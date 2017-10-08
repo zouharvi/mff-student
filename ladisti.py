@@ -1,31 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import json
+import json, re, collections, time
 from StringIO import StringIO
 
 # command line arguments:
-# -f --file
-# -s --sample
-# -v --verbose (show language comparison)
-# -i --input
+# -cd --compiled-database (path to compiled database)
+# -sv --save-database (path to target database file, will be merged)
+# -ld --language-definitions (path to json file)
+# -lc --language-comparison (show language comparison) (mutually exclusive with -i, -fi)
+# -i --input (string containing text to categorize) (mutually exclusive with -lc, -fi)
+# -fi --file-input (path to text file) (mutually exclusive with -i, -lc)
 
 lang_data = {}
-BANNED_CHARS = set(".?!<>(){}[]\"'_%*\n0123456789 ") #TODO: regex replaces
 FREQ_LIMIT = 1
 
 def process_data(data):
     # remove unwanted symbols from input
     data = data.lower()
-    data_clean = ""
-    prev_space = True
-    for c in data:
-        if not c in BANNED_CHARS:
-            data_clean += c
-            prev_space = False
-        if c == " " and not prev_space:
-            data_clean += c
-            prev_space = True
+    data_clean = re.sub("[.?!<>(){}\[\]\"'_%*\n$0123456789]+", " ", data)
+    data_clean = re.sub('\s+', ' ', data_clean)
     words = data_clean.split(" ")
     
     # calculate word frequency
@@ -43,19 +37,15 @@ def process_data(data):
         if freq > FREQ_LIMIT:
             words_freq_clean[word] = freq
 
-    # calculate ratio, so that samples of different size have the same weight
-    #no_words = len(words_freq_list) # TODO: divide by no_words later (after sum / for bigger precision)
-    #words_ratio = []
-    #for word in words_freq_list:
-    #    words_ratio.append({"word": word["word"], "ratio": (word["freq"]/no_words)})    
-
     return words_freq_clean
 
 def create_lang_object(object, data):
     object["word_freq"] = process_data(data)
     object["word_count"] = len(object["word_freq"])
+    #object["char_freq"] = ... #levenstein distance of sorted arrays?
 
 def add_to_database(key, data):
+    # adds data to local database
     sample = 0
     if not key in lang_data:
         sample = lang_data[key] = {}
@@ -64,6 +54,7 @@ def add_to_database(key, data):
     create_lang_object(sample, data)  
 
 def define_langs():
+    # 
     content = open("./lang_def.json").read()
     sample_data = json.load(StringIO(content))
 
@@ -72,6 +63,7 @@ def define_langs():
         add_to_database(key, sample_data[key])
         
 def distance_langs(lang1, lang2):
+    # calculates distance between two languages (sample input is interpreted as language on its own)
     word_freq_1 = lang1["word_freq"]
     word_freq_2 = lang2["word_freq"]
     s = 0.0
@@ -81,14 +73,18 @@ def distance_langs(lang1, lang2):
 
     return s/(lang1["word_count"]*lang2["word_count"])
 
+def compare_against_database(name, lang):
+    # compares input language against everything in the database
+    #TODO: confidence in result? (percentage - comparison to other results)
+    score = []
+    for key in lang_data.keys():
+        score.append({"name": key, "score": distance_langs(lang_data[key], lang)})
+    score.sort(key=lambda l:-l["score"])
+    print("closest lang to " + name + " is " + score[0]["name"])
+
 if __name__ == "__main__":
     define_langs()
     input_sample = {}
-    #create_lang_object(input_sample, u"alenka v říši divů rabbit alenka v říši divů rabbit")
-    #create_lang_object(input_sample, u"Já jsem Vilda, mám rád knihy a teplý čaj - obzvlášť když venku prší. Já jsem Vilda, mám rád knihy a teplý čaj - obzvlášť když venku prší.")
-    create_lang_object(input_sample, u"Hi, how are you? Hi, how are you? guten guten tag tag meine name ist vilda  meine name ist vilda dzien dobry dzien dobry alicja alicja ")
-    print(distance_langs(lang_data["cs"], input_sample))
-    print(distance_langs(lang_data["en"], input_sample))
-    print(distance_langs(lang_data["de"], input_sample))
-    print(distance_langs(lang_data["pl"], input_sample))
-    #print(lang_data)
+    create_lang_object(input_sample, u"What is   [ your 5 5name?] ${ What is 6your name?") #TODO: parametrize create lang object, so that boundary doesn't apply, or make it dynamic
+    compare_against_database("sample", input_sample)
+    compare_against_database("pl", lang_data["pl"])
