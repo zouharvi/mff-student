@@ -14,14 +14,16 @@ from StringIO import StringIO
 
 lang_data = {}
 FREQ_LIMIT = 1
+CHAR_WEIGHT = 1.0/10.0
 
-def process_data(data):
+def clean_data(data):
     # remove unwanted symbols from input
     data = data.lower()
     data_clean = re.sub("[.?!<>(){}\[\]\"'_%*\n$0123456789]+", " ", data)
     data_clean = re.sub('\s+', ' ', data_clean)
-    words = data_clean.split(" ")
-    
+    return data_clean
+
+def process_words(words):
     # calculate word frequency
     words_freq = {}
     for word in words:
@@ -39,10 +41,30 @@ def process_data(data):
 
     return words_freq_clean
 
+def process_chars(chars):
+    # calculate word frequency
+    chars_freq = {}
+    for char in chars:
+        if char in chars_freq:
+            chars_freq[char] += 1
+        else:
+            chars_freq[char] = 1
+    return chars_freq
+
 def create_lang_object(object, data):
-    object["word_freq"] = process_data(data)
-    object["word_count"] = len(object["word_freq"])
-    #object["char_freq"] = ... #levenstein distance of sorted arrays?
+    data_clean = clean_data(data)
+    object["word_freq"] = process_words(data_clean.split(" "))
+    
+    word_count = 0
+    for value in object["word_freq"].values():
+        word_count += value 
+    object["word_count"] = word_count
+    object["char_freq"] = process_chars(data_clean.replace(" ", ""))
+
+    char_count = 0
+    for value in object["char_freq"].values():
+        char_count += value 
+    object["char_count"] = char_count
 
 def add_to_database(key, data):
     # adds data to local database
@@ -72,12 +94,24 @@ def distance_langs(lang1, lang2):
     # calculates distance between two languages (sample input is interpreted as language on its own)
     word_freq_1 = lang1["word_freq"]
     word_freq_2 = lang2["word_freq"]
-    s = 0.0
+    s1 = 0.0
     for key in word_freq_1.keys():
         if key in word_freq_2:
-            s += word_freq_2[key]*word_freq_1[key]
+            s1 += word_freq_2[key]*word_freq_1[key]
 
-    return s/(lang1["word_count"]*lang2["word_count"])
+    score1 = s1/float(lang1["word_count"]*lang2["word_count"])
+
+    char_freq_1 = lang1["char_freq"]
+    char_freq_2 = lang2["char_freq"]
+    s2 = 0.0
+    for key in char_freq_1.keys():
+        if key in char_freq_2:
+            s2 += char_freq_2[key]*char_freq_1[key]
+
+    score2 = s2/float(lang1["char_count"]*lang2["char_count"])*CHAR_WEIGHT
+
+    print("word score: " + str(score1) + " char score: " + str(score2))
+    return score1+score2
 
 def compare_against_database(name, lang):
     # compares input language against everything in the database
@@ -93,6 +127,6 @@ if __name__ == "__main__":
     if not res:
         exit()
     input_sample = {}
-    create_lang_object(input_sample, u"What is   [ your 5 5name?] ${ What is 6your name?") #TODO: parametrize create lang object, so that boundary doesn't apply, or make it dynamic
+    #create_lang_object(input_sample, u"What is   [ your 5 5name?] ${ What is 6your name?") #TODO: parametrize create lang object, so that boundary doesn't apply, or make it dynamic
     compare_against_database("sample", input_sample)
     compare_against_database("pl", lang_data["pl"])
