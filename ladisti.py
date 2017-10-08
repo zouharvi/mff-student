@@ -6,7 +6,7 @@ from StringIO import StringIO
 
 # command line arguments:
 # -cd --compiled-database (path to compiled database)
-# -sv --save-database (path to target database file, will be merged)
+# -sv --save-database (path to target database file, will be overridden - to merge, load the database first)
 # -ld --language-definitions (path to json file)
 # -lc --language-comparison (show language comparison) (mutually exclusive with -i, -fi)
 # -i --input (string containing text to categorize) (mutually exclusive with -lc, -fi)
@@ -54,13 +54,19 @@ def add_to_database(key, data):
     create_lang_object(sample, data)  
 
 def define_langs():
-    # 
+    # load language definition into database
+    # invalid json is checked for
     content = open("./lang_def.json").read()
-    sample_data = json.load(StringIO(content))
+    try:
+        sample_data = json.load(StringIO(content))
+        lang_keys = list(sample_data.keys())
+        for key in lang_keys:
+            add_to_database(key, sample_data[key])
+    except ValueError:
+        print("invalid json, aborting")
+        return False
+    return True
 
-    lang_keys = list(sample_data.keys())
-    for key in lang_keys:
-        add_to_database(key, sample_data[key])
         
 def distance_langs(lang1, lang2):
     # calculates distance between two languages (sample input is interpreted as language on its own)
@@ -83,7 +89,9 @@ def compare_against_database(name, lang):
     print("closest lang to " + name + " is " + score[0]["name"])
 
 if __name__ == "__main__":
-    define_langs()
+    res = define_langs()
+    if not res:
+        exit()
     input_sample = {}
     create_lang_object(input_sample, u"What is   [ your 5 5name?] ${ What is 6your name?") #TODO: parametrize create lang object, so that boundary doesn't apply, or make it dynamic
     compare_against_database("sample", input_sample)
