@@ -5,16 +5,16 @@ import json, re, collections, time
 from StringIO import StringIO
 
 # command line arguments:
-# -cd --compiled-database (path to compiled database)
+# -ld --load-database (path to compiled database)
 # -sv --save-database (path to target database file, will be overridden - to merge, load the database first)
-# -ld --language-definitions (path to json file)
+# -ls --language-samples (path to json file)
 # -lc --language-comparison (show language comparison) (mutually exclusive with -i, -fi)
 # -i --input (string containing text to categorize) (mutually exclusive with -lc, -fi)
 # -fi --file-input (path to text file) (mutually exclusive with -i, -lc)
 
 lang_data = {}
 FREQ_LIMIT = 1
-CHAR_WEIGHT = 1.0/10.0
+WORD_CHAR_RATIO = 10.0
 
 def clean_data(data):
     # remove unwanted symbols from input
@@ -23,7 +23,7 @@ def clean_data(data):
     data_clean = re.sub('\s+', ' ', data_clean)
     return data_clean
 
-def process_words(words):
+def process_words(words, clean_freq_limit):
     # calculate word frequency
     words_freq = {}
     for word in words:
@@ -36,7 +36,7 @@ def process_words(words):
     words_freq_clean = {}
     for word in words_freq.keys():
         freq = words_freq[word]
-        if freq > FREQ_LIMIT:
+        if freq > clean_freq_limit:
             words_freq_clean[word] = freq
 
     return words_freq_clean
@@ -51,9 +51,9 @@ def process_chars(chars):
             chars_freq[char] = 1
     return chars_freq
 
-def create_lang_object(object, data):
+def create_lang_object(object, data, is_sample):
     data_clean = clean_data(data)
-    object["word_freq"] = process_words(data_clean.split(" "))
+    object["word_freq"] = process_words(data_clean.split(" "), 0 if is_sample else FREQ_LIMIT)
     
     word_count = 0
     for value in object["word_freq"].values():
@@ -73,7 +73,7 @@ def add_to_database(key, data):
         sample = lang_data[key] = {}
     else:
         sample = lang_data[key]
-    create_lang_object(sample, data)  
+    create_lang_object(sample, data, False)  
 
 def define_langs():
     # load language definition into database
@@ -99,7 +99,7 @@ def distance_langs(lang1, lang2):
         if key in word_freq_2:
             s1 += word_freq_2[key]*word_freq_1[key]
 
-    score1 = s1/float(lang1["word_count"]*lang2["word_count"])
+    score1 = s1/float(lang1["word_count"]*lang2["word_count"])*WORD_CHAR_RATIO
 
     char_freq_1 = lang1["char_freq"]
     char_freq_2 = lang2["char_freq"]
@@ -108,7 +108,7 @@ def distance_langs(lang1, lang2):
         if key in char_freq_2:
             s2 += char_freq_2[key]*char_freq_1[key]
 
-    score2 = s2/float(lang1["char_count"]*lang2["char_count"])*CHAR_WEIGHT
+    score2 = s2/float(lang1["char_count"]*lang2["char_count"])
 
     print("word score: " + str(score1) + " char score: " + str(score2))
     return score1+score2
@@ -127,6 +127,6 @@ if __name__ == "__main__":
     if not res:
         exit()
     input_sample = {}
-    #create_lang_object(input_sample, u"What is   [ your 5 5name?] ${ What is 6your name?") #TODO: parametrize create lang object, so that boundary doesn't apply, or make it dynamic
+    create_lang_object(input_sample, u"What is   [ your 5 5name?] ${ What is 6your name?", True)
     compare_against_database("sample", input_sample)
     compare_against_database("pl", lang_data["pl"])
