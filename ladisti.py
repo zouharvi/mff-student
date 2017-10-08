@@ -1,8 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+LAnguage DISTInctor
+Author: Vilém Zouhar
+'''
+
 import json, re, collections, time
 from StringIO import StringIO
+from math import log
 
 # command line arguments:
 # -ld --load-database (path to compiled database)
@@ -13,7 +19,7 @@ from StringIO import StringIO
 # -fi --file-input (path to text file) (mutually exclusive with -i, -lc)
 
 lang_data = {}
-FREQ_LIMIT = 1
+FREQ_LIMIT = 0
 WORD_CHAR_RATIO = 10.0
 
 def clean_data(data):
@@ -23,7 +29,8 @@ def clean_data(data):
     data_clean = re.sub('\s+', ' ', data_clean)
     return data_clean
 
-def process_words(words, clean_freq_limit):
+
+def process_words(words):
     # calculate word frequency
     words_freq = {}
     for word in words:
@@ -31,15 +38,17 @@ def process_words(words, clean_freq_limit):
             words_freq[word] += 1.0
         else:
             words_freq[word] = 1.0
-
+    '''
     # remove underrepresented words (below FREQ_LIMIT)
     words_freq_clean = {}
     for word in words_freq.keys():
         freq = words_freq[word]
-        if freq > clean_freq_limit:
+        if freq > FREQ_LIMIT:
             words_freq_clean[word] = freq
 
     return words_freq_clean
+    '''
+    return words_freq
 
 def process_chars(chars):
     # calculate word frequency
@@ -51,9 +60,9 @@ def process_chars(chars):
             chars_freq[char] = 1
     return chars_freq
 
-def create_lang_object(object, data, is_sample):
+def create_lang_object(object, data):
     data_clean = clean_data(data)
-    object["word_freq"] = process_words(data_clean.split(" "), 0 if is_sample else FREQ_LIMIT)
+    object["word_freq"] = process_words(data_clean.split(" "))
     
     word_count = 0
     for value in object["word_freq"].values():
@@ -73,7 +82,7 @@ def add_to_database(key, data):
         sample = lang_data[key] = {}
     else:
         sample = lang_data[key]
-    create_lang_object(sample, data, False)  
+    create_lang_object(sample, data)  
 
 def define_langs():
     # load language definition into database
@@ -97,20 +106,19 @@ def distance_langs(lang1, lang2):
     s1 = 0.0
     for key in word_freq_1.keys():
         if key in word_freq_2:
-            s1 += word_freq_2[key]*word_freq_1[key]
+            s1 += 3 #word_freq_2[key]*word_freq_1[key]
 
-    score1 = s1/float(lang1["word_count"]*lang2["word_count"])*WORD_CHAR_RATIO
+    score1 = s1/float(lang1["word_count"]*lang2["word_count"])
 
     char_freq_1 = lang1["char_freq"]
     char_freq_2 = lang2["char_freq"]
     s2 = 0.0
     for key in char_freq_1.keys():
         if key in char_freq_2:
-            s2 += char_freq_2[key]*char_freq_1[key]
+            s2 += 1 #char_freq_2[key]*char_freq_1[key]
 
     score2 = s2/float(lang1["char_count"]*lang2["char_count"])
 
-    print("word score: " + str(score1) + " char score: " + str(score2))
     return score1+score2
 
 def compare_against_database(name, lang):
@@ -120,13 +128,14 @@ def compare_against_database(name, lang):
     for key in lang_data.keys():
         score.append({"name": key, "score": distance_langs(lang_data[key], lang)})
     score.sort(key=lambda l:-l["score"])
-    print("closest lang to " + name + " is " + score[0]["name"])
+    print(name + ":")
+    for obj in score:
+        print(obj["name"] + ": " + str(obj["score"]))
 
 if __name__ == "__main__":
     res = define_langs()
     if not res:
         exit()
     input_sample = {}
-    create_lang_object(input_sample, u"What is   [ your 5 5name?] ${ What is 6your name?", True)
+    create_lang_object(input_sample, u"Ahoj, jmenuji se Vilda mám rád knihy - obzvlášť když venku prší. Guten tag, meine name ist Vilem und ich liebe bücher.")
     compare_against_database("sample", input_sample)
-    compare_against_database("pl", lang_data["pl"])
