@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import json
 from StringIO import StringIO
@@ -10,7 +11,7 @@ from StringIO import StringIO
 # -i --input
 
 lang_data = {}
-BANNED_CHARS = set(".?!<>(){}[]\"'_%0123456789 ")
+BANNED_CHARS = set(".?!<>(){}[]\"'_%*\n0123456789 ") #TODO: regex replaces
 FREQ_LIMIT = 1
 
 def process_data(data):
@@ -61,7 +62,6 @@ def add_to_database(key, data):
     else:
         sample = lang_data[key]
     create_lang_object(sample, data)  
-    print(lang_data[key])
 
 def define_langs():
     content = open("./lang_def.json").read()
@@ -83,4 +83,12 @@ def distance_langs(lang1, lang2):
 
 if __name__ == "__main__":
     define_langs()
-    print(lang_data)
+    input_sample = {}
+    #create_lang_object(input_sample, u"alenka v říši divů rabbit alenka v říši divů rabbit")
+    #create_lang_object(input_sample, u"Já jsem Vilda, mám rád knihy a teplý čaj - obzvlášť když venku prší. Já jsem Vilda, mám rád knihy a teplý čaj - obzvlášť když venku prší.")
+    create_lang_object(input_sample, u"Hi, how are you? Hi, how are you? guten guten tag tag meine name ist vilda  meine name ist vilda dzien dobry dzien dobry alicja alicja ")
+    print(distance_langs(lang_data["cs"], input_sample))
+    print(distance_langs(lang_data["en"], input_sample))
+    print(distance_langs(lang_data["de"], input_sample))
+    print(distance_langs(lang_data["pl"], input_sample))
+    #print(lang_data)
