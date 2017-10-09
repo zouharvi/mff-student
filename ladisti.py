@@ -17,6 +17,11 @@ from math import log
 # -lc --language-comparison (show language comparison) (mutually exclusive with -i, -fi)
 # -i --input (string containing text to categorize) (mutually exclusive with -lc, -fi)
 # -fi --file-input (path to text file) (mutually exclusive with -i, -lc)
+# -v --version
+# -h --help
+
+#TODO: check if code is executed with Python3
+#TODO: check that spaces are not words
 
 lang_data = {}
 FREQ_LIMIT = 0
@@ -25,9 +30,10 @@ WORD_CHAR_RATIO = 10.0
 def clean_data(data):
     # remove unwanted symbols from input
     data = data.lower()
-    data_clean = re.sub("[.?!<>(){}\[\]\"'_%*\n$0123456789]+", " ", data)
-    data_clean = re.sub('\s+', ' ', data_clean)
-    return data_clean
+    data = re.sub("[.?!<>(){}\[\]\"'_%*\n$0123456789\-]+", " ", data)
+    data = re.sub("\s+", " ", data) #TODO: does this really work?
+    data = re.sub("\s+$", "", data)
+    return data
 
 
 def process_words(words):
@@ -106,7 +112,7 @@ def distance_langs(lang1, lang2):
     s1 = 0.0
     for key in word_freq_1.keys():
         if key in word_freq_2:
-            s1 += 3 #word_freq_2[key]*word_freq_1[key]
+            s1 += 4 #word_freq_2[key]*word_freq_1[key]
 
     score1 = s1/float(lang1["word_count"]*lang2["word_count"])
 
@@ -119,7 +125,7 @@ def distance_langs(lang1, lang2):
 
     score2 = s2/float(lang1["char_count"]*lang2["char_count"])
 
-    return score1+score2
+    return (score1+score2)*100000
 
 def compare_against_database(name, lang):
     # compares input language against everything in the database
@@ -137,5 +143,5 @@ if __name__ == "__main__":
     if not res:
         exit()
     input_sample = {}
-    create_lang_object(input_sample, u"Ahoj, jmenuji se Vilda mám rád knihy - obzvlášť když venku prší. Guten tag, meine name ist Vilem und ich liebe bücher.")
+    create_lang_object(input_sample, u"Moje jméno je Vilda. Mám rád knihy. Německy by tato věta zněla: 'Guten Tag, meine Name ist Vilda.'")
     compare_against_database("sample", input_sample)
