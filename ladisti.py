@@ -21,60 +21,39 @@ from math import log
 # -h --help
 
 #TODO: check if code is executed with Python3
-#TODO: check that spaces are not words
 
 lang_data = {}
-FREQ_LIMIT = 0
-WORD_CHAR_RATIO = 10.0
+WORD_CHAR_RATIO = 100
 
 def clean_data(data):
     # remove unwanted symbols from input
     data = data.lower()
     data = re.sub("[.?!<>(){}\[\]\"'_%*\n$0123456789\-]+", " ", data)
-    data = re.sub("\s+", " ", data) #TODO: does this really work?
-    data = re.sub("\s+$", "", data)
+    data = re.sub("\s+", " ", data) # merge consecutive spaces into one
+    data = re.sub("\s+$", "", data) # remove trailing space
+    data = re.sub("^\s+", "", data) # remove leading space
     return data
 
 
-def process_words(words):
-    # calculate word frequency
-    words_freq = {}
-    for word in words:
-        if word in words_freq:
-            words_freq[word] += 1.0
+def element_frequency(elements):
+    # calculate element frequency is array (words in list and chars in string)
+    element_freq = {}
+    for element in elements:
+        if element in element_freq:
+            element_freq[element] += 1.0
         else:
-            words_freq[word] = 1.0
-    '''
-    # remove underrepresented words (below FREQ_LIMIT)
-    words_freq_clean = {}
-    for word in words_freq.keys():
-        freq = words_freq[word]
-        if freq > FREQ_LIMIT:
-            words_freq_clean[word] = freq
-
-    return words_freq_clean
-    '''
-    return words_freq
-
-def process_chars(chars):
-    # calculate word frequency
-    chars_freq = {}
-    for char in chars:
-        if char in chars_freq:
-            chars_freq[char] += 1
-        else:
-            chars_freq[char] = 1
-    return chars_freq
+            element_freq[element] = 1.0
+    return element_freq
 
 def create_lang_object(object, data):
     data_clean = clean_data(data)
-    object["word_freq"] = process_words(data_clean.split(" "))
+    object["word_freq"] = element_frequency(data_clean.split(" "))
     
     word_count = 0
     for value in object["word_freq"].values():
         word_count += value 
     object["word_count"] = word_count
-    object["char_freq"] = process_chars(data_clean.replace(" ", ""))
+    object["char_freq"] = element_frequency(data_clean.replace(" ", ""))
 
     char_count = 0
     for value in object["char_freq"].values():
@@ -112,36 +91,40 @@ def distance_langs(lang1, lang2):
     s1 = 0.0
     for key in word_freq_1.keys():
         if key in word_freq_2:
-            s1 += 4 #word_freq_2[key]*word_freq_1[key]
+            s1 += log(word_freq_2[key]*word_freq_1[key])
 
-    score1 = s1/float(lang1["word_count"]*lang2["word_count"])
+    score1 = WORD_CHAR_RATIO*10*s1/float(lang1["word_count"]*lang2["word_count"])
 
     char_freq_1 = lang1["char_freq"]
     char_freq_2 = lang2["char_freq"]
     s2 = 0.0
     for key in char_freq_1.keys():
         if key in char_freq_2:
-            s2 += 1 #char_freq_2[key]*char_freq_1[key]
+            s2 += log(char_freq_2[key]*char_freq_1[key])
 
-    score2 = s2/float(lang1["char_count"]*lang2["char_count"])
+    score2 = 10*s2/float(lang1["char_count"]*lang2["char_count"])
 
-    return (score1+score2)*100000
+    return (score1+score2)
 
 def compare_against_database(name, lang):
     # compares input language against everything in the database
-    #TODO: confidence in result? (percentage - comparison to other results)
     score = []
+    score_sum = 0
     for key in lang_data.keys():
-        score.append({"name": key, "score": distance_langs(lang_data[key], lang)})
+        score_local = distance_langs(lang_data[key], lang)
+        score_sum += score_local
+        score.append({"name": key, "score": score_local})
     score.sort(key=lambda l:-l["score"])
     print(name + ":")
+    
     for obj in score:
-        print(obj["name"] + ": " + str(obj["score"]))
+        print(obj["name"] + ": " + str(100.0*obj["score"]/score_sum))
 
 if __name__ == "__main__":
     res = define_langs()
     if not res:
         exit()
     input_sample = {}
-    create_lang_object(input_sample, u"Moje jméno je Vilda. Mám rád knihy. Německy by tato věta zněla: 'Guten Tag, meine Name ist Vilda.'")
+    #create_lang_object(input_sample, u"Moje jméno je Vilda. Mám rád knihy. Německy by tato věta zněla: 'Guten Tag, meine Name ist Vilda.'")
+    create_lang_object(input_sample, u"Fun hatter rabbit já jsem vilda")
     compare_against_database("sample", input_sample)
