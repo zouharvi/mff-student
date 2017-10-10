@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-LAnguage DISTInctor
+LAnguage DISTInctor, 2017
 Author: Vilém Zouhar
 '''
 
@@ -93,7 +93,6 @@ def distance_langs(lang1, lang2):
         if key in word_freq_2:
             s1 += log(word_freq_2[key]*word_freq_1[key])
 
-    score1 = WORD_CHAR_RATIO*10*s1/float(lang1["word_count"]*lang2["word_count"])
 
     char_freq_1 = lang1["char_freq"]
     char_freq_2 = lang2["char_freq"]
@@ -102,7 +101,9 @@ def distance_langs(lang1, lang2):
         if key in char_freq_2:
             s2 += log(char_freq_2[key]*char_freq_1[key])
 
-    score2 = 10*s2/float(lang1["char_count"]*lang2["char_count"])
+
+    score1 = WORD_CHAR_RATIO*10*s1/float(lang1["word_count"]*lang2["word_count"])
+    score2 =                 10*s2/float(lang1["char_count"]*lang2["char_count"])
 
     return (score1+score2)
 
@@ -125,6 +126,5 @@ if __name__ == "__main__":
     if not res:
         exit()
     input_sample = {}
-    #create_lang_object(input_sample, u"Moje jméno je Vilda. Mám rád knihy. Německy by tato věta zněla: 'Guten Tag, meine Name ist Vilda.'")
-    create_lang_object(input_sample, u"Fun hatter rabbit já jsem vilda")
+    create_lang_object(input_sample, u"Steh' auf und lebe, geh' neue Wege. Schau' nach vorn, nichts ist verlor'n.")
     compare_against_database("sample", input_sample)
