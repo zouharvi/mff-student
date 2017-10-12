@@ -99,7 +99,7 @@ def distance_langs(lang1, lang2):
     s2 = 0.0
     for key in char_freq_1.keys():
         if key in char_freq_2:
-            s2 += log(char_freq_2[key]*char_freq_1[key])
+            s2 += log(char_freq_2[key]*char_freq_1[key]+1)
 
 
     score1 = WORD_CHAR_RATIO*10*s1/float(lang1["word_count"]*lang2["word_count"])
