@@ -1,14 +1,16 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 '''
+LADISTI
 LAnguage DISTInctor, 2017
 Author: Vilém Zouhar
 '''
 
-import json, re, collections, time
-from StringIO import StringIO
-from math import log
+import sys
+if sys.version_info.major != 3:
+    print("python 3.x is required to run this program, aborting") 
+    sys.exit()
 
 # command line arguments:
 # -ld --load-database (path to compiled database)
@@ -20,7 +22,9 @@ from math import log
 # -v --version
 # -h --help
 
-#TODO: check if code is executed with Python3
+import json, re
+from io import StringIO
+from math import log
 
 lang_data = {}
 WORD_CHAR_RATIO = 100
