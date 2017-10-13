@@ -1,11 +1,9 @@
 # LADISTI
----
 
 Language Distinctor is a small program written in Python 3, which faciliates work with language detection.
 
----
 
-### Usage
+## Usage
 
 1. feed data into the program with JSON in the format of:
 ```
@@ -17,6 +15,5 @@ Language Distinctor is a small program written in Python 3, which faciliates wor
 ```
 2. ask the program to categorize input text
 
----
-### More Info
+## More Info
 The program was written by Vilém Zouhar for winter semester 2017/2018 at MFF.
