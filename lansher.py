@@ -112,7 +112,7 @@ def add_lang_file(file_name):
         sample_data = json.load(StringIO(content))
         lang_keys = list(sample_data.keys())
         for key in lang_keys:
-            if not isinstance(sample_data[key], str):
+            if not isinstance(sample_data[key], str) or len(sample_data[key]) < 1:
                 raise ValueError()
             add_to_database(key, sample_data[key])
     except ValueError:
