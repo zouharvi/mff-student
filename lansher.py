@@ -112,6 +112,8 @@ def add_lang_file(file_name):
         sample_data = json.load(StringIO(content))
         lang_keys = list(sample_data.keys())
         for key in lang_keys:
+            if not isinstance(sample_data[key], str):
+                raise ValueError()
             add_to_database(key, sample_data[key])
     except ValueError:
         print("invalid json, aborting")
@@ -243,5 +245,3 @@ if __name__ == "__main__":
     # save database to file
     if args.save_database != None:
         save_lang_database(args.save_database)
-
-    print(lang_data)
