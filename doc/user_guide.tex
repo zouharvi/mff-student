@@ -1,0 +1,158 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+
+\usepackage{listings}
+\usepackage[shortcuts]{extdash}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+
+\lstset{literate=%
+    {á}{{\' a}}1
+    {é}{{\' e}}1
+    {è}{{\` e}}1
+    {í}{{\' i}}1
+    {ý}{{\' y}}1
+    {ó}{{\' o}}1
+    {ú}{{\' u}}1
+    {ů}{{\r{u}}}1
+    {š}{{\v s}}1
+    {č}{{\v c}}1
+    {ř}{{\v r}}1
+    {ě}{{\v e}}1
+    {ž}{{\v z}}1
+    {ú}{{\' u}}1
+    {ä}{{\" a}}1
+    {ö}{{\" o}}1
+    {ł}{{\l}}1
+    {ę}{{\k e}}1
+    {ą}{{\k a}}1
+    {ź}{{\" o}}1
+    {ś}{{\" s}}1
+}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+
+
+\title{\textbf{Uživatelská dokumentace LANSHER }}
+\author{Vilém Zouhar}
+\date{2017}
+
+\usepackage{amsmath}
+\begin{document}
+
+\maketitle
+
+\section{Úvod} 
+LANSHER slouží k rozlišení jazyka na základě velkého množství trénovacích dat. Používá se ve dvou krocích:
+
+\begin{enumerate}
+\item Vytvoření databáze z JSON formátovaného souboru
+\item Použití databáze k rozeznání jazyka vstupu
+\end{enumerate}
+
+Přičemž není nutné pro každé použití absolvovat oba dva kroky. Zejména krok 1., výpočetně náročný, je možné provést jen jednou a používat tak vytvořenou databázi na rozeznávání jazyka. Je také možné použít již zpracovanou databázi dodávanou s programem.
+
+\section{Vytváření databáze}
+Databáze se vytváří z JSON souboru v daném formátu: (soubor \textit{alenka.json})
+\begin{lstlisting}[postbreak=, breakautoindent=true, breakindent=0pt, breaklines]
+{
+"cs":
+	"Alenka ani chvíli nemeškala a vskočila za ním, aniž jen zdaleka pomyslila, jak se kdy opět dostane ven.",
+"en": 
+	"In another moment down went Alice after it, never once considering how in the world she was to get out again.",
+"de":
+	"Den nächsten Augenblick war sie ihm nach in das Loch hineingesprungen, ohne zu bedenken, wie in aller Welt sie wieder herauskommen könnte.",
+"pl":
+	"Wczołgała się więc za nim do króliczej nory nie myśląc o tym, jak się później stamtąd wydostanie."
+}
+\end{lstlisting}
+
+Není třeba definovat všechny jazyky, a ani není nutné dodržovat dvouznakové značení. Pro přehlednost se v tomto dokumentu budeme dvou znaků držet. JSON vstup se do programu vkládá pomocí přepínače \textbf{\=/ls}, nebo \textbf{\=/\=/language\=/samples}.
+
+\section{Ukládání databáze}
+Pokud do programu vkládáme text ke zpracování, což je obecně náročná výpočetní operace, můžeme si takto zpracovanou databázi uložit za pomocí přepínače \textbf{\=/sd}, nebo \textbf{\=/\=/save\=/database}.
+
+Pokud třeba načítáme soubor \textit{alenka.json} a chceme zpracovanou verzi uložit do souboru \textit{alenka.ld}, použijeme přepínače \textbf{\=/ls} a \textbf{\=/sd}:
+\begin{lstlisting}
+./lansher.py -ls alenka.json -sd alenka.ld
+\end{lstlisting}
+
+\section{Načítání databáze}
+Je-li k dispozici již vytvořená databáze, do programu ji načteme pomocí \textbf{\=/ld}, nebo \textbf{\=/\=/load\=/database}. V příkladu:
+\begin{lstlisting}
+./lansher.py -ld alenka.ld
+\end{lstlisting}
+
+Tento příkaz však sám o sobě nemá žádný výstup, neboť mu nebyla předán žádný přepínač pro výstupní operace.
+
+\section{Slučování databáze}
+Jelikož existují dvě možnosti jak vytvářet databázi, je možné je zkombinovat a vytvořit tak novou, která je sloučením obou dvou. Toho docílíme načtením již vytvořené databáze, zpracováním nového úseku textu (\textit{kralik.json}) a uložením do souboru (\textit{alenka\_kralik.ld}):
+
+\begin{lstlisting}
+./lansher.py -ls kralik.json -ld alenka.ld -sd alenka_kralik.ld
+\end{lstlisting}
+
+
+\section{Vstup vzorku}
+Má-li program načtenou databázi (např. z předem zpracovaného textu), můžeme mu vložit vzorek k rozeznání.
+
+Pokud chceme předat vzorek z příkazové řádky, použijeme přepínač \textbf{\=/i}, nebo \textbf{\=/\=/input}:
+\begin{lstlisting}
+./lansher.py --load-database alenka.ld --input "Alenka v říši divů"
+\end{lstlisting}
+
+Výstup:
+\begin{lstlisting}
+input text comparison:
+cs (96.988%)
+en (1.045%)
+pl (1.023%)
+de (0.944%)
+\end{lstlisting}
+
+
+Pokud chceme předat vzorek ze souboru, použijeme přepínač \textbf{\=/fi}, nebo \textbf{\=/\=/file\=/input}. \textit{vzorek\_textu.txt} obsahuje řetězec: \textit{Sie könnte nicht mehr herauskommen.}
+\begin{lstlisting}
+./lansher.py --load-database alenka.ld --file-input vzorek_textu.txt
+\end{lstlisting}
+
+Výstup:
+\begin{lstlisting}
+input text comparison:
+de (98.662%)
+en (0.474%)
+pl (0.443%)
+cs (0.421%)
+\end{lstlisting}
+
+Databáze je v našem případě velmi malá. Pro přesnější rozlišování je třeba mít rozsah v rámci několika knih či slovníků.
+
+\section{Srovnání jazyků}
+Má-li program načtenou databázi, můžeme porovnat jazyky mezi sebou za pomocí přepínače \textbf{\=/lc}, nebo \textbf{\=/\=/language\=/comparison}, což pro každý jazyk vypíše nejbližší jiný:
+\begin{lstlisting}
+./lansher.py --load-database alenka.ld --language-comparison
+\end{lstlisting}
+
+Výstup:
+\begin{lstlisting}
+cs: pl (97.92%)
+de: en (97.33%)
+pl: cs (97.66%)
+en: de (96.97%)
+\end{lstlisting}
+
+\section{Přehled příkazů}
+\begin{center}
+\begin{tabular}{ l l l }
+ \textbf{\=/i}, \textbf{\=/\=/input} 				& & vzorek z příkazové řádky \\ 
+ \textbf{\=/fi}, \textbf{\=/\=/file\=/input} 		& & vzorek ze souboru \\  
+ \textbf{\=/ls}, \textbf{\=/\=/language\=/samples} 	& & vytvoření databáze \\
+ \textbf{\=/ld}, \textbf{\=/\=/load\=/database} 	& & načtení připravené databáze \\
+ \textbf{\=/sd}, \textbf{\=/\=/save\=/database} 	& & uložení načtené databáze \\
+ \textbf{\=/v}, \textbf{\=/\=/version} 				& & aktuální verze programu \\
+ \textbf{\=/h}, \textbf{\=/\=/help} 				& & nápověda \\
+ & \hspace{100pt} &  \\
+\end{tabular}
+\end{center}
+
+\end{document}
