@@ -9,7 +9,7 @@ Language Distinctor is a small program written in Python 3, which faciliates wor
 ```
 	{
 	'en': 'sample text in english',
-		'cs': 'ukázkový text v češtině',
+	'cs': 'ukázkový text v češtině',
 		...
 	}
 ```
