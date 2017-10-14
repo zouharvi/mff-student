@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-LADISTI
-LAnguage DISTInctor, 2017
+LANSHER
+language distinguisher, 2017
 Author: Vilém Zouhar
 '''
 
@@ -17,7 +17,7 @@ from io import StringIO
 from math import log
 
 VERSION = "0.1.0"
-VERSION_STR = "LADISTI language distinctor " + VERSION + "\nVilém Zouhar, 2017"
+VERSION_STR = "LANSHER language distinguisher " + VERSION + "\nVilém Zouhar, 2017"
 HELP_STR = '''the options below may be used: (-i, -fi, -lc are mutually exclusive)
     -ld --load-database           path to compiled database
     -sv --save-database           path to target database file (will be overriden; load the databse first to merge)
@@ -28,7 +28,7 @@ HELP_STR = '''the options below may be used: (-i, -fi, -lc are mutually exclusiv
     -v  --version                 show program version and exit
     -h  --help                    show help and exit
 
-full documentation and source code at <https://github.com/zouharvi/ladisti>
+full documentation and source code at <https://github.com/zouharvi/lansher>
 '''
 
 lang_data = {}
@@ -183,7 +183,7 @@ def compare_against_database(name, lang, skip=None, all=False):
 
 # the program begins here
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(add_help=False, prog="LADISTI")
+    parser = argparse.ArgumentParser(add_help=False, prog="LANSHER")
     parser._optionals.title = "program options"
     parser.add_argument("-v", "--version", action="store_true")
     parser.add_argument("-ld", "--load-database")
