@@ -5,7 +5,34 @@
 \usepackage{textcomp}
 \usepackage{tabto}
 \usepackage[shortcuts]{extdash}
+\usepackage{listings}
 \usepackage[a4paper, total={6in, 9in}]{geometry}
+
+\lstset{literate=%
+    {á}{{\' a}}1
+    {é}{{\' e}}1
+    {è}{{\` e}}1
+    {í}{{\' i}}1
+    {ý}{{\' y}}1
+    {ó}{{\' o}}1
+    {ú}{{\' u}}1
+    {ů}{{\r{u}}}1
+    {š}{{\v s}}1
+    {č}{{\v c}}1
+    {ř}{{\v r}}1
+    {ě}{{\v e}}1
+    {ž}{{\v z}}1
+    {ú}{{\' u}}1
+    {ä}{{\" a}}1
+    {ö}{{\" o}}1
+    {ł}{{\l}}1
+    {ę}{{\k e}}1
+    {ą}{{\k a}}1
+    {ź}{{\" o}}1
+    {ś}{{\" s}}1
+    {ť}{{\` t}}1
+}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
 
 \title{\textbf{Technická dokumentace LANSHER }}
 \author{Vilém Zouhar}
@@ -137,5 +164,40 @@ Obsahuje zpracování přepínačů a řídí celý program.
 Program je ošetřen oproti neplatným vstupům, je možné používat různé přepínače a zejména nápovědu \textbf{-h}.
 
 \section{Reálná funkčnost}
+S programem je dodávaná zpracovaná databáze 10 jazyků z různých překladů knihy \textit{Alenka v říši divů}. Změřme tedy dobu zpracovávání databáze a její následné ukládání:
+\begin{lstlisting}
+time ./lansher.py -ls alice_full.json  -sd alice_full.ld
+\end{lstlisting}
 
+Výstup:
+\begin{lstlisting}
+real	0m0.478s
+user	0m0.448s
+sys 	0m0.024s
+\end{lstlisting}
+
+Tedy půl vteřiny. Vstupní JSON má $\sim$2.3MB, zatímco zpracovaná databáze $\sim$0.8MB Pokud chceme použít ji, je na tom čas mnohem lépe:
+\begin{lstlisting}
+time ./lansher.py -ld alice_full.ld -i "Byl pozdní večer - první máj.."
+\end{lstlisting}
+
+Výstup:
+\begin{lstlisting}input text comparison:
+cs (59.713%)
+es (6.132%)
+fr (5.333%)
+pl (5.242%)
+no (5.124%)
+de (4.966%)
+en (4.824%)
+it (4.803%)
+ja (3.715%)
+ru (0.149%)
+
+real	0m0.066s
+user	0m0.060s
+sys 	0m0.008s
+\end{lstlisting}
+
+Pokud se nejedná o příliš krátkou větu, která není reprezentativní pro daný jazyk, dokáže program ve většině případů jazyk rozeznat správně.
 \end{document}

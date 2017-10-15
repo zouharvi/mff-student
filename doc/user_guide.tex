@@ -43,7 +43,7 @@
 \maketitle
 
 \section{Úvod} 
-LANSHER (LANguage distinguiSHER) slouží k rozlišení jazyka na základě velkého množství trénovacích dat. Používá se ve dvou krocích:
+LANSHER (\textbf{lan}guage distingui\textbf{sher}) slouží k rozlišení jazyka na základě velkého množství trénovacích dat. Používá se ve dvou krocích:
 
 \begin{enumerate}
 \item Vytvoření databáze z JSON formátovaného souboru
@@ -51,6 +51,20 @@ LANSHER (LANguage distinguiSHER) slouží k rozlišení jazyka na základě velk
 \end{enumerate}
 
 Přičemž není nutné pro každé použití absolvovat oba dva kroky. Zejména krok 1., výpočetně náročný, je možné provést jen jednou a používat tak vytvořenou databázi na rozeznávání jazyka. Je také možné použít již zpracovanou databázi dodávanou s programem.
+
+\section{Rychlé použití}
+Je možné použít předpřipravenou databázi (10 jazyků z různých překladů \textit{Alenky v říši divů}) například následujícím příkazem:
+
+\begin{lstlisting}
+./lansher.py -ld alice_full.ld -i "Byl pozdní večer - první máj.."
+\end{lstlisting}
+
+Srovnání jazyků dosáhneme za pomocí:
+
+
+\begin{lstlisting}
+./lansher.py -ld alice_full.ld -lc
+\end{lstlisting}
 
 \section{Vytváření databáze}
 Databáze se vytváří z JSON souboru v daném formátu: (soubor \textit{alenka.json})
