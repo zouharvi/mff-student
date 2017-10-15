@@ -69,7 +69,7 @@ def create_lang_object(object, data):
     data_clean = clean_data(data)
     word_freq_local = element_frequency(data_clean.split(" "))
     if "word_freq" in object:
-        object["word_freq"] = join_frequencies(word_freq_local, object["word_freq"]) # TODO: join
+        object["word_freq"] = join_frequencies(word_freq_local, object["word_freq"]) 
     else:
         object["word_freq"] = word_freq_local
     word_count = 0
@@ -79,7 +79,7 @@ def create_lang_object(object, data):
 
     char_freq_local = element_frequency(data_clean.replace(" ", ""))
     if "char_freq" in object:
-        object["char_freq"] = join_frequencies(char_freq_local, object["char_freq"]) # TODO: join
+        object["char_freq"] = join_frequencies(char_freq_local, object["char_freq"])
     else:
         object["char_freq"] = char_freq_local
     char_count = 0
@@ -156,8 +156,8 @@ def distance_langs(lang1, lang2):
             s2 += log(char_freq_2[key]*char_freq_1[key]+1) # log(arg + 1) to allow arg = 1 
 
 
-    score1 = WORD_CHAR_RATIO*10*s1/float(lang1["word_count"]*lang2["word_count"])
-    score2 =                 10*s2/float(lang1["char_count"]*lang2["char_count"])
+    score1 = WORD_CHAR_RATIO*10*s1/log(lang1["word_count"]*lang2["word_count"]+1)
+    score2 =                 10*s2/log(lang1["char_count"]*lang2["char_count"]+1)
 
     return (score1+score2)
 

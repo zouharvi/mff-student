@@ -1,0 +1,141 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{textcomp}
+\usepackage{tabto}
+\usepackage[shortcuts]{extdash}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+
+\title{\textbf{Technická dokumentace LANSHER }}
+\author{Vilém Zouhar}
+\date{2017}
+
+\usepackage{amsmath}
+\begin{document}
+
+\maketitle
+
+\section{Úvod a použité nástroje}
+LANSHER slouží k rozlišení jazyka na základě velkého množství trénovacích dat. Je naprogramován v jazyce Python3. Tato verze je programem striktně vyžadována, aby nedošlo k neočekávanému chování. Využívá se běžně dostupných knihoven, konkrétně \textbf{json, argparse, re} (regex) a \textbf{pickle} (serializace).
+
+
+\section{Fungování programu}
+Program je založený na tvorbě \textit{slovníku} ze vstupních definic jazyka. Ze vstupu na rozeznání se vytvoří také \textit{slovník} jazyka. Není tedy rozdíl v porovnávání dvou jazyků a rozeznávání vstupního textu (porovnání se všemi jazyky v databázi).
+
+Termínem \textit{slovník jazyka} je myšleno přiřazení slova \textbf{sl} k počtu výskytu \textbf{freq\textsubscript{sl}}. Pro větu \textit{Alenka tváří tvář Alence vyslovila: "Jmenuji se Alenka"} se jedná o zobrazení:
+
+
+\begin{center}
+\begin{tabular}{ l c l }
+ \textit{alenka} & \textrightarrow & \textit{2} \\ 
+ \textit{tváří} & \textrightarrow & \textit{1} \\ 
+ \textit{tvář} & \textrightarrow & \textit{1} \\ 
+ \textit{alence} & \textrightarrow & \textit{1} \\ 
+ \textit{vyslovila} & \textrightarrow & \textit{1} \\ 
+ \textit{jmenuji} & \textrightarrow & \textit{1} \\ 
+ \textit{se} & \textrightarrow & \textit{1} \\ 
+ & \hspace{100pt} &  \\
+\end{tabular}
+\end{center}
+
+Informace o interpunkčních znaménkách a velikosti písmen je pro jednoduchost srovnávání zahozena (vhodným regulérním výrazem). V programu je objekt \textit{slovníku} implementován za pomocí \textit{dictionary}, což má operace přidání prvku, získání prvku průměrně v konstantním čase.
+
+Pro srovnání dvou jazyků, například výše uvedené věty (\textit{S\textsubscript{1}}) a českého překladu \textit{Alenka v říši divů} (\textit{S\textsubscript{cs}}), první získáme množinu všech vzorů vyskytující se v obou \textit{slovnících} (\textit{M}) a první část jejich podobnosti určíme vztahem:
+
+\begin{center}
+$ |S_1S_{cs}|^\prime = \sum_{i=1}^{|M|} \ \ log(S_1(M_i)\cdot S_{cs}(M_i) +1) $
+\end{center}
+
+Je to tedy logaritmus vzájemného násobku četnosti dvou klíčů, pro všechny klíče vyskytující se v obou množinách. Člen $+1$ byl zvolen kvůli tomu, že v případě $S_1(m) = S_{cs}(m) = 1$ je funkční hodnota logaritmu 0, tedy chceme pozitivně ocenit i jeden společný výskyt.
+
+Četnosti se násobí, aby se získala větší podobnost při větší míře výskytu. Logaritmus je použití proto, aby se odfiltrovaly patologické případy. Jeden je demonstrován na dalším případě:
+
+S\textsubscript{en} (slovo \textit{to} je v angličtině zastoupeno hojně):
+\begin{center}
+\begin{tabular}{ l c l }
+ \textit{to} & \textrightarrow & \textit{31} \\ 
+ \textit{..} & \textrightarrow & \textit{..} \\ 
+ \textit{..} & \textrightarrow & \textit{..} \\ 
+ \hspace{30pt} & \hspace{100pt} & \hspace{30pt} \\
+\end{tabular}
+\end{center}
+
+S\textsubscript{cs}:
+\begin{center}
+\begin{tabular}{ l c l }
+ \textit{to} & \textrightarrow & \textit{5} \\ 
+ \textit{není} & \textrightarrow & \textit{4} \\ 
+ \textit{pravda} & \textrightarrow & \textit{2} \\ 
+ \textit{..} & \textrightarrow & \textit{..} \\ 
+ \textit{..} & \textrightarrow & \textit{..} \\ 
+ \hspace{30pt} & \hspace{100pt} & \hspace{30pt} \\
+\end{tabular}
+\end{center}
+
+S\textsubscript{2} (věta \textit{"To není pravda!"}):
+\begin{center}
+\begin{tabular}{ l c l }
+ \textit{to} & \textrightarrow & \textit{1} \\ 
+ \textit{není} & \textrightarrow & \textit{1} \\ 
+ \textit{pravda} & \textrightarrow & \textit{1} \\ 
+ \hspace{30pt} & \hspace{100pt} & \hspace{30pt} \\
+\end{tabular}
+\end{center}
+
+Byť má slovník angličtiny (zpracovaný na základě \textit{Alice in Wonderland}) s větou společné jen jedno slovo, má velkou četnost. Český slovník má definované všechny tři slova ve větě, ale ta mají menší četnost. V případě bez logaritmů by se tedy věta nekorektně rozpoznala jako anglická. Využíváme toho, že logaritmus je funkce rostoucí, avšak s klesající derivací~($\frac{1}{x}$).
+
+Další krajní případ může nastat tehdy, když databázi přetrénujeme. Tedy samotný jazyk bude mít definovaná slova, která bychom do něj běžně nezařadili. V trénovacím textu pro češtinu se může vyskytnou věta \textit{"V němčině 'guten Tag' znamená 'dobrý den'"}.  Výslední slovník by mimo jiné obsahoval i slova pro \textit{guten, tag}. Součet podobností tedy vydělíme počtem definovaných slov v jazyce, čímž budeme slovník penalizovat za svoji rozsáhlost.
+
+Podobnost dvou slovníků, $|S_1S_2|$, definujeme jako:
+
+\begin{center}
+$|S_1S_2| = \frac{\sum_{i=1}^{|M|} \ \ log(S_1(M_i)\cdot S_{cs}(M_i) +1)}{log(|S_1||S_2|+1)} $
+\end{center}
+
+Kromě podobnosti slovníků se k podobnosti jazyků používá (byť v řádově menší míře) i porovnání četnosti znaků, stejným způsobem.
+
+\section{Struktura programu}
+Celý program je napsaný v souboru \textit{lansher.py}. K jeho spuštění je zapotřebí Python3. Před vlastním programem je definována řada funkcí, přičemž všechny fungují průměrně v \textit{O(n)} čase.
+
+\begin{itemize}
+\item \textit{clean\_data}
+
+Vyčistí vstupní řetězec od interpunkčních znamének a převede ho do lowercase.
+\item \textit{element\_frequency}
+
+Vrací objekt typu \textit{dictionary}, kde funkční hodnota každého klíče je jeho četnost ve vstupním poli.
+\item \textit{join\_frequencies}
+
+Slouží k sloučení dvou slovníků jednoho jazyka
+\item \textit{create\_lang\_object}
+
+Vytvoří, popřípadě sloučí, slovní a znakové slovníky jazyka. Také vypočítá počet slov ve slovsnících. Odkazuje se na \textit{join\_frequencies}.
+\item \textit{add\_to\_database}
+
+Řídící funkce odkazující se na \textit{create\_lang\_object}. Přidává nově vytvořený jazyk do databáze programu.
+\item \textit{add\_lang\_file}
+
+Vytvoří objekt jazyka na základě vstupního souboru (JSON). Obsahuje validaci vstupu.
+\item \textit{add\_lang\_database}
+
+Vytvoří objekt jazyka na základě vstupního souboru již dřívě použitého a uloženého jazyka. Obsahuje validaci vstupu.
+\item \textit{save\_lang\_database}
+
+Uloží aktuální databázi programu do souboru za pomocí serializace \textit{pickle}.
+\item \textit{distance\_langs}
+
+Vypočítá vzdálenost dvou vstupních jazyků, je možné parametrizovat \textit{WORD\_CHAR\_RATIO} tedy poměr váhy četností slov a znaků.
+\item \textit{compare\_against\_database}
+
+Porovná vstupní jazyk se zbytkem databáze programu a zobrazí výsledky v procentech.
+\item \textit{podmínka na konci programu}
+
+Obsahuje zpracování přepínačů a řídí celý program.
+\end{itemize}
+
+Program je ošetřen oproti neplatným vstupům, je možné používat různé přepínače a zejména nápovědu \textbf{-h}.
+
+\section{Reálná funkčnost}
+
+\end{document}
