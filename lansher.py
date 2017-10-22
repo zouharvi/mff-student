@@ -16,7 +16,7 @@ import json, re, argparse, pickle
 from io import StringIO
 from math import log
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 VERSION_STR = "LANSHER language distinguisher " + VERSION + "\nVilém Zouhar, 2017"
 HELP_STR = '''the options below may be used: (-i, -fi, -lc are mutually exclusive)
     -ld --load-database           path to compiled database
@@ -32,7 +32,12 @@ full documentation and source code at <https://github.com/zouharvi/lansher>
 '''
 
 lang_data = {}
-WORD_CHAR_RATIO = 100
+WEIGHTS = {
+    "word":     200,
+    "char":     1,      # use chars only if notyhing else is left
+    "tuple2":   200,
+    "tuple3":   200
+}
 
 def clean_data(data):
     # remove unwanted symbols from input
@@ -55,6 +60,7 @@ def element_frequency(elements):
     return element_freq
 
 def join_frequencies(freqs_1, freqs_2):
+    # merge two frequency dictionaries
     freqs_merged = freqs_1    
     for key in freqs_2.keys():
         if key in freqs_merged:
@@ -63,37 +69,52 @@ def join_frequencies(freqs_1, freqs_2):
             freqs_merged[key] = freqs_2[key]
     return freqs_merged
 
+def create_tuples(n, words):
+    # create all n-tuple subsequences from list of string
+    tuples = []
+    for element in words:
+        processed = ""
+        cur_length = 0
+        for c in element:
+            processed += c
+            cur_length += 1
+            if cur_length == n:
+                cur_length -= 1
+                tuples.append(processed)
+                processed = processed[1:]
+    return tuples
+
+def join_if_available(name, object, arr_local):
+    # joins two frequencies if available
+    if name in object["freqs"]:
+        object["freqs"][name] = join_frequencies(arr_local, object["freqs"][name]) 
+    else:
+        object["freqs"][name] = arr_local
+    object["counts"][name] = len(object["freqs"][name])
+
 def create_lang_object(object, data):
     if object == None:
-        object = {}
+        object = {"freqs":{}, "counts":{}}
+
     data_clean = clean_data(data)
-    word_freq_local = element_frequency(data_clean.split(" "))
-    if "word_freq" in object:
-        object["word_freq"] = join_frequencies(word_freq_local, object["word_freq"]) 
-    else:
-        object["word_freq"] = word_freq_local
-    word_count = 0
-    for value in object["word_freq"].values():
-        word_count += value 
-    object["word_count"] = word_count
+    words_split = data_clean.split(" ")
 
+    word_freq_local = element_frequency(words_split)
+    join_if_available("word", object, word_freq_local)
     char_freq_local = element_frequency(data_clean.replace(" ", ""))
-    if "char_freq" in object:
-        object["char_freq"] = join_frequencies(char_freq_local, object["char_freq"])
-    else:
-        object["char_freq"] = char_freq_local
-    char_count = 0
-    for value in object["char_freq"].values():
-        char_count += value 
-    object["char_count"] = char_count
+    join_if_available("char", object, char_freq_local)
 
+    tuples2_freq_local = element_frequency(words_split)
+    join_if_available("tuple2", object, tuples2_freq_local)
+    tuples3_freq_local = element_frequency(words_split)
+    join_if_available("tuple3", object, tuples3_freq_local)
     return object
 
 def add_to_database(key, data):
     # adds data to local database
     sample = 0
     if not key in lang_data:
-        sample = lang_data[key] = {}
+        sample = lang_data[key] = {"freqs":{}, "counts":{}}
     else:
         sample = lang_data[key]
     create_lang_object(sample, data)  
@@ -139,27 +160,19 @@ def save_lang_database(file_name):
         print("cannot write \"" + file_name + "\", aborting")
         
         
-def distance_langs(lang1, lang2):
+def distance_langs(lang2, lang1):
     # calculates distance between two languages (sample input is interpreted as language on its own)
-    word_freq_1 = lang1["word_freq"]
-    word_freq_2 = lang2["word_freq"]
-    s1 = 0.0
-    for key in word_freq_1.keys():
-        if key in word_freq_2:
-            s1 += log(word_freq_2[key]*word_freq_1[key]+1) # log(arg + 1) to allow arg = 1 
+    total_score = 0
+    for type_name in lang1["freqs"]:
+        if type_name in lang2["freqs"]:
+            type_score = 0
+            for key in lang1["freqs"][type_name].keys():
+                if key in lang2["freqs"][type_name]:
+                    type_score += log(lang1["freqs"][type_name][key]*lang2["freqs"][type_name][key]+1) # log(arg + 1) to allow arg = 1 
+            type_score = WEIGHTS[type_name]*type_score/log(lang1["counts"][type_name]*lang2["counts"][type_name]+1)
+            total_score += type_score
 
-    char_freq_1 = lang1["char_freq"]
-    char_freq_2 = lang2["char_freq"]
-    s2 = 0.0
-    for key in char_freq_1.keys():
-        if key in char_freq_2:
-            s2 += log(char_freq_2[key]*char_freq_1[key]+1) # log(arg + 1) to allow arg = 1 
-
-
-    score1 = WORD_CHAR_RATIO*10*s1/log(lang1["word_count"]*lang2["word_count"]+1)
-    score2 =                 10*s2/log(lang1["char_count"]*lang2["char_count"]+1)
-
-    return (score1+score2)
+    return total_score
 
 def compare_against_database(name, lang, skip=None, all=False):
     # compares input language against everything in the database (skips language if $key is $skip)

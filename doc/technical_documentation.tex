@@ -120,7 +120,7 @@ Podobnost dvou slovníků, $|S_1S_2|$, definujeme jako:
 $|S_1S_2| = \frac{\sum_{i=1}^{|M|} \ \ log(S_1(M_i)\cdot S_{cs}(M_i) +1)}{log(|S_1||S_2|+1)} $
 \end{center}
 
-Kromě podobnosti slovníků se k podobnosti jazyků používá (byť v řádově menší míře) i porovnání četnosti znaků, stejným způsobem.
+Kromě podobnosti slovníků se k podobnosti jazyků používá i porovnání četnosti dvojic a trojic, stejným způsobem. Mnohem nižší váhu má četnost samotných znaků, která se tedy použije pouze v případě, že průnik slov, dvojic a trojic je příliš nízká.
 
 \section{Struktura programu}
 Celý program je napsaný v souboru \textit{lansher.py}. K jeho spuštění je zapotřebí Python3. Před vlastním programem je definována řada funkcí, přičemž všechny fungují průměrně v \textit{O(n)} čase.

@@ -17,3 +17,12 @@ Language Distinguisher is a small program written in Python 3, which faciliates 
 
 ## More Info
 The program was written by Vilém Zouhar for winter semester 2017/2018 at MFF.
+
+## Changelog
+
+#### 0.1.1
+added support for n-tuples
+easier word/char/tuples balancing 
+
+#### 0.1.0
+first release
