@@ -20,6 +20,9 @@ The program was written by Vilém Zouhar for winter semester 2017/2018 at MFF.
 
 ## Changelog
 
+#### 0.1.2
+* 4 tuples by default
+
 #### 0.1.1
 * added support for n-tuples
 * easier word/char/tuples balancing 

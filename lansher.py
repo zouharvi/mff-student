@@ -16,7 +16,7 @@ import json, re, argparse, pickle
 from io import StringIO
 from math import log
 
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 VERSION_STR = "LANSHER language distinguisher " + VERSION + "\nVilém Zouhar, 2017"
 HELP_STR = '''the options below may be used: (-i, -fi, -lc are mutually exclusive)
     -ld --load-database           path to compiled database
@@ -36,7 +36,8 @@ WEIGHTS = {
     "word":     200,
     "char":     1,      # use chars only if notyhing else is left
     "tuple2":   200,
-    "tuple3":   200
+    "tuple3":   200,
+    "tuple4":   200
 }
 
 def clean_data(data):
@@ -108,6 +109,8 @@ def create_lang_object(object, data):
     join_if_available("tuple2", object, tuples2_freq_local)
     tuples3_freq_local = element_frequency(words_split)
     join_if_available("tuple3", object, tuples3_freq_local)
+    tuples4_freq_local = element_frequency(words_split)
+    join_if_available("tuple4", object, tuples4_freq_local)
     return object
 
 def add_to_database(key, data):
