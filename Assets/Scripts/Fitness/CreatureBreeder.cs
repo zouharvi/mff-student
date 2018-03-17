@@ -60,7 +60,7 @@ public class CreatureBreeder : MonoBehaviour {
                 Genome g = toKill.GetComponent<CreatureAssembler>().genome;
                 g.SaveScore(toBest.GetComponent<AReferee>().GetScore());
                 killed.Add(g);
-                Destroy(toKill); // TODO: kill gracefully? fade..
+                toKill.GetComponent<CreatureAssembler>().Kill();
                 instances.RemoveAt(instances.Count - 1);
                 if(instances.Count == 1)
                 {

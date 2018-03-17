@@ -52,4 +52,10 @@ public class CreatureAssembler : MonoBehaviour {
         torso.CreateGraphics();
     }
 
+
+    public void Kill()
+    {
+        // TODO: destroy gracefully
+        Destroy(gameObject);
+    }
 }
