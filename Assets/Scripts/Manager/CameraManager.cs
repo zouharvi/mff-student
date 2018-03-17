@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour {
     // set up by environment manager
     public float cameraYMin, cameraYMax, cameraXMin, cameraXMax;
     private Vector3 dragOrigin;
-    private string[] followTexts = { "Second best", "Last", "Free movement", "Leader"};
+    private string[] followTexts = { "Leader", "Second best", "Last", "Free movement"};
 
     private void Start()
     {
@@ -42,6 +42,7 @@ public class CameraManager : MonoBehaviour {
     public void InitState()
     {
         state = 0;
+        textToChange.text = followTexts[0];
         // Don't refresh instantly, game objects are not ready
         Invoke("Refresh", 0.25f);
     }

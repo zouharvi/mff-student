@@ -4,9 +4,9 @@ public class CreatureWheel {
     public Vector2 position; // [0, 1]
     public float speed;      // [-1, 1]
     public float torgue;     // [-0.5, 1] negative turns off the motor
-    public float size;       // [0, 1]
+    public float size;       // [0.1, 1]
 
-    public const int MAX_SIZE   = 2;
+    public const int MAX_SIZE   = 3;
     public const int MAX_SPEED  = 500;
     public const int MAX_TORQUE = 1000;
 
