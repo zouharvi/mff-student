@@ -33,6 +33,7 @@ public class CreatureTorso
 
     public void CreateGraphics()
     {
-        gameObject.GetComponent<DrawPolygon>().CreateGraphicsFromPolygonCollider();
+        // TODO: base color on creature genes
+        gameObject.GetComponent<DrawPolygon>().CreateGraphicsFromPolygonCollider(Random.ColorHSV());
     }
 }

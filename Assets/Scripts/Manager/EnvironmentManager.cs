@@ -35,7 +35,7 @@ public class EnvironmentManager : MonoBehaviour {
 
 
         floor.GetComponent<PolygonCollider2D>().points = newPoints.ToArray();
-        floor.GetComponent<DrawPolygon>().CreateGraphicsFromPolygonCollider(0, 0.05f);
+        floor.GetComponent<DrawPolygon>().CreateGraphicsFromPolygonCollider(Random.ColorHSV(0, 1, 0, 1, 0, 0.4f), 0, 0.05f);
 
         CameraManager cameraManager = gameObject.GetComponent<CameraManager>();
         cameraManager.cameraXMin = -10;

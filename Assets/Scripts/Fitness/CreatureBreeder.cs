@@ -10,7 +10,7 @@ public class CreatureBreeder : MonoBehaviour {
     List<Genome> killed;
 
     public static int POPULATION_SIZE = 10;
-    public static float KILL_TIMER = 2;
+    public static float KILL_TIMER = 4;
     public static readonly int KILL_SEGMENT_LENGTH = 50;
     private float killTimeAcc = 0;
 
@@ -33,6 +33,7 @@ public class CreatureBreeder : MonoBehaviour {
 
     public void InstantiateNew()
     {
+        CreatureAssembler.drawOrder = 0;
         killed = new List<Genome>();
         instances = new List<GameObject>();
         foreach(Genome g in population)

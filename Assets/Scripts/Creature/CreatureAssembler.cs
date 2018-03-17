@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CreatureAssembler : MonoBehaviour {
+    public static int drawOrder = 0;
 
     //CreatureDescriptor descriptor;
     public GameObject blankWheel, blankTorso;
@@ -33,7 +34,7 @@ public class CreatureAssembler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Setup();
-
+        gameObject.transform.position += new Vector3(0, 0, -3*(drawOrder++));
         torso.Instantiate(blankTorso, transform);
         List<Vector2> newPoints = new List<Vector2>();
 

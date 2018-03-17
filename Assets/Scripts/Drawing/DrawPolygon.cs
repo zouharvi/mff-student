@@ -13,7 +13,7 @@ public class DrawPolygon : MonoBehaviour {
     /// </summary>
     /// <param name="shiftAmountX">offset added to polygon X</param>
     /// <param name="shiftAmountY">offset added to polygon Y</param>
-	public void CreateGraphicsFromPolygonCollider(float shiftAmountX = 0, float shiftAmountY = 0) {
+	public void CreateGraphicsFromPolygonCollider(Color color, float shiftAmountX = 0, float shiftAmountY = 0) {
         PolygonCollider2D collider = gameObject.GetComponent<PolygonCollider2D>();
         Vector2[] vertices2D = collider.points;
         Vector2 shiftVector = new Vector2(shiftAmountX, shiftAmountY);
@@ -38,7 +38,7 @@ public class DrawPolygon : MonoBehaviour {
 
         // Set up game object with mesh;
         MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        meshRenderer.material.color = Random.ColorHSV(); // TODO: pick color based on polygon genes
+        meshRenderer.material.color = color; // TODO: pick color based on polygon genes
         MeshFilter filter = gameObject.GetComponent<MeshFilter>();
         filter.mesh = msh;
     }
