@@ -6,17 +6,19 @@ public class DistanceReferee : AReferee {
     
     public override float GetScore()
     {
-        return gameObject.transform.position.x - initX;
+        return torso.transform.position.x - initX;
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+
     }
 
     private float initX;
+    private GameObject torso;
     public override void Start()
     {
-        initX = gameObject.transform.position.x;
+        torso = gameObject.GetComponent<CreatureAssembler>().torso.gameObject;
+        initX = torso.transform.position.x;
     }
 }
