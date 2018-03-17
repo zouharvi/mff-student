@@ -33,6 +33,6 @@ public class CreatureTorso
 
     public void CreateGraphics()
     {
-        gameObject.GetComponent<DrawPolygon>().CreateGraphicsFromPolygon();
+        gameObject.GetComponent<DrawPolygon>().CreateGraphicsFromPolygonCollider();
     }
 }

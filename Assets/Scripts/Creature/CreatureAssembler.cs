@@ -7,7 +7,7 @@ public class CreatureAssembler : MonoBehaviour {
     //CreatureDescriptor descriptor;
     public GameObject blankWheel, blankTorso;
 
-    private Genome genome;
+    public Genome genome;
     public CreatureTorso torso;
     public List<CreatureWheel> wheels = new List<CreatureWheel>();
 

@@ -8,9 +8,17 @@ public class DrawPolygon : MonoBehaviour {
 
     public Shader shader;
 
-	public void CreateGraphicsFromPolygon() {
+    /// <summary>
+    /// Create graphics complete with mesh from polygon collider points
+    /// </summary>
+    /// <param name="shiftAmountX">offset added to polygon X</param>
+    /// <param name="shiftAmountY">offset added to polygon Y</param>
+	public void CreateGraphicsFromPolygonCollider(float shiftAmountX = 0, float shiftAmountY = 0) {
         PolygonCollider2D collider = gameObject.GetComponent<PolygonCollider2D>();
         Vector2[] vertices2D = collider.points;
+        Vector2 shiftVector = new Vector2(shiftAmountX, shiftAmountY);
+        for (int i = 0; i < vertices2D.Length; i++)
+            vertices2D[i] += shiftVector;
 
         // Use the triangulator to get indices for creating triangles
         Triangulator tr = new Triangulator(vertices2D);

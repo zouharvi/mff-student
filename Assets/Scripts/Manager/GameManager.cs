@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
         breeder.ResetPopulation();
         breeder.InstantiateNew();
         cameraManager.InitState();
+        environment.GenerateTerrain(100);
         Debug.Log("Started vanilla");
     }
 	

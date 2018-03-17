@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class AReferee : MonoBehaviour {
 
     public abstract float GetScore();   // score is absolute
+    //public abstract float GetHealth();  // health is not
     public virtual void Update() {  }
     public virtual void Start() {  }
 
@@ -13,7 +14,7 @@ public abstract class AReferee : MonoBehaviour {
     {
         public int Compare(GameObject c1, GameObject c2)
         {
-            return (int)(100 * c1.GetComponent<AReferee>().GetScore() - 100 * c2.GetComponent<AReferee>().GetScore());
+            return (int)(-100 * c1.GetComponent<AReferee>().GetScore() + 100 * c2.GetComponent<AReferee>().GetScore());
         }
     }
 }
