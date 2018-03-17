@@ -33,10 +33,12 @@ public class CreatureWheel {
         this.size = size;
     }
 
-    public GameObject Instantiate(GameObject blankWheel, Transform parent, Rigidbody2D torsoRigidBody)
+    public GameObject Instantiate(GameObject blankWheel, Transform parent, Rigidbody2D torsoRigidBody, int order)
     {
         gameObject = GameObject.Instantiate(blankWheel, parent);
-        gameObject.transform.localScale = new Vector3(size * MAX_SIZE, size * MAX_SIZE, 1);
+        gameObject.transform.localScale = new Vector3(size * MAX_SIZE, 1, size * MAX_SIZE);
+        // cylinder mesh is rotated
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 0.5f * order);
         HingeJoint2D hingeJoint = gameObject.GetComponent<HingeJoint2D>();
         hingeJoint.connectedBody = torsoRigidBody;
         hingeJoint.connectedAnchor = position;

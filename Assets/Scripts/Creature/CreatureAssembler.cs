@@ -37,11 +37,12 @@ public class CreatureAssembler : MonoBehaviour {
         torso.Instantiate(blankTorso, transform);
         List<Vector2> newPoints = new List<Vector2>();
 
+        int i = 0;
         foreach (CreatureWheel cWheel in wheels)
         {
             // adds wheel positions
             newPoints.Add(cWheel.position);
-            cWheel.Instantiate(blankWheel, transform, torso.gameObject.GetComponent<Rigidbody2D>());
+            cWheel.Instantiate(blankWheel, transform, torso.gameObject.GetComponent<Rigidbody2D>(), i++);
         }
 
         // set true collider points and create pretty polygon shape

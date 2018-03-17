@@ -21,7 +21,7 @@ public class CameraManager : MonoBehaviour {
     public float cameraYMin;
     public float cameraYMax;
     private Vector3 dragOrigin;
-    private string[] followTexts = { "> Second best", "> Last", "> Leader", "> Free movement" };
+    private string[] followTexts = { "> Second best", "> Last", "> Free movement", "> Leader"};
 
     private void Start()
     {
@@ -38,10 +38,15 @@ public class CameraManager : MonoBehaviour {
         Refresh();
     }
     
+    public void InitState()
+    {
+        state = 0;
+        // Don't refresh here, game objects are not ready
+    }
+
     private void Refresh() {
         Debug.Log("refreshed");
 
-        // IMP: make this dynamic?
         switch (state)
         {
             case 0:
@@ -70,8 +75,9 @@ public class CameraManager : MonoBehaviour {
             case 0:
             case 1:
             case 2:
+                if (transformToFollow == null)
+                    break;
                 Vector3 t = transformToFollow.position;
-                Debug.Log("followed transform X: " + t.x.ToString()); 
                 t.z = Camera.main.transform.position.z;
                 Camera.main.transform.position = t;
                 break;

@@ -6,7 +6,7 @@ public class DistanceReferee : AReferee {
     
     public override float GetScore()
     {
-        return torso.transform.position.x - initX;
+        return -torso.transform.position.x + initX;
     }
 
     public override void Update()

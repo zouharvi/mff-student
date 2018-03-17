@@ -50,28 +50,19 @@ public class CreatureBreeder : MonoBehaviour {
     /// <returns></returns>
     public GameObject Best(int pos)
     {
-        instances.Sort(new CreatureComparer());
+        instances.Sort(AReferee.CREATURE_COMPARER);
         if(pos >= 0)
         {
             pos = Mathf.Min(instances.Count-1, pos);
             // pos == -1 should never happen
-            Debug.Log("Trying: " + pos.ToString());
             return instances[pos];
         } else
         {
             pos = Mathf.Max(-instances.Count, pos);
             // pos == 0 should never happen
-            Debug.Log("Trying: " + (instances.Count+pos).ToString());
             return instances[instances.Count + pos];
         }
     }
 
-    public class CreatureComparer : IComparer<GameObject>
-    {
-        public int Compare(GameObject c1, GameObject c2)
-        {
-            Debug.Log("sorting value: " + ((int)(100 * c1.GetComponent<AReferee>().GetScore() - 100 * c2.GetComponent<AReferee>().GetScore())).ToString());
-            return (int) (100*c1.GetComponent<AReferee>().GetScore() - 100*c2.GetComponent<AReferee>().GetScore());
-        }
-    }
+
 }
