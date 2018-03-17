@@ -54,8 +54,6 @@ public class CreatureBreeder : MonoBehaviour {
             GameObject toBest = Best(0);
             float toKillScore = toKill.GetComponent<AReferee>().GetScore();
             float toBestScore = toBest.GetComponent<AReferee>().GetScore();
-            Debug.Log("killing, because toKill: " + (toKill.GetComponent<AReferee>().GetScore()).ToString());
-            Debug.Log("killing, because toBest: " + (toBest.GetComponent<AReferee>().GetScore()).ToString());
             if (toKillScore < 0 || toBestScore-toKillScore > KILL_SEGMENT_LENGTH)
             {
                 Genome g = toKill.GetComponent<CreatureAssembler>().genome;

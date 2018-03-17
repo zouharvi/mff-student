@@ -18,10 +18,11 @@ public class CameraManager : MonoBehaviour {
 
     // camera drag vars
     public float dragSpeed;
-    public float cameraYMin;
-    public float cameraYMax;
+
+    // set up by environment manager
+    public float cameraYMin, cameraYMax, cameraXMin, cameraXMax;
     private Vector3 dragOrigin;
-    private string[] followTexts = { "> Second best", "> Last", "> Free movement", "> Leader"};
+    private string[] followTexts = { "Second best", "Last", "Free movement", "Leader"};
 
     private void Start()
     {
@@ -41,11 +42,11 @@ public class CameraManager : MonoBehaviour {
     public void InitState()
     {
         state = 0;
-        // Don't refresh here, game objects are not ready
+        // Don't refresh instantly, game objects are not ready
+        Invoke("Refresh", 0.25f);
     }
 
     private void Refresh() {
-        Debug.Log("refreshed");
 
         switch (state)
         {
@@ -96,6 +97,7 @@ public class CameraManager : MonoBehaviour {
                 Vector3 d = Camera.main.transform.position + move;
 
                 d.y = Mathf.Clamp(d.y, cameraYMin, cameraYMax);
+                d.x = Mathf.Clamp(d.x, cameraXMin, cameraXMax);
                 Camera.main.transform.position = d; // Translate(move, Space.World);
                 
                 break;
