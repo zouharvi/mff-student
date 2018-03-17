@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class DistanceReferee : AReferee {
     
-    public override float GetFitness()
-    {
-        throw new System.NotImplementedException();
-    }
-    
     public override float GetScore()
     {
         return gameObject.transform.position.x - initX;
@@ -18,7 +13,6 @@ public class DistanceReferee : AReferee {
     {
         throw new System.NotImplementedException();
     }
-
 
     private float initX;
     public override void Start()

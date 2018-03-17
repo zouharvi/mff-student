@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class AReferee : MonoBehaviour {
 
-    public abstract float GetFitness(); // fitness relative to peers
     public abstract float GetScore();   // score is absolute
     public virtual void Update() {  }
     public virtual void Start() {  }
