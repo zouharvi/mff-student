@@ -25,6 +25,22 @@ public class GameManager : MonoBehaviour {
         environment.GenerateTerrain(100);
         Debug.Log("Started vanilla");
     }
+
+    public void SubsequentGame()
+    {
+        breeder.CleanUp();
+        breeder.ResetPopulation();
+        breeder.InstantiateFollowingPopulation();
+        cameraManager.InitState();
+        Debug.Log("Started subsequent");
+    }
+
+    public void PrematureSubsequentGame()
+    {
+        Debug.Log("Ending run prematurely");
+        breeder.KillOffRest();
+        SubsequentGame();
+    }
 	
     public void OfferEnd()
     {

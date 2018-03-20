@@ -7,7 +7,11 @@ public class GenomeMixer {
     {
         public static float NEW_WHEEL_POINT = 0.1f;
         public static float REMOVE_WHEEL_POINT = 0.1f;
+        public static float WHEEL_CHANGE = 0.1f;
+
         public static float NEW_TORSO_POINT = 0.1f;
+        public static float REMOVE_TORSO_POINT = 0.1f;
+        public static float TORSO_POINT_CHANGE = 0.1f;
     }
 
     public static Genome Mutate(Genome g)
@@ -20,7 +24,55 @@ public class GenomeMixer {
         if (Random.value < PROB.REMOVE_WHEEL_POINT && r.wheels.Count != 0)
             r.wheels.RemoveAt(Random.Range(0, r.wheels.Count));
 
+        // modify individual wheels
+        for (int i = 0; i < g.wheels.Count; i++)
+        {
+            if (Random.value >= PROB.WHEEL_CHANGE)
+            {
+                g.wheels[i].size = Mathf.Clamp(g.wheels[i].size + Random.value * 0.3f - 0.15f, 0.1f, 1);
+                g.wheels[i].torque = Mathf.Clamp(g.wheels[i].torque + Random.value * 0.3f - 0.15f, -0.25f, 1);
+                g.wheels[i].speed = Mathf.Clamp(g.wheels[i].speed + Random.value * 0.3f - 0.15f, -1, 1);
+                g.wheels[i].position = new Vector2(
+                    Mathf.Clamp(g.wheels[i].position.x + Random.value * 0.3f - 0.15f, -1, 1),
+                    Mathf.Clamp(g.wheels[i].position.y + Random.value * 0.3f - 0.15f, -1, 1)
+                );
+            }
+        }
+
+        // TODO: make this dependend on the number of present points
+        if (Random.value < PROB.NEW_TORSO_POINT)
+            r.torso.points.Add(new Vector2(Random.value * 2 - 1, Random.value * 2 - 1));
+        if (Random.value < PROB.REMOVE_TORSO_POINT && r.torso.points.Count > 3)
+            r.torso.points.RemoveAt(Random.Range(0, r.torso.points.Count));
+
+        // modify individual torso points
+        for (int i = 0; i < g.torso.points.Count; i++)
+        {
+            if (Random.value >= PROB.TORSO_POINT_CHANGE)
+            {
+                g.torso.points[i] = new Vector2(
+                    Mathf.Clamp(g.torso.points[i].x + Random.value * 0.3f - 0.15f, -1, 1),
+                    Mathf.Clamp(g.torso.points[i].y + Random.value * 0.3f - 0.15f, -1, 1)
+                );
+            }
+        }
 
         return r;
+    }
+
+    public static Genome FromParents(Genome g1, Genome g2)
+    {
+        return new Genome(g1, g2);
+    }
+    
+    public static List<Genome> FromPopulation(List<Genome> oldPopulation)
+    {
+        List<Genome> newPopulation = new List<Genome>();
+        //for (int i = 0; i < oldPopulation.Count / 3; i++)
+        //    newPopulation.Add(Mutate(oldPopulation[i]));
+        for (int i = oldPopulation.Count / 3; i < oldPopulation.Count; i++)
+        // URGENT TODO: think of a better function for choosing two parents
+            newPopulation.Add(FromParents(oldPopulation[0], oldPopulation[1]));
+        return newPopulation;
     }
 }

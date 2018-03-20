@@ -59,10 +59,38 @@ public class CreatureBreeder : MonoBehaviour {
                 KillGenomed(toKill);
                 if(instances.Count == 1)
                 {
-                    // TODO: mutate new population?
-                    Debug.Log("game end");
+                    Debug.Log("Game end.");
+                    gameObject.GetComponent<GameManager>().SubsequentGame();
                 }
             }
+        }
+    }
+
+    public void InstantiateFollowingPopulation()
+    {
+        CreatureAssembler.drawOrder = 0;
+        killed.Reverse();
+        List<Genome> newPopulation = new List<Genome>();
+        newPopulation.Add(killed[0]); // the best one carries over // TODO: option this
+        newPopulation.Add(new Genome()); // one is completely randomized // TODO: option this
+        newPopulation.AddRange(GenomeMixer.FromPopulation(killed));
+
+        killed = new List<Genome>();
+        instances = new List<GameObject>();
+        foreach (Genome g in population)
+        {
+            GameObject creature = Instantiate(blankCreature);
+            CreatureAssembler assembler = creature.GetComponent<CreatureAssembler>();
+            assembler.Setup(g);
+            instances.Add(creature);
+        }
+    }
+
+    public void KillOffRest()
+    {
+        while (instances.Count != 0)
+        {
+            KillGenomed(Best(-1));
         }
     }
 
