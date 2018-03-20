@@ -33,6 +33,7 @@ public class CreatureBreeder : MonoBehaviour {
     public void InstantiateNew()
     {
         CreatureAssembler.drawOrder = 0;
+        killTimeAcc = -7;
         killed = new List<Genome>();
         instances = new List<GameObject>();
         foreach(Genome g in population)
@@ -57,7 +58,7 @@ public class CreatureBreeder : MonoBehaviour {
             if (toKillScore < 0 || toBestScore-toKillScore > KILL_SEGMENT_LENGTH)
             {
                 KillGenomed(toKill);
-                if(instances.Count == 1)
+                if(instances.Count <= 1)
                 {
                     Debug.Log("Game end.");
                     gameObject.GetComponent<GameManager>().SubsequentGame();
@@ -68,16 +69,19 @@ public class CreatureBreeder : MonoBehaviour {
 
     public void InstantiateFollowingPopulation()
     {
+        Debug.Log("instantiating following population");
         CreatureAssembler.drawOrder = 0;
+        killTimeAcc = -7;
+        Debug.Log(killed.Count);
         killed.Reverse();
         List<Genome> newPopulation = new List<Genome>();
         newPopulation.Add(killed[0]); // the best one carries over // TODO: option this
         newPopulation.Add(new Genome()); // one is completely randomized // TODO: option this
-        newPopulation.AddRange(GenomeMixer.FromPopulation(killed));
-
+        //newPopulation.AddRange(GenomeMixer.FromPopulation(killed));
+        population = newPopulation;
         killed = new List<Genome>();
         instances = new List<GameObject>();
-        foreach (Genome g in population)
+        foreach (Genome g in newPopulation)
         {
             GameObject creature = Instantiate(blankCreature);
             CreatureAssembler assembler = creature.GetComponent<CreatureAssembler>();

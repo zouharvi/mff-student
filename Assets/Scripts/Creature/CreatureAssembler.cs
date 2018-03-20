@@ -29,12 +29,7 @@ public class CreatureAssembler : MonoBehaviour {
         torso = new CreatureTorso(genome.torso);
         foreach (CreatureWheelDef cwd in genome.wheels)
             wheels.Add(new CreatureWheel(cwd));
-    }
-
-    // Use this for initialization
-    void Start () {
-        Setup();
-        gameObject.transform.position += new Vector3(0, 0, -3*(drawOrder++));
+        gameObject.transform.position += new Vector3(0, 0, -3 * (drawOrder++));
         torso.Instantiate(blankTorso, transform);
         List<Vector2> newPoints = new List<Vector2>();
 
@@ -50,6 +45,10 @@ public class CreatureAssembler : MonoBehaviour {
         torso.ExtendPolygon(newPoints);
         // create mesh
         torso.CreateGraphics();
+    }
+
+    // Use this for initialization
+    void Start () {
     }
 
 
