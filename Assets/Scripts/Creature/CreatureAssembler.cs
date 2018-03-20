@@ -17,10 +17,7 @@ public class CreatureAssembler : MonoBehaviour {
     /// </summary>
     public void Setup()
     {
-        torso = new CreatureTorso();
-        wheels.Add(new CreatureWheel());
-        wheels.Add(new CreatureWheel());
-        wheels.Add(new CreatureWheel());
+        Setup(new Genome());
     }
 
     /// <summary>
@@ -29,6 +26,9 @@ public class CreatureAssembler : MonoBehaviour {
     public void Setup(Genome genome)
     {
         this.genome = genome;
+        torso = new CreatureTorso(genome.torso);
+        foreach (CreatureWheelDef cwd in genome.wheels)
+            wheels.Add(new CreatureWheel(cwd));
     }
 
     // Use this for initialization
@@ -42,7 +42,7 @@ public class CreatureAssembler : MonoBehaviour {
         foreach (CreatureWheel cWheel in wheels)
         {
             // adds wheel positions
-            newPoints.Add(cWheel.position);
+            newPoints.Add(cWheel.def.position);
             cWheel.Instantiate(blankWheel, transform, torso.gameObject.GetComponent<Rigidbody2D>(), i++);
         }
 

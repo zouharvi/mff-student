@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnvironmentManager : MonoBehaviour {
     public GameObject floor;
+    public GameObject endKillZone;
     private static readonly float BLOCK_WIDTH = 3;
-    private static readonly float BLOCK_HEIGHT = 3;
+    private static readonly float BLOCK_HEIGHT = 1.1f;
 
     public void GenerateTerrain(int length)
     {
@@ -36,6 +37,8 @@ public class EnvironmentManager : MonoBehaviour {
 
         floor.GetComponent<PolygonCollider2D>().points = newPoints.ToArray();
         floor.GetComponent<DrawPolygon>().CreateGraphicsFromPolygonCollider(Random.ColorHSV(0, 1, 0, 1, 0, 0.4f), 0, 0.05f);
+
+        endKillZone.transform.position = new Vector3(BLOCK_WIDTH * (length-5), 0, 0);
 
         CameraManager cameraManager = gameObject.GetComponent<CameraManager>();
         cameraManager.cameraXMin = -10;

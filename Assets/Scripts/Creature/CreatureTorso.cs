@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class CreatureTorso
 {
-
-    public List<Vector2> points = new List<Vector2>();
-    public const int MAX_WIDTH = 3;
+    public CreatureTorsoDef def;
     public GameObject gameObject;
 
     /// <summary>
-    /// Randomization constructor
+    /// Randomization constructor, obsolete!
     /// </summary>
     public CreatureTorso()
     {
-        for (int i = 0; i < 5; i++)
-            points.Add(new Vector2(Random.value * 2 - 1, Random.value * 2 - 1) * MAX_WIDTH);
+        def = new CreatureTorsoDef(5);
+    }
+
+    /// <summary>
+    /// Def constructor
+    /// </summary>
+    public CreatureTorso(CreatureTorsoDef def)
+    {
+        this.def = def;
     }
 
     public void ExtendPolygon(List<Vector2> newPoints)
     {
-        points.AddRange(newPoints);
-        CustomMath.CreatePrettyPolygon(ref points);
-        gameObject.GetComponent<PolygonCollider2D>().points = points.ToArray();
+        def.points.AddRange(newPoints);
+        CustomMath.CreatePrettyPolygon(ref def.points);
+        Vector2[] pointsArr = new Vector2[def.points.Count];
+        for (int i = 0; i < def.points.Count; i++)
+            pointsArr[i] = def.points[i] * CreatureTorsoDef.MAX_WIDTH;
+        gameObject.GetComponent<PolygonCollider2D>().points = pointsArr;
     }
 
     public GameObject Instantiate(GameObject blankTorso, Transform parent)

@@ -28,7 +28,6 @@ public class CreatureBreeder : MonoBehaviour {
             foreach (GameObject go in instances)
                 Destroy(go);
         }
-
     }
 
     public void InstantiateNew()
@@ -57,17 +56,22 @@ public class CreatureBreeder : MonoBehaviour {
             float toBestScore = toBest.GetComponent<AReferee>().GetScore();
             if (toKillScore < 0 || toBestScore-toKillScore > KILL_SEGMENT_LENGTH)
             {
-                Genome g = toKill.GetComponent<CreatureAssembler>().genome;
-                g.SaveScore(toBest.GetComponent<AReferee>().GetScore());
-                killed.Add(g);
-                toKill.GetComponent<CreatureAssembler>().Kill();
-                instances.RemoveAt(instances.Count - 1);
+                KillGenomed(toKill);
                 if(instances.Count == 1)
                 {
+                    // TODO: mutate new population?
                     Debug.Log("game end");
                 }
             }
         }
+    }
+
+    public void KillGenomed(GameObject toKill)
+    {
+        Genome g = toKill.GetComponent<CreatureAssembler>().genome;
+        killed.Add(g);
+        toKill.GetComponent<CreatureAssembler>().Kill();
+        instances.RemoveAt(instances.Count - 1);
     }
 
     /// <summary>
@@ -90,6 +94,4 @@ public class CreatureBreeder : MonoBehaviour {
             return instances[instances.Count + pos];
         }
     }
-
-
 }

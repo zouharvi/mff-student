@@ -1,55 +1,43 @@
 ﻿using UnityEngine;
 
 public class CreatureWheel {
-    public Vector2 position; // [0, 1]
-    public float speed;      // [-1, 1]
-    public float torgue;     // [-0.5, 1] negative turns off the motor
-    public float size;       // [0.1, 1]
 
-    public const int MAX_SIZE   = 3;
-    public const int MAX_SPEED  = 500;
-    public const int MAX_TORQUE = 1000;
-
+    public CreatureWheelDef def;
     public GameObject gameObject;
 
     /// <summary>
-    /// Randomization constructor
+    /// Randomization constructor, obsolete!
     /// </summary>
     public CreatureWheel()
     {
-        position = new Vector2(Random.value * 2 - 1, Random.value * 2 - 1);
-        speed  = Random.value*2-1;
-        torgue = Random.value * 1.5f - 0.5f;
-        size   = Random.value*0.9f+0.1f;
+        def = new CreatureWheelDef();
     }
 
     /// <summary>
-    /// Absolute constructor
+    /// Def constructor
     /// </summary>
-    public CreatureWheel(Vector2 position, float speed, float size)
+    public CreatureWheel(CreatureWheelDef def)
     {
-        this.position = position;
-        this.speed = speed;
-        this.size = size;
+        this.def = def;
     }
 
     public GameObject Instantiate(GameObject blankWheel, Transform parent, Rigidbody2D torsoRigidBody, int order)
     {
+        // dirty order trick
         gameObject = GameObject.Instantiate(blankWheel, parent);
-        gameObject.transform.localScale = new Vector3(size * MAX_SIZE, size * MAX_SIZE, 1);
-        // cylinder mesh is rotated
+        gameObject.transform.localScale = new Vector3(def.size * CreatureWheelDef.MAX_SIZE, def.size * CreatureWheelDef.MAX_SIZE, 1);
         gameObject.transform.localPosition += new Vector3(0, 0, -0.5f * order);
         HingeJoint2D hingeJoint = gameObject.GetComponent<HingeJoint2D>();
         hingeJoint.connectedBody = torsoRigidBody;
-        hingeJoint.connectedAnchor = position;
+        hingeJoint.connectedAnchor = def.position;
 
-        if (torgue < 0) // turn motor off on negative torque
+        if (def.torque < 0) // turn motor off on negative torque
             hingeJoint.useMotor = false;
         else
         {
             JointMotor2D motor = hingeJoint.motor;
-            motor.motorSpeed = MAX_SPEED * speed;
-            motor.maxMotorTorque = MAX_TORQUE * torgue;
+            motor.motorSpeed = CreatureWheelDef.MAX_SPEED * def.speed;
+            motor.maxMotorTorque = CreatureWheelDef.MAX_TORQUE * def.torque;
             hingeJoint.motor = motor;
         }
 

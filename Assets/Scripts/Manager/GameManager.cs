@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     EnvironmentManager environment;
     CreatureBreeder breeder;
     CameraManager cameraManager;
+    public RectTransform goToStatisticPanel;
 
     private void Start()
     {
@@ -25,6 +26,12 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Started vanilla");
     }
 	
+    public void OfferEnd()
+    {
+        goToStatisticPanel.localScale = new Vector3(1, 1, 1);
+        Time.timeScale = 0;
+    }
+
 	void Update () {
 		
 	}

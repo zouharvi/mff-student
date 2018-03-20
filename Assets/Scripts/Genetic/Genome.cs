@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Genome {
+    public List<CreatureWheelDef> wheels = new List<CreatureWheelDef>();
+    public CreatureTorsoDef torso;
 
-    private float score;
-    public void SaveScore(float score)
+    public Genome(Genome g)
     {
-        this.score = score;
+        foreach(CreatureWheelDef cwd in g.wheels)
+            wheels.Add(new CreatureWheelDef(cwd));
+        torso = new CreatureTorsoDef(torso);
     }
 
-	// Use this for initialization
-	void Start () {
+    public Genome()
+    {
+        wheels.Add(new CreatureWheelDef());
+        wheels.Add(new CreatureWheelDef());
+        wheels.Add(new CreatureWheelDef());
+        torso = new CreatureTorsoDef(5);
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
