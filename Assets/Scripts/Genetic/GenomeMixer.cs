@@ -20,10 +20,9 @@ public class GenomeMixer {
 
         // TODO: make this dependend on the number of present wheels
         if (Random.value < PROB.NEW_WHEEL_POINT)
-            r.wheels.Add(new CreatureWheelDef());
+            r.wheels.Add(new CreatureWheelDef());   
         if (Random.value < PROB.REMOVE_WHEEL_POINT && r.wheels.Count != 0)
             r.wheels.RemoveAt(Random.Range(0, r.wheels.Count));
-
         // modify individual wheels
         for (int i = 0; i < g.wheels.Count; i++)
         {
@@ -68,11 +67,13 @@ public class GenomeMixer {
     public static List<Genome> FromPopulation(List<Genome> oldPopulation)
     {
         List<Genome> newPopulation = new List<Genome>();
-        //for (int i = 0; i < oldPopulation.Count / 3; i++)
-        //    newPopulation.Add(Mutate(oldPopulation[i]));
+        for (int i = 0; i < oldPopulation.Count / 3; i++)
+            newPopulation.Add(Mutate(oldPopulation[i]));
         for (int i = oldPopulation.Count / 3; i < oldPopulation.Count; i++)
         // URGENT TODO: think of a better function for choosing two parents
-            newPopulation.Add(FromParents(oldPopulation[0], oldPopulation[1]));
+            newPopulation.Add(
+                Mutate(FromParents(oldPopulation[0], oldPopulation[1]))
+                );
         return newPopulation;
     }
 }

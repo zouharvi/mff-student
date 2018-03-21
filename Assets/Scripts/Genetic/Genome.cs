@@ -8,9 +8,10 @@ public class Genome {
 
     public Genome(Genome g)
     {
+
         foreach (CreatureWheelDef cwd in g.wheels)
             wheels.Add(new CreatureWheelDef(cwd));
-        torso = new CreatureTorsoDef(torso);
+        torso = new CreatureTorsoDef(g.torso);
     }
 
     public Genome(Genome g1, Genome g2)

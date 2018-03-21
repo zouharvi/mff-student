@@ -77,7 +77,7 @@ public class CreatureBreeder : MonoBehaviour {
         List<Genome> newPopulation = new List<Genome>();
         newPopulation.Add(killed[0]); // the best one carries over // TODO: option this
         newPopulation.Add(new Genome()); // one is completely randomized // TODO: option this
-        //newPopulation.AddRange(GenomeMixer.FromPopulation(killed));
+        newPopulation.AddRange(GenomeMixer.FromPopulation(killed));
         population = newPopulation;
         killed = new List<Genome>();
         instances = new List<GameObject>();
