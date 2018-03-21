@@ -6,7 +6,7 @@ public class EnvironmentManager : MonoBehaviour {
     public GameObject floor;
     public GameObject endKillZone;
     private static readonly float BLOCK_WIDTH = 3;
-    private static readonly float BLOCK_HEIGHT = 1.1f;
+    private static readonly float BLOCK_HEIGHT = 2.1f;
 
     public void GenerateTerrain(int length)
     {

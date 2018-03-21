@@ -67,6 +67,9 @@ public class GenomeMixer {
     public static List<Genome> FromPopulation(List<Genome> oldPopulation)
     {
         List<Genome> newPopulation = new List<Genome>();
+        newPopulation.Add(oldPopulation[0]); // the best one carries over // TODO: option this
+        newPopulation.Add(Mutate(oldPopulation[0])); // the best one is also mutated
+        newPopulation.Add(new Genome()); // one is completely randomized // TODO: option this
         for (int i = 0; i < oldPopulation.Count / 3; i++)
             newPopulation.Add(Mutate(oldPopulation[i]));
         for (int i = oldPopulation.Count / 3; i < oldPopulation.Count; i++)

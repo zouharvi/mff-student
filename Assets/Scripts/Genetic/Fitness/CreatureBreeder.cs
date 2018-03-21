@@ -30,20 +30,6 @@ public class CreatureBreeder : MonoBehaviour {
         }
     }
 
-    public void InstantiateNew()
-    {
-        CreatureAssembler.drawOrder = 0;
-        killTimeAcc = -7;
-        killed = new List<Genome>();
-        instances = new List<GameObject>();
-        foreach(Genome g in population)
-        {
-            GameObject creature = Instantiate(blankCreature);
-            CreatureAssembler assembler = creature.GetComponent<CreatureAssembler>();
-            assembler.Setup(g);
-            instances.Add(creature);
-        }
-    }
 
     void Update () {
         killTimeAcc += Time.deltaTime;
@@ -70,18 +56,27 @@ public class CreatureBreeder : MonoBehaviour {
     public void InstantiateFollowingPopulation()
     {
         Debug.Log("instantiating following population");
-        CreatureAssembler.drawOrder = 0;
-        killTimeAcc = -7;
         Debug.Log(killed.Count);
         killed.Reverse();
-        List<Genome> newPopulation = new List<Genome>();
-        newPopulation.Add(killed[0]); // the best one carries over // TODO: option this
-        newPopulation.Add(new Genome()); // one is completely randomized // TODO: option this
-        newPopulation.AddRange(GenomeMixer.FromPopulation(killed));
-        population = newPopulation;
+        population = new List<Genome>();
+        population.AddRange(GenomeMixer.FromPopulation(killed));
+        InstantiatePopulation();
+
+    }
+
+    public void ValidateGenomes()
+    {
+        // URGENT TODO: super important - fix supercreatures
+    }
+
+    public void InstantiatePopulation()
+    {
+        ValidateGenomes();
+        CreatureAssembler.drawOrder = 0;
+        killTimeAcc = -7;
         killed = new List<Genome>();
         instances = new List<GameObject>();
-        foreach (Genome g in newPopulation)
+        foreach (Genome g in population)
         {
             GameObject creature = Instantiate(blankCreature);
             CreatureAssembler assembler = creature.GetComponent<CreatureAssembler>();

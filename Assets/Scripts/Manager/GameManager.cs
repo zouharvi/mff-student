@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
     public void VanillaGame () {
         breeder.CleanUp();
         breeder.ResetPopulation();
-        breeder.InstantiateNew();
+        breeder.InstantiatePopulation();
         cameraManager.InitState();
         environment.GenerateTerrain(100);
         Debug.Log("Started vanilla");
@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour {
     public void SubsequentGame()
     {
         breeder.CleanUp();
-        breeder.ResetPopulation();
         breeder.InstantiateFollowingPopulation();
         cameraManager.InitState();
         Debug.Log("Started subsequent");
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour {
         breeder.KillOffRest();
         SubsequentGame();
     }
-	
+
     public void OfferEnd()
     {
         goToStatisticPanel.localScale = new Vector3(1, 1, 1);
