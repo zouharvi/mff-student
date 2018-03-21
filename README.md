@@ -1,6 +1,10 @@
 # Grewh2D
 Genetically Refined Wheels in 2D - semi-interactive visualisation of genetic based evolution of multi-wheeled vehicles
 
+### TODO:
+- statistics screen
+- pretty transitions 
+
 ### Third party stuff:
 - [Unity](https://unity3d.com/)
 - [PixelFJVerdana12pt](http://www.1001fonts.com/pix-pixelfjverdana12pt-font.html)

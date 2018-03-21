@@ -5,18 +5,15 @@ using UnityEngine;
 public class CreatureBreeder : MonoBehaviour {
 
     public GameObject blankCreature;
-    List<Genome> population;
+    public List<Genome> population;
     List<GameObject> instances;
     List<Genome> killed;
 
-    public static int POPULATION_SIZE = 10;
-    public static float KILL_TIMER = 4;
-    public static readonly int KILL_SEGMENT_LENGTH = 50;
     private float killTimeAcc = 0;
 
     public void ResetPopulation () {
         population = new List<Genome>();
-        for (int i = 0; i < POPULATION_SIZE; i++)
+        for (int i = 0; i < GameGenSettings.POPULATION_SIZE; i++)
             population.Add(new Genome()); // randomization constructor
 	}
 
@@ -33,20 +30,18 @@ public class CreatureBreeder : MonoBehaviour {
 
     void Update () {
         killTimeAcc += Time.deltaTime;
-        if(killTimeAcc >= KILL_TIMER)
+        if(killTimeAcc >= GameGenSettings.KILL_TIMER)
         {
             killTimeAcc = 0;
-            Debug.Log("kill tick");
             GameObject toKill = Best(-1);
             GameObject toBest = Best(0);
             float toKillScore = toKill.GetComponent<AReferee>().GetScore();
             float toBestScore = toBest.GetComponent<AReferee>().GetScore();
-            if (toKillScore < 0 || toBestScore-toKillScore > KILL_SEGMENT_LENGTH)
+            if (toKillScore < 0 || toBestScore-toKillScore > GameGenSettings.KILL_SEGMENT_LENGTH)
             {
                 KillGenomed(toKill);
                 if(instances.Count <= 1)
                 {
-                    Debug.Log("Game end.");
                     gameObject.GetComponent<GameManager>().SubsequentGame();
                 }
             }
@@ -55,8 +50,6 @@ public class CreatureBreeder : MonoBehaviour {
 
     public void InstantiateFollowingPopulation()
     {
-        Debug.Log("instantiating following population");
-        Debug.Log(killed.Count);
         killed.Reverse();
         population = new List<Genome>();
         population.AddRange(GenomeMixer.FromPopulation(killed));
@@ -96,6 +89,8 @@ public class CreatureBreeder : MonoBehaviour {
     public void KillGenomed(GameObject toKill)
     {
         Genome g = toKill.GetComponent<CreatureAssembler>().genome;
+        // IMP: reshuffle dependencies so that this wouldn't need to happen?
+        g.cretin = toKill.GetComponent<AReferee>().IsCretin();
         killed.Add(g);
         toKill.GetComponent<CreatureAssembler>().Kill();
         instances.RemoveAt(instances.Count - 1);

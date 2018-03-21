@@ -47,8 +47,9 @@ public class CreatureAssembler : MonoBehaviour {
         torso.CreateGraphics();
     }
 
-    // Use this for initialization
-    void Start () {
+    public void DownplayForShowcase(Vector3 position)
+    {
+        gameObject.transform.position = position;
     }
 
 

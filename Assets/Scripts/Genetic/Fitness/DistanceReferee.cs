@@ -10,27 +10,14 @@ public class DistanceReferee : AReferee {
     public override float GetScore()
     {
         float expected = MINIMAL_PER_SECOND * (Time.time - initTime);
+        // parentheses next time, pls
         return -expected - initX + torso.transform.position.x ;
     }
 
-    //private float health = 2;
-    //private static readonly float DETEORIATION_SPEED = 0.1f;
-    //private static readonly int SEGMENT_LENGTH = 20;
-    //private int nextBase = SEGMENT_LENGTH;
-
-    //public override float GetHealth()
-    //{
-    //    throw new System.NotImplementedException();
-    //}
-
-    public override void Update()
+    public override bool IsCretin()
     {
-        //health -= Time.deltaTime * DETEORIATION_SPEED;
-        //if(torso.transform.position.x >= nextBase)
-        //{
-        //    health++;
-        //    nextBase += SEGMENT_LENGTH;
-        //}
+        // incapable of movement
+        return 7 >  torso.transform.position.x - initX;
     }
 
     private float initX;
@@ -41,5 +28,4 @@ public class DistanceReferee : AReferee {
         torso = gameObject.GetComponent<CreatureAssembler>().torso.gameObject;
         initX = torso.transform.position.x;
     }
-
 }

@@ -65,7 +65,6 @@ public class CameraManager : MonoBehaviour {
                 break;
             case 3:
                 // free movement
-                // TODO: !!
                 break;
         }
     }

@@ -11,19 +11,21 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
+        Physics2D.gravity = new Vector2(0, -9.81f);
         environment = gameObject.GetComponent<EnvironmentManager>();
         breeder = gameObject.GetComponent<CreatureBreeder>();
         cameraManager = gameObject.GetComponent<CameraManager>();
-        VanillaGame();
+        breeder.population = ShowcaseGenomes.genomes;
+        VanillaGame(false);
     }
 
-    public void VanillaGame () {
+    public void VanillaGame (bool reset) {
         breeder.CleanUp();
-        breeder.ResetPopulation();
+        if(reset)
+            breeder.ResetPopulation();
         breeder.InstantiatePopulation();
         cameraManager.InitState();
         environment.GenerateTerrain(100);
-        Debug.Log("Started vanilla");
     }
 
     public void SubsequentGame()
@@ -31,12 +33,10 @@ public class GameManager : MonoBehaviour {
         breeder.CleanUp();
         breeder.InstantiateFollowingPopulation();
         cameraManager.InitState();
-        Debug.Log("Started subsequent");
     }
 
     public void PrematureSubsequentGame()
     {
-        Debug.Log("Ending run prematurely");
         breeder.KillOffRest();
         SubsequentGame();
     }

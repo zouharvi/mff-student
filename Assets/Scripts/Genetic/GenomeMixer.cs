@@ -7,11 +7,11 @@ public class GenomeMixer {
     {
         public static float NEW_WHEEL_POINT = 0.1f;
         public static float REMOVE_WHEEL_POINT = 0.1f;
-        public static float WHEEL_CHANGE = 0.1f;
+        public static float WHEEL_CHANGE = 0.2f;
 
         public static float NEW_TORSO_POINT = 0.1f;
         public static float REMOVE_TORSO_POINT = 0.1f;
-        public static float TORSO_POINT_CHANGE = 0.1f;
+        public static float TORSO_POINT_CHANGE = 0.2f;
     }
 
     public static Genome Mutate(Genome g)
@@ -66,17 +66,30 @@ public class GenomeMixer {
     
     public static List<Genome> FromPopulation(List<Genome> oldPopulation)
     {
+        int cCount = 0;
         List<Genome> newPopulation = new List<Genome>();
-        newPopulation.Add(oldPopulation[0]); // the best one carries over // TODO: option this
-        newPopulation.Add(Mutate(oldPopulation[0])); // the best one is also mutated
-        newPopulation.Add(new Genome()); // one is completely randomized // TODO: option this
-        for (int i = 0; i < oldPopulation.Count / 3; i++)
-            newPopulation.Add(Mutate(oldPopulation[i]));
-        for (int i = oldPopulation.Count / 3; i < oldPopulation.Count; i++)
+        for (int i = 0; i < oldPopulation.Count; i++)
+            if (oldPopulation[i].cretin)
+            {
+                oldPopulation[i] = new Genome(); // replace genomes incapable of movement
+                cCount++;
+            }
+        Debug.Log("cCount: " + cCount.ToString() + " pop size: " + oldPopulation.Count);
+        newPopulation.Add(oldPopulation[0]); // the best one carries over
+
+        for (int i = 0; i < oldPopulation.Count * GameGenSettings.INDIVIDUALLY_MUTATED/100.0f; i++)
+                newPopulation.Add(Mutate(oldPopulation[i]));
+        for (int i = oldPopulation.Count * GameGenSettings.INDIVIDUALLY_MUTATED / 100; i < oldPopulation.Count; i++)
         // URGENT TODO: think of a better function for choosing two parents
             newPopulation.Add(
                 Mutate(FromParents(oldPopulation[0], oldPopulation[1]))
                 );
+
+        // fill/remove if count doesnt match properly (rounding errors)
+        if(newPopulation.Count > GameGenSettings.POPULATION_SIZE)
+            newPopulation.RemoveRange(GameGenSettings.POPULATION_SIZE - 1, newPopulation.Count - GameGenSettings.POPULATION_SIZE);
+        while (newPopulation.Count < GameGenSettings.POPULATION_SIZE)
+            newPopulation.Add(new Genome());
         return newPopulation;
     }
 }

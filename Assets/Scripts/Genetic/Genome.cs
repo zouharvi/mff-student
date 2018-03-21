@@ -5,10 +5,10 @@ using UnityEngine;
 public class Genome {
     public List<CreatureWheelDef> wheels = new List<CreatureWheelDef>();
     public CreatureTorsoDef torso;
+    public bool cretin = false;
 
     public Genome(Genome g)
     {
-
         foreach (CreatureWheelDef cwd in g.wheels)
             wheels.Add(new CreatureWheelDef(cwd));
         torso = new CreatureTorsoDef(g.torso);

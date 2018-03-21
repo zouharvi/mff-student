@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AReferee : MonoBehaviour {
 
     public abstract float GetScore();   // score is absolute
-    //public abstract float GetHealth();  // health is not
+    public abstract bool IsCretin();   // cretin if breeding is strictly undesired
     public virtual void Update() {  }
     public virtual void Start() {  }
 
