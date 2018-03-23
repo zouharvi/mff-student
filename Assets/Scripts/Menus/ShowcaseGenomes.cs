@@ -38,7 +38,8 @@ public class ShowcaseGenomes : MonoBehaviour {
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Scenes/MainScene");
+        Initiate.Fade("Scenes/MainScene", Color.black, 1f);
+//        SceneManager.LoadScene("Scenes/MainScene");
     }
 
     public GameObject aboutInfo;

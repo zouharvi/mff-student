@@ -3,10 +3,11 @@ Genetically Refined Wheels in 2D - semi-interactive visualisation of genetic bas
 
 ### TODO:
 - statistics screen
-- pretty transitions 
+- smooth camera follow
 
 ### Third party stuff:
 - [Unity](https://unity3d.com/)
 - [PixelFJVerdana12pt](http://www.1001fonts.com/pix-pixelfjverdana12pt-font.html)
 - [Pixelate](https://ax23w4.itch.io/pixelate)
 - [Trianglify](https://qrohlf.com/trianglify-generator/)
+- [Simple Fade Scene Transition System](https://assetstore.unity.com/packages/tools/gui/simple-fade-scene-transition-system-81753)
