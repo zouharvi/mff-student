@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class GameGenSettings : MonoBehaviour {
 
-    public Text populationText, terrainHardnessText, killTimerText, simSpeedText, individualVsFromParentsText, mutationText;
+    public Text populationText, terrainHardnessText, gravityText, killTimerText, simSpeedText, individualVsFromParentsText, mutationText;
     public static int POPULATION_SIZE;
     public static int TERRAIN_HARDNESS;
+    public static float GRAVITY_Y;
     public static int KILL_TIMER;
     public static int SIMULATION_SPEED;
 
@@ -24,6 +25,7 @@ public class GameGenSettings : MonoBehaviour {
     {
         POPULATION_SIZE = 21;
         TERRAIN_HARDNESS = 20;
+        GRAVITY_Y = -9.8f;
         KILL_TIMER = 2;
         SIMULATION_SPEED = 1;
         MUTATION_RAW = 20;
@@ -31,18 +33,27 @@ public class GameGenSettings : MonoBehaviour {
         INDIVIDUALLY_MUTATED = 20;
         MUTATED_FROM_PARENTS = 80;
         KILL_SEGMENT_LENGTH = 50;
+        Debug.Log(Physics2D.gravity.y);
+        Physics2D.gravity = new Vector2(0, GRAVITY_Y);
     }
 
     public void SetPopulationSize(Slider slider)
     {
         POPULATION_SIZE = (int) slider.value;
-        populationText.text = "Population size: " + POPULATION_SIZE;
+        populationText.text = "Population: " + POPULATION_SIZE;
     }
 
     public void SetTerrainHardness(Slider slider)
     {
         TERRAIN_HARDNESS = (int)slider.value;
-        terrainHardnessText.text = "Terrain hardness: " + TERRAIN_HARDNESS;
+        terrainHardnessText.text = "Terrain: " + TERRAIN_HARDNESS;
+    }
+
+    public void SetGravity(Slider slider)
+    {
+        GRAVITY_Y = slider.value;
+        Physics2D.gravity = new Vector2(0, GRAVITY_Y);
+        gravityText.text = "Gravity: " + ( (int) GRAVITY_Y*100.0f)/100.0f + " m/s";
     }
 
     public void SetKillTimer(Slider slider)
