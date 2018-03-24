@@ -15,11 +15,12 @@ public class CustomMath {
            Points are sorted clockwise here, but funnily enough, minimal triangulation
            appears to be an open problem, as it closely relates to the traveling salesman problem.
          */
-        points.Sort(new ClockwiseVector2Comparer());
+        // points.Sort(new ClockwiseVector2Comparer());
+        points = points.OrderBy(item => Mathf.Atan2(item.x, item.y)).ToList();
 
         for (int i = 1; i < points.Count; i++)
         {
-            if(Vector2.Angle(points[i-1], points[i]) < 5)
+            if(Vector2.Angle(points[i-1], points[i]) < 5 && points.Count > 3)
             {
                 points.RemoveAt(i); // TODO: what if wheel point is removed?
                 i--;
@@ -27,6 +28,7 @@ public class CustomMath {
         }
     }
 
+    /* broken on webgl builds
     public class ClockwiseVector2Comparer : IComparer<Vector2>
     {
         public int Compare(Vector2 v1, Vector2 v2)
@@ -34,4 +36,5 @@ public class CustomMath {
             return Mathf.Atan2(v1.x, v1.y).CompareTo(Mathf.Atan2(v2.x, v2.y));
         }
     }
+     */ 
 }

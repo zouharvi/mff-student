@@ -4,6 +4,11 @@ Genetically Refined Wheels in 2D - semi-interactive visualisation of genetic bas
 ### TODO:
 - statistics screen
 - smooth camera follow
+- choose to breed for the fastest
+
+### Notes:
+- unfortunately IComparable cannot be used since it breaks the WebGL build
+- minimal polygon triangulation is funnily enough an open problem, doing clockwise sort instead, so that indrawable polygons are fixe
 
 ### Third party stuff:
 - [Unity](https://unity3d.com/)

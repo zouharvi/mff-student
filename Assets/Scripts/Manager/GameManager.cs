@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     CreatureBreeder breeder;
     CameraManager cameraManager;
     public RectTransform goToStatisticPanel;
+    public bool doOfferEnd = true;
 
     private void Start()
     {
@@ -48,7 +49,8 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0;
     }
 
-	public void GoToStatistic () {
+	public void GoToStatistics () {
+        breeder.KillOffRest();
         Initiate.Fade("Scenes/Statistics", Color.black, 1f);
     }
 }

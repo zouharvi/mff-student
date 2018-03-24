@@ -9,7 +9,13 @@ public class EndKillZone : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         // TODO: test this game object is a creature
-        gm.OfferEnd();
+        if (gm.doOfferEnd)
+        {
+            gm.OfferEnd();
+            gm.doOfferEnd = false;
+        } else {
+            gm.PrematureSubsequentGame();
+        }
     }
 }
 

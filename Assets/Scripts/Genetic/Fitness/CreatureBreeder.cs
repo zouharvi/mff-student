@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CreatureBreeder : MonoBehaviour {
@@ -103,7 +104,8 @@ public class CreatureBreeder : MonoBehaviour {
     /// <returns></returns>
     public GameObject Best(int pos)
     {
-        instances.Sort(AReferee.CREATURE_COMPARER);
+        instances = instances.OrderBy(item => -item.GetComponent<AReferee>().GetScore()).ToList();
+       // instances.Sort(AReferee.CREATURE_COMPARER);
         if(pos >= 0)
         {
             pos = Mathf.Min(instances.Count-1, pos);

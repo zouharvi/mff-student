@@ -9,6 +9,7 @@ public abstract class AReferee : MonoBehaviour {
     public virtual void Update() {  }
     public virtual void Start() {  }
 
+    /* broken on webgl builds
     public static CreatureComparer CREATURE_COMPARER = new CreatureComparer();
     public class CreatureComparer : IComparer<GameObject>
     {
@@ -17,4 +18,5 @@ public abstract class AReferee : MonoBehaviour {
             return (int)(-100 * c1.GetComponent<AReferee>().GetScore() + 100 * c2.GetComponent<AReferee>().GetScore());
         }
     }
+     */
 }
