@@ -74,7 +74,6 @@ public class GenomeMixer {
                 oldPopulation[i] = new Genome(); // replace genomes incapable of movement
                 cCount++;
             }
-        Debug.Log("cCount: " + cCount.ToString() + " pop size: " + oldPopulation.Count);
         newPopulation.Add(oldPopulation[0]); // the best one carries over
 
         for (int i = 0; i < oldPopulation.Count * GameGenSettings.INDIVIDUALLY_MUTATED/100.0f; i++)

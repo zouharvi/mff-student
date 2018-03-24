@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class StatisticsCollector : MonoBehaviour {
 
-    public static List<int> firstAvgFitness;
-    public static List<int> lastAvgFitness;
-    public static List<int> firstBestFitness;
-    public static List<int> lastBestFitness;
+    public static List<int> avgGenFitness;
+    public static List<int> bestGenFitness;
 
     // Use this for initialization
     void Start () {

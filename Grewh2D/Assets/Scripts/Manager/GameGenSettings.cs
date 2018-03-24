@@ -8,7 +8,7 @@ public class GameGenSettings : MonoBehaviour {
     public Text populationText, terrainHardnessText, killTimerText, simSpeedText, individualVsFromParentsText;
     public static int POPULATION_SIZE = 21;
     public static int TERRAIN_HARDNESS = 20;
-    public static int KILL_TIMER = 4;
+    public static int KILL_TIMER = 2;
     public static int SIMULATION_SPEED = 1;
 
     // percentages, must sum to 100

@@ -106,8 +106,6 @@ public class CreatureBreeder : MonoBehaviour {
     /// <returns></returns>
     public GameObject Best(int pos)
     {
-        if (instances.Count == 0)
-            return null;
         instances = instances.OrderBy(item => -item.GetComponent<AReferee>().GetScore()).ToList();
        // instances.Sort(AReferee.CREATURE_COMPARER);
         if(pos >= 0)
