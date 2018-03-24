@@ -7,13 +7,27 @@ public class Genome {
     public CreatureTorsoDef torso;
     public bool cretin = false;
 
+    public string GetName()
+    {
+        string s = "";
+        foreach (CreatureWheelDef w in wheels)
+        {
+            s += "w(" + w.position.x + "," + w.position.y + ") ";
+        }
+        foreach (Vector2 v in torso.points)
+        {
+            s += "t(" + v.x + "," + v.y + ") ";
+        }
+        return s;
+    }
+
     public Genome(Genome g)
     {
         foreach (CreatureWheelDef cwd in g.wheels)
             wheels.Add(new CreatureWheelDef(cwd));
         torso = new CreatureTorsoDef(g.torso);
     }
-
+    
     public Genome(Genome g1, Genome g2)
     {
         for (int i = 0; i < g1.wheels.Count && i < g2.wheels.Count; i++)
@@ -36,6 +50,10 @@ public class Genome {
         }
     }
 
+
+    /// <summary>
+    /// random deprecated
+    /// </summary>
     public Genome()
     {
         wheels.Add(new CreatureWheelDef());
@@ -43,14 +61,4 @@ public class Genome {
         wheels.Add(new CreatureWheelDef());
         torso = new CreatureTorsoDef(5);
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

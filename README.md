@@ -3,7 +3,8 @@ Genetically Refined Wheels in 2D - semi-interactive visualisation of genetic bas
 
 ### TODO:
 - statistics screen
-- smooth camera follow
+- smooth camera follow (maybe omit this due to performance)
+- BUG: sometimes the best one doesn't carry over. This is not inheritedly bad. Maybe it's happening because of non-deterministic physics system, which drops some frames, especially on the first creature drop, resulting in it getting lost. 
 
 ### Notes:
 - unfortunately IComparable cannot be used since it breaks the WebGL build

@@ -5,17 +5,33 @@ using UnityEngine.UI;
 
 public class GameGenSettings : MonoBehaviour {
 
-    public Text populationText, terrainHardnessText, killTimerText, simSpeedText, individualVsFromParentsText;
-    public static int POPULATION_SIZE = 21;
-    public static int TERRAIN_HARDNESS = 20;
-    public static int KILL_TIMER = 2;
-    public static int SIMULATION_SPEED = 1;
+    public Text populationText, terrainHardnessText, killTimerText, simSpeedText, individualVsFromParentsText, mutationText;
+    public static int POPULATION_SIZE;
+    public static int TERRAIN_HARDNESS;
+    public static int KILL_TIMER;
+    public static int SIMULATION_SPEED;
+
+    private static int MUTATION_RAW;
+    public static float MUTATION;
 
     // percentages, must sum to 100
-    public static int INDIVIDUALLY_MUTATED = 20;
-    public static int MUTATED_FROM_PARENTS = 80;
+    public static int INDIVIDUALLY_MUTATED;
+    public static int MUTATED_FROM_PARENTS;
 
-    public static int KILL_SEGMENT_LENGTH = 50;
+    public static int KILL_SEGMENT_LENGTH;
+
+    private void Awake()
+    {
+        POPULATION_SIZE = 21;
+        TERRAIN_HARDNESS = 20;
+        KILL_TIMER = 2;
+        SIMULATION_SPEED = 1;
+        MUTATION_RAW = 20;
+        MUTATION = 0.2f;
+        INDIVIDUALLY_MUTATED = 20;
+        MUTATED_FROM_PARENTS = 80;
+        KILL_SEGMENT_LENGTH = 50;
+    }
 
     public void SetPopulationSize(Slider slider)
     {
@@ -47,5 +63,12 @@ public class GameGenSettings : MonoBehaviour {
         INDIVIDUALLY_MUTATED = (int)slider.value;
         MUTATED_FROM_PARENTS = 100 - INDIVIDUALLY_MUTATED;
         individualVsFromParentsText.text = "Individual/from parents: " + INDIVIDUALLY_MUTATED + "/" + MUTATED_FROM_PARENTS + "%";
+    }
+
+    public void SetMutation(Slider slider)
+    {
+        MUTATION_RAW = (int)slider.value;
+        MUTATION = MUTATION_RAW / 100.0f;
+        mutationText.text = "Mutation: " + MUTATION_RAW + "%";
     }
 }

@@ -23,17 +23,22 @@ public class GenomeMixer {
             r.wheels.Add(new CreatureWheelDef());   
         if (Random.value < PROB.REMOVE_WHEEL_POINT && r.wheels.Count != 0)
             r.wheels.RemoveAt(Random.Range(0, r.wheels.Count));
+
+        // for easier access
+        float gf = GameGenSettings.MUTATION;
+        float gh = GameGenSettings.MUTATION / 2.0f;
+
         // modify individual wheels
         for (int i = 0; i < g.wheels.Count; i++)
         {
             if (Random.value >= PROB.WHEEL_CHANGE)
             {
-                g.wheels[i].size = Mathf.Clamp(g.wheels[i].size + Random.value * 0.3f - 0.15f, 0.1f, 1);
-                g.wheels[i].torque = Mathf.Clamp(g.wheels[i].torque + Random.value * 0.3f - 0.15f, -0.25f, 1);
-                g.wheels[i].speed = Mathf.Clamp(g.wheels[i].speed + Random.value * 0.3f - 0.15f, -1, 1);
+                g.wheels[i].size = Mathf.Clamp(g.wheels[i].size + Random.value * gf - gh, 0.1f, 1);
+                g.wheels[i].torque = Mathf.Clamp(g.wheels[i].torque + Random.value *gf - gh, -0.25f, 1);
+                g.wheels[i].speed = Mathf.Clamp(g.wheels[i].speed + Random.value * gf - gh, -1, 1);
                 g.wheels[i].position = new Vector2(
-                    Mathf.Clamp(g.wheels[i].position.x + Random.value * 0.3f - 0.15f, -1, 1),
-                    Mathf.Clamp(g.wheels[i].position.y + Random.value * 0.3f - 0.15f, -1, 1)
+                    Mathf.Clamp(g.wheels[i].position.x + Random.value * gf - gh, -1, 1),
+                    Mathf.Clamp(g.wheels[i].position.y + Random.value * gf - gh, -1, 1)
                 );
             }
         }
@@ -50,8 +55,8 @@ public class GenomeMixer {
             if (Random.value >= PROB.TORSO_POINT_CHANGE)
             {
                 g.torso.points[i] = new Vector2(
-                    Mathf.Clamp(g.torso.points[i].x + Random.value * 0.3f - 0.15f, -1, 1),
-                    Mathf.Clamp(g.torso.points[i].y + Random.value * 0.3f - 0.15f, -1, 1)
+                    Mathf.Clamp(g.torso.points[i].x + Random.value * gf - gh, -1, 1),
+                    Mathf.Clamp(g.torso.points[i].y + Random.value *gf - gh, -1, 1)
                 );
             }
         }
@@ -97,6 +102,7 @@ public class GenomeMixer {
             newPopulation.RemoveRange(GameGenSettings.POPULATION_SIZE - 1, newPopulation.Count - GameGenSettings.POPULATION_SIZE);
         while (newPopulation.Count < GameGenSettings.POPULATION_SIZE)
             newPopulation.Add(new Genome());
+
         return newPopulation;
     }
 }

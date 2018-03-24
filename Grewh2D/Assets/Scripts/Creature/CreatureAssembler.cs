@@ -13,6 +13,7 @@ public class CreatureAssembler : MonoBehaviour {
     public List<CreatureWheel> wheels = new List<CreatureWheel>();
 
     public bool dead = false;
+    public string genomeName;
 
     /// <summary>
     /// Randomization constructor
@@ -28,6 +29,7 @@ public class CreatureAssembler : MonoBehaviour {
     public void Setup(Genome genome)
     {
         this.genome = genome;
+        genomeName = genome.GetName();
         torso = new CreatureTorso(genome.torso);
         foreach (CreatureWheelDef cwd in genome.wheels)
             wheels.Add(new CreatureWheel(cwd));
