@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 33017788634851232}
   - component: {fileID: 23482772411648682}
   - component: {fileID: 114369759403813412}
+  - component: {fileID: 114101465401734212}
   m_Layer: 8
   m_Name: BlankWheel
   m_TagString: Untagged
@@ -195,6 +196,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114101465401734212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1060273175775620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95350aba7b195e479f54e312f95a191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114369759403813412
 MonoBehaviour:
   m_ObjectHideFlags: 1

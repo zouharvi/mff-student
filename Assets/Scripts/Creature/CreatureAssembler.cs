@@ -55,7 +55,11 @@ public class CreatureAssembler : MonoBehaviour {
 
     public void Kill()
     {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.GetComponent<CreatureFader>().StartFadingToParentDeath();
+        }
         // TODO: destroy gracefully
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
