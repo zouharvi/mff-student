@@ -36,5 +36,15 @@ public class CustomMath {
             return Mathf.Atan2(v1.x, v1.y).CompareTo(Mathf.Atan2(v2.x, v2.y));
         }
     }
-     */ 
+     */
+
+    /// <summary>
+    /// returns with opposite linear probability
+    /// </summary>
+    /// <param name="totalSize"></param>
+    /// <returns></returns>
+    public static int RandGood(int totalSize)
+    {
+        return (int)(RandomFromDistribution.RandomLinear(4) * totalSize / 5.0f);
+    }
 }

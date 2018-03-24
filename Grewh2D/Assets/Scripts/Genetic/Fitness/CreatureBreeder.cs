@@ -54,8 +54,7 @@ public class CreatureBreeder : MonoBehaviour {
     public void InstantiateFollowingPopulation()
     {
         killed.Reverse();
-        population = new List<Genome>();
-        population.AddRange(GenomeMixer.FromPopulation(killed));
+        population = GenomeMixer.FromPopulation(killed);
         InstantiatePopulation();
 
     }

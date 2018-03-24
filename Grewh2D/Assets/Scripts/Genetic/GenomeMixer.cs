@@ -63,29 +63,37 @@ public class GenomeMixer {
     {
         return new Genome(g1, g2);
     }
+
     
+
     public static List<Genome> FromPopulation(List<Genome> oldPopulation)
     {
         int cCount = 0;
         List<Genome> newPopulation = new List<Genome>();
         for (int i = 0; i < oldPopulation.Count; i++)
+        {
             if (oldPopulation[i].cretin)
             {
                 oldPopulation[i] = new Genome(); // replace genomes incapable of movement
                 cCount++;
             }
+        }
         newPopulation.Add(oldPopulation[0]); // the best one carries over
+        newPopulation.Add(Mutate(oldPopulation[0])); // also its mutation
+        newPopulation.Add(new Genome()); // new randomized genome
 
         for (int i = 0; i < oldPopulation.Count * GameGenSettings.INDIVIDUALLY_MUTATED/100.0f; i++)
                 newPopulation.Add(Mutate(oldPopulation[i]));
         for (int i = oldPopulation.Count * GameGenSettings.INDIVIDUALLY_MUTATED / 100; i < oldPopulation.Count; i++)
         // URGENT TODO: think of a better function for choosing two parents
             newPopulation.Add(
-                Mutate(FromParents(oldPopulation[0], oldPopulation[1]))
+                Mutate(FromParents(
+                    oldPopulation[CustomMath.RandGood(oldPopulation.Count)],
+                    oldPopulation[CustomMath.RandGood(oldPopulation.Count)]))
                 );
 
         // fill/remove if count doesnt match properly (rounding errors)
-        if(newPopulation.Count > GameGenSettings.POPULATION_SIZE)
+        if (newPopulation.Count > GameGenSettings.POPULATION_SIZE)
             newPopulation.RemoveRange(GameGenSettings.POPULATION_SIZE - 1, newPopulation.Count - GameGenSettings.POPULATION_SIZE);
         while (newPopulation.Count < GameGenSettings.POPULATION_SIZE)
             newPopulation.Add(new Genome());
