@@ -33,7 +33,7 @@ public class CreatureTorso
         {
             pointsArr[i] = def.points[i] * CreatureTorsoDef.MAX_WIDTH;
             // remove points too close to each other (causes problems with tesselation)
-            /* THIS NEEDS TO BE SOLVED NICELY
+            /* THIS NEEDS TO BE RESOLVED NICELY
             if (i > 0)
             {
                 if(Mathf.Abs(Mathf.Atan2(def.points[i].x, def.points[i].y) - Mathf.Atan2(def.points[i-1].x, def.points[i-1].y)) < 0.05)

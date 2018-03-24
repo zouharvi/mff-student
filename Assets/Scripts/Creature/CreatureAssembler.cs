@@ -12,6 +12,8 @@ public class CreatureAssembler : MonoBehaviour {
     public CreatureTorso torso;
     public List<CreatureWheel> wheels = new List<CreatureWheel>();
 
+    public bool dead = false;
+
     /// <summary>
     /// Randomization constructor
     /// </summary>

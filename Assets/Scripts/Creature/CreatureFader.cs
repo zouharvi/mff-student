@@ -10,7 +10,7 @@ public class CreatureFader : MonoBehaviour {
     private float alpha = 1.0f;
     private Color curColor;
     private new MeshRenderer renderer;
-    public static readonly float DURATION = 2;
+    public static readonly float DURATION = 0.5f;
 
     private void Start()
     {
@@ -19,10 +19,10 @@ public class CreatureFader : MonoBehaviour {
     }
 
     public void StartFadingToParentDeath () {
-        Debug.Log("started fading");
         fading = true;
         renderer = gameObject.GetComponent<MeshRenderer>();
         curColor = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1);
+        transform.parent.GetComponent<CreatureAssembler>().dead = true;
     }
 	
 	void Update () {
