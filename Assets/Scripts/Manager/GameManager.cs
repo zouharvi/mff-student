@@ -20,13 +20,17 @@ public class GameManager : MonoBehaviour {
         VanillaGame(false);
     }
 
+    /// <summary>
+    /// deprecated
+    /// </summary>
+    /// <param name="reset"></param>
     public void VanillaGame (bool reset) {
         breeder.CleanUp();
         if(reset)
             breeder.ResetPopulation();
         breeder.InstantiatePopulation();
         cameraManager.InitState();
-        environment.GenerateTerrain(100);
+        environment.GenerateTerrain();
     }
 
     public void SubsequentGame()
@@ -50,7 +54,20 @@ public class GameManager : MonoBehaviour {
     }
 
 	public void GoToStatistics () {
+        Time.timeScale = 1;
         breeder.KillOffRest();
         Initiate.Fade("Scenes/Statistics", Color.black, 1f);
+    }
+
+    public void ContinuePlaying()
+    {
+        goToStatisticPanel.gameObject.SetActive(false);
+        Time.timeScale = GameGenSettings.SIMULATION_SPEED;
+    }
+
+    public void NewTerrain()
+    {
+        environment.GenerateTerrain();
+        PrematureSubsequentGame();
     }
 }

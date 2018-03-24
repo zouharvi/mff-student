@@ -7,7 +7,7 @@ public class EnvironmentManager : MonoBehaviour {
     public GameObject endKillZone;
     private static readonly float BLOCK_WIDTH = 3;
 
-    public void GenerateTerrain(int length)
+    public void GenerateTerrain(int length = 100)
     {
         length += 5; // more robust
 

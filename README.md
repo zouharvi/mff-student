@@ -4,7 +4,7 @@ Genetically Refined Wheels in 2D - semi-interactive visualisation of genetic bas
 ### TODO:
 - statistics screen
 - smooth camera follow
-- choose to breed for the fastest
+- graceful kill
 
 ### Notes:
 - unfortunately IComparable cannot be used since it breaks the WebGL build

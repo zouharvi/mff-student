@@ -35,6 +35,8 @@ public class CreatureBreeder : MonoBehaviour {
         {
             killTimeAcc = 0;
             GameObject toKill = Best(-1);
+            if (toKill == null)
+                return;
             GameObject toBest = Best(0);
             float toKillScore = toKill.GetComponent<AReferee>().GetScore();
             float toBestScore = toBest.GetComponent<AReferee>().GetScore();
@@ -104,6 +106,8 @@ public class CreatureBreeder : MonoBehaviour {
     /// <returns></returns>
     public GameObject Best(int pos)
     {
+        if (instances.Count == 0)
+            return null;
         instances = instances.OrderBy(item => -item.GetComponent<AReferee>().GetScore()).ToList();
        // instances.Sort(AReferee.CREATURE_COMPARER);
         if(pos >= 0)

@@ -32,7 +32,7 @@ public class ShowcaseGenomes : MonoBehaviour {
             displayed.Add(creature);
             CreatureAssembler assembler = creature.GetComponent<CreatureAssembler>();
             assembler.Setup(genomes[i]);
-            assembler.DownplayForShowcase(new Vector3((i%7)*10, -((int) i/7)*10, 0));
+            assembler.DownplayForShowcase(new Vector3(5.5f+(i%7)*8.5f, -0.5f-((int) i/7)*10, 0));
         }
     }
 

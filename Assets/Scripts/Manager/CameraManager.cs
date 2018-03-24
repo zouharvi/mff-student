@@ -49,6 +49,9 @@ public class CameraManager : MonoBehaviour {
 
     private void Refresh() {
 
+        GameObject best = breeder.Best(0);
+        if (best == null)
+            return;
         switch (state)
         {
             case 0:
