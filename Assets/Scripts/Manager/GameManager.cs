@@ -43,11 +43,12 @@ public class GameManager : MonoBehaviour {
 
     public void OfferEnd()
     {
-        goToStatisticPanel.localScale = new Vector3(1, 1, 1);
+        goToStatisticPanel.gameObject.SetActive(true);
+        //goToStatisticPanel.localScale = new Vector3(1, 1, 1);
         Time.timeScale = 0;
     }
 
-	void Update () {
-		
-	}
+	public void GoToStatistic () {
+        Initiate.Fade("Scenes/Statistics", Color.black, 1f);
+    }
 }

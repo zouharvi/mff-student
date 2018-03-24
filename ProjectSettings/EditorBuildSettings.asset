@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Showcase.unity
     guid: 8c880a9a175b60643aa2cd49bc57fe03
+  - enabled: 1
+    path: Assets/Scenes/Statistics.unity
+    guid: a210e7f0c714be84694422c793056289
   m_configObjects: {}
