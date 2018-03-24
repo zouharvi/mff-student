@@ -5,13 +5,13 @@ using UnityEngine;
 public class GenomeMixer {
     private struct PROB
     {
-        public static float NEW_WHEEL_POINT = 0.1f;
-        public static float REMOVE_WHEEL_POINT = 0.1f;
-        public static float WHEEL_CHANGE = 0.2f;
+        public static float NEW_WHEEL_POINT = 0.2f;
+        public static float REMOVE_WHEEL_POINT = 0.2f;
+        public static float WHEEL_CHANGE = 0.3f;
 
-        public static float NEW_TORSO_POINT = 0.1f;
-        public static float REMOVE_TORSO_POINT = 0.1f;
-        public static float TORSO_POINT_CHANGE = 0.2f;
+        public static float NEW_TORSO_POINT = 0.2f;
+        public static float REMOVE_TORSO_POINT = 0.2f;
+        public static float TORSO_POINT_CHANGE = 0.3f;
     }
 
     public static Genome Mutate(Genome g)
