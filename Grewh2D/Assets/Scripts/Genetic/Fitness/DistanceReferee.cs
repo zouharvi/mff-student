@@ -11,7 +11,13 @@ public class DistanceReferee : AReferee {
     {
         float expected = MINIMAL_PER_SECOND * (Time.time - initTime);
         // parentheses next time, pls
-        return -expected - initX + torso.transform.position.x ;
+        return -expected - initX + torso.transform.position.x;
+    }
+
+
+    public override float GetAbsolute()
+    {
+        return torso.transform.position.x- initX;
     }
 
     public override bool IsCretin()

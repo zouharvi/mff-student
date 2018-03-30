@@ -33,7 +33,6 @@ public class GameGenSettings : MonoBehaviour {
         INDIVIDUALLY_MUTATED = 20;
         MUTATED_FROM_PARENTS = 80;
         KILL_SEGMENT_LENGTH = 50;
-        Debug.Log(Physics2D.gravity.y);
         Physics2D.gravity = new Vector2(0, GRAVITY_Y);
     }
 

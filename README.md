@@ -2,7 +2,6 @@
 Genetically Refined Wheels in 2D - semi-interactive visualisation of genetic based evolution of multi-wheeled vehicles
 
 ### TODO:
-- statistics screen
 - smooth camera follow (maybe omit this due to performance)
 - sometimes the best one doesn't carry over. This is not inheritedly bad. Maybe it's happening because of non-deterministic physics system, which drops some frames, especially on the first creature drop, resulting in it getting lost. Or some forgotten mutation, idk. 
 - triangulation is sometimes not perfect

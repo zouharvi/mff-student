@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     EnvironmentManager environment;
     CreatureBreeder breeder;
     CameraManager cameraManager;
+    StatisticsCollector collector;
     public RectTransform goToStatisticPanel;
     public bool doOfferEnd = true;
 
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour {
         breeder = gameObject.GetComponent<CreatureBreeder>();
         cameraManager = gameObject.GetComponent<CameraManager>();
         breeder.population = ShowcaseGenomes.genomes;
+        collector = gameObject.GetComponent<StatisticsCollector>();
         VanillaGame(false);
     }
 
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
     public void SubsequentGame()
     {
+        SendToCollector();
         breeder.CleanUp();
         breeder.InstantiateFollowingPopulation();
         cameraManager.InitState();
@@ -46,14 +49,20 @@ public class GameManager : MonoBehaviour {
         SubsequentGame();
     }
 
+    private void SendToCollector()
+    {
+        collector.CollectEnd(breeder.killedAbsolutes);
+    }
+
     public void OfferEnd()
     {
         goToStatisticPanel.gameObject.SetActive(true);
-        //goToStatisticPanel.localScale = new Vector3(1, 1, 1);
         Time.timeScale = 0;
     }
 
 	public void GoToStatistics () {
+        breeder.KillOffRest();
+        SendToCollector();
         Time.timeScale = 1;
         breeder.KillOffRest();
         Initiate.Fade("Scenes/Statistics", Color.black, 1f);

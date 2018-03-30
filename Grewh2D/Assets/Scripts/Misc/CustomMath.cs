@@ -47,4 +47,28 @@ public class CustomMath {
     {
         return (int)(RandomFromDistribution.RandomLinear(4) * totalSize / 5.0f);
     }
+
+
+    public static void Normalize(ref List<float> values)
+    {
+        float min = values.Min();
+        float max = values.Max();
+        // shift
+        for (int i = 0; i < values.Count; i++)
+            values[i] = values[i] - min;
+        max = max - min;
+        for (int i = 0; i < values.Count; i++)
+            values[i] = values[i] / max;
+    }
+
+    public static void NormalizeByMax(ref List<float> values, float max)
+    {
+        float min = values.Min();
+        // shift
+        for (int i = 0; i < values.Count; i++)
+            values[i] = values[i] - min;
+        max -= min;
+        for (int i = 0; i < values.Count; i++)
+            values[i] = values[i] / max;
+    }
 }

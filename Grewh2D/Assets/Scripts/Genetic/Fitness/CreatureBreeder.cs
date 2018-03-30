@@ -9,6 +9,7 @@ public class CreatureBreeder : MonoBehaviour {
     public List<Genome> population;
     List<GameObject> instances;
     List<Genome> killed;
+    public List<float> killedAbsolutes;
 
     private float killTimeAcc = 0;
 
@@ -70,6 +71,7 @@ public class CreatureBreeder : MonoBehaviour {
         CreatureAssembler.drawOrder = 0;
         killTimeAcc = -7;
         killed = new List<Genome>();
+        killedAbsolutes = new List<float>();
         instances = new List<GameObject>();
         foreach (Genome g in population)
         {
@@ -90,9 +92,11 @@ public class CreatureBreeder : MonoBehaviour {
 
     public void KillGenomed(GameObject toKill)
     {
+        AReferee r = toKill.GetComponent<AReferee>();
+        killedAbsolutes.Add(r.GetAbsolute());
         Genome g = toKill.GetComponent<CreatureAssembler>().genome;
         // IMP: reshuffle dependencies so that this wouldn't need to happen?
-        g.cretin = toKill.GetComponent<AReferee>().IsCretin();
+        g.cretin = r.IsCretin();
         killed.Add(g);
         toKill.GetComponent<CreatureAssembler>().Kill();
         instances.RemoveAt(instances.Count - 1);

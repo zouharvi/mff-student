@@ -5049,6 +5049,7 @@ GameObject:
   - component: {fileID: 2057958671}
   - component: {fileID: 2057958675}
   - component: {fileID: 2057958676}
+  - component: {fileID: 2057958677}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5082,6 +5083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blankCreature: {fileID: 1904342288910356, guid: 3d9bd8824b2869c4496a738788106891,
     type: 2}
+  killedReferees: []
 --- !u!114 &2057958673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5144,6 +5146,17 @@ MonoBehaviour:
   simSpeedText: {fileID: 1644335108}
   individualVsFromParentsText: {fileID: 838033246}
   mutationText: {fileID: 391465232}
+--- !u!114 &2057958677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2057958670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a714e89144d9f14dae2db3d7e2a40e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2070932058
 GameObject:
   m_ObjectHideFlags: 0
