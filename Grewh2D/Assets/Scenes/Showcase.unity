@@ -835,7 +835,7 @@ MonoBehaviour:
     project at Charles University Faculty of Mathematics and Physics in 2018.\n\nGenomes
     in this program represent polygons with attached circles, also known as cars.
     Their goal is to reach the other end of the map.\n\nIn-simulation parameters are:\nPopulation
-    size: \t\t\t\t\t\t#number of cars created in the next iteration\nTerrain hardness:
+    size: \t\t\t\t\t\tnumber of cars created in the next iteration\nTerrain hardness:
     \t\t\t\taverage height difference of terrain blocks\nKill timer:\t\t\t\t\t\t\t\t\thow
     often to kill the least capable car\nSimulation speed: \t\t\t\t\tself explanatory\nIndividual/From
     parents:\t\thow many genomes should be based on\n\t\t\t\t\t\t\t\t\t\t\t\tmutating

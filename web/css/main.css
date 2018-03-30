@@ -1,0 +1,32 @@
+* {
+    font-family: 'Lato';
+}
+
+.main_title { 
+    font-family: 'Lato';
+    font-size: 130px;
+}
+
+.main_title_sub { 
+    font-family: 'Lato';
+    font-size: 18px;
+}
+
+#subtitle { 
+    font-family: 'Lato';
+    font-size: 19px;
+    margin-left: 10px;
+}
+
+.a_0 {
+    color: black;
+}
+
+.a_list {
+    font-size: 20px;
+    color: black;
+}
+
+.s_1 {
+    font-size: 23px;
+}

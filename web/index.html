@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Grewh2D | Vilém Zouhar</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href='css/main.css'>
+    <link rel="icon" type="image/png" href="src/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/BuildWeb.json");
+    </script>
+  </head>
+  <body style='background-color: #fff6e5'>
+    
+      <div style='width: 1152px; margin-bottom: 90px;'> 
+          <div style='margin-bottom: 10px'>
+              <img style='width: 150px' src='/src/icon.png'>
+              <span class='main_title'>re</span>
+              <span class='main_title'>w</span>
+              <span class='main_title'>2D</span>
+            </br>
+            <span id='subtitle'>Genetically refined wheels in 2D is a semestral project by <a class='a_0' href='http://www.vilix.xyz'>Vilém Zouhar</a> at <a class='a_0' href='https://www.mff.cuni.cz/' target='_blank'>MFF</a></span>
+          </div>
+          <div id="gameContainer" style="width: 1152px; height: 648px;"></div>
+          <div style='margin-top: 10px;'>
+            <p style='margin-bottom: 15px;' class='s_1'>Binaries <span style='font-size: 15px'>(for much higher performance and stability)</span></p>
+            <a class='a_list' style='margin-left: 15px;' href='bin/windows.7z'>Windows</a> (missing)<br>
+            <a class='a_list' style='margin-left: 15px;' href='bin/linux.7z'>Linux </a><span style='font-size: 15px; margin-left: 5px;'>(Debian tested)</span> (missing)
+          </div>
+          <div>
+            <p class='s_1'>What's this about?</p>
+            <p style='margin-left: 15px;'>Grewh2D (genetically refined wheels in 2D) is a small program demonstrating the beauty of genetic algorithms. Created by Vilém Zouhar (@ViliX64) as a semestral project at Charles University Faculty of Mathematics and Physics in 2018.<br>
+Genomes in this program represent polygons with attached circles, also known as cars. Their goal is to reach the other end of the map.<br>
+<br>
+In-simulation parameters are:<br>
+<span style='display: inline-block; width: 200px;'>Population size:</span>          number of cars created in the next iteration<br>
+<span style='display: inline-block; width: 200px;'>Terrain hardness:</span> 				  average height difference of terrain blocks<br>
+<span style='display: inline-block; width: 200px;'>Kill timer:</span>									how often to kill the least capable car<br>
+<span style='display: inline-block; width: 200px;'>Simulation speed:</span> 					self explanatory<br>
+<span style='display: inline-block; width: 200px;'>Individual/From parents:</span>		how many genomes should be based on mutating one individual, or be derived from parents
+            </p>
+          </div>
+          
+          <div>
+              <p class='s_1' style=''>Links, misc, ..</p>
+              <a class='a_list' style='margin-left: 15px;' href='https://www.github.com/zouharvi/grewh2D'>GitHub</a><br>
+              <a class='a_list' style='margin-left: 15px;' href='https://twitter.com/ViliX64'>Twitter</a><br>
+              <a class='a_list' style='margin-left: 15px;' href='/doc/grewh2d_user.pdf'>User documentation</a> (missing)<br>
+              <a class='a_list' style='margin-left: 15px;' href='/doc/grewh2d_technical.pdf'>Technical documentation</a> (missing)<br>
+            </div>
+            
+        </div>
+  </body>
+</html>
