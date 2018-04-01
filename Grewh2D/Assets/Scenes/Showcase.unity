@@ -839,7 +839,8 @@ MonoBehaviour:
     \t\t\t\taverage height difference of terrain blocks\nKill timer:\t\t\t\t\t\t\t\t\thow
     often to kill the least capable car\nSimulation speed: \t\t\t\t\tself explanatory\nIndividual/From
     parents:\t\thow many genomes should be based on\n\t\t\t\t\t\t\t\t\t\t\t\tmutating
-    one individual, or be derived from parents"
+    one individual, or be derived from parents\nMutation: \t\t\t\t\t\t\t\tmutation
+    size"
 --- !u!222 &1176786945
 CanvasRenderer:
   m_ObjectHideFlags: 0

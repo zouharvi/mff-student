@@ -1,0 +1,69 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{1.1cm}
+\begin{center}
+	\fontfamily{pbk}
+	{\huge \text{Grewh2D}} \vspace{0.3cm} \\ 
+	{\small \text{Genetically Refined Wheels in 2D}} \vspace{0.1cm} \\
+	{\small \text{version 0.1.0}} \vspace{0.5cm} \\
+	{\normalsize \text{User documentation}} \vspace{0.2cm} \\
+	{\normalsize \text{by Vilém Zouhar}} \vspace{0.5cm} \\
+\end{center}
+
+\section*{About}
+The purpose of Genetically Refined Wheels in 2D (abbrev. Grewh2D) is to demonstrate the beauty of genetic algorithms. It was created by Vilém Zouhar as a semestral project at Charles University Faculty of Mathematics and Physics in 2018.
+Genomes in this program represent polygons with attached circles, also known as cars. Their goal is to reach the other end of the map.
+
+\section*{Getting Grewh2D}
+Grewh2D can be run either in WebGL environment, or locally via Windows or Linux executables. WebGL, binaries and latest versions of user and technical documentation are hosted at \href{http://vilix.xyz/s/grewh2d/}{vilix.xyz/s/grewh2d}. Note that Windows and Linux executables don't have to be installed and provide much higher performance and stability. \\
+
+WebGL version has been tested on Chrome 65.0.3325.181 64-bit, Windows, Windows version on Win10 (all updates till april 2018), 64-bit and lastly the Linux version has been tested on Debian 9.4 64-bit.
+
+\section*{Usage}
+The program is divided into three parts:
+\begin{enumerate}
+	\item Population showcase 
+	\item Simulation
+	\item Statistics
+\end{enumerate}
+The most common workflow is: $1. \rightarrow 2. \rightarrow 3. \rightarrow 1. \rightarrow ...$
+\subsection*{Population showcase}
+The whole population can be rerandomized with the \textit{New population} button. \textit{Start} changes the scene to 2. (Simulation).
+
+\subsection*{Simulation}
+Simulation provides a method to sort genomes by their fitness. Once all individuals are killed, new population is created based on previous results. The simulation environment provides these options:
+\begin{itemize}
+	\item{Population size} \hspace{0.92cm} Size of the next population
+	\item{Terrain difficulty} \hspace{0.67cm}  Hardness of the terrain (achieved by average height difference).\\ 
+	\text{}\hspace{3.39cm}  For new terrain, click \textit{New terrain}
+	\item{Gravity} \hspace{2.1cm} Downward gravity force
+	\item{Kill timer} \hspace{1.8cm} How fast to kill the least capable individual
+	\item{Simulation speed} \hspace{0.71cm} Speed of the physical simulation
+	\item{Individual/parents} \hspace{0.39cm} How many genomes should be based on mutating one individual or be derived \\
+	\text{}\hspace{3.39cm} from parents
+	\item{Mutation} \hspace{1.8cm} Mutation size
+\end{itemize}
+By default the camera follows the leader. Clicking the \textit{camera button} cycles the camera mode: \textit{second, best, last} and \textit{free} mode. \textit{Mutate now} kills of all individuals by their respective position. \textit{Statistics} changes the scene to 3.
+
+\subsection*{Statistics}
+A simple screen displaying two graphs: \textit{average fitness by generation} and \textit{best fitness by generation}.
+
+\section*{Notes}
+Please note that genetic algorithms (similar to the one used in Grewh2D) are by definition nondeterministic. Achieving the end is not ensured as randomness is introduced.
+\end{document}
