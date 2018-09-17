@@ -12,13 +12,14 @@ Součástí projektu jsou následující položky:
 
 - návrh projektu
 - vývoj 
-- - project stub
+- - project stub, build system
 - - compiler
 - - - tokenizer
 - - - parser
 - - - grammar
 - - - core interface
 - - core
+- - - scheduler
 - - - processor 
 - - backend
 - - - návrh formátu souboru
@@ -31,12 +32,13 @@ Součástí projektu jsou následující položky:
 Rozdělení práce následující:
 - Petr
 - - backend
+- - processor
 - Vilda
-- - project stub
+- - project stub, build system
 - - compiler
+- - scheduler
 - společně, či dle vyvážení časových investicí
 - - návrh projektu 
-- - core
 - - dokumentace
 - - utilities
 
