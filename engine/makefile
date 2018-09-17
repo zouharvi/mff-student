@@ -6,14 +6,14 @@ OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
 
 engine: $(OBJECTS)
 	@echo "$(OBJECTS)"
-	@echo "Creating libzimadbe.a from $^"
+	@echo "Linking libzimadbe.a"
 	@mkdir -p bin
 	ar -cvq bin/libzimadbe.a $^
 
 build/%.o: src/%.cpp
 	@echo ""
 	@echo "Compiling $<"
-	@mkdir -p build
+	@mkdir -p $(shell dirname $@)
 	g++ -g -Wall -I include/ -c -o $@ $<
 
 clean:

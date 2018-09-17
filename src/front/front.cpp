@@ -1,4 +1,4 @@
-#include "front.h"
+#include "front/front.h"
 
 bool Front::next_line(string& line) {
     cout << (buffer.length() == 0 ? PROMPT_WORD : PROMPT_WORD_CONTINUE);

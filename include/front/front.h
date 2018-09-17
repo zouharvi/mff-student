@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
-#include "compiler.h"
-#include "tokenizer.h"
+#include "../compiler/compiler.h"
+#include "../utils/tokenizer.h"
 #include "meta_system.h"
 
 using namespace std;
@@ -33,6 +33,4 @@ class Front {
         // user welcome
         const string HELLO_USER = "ZimaDB version " + VERSION_STR + "\nEnter `.help` for usage hints.";
         const string NO_PERNAMENT_DB = "No .zima file specified. Using `default.zima` instead.";
-        
-
 };

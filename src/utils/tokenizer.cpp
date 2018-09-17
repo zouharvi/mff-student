@@ -1,4 +1,4 @@
-#include "tokenizer.h"
+#include "utils/tokenizer.h"
 
 vector<string> Tokenizer::split(string line) {
     vector<string> tokens;

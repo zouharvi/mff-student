@@ -1,6 +1,7 @@
 # ignore temp folders
 build/
 engine/build
+engine/bin
 
 # ignore editor folders
 .vscode/

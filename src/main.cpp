@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-#include "front.h"
+#include "front/front.h"
 #include "engine_interface.h"
 
 using namespace std;

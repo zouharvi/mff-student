@@ -7,4 +7,4 @@
 | organization | 16-09-2018 | 0.5 |
 | project stub, build system, logo | 17-09-2018 | 2.5 |
 | basic IO system | 17-09-2018 | 1 |
-| meta_system, tokenization | 17-09-2018 | 1.5 |
+| meta_system, tokenization, build system | 17-09-2018 | 2 |

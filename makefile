@@ -6,14 +6,14 @@ LIB := # -L lib
 
 zimadb: $(OBJECTS) engine/bin/libzimadbe.a
 	@echo ""
-	@echo "Linking $^"
+	@echo "Linking $@"
 	@mkdir -p bin
 	g++ $^ -o bin/zimadb $(LIB)
 
 build/%.o: src/%.cpp
 	@echo ""
 	@echo "Compiling $<"
-	@mkdir -p build
+	@mkdir -p $(shell dirname $@)
 	g++ -g -Wall -I include/ -c -o $@ $<
 
 engine/bin/libzimadbe.a: 
