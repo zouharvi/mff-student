@@ -1,5 +1,5 @@
 # minimalist build setup
-
+.DEFAULT_GOAL := zimadb
 SOURCES := $(shell find src/ -type f -name *.cpp)
 OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
 LIB := # -L lib 
@@ -27,7 +27,7 @@ clean:
 	rm -rf build/ 
 	rm -rf bin/
 	@echo ""
-	@echo "Now cleaning the engine";
+	@echo "Cleaning the engine";
 	@$(MAKE) -C engine --no-print-directory clean
 
 test:

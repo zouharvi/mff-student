@@ -1,14 +1,14 @@
 # minimalist build setup to be used by Petr
 
+.DEFAULT_GOAL := engine
 SOURCES := $(shell find src/ -type f -name *.cpp)
 OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
 
 engine: $(OBJECTS)
-	@echo ""
+	@echo "$(OBJECTS)"
 	@echo "Creating libzimadbe.a from $^"
 	@mkdir -p bin
 	ar -cvq bin/libzimadbe.a $^
-	ar -t bin/libzimadbe.a
 
 build/%.o: src/%.cpp
 	@echo ""

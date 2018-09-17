@@ -6,7 +6,7 @@ SQLite-like database implementation from scratch (semestral project by Petr Chme
 Read concept assignment in `doc/concept.md`.
 
 ## Build
-`make zimadb`
+`make` (`zimadb` is already the default target)
 
 We use makefile with a simple cascade:
 `zimadb` requires all of the source files to be compiled as well as `libzimadbe.a`, located in `engine/`. This folder contains its own makefile with `engine` target, which requires all of this folders source files to be compiled. The product is `engine/bin/libzimadbe.a` which is linked back with the rest of top level zimadb objects.
