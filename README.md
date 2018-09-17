@@ -6,7 +6,7 @@ SQLite-like database implementation from scratch (semestral project by Petr Chme
 Read concept assignment in `doc_meta/concept.md`.
 
 ## Build
-`make` (**zimadb** is already the default target)
+`make` (**ZimaDB** is already the default target)
 
 `make run` will build & run **ZimaDB**.
 
