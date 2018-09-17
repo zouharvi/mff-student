@@ -16,6 +16,7 @@ void Front::start_loop() {
             loop(string(buf));
         }
     }
+    cout << endl;
 }
 
 bool Front::loop(string line) {
