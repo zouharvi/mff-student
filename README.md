@@ -3,7 +3,7 @@
 SQLite-like database implementation from scratch (semestral project by Petr Chmel and Vilém Zouhar).
 
 ## Documentation
-Read concept assignment in `doc/concept.md`.
+Read concept assignment in `doc_meta/concept.md`.
 
 ## Build
 `make` (`zimadb` is already the default target)
