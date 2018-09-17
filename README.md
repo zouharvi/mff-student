@@ -17,3 +17,6 @@ We use makefile with a simple cascade:
 - [Never write your own database](https://medium.com/@terrycrowley/never-write-your-own-database-736f704c780) by Terry Crowley
 - [Database systems: the complete book](https://vufind.techlib.cz/Record/000144487#description) by Hector Garcia-Molina, Jeffrey D. Ullman, Jennifer Widom
 - [How does a database work](https://cstack.github.io/db_tutorial/) by Connor Stack
+
+## Requirements
+- The `readline` library is needed to build the program. It can be obtained from most of the maintained repositories, eg. `dnf install readline-devel`.

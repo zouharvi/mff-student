@@ -3,6 +3,8 @@
 #include "../compiler/compiler.h"
 #include "../utils/tokenizer.h"
 #include "meta_system.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 using namespace std;
 
@@ -20,10 +22,10 @@ class Front {
         MetaSystem meta_system;
 
         // main program input loading loop
-        bool loop(string&);
+        bool loop(string);
 
         // prompt and load next line
-        bool next_line(string&);
+        char* next_line();
         const string PROMPT_WORD          = "zimadb> ";
         const string PROMPT_WORD_CONTINUE = "   ...> ";
 
