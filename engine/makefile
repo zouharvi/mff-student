@@ -1,0 +1,23 @@
+# minimalist build setup to be used by Petr
+
+SOURCES := $(shell find src/ -type f -name *.cpp)
+OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
+
+engine: $(OBJECTS)
+	@echo ""
+	@echo "Creating libzimadbe.a from $^"
+	@mkdir -p bin
+	ar -cvq bin/libzimadbe.a $^
+	ar -t bin/libzimadbe.a
+
+build/%.o: src/%.cpp
+	@echo ""
+	@echo "Compiling $<"
+	@mkdir -p build
+	g++ -g -Wall -I include/ -c -o $@ $<
+
+clean:
+	@echo ""
+	@echo "Removing build/ and bin/";
+	rm -rf build/ 
+	rm -rf bin/
