@@ -13,8 +13,8 @@ void Front::start_loop() {
     {
         if (strlen(buf) > 0) {
             add_history(buf);
+            loop(string(buf));
         }
-        loop(string(buf));
     }
 }
 

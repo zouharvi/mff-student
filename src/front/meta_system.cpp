@@ -32,8 +32,9 @@ void MetaSystem::exit() {
 
 void MetaSystem::open(vector<string> tokens) {
     if(tokens.size() < 2) {
-        cout << "Not enough arguments for `.open`. Please specifiy filename.";
-    }
+        cout << "Not enough arguments for `.open`. Please specifiy filename." << endl;
+    };
+    database_file = tokens[1];
     // TODO: Engine call
 }
 
