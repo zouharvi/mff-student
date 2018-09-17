@@ -6,6 +6,7 @@ Projekt ZimaDB si klade za cíl implementovat podmnožinu funkcionality SQL comp
 - agregační funkce COUNT, SUM, AVG
 - jednoúrovňový JOIN
 
+
 ## Vývoj
 Součástí projektu jsou následující položky:
 
@@ -35,6 +36,8 @@ Rozdělení práce následující:
 - - compiler
 - společně, či dle vyvážení časových investicí
 - - návrh projektu 
-- - core 
+- - core
 - - dokumentace
 - - utilities
+
+Rozdělení bude vynuceno návrhem závislostí v build systému (dva makefiles).
