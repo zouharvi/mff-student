@@ -1,4 +1,5 @@
-# ZimaDB
+![ZimaDB logo](https://raw.githubusercontent.com/zouharvi/zimadb/master/doc_meta/logo/zimadb.png)
+
 SQLite-like database implementation from scratch (semestral project by Petr Chmel and Vilém Zouhar).
 
 ## Documentation
