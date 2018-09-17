@@ -8,13 +8,13 @@ using namespace std;
 
 int main() {
     // proof of library linkage
-    print_hello();
 
+    print_hello();
     try {
         Front front;
         front.start_loop();
-    } catch(...) {
-        exception_ptr p = current_exception();
+    } catch (const std::exception &e) {
+        std::cout << e.what() << endl;
     }
 
     return 0;

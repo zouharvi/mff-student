@@ -1,16 +1,16 @@
 #include "front.h"
-#include "tokenizer.h"
 
 bool Front::next_line(string& line) {
-    cout << (buffer.length() == 0) ? PROMPT_WORD : PROMPT_WORD_CONTINUE;
+    cout << (buffer.length() == 0 ? PROMPT_WORD : PROMPT_WORD_CONTINUE);
     bool result =  (bool) getline(cin, line);
 
     return result;
 }
 
 void Front::start_loop() {
-    string line;
+    cout << HELLO_USER << endl;
 
+    string line;
     while (next_line(line))
     {
         loop(line);
@@ -30,7 +30,6 @@ bool Front::loop(string& line) {
 
     return true;
 }
-
 
 Front::Front() {
     
