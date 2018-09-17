@@ -8,3 +8,4 @@
 | project stub, build system, logo | 17-09-2018 | 2.5 |
 | basic IO system, meta_system | 17-09-2018 | 1 |
 | tokenization, build system, arrow navigation | 17-09-2018 | 2 |
+| models, grammar | 18-09-2018 | 0.5 |
