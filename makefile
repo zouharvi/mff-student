@@ -21,6 +21,11 @@ engine/bin/libzimadbe.a:
 	@echo "Building the engine"
 	@$(MAKE) -C engine --no-print-directory  engine
 
+run: zimadb
+	@echo ""
+	@echo ""
+	@bin/zimadb
+
 clean:
 	@echo ""
 	@echo "Removing build/ and bin/";
