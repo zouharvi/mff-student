@@ -1,11 +1,20 @@
 
 ## Obecné
-Projekt ZimaDB si klade za cíl implementovat podmnožinu funkcionality SQL compliant engine, konkrétně SQLite. Mezi podporované funkcionality zcela jistě bude patřit:
-- práce s databázovými soubory skrze ZimaDB CLI
-- základní operace SELECT, INSERT, UPDATE, DELETE s jednoduchými modifikátory a podmínkami WHERE
-- agregační funkce COUNT, SUM, AVG
-- jednoúrovňový JOIN
+Projekt ZimaDB si klade za cíl implementovat podmnožinu funkcionality SQL compliant engine, konkrétně SQLite.
 
+### Datové typy
+- BOOLEAN
+- [UNSIGNED] INT, TINYINT
+- VARCHAR(N)
+- DOUBLE
+- DATE (není součástí specifikace)
+- BLOB(N) (není součástí specifikace)
+- atribut PRIMARY
+
+### Povolené operace
+- SELECT, INSERT, UPDATE, DELETE, CREATE TABLE
+- agregační funkce COUNT, SUM, AVG
+- JOIN (není součástí specifikace)
 
 ## Vývoj
 Součástí projektu jsou následující položky:
@@ -42,4 +51,10 @@ Rozdělení práce následující:
 - - dokumentace
 - - utilities
 
-Rozdělení bude vynuceno návrhem závislostí v build systému (dva makefiles).
+Rozdělení bude vynuceno návrhem závislostí v build systému (dva makefiles). Viz. objektový návrh.
+
+### Roadmap (nezávazně)
+- před začátkem školy
+- - většina objektů z UML existujících, byť jen s dummy funkčností
+- - základní pravidla gramatiky
+- - finální build system
