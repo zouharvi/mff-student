@@ -22,7 +22,7 @@ class Front {
         MetaSystem meta_system;
 
         // main program input loading loop
-        bool loop(string);
+        void loop(string);
 
         // prompt and load next line
         char* next_line();
