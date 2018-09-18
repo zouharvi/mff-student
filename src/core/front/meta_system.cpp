@@ -44,9 +44,9 @@ void MetaSystem::debug_f(vector<string> tokens) {
         cout << "database:   " << database_file << endl;
     }
     if(tokens.size() >= 2) {
-        if(tokens[1] == "on") {
+        if(TextUtils::to_upper(tokens[1]) == "ON") {
             DEBUG = true;
-        } else if(tokens[1] == "off") {
+        } else if(TextUtils::to_upper(tokens[1]) == "OFF") {
             DEBUG = false;
         } else {
             cout << "Unknown option: `" << tokens[1] << "`" << endl;;

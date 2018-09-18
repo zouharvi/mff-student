@@ -28,7 +28,7 @@ bool Front::loop(string line) {
     // we accept multiline string, hence this cumbersome process
     buffer += "\n" + line;
     if(Tokenizer::is_end_query(line)) {
-        bool response = compiler.process(Tokenizer::split(buffer));
+        bool response = compiler.process(Tokenizer::split(Tokenizer::remove_end_query(buffer)));
         buffer = "";
         return response;
     } 

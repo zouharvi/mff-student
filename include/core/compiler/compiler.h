@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include "models/query.h"
 
 using namespace std;
 

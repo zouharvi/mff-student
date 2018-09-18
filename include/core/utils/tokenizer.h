@@ -13,4 +13,7 @@ class Tokenizer {
 
         // SQL queries can be multiline and end with a semicolon and arbitrary amount of trailing whitespace
         static bool is_end_query(string);
+
+        // remove the last semicolon
+        static string remove_end_query(string);
 };

@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "utils/text_utils.h"
 
 using namespace std;
 
