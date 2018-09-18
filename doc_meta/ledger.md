@@ -11,4 +11,5 @@
 | tokenization, build system, arrow navigation | 17-09-2018 | 2 |
 | models, grammar | 18-09-2018 | 0.5 |
 | meetup | 18-09-2018 | 2 |
-| build system, grammar model system | 18-09-2018 | 1.5 |
+| build system, grammar model system, basic queries | 18-09-2018 | 3 |
+| create table, var types | 19-09-2018 | 1 |

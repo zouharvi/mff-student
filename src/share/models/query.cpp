@@ -14,11 +14,19 @@ template <class QueryType> void* Query::try_parse(vector<string> tokens) {
 }
 
 Query::Query(vector<string> tokens) {
-    string command = TextUtils::to_upper(tokens[0]);
-    if(command == "DROP")
+    if(tokens.size() < 2) {
+        cout << "Error: no query has less than two tokens" << endl;
+        return;
+    } 
+
+    string command1 = TextUtils::to_upper(tokens[0]);
+    string command2 = TextUtils::to_upper(tokens[1]);
+    if(command1 == "DROP" && command2 == "TABLE")
         try_parse<DropTable>(tokens);
-    else if(command == "TRUNCATE")
+    else if(command1 == "TRUNCATE" && command2 == "TABLE")
         try_parse<TruncateTable>(tokens);
+    else if(command1 == "CREATE" && command2 == "TABLE")
+        try_parse<CreateTable>(tokens);
     else 
-        cout << "Unrecognized query `" << tokens[0] << "`" << endl;
+        cout << "Unrecognized query `" << tokens[0] << "`, `" << tokens[1] << "`" << endl;
 }

@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "create_table.h"
 #include "drop_table.h"
 #include "truncate_table.h"
 #include "utils/text_utils.h"

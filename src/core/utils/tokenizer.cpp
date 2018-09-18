@@ -14,6 +14,15 @@ vector<string> Tokenizer::split(string line) {
             escaped = line[i] == '\\'; // if \, just set escaped to true
 
             if(quote_mark == '\0') {
+                if(line[i] == '(' || line[i] == ')' || line[i] == ',') { // brackets and commas need to be tokenized separately
+                    if(cur_word != "") {
+                        tokens.push_back(cur_word);
+                        cur_word = "";
+                    }
+                    tokens.push_back(string(1, line[i]));
+                    continue;
+                }
+
                 if(line[i] == '\'' || line[i] == '"') { // set up new quote mark
                     quote_mark = line[i];
                 } else if(line[i] == ' ' || line[i] == '\t' || line[i] == '\n') { // whitespace end current word if not empty
