@@ -1,7 +1,7 @@
 | Petr | date | time in hrs |
 | ---- | ---- | ----------: |
 | studying | 16-09-2018 | 2 |
-| meetup | 18-09-2018 | 1.5 |
+| meetup | 18-09-2018 | 2 |
 
 | Vilda | date | time in hrs |
 | ----- | ---- | ----------: |
@@ -10,4 +10,4 @@
 | basic IO system, meta_system | 17-09-2018 | 1 |
 | tokenization, build system, arrow navigation | 17-09-2018 | 2 |
 | models, grammar | 18-09-2018 | 0.5 |
-| meetup | 18-09-2018 | 1.5 |
+| meetup | 18-09-2018 | 2 |
