@@ -13,8 +13,13 @@ Projekt ZimaDB si klade za cíl implementovat podmnožinu funkcionality SQL comp
 
 ### Povolené operace
 - SELECT, INSERT, UPDATE, DELETE, CREATE TABLE
-- agregační funkce COUNT, SUM, AVG
-- JOIN (není součástí specifikace)
+- agregační funkce, ani výrazy nejsou pro složitost povoleny, stejně jako vnořený SELECT
+- - při studiu této problematiky se ukázalo, že implementace by vyžadovala použití virtual views a celkově by byla příliš složitá na rozsah tohoto projektu 
+- JOIN (implementován pro začátek jako multiple select + podmínky, při volných prostředcích přidáno syntakticky jako JOIN ON)
+
+### Další
+- Je možné vybírat s příznakem DISTINCT
+- Podporováno je i ORDER BY
 
 ## Vývoj
 Součástí projektu jsou následující položky:
