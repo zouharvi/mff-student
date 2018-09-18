@@ -4,22 +4,30 @@ SOURCES := $(shell find src/ -type f -name *.cpp)
 OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
 LIB := -lreadline
 
-zimadb: $(OBJECTS) engine/bin/libzimadbe.a
+zimadb: $(OBJECTS)
 	@echo ""
 	@echo "Linking $@"
 	@mkdir -p bin
 	g++ $^ -o bin/zimadb $(LIB)
 
-build/%.o: src/%.cpp
+build/core/%.o: src/core/%.cpp
 	@echo ""
-	@echo "Compiling $<"
+	@echo "Compiling core $<"
 	@mkdir -p $(shell dirname $@)
-	g++ -g -Wall -I include/ -c -o $@ $<
+	g++ -g -Wall -I include/core -I include/share  -c -o $@ $<
 
-engine/bin/libzimadbe.a: 
+build/engine/%.o: src/engine/%.cpp
 	@echo ""
-	@echo "Building the engine"
-	@$(MAKE) -C engine --no-print-directory  engine
+	@echo "Compiling engine $<"
+	@mkdir -p $(shell dirname $@)
+	g++ -g -Wall -I include/engine -I include/share -c -o $@ $<
+
+
+build/share/%.o: src/share/%.cpp
+	@echo ""
+	@echo "Compiling share $<"
+	@mkdir -p $(shell dirname $@)
+	g++ -g -Wall -I include/share -c -o $@ $<
 
 run: zimadb
 	@echo ""
@@ -31,9 +39,8 @@ clean:
 	@echo "Removing build/ and bin/";
 	rm -rf build/ 
 	rm -rf bin/
-	@echo ""
-	@echo "Cleaning the engine";
-	@$(MAKE) -C engine --no-print-directory clean
+
+re: clean run
 
 test:
 	@echo "Tests are not implemented"
