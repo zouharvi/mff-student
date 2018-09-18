@@ -56,7 +56,7 @@ Rozdělení práce následující:
 - - dokumentace
 - - utilities
 
-Rozdělení bude vynuceno návrhem závislostí v build systému (dva makefiles). Viz. objektový návrh.
+Rozdělení bude vynuceno návrhem závislostí v build systému. Kódu engine se zpřístupňují hlavičkové soubory engine/ a share/ a kódu core symetricky. Viz. objektový návrh.
 
 ### Roadmap (nezávazně)
 - před začátkem školy
