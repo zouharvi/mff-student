@@ -11,3 +11,4 @@
 | tokenization, build system, arrow navigation | 17-09-2018 | 2 |
 | models, grammar | 18-09-2018 | 0.5 |
 | meetup | 18-09-2018 | 2 |
+| build system | 18-09-2018 | 0.5 |
