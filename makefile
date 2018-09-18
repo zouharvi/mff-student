@@ -2,7 +2,7 @@
 .DEFAULT_GOAL := zimadb
 SOURCES := $(shell find src/ -type f -name *.cpp)
 OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
-LIB := -lreadline -lcurses
+LIB := -lreadline
 
 zimadb: $(OBJECTS) engine/bin/libzimadbe.a
 	@echo ""
