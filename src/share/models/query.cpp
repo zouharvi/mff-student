@@ -1,6 +1,6 @@
 #include "models/query.h"
 
-template <class QueryType> void* Query::try_parse(vector<string> tokens) {
+template <class QueryType> void Query::try_parse(vector<string> tokens) {
     QueryCommand command;
     QueryBase* query_data = new QueryType(tokens, command);
 

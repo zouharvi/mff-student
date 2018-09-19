@@ -15,6 +15,7 @@ class CreateTable : public QueryBase {
         
         string table_name;
         vector<ColumnType> columns;
+        bool as = false; // uses select from other table TODO: not implemented
         bool if_not_exists = false; // just supress error if table exists
 
         // TODO: Possibly add AS select statement? Not too hard to implement.

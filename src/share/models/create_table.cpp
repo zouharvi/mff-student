@@ -27,11 +27,18 @@ CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
         bad_syntax(command); return;
     }
 
+    // find this scopes's matching parenthesis
     size_t ending_def = starting_def + 1;
-
+    size_t open = 1;
     for(; ending_def < length; ending_def++) {
-        if(tokens[ending_def] == ")")
-            break;
+        if(tokens[ending_def] == "(") 
+            open ++;
+        if(tokens[ending_def] == ")") {
+            if(open != 1)
+                open --;
+            else
+                break;
+        }
     }
 
     if(tokens[ending_def] != ")") { // matching parenthesis not found
@@ -42,41 +49,36 @@ CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
         bad_syntax(command); return;
     }
 
-    uint state = 0;
-    string column_name;
+    vector<string> buff;
     for(size_t i = starting_def+1; i < ending_def; i++) {
-        if(state == 2 && tokens[i] != ",") {
-            bad_syntax(command); return;
+        if(i == ending_def -1) {
+            buff.push_back(tokens[i]);
         }
-        if(state == 0) {
-            column_name = tokens[i];
-        } else if(state == 1) {
-            bool ok;
-            columns.push_back(ColumnType(column_name, tokens[i], ok));
-            if(!ok) {
-                silent_err(command); return;
+
+        if(tokens[i] == "," || i == ending_def - 1) {
+            if(buff.size() < 2) {
+                bad_syntax(command); return;
+            } else {
+                bool ok;
+                columns.push_back(ColumnType(buff, ok));
+                buff = vector<string>();
+                if(!ok) {
+                    silent_err(command); return;
+                }
             }
+        } else {
+            buff.push_back(tokens[i]);
         }
-        state = (state + 1) % 3; // column_name column_def , TODO: datatype is not one token for VARCHAR(n), or attributes
     }
 
-    if(state != 2 || columns.size() == 0) {
-            bad_syntax(command); return;
-    }
-
-    cout << "DUMPING CREATE TABLE QUERY " << endl;
-    cout << "ending state index: " << state << endl;
-    cout << "table_name: " << table_name << endl;
-    cout << "columns: " << endl;
     for(ColumnType s : columns) {
-        cout << s.name << " : " << s.type.type << endl;
+        cout << s.name << " : " << s.type.type << " (" << s.type.size << ")" << endl;
     }
-    cout << "if_not_exists: " << ((int) if_not_exists) << endl;
 }
 
 void CreateTable::bad_syntax(QueryCommand& command) {
     command = ERROR;
-    cout << "Error: bad CREATE TABLE syntax (CREATE TABLE [IF NOT EXISTS] table_name ( column_name column_def, .. );)" << endl;
+    cout << "Error: bad CREATE TABLE syntax `CREATE TABLE [IF NOT EXISTS] table_name ( column_name column_def, .. );`" << endl;
 }
 
 void CreateTable::silent_err(QueryCommand& command) {

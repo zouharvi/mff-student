@@ -23,5 +23,5 @@ class Query {
 
     private:
         // this shouldn't compile unless QueryType is a subclass of QueryBase
-        template <class QueryType> void* try_parse(vector<string>);
+        template <class QueryType> void try_parse(vector<string>);
 };
