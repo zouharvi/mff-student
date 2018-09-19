@@ -3,6 +3,11 @@
 VarType::VarType(vector<string> tokens, bool& ok) {
     ok = true;
     type = INT;
+    size_t length = tokens.size();
+    if(length == 0) {
+        not_valid(tokens, ok); return;
+    }
+
     if(tokens[0] == "INT") {
         type = INT;
     } else if(tokens[0] == "TINYINT") {
@@ -28,7 +33,7 @@ VarType::VarType(vector<string> tokens, bool& ok) {
         not_valid(tokens, ok); return;
     }
 
-    if( (custom_size && tokens.size() != 4) || (!custom_size && tokens.size() != 1)) {
+    if( (custom_size && length != 4) || (!custom_size && length != 1)) {
         not_valid(tokens, ok); return;
     }
 }
@@ -36,6 +41,20 @@ VarType::VarType(vector<string> tokens, bool& ok) {
 void VarType::not_valid(vector<string> tokens, bool& ok) {
     cout << "Error: `" << CompUtils::implode(tokens, " ") << "` is not a valid var type" << endl; 
     ok = false;
+}
+
+string VarType::get_type_name() {
+    switch(type) {
+        case INT: return "INT";
+        case TINYINT: return "TINYINT";
+        case BOOLEAN: return "BOOLEAN";
+        case VARCHAR: return "VARCHAR";
+    }
+    return "";
+}
+
+string VarType::debug() {
+    return get_type_name() + (type == VARCHAR ? "(" + to_string(size) + ")" : "");
 }
 
 VarType::VarType() { }

@@ -10,7 +10,7 @@ class CreateTable : public QueryBase {
         CreateTable(vector<string>, QueryCommand&);
         
         // parsing errors
-        void bad_syntax(QueryCommand&); 
+        void bad_syntax(QueryCommand&, string extra = ""); 
         void silent_err(QueryCommand&); 
         
         string table_name;

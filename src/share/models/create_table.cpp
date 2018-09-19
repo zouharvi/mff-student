@@ -13,7 +13,7 @@ CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
  
     if(tokens[3] != "(") { // must contain IF NOT EXISTS
         if(length < 6 || tokens[2] != "IF" || tokens[3] != "NOT" || tokens[4] != "EXISTS") {
-            bad_syntax(command); return;
+            bad_syntax(command, "Nor name or `IF NOT EXISTS` found."); return;
         } else { // found IF NOT EXISTS
             if_not_exists = true;
             table_name = tokens[5];
@@ -24,7 +24,7 @@ CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
     }
     
     if(tokens[starting_def] != "(") { // starting parenthesis not found
-        bad_syntax(command); return;
+        bad_syntax(command, "Starting parenthesis not found."); return;
     }
 
     // find this scopes's matching parenthesis
@@ -42,11 +42,11 @@ CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
     }
 
     if(tokens[ending_def] != ")") { // matching parenthesis not found
-        bad_syntax(command); return;
+        bad_syntax(command, "Matching column descriptions parenthesis not found."); return;
     }
 
     if(ending_def != length -1) { // some tokens following
-        bad_syntax(command); return;
+        bad_syntax(command, "There are some words following the last correct `)`."); return;
     }
 
     vector<string> buff;
@@ -57,7 +57,7 @@ CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
 
         if(tokens[i] == "," || i == ending_def - 1) {
             if(buff.size() < 2) {
-                bad_syntax(command); return;
+                bad_syntax(command, "Column description requires at least two words."); return;
             } else {
                 bool ok;
                 columns.push_back(ColumnType(buff, ok));
@@ -71,14 +71,17 @@ CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
         }
     }
 
-    for(ColumnType s : columns) {
-        cout << s.name << " : " << s.type.type << " (" << s.type.size << ")" << endl;
+    for(ColumnType column : columns) {
+        cout << column.debug() << endl;
     }
 }
 
-void CreateTable::bad_syntax(QueryCommand& command) {
+void CreateTable::bad_syntax(QueryCommand& command, string extra) {
     command = ERROR;
-    cout << "Error: bad CREATE TABLE syntax `CREATE TABLE [IF NOT EXISTS] table_name ( column_name column_def, .. );`" << endl;
+    cout << "Error: Bad CREATE TABLE syntax `CREATE TABLE [IF NOT EXISTS] table_name ( column_name column_def, .. );`" << endl;
+    if (extra != "") {
+        cout << "       " << extra << endl;
+    }
 }
 
 void CreateTable::silent_err(QueryCommand& command) {
