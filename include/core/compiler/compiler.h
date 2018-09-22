@@ -2,9 +2,7 @@
 #include <vector>
 #include "models/query.h"
 
-using namespace std;
-
 class Compiler {
     public:
-        bool process(vector<string>);
+        bool process(std::vector<std::string>);
 };

@@ -1,4 +1,5 @@
 #include "utils/comp_utils.h"
+using namespace std;
 
 string CompUtils::implode(const vector<string>& vec, const char* delim) {
     stringstream res;

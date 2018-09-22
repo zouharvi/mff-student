@@ -1,4 +1,5 @@
 #include "front/front.h"
+using namespace std;
 
 char* Front::next_line() {
     return readline(buffer.length() == 0 ? PROMPT_WORD.c_str() : PROMPT_WORD_CONTINUE.c_str());

@@ -1,20 +1,20 @@
 #include <vector>
 #include <string>
+#include <iostream>
 #include "query_base.h"
 #include "column_type.h"
 #include "utils/text_utils.h"
-using namespace std;
 
 class CreateTable : public QueryBase {
     public:
-        CreateTable(vector<string>, QueryCommand&);
+        CreateTable(std::vector<std::string>, QueryCommand&);
         
         // parsing errors
-        void bad_syntax(QueryCommand&, string extra = ""); 
+        void bad_syntax(QueryCommand&, std::string extra = ""); 
         void silent_err(QueryCommand&); 
         
-        string table_name;
-        vector<ColumnType> columns;
+        std::string table_name;
+        std::vector<ColumnType> columns;
         bool as = false; // uses select from other table TODO: not implemented
         bool if_not_exists = false; // just supress error if table exists
 

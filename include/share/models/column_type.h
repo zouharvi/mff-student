@@ -3,16 +3,15 @@
 #include "utils/comp_utils.h"
 #include "utils/text_utils.h"
 #include "models/var_type.h"
-using namespace std;
 
 class ColumnType {
     public:
-        ColumnType(vector<string>, bool&);
+        ColumnType(std::vector<std::string>, bool&);
 
         // print this object's content
-        string debug();
+        std::string debug();
 
-        string name;
+        std::string name;
         VarType type;
         bool not_null = false;
         bool primary_key = false;

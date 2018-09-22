@@ -1,4 +1,5 @@
 #include "models/query.h"
+using namespace std;
 
 template <class QueryType> void Query::try_parse(vector<string> tokens) {
     QueryCommand command;

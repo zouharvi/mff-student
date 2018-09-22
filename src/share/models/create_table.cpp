@@ -1,6 +1,5 @@
 #include "models/create_table.h"
 
-#include <iostream>
 using namespace std;
 
 CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {

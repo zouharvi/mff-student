@@ -1,13 +1,12 @@
 #include <string>
-using namespace std;
 
 #ifndef TEXT_UTILS
     #define TEXT_UTILS
 
     class TextUtils {
         public:
-            static string to_upper(string);
-            static string to_lower(string);
+            static std::string to_upper(std::string);
+            static std::string to_lower(std::string);
     };
 
 #endif

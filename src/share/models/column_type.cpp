@@ -1,5 +1,7 @@
 #include "models/column_type.h"
 
+using namespace std;
+
 ColumnType::ColumnType(vector<string> tokens, bool& ok) {
     this->name = tokens[0];
     size_t length = tokens.size();

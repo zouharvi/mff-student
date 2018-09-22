@@ -1,4 +1,5 @@
 #include "front/meta_system.h"
+using namespace std;
 
 bool MetaSystem::DEBUG = false;
 

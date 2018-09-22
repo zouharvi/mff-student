@@ -6,8 +6,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-using namespace std;
-
 class Front {
     public:
         Front();
@@ -15,24 +13,24 @@ class Front {
 
     private:
         // buffer for multiline inputs
-        string buffer = "";
+        std::string buffer = "";
 
         // two main processing systems
         Compiler compiler;
         MetaSystem meta_system;
 
         // main program input loading loop
-        void loop(string);
+        void loop(std::string);
 
         // prompt and load next line
         char* next_line();
-        const string PROMPT_WORD          = "zimadb> ";
-        const string PROMPT_WORD_CONTINUE = "   ...> ";
+        const std::string PROMPT_WORD          = "zimadb> ";
+        const std::string PROMPT_WORD_CONTINUE = "   ...> ";
 
         // program vars
-        const string VERSION_STR = "0.0.1a";
+        const std::string VERSION_STR = "0.0.1a";
         
         // user welcome
-        const string HELLO_USER = "ZimaDB version " + VERSION_STR + "\nEnter `.help` for usage hints.";
-        const string NO_PERNAMENT_DB = "No .zima file specified. Using `default.zima` instead.";
+        const std::string HELLO_USER = "ZimaDB version " + VERSION_STR + "\nEnter `.help` for usage hints.";
+        const std::string NO_PERNAMENT_DB = "No .zima file specified. Using `default.zima` instead.";
 };

@@ -1,5 +1,7 @@
 #include "compiler/compiler.h"
 
+using namespace std;
+
 bool Compiler::process(vector<string> tokens) {
     Query query(tokens);
 

@@ -5,11 +5,10 @@
 #include "drop_table.h"
 #include "truncate_table.h"
 #include "utils/text_utils.h"
-using namespace std;
 
 class Query {
     public:
-        Query(vector<string>);
+        Query(std::vector<std::string>);
         QueryCommand command;
         QueryBase* data;
 
@@ -23,5 +22,5 @@ class Query {
 
     private:
         // this shouldn't compile unless QueryType is a subclass of QueryBase
-        template <class QueryType> void try_parse(vector<string>);
+        template <class QueryType> void try_parse(std::vector<std::string>);
 };

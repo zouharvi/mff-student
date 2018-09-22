@@ -2,14 +2,14 @@
 #include <string>
 #include <stdexcept>
 #include "front/front.h"
-#include "engine_interface.h"
+#include "random_share_header.h"
 
 using namespace std;
 
 int main() {
     // proof of library linkage
 
-    print_hello();
+    impress_me();
     try {
         Front front;
         front.start_loop();

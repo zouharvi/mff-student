@@ -1,4 +1,5 @@
 #include "utils/tokenizer.h"
+using namespace std;
 
 vector<string> Tokenizer::split(string line) {
     vector<string> tokens;

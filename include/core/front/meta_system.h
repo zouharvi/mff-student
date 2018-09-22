@@ -3,18 +3,16 @@
 #include <iostream>
 #include "utils/text_utils.h"
 
-using namespace std;
-
 class MetaSystem {
     public:
-        bool process(vector<string>);
+        bool process(std::vector<std::string>);
 
         // system vars
-        string database_file;
+        std::string database_file;
         static bool DEBUG;
 
         // menu texts
-        const string HELP_TEXT =
+        const std::string HELP_TEXT =
             ".about             Display info about this project\n"
             ".debug [on|off]    Turn debug on/off. Omit arguments for info.\n"
             ".dump TABLE*       Ouput SQL code to dump a whole table (use regex for table name)\n"
@@ -23,7 +21,7 @@ class MetaSystem {
             ".open DATABASE     Open a database file (ends with .zima)\n"
             ".schema TABLE*     Output SQL code to replicate a table schema (use regex for table name)";
 
-        const string ABOUT_TEXT =
+        const std::string ABOUT_TEXT =
             "ZimaDB is a from-scratch implementation of some of the SQLite functionality. You can\n"
             "expect some SQL commands to be working, must mostly just a minor subset of them,\n"
             "limited mostly to the simple ones.\n\n"
@@ -32,11 +30,11 @@ class MetaSystem {
 
         // base functions
         void about();
-        void debug_f(vector<string>);
-        void dump(vector<string>);
+        void debug_f(std::vector<std::string>);
+        void dump(std::vector<std::string>);
         void exit();
         void help();
-        void open(vector<string>);
-        void schema(vector<string>);
+        void open(std::vector<std::string>);
+        void schema(std::vector<std::string>);
 
 };

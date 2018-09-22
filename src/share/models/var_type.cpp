@@ -1,4 +1,5 @@
 #include "models/var_type.h"
+using namespace std;
 
 VarType::VarType(vector<string> tokens, bool& ok) {
     ok = true;
