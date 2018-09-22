@@ -3,8 +3,11 @@ using namespace std;
 
 template <class QueryType> void Query::try_parse(vector<string> tokens) {
     QueryCommand command;
-    QueryBase* query_data = new QueryType(tokens, command);
-
+    if(!std::is_base_of<QueryBase, QueryType>()) {
+        throw runtime_error("Wrong QueryType type passed to try_parse template.");
+    }
+    QueryBase* query_data = QueryType(tokens, command).get_data();
+    cout << "query type: " << query_data->type << endl;
     if(command == ERROR) {
         this->command = ERROR;
         // TODO: delete query_data  

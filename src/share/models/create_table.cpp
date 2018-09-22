@@ -3,6 +3,7 @@
 using namespace std;
 
 CreateTable::CreateTable(vector<string> tokens, QueryCommand& command) {
+    type = CREATE;
     size_t length = tokens.size();
     if(length < 4) {
         bad_syntax(command); return; // sadly `return void` doesn't work

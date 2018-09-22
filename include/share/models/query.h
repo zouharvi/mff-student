@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <exception>
 #include "create_table.h"
 #include "drop_table.h"
 #include "truncate_table.h"
@@ -23,4 +24,4 @@ class Query {
     private:
         // this shouldn't compile unless QueryType is a subclass of QueryBase
         template <class QueryType> void try_parse(std::vector<std::string>);
-};
+};  

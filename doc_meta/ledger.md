@@ -13,4 +13,4 @@
 | meetup | 18-09-2018 | 2 |
 | build system, grammar model system, basic queries | 18-09-2018 | 3 |
 | create table, var types | 19-09-2018 | 4 |
-| fix mass usings | 22-09-2018 | 0.5 |
+| fix mass usings, better query inheritance | 22-09-2018 | 1 |
