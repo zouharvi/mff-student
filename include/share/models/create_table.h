@@ -7,12 +7,14 @@
 
 class CreateTable : public QueryBase {
     public:
-        CreateTable(std::vector<std::string>, QueryCommand&);
+        CreateTable(std::vector<std::string>, bool&);
         
         // parsing errors
-        void bad_syntax(QueryCommand&, std::string extra = ""); 
-        void silent_err(QueryCommand&); 
+        void bad_syntax(bool&, std::string extra = ""); 
+        void specific_err(bool&, std::string extra = ""); 
         
+        ColumnType* primary_key = nullptr;
+
         std::string table_name;
         std::vector<ColumnType> columns;
         bool as = false; // uses select from other table TODO: not implemented

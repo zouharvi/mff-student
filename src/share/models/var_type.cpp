@@ -47,6 +47,7 @@ void VarType::not_valid(vector<string> tokens, bool& ok) {
 string VarType::get_type_name() {
     switch(type) {
         case INT: return "INT";
+        case DOUBLE: return "DOUBLE";
         case TINYINT: return "TINYINT";
         case BOOLEAN: return "BOOLEAN";
         case VARCHAR: return "VARCHAR";

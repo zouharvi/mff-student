@@ -3,10 +3,10 @@
 #include <iostream>
 using namespace std;
 
-TruncateTable::TruncateTable(vector<string> tokens, QueryCommand& command) {
+TruncateTable::TruncateTable(vector<string> tokens, bool& ok) {
     type = TRUNCATE;
     if(tokens.size() != 3) {
-        cout << "Error: bad TRUNCATE syntax (TRUNCATE TABLE table_name;)" << endl; command = ERROR;
+        cout << "Error: bad TRUNCATE syntax (TRUNCATE TABLE table_name;)" << endl; ok = false;
     } else {
         table_name = tokens[2];
     }

@@ -9,7 +9,4 @@ class QueryBase {
         // overriden by children
         enum Type { GENERIC, CREATE, DROP, TRUNCATE, DELETE, UPDATE, SELECT } type = GENERIC;
 };
-
-enum QueryCommand {DROP, TRUNCATE, ERROR};
-
 #endif

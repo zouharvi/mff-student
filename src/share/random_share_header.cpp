@@ -2,4 +2,5 @@
 
 int impress_me() {
     cout << "e^i = -1" << endl;    
+    return -35;
 }

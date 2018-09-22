@@ -6,6 +6,6 @@
 
 class DropTable : public QueryBase {
     public:
-        DropTable(std::vector<std::string>, QueryCommand&);
+        DropTable(std::vector<std::string>, bool&);
         std::string table_name;
 };

@@ -5,7 +5,7 @@
 
 class TruncateTable : public QueryBase {
     public:
-        TruncateTable(std::vector<std::string>, QueryCommand&);
+        TruncateTable(std::vector<std::string>, bool&);
         std::string table_name;
         QueryBase* get_data();
 };

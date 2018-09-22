@@ -10,7 +10,7 @@
 class Query {
     public:
         Query(std::vector<std::string>);
-        QueryCommand command;
+        bool ok;
         QueryBase* data;
 
         // TODO: this needs to be discussed, use void ptr, or
