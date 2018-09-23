@@ -7,18 +7,18 @@ ColumnType::ColumnType(vector<string> tokens, bool& ok) {
     size_t length = tokens.size();
     size_t end = length -1;
     size_t start = 1;
-    if(tokens[end] == "ASC") {
+    if(TextUtils::cmp(tokens[end], "ASC")) {
         end -= 1;
         sort_order = ASC;
-    } else if(tokens[end] == "DESC") {
+    } else if(TextUtils::cmp(tokens[end], "DESC")) {
         end -= 1;
         sort_order = DESC;
     }
-    if(end > 1 && tokens[end] == "KEY" && tokens[end-1] == "PRIMARY") {
+    if(end > 1 && TextUtils::cmp(tokens[end],"KEY") && TextUtils::cmp(tokens[end-1], "PRIMARY")) {
         primary_key = true;
         end -= 2;
     }
-    if(end > 1 && tokens[end] == "NULL" && tokens[end-1] == "NOT") {
+    if(end > 1 && TextUtils::cmp(tokens[end], "NULL") && TextUtils::cmp(tokens[end-1], "NOT")) {
         not_null = true;
         end -= 2;
     }

@@ -7,6 +7,7 @@
         public:
             static std::string to_upper(std::string);
             static std::string to_lower(std::string);
+            static bool cmp(std::string, std::string);
     };
 
 #endif

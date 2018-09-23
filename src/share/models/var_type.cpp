@@ -3,21 +3,21 @@ using namespace std;
 
 VarType::VarType(vector<string> tokens, bool& ok) {
     ok = true;
-    type = INT;
     size_t length = tokens.size();
     if(length == 0) {
         not_valid(tokens, ok); return;
     }
 
-    if(tokens[0] == "INT") {
+    string type_str = TextUtils::to_upper(tokens[0]);
+    if(type_str == "INT") {
         type = INT;
-    } else if(tokens[0] == "TINYINT") {
+    } else if(type_str == "TINYINT") {
         type = TINYINT;
-    } else if(tokens[0] == "DOUBLE") {
+    } else if(type_str == "DOUBLE") {
         type = DOUBLE;
-    } else if(tokens[0] == "BOOLEAN") {
+    } else if(type_str == "BOOLEAN") {
         type = BOOLEAN;
-    } else if(tokens[0] == "VARCHAR") {
+    } else if(type_str == "VARCHAR") {
         type = VARCHAR;
         size = 32;
         if(tokens.size() == 4) {

@@ -15,12 +15,17 @@ vector<string> Tokenizer::split(string line) {
             escaped = line[i] == '\\'; // if \, just set escaped to true
 
             if(quote_mark == '\0') {
-                if(line[i] == '(' || line[i] == ')' || line[i] == ',') { // brackets and commas need to be tokenized separately
+                if( (string("()+-/*,").find(line[i]) != string::npos) || (i != length-1 && line[i] == '|' && line[i+1] == '|') ) { // operators need to be tokenized separately
                     if(cur_word != "") {
                         tokens.push_back(cur_word);
                         cur_word = "";
                     }
-                    tokens.push_back(string(1, line[i]));
+                    if(i != length-1 && line[i] == '|' && line[i+1] == '|') { // special treatment for ||
+                        tokens.push_back("||");
+                        i++;
+                    } else {
+                        tokens.push_back(string(1, line[i]));
+                    }
                     continue;
                 }
 

@@ -14,3 +14,4 @@
 | build system, grammar model system, basic queries | 18-09-2018 | 3 |
 | create table, var types | 19-09-2018 | 4 |
 | fix mass usings, better query inheritance, #8, #9 | 22-09-2018 | 1.5 |
+| fix string cmp size agnostic | 23-09-2018 | 0.5 |

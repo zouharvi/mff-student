@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "utils/comp_utils.h"
+#include "utils/text_utils.h"
 
 class VarType {
     public:
