@@ -7,6 +7,6 @@ class QueryBase {
         QueryBase* get_data() { return this; };
 
         // overriden by children
-        enum Type { GENERIC, CREATE, DROP, TRUNCATE, DELETE, UPDATE, SELECT } type = GENERIC;
+        enum Type { GENERIC, CREATE, DROP, TRUNCATE, DELETE, UPDATE, SELECT, INSERT } type = GENERIC;
 };
 #endif

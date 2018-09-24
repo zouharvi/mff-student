@@ -28,6 +28,8 @@ Query::Query(vector<string> tokens) {
         try_parse<TruncateTable>(tokens);
     else if(command1 == "CREATE" && command2 == "TABLE")
         try_parse<CreateTable>(tokens);
+    else if(command1 == "SELECT")
+        try_parse<Select>(tokens);
     else 
         cout << "Unrecognized query `" << tokens[0] << "`, `" << tokens[1] << "`" << endl;
 }

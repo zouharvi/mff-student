@@ -1,3 +1,6 @@
+#ifndef COLUMN_TYPE
+#define COLUMN_TYPE
+
 #include <string>
 #include <vector>
 #include "utils/comp_utils.h"
@@ -17,3 +20,5 @@ class ColumnType {
         bool primary_key = false;
         enum {ASC, DESC} sort_order = ASC; 
 };
+
+#endif
