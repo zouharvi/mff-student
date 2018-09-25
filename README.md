@@ -12,7 +12,9 @@ Read concept assignment in `doc_meta/concept.md`.
 
 `make re` will clean & run **ZimaDB**.
 
-We used a makefile with a simple cascade, but due to linkage complexity we work in three main directories: `share/`, `engine/` and `core/`. `engine/` (storage, processor) is maintained by Petr Chmel and `core/` (lexing, parsing) by Vilém Zouhar. 
+We used a makefile with a simple cascade, but due to linkage complexity we work in three main directories: `share/`, `engine/` and `core/`.
+
+`engine/` (storage, processor) is maintained by Petr Chmel and `core/` (lexing, parsing) by Vilém Zouhar. 
 
 ## Sources
 - [Never write your own database](https://medium.com/@terrycrowley/never-write-your-own-database-736f704c780) by Terry Crowley
