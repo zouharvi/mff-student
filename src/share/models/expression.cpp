@@ -62,8 +62,8 @@ Expression::Expression(vector<string> tokens, bool& ok) {
     left_expr  = new Expression(CompUtils::slice(tokens, start_index, lowest_priority_index-1), ok);
     right_expr = new Expression(CompUtils::slice(tokens, lowest_priority_index+1, end_index), ok);
 
-    required_vars.merge(left_expr.required_vars);
-    required_vars.merge(right_expr.required_vars);
+    required_vars.merge(left_expr->required_vars);
+    required_vars.merge(right_expr->required_vars);
 }
 
 string Expression::eval(map<string, string>& vars, bool& ok) {
@@ -171,7 +171,7 @@ template <>
 double Expression::cast<double>(string value, bool& ok) {
     try {
         return stod(value);
-    } catch(std::exception e) {
+    } catch(...) {
         ok = false;
         err(ok, "Error: `" + value + "` cannot be parsed");
         return 0;

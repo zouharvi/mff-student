@@ -8,7 +8,7 @@
 
 class Front {
     public:
-        Front();
+        Front(std::string);
         void start_loop();
 
     private:

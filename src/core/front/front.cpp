@@ -24,16 +24,16 @@ void Front::loop(string line) {
     // if buffer is empty and this is probably a meta command
     if(buffer.length() == 0 && Tokenizer::is_meta(line)) {
         meta_system.process(Tokenizer::split(line.substr(1)));
+    } else {
+        // we accept multiline string, hence this cumbersome process
+        buffer += "\n" + line;
+        if(Tokenizer::is_end_query(line)) {
+            compiler.process(Tokenizer::split(Tokenizer::remove_end_query(buffer)));
+            buffer = "";
+        } 
     }
-
-    // we accept multiline string, hence this cumbersome process
-    buffer += "\n" + line;
-    if(Tokenizer::is_end_query(line)) {
-        compiler.process(Tokenizer::split(Tokenizer::remove_end_query(buffer)));
-        buffer = "";
-    } 
 }
 
-Front::Front() {
-    
+Front::Front(string file) {
+    meta_system.database_file = file;
 }

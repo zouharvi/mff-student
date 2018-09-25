@@ -19,7 +19,7 @@ class Expression {
         // does a cast of internal eval (split due to linking errors)
         template <typename T>
         T eval_cast(std::map<std::string, std::string>&, bool&);
-        set<std::string> required_vars;
+        std::set<std::string> required_vars;
 
     private:
         template <typename T> 

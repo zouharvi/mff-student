@@ -6,12 +6,14 @@
 
 using namespace std;
 
-int main() {
-    // proof of library linkage
-
-    impress_me();
+int main(int argc, char *argv[]) {
     try {
-        Front front;
+        // proof of project linkage
+        impress_me();
+
+        // get the first parameter or nothing
+        string db_name(argc > 1 ? argv[1] : "");
+        Front front(db_name);
         front.start_loop();
     } catch (const std::exception &e) {
         std::cout << e.what() << endl;
