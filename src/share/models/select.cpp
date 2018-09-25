@@ -58,6 +58,9 @@ Select::Select(vector<string> tokens, bool& ok) {
     if(index < length) {
         condition = new Expression(CompUtils::slice(tokens, index, length-1), ok);
     }
+
+    map<string, string> vars;
+    cout << "EXPRESSION EVAL RESULT: " << expressions[0].eval(vars, ok) << endl;
 }
 
 void Select::bad_syntax(bool& ok, string extra) {

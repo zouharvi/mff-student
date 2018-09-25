@@ -3,24 +3,29 @@ using namespace std;
 
 Expression::Expression(vector<string> tokens, bool& ok) {
     size_t length = tokens.size();
-    
-    // todo: strip parentheses left & right by slice
-
     size_t start_index = 0;
-    size_t end_index = length - start_index;
+    size_t end_index = length - start_index-1;
+    while(tokens[start_index] == "(" && tokens[end_index] == ")") {
+        start_index++;
+        end_index--;
+    }
+    length = end_index - start_index +1;
     
-    if(length == 0) {
+    if(length == 0) { // virtual operand for, eg + -5
         value = "";
+        value_only = true;
         return;
     }
-    if(length == 1) {
+    if(length == 1) { // probably a variable or a constant
         value = tokens[0];
+        value_only = true;
         return;
     }
 
     uint open = 0;
     uint lowest_priority = 0;
     uint lowest_priority_index = 0; 
+    // this could be all done in one pass, but this just seemed more robus
     for(size_t i = start_index; i < end_index; i++) {
         if(tokens[i] == "(") {
             open += 1;
@@ -42,10 +47,142 @@ Expression::Expression(vector<string> tokens, bool& ok) {
         }
     }
 
+    string ops = this->ops = tokens[lowest_priority_index];
+    if(ops == "+")        op = ADD;
+    else if(ops == "-")   op = SUB;
+    else if(ops == "/")   op = DIV;
+    else if(ops == "*")   op = MUL;
+    else if(ops == "AND") op = AND;
+    else if(ops == "OR")  op = OR;
+    else if(ops == "||")  op = CAT;
+    else {
+        err(ok, "Error: Invalid operator `" + ops + "`");
+    }
+
     left_expr  = new Expression(CompUtils::slice(tokens, start_index, lowest_priority_index-1), ok);
     right_expr = new Expression(CompUtils::slice(tokens, lowest_priority_index+1, end_index), ok);
-    cout << "Found " << tokens[lowest_priority_index] << endl; 
+
+    required_vars.merge(left_expr.required_vars);
+    required_vars.merge(right_expr.required_vars);
 }
+
+string Expression::eval(map<string, string>& vars, bool& ok) {
+    if(value_only)
+        return value;
+
+    double ld, rd;
+    bool lb, rb;
+    string ls, rs;
+    switch(op) {
+        case ADD:
+            // left side can be virtual
+            ld = left_expr==nullptr?0:left_expr->eval_cast<double>(vars, ok);
+            if(right_expr == nullptr) {
+                missing_right_op(ok, ops); return "";
+            }
+            rd = right_expr->eval_cast<double>(vars, ok);
+            return std::to_string(ok? (ld + rd) : 0);
+            break;
+        case SUB:
+            // left side can be virtual
+            ld = left_expr==nullptr?0:left_expr->eval_cast<double>(vars, ok);
+            if(right_expr == nullptr) {
+                missing_right_op(ok, ops); return "";
+            }
+            rd = right_expr->eval_cast<double>(vars, ok);
+            return std::to_string(ok? (ld - rd) : 0);
+            break;
+        case MUL:
+            if(left_expr == nullptr) {
+                missing_left_op(ok, ops); return "";
+            }
+            if(right_expr == nullptr) {
+                missing_right_op(ok, ops); return "";
+            }
+            ld =  left_expr->eval_cast<double>(vars, ok);
+            rd = right_expr->eval_cast<double>(vars, ok);
+            return std::to_string(ok? (ld * rd) : 0);
+            break;
+        case DIV:
+            if(left_expr == nullptr) {
+                missing_left_op(ok, ops); return "";
+            }
+            if(right_expr == nullptr) {
+                missing_right_op(ok, ops); return "";
+            }
+            ld =  left_expr->eval_cast<double>(vars, ok);
+            rd = right_expr->eval_cast<double>(vars, ok);
+            if(rd == 0) {
+                err(ok, "Error: Division by zero");
+                return "";
+            }
+            return std::to_string(ok? (ld / rd) : 0);
+            break;
+        case AND:
+            if(left_expr == nullptr) {
+                missing_left_op(ok, ops); return "";
+            }
+            if(right_expr == nullptr) {
+                missing_right_op(ok, ops); return "";
+            }
+            lb =  left_expr->eval_cast<bool>(vars, ok);
+            rb = right_expr->eval_cast<bool>(vars, ok);
+            return std::to_string(ok? (lb && rb) : 0);
+            break;
+        case OR:
+            if(left_expr == nullptr) {
+                missing_left_op(ok, ops); return "";
+            }
+            if(right_expr == nullptr) {
+                missing_right_op(ok, ops); return "";
+            }
+            lb =  left_expr->eval_cast<bool>(vars, ok);
+            rb = right_expr->eval_cast<bool>(vars, ok);
+            return std::to_string(ok? (lb || rb) : 0);
+            break;
+        case CAT:
+            if(left_expr == nullptr) {
+                missing_left_op(ok, ops); return "";
+            }
+            if(right_expr == nullptr) {
+                missing_right_op(ok, ops); return "";
+            }
+            ls =  left_expr->eval_cast<string>(vars, ok);
+            rs = right_expr->eval_cast<string>(vars, ok);
+            return ok? ls+rs : to_string(0);
+            break;
+        default:
+            err(ok, "Error: No operator found");
+            return "";
+    }
+}
+
+template <typename T>
+T Expression::eval_cast(map<string, string>& vars, bool& ok) {
+    return cast<T>(eval(vars, ok), ok);
+}
+
+template <>
+bool Expression::cast<bool>(string value, bool&) {
+    return value != "0" && value != "";
+}
+
+template <>
+double Expression::cast<double>(string value, bool& ok) {
+    try {
+        return stod(value);
+    } catch(std::exception e) {
+        ok = false;
+        err(ok, "Error: `" + value + "` cannot be parsed");
+        return 0;
+    }
+}
+
+template <>
+string Expression::cast<string>(string value, bool&) {
+    return value;
+}
+
 
 uint Expression::get_priority(string op) {
     // level 2
@@ -92,4 +229,12 @@ void Expression::err(bool& ok, std::string info, std::vector<std::string> tokens
         cout << "      ";
     }
     cout << info << endl;
+}
+
+void Expression::missing_left_op(bool& ok, string ops) {
+    err(ok, "Error: Missing left operand for `" + ops + "`");
+}
+
+void Expression::missing_right_op(bool& ok, string ops) {
+    err(ok, "Error: Missing right operand for `" + ops + "`");
 }

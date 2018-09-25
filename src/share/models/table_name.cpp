@@ -2,6 +2,11 @@
 using namespace std;
 
 TableName::TableName(vector<string> tokens, bool& ok) {
-    for(string s : tokens)
-        cout << "TNME: " << s << endl;
+    if(tokens.size() != 1) {
+        ok = false;
+        cout << "Error: `" << CompUtils::implode(tokens, " ") << "` is an invalid table name." << endl; 
+        return;
+    }
+
+    name = tokens[0];
 }
