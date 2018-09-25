@@ -16,3 +16,4 @@
 | fix mass usings, better query inheritance, #8, #9 | 22-09-2018 | 1.5 |
 | fix string cmp size agnostic | 23-09-2018 | 0.5 |
 | select exprs base | 24-09-2018 | 0.5 |
+| exprs loading | 25-09-2018 | 1.5 |

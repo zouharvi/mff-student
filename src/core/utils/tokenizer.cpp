@@ -15,7 +15,7 @@ vector<string> Tokenizer::split(string line) {
             escaped = line[i] == '\\'; // if \, just set escaped to true
 
             if(quote_mark == '\0') {
-                if( (string("()+-/*,").find(line[i]) != string::npos) || (i != length-1 && line[i] == '|' && line[i+1] == '|') ) { // operators need to be tokenized separately
+                if( (string("()+-/*%,").find(line[i]) != string::npos) || (i != length-1 && line[i] == '|' && line[i+1] == '|') ) { // operators need to be tokenized separately
                     if(cur_word != "") {
                         tokens.push_back(cur_word);
                         cur_word = "";
