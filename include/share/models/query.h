@@ -6,6 +6,7 @@
 #include "drop_table.h"
 #include "truncate_table.h"
 #include "select.h"
+#include "delete.h"
 #include "utils/text_utils.h"
 
 class Query {

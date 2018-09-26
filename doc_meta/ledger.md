@@ -17,3 +17,4 @@
 | fix string cmp size agnostic | 23-09-2018 | 0.5 |
 | select exprs base | 24-09-2018 | 0.5 |
 | exprs loading, exprs resolving #7, filename loading, meta | 25-09-2018 | 5 |
+| delete, truncate #3 | 26-09-2018 | 1 |

@@ -10,3 +10,6 @@ TableName::TableName(vector<string> tokens, bool& ok) {
 
     name = tokens[0];
 }
+TableName::TableName(string name, bool& ok) {
+    this->name = name;
+}

@@ -10,9 +10,10 @@ TruncateTable::TruncateTable(vector<string> tokens, bool& ok) {
     } else {
         table_name = tokens[2];
     }
+
+    real_query = new Delete(vector<string> { "DELETE", "FROM", table_name }, ok);
 }
 
 QueryBase* TruncateTable::get_data() {
-    // TODO: translate this into an ordinary delete statement
-    return this;
+    return real_query;
 }

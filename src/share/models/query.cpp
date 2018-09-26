@@ -7,9 +7,7 @@ template <class QueryType> void Query::try_parse(vector<string> tokens) {
     }
     QueryBase* query_data = QueryType(tokens, ok).get_data();
 
-    if(!ok) {
-        // TODO: delete query_data  
-    } else {
+    if(ok) {
         this->data = query_data;
     }
 }
@@ -30,6 +28,8 @@ Query::Query(vector<string> tokens) {
         try_parse<CreateTable>(tokens);
     else if(command1 == "SELECT")
         try_parse<Select>(tokens);
+    else if(command1 == "DELETE")
+        try_parse<Delete>(tokens);
     else 
         cout << "Unrecognized query `" << tokens[0] << "`, `" << tokens[1] << "`" << endl;
 }

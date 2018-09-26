@@ -1,3 +1,6 @@
+#ifndef EXPRESSION
+#define EXPRESSION
+
 #include <vector>
 #include <string>
 #include <map>
@@ -36,3 +39,5 @@ class Expression {
         void static missing_left_op(bool&, std::string); 
         void static missing_right_op(bool&, std::string); 
 };
+
+#endif
