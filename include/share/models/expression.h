@@ -33,6 +33,7 @@ class Expression {
         Expression *left_expr, *right_expr;
         
         bool value_only = false;
+        bool is_variable = false;
         std::string value, ops;
         
         bool static is_operator(std::string);

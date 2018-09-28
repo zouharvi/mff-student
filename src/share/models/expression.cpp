@@ -19,6 +19,17 @@ Expression::Expression(vector<string> tokens, bool& ok) {
     if(length == 1) { // probably a variable or a constant
         value = tokens[0];
         value_only = true;
+        // TODO: check if value is at least size 2
+        if((value.front() == '"' && value.back() == '"') ||
+           (value.front() == '"' && value.back() == '"')) {
+            // string constant
+            value = value.substr(1, value.length()-2);
+        } else if(false) {
+            // TODO: is number
+        } else {
+            is_variable = true;
+            required_vars.insert(value);
+        }
         return;
     }
 
@@ -26,7 +37,7 @@ Expression::Expression(vector<string> tokens, bool& ok) {
     uint lowest_priority = 0;
     uint lowest_priority_index = 0; 
     // this could be all done in one pass, but this just seemed more robus
-    for(size_t i = start_index; i < end_index; i++) {
+    for(size_t i = start_index; i <= end_index; i++) {
         if(tokens[i] == "(") {
             open++;
             continue;
@@ -70,8 +81,18 @@ Expression::Expression(vector<string> tokens, bool& ok) {
 }
 
 string Expression::eval(map<string, string>& vars, bool& ok) {
-    if(value_only)
-        return value;
+    if(value_only) {
+        if(is_variable) {
+            if(vars.count(value) == 0) { // didn't find the required value
+                err(ok, "Error: Variable `" + value + "` not propagated");
+                return "";
+            } else {
+                return vars[value];
+            }
+        } else {
+            return value;
+        }
+    }
 
     double ld, rd;
     bool lb, rb;

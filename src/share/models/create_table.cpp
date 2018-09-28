@@ -73,7 +73,7 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
 
     // check at most one PRIMARY KEY and unique names
     unordered_set<string> column_names;
-    for(ColumnType column : columns) {
+    for(ColumnType& column : columns) {
         if(column_names.count(column.name) != 0) {
             specific_err(ok, "Error: Multiple columns named `" + column.name + "`"); break;
         } else {

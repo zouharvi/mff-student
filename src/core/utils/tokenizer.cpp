@@ -1,4 +1,5 @@
 #include "utils/tokenizer.h"
+#include <iostream>
 using namespace std;
 
 vector<string> Tokenizer::split(string line) {
@@ -31,6 +32,7 @@ vector<string> Tokenizer::split(string line) {
 
                 if(line[i] == '\'' || line[i] == '"') { // set up new quote mark
                     quote_mark = line[i];
+                    cur_word += line[i];
                 } else if(line[i] == ' ' || line[i] == '\t' || line[i] == '\n') { // whitespace end current word if not empty
                     if(cur_word.length() != 0) {
                         tokens.push_back(cur_word);
@@ -43,10 +45,8 @@ vector<string> Tokenizer::split(string line) {
             } else {
                 if(line[i] == quote_mark) { // end quotation
                     quote_mark = '\0';
-                    tokens.push_back(cur_word);
+                    tokens.push_back(cur_word + line[i]);
                     cur_word = "";
-                } else if(line[i] == quote_mark) { // set up new quote mark
-                    quote_mark = '\0';
                 } else {
                     cur_word += line[i]; // otherwise just append to the current word
                 }
@@ -56,7 +56,6 @@ vector<string> Tokenizer::split(string line) {
     if(cur_word != "") {
         tokens.push_back(cur_word);
     }
-
     return tokens;
 }
 

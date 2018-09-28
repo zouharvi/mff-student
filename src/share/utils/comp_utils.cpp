@@ -14,7 +14,7 @@ uint CompUtils::parse_uint(string text, bool& ok) {
         return 0;
     }
 
-    for(char c : text) {
+    for(const char& c : text) {
         if(!isdigit(c)) {
             ok = false;
             return 0;

@@ -12,7 +12,7 @@ class ColumnType {
         ColumnType(std::vector<std::string>, bool&);
 
         // print this object's content
-        std::string debug();
+        const std::string debug();
 
         std::string name;
         VarType type;

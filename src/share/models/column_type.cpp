@@ -25,6 +25,6 @@ ColumnType::ColumnType(vector<string> tokens, bool& ok) {
     this->type = VarType(CompUtils::slice(tokens, start, end), ok);
 }
 
-string ColumnType::debug() {
+const string ColumnType::debug() {
     return name + " : " + type.debug() + (not_null ? " NOT NULL" : "") + (primary_key? (" PRIMARY KEY " + ((string) (sort_order == DESC ? "DESC" : "ASC"))) : "" ); 
 }
