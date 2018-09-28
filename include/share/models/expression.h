@@ -19,9 +19,11 @@ class Expression {
         // evaluate this expression
         std::string eval(std::map<std::string, std::string>&, bool&);
 
-        // does a cast of internal eval (split due to linking errors)
+        // does a cast of internal eval (split due to linking errors with -O3 optimization level)
         template <typename T>
-        T eval_cast(std::map<std::string, std::string>&, bool&);
+        T eval_cast(std::map<std::string, std::string>& vars, bool& ok) {
+            return cast<T>(eval(vars, ok), ok);
+        }
         std::set<std::string> required_vars;
 
     private:

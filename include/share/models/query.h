@@ -12,16 +12,8 @@
 class Query {
     public:
         Query(std::vector<std::string>);
-        bool ok;
+        bool ok = true;
         QueryBase* data;
-
-        // TODO: this needs to be discussed, use void ptr, or
-        // this weird union?
-        // union {
-        //     string* error;
-        //     DropTable* drop;
-        //     TruncateTable* truncate;
-        // } data;
 
     private:
         // this shouldn't compile unless QueryType is a subclass of QueryBase

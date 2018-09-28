@@ -3,31 +3,32 @@
 SOURCES := $(shell find src/ -type f -name *.cpp)
 OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
 LIB := -lreadline
+GCC_ARGS := -Wall -std=c++17 -O3
 
 zimadb: $(OBJECTS)
 	@echo ""
 	@echo "Linking $@"
 	@mkdir -p bin
-	g++ $^ -std=c++17 -o bin/zimadb $(LIB)
+	g++ $^ $(GCC_ARGS) -o bin/zimadb $(LIB)
 
 build/core/%.o: src/core/%.cpp
 	@echo ""
 	@echo "Compiling core $<"
 	@mkdir -p $(shell dirname $@)
-	g++ -g -Wall -std=c++17 -I include/core -I include/share  -c -o $@ $<
+	g++ $(GCC_ARGS) -I include/core -I include/share  -c -o $@ $<
 
 build/engine/%.o: src/engine/%.cpp
 	@echo ""
 	@echo "Compiling engine $<"
 	@mkdir -p $(shell dirname $@)
-	g++ -g -Wall -std=c++17 -I include/engine -I include/share -c -o $@ $<
+	g++ $(GCC_ARGS) -I include/engine -I include/share -c -o $@ $<
 
 
 build/share/%.o: src/share/%.cpp
 	@echo ""
 	@echo "Compiling share $<"
 	@mkdir -p $(shell dirname $@)
-	g++ -g -Wall -std=c++17 -I include/share -c -o $@ $<
+	g++ $(GCC_ARGS) -I include/share -c -o $@ $<
 
 run: zimadb
 	@echo ""

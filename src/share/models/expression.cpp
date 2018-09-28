@@ -90,7 +90,7 @@ string Expression::eval(map<string, string>& vars, bool& ok) {
                 missing_right_op(ok, ops); return "";
             }
             rd = right_expr->eval_cast<double>(vars, ok);
-            return std::to_string(ok? (ld - rd) : 0);
+            return to_string(ok? (ld - rd) : 0);
             break;
         case MUL:
             if(left_expr == nullptr) {
@@ -101,7 +101,7 @@ string Expression::eval(map<string, string>& vars, bool& ok) {
             }
             ld =  left_expr->eval_cast<double>(vars, ok);
             rd = right_expr->eval_cast<double>(vars, ok);
-            return std::to_string(ok? (ld * rd) : 0);
+            return to_string(ok? (ld * rd) : 0);
             break;
         case DIV:
             if(left_expr == nullptr) {
@@ -116,7 +116,7 @@ string Expression::eval(map<string, string>& vars, bool& ok) {
                 err(ok, "Error: Division by zero");
                 return "";
             }
-            return std::to_string(ok? (ld / rd) : 0);
+            return to_string(ok? (ld / rd) : 0);
             break;
         case AND:
             if(left_expr == nullptr) {
@@ -127,7 +127,7 @@ string Expression::eval(map<string, string>& vars, bool& ok) {
             }
             lb =  left_expr->eval_cast<bool>(vars, ok);
             rb = right_expr->eval_cast<bool>(vars, ok);
-            return std::to_string(ok? (lb && rb) : 0);
+            return to_string(ok? (lb && rb) : 0);
             break;
         case OR:
             if(left_expr == nullptr) {
@@ -138,7 +138,7 @@ string Expression::eval(map<string, string>& vars, bool& ok) {
             }
             lb =  left_expr->eval_cast<bool>(vars, ok);
             rb = right_expr->eval_cast<bool>(vars, ok);
-            return std::to_string(ok? (lb || rb) : 0);
+            return to_string(ok? (lb || rb) : 0);
             break;
         case CAT:
             if(left_expr == nullptr) {
@@ -155,11 +155,6 @@ string Expression::eval(map<string, string>& vars, bool& ok) {
             err(ok, "Error: No operator found");
             return "";
     }
-}
-
-template <typename T>
-T Expression::eval_cast(map<string, string>& vars, bool& ok) {
-    return cast<T>(eval(vars, ok), ok);
 }
 
 template <>
