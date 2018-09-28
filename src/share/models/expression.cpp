@@ -28,11 +28,11 @@ Expression::Expression(vector<string> tokens, bool& ok) {
     // this could be all done in one pass, but this just seemed more robus
     for(size_t i = start_index; i < end_index; i++) {
         if(tokens[i] == "(") {
-            open += 1;
+            open++;
             continue;
         }
         if(tokens[i] == ")") {
-            open -= 1;
+            open--;
             if(open < 0) {
                 err(ok, "Expression not properly parenthesized", tokens); return;
             }
@@ -45,6 +45,9 @@ Expression::Expression(vector<string> tokens, bool& ok) {
                 lowest_priority = open * 100 + priority;
             }
         }
+    }
+    if(open != 0) {
+        err(ok, "Expression not properly parenthesized", tokens); return;
     }
 
     string ops = this->ops = tokens[lowest_priority_index];
@@ -220,7 +223,7 @@ bool Expression::is_operator(string op) {
 void Expression::err(bool& ok, std::string info, std::vector<std::string> tokens) {
     ok = false;
     if(!tokens.empty()) {
-        cout << "Error `" << CompUtils::implode(tokens, ",") << "`";
+        cout << "Error `" << CompUtils::implode(tokens, " ") << "`" << endl;
         cout << "      ";
     }
     cout << info << endl;
