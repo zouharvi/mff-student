@@ -3,7 +3,7 @@
 SOURCES := $(shell find src/ -type f -name *.cpp)
 OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
 LIB := -lreadline
-GCC_ARGS := -Wall -std=c++17 -O3
+GCC_ARGS := -Wall -Wextra -pedantic -std=c++17 -O3
 
 zimadb: $(OBJECTS)
 	@echo ""
