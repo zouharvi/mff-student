@@ -1,3 +1,6 @@
+#ifndef SELECT_H
+#define SELECT_H
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -21,3 +24,6 @@ class Select : public QueryBase {
         Expression* condition;
         std::vector<TableName> table_names;
 };
+
+
+#endif

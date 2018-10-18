@@ -1,3 +1,6 @@
+#ifndef DROP_TABLE_H
+#define DROP_TABLE_H
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -9,3 +12,5 @@ class DropTable : public QueryBase {
         DropTable(std::vector<std::string>, bool&);
         std::string table_name;
 };
+
+#endif

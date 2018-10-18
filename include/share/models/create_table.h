@@ -1,3 +1,6 @@
+#ifndef CREATE_TABLE_H
+#define CREATE_TABLE_H
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -24,3 +27,5 @@ class CreateTable : public QueryBase {
         // TODO: Possibly add AS select statement? Not too hard to implement.
 
 };
+
+#endif
