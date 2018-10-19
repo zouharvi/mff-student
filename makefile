@@ -15,7 +15,7 @@ build/core/%.o: src/core/%.cpp
 	@echo ""
 	@echo "Compiling core $<"
 	@mkdir -p $(shell dirname $@)
-	g++ $(GCC_ARGS) -I include/core -I include/share  -c -o $@ $<
+	g++ $(GCC_ARGS) -I include/core -I include/engine -I include/share  -c -o $@ $<
 
 build/engine/%.o: src/engine/%.cpp
 	@echo ""
