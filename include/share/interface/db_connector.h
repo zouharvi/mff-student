@@ -5,7 +5,7 @@
 
 class DbConnector {
     public:
-        std::string perform_query(Query);
+        std::string perform_query(Query&);
 
     private:
         Manager db_manager;

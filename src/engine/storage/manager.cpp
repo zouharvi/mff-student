@@ -5,20 +5,23 @@ bool Manager::open_file(std::string filename)
     return fileio.open_file(filename);
 }
 
-std::string Manager::perform_query(Query query)
+std::string Manager::perform_query(Query& query)
 {
+    if (query.data == nullptr)
+        return "null ptr fail";
+
     switch(query.data->type){
         case QueryBase::DELETE:
-            delete_records(static_cast<Delete*>(query.data));
+            return delete_records(query);
             break;
         case QueryBase::CREATE:
-            return create_table(static_cast<CreateTable*>(query.data));
+            return create_table(query);
             break;
         case QueryBase::DROP:
-            drop_table(static_cast<DropTable*>(query.data));
+            return drop_table(query);
             break;
         case QueryBase::SELECT:
-            return select(static_cast<Select*>(query.data));
+            return select(query);
             break;
         default:
             return "Unknown query";
