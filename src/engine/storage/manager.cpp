@@ -23,5 +23,6 @@ std::string Manager::perform_query(Query query)
         default:
             return "Unknown query";
     }
-    
+
+    return "";
 }
