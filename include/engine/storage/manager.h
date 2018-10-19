@@ -11,8 +11,8 @@ class Manager {
         void close_file();
 
     private:
-        std::string create_table(CreateTable*) {};
-        bool drop_table(DropTable*) {};
+        std::string create_table(CreateTable* data) {return fileio.create_table(data);};
+        std::string drop_table(DropTable* data) {return fileio.drop_table(data);};
         std::string delete_records(Delete*) {};
         //std::string insert(Insert*);
         //std::string update(Update*)
