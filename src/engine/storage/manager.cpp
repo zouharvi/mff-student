@@ -12,7 +12,7 @@ std::string Manager::perform_query(Query query)
             delete_records(static_cast<Delete*>(query.data));
             break;
         case QueryBase::CREATE:
-            create_table(static_cast<CreateTable*>(query.data));
+            return create_table(static_cast<CreateTable*>(query.data));
             break;
         case QueryBase::DROP:
             drop_table(static_cast<DropTable*>(query.data));
