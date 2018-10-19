@@ -40,14 +40,16 @@ std::string FileIO::create_table(Query& query)
         return "null ptr fail"; // TODO: strings to consts
     if (!dbfile.is_open())
         return "no file to write to";
+
+    std::unique_ptr<CreateTable> create_table_query ((CreateTable*) query.data.get());
     
     bool status = false;
     switch (file_version) {
         case PROVISIONAL:
-            status = create_table_provisional(static_cast<CreateTable*>(query.data));
+            status = create_table_provisional(create_table_query);
             break;
         case V1:
-            status = create_table_v1(static_cast<CreateTable*>(query.data));
+            status = create_table_v1(create_table_query);
             break;
         default:
             return "Unknown file format";
@@ -59,12 +61,12 @@ std::string FileIO::create_table(Query& query)
     }
     else
     {
-        return "Created the table " + static_cast<CreateTable*>(query.data)->table_name;
+        return "Created the table " + create_table_query->table_name;
     }
 }
 
 
-bool FileIO::create_table_provisional(CreateTable* query)
+bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
 {
     // Start at the beginning of the file
     dbfile.seekg(0);
@@ -104,12 +106,14 @@ std::string FileIO::drop_table(Query& query)
 
     bool status = false;
 
+    std::unique_ptr<DropTable> drop_table_query ((DropTable*) query.data.get());
+
     switch (file_version) {
         case PROVISIONAL:
-            status = drop_table_provisional(static_cast<DropTable*>(query.data));
+            status = drop_table_provisional(drop_table_query);
             break;
         case V1:
-            status = drop_table_v1(static_cast<DropTable*>(query.data));
+            status = drop_table_v1(drop_table_query);
             break;
         default:
             return "Unknown file format";
@@ -120,11 +124,11 @@ std::string FileIO::drop_table(Query& query)
     }
     else
     {
-        return "Dropped the table " + static_cast<DropTable*>(query.data)->table_name;
+        // return "Dropped the table " + static_cast<DropTable*>(query.data)->table_name;
     }
 }
 
-bool FileIO::drop_table_provisional(DropTable* query)
+bool FileIO::drop_table_provisional(std::unique_ptr<DropTable>& query)
 {
     // Start at the beginning of the file
     dbfile.seekg(0);

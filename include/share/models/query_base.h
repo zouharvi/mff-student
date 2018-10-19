@@ -1,5 +1,5 @@
-#ifndef QUERY_BASE
-#define QUERY_BASE
+#ifndef QUERY_BASE_H
+#define QUERY_BASE_H
 
 class QueryBase {
     public:

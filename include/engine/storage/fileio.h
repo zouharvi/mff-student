@@ -29,11 +29,11 @@ class FileIO {
     std::fstream rollback_journal;
 
     /* ----- OPERATIONS ----- */
-    bool create_table_provisional(CreateTable*);
-    bool create_table_v1(CreateTable*) {};
+    bool create_table_provisional(std::unique_ptr<CreateTable>&);
+    bool create_table_v1(std::unique_ptr<CreateTable>&) {};
 
-    bool drop_table_provisional(DropTable*);
-    bool drop_table_v1(DropTable*) {};
+    bool drop_table_provisional(std::unique_ptr<DropTable>&);
+    bool drop_table_v1(std::unique_ptr<DropTable>&) {};
 
     //std::vector<std::vector<std::string>> select_provisional(Select*);
     //std::vector<std::vector<std::string>> select_v1(Select*);

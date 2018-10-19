@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <exception>
+#include <memory>
 #include "create_table.h"
 #include "drop_table.h"
 #include "truncate_table.h"
@@ -16,7 +17,7 @@ class Query {
     public:
         Query(std::vector<std::string>);
         bool ok = true;
-        QueryBase* data;
+        std::unique_ptr<QueryBase> data;
 
     private:
         // this shouldn't compile unless QueryType is a subclass of QueryBase

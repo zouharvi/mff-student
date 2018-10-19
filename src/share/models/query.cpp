@@ -5,11 +5,10 @@ template <class QueryType> void Query::try_parse(vector<string> tokens) {
     if(!std::is_base_of<QueryBase, QueryType>()) {
         throw runtime_error("Wrong QueryType type passed to try_parse template.");
     }
-    QueryBase* query_data = QueryType(tokens, ok).get_data();
 
-    if(ok) {
-        this->data = query_data;
-    }
+    // if(ok) {g
+        this->data = std::make_unique<QueryType>(tokens, ok);
+    // }
 }
 
 Query::Query(vector<string> tokens) {
