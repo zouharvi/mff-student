@@ -6,7 +6,6 @@
 class Compiler {
     public:
         bool process(std::vector<std::string>);
-
-    private:
-        DbConnector db;
+        DbConnector* db;
+        Compiler (DbConnector* db) { this->db = db; };
 };

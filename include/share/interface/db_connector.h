@@ -1,3 +1,6 @@
+#ifndef DB_CONNECTOR_H
+#define DB_CONNECTOR_H
+
 #include <string>
 
 #include "models/query.h"
@@ -6,7 +9,10 @@
 class DbConnector {
     public:
         std::string perform_query(Query&);
+        std::string open_file(std::string);
 
     private:
         Manager db_manager;
 };
+
+#endif

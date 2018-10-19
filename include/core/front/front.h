@@ -19,6 +19,8 @@ class Front {
         Compiler compiler;
         MetaSystem meta_system;
 
+        DbConnector db;
+
         // main program input loading loop
         void loop(std::string);
 

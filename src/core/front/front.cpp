@@ -34,6 +34,6 @@ void Front::loop(string line) {
     }
 }
 
-Front::Front(string file) {
-    meta_system.database_file = file;
+Front::Front(string file) : meta_system(file, &db), compiler(&db) {
+    
 }

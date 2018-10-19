@@ -2,9 +2,12 @@
 #include <vector>
 #include <iostream>
 #include "utils/text_utils.h"
+#include "interface/db_connector.h"
+
 
 class MetaSystem {
     public:
+        MetaSystem(std::string, DbConnector*);
         bool process(std::vector<std::string>);
 
         // system vars
@@ -37,4 +40,5 @@ class MetaSystem {
         void open(std::vector<std::string>);
         void schema(std::vector<std::string>);
 
+        DbConnector* db;
 };
