@@ -29,10 +29,10 @@ class FileIO {
 
     /* ----- OPERATIONS ----- */
     bool create_table_provisional(CreateTable*);
-    bool create_table_v1(CreateTable*);
+    bool create_table_v1(CreateTable*) {};
 
     bool drop_table_provisional(DropTable*);
-    bool drop_table_v1(DropTable*);
+    bool drop_table_v1(DropTable*) {};
 
     //std::vector<std::vector<std::string>> select_provisional(Select*);
     //std::vector<std::vector<std::string>> select_v1(Select*);
