@@ -28,7 +28,7 @@ build/share/%.o: src/share/%.cpp
 	@echo ""
 	@echo "Compiling share $<"
 	@mkdir -p $(shell dirname $@)
-	g++ $(GCC_ARGS) -I include/share -c -o $@ $<
+	g++ $(GCC_ARGS) -I include/share -I include/engine -I include/core -c -o $@ $<
 
 run: zimadb
 	@echo ""

@@ -1,3 +1,6 @@
+#ifndef QUERY_H
+#define QUERY_H
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -19,3 +22,5 @@ class Query {
         // this shouldn't compile unless QueryType is a subclass of QueryBase
         template <class QueryType> void try_parse(std::vector<std::string>);
 };  
+
+#endif

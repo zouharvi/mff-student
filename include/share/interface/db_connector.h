@@ -1,7 +1,7 @@
 #include <string>
 
 #include "models/query.h"
-#include "engine/storage/manager.h"
+#include "storage/manager.h"
 
 class DbConnector {
     public:

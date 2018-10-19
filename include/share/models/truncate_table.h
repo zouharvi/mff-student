@@ -1,3 +1,6 @@
+#ifndef TRUNCATE_TABLE_H
+#define TRUNCATE_TABLE_H
+
 #include <vector>
 #include <string>
 #include "query_base.h"
@@ -13,3 +16,5 @@ class TruncateTable : public QueryBase {
     private:
         Delete* real_query;
 };
+
+#endif
