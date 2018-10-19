@@ -20,6 +20,7 @@ Query::Query(vector<string> tokens) {
 
     string command1 = TextUtils::to_upper(tokens[0]);
     string command2 = TextUtils::to_upper(tokens[1]);
+
     if(command1 == "DROP" && command2 == "TABLE")
         try_parse<DropTable>(tokens);
     else if(command1 == "TRUNCATE" && command2 == "TABLE")
@@ -30,6 +31,6 @@ Query::Query(vector<string> tokens) {
         try_parse<Select>(tokens);
     else if(command1 == "DELETE")
         try_parse<Delete>(tokens);
-    else 
+    else
         cout << "Unrecognized query `" << tokens[0] << "`, `" << tokens[1] << "`" << endl;
 }

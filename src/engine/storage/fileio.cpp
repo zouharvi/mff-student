@@ -34,21 +34,20 @@ void FileIO::close_file()
     }
 }
 
-std::string FileIO::create_table(CreateTable* query)
+std::string FileIO::create_table(Query& query)
 {
-    if (query == nullptr)
+    if (query.data == nullptr)
         return "null ptr fail"; // TODO: strings to consts
     if (!dbfile.is_open())
         return "no file to write to";
     
     bool status = false;
-
     switch (file_version) {
         case PROVISIONAL:
-            status = create_table_provisional(query);
+            status = create_table_provisional(static_cast<CreateTable*>(query.data));
             break;
         case V1:
-            status = create_table_v1(query);
+            status = create_table_v1(static_cast<CreateTable*>(query.data));
             break;
         default:
             return "Unknown file format";
@@ -60,7 +59,7 @@ std::string FileIO::create_table(CreateTable* query)
     }
     else
     {
-        return "";
+        return "Created the table " + static_cast<CreateTable*>(query.data)->table_name;
     }
 }
 
@@ -96,9 +95,9 @@ bool FileIO::create_table_provisional(CreateTable* query)
 }
 
 
-std::string FileIO::drop_table(DropTable* query)
+std::string FileIO::drop_table(Query& query)
 {
-    if (query == nullptr)
+    if (query.data == nullptr)
         return "null ptr fail"; // TODO: strings to consts
     if (!dbfile.is_open())
         return "no file to delete from";
@@ -107,10 +106,10 @@ std::string FileIO::drop_table(DropTable* query)
 
     switch (file_version) {
         case PROVISIONAL:
-            status = drop_table_provisional(query);
+            status = drop_table_provisional(static_cast<DropTable*>(query.data));
             break;
         case V1:
-            status = drop_table_v1(query);
+            status = drop_table_v1(static_cast<DropTable*>(query.data));
             break;
         default:
             return "Unknown file format";
@@ -121,7 +120,7 @@ std::string FileIO::drop_table(DropTable* query)
     }
     else
     {
-        return "";
+        return "Dropped the table " + static_cast<DropTable*>(query.data)->table_name;
     }
 }
 
