@@ -33,6 +33,7 @@ void MetaSystem::about() {
 
 void MetaSystem::exit() {
     // TODO: is everything cleaned up?
+    db->close_file();
     std::exit(0);
 }
 

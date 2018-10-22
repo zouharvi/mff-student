@@ -14,7 +14,7 @@
 
 class FileIO {
     public:
-    bool open_file(std::string);
+    std::string open_file(std::string);
     void close_file();
 
     std::string create_table(Query&);

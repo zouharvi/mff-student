@@ -1,6 +1,6 @@
 #include "storage/fileio.h"
 
-bool FileIO::open_file(std::string filename)
+std::string FileIO::open_file(std::string filename)
 {
     // Get the file's extension (without the full stop)
     // This is later going to be swapped to reading the file's header
@@ -17,13 +17,17 @@ bool FileIO::open_file(std::string filename)
     else
     {
         // Unknown file extension
-        return false;
+        return "Error: unknown extension `" + ext + "`";
     }
 
     close_file();
 
     dbfilename = filename;
-    dbfile.open(filename);
+    dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
+
+    return dbfile.fail() ?
+        "Error opening file `" + filename + "`" :
+        "File `" + filename + "` open";
 }
 
 void FileIO::close_file()

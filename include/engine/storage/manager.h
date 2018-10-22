@@ -7,7 +7,7 @@
 class Manager {
     public:
         std::string perform_query(Query&);
-        bool open_file(std::string);
+        std::string open_file(std::string);
         void close_file();
 
     private:
