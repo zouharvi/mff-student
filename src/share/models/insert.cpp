@@ -6,10 +6,10 @@ Insert::Insert(vector<string> tokens, bool& ok) {
     type = INSERT;
     size_t length = tokens.size();
     
-    if(length < 8 || tokens[0] != "INSERT" || tokens[1] != "INTO") {
-        bad_syntax(ok); return; // sadly `return void` doesn't work
+    if(length < 8 || !TextUtils::cmp(tokens[0], "INSERT") || !TextUtils::cmp(tokens[1], "INTO")) {
+        bad_syntax(ok); return;
     }
-    table_name = TextUtils::strip_quotes(tokens[2]);
+    table_name = new TableName(TextUtils::strip_quotes(tokens[2]), ok);
 
     if (tokens[3] != "(") {
         bad_syntax(ok, "Missing column name list"); return;
@@ -37,7 +37,7 @@ Insert::Insert(vector<string> tokens, bool& ok) {
     }
 
     index++;
-    if (tokens[index] != "VALUES") {
+    if (!TextUtils::cmp(tokens[index],"VALUES")) {
         bad_syntax(ok); return;
         // TODO: Possible SELECT extension
     }
@@ -65,7 +65,11 @@ Insert::Insert(vector<string> tokens, bool& ok) {
     }
 
     if(expressions.empty()) {
-        specific_err(ok, "Error: no insert expression specified"); return;
+        specific_err(ok, "Error: No insert expression specified"); return;
+    }
+
+    if(expressions.size() != columns.size()) {
+        specific_err(ok, "Error: Number of columns does not match the number of given expressions"); return;
     }
 
     // map<string, string> vars;

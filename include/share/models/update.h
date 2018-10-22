@@ -1,5 +1,5 @@
-#ifndef INSERT_H
-#define INSERT_H
+#ifndef UPDATE_MODEL_H
+#define UPDATE_MODEL_H
 
 #include <vector>
 #include <string>
@@ -12,9 +12,9 @@
 #include "utils/text_utils.h"
 #include "utils/comp_utils.h"
 
-class Insert : public QueryBase {
+class Update : public QueryBase {
     public:
-        Insert(std::vector<std::string>, bool&);
+        Update(std::vector<std::string>, bool&);
         
         // parsing errors
         void bad_syntax(bool&, std::string extra = ""); 
@@ -22,9 +22,8 @@ class Insert : public QueryBase {
         
         std::vector<std::string> columns;
         std::vector<Expression> expressions;
+        Expression* condition;
         TableName* table_name;
-
-        // TODO: possible Select?
 };
 
 

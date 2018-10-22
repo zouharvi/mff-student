@@ -89,5 +89,5 @@ string Tokenizer::remove_end_query(string line) {
 }
 
 bool Tokenizer::split_char(char c) {
-    return string("()+-/*%,").find(c) != string::npos;
+    return string("()+-/*%,=").find(c) != string::npos;
 }

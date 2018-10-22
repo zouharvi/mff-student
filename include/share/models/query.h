@@ -11,6 +11,7 @@
 #include "truncate_table.h"
 #include "select.h"
 #include "insert.h"
+#include "update.h"
 #include "delete.h"
 #include "utils/text_utils.h"
 
