@@ -19,7 +19,7 @@ class FileIO {
 
     std::string create_table(Query&);
     std::string drop_table(Query&);
-    //std::string select(Select*);
+    //std::string select(Query*);
         
     private:
     enum FILE_VERSION {PROVISIONAL, V1} file_version;

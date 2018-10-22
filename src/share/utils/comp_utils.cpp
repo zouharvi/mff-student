@@ -24,3 +24,16 @@ uint CompUtils::parse_uint(string text, bool& ok) {
 
     return num;
 }
+
+bool CompUtils::is_number(const std::string& s) {
+    try
+    {
+        std::stod(s);
+    }
+    catch(...)
+    {
+        return false;
+    }
+    
+    return true;
+}

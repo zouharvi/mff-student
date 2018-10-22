@@ -14,3 +14,15 @@ string TextUtils::to_lower(string s) {
 bool TextUtils::cmp(string a, string b) {
     return to_upper(a) == to_upper(b);
 }
+
+string TextUtils::strip_quotes(string a) {
+    if(a.size() >= 2 &&
+        (
+            (a[0] == '"'  && a.back() == '"') ||
+            (a[0] == '\'' && a.back() == '\'')
+        )
+    ) {
+        return a.substr(1, a.size() - 2);
+    }
+    return a;
+}

@@ -24,8 +24,8 @@ Expression::Expression(vector<string> tokens, bool& ok) {
            (value.front() == '"' && value.back() == '"')) {
             // string constant
             value = value.substr(1, value.length()-2);
-        } else if(false) {
-            // TODO: is number
+        } else if(CompUtils::is_number(value)) {
+            // is number
         } else {
             is_variable = true;
             required_vars.insert(value);

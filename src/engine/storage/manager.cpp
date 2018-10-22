@@ -32,5 +32,5 @@ std::string Manager::perform_query(Query& query)
             return "Unknown query";
     }
 
-    return "";
+    // return "";
 }
