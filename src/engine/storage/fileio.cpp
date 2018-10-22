@@ -47,7 +47,7 @@ std::string FileIO::create_table(Query& query)
 
     std::unique_ptr<CreateTable> create_table_query ((CreateTable*) query.data.get());
     
-    bool status = false;
+    bool status;
     switch (file_version) {
         case PROVISIONAL:
             status = create_table_provisional(create_table_query);
@@ -56,16 +56,17 @@ std::string FileIO::create_table(Query& query)
             status = create_table_v1(create_table_query);
             break;
         default:
+            status = false;
             return "Unknown file format";
     }
 
     if (!status)
     {
-        return "Failed to create the table";
+        return "Failed to create table";
     }
     else
     {
-        return "Created the table " + create_table_query->table_name;
+        return "Created table `" + create_table_query->table_name + "`";
     }
 }
 
@@ -73,9 +74,10 @@ std::string FileIO::create_table(Query& query)
 bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
 {
     // Start at the beginning of the file
-    dbfile.seekg(0);
-    std::string line;
+    dbfile.clear();
+    dbfile.seekg(0, std::ios::beg);
 
+    std::string line;
     while(!dbfile.eof())
     {
         std::getline(dbfile, line);
@@ -87,16 +89,22 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
         }
     }
 
+    // Restart seek
+    dbfile.clear();
+    dbfile.seekg(0, std::ios::beg);
+
     dbfile << ";TABLE:" << query->table_name << std::endl;
     dbfile << ";COLDEF:";
     
     for(const auto &column: query->columns)
     {
+        std::cout << "I " << column.type.type << std::endl;
         // Provisional fileformat doesn't support anything else but column name and type
         dbfile << column.type.type << "-" << column.name << ",";
     }
 
     dbfile << std::endl;
+    dbfile.flush();
     return true;
 }
 
@@ -128,14 +136,15 @@ std::string FileIO::drop_table(Query& query)
     }
     else
     {
-        // return "Dropped the table " + static_cast<DropTable*>(query.data)->table_name;
+        return "Dropped the table " + drop_table_query->table_name;
     }
 }
 
 bool FileIO::drop_table_provisional(std::unique_ptr<DropTable>& query)
 {
     // Start at the beginning of the file
-    dbfile.seekg(0);
+    dbfile.clear();
+    dbfile.seekg(0, std::ios::beg);
     std::string line;
 
     std::ofstream tempfile("temp.pzima");
@@ -153,11 +162,13 @@ bool FileIO::drop_table_provisional(std::unique_ptr<DropTable>& query)
         }
 
         if (write)
-            tempfile << line;
+            tempfile << line << std::endl;
     }
     
     tempfile.close();
     dbfile.close();
+
+    std::rename("temp.pzima", dbfilename.c_str());
 
     return true;
 }

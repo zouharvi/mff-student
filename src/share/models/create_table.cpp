@@ -22,7 +22,14 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
     } else {
         table_name = tokens[2];
     }
-    
+
+    // sometimes one token is inside of quotes    
+    if((table_name[0] == '"'  && table_name.back() == '"') ||
+       (table_name[0] == '\'' && table_name.back() == '\''))
+    {
+        table_name = table_name.substr(1, table_name.size() - 2);
+    }
+
     if(tokens[starting_def] != "(") { // starting parenthesis not found
         bad_syntax(ok, "Starting parenthesis not found."); return;
     }
