@@ -28,6 +28,8 @@ std::string Manager::perform_query(Query& query)
         case QueryBase::SELECT:
             return select(query);
             break;
+        case QueryBase::INSERT:
+            return insert(query);
         default:
             return "Unknown query";
     }

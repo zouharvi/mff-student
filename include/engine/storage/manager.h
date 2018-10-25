@@ -15,7 +15,7 @@ class Manager {
         std::string drop_table(Query& query) {return fileio.drop_table(query);};
         std::string delete_records(Query&) {};
         std::string select(Query&) { return "SELECT NOT IMPLEMENTED"; };
-        std::string insert(Query&) { return "INSERT NOT IMPLEMENTED"; };
+        std::string insert(Query& query) { return fileio.insert(query); };
         std::string update(Query&) { return "UPDATE NOT IMPLEMENTED"; };
         
 
