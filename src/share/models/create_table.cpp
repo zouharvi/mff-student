@@ -62,7 +62,6 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
             if(buff.size() < 2) {
                 bad_syntax(ok, "Column description requires at least two words."); return;
             } else {
-                bool ok;
                 columns.push_back(ColumnType(buff, ok));
                 buff = vector<string>();
                 if(!ok) {
