@@ -88,7 +88,7 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
                 primary_key = &column;
             }
         }
-        cout << column.debug() << endl;
+        //cout << column.debug() << endl;
     }
 }
 

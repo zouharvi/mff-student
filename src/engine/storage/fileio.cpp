@@ -101,7 +101,6 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
     
     for(const auto &column: query->columns)
     {
-        std::cout << "I " << column.type.type << std::endl;
         // Provisional fileformat doesn't support anything else but column name and type
         dbfile << column.type.type << "-" << column.name << ",";
     }
@@ -236,6 +235,8 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
             columns = get_column_names_provisional(line);
 
             found = true;
+	    
+	    tempfile << columns.at(0).second << std::endl;
 
             for(auto& column: columns)
             {
