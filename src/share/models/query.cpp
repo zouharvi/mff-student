@@ -14,6 +14,7 @@ template <class QueryType> void Query::try_parse(vector<string> tokens) {
 Query::Query(vector<string> tokens) {
     if(tokens.size() < 2) {
         cout << "Error: No query has less than two tokens" << endl;
+	query.ok = false;
         return;
     } 
 
