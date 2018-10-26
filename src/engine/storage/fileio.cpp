@@ -85,8 +85,10 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
     {
         std::getline(dbfile, line);
 
+	std::ptrdiff_t table_name_end = line.find_first_of(';', 1)-7;
+
         // Check for table name collision
-        if(!query->if_not_exists && line.substr(0,6) == ";TABLE" && line.substr(7) == query->table_name)
+        if(!query->if_not_exists && line.substr(0,6) == ";TABLE" && line.substr(7, table_name_end) == query->table_name)
         {
             return false;
         }
@@ -96,7 +98,7 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
     dbfile.clear();
     dbfile.seekg(0, std::ios::beg);
 
-    dbfile << ";TABLE:" << query->table_name << std::endl;
+    dbfile << ";TABLE:" << query->table_name;
     dbfile << ";COLDEF:";
     
     for(const auto &column: query->columns)
@@ -156,9 +158,11 @@ bool FileIO::drop_table_provisional(std::unique_ptr<DropTable>& query)
     while(!dbfile.eof())
     {
         std::getline(dbfile, line);
+
+	std::ptrdiff_t table_name_end = line.find_first_of(';', 1)-7;
         
         // Check for table name collision
-        if(line.substr(0,6) == ";TABLE" && (line.substr(7) == query->table_name || (!write && line.substr(7) != query->table_name)))
+        if(line.substr(0,6) == ";TABLE" && (line.substr(7, table_name_end) == query->table_name || (!write && line.substr(7, table_name_end) != query->table_name)))
         {
             write = !write;
         }
@@ -227,7 +231,9 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
     {
         std::getline(dbfile, line);
 
-        if(line.substr(0,6) == ";TABLE" && line.substr(7) == query->table_name->name)
+	std::ptrdiff_t table_name_end = line.find_first_of(';', 1)-7;
+
+        if(line.substr(0,6) == ";TABLE" && line.substr(7, table_name_end) == query->table_name->name)
         {
             tempfile << line << std::endl;
 
@@ -236,11 +242,10 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
 
             found = true;
 	    
-	    tempfile << columns.at(0).second << std::endl;
-
             for(auto& column: columns)
             {
                 auto data = std::find(query->columns.begin(), query->columns.end(), column.second);
+		std::cout << column.second;
 
                 if(data != query->columns.end())
                 {
@@ -249,6 +254,7 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
                     //TODO: add type checks
                     written_line.append(query->expressions.at(index).eval(dummy, found));
                     written_line.append(",");
+		    std::cout<<written_line<<std::endl;
                 }
                 else
                 {
@@ -256,9 +262,9 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
                     break;
                 }
 
-                if(found)
-                    tempfile << written_line << std::endl;
             }
+            if(found)
+                tempfile << written_line << std::endl;
 
         }
         else
@@ -330,8 +336,10 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
     {
         std::getline(dbfile, line);
 
+	std::ptrdiff_t table_name_end = line.find_first_of(';', 1)-7;
+
         // Check for table name
-        if(line.substr(0,6) == ";TABLE" && (line.substr(7) == query->table_names.at(0).name || (!in_table && line.substr(7) != query->table_names.at(0).name)))
+        if(line.substr(0,6) == ";TABLE" && (line.substr(7, table_name_end) == query->table_names.at(0).name || (!in_table && line.substr(7, table_name_end) != query->table_names.at(0).name)))
         {
             in_table = !in_table;
             columns = get_column_names_provisional(line);
@@ -356,7 +364,7 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
             result_rows.push_back(std::vector<std::string>());
 
             // TODO: is this really correct? Probably not...
-            if(query->condition->eval(data, eval_ok) == "true" && eval_ok)
+            if(query->condition != nullptr && query->condition->eval_cast<bool>(data, eval_ok) && eval_ok)
             {
                 std::string expr_result;
 
@@ -395,6 +403,7 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
 std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_provisional(std::string tabledef)
 {
     std::vector<std::pair<VarType::Type, std::string>> result = std::vector<std::pair<VarType::Type, std::string>>();
+    std::cout << tabledef<<std::endl;
     auto left_substr = std::find(tabledef.begin(), tabledef.end(), '-');
     while(left_substr != tabledef.end())
     {
@@ -403,8 +412,9 @@ std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_prov
        VarType::Type column_type = VarType::Type((std::string(left_substr-1, left_substr).at(0)) - '0');
 
        result.push_back(std::make_pair(column_type, std::string(left_substr+1, right_substr)));
+       std::cout << std::string(left_substr+1, right_substr) << std::endl;
 
-       left_substr = std::find(left_substr, tabledef.end(), '-');
+       left_substr = std::find(left_substr+1, tabledef.end(), '-');
     }
     return result;
 }
