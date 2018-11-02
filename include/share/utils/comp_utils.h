@@ -22,5 +22,8 @@
 
             // return parsed unsigned int on success; sets bool to false if parse error or nan
             static uint parse_uint(std::string, bool&);
+
+            // tries to parse string into a double
+            static bool is_number(const std::string&);
     };
 #endif

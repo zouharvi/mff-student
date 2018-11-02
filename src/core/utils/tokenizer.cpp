@@ -16,7 +16,7 @@ vector<string> Tokenizer::split(string line) {
             escaped = line[i] == '\\'; // if \, just set escaped to true
 
             if(quote_mark == '\0') {
-                if( (string("()+-/*%,").find(line[i]) != string::npos) || (i != length-1 && line[i] == '|' && line[i+1] == '|') ) { // operators need to be tokenized separately
+                if( split_char(line[i]) || (i != length-1 && line[i] == '|' && line[i+1] == '|') ) { // operators need to be tokenized separately
                     if(cur_word != "") {
                         tokens.push_back(cur_word);
                         cur_word = "";
@@ -86,4 +86,8 @@ string Tokenizer::remove_end_query(string line) {
         }
     }
     return line;
+}
+
+bool Tokenizer::split_char(char c) {
+    return string("()+-/*%,=").find(c) != string::npos;
 }

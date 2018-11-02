@@ -14,4 +14,7 @@ class Tokenizer {
 
         // remove the last semicolon
         static std::string remove_end_query(std::string);
+    
+    private:
+        static bool split_char(char);
 };

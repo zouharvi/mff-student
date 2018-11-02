@@ -1,8 +1,13 @@
 #include "storage/manager.h"
 
-bool Manager::open_file(std::string filename)
+std::string Manager::open_file(std::string filename)
 {
     return fileio.open_file(filename);
+}
+
+void Manager::close_file()
+{
+    fileio.close_file();
 }
 
 std::string Manager::perform_query(Query& query)
@@ -23,9 +28,11 @@ std::string Manager::perform_query(Query& query)
         case QueryBase::SELECT:
             return select(query);
             break;
+        case QueryBase::INSERT:
+            return insert(query);
         default:
             return "Unknown query";
     }
 
-    return "";
+    // return "";
 }

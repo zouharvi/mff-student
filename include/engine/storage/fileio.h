@@ -6,6 +6,7 @@
 #include "models/create_table.h"
 #include "models/drop_table.h"
 #include "models/query.h"
+#include "models/insert.h"
 #include "models/select.h"
 
 
@@ -14,12 +15,13 @@
 
 class FileIO {
     public:
-    bool open_file(std::string);
+    std::string open_file(std::string);
     void close_file();
 
     std::string create_table(Query&);
     std::string drop_table(Query&);
-    //std::string select(Select*);
+    std::string insert(Query&);
+    std::string select(Query&);
         
     private:
     enum FILE_VERSION {PROVISIONAL, V1} file_version;
@@ -35,8 +37,14 @@ class FileIO {
     bool drop_table_provisional(std::unique_ptr<DropTable>&);
     bool drop_table_v1(std::unique_ptr<DropTable>&) {};
 
-    //std::vector<std::vector<std::string>> select_provisional(Select*);
-    //std::vector<std::vector<std::string>> select_v1(Select*);
+    bool insert_provisional(std::unique_ptr<Insert>&);
+    bool insert_v1(std::unique_ptr<Insert>&) {};
+
+    std::vector<std::vector<std::string>> select_provisional(std::unique_ptr<Select>&);
+    std::vector<std::vector<std::string>> select_v1(std::unique_ptr<Select>&) {};
+
+    std::vector<std::pair<VarType::Type, std::string>> get_column_names_provisional(std::string);
+    std::vector<std::string> get_row_data_provisional(std::string);
     
     const std::string PROVISIONAL_FILE_EXTENSION = "pzima";
     const std::string V1_FILE_EXTENSION = "zima";

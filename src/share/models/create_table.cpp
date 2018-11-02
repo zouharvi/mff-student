@@ -22,7 +22,10 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
     } else {
         table_name = tokens[2];
     }
-    
+
+    // sometimes one token is inside of quotes   
+    table_name = TextUtils::strip_quotes(table_name);
+
     if(tokens[starting_def] != "(") { // starting parenthesis not found
         bad_syntax(ok, "Starting parenthesis not found."); return;
     }
@@ -59,7 +62,6 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
             if(buff.size() < 2) {
                 bad_syntax(ok, "Column description requires at least two words."); return;
             } else {
-                bool ok;
                 columns.push_back(ColumnType(buff, ok));
                 buff = vector<string>();
                 if(!ok) {
@@ -86,7 +88,7 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
                 primary_key = &column;
             }
         }
-        cout << column.debug() << endl;
+        //cout << column.debug() << endl;
     }
 }
 
