@@ -5,7 +5,6 @@ bool FileIO::open_file(std::string filename)
     // Get the file's extension (without the full stop)
     // This is later going to be swapped to reading the file's header
     std::string ext = filename.substr(filename.find_last_of('.') + 1);
-
     if (ext == PROVISIONAL_FILE_EXTENSION)
     {
         file_version = PROVISIONAL;
@@ -24,6 +23,7 @@ bool FileIO::open_file(std::string filename)
 
     dbfilename = filename;
     dbfile.open(filename);
+    return true;
 }
 
 void FileIO::close_file()
