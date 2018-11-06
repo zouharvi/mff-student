@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <memory>
 #include "zimadb.h"
 #include "meta_system.h"
 #include "../compiler/compiler.h"
@@ -23,11 +24,11 @@ class Front {
         std::string buffer = "";
 
         // two main processing systems
-        MetaSystem meta_system;
-        Compiler compiler;
+        std::unique_ptr<MetaSystem> meta_system;
+        std::unique_ptr<Compiler> compiler;
 
-        // main interface 
-        DbConnector db;
+        // main db interface 
+        std::shared_ptr<DbConnector> db;
 
         // main program input loading loop
         void loop(std::string);

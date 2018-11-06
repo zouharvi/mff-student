@@ -1,18 +1,21 @@
 #include <string>
 #include <vector>
+#include <memory>
 #include <iostream>
+#include "zimadb.h"
 #include "utils/text_utils.h"
 #include "interface/db_connector.h"
 
 
 class MetaSystem {
     public:
-        MetaSystem(std::string, DbConnector*);
-        bool process(std::vector<std::string>);
+        MetaSystem(std::string_view, std::shared_ptr<DbConnector>);
+        
+        // execute command specified by tokens
+        bool process(const std::vector<std::string>&);
 
         // system vars
         std::string database_file;
-        static bool DEBUG;
 
         // menu texts
         const std::string HELP_TEXT =
@@ -31,14 +34,17 @@ class MetaSystem {
             "SQL compiler, parser, lexer created by Vilém Zouhar. File format, low level operations\n"
             "designed by Petr Chmel, both MFF students. Created as a semestral project in 2018/2019";
 
+
+    private:
         // base functions
         void about();
-        void debug_f(std::vector<std::string>);
-        void dump(std::vector<std::string>);
+        void debug(const std::vector<std::string>&);
+        void dump(const std::vector<std::string>&);
         void exit();
         void help();
-        void open(std::vector<std::string>);
-        void schema(std::vector<std::string>);
+        void open(const std::vector<std::string>&);
+        void schema(const std::vector<std::string>&);
 
-        DbConnector* db;
+        // db to communicate open files
+        std::shared_ptr<DbConnector> db;
 };

@@ -22,7 +22,7 @@ void Front::start_loop() {
 void Front::loop(std::string line) {
     // if buffer is empty and this is probably a meta command
     if(buffer.length() == 0 && Tokenizer::is_meta(line)) {
-        meta_system.process(Tokenizer::split(line.substr(1)));
+        meta_system->process(Tokenizer::split(line.substr(1)));
     } else {
         // we accept multiline string, hence this cumbersome process
         buffer += "\n" + line;
@@ -37,12 +37,15 @@ void Front::loop(std::string line) {
             buffer.clear();
             
             for(auto query_raw : queries_raw) {
-                compiler.process(query_raw);
+                compiler->process(query_raw);
             }
         } 
     }
 }
 
-Front::Front(std::string file) : meta_system(file, &db), compiler(&db) {
-    
+Front::Front(std::string file) {
+    db = std::make_shared<DbConnector>();
+
+    meta_system = std::make_unique<MetaSystem>(file, db);
+    compiler = std::make_unique<Compiler>(db);
 }

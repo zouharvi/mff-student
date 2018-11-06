@@ -20,3 +20,7 @@
 | delete, truncate #3 | 26-09-2018 | 1 |
 | gcc optimization, template bugs, #12, #11, #14 | 28-09-2018 | 2.5 |
 | merge issues | 18-10-2018 | .5 |
+
+
+ledger out of date
+both devs estimate 60+ hrs
