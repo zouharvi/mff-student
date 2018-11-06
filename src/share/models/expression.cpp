@@ -5,6 +5,7 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
     size_t length = tokens.size();
     size_t start_index = 0;
     size_t end_index = length - start_index - 1;
+
     while (tokens[start_index] == "(" && tokens[end_index] == ")")
     {
         start_index++;
@@ -22,7 +23,7 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
     { // probably a variable or a constant
         value = tokens[0];
         value_only = true;
-        // TODO: check if value is at least size 2
+        // @TODO: check if value is at least size 2
         if ((value.front() == '"' && value.back() == '"') ||
             (value.front() == '"' && value.back() == '"'))
         {
@@ -40,7 +41,6 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
         }
         return;
     }
-
     int open = 0;
     uint lowest_priority = 0;
     uint lowest_priority_index = 0;
@@ -93,6 +93,10 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
         op = OR;
     else if (ops == "||")
         op = CAT;
+    else if (ops == "=")
+        op = EQ;
+    else if (ops == "!=")
+        op = NEQ;
     else
     {
         err(ok, "Error: Invalid operator `" + ops + "`");
@@ -105,7 +109,7 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
     required_vars.merge(right_expr->required_vars);
 }
 
-std::string Expression::eval(std::map<std::string, std::string>& vars, bool &ok)
+std::string Expression::eval(std::map<std::string, std::string> &vars, bool &ok)
 {
     if (value_only)
     {
@@ -234,6 +238,36 @@ std::string Expression::eval(std::map<std::string, std::string>& vars, bool &ok)
         rs = right_expr->eval_cast<std::string>(vars, ok);
         return ok ? ls + rs : std::to_string(0);
         break;
+    case EQ:
+        if (left_expr == nullptr)
+        {
+            missing_left_op(ok, ops);
+            return "";
+        }
+        if (right_expr == nullptr)
+        {
+            missing_right_op(ok, ops);
+            return "";
+        }
+        ls = left_expr->eval_cast<std::string>(vars, ok);
+        rs = right_expr->eval_cast<std::string>(vars, ok);
+        return (ok && ls == rs) ? std::to_string(1) : std::to_string(0);
+        break;
+    case NEQ:
+        if (left_expr == nullptr)
+        {
+            missing_left_op(ok, ops);
+            return "";
+        }
+        if (right_expr == nullptr)
+        {
+            missing_right_op(ok, ops);
+            return "";
+        }
+        ls = left_expr->eval_cast<std::string>(vars, ok);
+        rs = right_expr->eval_cast<std::string>(vars, ok);
+        return (ok && ls != rs) ? std::to_string(1) : std::to_string(0);
+        break;
     default:
         err(ok, "Error: No operator found");
         return "";
@@ -269,6 +303,7 @@ std::string Expression::cast<std::string>(std::string value, bool &)
 
 uint Expression::get_priority(std::string op)
 {
+
     // level 2
     if (op == "*")
         return 5;
@@ -294,6 +329,12 @@ uint Expression::get_priority(std::string op)
         return 3;
     if (op == "OR")
         return 3;
+
+    // level 8
+    if (op == "=")
+        return 2;
+    if (op == "!=")
+        return 2;
 
     return 0;
 }
@@ -330,12 +371,12 @@ void Expression::err(bool &ok, std::string info, std::vector<std::string> tokens
     std::cout << info << std::endl;
 }
 
-void Expression::missing_left_op(bool &ok, const std::string& ops)
+void Expression::missing_left_op(bool &ok, const std::string &ops)
 {
     err(ok, "Error: Missing left operand for `" + ops + "`");
 }
 
-void Expression::missing_right_op(bool &ok, const std::string& ops)
+void Expression::missing_right_op(bool &ok, const std::string &ops)
 {
     err(ok, "Error: Missing right operand for `" + ops + "`");
 }

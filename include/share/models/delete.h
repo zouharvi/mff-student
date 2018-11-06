@@ -14,16 +14,17 @@
 #include "utils/text_utils.h"
 #include "utils/comp_utils.h"
 
-class Delete : public QueryBase {
-    public:
-        Delete(const std::vector<std::string>&, bool&);
-        
-        // parsing errors
-        void bad_syntax(bool&, std::string extra = ""); 
-        void specific_err(bool&, std::string extra = ""); 
-        
-        std::unique_ptr<Expression> condition;
-        TableName* table_name;
+class Delete : public QueryBase
+{
+  public:
+    Delete(const std::vector<std::string> &, bool &);
+
+    // parsing errors
+    void bad_syntax(bool &, std::string extra = "");
+    void specific_err(bool &, std::string extra = "");
+
+    std::unique_ptr<Expression> condition;
+    TableName *table_name;
 };
 
 #endif

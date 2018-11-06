@@ -8,14 +8,15 @@
 #include "models/delete.h"
 #include "utils/text_utils.h"
 
-class TruncateTable : public QueryBase {
-    public:
-        TruncateTable(const std::vector<std::string>&, bool&);
-        std::string table_name;
-        std::shared_ptr<QueryBase> get_data();
+class TruncateTable : public QueryBase
+{
+  public:
+    TruncateTable(const std::vector<std::string> &, bool &);
+    std::string table_name;
+    std::shared_ptr<QueryBase> get_data();
 
-    private:
-        std::shared_ptr<Delete> real_query;
+  private:
+    std::shared_ptr<Delete> real_query;
 };
 
 #endif

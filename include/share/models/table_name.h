@@ -6,11 +6,12 @@
 #include <iostream>
 #include "utils/comp_utils.h"
 
-class TableName {
-    public:
-        TableName(const std::vector<std::string>&, bool&);
-        TableName(const std::string&, bool&);
-        std::string name;
+class TableName
+{
+  public:
+    TableName(const std::vector<std::string> &, bool &);
+    TableName(const std::string &, bool &);
+    std::string name;
 };
 
 #endif

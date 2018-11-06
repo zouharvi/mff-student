@@ -13,18 +13,18 @@
 #include "utils/text_utils.h"
 #include "utils/comp_utils.h"
 
-class Select : public QueryBase {
-    public:
-        Select(const std::vector<std::string>&, bool&);
-        
-        // parsing errors
-        void bad_syntax(bool&, std::string extra = ""); 
-        void specific_err(bool&, std::string extra = ""); 
-        
-        std::vector<Expression> expressions;
-        std::unique_ptr<Expression> condition;
-        std::vector<TableName> table_names;
-};
+class Select : public QueryBase
+{
+  public:
+    Select(const std::vector<std::string> &, bool &);
 
+    // parsing errors
+    void bad_syntax(bool &, std::string extra = "");
+    void specific_err(bool &, std::string extra = "");
+
+    std::vector<Expression> expressions;
+    std::unique_ptr<Expression> condition;
+    std::vector<TableName> table_names;
+};
 
 #endif

@@ -2,16 +2,19 @@
 
 using namespace std;
 
-
-bool Compiler::process(vector<string> tokens) {
+bool Compiler::process(vector<string> tokens)
+{
     Query query(tokens);
 
-    if(query.ok) {
+    if (query.ok)
+    {
         string res = db->perform_query(query);
         cout << res << endl;
 
         return true;
-    } else {
+    }
+    else
+    {
         return false;
     }
 }
