@@ -13,8 +13,13 @@ class Tokenizer {
         static bool is_end_query(std::string);
 
         // remove the last semicolon
-        static std::string remove_end_query(std::string);
+        // @UNUSED
+        static std::string& remove_end_query(std::string&);
     
+        // returns a vector of queries (vector of tokens)
+        static std::vector<std::vector<std::string>> extract_queries(const std::vector<std::string>&);
+
     private:
+        // is a specified char a split char?
         static bool split_char(char);
 };

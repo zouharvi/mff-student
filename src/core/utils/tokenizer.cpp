@@ -76,7 +76,7 @@ bool Tokenizer::is_end_query(string line) {
     return false;
 }
 
-string Tokenizer::remove_end_query(string line) {
+std::string& Tokenizer::remove_end_query(string& line) {
     for(size_t i = line.length() - 1; i >= 0; i++) {
         if(line[i] == ' ' || line[i] == '\t' || line[i] == '\n') {
             continue;
@@ -85,7 +85,23 @@ string Tokenizer::remove_end_query(string line) {
             break;
         }
     }
+
     return line;
+}
+
+std::vector<std::vector<std::string>> Tokenizer::extract_queries(const std::vector<std::string>& tokens) {
+    std::vector<std::vector<std::string>> queries;
+    std::vector<std::string> buff;
+    for(auto s : tokens) {
+        if(s == ";") {
+            queries.push_back(buff);
+            buff.clear();
+        } else {
+            buff.push_back(s);
+        }
+    }
+    
+    return queries;
 }
 
 bool Tokenizer::split_char(char c) {

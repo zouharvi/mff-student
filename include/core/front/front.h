@@ -1,14 +1,20 @@
 #include <string>
 #include <iostream>
+#include "meta_system.h"
 #include "../compiler/compiler.h"
 #include "../utils/tokenizer.h"
-#include "meta_system.h"
+
+// external libraries
 #include <readline/readline.h>
 #include <readline/history.h>
 
 class Front {
     public:
+        // constructor with filename string parameter
+        // pass empty string if no file specified
         Front(std::string);
+
+        // input entry point
         void start_loop();
 
     private:
@@ -19,6 +25,7 @@ class Front {
         Compiler compiler;
         MetaSystem meta_system;
 
+        // main interface 
         DbConnector db;
 
         // main program input loading loop
@@ -26,11 +33,11 @@ class Front {
 
         // prompt and load next line
         char* next_line();
-        const std::string PROMPT_WORD          = "zimadb> ";
-        const std::string PROMPT_WORD_CONTINUE = "   ...> ";
 
         // program vars
         const std::string VERSION_STR = "0.0.1a";
+        const std::string PROMPT_WORD          = "zimadb> ";
+        const std::string PROMPT_WORD_CONTINUE = "   ...> ";
         
         // user welcome
         const std::string HELLO_USER = "ZimaDB version " + VERSION_STR + "\nEnter `.help` for usage hints.";
