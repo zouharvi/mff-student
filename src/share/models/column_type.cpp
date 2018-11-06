@@ -1,8 +1,6 @@
 #include "models/column_type.h"
 
-using namespace std;
-
-ColumnType::ColumnType(vector<string> tokens, bool& ok) {
+ColumnType::ColumnType(const std::vector<std::string>& tokens, bool& ok) {
     this->name = tokens[0];
     size_t length = tokens.size();
     size_t end = length -1;
@@ -22,9 +20,10 @@ ColumnType::ColumnType(vector<string> tokens, bool& ok) {
         not_null = true;
         end -= 2;
     }
+    // ColumnType does not throw errors, it just passes the leftover tokens to VarType
     this->type = VarType(CompUtils::slice(tokens, start, end), ok);
 }
 
-const string ColumnType::debug() {
-    return name + " : " + type.debug() + (not_null ? " NOT NULL" : "") + (primary_key? (" PRIMARY KEY " + ((string) (sort_order == DESC ? "DESC" : "ASC"))) : "" ); 
+const std::string ColumnType::debug() {
+    return name + " : " + type.debug() + (not_null ? " NOT NULL" : "") + (primary_key? (" PRIMARY KEY " + ((std::string) (sort_order == DESC ? "DESC" : "ASC"))) : "" ); 
 }

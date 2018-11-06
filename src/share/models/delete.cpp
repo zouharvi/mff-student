@@ -1,8 +1,7 @@
 #include "models/delete.h"
 
-using namespace std;
 
-Delete::Delete(vector<string> tokens, bool& ok) {
+Delete::Delete(const std::vector<std::string>& tokens, bool& ok) {
     type = DELETE;
     size_t length = tokens.size();
     if(length < 2) {
@@ -19,33 +18,37 @@ Delete::Delete(vector<string> tokens, bool& ok) {
         table_name = new TableName(tokens[2], ok);
     }
 
+    // conditions
     if(length >= 4 && TextUtils::cmp(tokens[3], "WHERE")) {
         // condition present
         if(length == 4) {
             bad_syntax(ok); return; 
         }
-        condition = new Expression(CompUtils::slice(tokens, 4, length-1), ok);
+        condition = std::make_unique<Expression>(CompUtils::slice(tokens, 4, length-1), ok);
     } else {
         if(length >= 4) {
             bad_syntax(ok); return; 
         }
         // create virtual condition, that permits everything
-        condition = new Expression(vector<string> { "1" }, ok);
+        condition = std::make_unique<Expression>(std::vector<std::string> { "1" }, ok);
     }
 
-    map<string, string> vars;
-    cout << "CONDITION EVAL RESULT: " << condition->eval_cast<bool>(vars, ok) << endl;
+
+    if(ZIMADB_DEBUG) {
+        std::map<std::string, std::string> vars;
+        std::cout << "DELETE CONDITION EMPTY EVAL RESULT: " << condition->eval_cast<bool>(vars, ok) << std::endl;
+    }
 }
 
-void Delete::bad_syntax(bool& ok, string extra) {
+void Delete::bad_syntax(bool& ok, std::string extra) {
     ok = false;
-    cout << "Error: Bad DELETE syntax `DELETE FROM table_name [WHERE condition];`" << endl;
+    std::cout << "Error: Bad DELETE syntax `DELETE FROM table_name [WHERE condition];`" << std::endl;
     if (extra != "") {
-        cout << "       " << extra << endl;
+        std::cout << "       " << extra << std::endl;
     }
 }
 
-void Delete::specific_err(bool& ok, string extra) {
+void Delete::specific_err(bool& ok, std::string extra) {
     ok = false;
-    cout << extra << endl;
+    std::cout << extra << std::endl;
 }

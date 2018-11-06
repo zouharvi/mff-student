@@ -1,5 +1,5 @@
-#ifndef COLUMN_TYPE
-#define COLUMN_TYPE
+#ifndef COLUMN_TYPE_H
+#define COLUMN_TYPE_H
 
 #include <string>
 #include <vector>
@@ -9,13 +9,16 @@
 
 class ColumnType {
     public:
-        ColumnType(std::vector<std::string>, bool&);
+        ColumnType(const std::vector<std::string>&, bool&);
 
         // print this object's content
         const std::string debug();
 
+        // variable name, type
         std::string name;
         VarType type;
+
+        // column type modifiers
         bool not_null = false;
         bool primary_key = false;
         enum {ASC, DESC} sort_order = ASC; 

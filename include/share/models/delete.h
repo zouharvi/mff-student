@@ -1,10 +1,13 @@
-#ifndef MODEL_DELETE
-#define MODEL_DELETE
+#ifndef MODEL_DELETE_H
+#define MODEL_DELETE_H
 
 #include <vector>
 #include <string>
 #include <iostream>
+#include <memory>
 #include <unordered_set>
+
+#include "zimadb.h"
 #include "query_base.h"
 #include "models/expression.h"
 #include "models/table_name.h"
@@ -14,13 +17,13 @@
 
 class Delete : public QueryBase {
     public:
-        Delete(std::vector<std::string>, bool&);
+        Delete(const std::vector<std::string>&, bool&);
         
         // parsing errors
         void bad_syntax(bool&, std::string extra = ""); 
         void specific_err(bool&, std::string extra = ""); 
         
-        Expression* condition;
+        std::unique_ptr<Expression> condition;
         TableName* table_name;
 };
 

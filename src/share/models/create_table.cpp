@@ -2,7 +2,7 @@
 
 using namespace std;
 
-CreateTable::CreateTable(vector<string> tokens, bool& ok) {
+CreateTable::CreateTable(const vector<string>& tokens, bool& ok) {
     type = CREATE;
     size_t length = tokens.size();
     if(length < 4) {
@@ -75,6 +75,7 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
 
     // check at most one PRIMARY KEY and unique names
     unordered_set<string> column_names;
+    int column_index = 0;
     for(ColumnType& column : columns) {
         if(column_names.count(column.name) != 0) {
             specific_err(ok, "Error: Multiple columns named `" + column.name + "`"); break;
@@ -82,12 +83,13 @@ CreateTable::CreateTable(vector<string> tokens, bool& ok) {
             column_names.insert(column.name);
         }
         if(column.primary_key) {
-            if(primary_key != nullptr) {
+            if(primary_key != -1) {
                 specific_err(ok, "Error: Multiple PRIMARY KEYS"); break;
             } else {
-                primary_key = &column;
+                primary_key = column_index;
             }
         }
+        column_index ++;
         //cout << column.debug() << endl;
     }
 }

@@ -92,7 +92,7 @@ std::vector<std::vector<std::string>> Tokenizer::extract_queries(const std::vect
     std::vector<std::vector<std::string>> queries;
     std::vector<std::string> buff;
     for(auto s : tokens) {
-        if(s == ";") {
+        if(s[s.length()-1] == ';') {
             queries.push_back(buff);
             buff.clear();
         } else {

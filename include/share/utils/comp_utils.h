@@ -14,7 +14,7 @@ class CompUtils {
         // creates a new subvector
         // unfortunately compiled many times over in th eheader
         template<typename T>
-        static std::vector<T> slice(std::vector<T> &v, int m, int n) {
+        static std::vector<T> slice(const std::vector<T> &v, int m, int n) {
             std::vector<T> vec(n - m + 1);
             copy(v.begin() + m, v.begin() + n + 1, vec.begin());
             return vec;
