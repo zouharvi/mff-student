@@ -45,3 +45,6 @@ re: clean run
 
 test:
 	@echo "Tests are not implemented"
+
+size:
+	find . -type f | grep -E ".(cpp|h)$$" | xargs ls -la |  awk '{ total += $$5; print }; END { print total/1024, "KB" }';
