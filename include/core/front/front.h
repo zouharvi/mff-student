@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include "zimadb.h"
 #include "meta_system.h"
 #include "../compiler/compiler.h"
 #include "../utils/tokenizer.h"
@@ -35,11 +36,10 @@ class Front {
         char* next_line();
 
         // program vars
-        const std::string VERSION_STR = "0.0.1a";
         const std::string PROMPT_WORD          = "zimadb> ";
         const std::string PROMPT_WORD_CONTINUE = "   ...> ";
         
         // user welcome
-        const std::string HELLO_USER = "ZimaDB version " + VERSION_STR + "\nEnter `.help` for usage hints.";
+        const std::string HELLO_USER = "ZimaDB version " + std::string(ZIMADB_VERSION) + "\nEnter `.help` for usage hints.";
         const std::string NO_PERNAMENT_DB = "No .zima file specified. Using `default.zima` instead.";
 };
