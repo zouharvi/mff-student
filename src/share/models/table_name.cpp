@@ -11,5 +11,9 @@ TableName::TableName(vector<string> tokens, bool& ok) {
     name = tokens[0];
 }
 TableName::TableName(string name, bool& ok) {
-    this->name = name;
+    if(name.length() == 0) {
+        ok = false;
+    } else {
+        this->name = name;
+    }
 }

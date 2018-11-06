@@ -61,10 +61,10 @@ void MetaSystem::debug_f(vector<string> tokens) {
     }
 }
 
-void MetaSystem::dump(vector<string> tokens) {
-    // TODO: Engine call. Dump all tables if only one param, otherwise regex.
+void MetaSystem::dump(vector<string>) {
+    // @TODO: Engine call. Dump all tables if only one param, otherwise regex.
 }
 
-void MetaSystem::schema(vector<string> tokens) {
-    // TODO: Engine call. Dump all table schemas if only one param, otherwise regex.
+void MetaSystem::schema(vector<string>) {
+    // @TODO: Engine call. Dump all table schemas if only one param, otherwise regex.
 }

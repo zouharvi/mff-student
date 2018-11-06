@@ -23,8 +23,8 @@ class Front {
         std::string buffer = "";
 
         // two main processing systems
-        Compiler compiler;
         MetaSystem meta_system;
+        Compiler compiler;
 
         // main interface 
         DbConnector db;
