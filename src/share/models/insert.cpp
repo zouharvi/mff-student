@@ -1,20 +1,19 @@
 #include "models/insert.h"
 
-using namespace std;
-
-Insert::Insert(vector<string> tokens, bool& ok) {
+Insert::Insert(const std::vector<std::string>& tokens, bool& ok) {
     type = INSERT;
     size_t length = tokens.size();
     
     if(length < 8 || !TextUtils::cmp(tokens[0], "INSERT") || !TextUtils::cmp(tokens[1], "INTO")) {
         bad_syntax(ok); return;
     }
-    table_name = new TableName(TextUtils::strip_quotes(tokens[2]), ok);
+    table_name = std::make_unique<TableName>(TextUtils::strip_quotes(tokens[2]), ok);
 
     if (tokens[3] != "(") {
         bad_syntax(ok, "Missing column name list"); return;
     }
 
+    // column order list
     size_t index = 4;
     bool next_comma = false;
     while(length > index && tokens[index] != ")") {
@@ -39,7 +38,7 @@ Insert::Insert(vector<string> tokens, bool& ok) {
     index++;
     if (!TextUtils::cmp(tokens[index],"VALUES")) {
         bad_syntax(ok); return;
-        // TODO: Possible SELECT extension
+        // @TODO: Possible SELECT extension
     }
 
     index++;
@@ -49,7 +48,7 @@ Insert::Insert(vector<string> tokens, bool& ok) {
     index++;
     
     // insert expressions
-    vector<string> buff;
+    std::vector<std::string> buff;
     for(; index < length && !TextUtils::cmp(tokens[index], ")"); index++) {
         if(tokens[index] == ",") {
             expressions.push_back(Expression(buff, ok));
@@ -71,20 +70,17 @@ Insert::Insert(vector<string> tokens, bool& ok) {
     if(expressions.size() != columns.size()) {
         specific_err(ok, "Error: Number of columns does not match the number of given expressions"); return;
     }
-
-    // map<string, string> vars;
-    // cout << expressions[0].eval(vars, ok) << endl;
 }
 
-void Insert::bad_syntax(bool& ok, string extra) {
+void Insert::bad_syntax(bool& ok, std::string extra) {
     ok = false;
-    cout << "Error: Bad INSERT syntax `INSERT INTO table_name (column_name, ..) VALUES (expression, ...);`" << endl;
+    std::cout << "Error: Bad INSERT syntax `INSERT INTO table_name (column_name, ..) VALUES (expression, ...);`" << std::endl;
     if (extra != "") {
-        cout << "       " << extra << endl;
+        std::cout << "       " << extra << std::endl;
     }
 }
 
-void Insert::specific_err(bool& ok, string extra) {
+void Insert::specific_err(bool& ok, std::string extra) {
     ok = false;
-    cout << extra << endl;
+    std::cout << extra << std::endl;
 }

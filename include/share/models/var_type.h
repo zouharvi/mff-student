@@ -6,17 +6,16 @@
 
 class VarType {
     public:
-        VarType(std::vector<std::string>, bool&);
-        VarType();
-        void not_valid(std::vector<std::string>, bool&);
+        VarType(const std::vector<std::string>&, bool&);
+        
+        // parsing error
+        void not_valid(const std::vector<std::string>&, bool&);
 
         // print this object's content
-        std::string debug();
-
+        std::string to_string();
 
         enum Type {INT, TINYINT, DOUBLE, VARCHAR, BOOLEAN } type;
         size_t size; // applicable only to varchar
-
 
     private:
         // get type string name

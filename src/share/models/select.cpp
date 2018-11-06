@@ -1,8 +1,6 @@
 #include "models/select.h"
 
-using namespace std;
-
-Select::Select(vector<string> tokens, bool& ok) {
+Select::Select(const std::vector<std::string>& tokens, bool& ok) {
     type = SELECT;
     size_t length = tokens.size();
     if(length < 4) {
@@ -11,7 +9,7 @@ Select::Select(vector<string> tokens, bool& ok) {
 
     // select expressions
     size_t index = 1;
-    vector<string> buff;
+    std::vector<std::string> buff;
     for(; index < length && !TextUtils::cmp(tokens[index], "FROM"); index++) {
         if(tokens[index] == ",") {
             expressions.push_back(Expression(buff, ok));
@@ -55,22 +53,19 @@ Select::Select(vector<string> tokens, bool& ok) {
 
     // condition
     if(index < length) {
-        condition = new Expression(CompUtils::slice(tokens, index, length-1), ok);
+        condition = std::make_unique<Expression>(CompUtils::slice(tokens, index, length-1), ok);
     }
-
-    // map<string, string> vars;
-    // cout << expressions[0].eval(vars, ok) << endl;
 }
 
-void Select::bad_syntax(bool& ok, string extra) {
+void Select::bad_syntax(bool& ok, std::string extra) {
     ok = false;
-    cout << "Error: Bad SELECT syntax `SELECT expression, ... FROM table_name, ..;`" << endl;
+    std::cout << "Error: Bad SELECT syntax `SELECT expression, ... FROM table_name, ..;`" << std::endl;
     if (extra != "") {
-        cout << "       " << extra << endl;
+        std::cout << "       " << extra << std::endl;
     }
 }
 
-void Select::specific_err(bool& ok, string extra) {
+void Select::specific_err(bool& ok, std::string extra) {
     ok = false;
-    cout << extra << endl;
+    std::cout << extra << std::endl;
 }

@@ -1,10 +1,12 @@
-#ifndef UPDATE_MODEL_H
-#define UPDATE_MODEL_H
+#ifndef MODEL_UPDATE_H
+#define MODEL_UPDATE_H
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <unordered_set>
+#include <memory>
+
 #include "query_base.h"
 #include "models/expression.h"
 #include "models/table_name.h"
@@ -14,16 +16,17 @@
 
 class Update : public QueryBase {
     public:
-        Update(std::vector<std::string>, bool&);
+        Update(const std::vector<std::string>&, bool&);
         
         // parsing errors
         void bad_syntax(bool&, std::string extra = ""); 
         void specific_err(bool&, std::string extra = ""); 
         
+        // update properties
         std::vector<std::string> columns;
         std::vector<Expression> expressions;
-        Expression* condition;
-        TableName* table_name;
+        std::unique_ptr<Expression> condition;
+        std::unique_ptr<TableName> table_name;
 };
 
 

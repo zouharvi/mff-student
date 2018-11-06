@@ -6,7 +6,6 @@
 #include <iostream>
 #include <memory>
 #include <unordered_set>
-
 #include "zimadb.h"
 #include "query_base.h"
 #include "models/expression.h"

@@ -103,7 +103,7 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
     for(const auto &column: query->columns)
     {
         // Provisional fileformat doesn't support anything else but column name and type
-        dbfile << column.type.type << "-" << column.name << ",";
+        dbfile << column.type->type << "-" << column.name << ",";
     }
 
     dbfile << std::endl;
@@ -367,9 +367,10 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
             {
                 std::string expr_result;
 
-                for(auto expr: query->expressions)
+                // Expression has a deleted reference copy function, hence this old style iteration
+                for(size_t i = 0; i < query->expressions.size(); i++)
                 {
-                    expr_result = expr.eval(data, eval_ok);
+                    expr_result = query->expressions[i].eval(data, eval_ok);
 
                     if(eval_ok)
                     {

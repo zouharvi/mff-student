@@ -1,10 +1,11 @@
-#ifndef SELECT_H
-#define SELECT_H
+#ifndef MODEL_SELECT_H
+#define MODEL_SELECT_H
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <unordered_set>
+#include <memory>
 #include "query_base.h"
 #include "models/expression.h"
 #include "models/table_name.h"
@@ -14,14 +15,14 @@
 
 class Select : public QueryBase {
     public:
-        Select(std::vector<std::string>, bool&);
+        Select(const std::vector<std::string>&, bool&);
         
         // parsing errors
         void bad_syntax(bool&, std::string extra = ""); 
         void specific_err(bool&, std::string extra = ""); 
         
         std::vector<Expression> expressions;
-        Expression* condition;
+        std::unique_ptr<Expression> condition;
         std::vector<TableName> table_names;
 };
 

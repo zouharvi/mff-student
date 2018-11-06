@@ -1,31 +1,27 @@
 #include "models/update.h"
 
-using namespace std;
-
-Update::Update(vector<string> tokens, bool& ok) {
+Update::Update(const std::vector<std::string>& tokens, bool& ok) {
     type = UPDATE;
     size_t length = tokens.size();
     if(length < 4) {
         bad_syntax(ok); return;
     }
-    table_name = new TableName(tokens[1], ok);
+    table_name = std::make_unique<TableName>(tokens[1], ok);
 
     if(!TextUtils::cmp(tokens[2], "SET")) {
         bad_syntax(ok); return;
     }
 
-    cout << "1" << endl;
-
     // update expressions
     size_t index = 3;
-    vector<string> buff;
+    std::vector<std::string> buff;
     for(; index < length && !TextUtils::cmp(tokens[index], "WHERE"); index++) {
         if(tokens[index] == ",") {
             if(buff.size() < 3 || buff[1] != "=") {
                 bad_syntax(ok); return;
             } 
             columns.push_back(buff[0]);
-            expressions.push_back(Expression(vector<string>(buff.begin()+2, buff.end()), ok));
+            expressions.push_back(Expression(std::vector<std::string>(buff.begin()+2, buff.end()), ok));
             buff.clear();    
         } else {
             buff.push_back(tokens[index]);
@@ -37,7 +33,7 @@ Update::Update(vector<string> tokens, bool& ok) {
             bad_syntax(ok, buff[1]); return;
         } 
         columns.push_back(buff[0]);
-        expressions.push_back(Expression(vector<string>(buff.begin()+2, buff.end()), ok));
+        expressions.push_back(Expression(std::vector<std::string>(buff.begin()+2, buff.end()), ok));
         buff.clear();
     }
 
@@ -53,22 +49,19 @@ Update::Update(vector<string> tokens, bool& ok) {
 
     // condition
     if(index < length && tokens[index] == "WHERE") {
-        condition = new Expression(CompUtils::slice(tokens, index, length-1), ok);
+        condition = std::make_unique<Expression>(CompUtils::slice(tokens, index, length-1), ok);
     } 
-    
-    // map<string, string> vars;
-    // cout << expressions[0].eval(vars, ok) << endl;
 }
 
-void Update::bad_syntax(bool& ok, string extra) {
+void Update::bad_syntax(bool& ok, std::string extra) {
     ok = false;
-    cout << "Error: Bad UPDATE syntax `UPDATE table_name SET column1 = expression1, column2 = expression2, .. [WHERE condition];`" << endl;
+    std::cout << "Error: Bad UPDATE syntax `UPDATE table_name SET column1 = expression1, column2 = expression2, .. [WHERE condition];`" << std::endl;
     if (extra != "") {
-        cout << "       " << extra << endl;
+        std::cout << "       " << extra << std::endl;
     }
 }
 
-void Update::specific_err(bool& ok, string extra) {
+void Update::specific_err(bool& ok, std::string extra) {
     ok = false;
-    cout << extra << endl;
+    std::cout << extra << std::endl;
 }

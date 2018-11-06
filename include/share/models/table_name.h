@@ -8,8 +8,8 @@
 
 class TableName {
     public:
-        TableName(std::vector<std::string>, bool&);
-        TableName(std::string, bool&);
+        TableName(const std::vector<std::string>&, bool&);
+        TableName(const std::string&, bool&);
         std::string name;
 };
 

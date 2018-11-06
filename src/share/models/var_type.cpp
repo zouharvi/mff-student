@@ -1,14 +1,13 @@
 #include "models/var_type.h"
-using namespace std;
 
-VarType::VarType(vector<string> tokens, bool& ok) {
+VarType::VarType(const std::vector<std::string>& tokens, bool& ok) {
     ok = true;
     size_t length = tokens.size();
     if(length == 0) {
         not_valid(tokens, ok); return;
     }
 
-    string type_str = TextUtils::to_upper(tokens[0]);
+    std::string type_str = TextUtils::to_upper(tokens[0]);
     if(type_str == "INT") {
         type = INT;
     } else if(type_str == "TINYINT") {
@@ -39,12 +38,12 @@ VarType::VarType(vector<string> tokens, bool& ok) {
     }
 }
 
-void VarType::not_valid(vector<string> tokens, bool& ok) {
-    cout << "Error: `" << CompUtils::implode(tokens, " ") << "` is not a valid var type" << endl; 
+void VarType::not_valid(const std::vector<std::string>& tokens, bool& ok) {
+    std::cout << "Error: `" << CompUtils::implode(tokens, " ") << "` is not a valid var type" << std::endl; 
     ok = false;
 }
 
-string VarType::get_type_name() {
+std::string VarType::get_type_name() {
     switch(type) {
         case INT: return "INT";
         case DOUBLE: return "DOUBLE";
@@ -55,8 +54,6 @@ string VarType::get_type_name() {
     return "";
 }
 
-string VarType::debug() {
-    return get_type_name() + (type == VARCHAR ? "(" + to_string(size) + ")" : "");
+std::string VarType::to_string() {
+    return get_type_name() + (type == VARCHAR ? "(" + std::to_string(size) + ")" : "");
 }
-
-VarType::VarType() { }

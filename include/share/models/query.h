@@ -17,13 +17,13 @@
 
 class Query {
     public:
-        Query(std::vector<std::string>);
-        bool ok = true;
+        Query(const std::vector<std::string>&);
         std::unique_ptr<QueryBase> data;
+        bool ok = true;
 
     private:
         // this shouldn't compile unless QueryType is a subclass of QueryBase
-        template <class QueryType> void try_parse(std::vector<std::string>);
+        template <class QueryType> void try_parse(const std::vector<std::string>&);
 };  
 
 #endif

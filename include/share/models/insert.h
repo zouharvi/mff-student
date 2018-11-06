@@ -1,10 +1,11 @@
-#ifndef INSERT_H
-#define INSERT_H
+#ifndef MODEL_INSERT_H
+#define MODEL_INSERT_H
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <unordered_set>
+#include <memory>
 #include "query_base.h"
 #include "models/expression.h"
 #include "models/table_name.h"
@@ -14,7 +15,7 @@
 
 class Insert : public QueryBase {
     public:
-        Insert(std::vector<std::string>, bool&);
+        Insert(const std::vector<std::string>&, bool&);
         
         // parsing errors
         void bad_syntax(bool&, std::string extra = ""); 
@@ -22,9 +23,9 @@ class Insert : public QueryBase {
         
         std::vector<std::string> columns;
         std::vector<Expression> expressions;
-        TableName* table_name;
+        std::unique_ptr<TableName> table_name;
 
-        // TODO: possible Select?
+        // @TODO: possible Select
 };
 
 

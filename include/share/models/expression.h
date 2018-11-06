@@ -1,5 +1,5 @@
-#ifndef EXPRESSION
-#define EXPRESSION
+#ifndef MODEL_EXPRESSION_H
+#define MODEL_EXPRESSION_H
 
 #include <vector>
 #include <string>
@@ -7,12 +7,13 @@
 #include <set>
 #include <iostream>
 #include <exception>
+#include <memory>
 #include "utils/text_utils.h"
 #include "utils/comp_utils.h"
 
 class Expression {
     public:
-        Expression(std::vector<std::string>, bool&);
+        Expression(const std::vector<std::string>&, bool&);
 
         enum OPERATOR { ADD, SUB, DIV, MUL, AND, OR, CAT } op;
 
@@ -30,7 +31,7 @@ class Expression {
         template <typename T> 
         T static cast(std::string, bool&);
 
-        Expression *left_expr, *right_expr;
+        std::unique_ptr<Expression> left_expr, right_expr;
         
         bool value_only = false;
         bool is_variable = false;
@@ -38,9 +39,11 @@ class Expression {
         
         bool static is_operator(std::string);
         uint static get_priority(std::string);
+
+        // error outputs
         void static err(bool&, std::string, std::vector<std::string> = std::vector<std::string>()); 
-        void static missing_left_op(bool&, std::string); 
-        void static missing_right_op(bool&, std::string); 
+        void static missing_left_op(bool&, const std::string&); 
+        void static missing_right_op(bool&, const std::string&); 
 };
 
 #endif

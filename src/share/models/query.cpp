@@ -1,7 +1,7 @@
 #include "models/query.h"
 using namespace std;
 
-template <class QueryType> void Query::try_parse(vector<string> tokens) {
+template <class QueryType> void Query::try_parse(const vector<string>& tokens) {
     if(!std::is_base_of<QueryBase, QueryType>()) {
         throw runtime_error("Wrong QueryType type passed to try_parse template.");
     }
@@ -9,7 +9,7 @@ template <class QueryType> void Query::try_parse(vector<string> tokens) {
     this->data = std::make_unique<QueryType>(tokens, ok);
 }
 
-Query::Query(vector<string> tokens) {
+Query::Query(const vector<string>& tokens) {
     if(tokens.size() < 2) {
         cout << "Error: No query has less than two tokens" << endl;
 	ok = false;

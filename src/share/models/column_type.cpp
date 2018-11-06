@@ -21,9 +21,9 @@ ColumnType::ColumnType(const std::vector<std::string>& tokens, bool& ok) {
         end -= 2;
     }
     // ColumnType does not throw errors, it just passes the leftover tokens to VarType
-    this->type = VarType(CompUtils::slice(tokens, start, end), ok);
+    this->type = std::make_unique<VarType>(CompUtils::slice(tokens, start, end), ok);
 }
 
-const std::string ColumnType::debug() {
-    return name + " : " + type.debug() + (not_null ? " NOT NULL" : "") + (primary_key? (" PRIMARY KEY " + ((std::string) (sort_order == DESC ? "DESC" : "ASC"))) : "" ); 
+std::string ColumnType::to_string() {
+    return name + " : " + type->to_string() + (not_null ? " NOT NULL" : "") + (primary_key? (" PRIMARY KEY " + ((std::string) (sort_order == DESC ? "DESC" : "ASC"))) : "" ); 
 }

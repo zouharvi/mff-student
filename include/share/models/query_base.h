@@ -9,4 +9,5 @@ class QueryBase {
         // overriden by children
         enum Type { GENERIC, CREATE, DROP, TRUNCATE, DELETE, UPDATE, SELECT, INSERT } type = GENERIC;
 };
+
 #endif

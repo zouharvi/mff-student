@@ -90,7 +90,9 @@ CreateTable::CreateTable(const vector<string>& tokens, bool& ok) {
             }
         }
         column_index ++;
-        //cout << column.debug() << endl;
+        if(ZIMADB_DEBUG) {
+            std::cout << column.to_string() << std::endl;
+        }
     }
 }
 
