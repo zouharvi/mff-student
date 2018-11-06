@@ -7,7 +7,7 @@ string CompUtils::implode(const vector<string>& vec, const char* delim) {
     return res.str();
 }
 
-uint CompUtils::parse_uint(string text, bool& ok) {
+uint CompUtils::parse_uint(std::string_view text, bool& ok) {
     uint num = 0;
     if(text.length() >= 9) {
         ok = false;
@@ -25,13 +25,13 @@ uint CompUtils::parse_uint(string text, bool& ok) {
     return num;
 }
 
+// exceptions shouldn't be part of normal program flow, but 
+// there isn't any prettier way
 bool CompUtils::is_number(const std::string& s) {
-    try
-    {
+    try {
         std::stod(s);
     }
-    catch(...)
-    {
+    catch(...) {
         return false;
     }
     

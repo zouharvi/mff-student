@@ -1,12 +1,11 @@
 #include "utils/tokenizer.h"
 #include <iostream>
-using namespace std;
 
-vector<string> Tokenizer::split(string line) {
-    vector<string> tokens;
+std::vector<std::string> Tokenizer::split(std::string_view line) {
+    std::vector<std::string> tokens;
     char quote_mark = '\0';
     bool escaped = false;
-    string cur_word = "";
+    std::string cur_word = "";
     for(size_t i = 0, length = line.length(); i < length; i++) {
         if(escaped) {
             escaped = false;
@@ -25,7 +24,7 @@ vector<string> Tokenizer::split(string line) {
                         tokens.push_back("||");
                         i++;
                     } else {
-                        tokens.push_back(string(1, line[i]));
+                        tokens.push_back(std::string(1, line[i]));
                     }
                     continue;
                 }
@@ -59,12 +58,12 @@ vector<string> Tokenizer::split(string line) {
     return tokens;
 }
 
-bool Tokenizer::is_meta(string line) {
+bool Tokenizer::is_meta(std::string_view line) {
     return line[0] == '.';
 }
 
-bool Tokenizer::is_end_query(string line) {
-    for(size_t i = line.length() - 1; i >= 0; i++) {
+bool Tokenizer::is_end_query(std::string_view line) {
+    for(size_t i = line.length() - 1; ; i++) {
         if(line[i] == ' ' || line[i] == '\t' || line[i] == '\n') {
             continue;
         } else if(line[i] == ';') {
@@ -76,8 +75,8 @@ bool Tokenizer::is_end_query(string line) {
     return false;
 }
 
-string Tokenizer::remove_end_query(string line) {
-    for(size_t i = line.length() - 1; i >= 0; i++) {
+std::string& Tokenizer::remove_end_query(std::string& line) {
+    for(size_t i = line.length() - 1; ; i++) {
         if(line[i] == ' ' || line[i] == '\t' || line[i] == '\n') {
             continue;
         } else if(line[i] == ';') {
@@ -85,9 +84,25 @@ string Tokenizer::remove_end_query(string line) {
             break;
         }
     }
+
     return line;
 }
 
+std::vector<std::vector<std::string>> Tokenizer::extract_queries(const std::vector<std::string>& tokens) {
+    std::vector<std::vector<std::string>> queries;
+    std::vector<std::string> buff;
+    for(auto s : tokens) {
+        if(s == ";") {
+            queries.push_back(buff);
+            buff.clear();
+        } else {
+            buff.push_back(s);
+        }
+    }
+    
+    return queries;
+}
+
 bool Tokenizer::split_char(char c) {
-    return string("()+-/*%,=").find(c) != string::npos;
+    return std::string("()+-/*%,=").find(c) != std::string::npos;
 }

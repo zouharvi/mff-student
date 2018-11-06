@@ -33,7 +33,7 @@ Expression::Expression(vector<string> tokens, bool& ok) {
         return;
     }
 
-    uint open = 0;
+    int open = 0;
     uint lowest_priority = 0;
     uint lowest_priority_index = 0; 
     // this could be all done in one pass, but this just seemed more robus
