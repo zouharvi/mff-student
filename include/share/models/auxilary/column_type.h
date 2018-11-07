@@ -6,7 +6,7 @@
 #include <memory>
 #include "utils/comp_utils.h"
 #include "utils/text_utils.h"
-#include "models/var_type.h"
+#include "models/auxilary/var_type.h"
 
 class ColumnType
 {

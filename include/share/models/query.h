@@ -1,18 +1,18 @@
-#ifndef QUERY_H
-#define QUERY_H
+#ifndef MODEL_QUERY_H
+#define MODEL_QUERY_H
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <exception>
 #include <memory>
-#include "create_table.h"
-#include "drop_table.h"
-#include "truncate_table.h"
-#include "select.h"
-#include "insert.h"
-#include "update.h"
-#include "delete.h"
+#include "models/queries/create_table.h"
+#include "models/queries/drop_table.h"
+#include "models/queries/truncate_table.h"
+#include "models/queries/select.h"
+#include "models/queries/insert.h"
+#include "models/queries/update.h"
+#include "models/queries/delete.h"
 #include "utils/text_utils.h"
 
 class Query

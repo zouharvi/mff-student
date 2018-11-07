@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "query_base.h"
+#include "models/query_base.h"
 #include "utils/text_utils.h"
 
 class DropTable : public QueryBase

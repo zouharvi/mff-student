@@ -1,8 +1,6 @@
-#include "models/create_table.h"
+#include "models/queries/create_table.h"
 
-using namespace std;
-
-CreateTable::CreateTable(const vector<string> &tokens, bool &ok)
+CreateTable::CreateTable(const std::vector<std::string> &tokens, bool &ok)
 {
     type = CREATE;
     size_t length = tokens.size();
@@ -70,7 +68,7 @@ CreateTable::CreateTable(const vector<string> &tokens, bool &ok)
         return;
     }
 
-    vector<string> buff;
+    std::vector<std::string> buff;
     for (size_t i = starting_def + 1; i < ending_def; i++)
     {
         if (i == ending_def - 1)
@@ -88,7 +86,7 @@ CreateTable::CreateTable(const vector<string> &tokens, bool &ok)
             else
             {
                 columns.push_back(ColumnType(buff, ok));
-                buff = vector<string>();
+                buff = std::vector<std::string>();
                 if (!ok)
                 {
                     specific_err(ok);
@@ -103,7 +101,7 @@ CreateTable::CreateTable(const vector<string> &tokens, bool &ok)
     }
 
     // check at most one PRIMARY KEY and unique names
-    unordered_set<string> column_names;
+    std::unordered_set<std::string> column_names;
     int column_index = 0;
     for (ColumnType &column : columns)
     {
@@ -136,18 +134,18 @@ CreateTable::CreateTable(const vector<string> &tokens, bool &ok)
     }
 }
 
-void CreateTable::bad_syntax(bool &ok, string extra)
+void CreateTable::bad_syntax(bool &ok, std::string extra)
 {
     ok = false;
-    cout << "Error: Bad CREATE TABLE syntax `CREATE TABLE [IF NOT EXISTS] table_name ( column_name column_def, .. );`" << endl;
+    std::cout << "Error: Bad CREATE TABLE syntax `CREATE TABLE [IF NOT EXISTS] table_name ( column_name column_def, .. );`" << std::endl;
     if (extra != "")
     {
-        cout << "       " << extra << endl;
+        std::cout << "       " << extra << std::endl;
     }
 }
 
-void CreateTable::specific_err(bool &ok, string extra)
+void CreateTable::specific_err(bool &ok, std::string extra)
 {
     ok = false;
-    cout << extra << endl;
+    std::cout << extra << std::endl;
 }

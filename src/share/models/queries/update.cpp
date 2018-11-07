@@ -1,4 +1,4 @@
-#include "models/update.h"
+#include "models/queries/update.h"
 
 Update::Update(const std::vector<std::string> &tokens, bool &ok)
 {

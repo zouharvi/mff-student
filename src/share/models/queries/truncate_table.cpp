@@ -1,6 +1,4 @@
-#include "models/truncate_table.h"
-
-#include <iostream>
+#include "models/queries/truncate_table.h"
 
 TruncateTable::TruncateTable(const std::vector<std::string> &tokens, bool &ok)
 {

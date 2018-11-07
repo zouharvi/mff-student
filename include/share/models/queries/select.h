@@ -6,10 +6,10 @@
 #include <iostream>
 #include <unordered_set>
 #include <memory>
-#include "query_base.h"
-#include "models/expression.h"
-#include "models/table_name.h"
-#include "column_type.h"
+#include "models/query_base.h"
+#include "models/auxilary/expression.h"
+#include "models/auxilary/table_name.h"
+#include "models/auxilary/column_type.h"
 #include "utils/text_utils.h"
 #include "utils/comp_utils.h"
 

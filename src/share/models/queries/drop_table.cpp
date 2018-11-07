@@ -1,4 +1,4 @@
-#include "models/drop_table.h"
+#include "models/queries/drop_table.h"
 
 DropTable::DropTable(const std::vector<std::string> &tokens, bool &ok)
 {

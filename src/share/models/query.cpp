@@ -1,28 +1,27 @@
 #include "models/query.h"
-using namespace std;
 
 template <class QueryType>
-void Query::try_parse(const vector<string> &tokens)
+void Query::try_parse(const std::vector<std::string> &tokens)
 {
     if (!std::is_base_of<QueryBase, QueryType>())
     {
-        throw runtime_error("Wrong QueryType type passed to try_parse template.");
+        throw std::runtime_error("Wrong QueryType type passed to try_parse template.");
     }
 
     this->data = std::make_unique<QueryType>(tokens, ok);
 }
 
-Query::Query(const vector<string> &tokens)
+Query::Query(const std::vector<std::string> &tokens)
 {
     if (tokens.size() < 2)
     {
-        cout << "Error: No query has less than two tokens" << endl;
+        std::cout << "Error: No query has less than two tokens" << std::endl;
         ok = false;
         return;
     }
 
-    string command1 = TextUtils::to_upper(tokens[0]);
-    string command2 = TextUtils::to_upper(tokens[1]);
+    std::string command1 = TextUtils::to_upper(tokens[0]);
+    std::string command2 = TextUtils::to_upper(tokens[1]);
 
     if (command1 == "DROP" && command2 == "TABLE")
         try_parse<DropTable>(tokens);
@@ -39,5 +38,5 @@ Query::Query(const vector<string> &tokens)
     else if (command1 == "UPDATE")
         try_parse<Update>(tokens);
     else
-        cout << "Unrecognized query `" << tokens[0] << "`, `" << tokens[1] << "`" << endl;
+        std::cout << "Unrecognized query `" << tokens[0] << "`, `" << tokens[1] << "`" << std::endl;
 }

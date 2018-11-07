@@ -1,13 +1,12 @@
 #include "front/meta_system.h"
-using namespace std;
 
-MetaSystem::MetaSystem(string_view file, std::shared_ptr<DbConnector> db)
+MetaSystem::MetaSystem(std::string_view file, std::shared_ptr<DbConnector> db)
 {
     database_file = file;
     this->db = db;
 }
 
-bool MetaSystem::process(const vector<string> &tokens)
+bool MetaSystem::process(const std::vector<std::string> &tokens)
 {
     if (tokens.size() == 0)
     {
@@ -25,19 +24,19 @@ bool MetaSystem::process(const vector<string> &tokens)
     else if (tokens[0] == "debug")
         debug(tokens);
     else
-        cout << "Unknown command: `" << tokens[0] << "`" << endl;
+        std::cout << "Unknown command: `" << tokens[0] << "`" << std::endl;
 
     return true;
 }
 
 void MetaSystem::help()
 {
-    cout << HELP_TEXT << endl;
+    std::cout << HELP_TEXT << std::endl;
 }
 
 void MetaSystem::about()
 {
-    cout << ABOUT_TEXT << endl;
+    std::cout << ABOUT_TEXT << std::endl;
 }
 
 void MetaSystem::exit()
@@ -47,24 +46,23 @@ void MetaSystem::exit()
     std::exit(0);
 }
 
-void MetaSystem::open(const vector<string> &tokens)
+void MetaSystem::open(const std::vector<std::string> &tokens)
 {
     if (tokens.size() < 2)
     {
-        cout << "Not enough arguments for `.open`. Please specifiy filename." << endl;
-    };
+        std::cout << "Not enough arguments for `.open`. Please specifiy filename." << std::endl;
+    }
     database_file = tokens[1];
-    cout << db->open_file(database_file) << endl;
-    ;
+    std::cout << db->open_file(database_file) << std::endl;
 }
 
 void MetaSystem::debug(const std::vector<std::string> &)
 {
-    cout << "debug:      " << (ZIMADB_DEBUG ? "on" : "off") << endl;
-    cout << "database:   " << database_file << endl;
+    std::cout << "debug:      " << (ZIMADB_DEBUG ? "on" : "off") << std::endl;
+    std::cout << "database:   " << database_file << std::endl;
 
     // ZIMADB_DEBUG is now constant
-    // @RUDIMENT
+    // @UNUSED
     // if(tokens.size() >= 2) {
     //     if(TextUtils::to_upper(tokens[1]) == "ON") {
     //         DEBUG = true;

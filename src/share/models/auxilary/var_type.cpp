@@ -1,4 +1,4 @@
-#include "models/var_type.h"
+#include "models/auxilary/var_type.h"
 
 VarType::VarType(const std::vector<std::string> &tokens, bool &ok)
 {

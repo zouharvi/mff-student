@@ -1,4 +1,4 @@
-#include "models/delete.h"
+#include "models/queries/delete.h"
 
 Delete::Delete(const std::vector<std::string> &tokens, bool &ok)
 {

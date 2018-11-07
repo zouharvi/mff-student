@@ -1,4 +1,4 @@
-#include "models/column_type.h"
+#include "models/auxilary/column_type.h"
 
 ColumnType::ColumnType(const std::vector<std::string> &tokens, bool &ok)
 {

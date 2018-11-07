@@ -3,11 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "models/create_table.h"
-#include "models/drop_table.h"
 #include "models/query.h"
-#include "models/insert.h"
-#include "models/select.h"
 
 
 #ifndef FILEIO_H

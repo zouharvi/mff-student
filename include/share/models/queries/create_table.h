@@ -7,8 +7,8 @@
 #include <unordered_set>
 #include <memory>
 #include "zimadb.h"
-#include "query_base.h"
-#include "column_type.h"
+#include "models/query_base.h"
+#include "models/auxilary/column_type.h"
 #include "utils/text_utils.h"
 
 class CreateTable : public QueryBase

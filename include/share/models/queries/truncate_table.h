@@ -4,8 +4,9 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "query_base.h"
-#include "models/delete.h"
+#include <iostream>
+#include "models/query_base.h"
+#include "models/queries/delete.h"
 #include "utils/text_utils.h"
 
 class TruncateTable : public QueryBase

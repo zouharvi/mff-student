@@ -1,4 +1,4 @@
-#include "models/table_name.h"
+#include "models/auxilary/table_name.h"
 
 TableName::TableName(const std::vector<std::string> &tokens, bool &ok)
 {

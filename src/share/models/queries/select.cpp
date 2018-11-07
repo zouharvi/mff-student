@@ -1,4 +1,4 @@
-#include "models/select.h"
+#include "models/queries/select.h"
 
 Select::Select(const std::vector<std::string> &tokens, bool &ok)
 {

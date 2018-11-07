@@ -1,10 +1,9 @@
 #include "utils/comp_utils.h"
-using namespace std;
 
-string CompUtils::implode(const vector<string> &vec, const char *delim)
+std::string CompUtils::implode(const std::vector<std::string> &vec, const char *delim)
 {
-    stringstream res;
-    copy(vec.begin(), vec.end(), ostream_iterator<string>(res, delim));
+    std::stringstream res;
+    copy(vec.begin(), vec.end(), std::ostream_iterator<std::string>(res, delim));
     return res.str();
 }
 

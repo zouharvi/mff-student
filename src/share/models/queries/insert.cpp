@@ -1,4 +1,4 @@
-#include "models/insert.h"
+#include "models/queries/insert.h"
 
 Insert::Insert(const std::vector<std::string> &tokens, bool &ok)
 {
