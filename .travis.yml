@@ -1,2 +1,8 @@
+language: cpp
+os: linux
+addons:
+  apt:
+    packages:
+      - g++-7
 script:
-- make run
+- make travis
