@@ -1,9 +1,11 @@
 #include "storage/fileio.h"
+#include "storage/errors.h"
+#include "storage/dbfile.h"
 
 #include <algorithm>
 #include <map>
 
-std::string FileIO::open_file(std::string filename)
+FILE_STATUS FileIO::open_file(std::string filename)
 {
     // Get the file's extension (without the full stop)
     // This is later going to be swapped to reading the file's header
@@ -20,7 +22,7 @@ std::string FileIO::open_file(std::string filename)
     else
     {
         // Unknown file extension
-        return "Error: unknown extension `" + ext + "`";
+        return FILE_STATUS::FAILURE;
     }
 
     close_file();
@@ -28,9 +30,17 @@ std::string FileIO::open_file(std::string filename)
     dbfilename = filename;
     dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
 
+    if(!dbfile.fail())
+    {
+        dbfile.seekg(LAST_PAGE_OFFSET);
+        char val[2];
+        dbfile.read(val, 2);
+        max_page = val[0] * 256 + val[1];        
+    }
+
     return dbfile.fail() ?
-        "Error opening file `" + filename + "`" :
-        "File `" + filename + "` open";
+        FILE_STATUS::FAILURE :
+        FILE_STATUS(file_version);
 }
 
 void FileIO::close_file()
@@ -44,9 +54,9 @@ void FileIO::close_file()
 std::string FileIO::create_table(Query& query)
 {
     if (query.data == nullptr)
-        return "null ptr fail"; // TODO: strings to consts
+        return error_msg(ErrorId::received_nullptr);
     if (!dbfile.is_open())
-        return "no file to write to";
+        return error_msg(ErrorId::no_file_open);
 
     std::unique_ptr<CreateTable> create_table_query ((CreateTable*) query.data.get());
     
@@ -85,7 +95,7 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
     {
         std::getline(dbfile, line);
 
-	std::ptrdiff_t table_name_end = line.find_first_of(';', 1)-7;
+	    std::ptrdiff_t table_name_end = line.find_first_of(';', 1) - 7;
 
         // Check for table name collision
         if(!query->if_not_exists && line.substr(0,6) == ";TABLE" && line.substr(7, table_name_end) == query->table_name)
@@ -116,9 +126,9 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable>& query)
 std::string FileIO::drop_table(Query& query)
 {
     if (query.data == nullptr)
-        return "null ptr fail"; // TODO: strings to consts
+        return error_msg(ErrorId::received_nullptr);
     if (!dbfile.is_open())
-        return "no file to delete from";
+        return error_msg(ErrorId::no_file_open);
 
     bool status = false;
 
@@ -176,7 +186,7 @@ bool FileIO::drop_table_provisional(std::unique_ptr<DropTable>& query)
 
     std::rename("temp.pzima", dbfilename.c_str());
 
-    dbfile.open(dbfilename.c_str());
+    dbfile.open(dbfilename.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
 
     return true;
 }
@@ -184,9 +194,9 @@ bool FileIO::drop_table_provisional(std::unique_ptr<DropTable>& query)
 std::string FileIO::insert(Query& query)
 {
     if (query.data == nullptr)
-        return "null ptr fail"; // TODO: strings to consts
+        return error_msg(ErrorId::received_nullptr);
     if (!dbfile.is_open())
-        return "no file to delete from";
+        return error_msg(ErrorId::no_file_open);
 
     bool status = false;
 
@@ -231,7 +241,7 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
     {
         std::getline(dbfile, line);
 
-	std::ptrdiff_t table_name_end = line.find_first_of(';', 1)-7;
+	    std::ptrdiff_t table_name_end = line.find_first_of(';', 1) - 7;
 
         if(line.substr(0,6) == ";TABLE" && line.substr(7, table_name_end) == query->table_name->name)
         {
@@ -245,7 +255,7 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
             for(auto& column: columns)
             {
                 auto data = std::find(query->columns.begin(), query->columns.end(), column.second);
-		std::cout << column.second;
+		        std::cout << column.second;
 
                 if(data != query->columns.end())
                 {
@@ -254,7 +264,7 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
                     //TODO: add type checks
                     written_line.append(query->expressions.at(index).eval(dummy, found));
                     written_line.append(",");
-		    std::cout<<written_line<<std::endl;
+		            std::cout<<written_line<<std::endl;
                 }
                 else
                 {
@@ -279,7 +289,7 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert>& query)
 
     std::rename("temp.pzima", dbfilename.c_str());
 
-    dbfile.open(dbfilename.c_str());
+    dbfile.open(dbfilename.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
 
     return found;
 }
@@ -336,7 +346,7 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
     {
         std::getline(dbfile, line);
 
-	std::ptrdiff_t table_name_end = line.find_first_of(';', 1)-7;
+	    std::ptrdiff_t table_name_end = line.find_first_of(';', 1) - 7;
 
         // Check for table name
         if(line.substr(0,6) == ";TABLE" && (line.substr(7, table_name_end) == query->table_names.at(0).name || (!in_table && line.substr(7, table_name_end) != query->table_names.at(0).name)))
@@ -394,13 +404,57 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
 
     std::rename("temp.pzima", dbfilename.c_str());
 
-    dbfile.open(dbfilename.c_str());
+    dbfile.open(dbfilename.c_str(), std::fstream::in | std::fstream::out | std::fstream::app);
 
     return result_rows;
 }
 
+std::string FileIO::read_page(std::size_t page_nr)
+{
+    if(file_version == PROVISIONAL || dbfile.fail())
+    {
+        return "";
+    }
 
-std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_provisional(std::string tabledef)
+    char c_str[PAGE_SIZE];
+    dbfile.seekg(page_nr * PAGE_SIZE);
+    dbfile.read(c_str, PAGE_SIZE);
+    std::string result = c_str;
+    dbfile.clear();
+
+    return result;
+}
+
+bool FileIO::append_page(std::string page)
+{
+    if(page.size() != get_page_size())
+    {
+        return false;
+    }
+
+    dbfile.seekg(max_page * PAGE_SIZE);
+    dbfile.clear();
+    dbfile.write(page.c_str(), PAGE_SIZE);
+    
+    return dbfile.fail();
+}
+
+
+bool FileIO::rewrite_page(std::size_t page_nr, std::string page)
+{
+    if(file_version == PROVISIONAL || dbfile.fail())
+    {
+        return false;
+    }
+
+    dbfile.seekg(page_nr * PAGE_SIZE);
+    dbfile.write(page.c_str(), PAGE_SIZE);
+    dbfile.clear();
+
+    return true; // TODO: this is weird, something should be checked here
+}
+
+std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_provisional(std::string& tabledef)
 {
     std::vector<std::pair<VarType::Type, std::string>> result = std::vector<std::pair<VarType::Type, std::string>>();
     std::cout << tabledef<<std::endl;
@@ -419,7 +473,7 @@ std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_prov
     return result;
 }
 
-std::vector<std::string> FileIO::get_row_data_provisional(std::string row)
+std::vector<std::string> FileIO::get_row_data_provisional(std::string& row)
 {
     std::vector<std::string> result = std::vector<std::string>();
     auto left_substr = row.begin();
