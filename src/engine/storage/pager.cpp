@@ -8,12 +8,12 @@
 std::string Pager::add_table(Query& query, FileIO& fileio)
 {
     CreateTable* data = (CreateTable *)(query.data.get());
-    if(data->primary_key == nullptr)
+    if(data->primary_key == -1)
     {
         bool ok = true;
         std::vector<std::string> id_definition = { "zimaid", "PRIMARY", "KEY",  "INT" };
         data->columns.push_back(ColumnType(id_definition, ok));
-        data->primary_key = &(data->columns[data->columns.size()-1]);
+        data->primary_key = data->columns.size()-1;
     }
 
     std::size_t definition_page_nr = get_empty_page_address(fileio);
@@ -23,7 +23,7 @@ std::string Pager::add_table(Query& query, FileIO& fileio)
     
     btree.insert(BASE_TABLE_TREE_ROOT, data->table_name, pair_pointer, fileio);
 
-    bool ok = btree.build_root(root_tree_page, static_cast<int>(data->primary_key->type.type), fileio);
+    bool ok = btree.build_root(root_tree_page, static_cast<int>(data->columns[data->primary_key].type->type), fileio);
     TableDefinition table_def;
     table_def.fill(data);
     ok = ok && write_table_page(definition_page_nr, table_def, fileio);
@@ -520,10 +520,10 @@ void TableDefinition::fill(CreateTable* data)
     empty_data_page = 0;
     next_id = 1;
 
-    for(auto column: data->columns)
+    for(auto column=data->columns.begin(); column != data->columns.end(); ++column)
     {
-        columns.push_back(std::make_tuple(column.type.type, column.type.size, column.name));
-        if(column.primary_key)
+        columns.push_back(std::make_tuple(column->type->type, column->type->size, column->name));
+        if(column->primary_key)
         {
             primary = counter;
         }

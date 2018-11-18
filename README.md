@@ -2,6 +2,10 @@
 
 SQLite-like database implementation from scratch (semestral project by Petr Chmel and Vilém Zouhar).
 
+[![Build Status](https://travis-ci.org/zouharvi/ZimaDB.svg?branch=master)](https://travis-ci.org/zouharvi/ZimaDB)
+[![Build Status](https://travis-ci.org/zouharvi/ZimaDB.svg?branch=develop)](https://travis-ci.org/zouharvi/ZimaDB)
+
+
 ## Documentation
 Read concept assignment in `doc_meta/concept.md`.
 

@@ -1,28 +1,41 @@
 #include "utils/text_utils.h"
-using namespace std;
 
-string TextUtils::to_upper(string s) {
-    for (auto & c: s) c = toupper(c);
+std::string TextUtils::to_upper(std::string s)
+{
+    for (auto &c : s)
+        c = toupper(c);
     return s;
 }
 
-string TextUtils::to_lower(string s) {
-    for (auto & c: s) c = toupper(c);
+std::string TextUtils::to_lower(std::string s)
+{
+    for (auto &c : s)
+        c = toupper(c);
     return s;
 }
 
-bool TextUtils::cmp(string a, string b) {
-    return to_upper(a) == to_upper(b);
-}
-
-string TextUtils::strip_quotes(string a) {
-    if(a.size() >= 2 &&
-        (
-            (a[0] == '"'  && a.back() == '"') ||
-            (a[0] == '\'' && a.back() == '\'')
-        )
-    ) {
-        return a.substr(1, a.size() - 2);
+bool TextUtils::cmp(std::string_view a, std::string_view b)
+{
+    if (a.length() != b.length())
+    {
+        return false;
     }
-    return a;
+    for (size_t i = 0; i < a.length(); i++)
+    {
+        if (toupper(a[i]) != toupper(b[i]))
+            return false;
+    }
+    return true;
+}
+
+std::string TextUtils::strip_quotes(std::string_view a)
+{
+    if (a.size() >= 2 &&
+        ((a[0] == '"' && a.back() == '"') ||
+         (a[0] == '\'' && a.back() == '\'')))
+    {
+        return std::string(a.substr(1, a.size() - 2));
+    }
+
+    return std::string(a);
 }

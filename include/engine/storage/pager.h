@@ -3,7 +3,7 @@
 #include "storage/fileio.h"
 #include "storage/btree.h"
 #include "models/query.h"
-#include "models/select.h"
+#include "models/queries/select.h"
 
 #ifndef PAGER_H
 #define PAGER_H
