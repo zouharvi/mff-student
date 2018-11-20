@@ -50,3 +50,7 @@ travis: zimadb test
 
 size:
 	find . -type f | grep -E ".(cpp|h)$$" | xargs ls -la |  awk '{ total += $$5; print }; END { print total/1024, "KB" }';
+size_husak:
+	find . -type f | grep -E ".(cpp|h)$$" | xargs ls -la |  awk '{ total += $$5; print }; END { print total*2/1024, "KB" }';
+lines:
+	find . -type f | grep -E ".(cpp|h)$$" | xargs ls | xargs cat | wc -l;
