@@ -30,6 +30,8 @@ build/share/%.o: src/share/%.cpp
 	@mkdir -p $(shell dirname $@)
 	g++ $(GCC_ARGS) -I include/share -I include/engine -I include/core -c -o $@ $<
 
+.PHONY: run clean re test travis size size_husak lines
+
 run: zimadb
 	@echo ""
 	@echo ""
