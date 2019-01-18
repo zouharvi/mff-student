@@ -1,9 +1,13 @@
 # minimalist build setup
 .DEFAULT_GOAL := zimadb
 SOURCES := $(shell find src/ -type f -name *.cpp)
+TEST_SOURCES := $(shell find src/*/*/ test/ -type f -name *.cpp)
 OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
-LIB := -lreadline
+TEST_OBJECTS := $(patsubst src/%, build/%, $(TEST_SOURCES:.cpp=.o))
+LIB := -lreadline -lstdc++fs
+TESTLIB := -lgtest
 GCC_ARGS := -Wall -Wextra -pedantic -std=c++17 -O3
+TEST_GCC_ARGS := -Wall -Wextra -pedantic -std=c++17
 
 zimadb: $(OBJECTS)
 	@echo ""

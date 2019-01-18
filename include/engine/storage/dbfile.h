@@ -33,6 +33,19 @@ const char TABLE_DEFINITION_PAGE_HEADER = 0x05;
 const char DATA_PAGE_HEADER = 0x50;
 const char FREE_PAGE_HEADER = 0x20;
 
+
+// DEFAULT STRINGS
+namespace paging
+{
+    std::string get_empty_page(std::size_t);
+
+    std::string get_empty_header_page();
+
+    std::string get_empty_table_page();
+
+}
+
+
 // SOME OTHER CONSTANTS (@Vilda)
 
 const std::string TRUE_VALUE = "true";

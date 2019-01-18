@@ -409,7 +409,7 @@ std::string BTree::create_page(BTreeNode node, std::size_t page_size)
     assert(!node.is_leaf || node.data_pointers.size() == node.keys.size());
     const std::size_t SIZES[] = {4, 1, 4, 64, 1};
 
-    std::string page('\0', page_size);
+    std::string page = paging::get_empty_page(page_size);
 
     if (node.is_leaf)
     {
@@ -453,7 +453,7 @@ std::string BTree::create_page(BTreeNode node, std::size_t page_size)
 
 bool BTree::build_root(std::size_t page_nr, int primary_type, FileIO& fileio)
 {
-    std::string page('\0', fileio.get_page_size());
+    std::string page = paging::get_empty_page(fileio.get_page_size());
 
     page[0] = LEAF_BTREE_PAGE_HEADER;
     page[1] = 0xFF;

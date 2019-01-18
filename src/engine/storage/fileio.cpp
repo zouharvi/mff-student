@@ -3,6 +3,7 @@
 #include "storage/dbfile.h"
 
 #include <algorithm>
+#include <filesystem>
 #include <map>
 
 FILE_STATUS FileIO::open_file(std::string filename)
@@ -27,7 +28,19 @@ FILE_STATUS FileIO::open_file(std::string filename)
     close_file();
 
     dbfilename = filename;
+
+    bool file_exists = std::filesystem::exists(filename);
+    
     dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
+
+    // A new file was created, so we create the first two default pages
+    if(!file_exists)
+    {
+        dbfile.seekg(0);
+        dbfile.write(paging::get_empty_header_page().c_str(), PAGE_SIZE);
+        dbfile.write(paging::get_empty_table_page().c_str(), PAGE_SIZE);
+        dbfile.seekg(0);
+    }
 
     if(!dbfile.fail())
     {
