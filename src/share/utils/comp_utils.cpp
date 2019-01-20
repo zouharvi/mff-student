@@ -3,6 +3,7 @@
 std::string CompUtils::implode(const std::vector<std::string> &vec, const char *delim)
 {
     std::stringstream res;
+    // CHECK: is this 100% safe in all cases?
     copy(vec.begin(), vec.end(), std::ostream_iterator<std::string>(res, delim));
     return res.str();
 }
@@ -10,13 +11,14 @@ std::string CompUtils::implode(const std::vector<std::string> &vec, const char *
 uint CompUtils::parse_uint(std::string_view text, bool &ok)
 {
     uint num = 0;
+    // max size 9
     if (text.length() >= 9)
     {
         ok = false;
         return 0;
     }
 
-    for (const char &c : text)
+    for (char c : text)
     {
         if (!isdigit(c))
         {
@@ -29,18 +31,28 @@ uint CompUtils::parse_uint(std::string_view text, bool &ok)
     return num;
 }
 
-// exceptions shouldn't be part of normal program flow, but
-// there isn't any prettier way
+// Exceptions shouldn't be part of normal program flow and
+// the other solution is too heavy. @ANALYSIS
 bool CompUtils::is_number(const std::string &s)
 {
-    try
+    double tmp;
+    if (std::stringstream(s) >> tmp)
     {
-        std::stod(s);
+        return true;
     }
-    catch (...)
+    else
     {
         return false;
     }
 
-    return true;
+    // try
+    // {
+    //     std::stod(s);
+    // }
+    // catch (...)
+    // {
+    //     return false;
+    // }
+
+    // return true;
 }
