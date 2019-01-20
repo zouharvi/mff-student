@@ -25,7 +25,7 @@ bool TextUtils::cmp(std::string_view a, std::string_view b)
     {
         return false;
     }
- 
+
     // check individual chars
     for (size_t i = 0; i < a.length(); i++)
     {
@@ -34,7 +34,7 @@ bool TextUtils::cmp(std::string_view a, std::string_view b)
             return false;
         }
     }
-    
+
     return true;
 }
 

@@ -15,18 +15,18 @@
 
 class Update : public QueryBase
 {
-  public:
-    Update(const std::vector<std::string> &, bool &);
+public:
+  Update(const std::vector<std::string> &, bool &);
 
-    // parsing errors
-    void bad_syntax(bool &, std::string extra = "");
-    void specific_err(bool &, std::string extra = "");
+  // parsing errors
+  void bad_syntax(bool &, std::string extra = "");
+  void specific_err(bool &, std::string extra = "");
 
-    // update properties
-    std::vector<std::string> columns;
-    std::vector<Expression> expressions;
-    std::unique_ptr<Expression> condition;
-    std::unique_ptr<TableName> table_name;
+  // update properties
+  std::vector<std::string> columns;
+  std::vector<Expression> expressions;
+  std::unique_ptr<Expression> condition;
+  std::unique_ptr<TableName> table_name;
 };
 
 #endif

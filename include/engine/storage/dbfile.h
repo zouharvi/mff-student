@@ -6,16 +6,13 @@
 // HEADER OFFSETS
 
 const std::size_t LAST_PAGE_OFFSET = 28; // offset showing the last allocated page's address
-const std::size_t FREE_OFFSET = 30; // offset showing the first freelist page's address
-
+const std::size_t FREE_OFFSET = 30;      // offset showing the first freelist page's address
 
 // FREELIST PAGE OFFSETS
 const std::size_t SUCCESSOR_OFFSET = 1; // offset showing the page's sucessor's address
 
-
 // DATAPAGE OFFSETS
 const std::size_t DATAPAGE_START = 1;
-
 
 // TABLE DEFINITION HEADER OFFSETS
 
@@ -33,18 +30,16 @@ const char TABLE_DEFINITION_PAGE_HEADER = 0x05;
 const char DATA_PAGE_HEADER = 0x50;
 const char FREE_PAGE_HEADER = 0x20;
 
-
 // DEFAULT STRINGS
 namespace paging
 {
-    std::string get_empty_page(std::size_t);
+std::string get_empty_page(std::size_t);
 
-    std::string get_empty_header_page();
+std::string get_empty_header_page();
 
-    std::string get_empty_table_page();
+std::string get_empty_table_page();
 
-}
-
+} // namespace paging
 
 // SOME OTHER CONSTANTS (@Vilda)
 

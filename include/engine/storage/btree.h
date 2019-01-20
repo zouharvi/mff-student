@@ -9,31 +9,30 @@
 
 struct BTreeNode;
 
-class BTree {
-    public:
-        std::pair<std::size_t, std::size_t> find(std::size_t page_nr, std::string& key, FileIO&);
-        std::pair<std::size_t, std::size_t> find(std::pair<std::size_t, std::size_t> location, FileIO&);
-        std::pair<std::size_t, std::size_t> find_btree_location(std::size_t page_nr, std::string& key, FileIO&);
-        std::vector<std::pair<std::size_t, std::size_t>> find_all(std::size_t page_nr, FileIO&);
-        std::vector<std::pair<std::pair<std::size_t, std::size_t>, std::pair<std::size_t, std::size_t>>> find_all_locations(std::size_t page_nr, FileIO&);
-        
-        bool build_root(std::size_t page_nr, int primary_type, FileIO&);
+class BTree
+{
+  public:
+    std::pair<std::size_t, std::size_t> find(std::size_t page_nr, std::string &key, FileIO &);
+    std::pair<std::size_t, std::size_t> find(std::pair<std::size_t, std::size_t> location, FileIO &);
+    std::pair<std::size_t, std::size_t> find_btree_location(std::size_t page_nr, std::string &key, FileIO &);
+    std::vector<std::pair<std::size_t, std::size_t>> find_all(std::size_t page_nr, FileIO &);
+    std::vector<std::pair<std::pair<std::size_t, std::size_t>, std::pair<std::size_t, std::size_t>>> find_all_locations(std::size_t page_nr, FileIO &);
 
-        std::size_t insert(std::size_t page_nr, std::string& key, std::pair<std::size_t, std::size_t>& ptr, FileIO&);
-        bool delete_key(std::size_t page_nr, std::string& key, FileIO&);
-        bool delete_position(std::pair<std::size_t, std::size_t> location, FileIO&);
-        std::vector<std::size_t> get_all_tree_pages(std::size_t page_nr, FileIO& fileio);
+    bool build_root(std::size_t page_nr, int primary_type, FileIO &);
 
-    private:
-        BTreeNode parse_page(std::string&);
+    std::size_t insert(std::size_t page_nr, std::string &key, std::pair<std::size_t, std::size_t> &ptr, FileIO &);
+    bool delete_key(std::size_t page_nr, std::string &key, FileIO &);
+    bool delete_position(std::pair<std::size_t, std::size_t> location, FileIO &);
+    std::vector<std::size_t> get_all_tree_pages(std::size_t page_nr, FileIO &fileio);
 
-        
-        std::string create_page(BTreeNode, std::size_t);
-        bool split_child(BTreeNode&, std::size_t, BTreeNode&, std::size_t, BTreeNode&, std::size_t&, FileIO&);
-        bool merge(BTreeNode&, std::size_t, FileIO&);
+  private:
+    BTreeNode parse_page(std::string &);
 
-        static constexpr std::size_t ORDER = 10; // TODO: experiment with different numbers, it is expected that ORDER is an even number for easier splitting.
+    std::string create_page(BTreeNode, std::size_t);
+    bool split_child(BTreeNode &, std::size_t, BTreeNode &, std::size_t, BTreeNode &, std::size_t &, FileIO &);
+    bool merge(BTreeNode &, std::size_t, FileIO &);
 
+    static constexpr std::size_t ORDER = 10; // TODO: experiment with different numbers, it is expected that ORDER is an even number for easier splitting.
 };
 
 struct BTreeNode

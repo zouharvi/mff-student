@@ -16,18 +16,18 @@
 
 class Insert : public QueryBase
 {
-  public:
-    Insert(const std::vector<std::string> &, bool &);
+public:
+  Insert(const std::vector<std::string> &, bool &);
 
-    // parsing errors
-    void bad_syntax(bool &, std::string extra = "");
-    void specific_err(bool &, std::string extra = "");
+  // parsing errors
+  void bad_syntax(bool &, std::string extra = "");
+  void specific_err(bool &, std::string extra = "");
 
-    std::vector<std::string> columns;
-    std::vector<Expression> expressions;
-    std::unique_ptr<TableName> table_name;
+  std::vector<std::string> columns;
+  std::vector<Expression> expressions;
+  std::unique_ptr<TableName> table_name;
 
-    // @TODO: possible Select
+  // @TODO: possible Select
 };
 
 #endif

@@ -24,10 +24,10 @@ The first page of the database is **always** a header page, and the second page 
 
 The first page consists only of the database header, with the rest of the page being empty (filled with '\0').
 
-| Offset | Length | Description |
-|--------|--------|-------------|
-| 0      | 16     | The magic string "ZimaDB file ver1"
-| 30     | 2 (4?) | The first page in a free page linked list. If the list is empty, the value is 0.
+| Offset | Length | Description                                                                      |
+| ------ | ------ | -------------------------------------------------------------------------------- |
+| 0      | 16     | The magic string "ZimaDB file ver1"                                              |
+| 30     | 2 (4?) | The first page in a free page linked list. If the list is empty, the value is 0. |
 
 
 ### Free pages

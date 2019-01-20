@@ -16,15 +16,15 @@
 
 class Delete : public QueryBase
 {
-  public:
-    Delete(const std::vector<std::string> &, bool &);
+public:
+  Delete(const std::vector<std::string> &, bool &);
 
-    // parsing errors
-    void bad_syntax(bool &, std::string extra = "");
-    void specific_err(bool &, std::string extra = "");
+  // parsing errors
+  void bad_syntax(bool &, std::string extra = "");
+  void specific_err(bool &, std::string extra = "");
 
-    std::unique_ptr<Expression> condition;
-    TableName *table_name;
+  std::unique_ptr<Expression> condition;
+  TableName *table_name;
 };
 
 #endif

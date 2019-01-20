@@ -6,15 +6,15 @@
 
 class Compiler
 {
-  public:
-    // creates and executes a query
-    bool process(std::vector<std::string>);
+public:
+  // creates and executes a query
+  bool process(std::vector<std::string>);
 
-    Compiler(std::shared_ptr<DbConnector> db)
-    {
-        this->db = db;
-    };
+  Compiler(std::shared_ptr<DbConnector> db)
+  {
+    this->db = db;
+  };
 
-  private:
-    std::shared_ptr<DbConnector> db;
+private:
+  std::shared_ptr<DbConnector> db;
 };

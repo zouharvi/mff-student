@@ -3,6 +3,7 @@
 #include "storage/dbfile.h"
 
 #include <algorithm>
+// TODO: plain <filesystem> breaks Travis build, but it's the one gcc supports 
 // #include <experimental/filesystem>
 #include <filesystem>
 #include <map>
@@ -31,11 +32,11 @@ FILE_STATUS FileIO::open_file(std::string filename)
     dbfilename = filename;
 
     bool file_exists = std::filesystem::exists(filename);
-    
+
     dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
 
     // A new file was created, so we create the first two default pages
-    if(!file_exists)
+    if (!file_exists)
     {
         dbfile.seekg(0);
         dbfile.write(paging::get_empty_header_page().c_str(), PAGE_SIZE);
@@ -43,17 +44,15 @@ FILE_STATUS FileIO::open_file(std::string filename)
         dbfile.seekg(0);
     }
 
-    if(!dbfile.fail())
+    if (!dbfile.fail())
     {
         dbfile.seekg(LAST_PAGE_OFFSET);
         char val[2];
         dbfile.read(val, 2);
-        max_page = val[0] * 256 + val[1];        
+        max_page = val[0] * 256 + val[1];
     }
 
-    return dbfile.fail() ?
-        FILE_STATUS::FAILURE :
-        FILE_STATUS(file_version);
+    return dbfile.fail() ? FILE_STATUS::FAILURE : FILE_STATUS(file_version);
 }
 
 void FileIO::close_file()
@@ -108,7 +107,7 @@ bool FileIO::create_table_provisional(std::unique_ptr<CreateTable> &query)
     {
         std::getline(dbfile, line);
 
-	    std::ptrdiff_t table_name_end = line.find_first_of(';', 1) - 7;
+        std::ptrdiff_t table_name_end = line.find_first_of(';', 1) - 7;
 
         // Check for table name collision
         if (!query->if_not_exists && line.substr(0, 6) == ";TABLE" && line.substr(7, table_name_end) == query->table_name)
@@ -254,7 +253,7 @@ bool FileIO::insert_provisional(std::unique_ptr<Insert> &query)
     {
         std::getline(dbfile, line);
 
-	    std::ptrdiff_t table_name_end = line.find_first_of(';', 1) - 7;
+        std::ptrdiff_t table_name_end = line.find_first_of(';', 1) - 7;
 
         if (line.substr(0, 6) == ";TABLE" && line.substr(7, table_name_end) == query->table_name->name)
         {
@@ -422,7 +421,7 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
 
 std::string FileIO::read_page(std::size_t page_nr)
 {
-    if(file_version == PROVISIONAL || dbfile.fail())
+    if (file_version == PROVISIONAL || dbfile.fail())
     {
         return "";
     }
@@ -438,7 +437,7 @@ std::string FileIO::read_page(std::size_t page_nr)
 
 bool FileIO::append_page(std::string page)
 {
-    if(page.size() != get_page_size())
+    if (page.size() != get_page_size())
     {
         return false;
     }
@@ -446,14 +445,13 @@ bool FileIO::append_page(std::string page)
     dbfile.seekg(max_page * PAGE_SIZE);
     dbfile.clear();
     dbfile.write(page.c_str(), PAGE_SIZE);
-    
+
     return dbfile.fail();
 }
 
-
 bool FileIO::rewrite_page(std::size_t page_nr, std::string page)
 {
-    if(file_version == PROVISIONAL || dbfile.fail())
+    if (file_version == PROVISIONAL || dbfile.fail())
     {
         return false;
     }
@@ -465,7 +463,7 @@ bool FileIO::rewrite_page(std::size_t page_nr, std::string page)
     return true; // TODO: this is weird, something should be checked here
 }
 
-std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_provisional(std::string& tabledef)
+std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_provisional(std::string &tabledef)
 {
     std::vector<std::pair<VarType::Type, std::string>> result = std::vector<std::pair<VarType::Type, std::string>>();
     std::cout << tabledef << std::endl;
@@ -484,7 +482,7 @@ std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_prov
     return result;
 }
 
-std::vector<std::string> FileIO::get_row_data_provisional(std::string& row)
+std::vector<std::string> FileIO::get_row_data_provisional(std::string &row)
 {
     std::vector<std::string> result = std::vector<std::string>();
     auto left_substr = row.begin();

@@ -9,9 +9,9 @@
 
 class DropTable : public QueryBase
 {
-  public:
-    DropTable(const std::vector<std::string> &, bool &);
-    std::string table_name;
+public:
+  DropTable(const std::vector<std::string> &, bool &);
+  std::string table_name;
 };
 
 #endif

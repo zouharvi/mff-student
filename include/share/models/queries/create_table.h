@@ -13,22 +13,22 @@
 
 class CreateTable : public QueryBase
 {
-  public:
-    CreateTable(const std::vector<std::string> &, bool &);
+public:
+  CreateTable(const std::vector<std::string> &, bool &);
 
-    // parsing errors
-    void bad_syntax(bool &, std::string extra = "");
-    void specific_err(bool &, std::string extra = "");
+  // parsing errors
+  void bad_syntax(bool &, std::string extra = "");
+  void specific_err(bool &, std::string extra = "");
 
-    std::string table_name;
-    std::vector<ColumnType> columns;
+  std::string table_name;
+  std::vector<ColumnType> columns;
 
-    // create table modifiers
-    bool if_not_exists = false; // just supress error if table exists
-    int primary_key = 0;
+  // create table modifiers
+  bool if_not_exists = false; // just supress error if table exists
+  int primary_key = 0;
 
-    // @TODO: Possibly add AS select statement. Not too hard to implement.
-    bool as = false;
+  // @TODO: Possibly add AS select statement. Not too hard to implement.
+  bool as = false;
 };
 
 #endif

@@ -12,7 +12,8 @@ const std::string ERROR_MESSAGES[] = {
 
 };
 
-enum class ErrorId {
+enum class ErrorId
+{
     unknown_error,
     received_nullptr,
     no_file_open,
@@ -21,6 +22,5 @@ enum class ErrorId {
 };
 
 std::string error_msg(ErrorId err_id);
-
 
 #endif
