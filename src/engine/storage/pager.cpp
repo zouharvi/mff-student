@@ -187,7 +187,7 @@ bool Pager::add_freelist_page(std::size_t page_nr, FileIO &fileio)
 
 std::string Pager::create_freelist_page(std::size_t successor, std::size_t page_size)
 {
-    std::string header_page('\0', page_size);
+    std::string header_page = paging::get_empty_page(page_size);
     header_page[0] = FREE_PAGE_HEADER;
     header_page[SUCCESSOR_OFFSET] = successor % 256;
     header_page[SUCCESSOR_OFFSET + 1] = (successor / 256) % 256;
@@ -209,32 +209,22 @@ bool Pager::write_header_page(HeaderData data, FileIO &fileio)
 
 bool Pager::write_header_page(FileIO &fileio)
 {
-    std::string header_page('\0', fileio.get_page_size());
+    std::string header_page = paging::get_empty_header_page(); 
     return fileio.rewrite_page(0, header_page);
 }
 
 std::string Pager::create_header_page(HeaderData data, std::size_t page_size)
 {
-    std::string header_page('\0', page_size);
-    header_page[FREE_OFFSET] = data.first_free_page % 256;
-    header_page[FREE_OFFSET + 1] = (data.first_free_page / 256) % 256;
-
-    return header_page;
+    return paging::create_header_page(data, page_size);
 }
 
 HeaderData Pager::get_header_data(FileIO &fileio)
 {
-    std::string header_page = fileio.read_page(0);
-    const char *c_str = header_page.c_str();
-
-    HeaderData data;
-    data.first_free_page = c_str[FREE_OFFSET + 1] + c_str[FREE_OFFSET] * 256;
-
-    return data;
+    return paging::get_header_data(fileio);
 }
 
 /*
- * Parses the data page irregardles of the actual content - this means, that any empty row will still be present and must be filtered out.
+ * Parses the data page regardless of the actual content - this means, that any empty row will still be present and must be filtered out.
  */
 std::vector<std::map<std::string, std::string>> Pager::parse_data_page(std::size_t page_nr, TableDefinition table_def, FileIO &fileio)
 {
@@ -413,11 +403,10 @@ std::size_t Pager::get_next_definition_page(std::size_t page_nr, FileIO &fileio)
 
 bool Pager::write_table_page(std::size_t page_nr, TableDefinition table_def, FileIO &fileio)
 {
-
     std::vector<std::string> pages;
     std::vector<std::size_t> pagenumbers;
 
-    std::string page('\0', fileio.get_page_size());
+    std::string page = paging::get_empty_page(fileio.get_page_size());
 
     page[0] = TABLE_DEFINITION_PAGE_HEADER;
     page[EMPTY_PAGE] = table_def.empty_data_page / 256;
@@ -439,7 +428,7 @@ bool Pager::write_table_page(std::size_t page_nr, TableDefinition table_def, Fil
 
         if (current_char_index + record_length > fileio.get_page_size())
         {
-            pages.push_back(std::string('\0', fileio.get_page_size()));
+            pages.push_back(paging::get_empty_page(fileio.get_page_size()));
             std::size_t next_definition = get_next_definition_page(pagenumbers[current_page_index], fileio);
 
             if (next_definition == 0)
@@ -502,7 +491,7 @@ std::size_t Pager::get_empty_page_address(FileIO &fileio)
     else
     {
         result = data.last_page_number + 1;
-        fileio.append_page(std::string("\0", fileio.get_page_size()));
+        fileio.append_page(std::move(paging::get_empty_page(fileio.get_page_size())));
         data.last_page_number++;
         write_header_page(data, fileio);
     }

@@ -43,7 +43,7 @@ class FileIO
     std::string dbfilename;
     std::size_t max_page;
 
-    static constexpr std::size_t PAGE_SIZE = 1024 * 4; // 2^12 bytes, currently a constant but may be changed during runtime later when the DB is more developed
+    static constexpr std::size_t PAGE_SIZE = 1024 * 4; // 2^12 bytes, currently a constant but could be changed during runtime later if the DB is more developed
 
     std::fstream rollback_journal;
 

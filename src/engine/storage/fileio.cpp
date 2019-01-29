@@ -26,32 +26,44 @@ FILE_STATUS FileIO::open_file(std::string filename)
         // Unknown file extension
         return FILE_STATUS::FAILURE;
     }
-
     close_file();
 
     dbfilename = filename;
 
     bool file_exists = std::filesystem::exists(filename);
 
-    dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
-
-    // A new file was created, so we create the first two default pages
-    if (!file_exists)
+    if (ext == PROVISIONAL_FILE_EXTENSION)
     {
-        dbfile.seekg(0);
-        dbfile.write(paging::get_empty_header_page().c_str(), PAGE_SIZE);
-        dbfile.write(paging::get_empty_table_page().c_str(), PAGE_SIZE);
-        dbfile.seekg(0);
+        dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
     }
-
-    if (!dbfile.fail())
+    else if (ext == V1_FILE_EXTENSION)
     {
-        dbfile.seekg(LAST_PAGE_OFFSET);
-        char val[2];
-        dbfile.read(val, 2);
-        max_page = val[0] * 256 + val[1];
-    }
+        // A new file was created, so we create the first two default pages
+        if (!file_exists)
+        {
+            dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
+            dbfile.seekg(0);
+            dbfile.write(paging::get_empty_header_page().c_str(), PAGE_SIZE);
+            dbfile.write(paging::get_empty_table_page().c_str(), PAGE_SIZE);
+            dbfile.close();
+        }
 
+        dbfile.open(filename, std::fstream::in | std::fstream::out | std::fstream::binary);
+        dbfile.seekp(0);
+
+        if (!dbfile.fail())
+        {
+            dbfile.seekg(LAST_PAGE_OFFSET);
+            char val[2];
+            dbfile.read(val, 2);
+            std::cerr << int(val[0]) << " " << int(val[1]) << std::endl;
+            max_page = std::size_t(val[0]) * 256 + std::size_t(val[1]);
+        }
+
+    }
+    // Other cases would have already returned by now    
+
+    
     return dbfile.fail() ? FILE_STATUS::FAILURE : FILE_STATUS(file_version);
 }
 
@@ -442,7 +454,8 @@ bool FileIO::append_page(std::string page)
         return false;
     }
 
-    dbfile.seekg(max_page * PAGE_SIZE);
+    dbfile.seekp((max_page + 1) * PAGE_SIZE);
+    max_page++;
     dbfile.clear();
     dbfile.write(page.c_str(), PAGE_SIZE);
 

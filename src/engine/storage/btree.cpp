@@ -171,8 +171,7 @@ bool BTree::delete_position(std::pair<std::size_t, std::size_t> location, FileIO
 
 bool BTree::split_child(BTreeNode &parent_node, std::size_t parent_nr, BTreeNode &child_node, std::size_t child_nr, BTreeNode &new_child_node, std::size_t &new_child_nr, FileIO &fileio)
 {
-    // TOIMPLEMENT: new_child_nr = get_valid_page_nr();
-    new_child_nr = child_nr;
+    new_child_nr = paging::get_empty_page_address(fileio);
     auto pointer_it = std::find(parent_node.pointers.begin(), parent_node.pointers.end(), child_nr);
     std::size_t index = pointer_it - parent_node.pointers.begin();
     new_child_node.parent_nr = child_node.parent_nr;
@@ -261,7 +260,8 @@ bool BTree::merge(BTreeNode &node, std::size_t page_nr, FileIO &fileio)
             parent.pointers.erase(parent.pointers.begin() + (index - 1));
             fileio.rewrite_page(node.parent_nr, create_page(parent, fileio.get_page_size()));
             fileio.rewrite_page(parent.pointers[index - 1], create_page(left_sibling, fileio.get_page_size()));
-            // TOIMPLEMENT: free the node page
+            
+            paging::add_freelist_page(page_nr, fileio);
 
             if (parent.keys.size() <= ORDER / 2)
             {
@@ -311,7 +311,8 @@ bool BTree::merge(BTreeNode &node, std::size_t page_nr, FileIO &fileio)
             parent.pointers.erase(parent.pointers.begin() + (index));
             fileio.rewrite_page(node.parent_nr, create_page(parent, fileio.get_page_size()));
             fileio.rewrite_page(page_nr, create_page(node, fileio.get_page_size()));
-            // TOIMPLEMENT: free the right sibling page
+
+            paging::add_freelist_page(parent.pointers[index + 1], fileio);
 
             if (parent.keys.size() <= ORDER / 2)
             {
@@ -362,16 +363,20 @@ BTreeNode BTree::parse_page(std::string &page)
 
     BTreeNode node;
 
-    if (c_str[0] == 0x02) // Interior page
+    if (c_str[0] == INTERIOR_BTREE_PAGE_HEADER) // Interior page
     {
         node.is_leaf = false;
     }
-    else if (c_str[0] == 0x0a) // Leaf page
+    else if (c_str[0] == LEAF_BTREE_PAGE_HEADER) // Leaf page
     {
         node.is_leaf = true;
     }
+    else
+    {
+        throw std::logic_error("Unknown pagetype");
+    }
 
-    std::size_t key_nr = c_str[1] * 256 + c_str[2];
+    std::size_t key_nr = (unsigned char)(c_str[1]) * 256 + (unsigned char)(c_str[2]);
     int type = c_str[3];
     node.parent_nr = c_str[4] * 256 + c_str[5];
     node.type = type;
@@ -419,9 +424,18 @@ std::string BTree::create_page(BTreeNode node, std::size_t page_size)
     }
 
     std::size_t key_nr = node.keys.size();
-
-    page[1] = key_nr / 256;
-    page[2] = key_nr % 256;
+    
+    if(node.pointers.size() == 0)
+    {
+        page[1] = 255;
+        page[2] = 255;
+    }
+    else
+    {
+        page[1] = key_nr / 256;
+        page[2] = key_nr % 256;
+    }
+    
     page[3] = node.type;
     page[4] = node.parent_nr / 256;
     page[5] = node.parent_nr % 256;

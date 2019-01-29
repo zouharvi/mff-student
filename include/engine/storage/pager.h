@@ -1,6 +1,7 @@
 #include <string>
 
 #include "storage/fileio.h"
+#include "storage/dbfile.h"
 #include "storage/btree.h"
 #include "models/query.h"
 #include "models/queries/select.h"
@@ -8,7 +9,6 @@
 #ifndef PAGER_H
 #define PAGER_H
 
-struct HeaderData;
 struct TableDefinition;
 
 class Pager
@@ -46,11 +46,6 @@ class Pager
     std::size_t get_empty_page_address(FileIO &);
 };
 
-struct HeaderData
-{
-    std::size_t first_free_page;
-    std::size_t last_page_number;
-};
 
 struct TableDefinition
 {

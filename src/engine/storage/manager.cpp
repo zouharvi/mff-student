@@ -15,6 +15,9 @@ void Manager::close_file()
 
 std::string Manager::perform_query(Query &query)
 {
+    if (!query.ok)
+        return "";
+    
     if (query.data == nullptr)
         return error_msg(ErrorId::received_nullptr);
 
