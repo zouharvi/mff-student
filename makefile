@@ -8,31 +8,32 @@ LIB := -lreadline -lstdc++fs
 TESTLIB := -lgtest
 GCC_ARGS := -Wall -Wextra -pedantic -std=c++17 -O3
 TEST_GCC_ARGS := -Wall -Wextra -pedantic -std=c++17
-
+COMPILER := g++
+ 
 zimadb: $(OBJECTS)
 	@echo ""
 	@echo "Linking $@"
 	@mkdir -p bin
-	g++ $^ $(GCC_ARGS) -o bin/zimadb $(LIB)
+	$(COMPILER) $^ $(GCC_ARGS) -o bin/zimadb $(LIB)
 
 build/core/%.o: src/core/%.cpp
 	@echo ""
 	@echo "Compiling core $<"
 	@mkdir -p $(shell dirname $@)
-	g++ $(GCC_ARGS) -I include/core -I include/engine -I include/share  -c -o $@ $<
+	$(COMPILER) $(GCC_ARGS) -I include/core -I include/engine -I include/share  -c -o $@ $<
 
 build/engine/%.o: src/engine/%.cpp
 	@echo ""
 	@echo "Compiling engine $<"
 	@mkdir -p $(shell dirname $@)
-	g++ $(GCC_ARGS) -I include/engine -I include/share -c -o $@ $<
+	$(COMPILER) $(GCC_ARGS) -I include/engine -I include/share -c -o $@ $<
 
 
 build/share/%.o: src/share/%.cpp
 	@echo ""
 	@echo "Compiling share $<"
 	@mkdir -p $(shell dirname $@)
-	g++ $(GCC_ARGS) -I include/share -I include/engine -I include/core -c -o $@ $<
+	$(COMPILER) $(GCC_ARGS) -I include/share -I include/engine -I include/core -c -o $@ $<
 
 .PHONY: run clean re test travis size size_husak lines
 

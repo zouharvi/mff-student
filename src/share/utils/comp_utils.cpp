@@ -8,9 +8,9 @@ std::string CompUtils::implode(const std::vector<std::string> &vec, const char *
     return res.str();
 }
 
-uint CompUtils::parse_uint(std::string_view text, bool &ok)
+unsigned int CompUtils::parse_uint(std::string_view text, bool &ok)
 {
-    uint num = 0;
+    unsigned int num = 0;
     // max size 9
     if (text.length() >= 9)
     {

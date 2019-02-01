@@ -42,8 +42,8 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
         return;
     }
     int open = 0;
-    uint lowest_priority = 0;
-    uint lowest_priority_index = 0;
+    unsigned int lowest_priority = 0;
+    unsigned int lowest_priority_index = 0;
     // this could be all done in one pass, but this just seemed more robus
     for (size_t i = start_index; i <= end_index; i++)
     {
@@ -62,7 +62,7 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
             }
             continue;
         }
-        uint priority = get_priority(tokens[i]);
+        unsigned int priority = get_priority(tokens[i]);
         if (priority != 0)
         { // tokens[i] is an operator
             if (open * 100 + priority < lowest_priority || lowest_priority == 0)
@@ -301,7 +301,7 @@ std::string Expression::cast<std::string>(std::string value, bool &)
     return value;
 }
 
-uint Expression::get_priority(std::string op)
+unsigned int Expression::get_priority(std::string op)
 {
 
     // level 2

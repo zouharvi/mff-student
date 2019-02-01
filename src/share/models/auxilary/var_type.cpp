@@ -35,7 +35,7 @@ VarType::VarType(const std::vector<std::string> &tokens, bool &ok)
         {
             if (tokens[1] == "(" && tokens[3] == ")")
             {
-                uint s = CompUtils::parse_uint(tokens[2], ok);
+                unsigned int s = CompUtils::parse_uint(tokens[2], ok);
                 if (!ok || size > VARCHAR_MAX_SIZE)
                 {
                     not_valid(tokens, ok);
