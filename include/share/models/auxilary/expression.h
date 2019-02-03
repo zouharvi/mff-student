@@ -51,7 +51,7 @@ class Expression
     std::string value, ops;
 
     bool static is_operator(std::string);
-    uint static get_priority(std::string);
+    unsigned int static get_priority(std::string);
 
     // error outputs
     void static err(bool &, std::string, std::vector<std::string> = std::vector<std::string>());

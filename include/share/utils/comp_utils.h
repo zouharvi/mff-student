@@ -23,7 +23,7 @@ class CompUtils
     }
 
     // return parsed unsigned int on success; sets bool to false if parse error or nan
-    static uint parse_uint(std::string_view, bool &);
+    static unsigned int parse_uint(std::string_view, bool &);
 
     // tries to parse string into a double
     // (stod doesn't know string_view, hence const reference)
