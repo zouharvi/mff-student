@@ -35,7 +35,7 @@ class Pager
     std::string create_header_page(HeaderData, std::size_t);
 
     std::vector<std::map<std::string, std::string>> parse_data_page(std::size_t page_nr, TableDefinition table_def, FileIO &);
-    std::string create_data_page(std::vector<std::map<std::string, std::string>> rows, TableDefinition table_def, std::size_t page_size);
+    std::string create_data_page(std::vector<std::map<std::string, std::string>> rows, TableDefinition& table_def, std::size_t page_size);
     bool write_data_page(std::size_t page_nr, std::vector<std::map<std::string, std::string>> rows, TableDefinition table_def, FileIO &);
 
     bool write_table_page(std::size_t page_nr, TableDefinition table_def, FileIO &);

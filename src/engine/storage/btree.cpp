@@ -111,7 +111,6 @@ std::size_t BTree::insert(std::size_t page_nr, std::string &key, std::pair<std::
     {
         auto up = std::upper_bound(x_node.keys.begin(), x_node.keys.end(), key); // TODO: add comparator based on the type
         std::size_t subtree_index = up - x_node.keys.begin();
-
         y_page_nr = x_node.pointers[subtree_index];
         y_page = fileio.read_page(y_page_nr);
         y_node = parse_page(y_page);
@@ -149,7 +148,7 @@ std::size_t BTree::insert(std::size_t page_nr, std::string &key, std::pair<std::
     fileio.rewrite_page(x_page_nr, x_page);
 
     return x_page_nr;
-}
+} 
 
 bool BTree::delete_position(std::pair<std::size_t, std::size_t> location, FileIO &fileio)
 {
@@ -378,10 +377,11 @@ BTreeNode BTree::parse_page(std::string &page)
 
     std::size_t key_nr = (unsigned char)(c_str[1]) * 256 + (unsigned char)(c_str[2]);
     int type = c_str[3];
-    node.parent_nr = c_str[4] * 256 + c_str[5];
+    node.parent_nr = (unsigned char)(c_str[4]) * 256 + (unsigned char)(c_str[5]);
     node.type = type;
 
-    if (key_nr == 255 * 256 + 255)
+
+    if (key_nr == (std::size_t)(255) * (std::size_t)(256) + (std::size_t)(255))
         return node; // This node has no keys or pointers, this is a reserved value
 
     // If there are n keys, there are n+1 pointers
@@ -393,6 +393,10 @@ BTreeNode BTree::parse_page(std::string &page)
     for (std::size_t i = 0; i < key_nr; i++)
     {
         node.keys.push_back(page.substr(6 + (key_nr + 1) * 2 + SIZES[type] * i, SIZES[type]));
+        if(type == 3) // string
+        {
+            node.keys[i] = node.keys[i].substr(0, node.keys[i].find('\0'));
+        }
     }
 
     if (node.is_leaf)
@@ -406,7 +410,7 @@ BTreeNode BTree::parse_page(std::string &page)
     return node;
 }
 
-std::string BTree::create_page(BTreeNode node, std::size_t page_size)
+std::string BTree::create_page(BTreeNode& node, std::size_t page_size)
 {
     assert(node.keys.size() + 1 == node.pointers.size() || node.is_leaf);
     assert(!node.is_leaf || node.data_pointers.size() == node.keys.size());
@@ -425,24 +429,24 @@ std::string BTree::create_page(BTreeNode node, std::size_t page_size)
 
     std::size_t key_nr = node.keys.size();
     
-    if(node.pointers.size() == 0)
+    if(node.pointers.size() == 0 && node.keys.size() == 0)
     {
         page[1] = 255;
         page[2] = 255;
     }
     else
     {
-        page[1] = key_nr / 256;
+        page[1] = (key_nr / 256) % 256;
         page[2] = key_nr % 256;
     }
     
     page[3] = node.type;
-    page[4] = node.parent_nr / 256;
+    page[4] = (node.parent_nr / 256) % 256;
     page[5] = node.parent_nr % 256;
 
-    for (std::size_t i = 0; i < key_nr + 1; ++i)
+    for (std::size_t i = 0; i < node.pointers.size(); ++i)
     {
-        page[6 + 2 * i] = node.pointers[i] / 256;
+        page[6 + 2 * i] = (node.pointers[i] / 256) % 256;
         page[7 + 2 * i] = node.pointers[i] % 256;
     }
     for (std::size_t i = 0; i < key_nr; ++i)
@@ -453,9 +457,9 @@ std::string BTree::create_page(BTreeNode node, std::size_t page_size)
     {
         for (std::size_t i = 0; i < key_nr; ++i)
         {
-            page[4 + 2 * (key_nr + 1) + SIZES[node.type] * key_nr + 4 * i] = node.data_pointers[i].first / 256;
+            page[4 + 2 * (key_nr + 1) + SIZES[node.type] * key_nr + 4 * i] = (node.data_pointers[i].first / 256) % 256;
             page[5 + 2 * (key_nr + 1) + SIZES[node.type] * key_nr + 4 * i] = node.data_pointers[i].first % 256;
-            page[6 + 2 * (key_nr + 1) + SIZES[node.type] * key_nr + 4 * i] = node.data_pointers[i].second / 256;
+            page[6 + 2 * (key_nr + 1) + SIZES[node.type] * key_nr + 4 * i] = (node.data_pointers[i].second / 256) % 256;
             page[7 + 2 * (key_nr + 1) + SIZES[node.type] * key_nr + 4 * i] = node.data_pointers[i].second % 256;
         }
     }

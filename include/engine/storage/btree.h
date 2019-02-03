@@ -28,7 +28,7 @@ class BTree
   private:
     BTreeNode parse_page(std::string &);
 
-    std::string create_page(BTreeNode, std::size_t);
+    std::string create_page(BTreeNode&, std::size_t);
     bool split_child(BTreeNode &, std::size_t, BTreeNode &, std::size_t, BTreeNode &, std::size_t &, FileIO &);
     bool merge(BTreeNode &, std::size_t, FileIO &);
 

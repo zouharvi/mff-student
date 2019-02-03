@@ -25,7 +25,7 @@ public:
 
   // create table modifiers
   bool if_not_exists = false; // just supress error if table exists
-  int primary_key = 0;
+  int primary_key = -1;
 
   // @TODO: Possibly add AS select statement. Not too hard to implement.
   bool as = false;

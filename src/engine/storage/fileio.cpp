@@ -56,7 +56,6 @@ FILE_STATUS FileIO::open_file(std::string filename)
             dbfile.seekg(LAST_PAGE_OFFSET);
             char val[2];
             dbfile.read(val, 2);
-            std::cerr << int(val[0]) << " " << int(val[1]) << std::endl;
             max_page = std::size_t(val[0]) * 256 + std::size_t(val[1]);
         }
 
@@ -441,8 +440,9 @@ std::string FileIO::read_page(std::size_t page_nr)
     char c_str[PAGE_SIZE];
     dbfile.seekg(page_nr * PAGE_SIZE);
     dbfile.read(c_str, PAGE_SIZE);
-    std::string result = c_str;
+    std::string result(c_str, PAGE_SIZE);
     dbfile.clear();
+    dbfile.flush();
 
     return result;
 }
@@ -464,16 +464,17 @@ bool FileIO::append_page(std::string page)
 
 bool FileIO::rewrite_page(std::size_t page_nr, std::string page)
 {
+
     if (file_version == PROVISIONAL || dbfile.fail())
     {
         return false;
     }
-
-    dbfile.seekg(page_nr * PAGE_SIZE);
+    dbfile.seekp(page_nr * PAGE_SIZE);
+    dbfile.clear();
     dbfile.write(page.c_str(), PAGE_SIZE);
     dbfile.clear();
-
-    return true; // TODO: this is weird, something should be checked here
+    
+    return true;
 }
 
 std::vector<std::pair<VarType::Type, std::string>> FileIO::get_column_names_provisional(std::string &tabledef)

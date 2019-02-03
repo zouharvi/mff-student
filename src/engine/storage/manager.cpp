@@ -142,5 +142,10 @@ std::string Manager::select_v1(Query &query)
         result.append("\n");
     }
 
+    if(result_rows.size() == 0)
+    {
+        result = "No results found";
+    }
+
     return result;
 }

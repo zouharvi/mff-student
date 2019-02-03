@@ -55,7 +55,7 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
     Insert *data = (Insert *)(query.data.get());
 
     auto pointer = btree.find(BASE_TABLE_TREE_ROOT, data->table_name->name, fileio);
-    auto table_def = get_table_definition(pointer.second, fileio);
+    auto table_def = get_table_definition(pointer.first, fileio);
 
     std::string primary_name = std::get<2>(table_def.columns[table_def.primary]);
     std::size_t primary_index, i;
@@ -72,13 +72,14 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
     {
         return error_msg(ErrorId::no_primary_key_insert);
     }
-    else if (primary_name == "zimaid")
+    else if (i == data->columns.size() && primary_name == "zimaid")
     {
         bool ok = true;
         data->columns.push_back("zimaid");
         std::vector<std::string> id = {std::to_string(table_def.next_id)};
         data->expressions.push_back(Expression(id, ok));
         table_def.next_id++;
+        primary_index = i;
     }
 
     std::vector<std::map<std::string, std::string>> page_data;
@@ -89,7 +90,7 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
     {
         row.insert(std::make_pair(data->columns[i], data->expressions[i].eval(dummy, ok))); // These should all be constant, so no checks for validity should be necessary
     }
-
+    
     std::size_t datapage_nr = table_def.empty_data_page == 0 ? get_empty_page_address(fileio) : table_def.empty_data_page;
 
     if (table_def.empty_data_page != 0)
@@ -98,6 +99,10 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
     }
 
     page_data.push_back(row);
+
+    std::string key = data->expressions[primary_index].eval(dummy, ok);
+    auto coords = std::make_pair(datapage_nr, page_data.size()-1);
+    btree.insert(pointer.second, key, coords, fileio);
 
     ok = write_data_page(datapage_nr, page_data, table_def, fileio);
 
@@ -110,8 +115,9 @@ std::string Pager::delete_records(Query &query, FileIO &fileio)
 {
     Delete *data = (Delete *)(query.data.get());
     auto pointer = btree.find(BASE_TABLE_TREE_ROOT, data->table_name->name, fileio);
-    auto locations = btree.find_all_locations(pointer.first, fileio);
-    auto table_def = get_table_definition(pointer.second, fileio);
+    auto table_def = get_table_definition(pointer.first, fileio);
+    auto locations = btree.find_all_locations(pointer.second, fileio);
+    
 
     std::sort(locations.begin(), locations.end(), [](auto &a, auto &b) { return a.first.first < b.first.first || (a.first.first == b.first.first && a.first.second < b.first.second); });
 
@@ -145,9 +151,13 @@ std::string Pager::delete_records(Query &query, FileIO &fileio)
 std::vector<std::map<std::string, std::string>> Pager::select(TableName &tablename, FileIO &fileio) // Currently fetches *all* records from a single named table, better solution is currently probably impossible due to the way conditions are handled
 {
     auto pointer = btree.find(BASE_TABLE_TREE_ROOT, tablename.name, fileio);
-    auto locations = btree.find_all_locations(pointer.first, fileio);
-    auto table_def = get_table_definition(pointer.second, fileio);
-
+    if(pointer.first == 0 || pointer.second == 0)
+    {
+        return std::vector<std::map<std::string, std::string>>();
+    }
+    auto table_def = get_table_definition(pointer.first, fileio);
+    auto locations = btree.find_all_locations(pointer.second, fileio);
+    
     std::sort(locations.begin(), locations.end(), [](auto &a, auto &b) { return a.first.first < b.first.first || (a.first.first == b.first.first && a.first.second < b.first.second); });
 
     std::vector<std::map<std::string, std::string>> page_rows, result;
@@ -283,13 +293,13 @@ std::vector<std::map<std::string, std::string>> Pager::parse_data_page(std::size
     return rows;
 }
 
-std::string Pager::create_data_page(std::vector<std::map<std::string, std::string>> rows, TableDefinition table_def, std::size_t page_size)
+std::string Pager::create_data_page(std::vector<std::map<std::string, std::string>> rows, TableDefinition& table_def, std::size_t page_size)
 {
     assert(rows.size() * table_def.get_row_size() < page_size - 1);
     std::size_t current_index = DATAPAGE_START;
     constexpr std::size_t SIZES[] = {4, 1, 4, 0 /* N/A */, 1};
 
-    std::string page('\0', page_size);
+    std::string page = paging::get_empty_page(page_size);
 
     for (auto row : rows)
     {
@@ -304,7 +314,12 @@ std::string Pager::create_data_page(std::vector<std::map<std::string, std::strin
             }
             catch (std::out_of_range &e)
             {
-                external = std::string("\0", len);
+                if(std::get<2>(table_def.columns[table_def.primary]) == std::get<2>(column))
+                {
+                    external = std::to_string(table_def.next_id);
+                    table_def.next_id++;
+                }
+                external = paging::get_empty_page(len);
             }
 
             int i;
@@ -343,6 +358,7 @@ std::string Pager::create_data_page(std::vector<std::map<std::string, std::strin
                 break;
             }
             page.replace(current_index, len, result);
+            current_index += len;
         }
     }
     return page;
@@ -357,12 +373,16 @@ bool Pager::write_data_page(std::size_t page_nr, std::vector<std::map<std::strin
 TableDefinition Pager::parse_table_page(std::string &page, FileIO &fileio)
 {
     TableDefinition table_def;
+    if(page[0] != TABLE_DEFINITION_PAGE_HEADER)
+    {
+        throw std::logic_error("Incorrect pagetype");
+    }
     table_def.empty_data_page = page[EMPTY_PAGE] * 256 + page[EMPTY_PAGE + 1];
+    table_def.next_definition = page[NEXT_DEFINITION_PAGE] * 256 + page[NEXT_DEFINITION_PAGE + 1];
     table_def.last_used_char = page[LAST_USED_CHAR] * 256 + page[LAST_USED_CHAR + 1];
     table_def.next_id = page[NEXT_ID] * 256 + page[NEXT_ID + 1];
     table_def.primary = page[PRIMARY_KEY_ORDER] * 256 + page[PRIMARY_KEY_ORDER + 1];
-    table_def.next_definition = page[NEXT_DEFINITION_PAGE] * 256 + page[NEXT_DEFINITION_PAGE + 1];
-
+    
     std::size_t current_char = TABLE_DEFINITION_START;
     while (current_char < table_def.last_used_char && current_char < fileio.get_page_size())
     {
@@ -414,7 +434,7 @@ bool Pager::write_table_page(std::size_t page_nr, TableDefinition table_def, Fil
     page[NEXT_ID] = table_def.next_id / 256;
     page[NEXT_ID + 1] = table_def.next_id % 256;
     page[PRIMARY_KEY_ORDER] = table_def.primary / 256;
-    page[PRIMARY_KEY_ORDER] = table_def.primary % 256;
+    page[PRIMARY_KEY_ORDER + 1] = table_def.primary % 256;
 
     pages.push_back(page);
     pagenumbers.push_back(page_nr);
@@ -437,6 +457,8 @@ bool Pager::write_table_page(std::size_t page_nr, TableDefinition table_def, Fil
             pagenumbers.push_back(next_definition);
             pages[current_page_index][NEXT_DEFINITION_PAGE] = next_definition / 256;
             pages[current_page_index][NEXT_DEFINITION_PAGE + 1] = next_definition % 256;
+            pages[current_page_index][LAST_USED_CHAR] = (current_char_index / 256) % 256;
+            pages[current_page_index][LAST_USED_CHAR + 1] = current_char_index % 256;
 
             current_page_index++;
             current_char_index = TABLE_DEFINITION_START; // This should suffice - a check for maximum length should be somewhere, though.
@@ -460,6 +482,9 @@ bool Pager::write_table_page(std::size_t page_nr, TableDefinition table_def, Fil
 
     pages[current_page_index][NEXT_DEFINITION_PAGE] = 0;
     pages[current_page_index][NEXT_DEFINITION_PAGE + 1] = 0;
+
+    pages[current_page_index][LAST_USED_CHAR] = (current_char_index / 256) % 256;
+    pages[current_page_index][LAST_USED_CHAR + 1] = current_char_index % 256;
 
     bool ok = true;
 
@@ -501,17 +526,12 @@ std::size_t Pager::get_empty_page_address(FileIO &fileio)
 
 void TableDefinition::fill(CreateTable *data)
 {
-    std::size_t counter = 0;
+    primary = data->primary_key;
     empty_data_page = 0;
     next_id = 1;
 
     for (auto column = data->columns.begin(); column != data->columns.end(); ++column)
     {
         columns.push_back(std::make_tuple(column->type->type, column->type->size, column->name));
-        if (column->primary_key)
-        {
-            primary = counter;
-        }
-        counter++;
     }
 }
