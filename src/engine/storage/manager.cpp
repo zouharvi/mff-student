@@ -12,6 +12,7 @@ std::string Manager::open_file(std::string filename)
 void Manager::close_file()
 {
     fileio.close_file();
+    file_status = FILE_STATUS::FAILURE;
 }
 
 std::string Manager::perform_query(Query &query)
@@ -50,6 +51,8 @@ std::string Manager::create_table(Query &query)
         return fileio.create_table(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return create_table_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::drop_table(Query &query)
@@ -58,6 +61,8 @@ std::string Manager::drop_table(Query &query)
         return fileio.drop_table(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return drop_table_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::insert(Query &query)
@@ -66,6 +71,8 @@ std::string Manager::insert(Query &query)
         return fileio.insert(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return insert_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::select(Query &query)
@@ -74,6 +81,8 @@ std::string Manager::select(Query &query)
         return fileio.select(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return select_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::select_v1(Query &query)
