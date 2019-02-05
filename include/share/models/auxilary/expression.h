@@ -29,6 +29,9 @@ class Expression
         NEQ
     } op;
 
+    // raw value for column name
+    std::string raw_value;
+
     // evaluate this expression
     std::string eval(std::map<std::string, std::string> &, bool &);
 

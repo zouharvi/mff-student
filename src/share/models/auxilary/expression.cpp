@@ -6,6 +6,11 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
     size_t start_index = 0;
     size_t end_index = length - start_index - 1;
 
+    for (const std::string& s : tokens)
+    {
+        raw_value += s;
+    }
+
     while (tokens[start_index] == "(" && tokens[end_index] == ")")
     {
         start_index++;
