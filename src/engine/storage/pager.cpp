@@ -171,8 +171,8 @@ std::vector<std::map<std::string, std::string>> Pager::select(TableName &tablena
             current_page = locations[i].first.first;
             page_rows = parse_data_page(current_page, table_def, fileio);
 
-            result.insert(result.end(), page_rows.begin(), page_rows.end());
         }
+        result.push_back(page_rows[locations[i].first.second]);
     }
 
     return result;
