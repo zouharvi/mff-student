@@ -1,4 +1,5 @@
 # minimalist build setup
+SHELL := bash
 .DEFAULT_GOAL := zimadb
 SOURCES := $(shell find src/ -type f -name *.cpp)
 TEST_SOURCES := $(shell find src/*/*/ test/ -type f -name *.cpp)
@@ -50,8 +51,17 @@ clean:
 
 re: clean run
 
-test:
-	@echo "Tests are not implemented"
+test: zimadb
+	@echo "Running all tests"
+	cd "test/scripts/"; \
+	for filename in *.sh; do \
+		printf "\n\n===========================================\n"; \
+		printf "Running test - $$filename\n"; \
+		printf "===========================================\n\n"; \
+		./$$filename   || break; \
+	done; \
+	rm -rf *.zima
+
 
 travis: zimadb test	
 
