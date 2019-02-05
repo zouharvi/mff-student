@@ -106,9 +106,10 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
                 found = true;
                 break;
             }
-            if(!found)
-                return error_msg(ErrorId::inserting_nonexistent_column);
         }
+        if(!found)
+            return error_msg(ErrorId::inserting_nonexistent_column);
+
     }
 
     std::string primary_name = std::get<2>(table_def.columns[table_def.primary]);

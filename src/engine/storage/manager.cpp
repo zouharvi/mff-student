@@ -168,25 +168,11 @@ std::string Manager::select_v1(Query &query)
 
     if(products.size() > 0 && result_rows.size() > 0)
     {
-        auto p = products[0];
-        for(auto it = p.begin(); it != p.end(); ++it)
-        {
-            it->second = it->first;
-        }
-        bool ok = true;
         std::vector<std::string> row_titles;
 
         for (auto &&expression : data->expressions)
         {
-            std::string col = expression.eval(p, ok);
-            if (ok)
-            {
-                row_titles.push_back(col);
-            }
-            else
-            {
-                row_titles.push_back("");
-            }
+            row_titles.push_back(expression.raw_name);
         }
 
         std::vector<std::size_t> col_length;
