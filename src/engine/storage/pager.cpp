@@ -230,7 +230,7 @@ std::string Pager::delete_records(Query &query, FileIO &fileio)
             page_rows = parse_data_page(current_page, table_def, fileio);
         }
 
-        if (data->condition == nullptr || (data->condition->eval(page_rows[locations[i].second.second], ok) == "1" && ok))
+        if (data->condition == nullptr || (data->condition->eval_cast<bool>(page_rows[locations[i].second.second], ok) && ok))
         {
             to_delete.push_back(locations[i].first);
         }
