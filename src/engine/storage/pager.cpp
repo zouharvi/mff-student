@@ -47,7 +47,7 @@ std::string Pager::delete_table(Query &query, FileIO &fileio)
     }
 
     add_freelist_page(pointer.second, fileio); // The table definition page
-    // TODO: this will break when table definition page lengthening is implemented
+    // TODO: this will break if table definition page lengthening is implemented
 }
 
 std::string Pager::add_records(Query &query, FileIO &fileio)
@@ -90,18 +90,60 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
     {
         row.insert(std::make_pair(data->columns[i], data->expressions[i].eval(dummy, ok))); // These should all be constant, so no checks for validity should be necessary
     }
-    
-    std::size_t datapage_nr = table_def.empty_data_page == 0 ? get_empty_page_address(fileio) : table_def.empty_data_page;
+
+    std::size_t datapage_nr;
+    std::size_t index;
+    bool new_page = table_def.empty_data_page == 0;
 
     if (table_def.empty_data_page != 0)
     {
+        datapage_nr = table_def.empty_data_page;
         page_data = parse_data_page(datapage_nr, table_def, fileio);
+        auto locations = btree.find_all_locations(pointer.second, fileio);
+    
+        std::sort(locations.begin(), locations.end(), [](auto &a, auto &b) { return a.second.first < b.second.first || (a.second.first == b.second.first && a.second.second < b.second.second); });
+        remove_if(locations.begin(), locations.end(), [datapage_nr](auto& a){ return a.second.first != datapage_nr;});
+        if(locations.size() == 0)
+        {
+            page_data[0] = row;
+            index = 0;
+        }
+        else if(locations.size() == 1)
+        {
+            index = locations[0].second.second == 0 ? 1 : 0;
+            page_data[index] = row;
+        }
+        else
+        {
+            for(std::size_t i = 1; i < locations.size(); ++i)
+            {
+                if(locations[i-1].second.second + 1 < locations[i].second.second)
+                {
+                    index = locations[i-1].second.second + 1;
+                    page_data[index] = row;
+                    table_def.empty_data_page = datapage_nr;
+                    break;
+                }
+            }
+
+            if((locations[locations.size()-1].second.second + 1)*table_def.get_row_size() >= fileio.get_page_size())
+            {
+                page_data = {};
+                new_page = true;
+            }
+        }
+    }
+    
+    if (new_page)
+    {
+        datapage_nr = get_empty_page_address(fileio);
+        index = 0;
+        page_data.push_back(row);
+        table_def.empty_data_page = datapage_nr;
     }
 
-    page_data.push_back(row);
-
     std::string key = data->expressions[primary_index].eval(dummy, ok);
-    auto coords = std::make_pair(datapage_nr, page_data.size()-1);
+    auto coords = std::make_pair(datapage_nr, index);
     btree.insert(pointer.second, key, coords, fileio);
 
     ok = write_data_page(datapage_nr, page_data, table_def, fileio);
@@ -158,7 +200,7 @@ std::vector<std::map<std::string, std::string>> Pager::select(TableName &tablena
     auto table_def = get_table_definition(pointer.first, fileio);
     auto locations = btree.find_all_locations(pointer.second, fileio);
     
-    std::sort(locations.begin(), locations.end(), [](auto &a, auto &b) { return a.first.first < b.first.first || (a.first.first == b.first.first && a.first.second < b.first.second); });
+    std::sort(locations.begin(), locations.end(), [](auto &a, auto &b) { return a.second.first < b.second.first || (a.second.first == b.second.first && a.second.second < b.second.second); });
 
     std::vector<std::map<std::string, std::string>> page_rows, result;
     std::size_t current_page = 0;
