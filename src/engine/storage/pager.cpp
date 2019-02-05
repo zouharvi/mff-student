@@ -11,7 +11,7 @@ std::string Pager::add_table(Query &query, FileIO &fileio)
     if (data->primary_key == -1)
     {
         bool ok = true;
-        std::vector<std::string> id_definition = {"zimaid", "PRIMARY", "KEY", "INT"};
+        std::vector<std::string> id_definition = {"zimaid", "INT" , "PRIMARY", "KEY"};
         data->columns.push_back(ColumnType(id_definition, ok));
         data->primary_key = data->columns.size() - 1;
     }
