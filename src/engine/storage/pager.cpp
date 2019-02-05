@@ -212,9 +212,8 @@ std::vector<std::map<std::string, std::string>> Pager::select(TableName &tablena
         {
             current_page = locations[i].second.first;
             page_rows = parse_data_page(current_page, table_def, fileio);
-
-            std::cerr << "ROWS:" << page_rows.size() << std::endl;
         }
+
         result.push_back(page_rows[locations[i].second.second]);
     }
 
