@@ -1,4 +1,7 @@
 #!/bin/bash
 
-rm -rf ahoj.zima
-echo ".open ahoj.zima" | ../../bin/zimadb
+../../bin/zimadb <<EOF
+.open ahoj.zima
+.open zdravicko.zima
+.open ahoj.zima
+EOF

@@ -1,4 +1,8 @@
 #!/bin/bash
 
-rm -rf ahoj.zima
-echo -e ".open ahoj.zima\n create table wild (a int);\n insert into wild (a) values (1);\n select * from wild;" | ../../bin/zimadb
+../../bin/zimadb <<EOF
+.open ahoj.zima
+create table DRAK (a int);
+insert into DRAK (a) values (1);
+select * from DRAK;
+EOF

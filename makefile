@@ -58,9 +58,9 @@ test: zimadb
 		printf "\n\n===========================================\n"; \
 		printf "Running test - $$filename\n"; \
 		printf "===========================================\n\n"; \
-		./$$filename   || break; \
-	done; \
-	rm -rf *.zima
+		./$$filename; \
+		rm -rf *.zima; \
+	done;
 
 
 travis: zimadb test	
