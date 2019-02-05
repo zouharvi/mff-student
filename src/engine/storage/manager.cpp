@@ -1,5 +1,6 @@
 #include "storage/manager.h"
 #include "storage/errors.h"
+#include <iostream>
 
 std::string Manager::open_file(std::string filename)
 {
@@ -11,6 +12,7 @@ std::string Manager::open_file(std::string filename)
 void Manager::close_file()
 {
     fileio.close_file();
+    file_status = FILE_STATUS::FAILURE;
 }
 
 std::string Manager::perform_query(Query &query)
@@ -49,6 +51,8 @@ std::string Manager::create_table(Query &query)
         return fileio.create_table(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return create_table_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::drop_table(Query &query)
@@ -57,6 +61,8 @@ std::string Manager::drop_table(Query &query)
         return fileio.drop_table(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return drop_table_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::insert(Query &query)
@@ -65,6 +71,8 @@ std::string Manager::insert(Query &query)
         return fileio.insert(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return insert_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::select(Query &query)
@@ -73,6 +81,8 @@ std::string Manager::select(Query &query)
         return fileio.select(query);
     else if (file_status != FILE_STATUS::FAILURE)
         return select_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
 }
 
 std::string Manager::select_v1(Query &query)
@@ -132,17 +142,72 @@ std::string Manager::select_v1(Query &query)
 
     std::string result;
 
-    for (auto &&row : result_rows)
+    if(products.size() > 0 && result_rows.size() > 0)
     {
-        for (auto &&col : row)
+        auto p = products[0];
+        for(auto it = p.begin(); it != p.end(); ++it)
         {
-            result.append(col);
-            result.append("|");
+            it->second = it->first;
+        }
+        bool ok = true;
+        std::vector<std::string> row_titles;
+
+        for (auto &&expression : data->expressions)
+        {
+            std::string col = expression.eval(p, ok);
+            if (ok)
+            {
+                row_titles.push_back(col);
+            }
+        }
+
+        std::vector<std::size_t> col_length;
+
+        for(std::size_t col = 0; col<row_titles.size(); ++col)
+        {
+            std::size_t maxlen = row_titles[col].length();
+            for (auto &&row : result_rows)
+            {
+                maxlen = std::max(maxlen, row[col].length());
+            }
+
+            col_length.push_back(maxlen);
+        }
+
+        for(std::size_t i = 0; i<row_titles.size(); ++i)
+        {
+            if(i>0)
+                result.append("|");
+            row_titles[i].resize(col_length[i], ' ');
+            result.append(row_titles[i]);
         }
         result.append("\n");
-    }
+        std::string delim;
+        for(std::size_t i = 0; i<row_titles.size(); ++i)
+        {
+            if(i>0)
+                result.append("|");
+            delim.resize(col_length[i], '-');
+            result.append(delim);
+        }
+        result.append("\n");
 
-    if(result_rows.size() == 0)
+        for (auto &&row : result_rows)
+        {
+            for (std::size_t i = 0; i<row.size(); i++)
+            {
+                if(i>0)
+                    result.append("|");
+                row[i].resize(col_length[i], ' ');
+                result.append(row[i]);
+            }
+            result.append("\n");
+        }
+
+        result.append("Rows: ");
+        result.append(std::to_string(result_rows.size()));
+    }
+    else
     {
         result = "No results found";
     }
