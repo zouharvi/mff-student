@@ -48,6 +48,9 @@ std::string Pager::delete_table(Query &query, FileIO &fileio)
 
     add_freelist_page(pointer.second, fileio); // The table definition page
     // TODO: this will break when table definition page lengthening is implemented
+
+	// @ERROR:
+	return "";
 }
 
 std::string Pager::add_records(Query &query, FileIO &fileio)
