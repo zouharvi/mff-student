@@ -8,6 +8,14 @@
 std::string Pager::add_table(Query &query, FileIO &fileio)
 {
     CreateTable *data = (CreateTable *)(query.data.get());
+
+    auto ptr = btree.find(BASE_TABLE_TREE_ROOT, data->table_name, fileio);
+
+    if(ptr.first != 0)
+    {
+        return error_msg(ErrorId::table_already_exists);
+    }
+
     if (data->primary_key == -1)
     {
         bool ok = true;
@@ -20,7 +28,6 @@ std::string Pager::add_table(Query &query, FileIO &fileio)
     std::size_t root_tree_page = get_empty_page_address(fileio);
 
     std::pair<std::size_t, std::size_t> pair_pointer = std::make_pair(definition_page_nr, root_tree_page);
-
     btree.insert(BASE_TABLE_TREE_ROOT, data->table_name, pair_pointer, fileio);
 
     bool ok = btree.build_root(root_tree_page, static_cast<int>(data->columns[data->primary_key].type->type), fileio);
