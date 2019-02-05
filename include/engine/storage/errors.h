@@ -11,6 +11,7 @@ const std::string ERROR_MESSAGES[] = {
     "I/O error.",
     "The table does not exist.",
     "This command is not implemented for provisional files.",
+    "A column doesn't exist in the table.",
 };
 
 enum class ErrorId
@@ -22,6 +23,7 @@ enum class ErrorId
     io_error,
     table_does_not_exist,
     not_implemented_provisional,
+    inserting_nonexistent_column,
 };
 
 std::string error_msg(ErrorId err_id);

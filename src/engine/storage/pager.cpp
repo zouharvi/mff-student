@@ -89,6 +89,21 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
         return error_msg(ErrorId::table_does_not_exist);
     auto table_def = get_table_definition(pointer.first, fileio);
 
+    for(auto&& column: data->columns)
+    {
+        bool found = false;
+        for(auto table_column: table_def.columns)
+        {
+            if(column == std::get<2>(table_column))
+            {
+                found = true;
+                break;
+            }
+            if(!found)
+                return error_msg(ErrorId::inserting_nonexistent_column);
+        }
+    }
+
     std::string primary_name = std::get<2>(table_def.columns[table_def.primary]);
     std::size_t primary_index, i;
     for (i = 0; i < data->columns.size(); ++i)
@@ -207,7 +222,7 @@ std::string Pager::delete_records(Query &query, FileIO &fileio)
             page_rows = parse_data_page(current_page, table_def, fileio);
         }
 
-        if (data->condition == nullptr || (data->condition->eval(page_rows[locations[i].second.second], ok) == "" && ok))
+        if (data->condition == nullptr || (data->condition->eval(page_rows[locations[i].second.second], ok) == "1" && ok))
         {
             to_delete.push_back(locations[i].first);
         }
@@ -326,6 +341,7 @@ std::vector<std::map<std::string, std::string>> Pager::parse_data_page(std::size
             if (std::get<0>(column) == VarType::VARCHAR)
             {
                 result = page.substr(current_char_index, std::get<1>(column));
+                result.erase(std::find(result.begin(), result.end(), '\0'), result.end());
                 current_char_index += std::get<1>(column);
             }
             else
@@ -395,7 +411,10 @@ std::string Pager::create_data_page(std::vector<std::map<std::string, std::strin
                     external = std::to_string(table_def.next_id);
                     table_def.next_id++;
                 }
-                external = paging::get_empty_page(len);
+                else
+                {
+                    continue;
+                }
             }
 
             int i;

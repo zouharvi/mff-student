@@ -183,6 +183,10 @@ std::string Manager::select_v1(Query &query)
             {
                 row_titles.push_back(col);
             }
+            else
+            {
+                row_titles.push_back("");
+            }
         }
 
         std::vector<std::size_t> col_length;
@@ -228,6 +232,7 @@ std::string Manager::select_v1(Query &query)
             result.append("\n");
         }
 
+        result.append("\n");
         result.append("Rows: ");
         result.append(std::to_string(result_rows.size()));
     }
