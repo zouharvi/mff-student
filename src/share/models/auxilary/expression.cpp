@@ -8,7 +8,7 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
 
     for (const std::string& s : tokens)
     {
-        raw_value += s;
+        raw_name += s;
     }
 
     while (tokens[start_index] == "(" && tokens[end_index] == ")")

@@ -30,7 +30,7 @@ class Expression
     } op;
 
     // raw value for column name
-    std::string raw_value;
+    std::string raw_name;
 
     // evaluate this expression
     std::string eval(std::map<std::string, std::string> &, bool &);
