@@ -16,6 +16,7 @@ class Pager
   public:
     std::string add_table(Query &, FileIO &);
     std::string delete_table(Query &, FileIO &);
+    std::string truncate_table(Query &, FileIO &);
     std::string add_records(Query &, FileIO &);
     std::string delete_records(Query &, FileIO &);
     std::vector<std::map<std::string, std::string>> select(TableName &, FileIO &);

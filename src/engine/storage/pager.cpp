@@ -35,9 +35,11 @@ std::string Pager::delete_table(Query &query, FileIO &fileio)
 {
     DropTable *data = (DropTable *)(query.data.get());
     std::pair<std::size_t, std::size_t> address = btree.find_btree_location(BASE_TABLE_TREE_ROOT, data->table_name, fileio);
+    if(address.first == 0)
+        return error_msg(ErrorId::table_does_not_exist);
 
     auto pointer = btree.find(address, fileio);
-    std::vector<std::size_t> page_numbers = btree.get_all_tree_pages(pointer.first, fileio);
+    std::vector<std::size_t> page_numbers = btree.get_all_tree_pages(pointer.second, fileio);
 
     btree.delete_position(address, fileio);
 
@@ -49,15 +51,42 @@ std::string Pager::delete_table(Query &query, FileIO &fileio)
     add_freelist_page(pointer.second, fileio); // The table definition page
     // TODO: this will break if table definition page lengthening is implemented
 
-	// @ERROR:
-	return "";
+	return "Deleted table";
 }
+
+std::string Pager::truncate_table(Query &query, FileIO &fileio)
+{
+    TruncateTable *data = (TruncateTable *)(query.data.get());
+    std::pair<std::size_t, std::size_t> address = btree.find_btree_location(BASE_TABLE_TREE_ROOT, data->table_name, fileio);
+
+    if(address.first == 0)
+        return error_msg(ErrorId::table_does_not_exist);
+
+    auto pointer = btree.find(address, fileio);
+    std::vector<std::size_t> page_numbers = btree.get_all_tree_pages(pointer.second, fileio);
+
+    std::string table_def_page = fileio.read_page(pointer.first);
+    TableDefinition table_def = parse_table_page(table_def_page, fileio);
+
+    for (auto page_nr : page_numbers)
+    {
+        if(page_nr != pointer.second)
+            add_freelist_page(page_nr, fileio); // This is almost surely extremely inefficient in disk writes
+    }
+
+    btree.build_root(pointer.second, std::get<0>(table_def.columns[table_def.primary]), fileio);
+
+	return "Truncated table";
+}
+
 
 std::string Pager::add_records(Query &query, FileIO &fileio)
 {
     Insert *data = (Insert *)(query.data.get());
 
     auto pointer = btree.find(BASE_TABLE_TREE_ROOT, data->table_name->name, fileio);
+    if(pointer.first == 0)
+        return error_msg(ErrorId::table_does_not_exist);
     auto table_def = get_table_definition(pointer.first, fileio);
 
     std::string primary_name = std::get<2>(table_def.columns[table_def.primary]);
@@ -162,7 +191,6 @@ std::string Pager::delete_records(Query &query, FileIO &fileio)
     auto pointer = btree.find(BASE_TABLE_TREE_ROOT, data->table_name->name, fileio);
     auto table_def = get_table_definition(pointer.first, fileio);
     auto locations = btree.find_all_locations(pointer.second, fileio);
-    
 
     std::sort(locations.begin(), locations.end(), [](auto &a, auto &b) { return a.first.first < b.first.first || (a.first.first == b.first.first && a.first.second < b.first.second); });
 
@@ -179,7 +207,7 @@ std::string Pager::delete_records(Query &query, FileIO &fileio)
             page_rows = parse_data_page(current_page, table_def, fileio);
         }
 
-        if (data->condition->eval(page_rows[locations[i].second.second], ok) == "" && ok)
+        if (data->condition == nullptr || (data->condition->eval(page_rows[locations[i].second.second], ok) == "" && ok))
         {
             to_delete.push_back(locations[i].first);
         }

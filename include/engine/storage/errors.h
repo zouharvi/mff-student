@@ -9,7 +9,8 @@ const std::string ERROR_MESSAGES[] = {
     "No open file to write to.",
     "The requested insert has no primary key.",
     "I/O error.",
-
+    "The table does not exist.",
+    "This command is not implemented for provisional files.",
 };
 
 enum class ErrorId
@@ -19,6 +20,8 @@ enum class ErrorId
     no_file_open,
     no_primary_key_insert,
     io_error,
+    table_does_not_exist,
+    not_implemented_provisional,
 };
 
 std::string error_msg(ErrorId err_id);

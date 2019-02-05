@@ -89,9 +89,6 @@ std::string FileIO::create_table(Query &query)
     case PROVISIONAL:
         status = create_table_provisional(create_table_query);
         break;
-    case V1:
-        status = create_table_v1(create_table_query);
-        break;
     default:
         status = false;
         return "Unknown file format";
@@ -161,9 +158,6 @@ std::string FileIO::drop_table(Query &query)
     case PROVISIONAL:
         status = drop_table_provisional(drop_table_query);
         break;
-    case V1:
-        status = drop_table_v1(drop_table_query);
-        break;
     default:
         return "Unknown file format";
     }
@@ -229,9 +223,6 @@ std::string FileIO::insert(Query &query)
     {
     case PROVISIONAL:
         status = insert_provisional(insert_query);
-        break;
-    case V1:
-        status = insert_v1(insert_query);
         break;
     default:
         return "Unknown file format";
@@ -330,14 +321,11 @@ std::string FileIO::select(Query &query)
     case PROVISIONAL:
         result = select_provisional(select_query);
         break;
-    case V1:
-        result = select_v1(select_query);
-        break;
     default:
         return "Unknown file format";
     }
 
-    //TODO: this currently returns no infomration, the query result should be created in Manager.
+    //TODO: this currently returns no information, the query result should be created in Manager.
     return "Something has been selected";
 }
 

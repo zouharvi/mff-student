@@ -40,6 +40,9 @@ std::string Manager::perform_query(Query &query)
     case QueryBase::INSERT:
         return insert(query);
         break;
+    case QueryBase::TRUNCATE:
+        return truncate(query);
+        break;
     default:
         return "Unknown query";
     }
@@ -84,6 +87,27 @@ std::string Manager::select(Query &query)
     else
         return error_msg(ErrorId::no_file_open);
 }
+
+std::string Manager::truncate(Query &query)
+{
+    if (file_status == FILE_STATUS::PROVISIONAL)
+        return error_msg(ErrorId::not_implemented_provisional);
+    else if (file_status != FILE_STATUS::FAILURE)
+        return truncate_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
+}
+
+std::string Manager::delete_records(Query &query)
+{
+    if (file_status == FILE_STATUS::PROVISIONAL)
+        return error_msg(ErrorId::not_implemented_provisional);
+    else if (file_status != FILE_STATUS::FAILURE)
+        return delete_v1(query);
+    else
+        return error_msg(ErrorId::no_file_open);
+}
+
 
 std::string Manager::select_v1(Query &query)
 {

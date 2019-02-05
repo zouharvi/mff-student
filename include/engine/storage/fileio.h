@@ -49,13 +49,10 @@ class FileIO
 
     /* ----- OPERATIONS ----- */
     bool create_table_provisional(std::unique_ptr<CreateTable> &);
-	bool create_table_v1(std::unique_ptr<CreateTable> &) { return false;  };
 
     bool drop_table_provisional(std::unique_ptr<DropTable> &);
-    bool drop_table_v1(std::unique_ptr<DropTable> &){ return false; };
 
     bool insert_provisional(std::unique_ptr<Insert> &);
-    bool insert_v1(std::unique_ptr<Insert> &){ return false; };
 
     std::vector<std::vector<std::string>> select_provisional(std::unique_ptr<Select> &);
 	std::vector<std::vector<std::string>> select_v1(std::unique_ptr<Select> &) { return std::vector<std::vector<std::string>>();  };
