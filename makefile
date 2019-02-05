@@ -7,7 +7,7 @@ OBJECTS := $(patsubst src/%, build/%, $(SOURCES:.cpp=.o))
 TEST_OBJECTS := $(patsubst src/%, build/%, $(TEST_SOURCES:.cpp=.o))
 LIB := -lreadline -lstdc++fs
 TESTLIB := -lgtest
-GCC_ARGS := -Wall -Wextra -pedantic -std=c++17 -O3
+GCC_ARGS := -Wall -Wextra -pedantic -std=c++17 -g
 TEST_GCC_ARGS := -Wall -Wextra -pedantic -std=c++17
 COMPILER := g++
  

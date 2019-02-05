@@ -8,7 +8,6 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
 
     for (const std::string &s : tokens)
     {
-        std::cout << "   " << s << std::endl;
         raw_name += s;
     }
 

@@ -160,5 +160,5 @@ std::vector<std::vector<std::string>> Tokenizer::extract_queries(const std::vect
 
 bool Tokenizer::split_char(char c)
 {
-    return std::string("()+-/*%,=;><").find(c) != std::string::npos;
+    return std::string("()+-/*%,=;><!").find(c) != std::string::npos;
 }
