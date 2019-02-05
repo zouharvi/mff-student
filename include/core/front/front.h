@@ -6,9 +6,11 @@
 #include "../compiler/compiler.h"
 #include "../utils/tokenizer.h"
 
-// external libraries
-#include <readline/readline.h>
-#include <readline/history.h>
+#ifdef __linux__
+	// external libraries
+	#include <readline/readline.h>
+	#include <readline/history.h>
+#endif
 
 class Front
 {

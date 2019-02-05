@@ -1,4 +1,7 @@
 #!/bin/bash
 
-rm -rf ahoj.zima
-echo -e ".open ahoj.zima\n create table pokus (a int);\n select * from pokus;" | ../../bin/zimadb
+../../bin/zimadb <<EOF
+.open ahoj.zima
+create table pokus (a int);
+select * from pokus;
+EOF
