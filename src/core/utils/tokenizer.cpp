@@ -38,6 +38,16 @@ std::vector<std::string> Tokenizer::split(std::string_view line)
                         tokens.push_back("!=");
                         i++;
                     }
+                    else if (i != length - 1 && line[i] == '>' && line[i + 1] == '=')
+                    { // special treatment for >=
+                        tokens.push_back(">=");
+                        i++;
+                    }
+                    else if (i != length - 1 && line[i] == '<' && line[i + 1] == '=')
+                    { // special treatment for <=
+                        tokens.push_back("<=");
+                        i++;
+                    }
                     else
                     {
                         tokens.push_back(std::string(1, line[i]));
@@ -150,5 +160,5 @@ std::vector<std::vector<std::string>> Tokenizer::extract_queries(const std::vect
 
 bool Tokenizer::split_char(char c)
 {
-    return std::string("()+-/*%,=;").find(c) != std::string::npos;
+    return std::string("()+-/*%,=;><").find(c) != std::string::npos;
 }

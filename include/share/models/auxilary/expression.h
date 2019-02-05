@@ -26,6 +26,10 @@ class Expression
         OR,
         CAT,
         EQ,
+        GT,
+        LT,
+        GET,
+        LET,
         NEQ
     } op;
 

@@ -141,7 +141,7 @@ std::string Manager::select_v1(Query &query)
     for (auto &&record : products)
     {
         bool ok = true;
-        if (data->condition == nullptr || (data->condition->eval(record, ok) == "" && ok)) // TODO: is this correct?
+        if (data->condition == nullptr || (data->condition->eval_cast<bool>(record, ok) && ok))
         {
             std::vector<std::string> row;
             for (auto &&expression : data->expressions)

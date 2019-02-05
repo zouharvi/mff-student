@@ -6,7 +6,7 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
     size_t start_index = 0;
     size_t end_index = length - start_index - 1;
 
-    for (const std::string& s : tokens)
+    for (const std::string &s : tokens)
     {
         raw_name += s;
     }
@@ -100,6 +100,14 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
         op = CAT;
     else if (ops == "=")
         op = EQ;
+    else if (ops == ">")
+        op = GT;
+    else if (ops == "<")
+        op = LT;
+    else if (ops == ">=")
+        op = GET;
+    else if (ops == "<=")
+        op = LET;
     else if (ops == "!=")
         op = NEQ;
     else
@@ -244,21 +252,11 @@ std::string Expression::eval(std::map<std::string, std::string> &vars, bool &ok)
         return ok ? ls + rs : std::to_string(0);
         break;
     case EQ:
-        if (left_expr == nullptr)
-        {
-            missing_left_op(ok, ops);
-            return "";
-        }
-        if (right_expr == nullptr)
-        {
-            missing_right_op(ok, ops);
-            return "";
-        }
-        ls = left_expr->eval_cast<std::string>(vars, ok);
-        rs = right_expr->eval_cast<std::string>(vars, ok);
-        return (ok && ls == rs) ? std::to_string(1) : std::to_string(0);
-        break;
     case NEQ:
+    case GT:
+    case LT:
+    case GET:
+    case LET:
         if (left_expr == nullptr)
         {
             missing_left_op(ok, ops);
@@ -271,7 +269,37 @@ std::string Expression::eval(std::map<std::string, std::string> &vars, bool &ok)
         }
         ls = left_expr->eval_cast<std::string>(vars, ok);
         rs = right_expr->eval_cast<std::string>(vars, ok);
-        return (ok && ls != rs) ? std::to_string(1) : std::to_string(0);
+        switch (op)
+        {
+        case EQ:
+            return (ok && ls == rs) ? std::to_string(1) : std::to_string(0);
+        case NEQ:
+            return (ok && ls != rs) ? std::to_string(1) : std::to_string(0);
+        case GT:
+        case LT:
+        case GET:
+        case LET:
+        {
+            double lsi = left_expr->eval_cast<double>(vars, ok);
+            double rsi = right_expr->eval_cast<double>(vars, ok);
+            switch (op)
+            {
+            case GT:
+                return (ok && lsi > rsi) ? std::to_string(1) : std::to_string(0);
+            case LT:
+                return (ok && lsi < rsi) ? std::to_string(1) : std::to_string(0);
+            case GET:
+                return (ok && lsi >= rsi) ? std::to_string(1) : std::to_string(0);
+            case LET:
+                return (ok && lsi <= rsi) ? std::to_string(1) : std::to_string(0);
+            default:
+                return std::to_string(0);
+            }
+            break;
+        }
+        default:
+            return std::to_string(0);
+        }
         break;
     default:
         err(ok, "Error: No operator found");
@@ -340,6 +368,15 @@ unsigned int Expression::get_priority(std::string op)
         return 2;
     if (op == "!=")
         return 2;
+    if (op == ">=")
+        return 2;
+    if (op == "<=")
+        return 2;
+    if (op == ">")
+        return 2;
+    if (op == "<")
+        return 2;
+
 
     return 0;
 }
