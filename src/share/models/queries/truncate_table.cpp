@@ -13,10 +13,10 @@ TruncateTable::TruncateTable(const std::vector<std::string> &tokens, bool &ok)
         table_name = tokens[2];
     }
 
-    real_query = std::make_shared<Delete>(std::vector<std::string>{"DELETE", "FROM", table_name}, ok);
+    // real_query = std::make_shared<Delete>(std::vector<std::string>{"DELETE", "FROM", table_name}, ok);
 }
 
-std::shared_ptr<QueryBase> TruncateTable::get_data()
-{
-    return real_query;
-}
+// std::shared_ptr<QueryBase> TruncateTable::get_data()
+// {
+//     return real_query;
+// }
