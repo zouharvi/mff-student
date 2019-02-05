@@ -128,15 +128,15 @@ std::string Pager::delete_records(Query &query, FileIO &fileio)
 
     for (std::size_t i = 0; i < locations.size(); ++i)
     {
-        if (current_page != locations[i].first.first)
+        if (current_page != locations[i].second.first)
         {
-            current_page = locations[i].first.first;
+            current_page = locations[i].second.first;
             page_rows = parse_data_page(current_page, table_def, fileio);
         }
 
-        if (data->condition->eval(page_rows[locations[i].first.second], ok) == "" && ok)
+        if (data->condition->eval(page_rows[locations[i].second.second], ok) == "" && ok)
         {
-            to_delete.push_back(locations[i].second);
+            to_delete.push_back(locations[i].first);
         }
     }
 
@@ -166,13 +166,14 @@ std::vector<std::map<std::string, std::string>> Pager::select(TableName &tablena
 
     for (std::size_t i = 0; i < locations.size(); ++i)
     {
-        if (current_page != locations[i].first.first)
+        if (current_page != locations[i].second.first)
         {
-            current_page = locations[i].first.first;
+            current_page = locations[i].second.first;
             page_rows = parse_data_page(current_page, table_def, fileio);
 
+            std::cerr << "ROWS:" << page_rows.size() << std::endl;
         }
-        result.push_back(page_rows[locations[i].first.second]);
+        result.push_back(page_rows[locations[i].second.second]);
     }
 
     return result;
@@ -244,7 +245,7 @@ std::vector<std::map<std::string, std::string>> Pager::parse_data_page(std::size
     std::size_t current_char_index = DATAPAGE_START, row_size = table_def.get_row_size();
     constexpr std::size_t SIZES[] = {4, 1, 4, 0 /* N/A */, 1};
 
-    for (; current_char_index + row_size < fileio.get_page_size(); current_char_index += row_size)
+    for (; current_char_index + row_size < fileio.get_page_size();)
     {
         std::map<std::string, std::string> row;
         for (auto column : table_def.columns)
@@ -253,10 +254,12 @@ std::vector<std::map<std::string, std::string>> Pager::parse_data_page(std::size
             if (std::get<0>(column) == VarType::VARCHAR)
             {
                 result = page.substr(current_char_index, std::get<1>(column));
+                current_char_index += std::get<1>(column);
             }
             else
             {
                 std::string internal_form = page.substr(current_char_index, SIZES[std::get<0>(column)]);
+                current_char_index += SIZES[std::get<0>(column)];
                 switch (std::get<0>(column))
                 {
                 case VarType::BOOLEAN:
@@ -271,10 +274,10 @@ std::vector<std::map<std::string, std::string>> Pager::parse_data_page(std::size
                     break;
                 case VarType::INT:
                     result = std::to_string(
-                        256 * 256 * 256 * internal_form[0] +
-                        256 * 256 * internal_form[1] +
-                        256 * internal_form[2] +
-                        internal_form[3]);
+                        256 * 256 * 256 * (int64_t)(internal_form[0]) +
+                        256 * 256 * (int64_t)(internal_form[1]) +
+                        256 * (int64_t)(internal_form[2]) +
+                        (int64_t)(internal_form[3]));
                     break;
                 case VarType::TINYINT:
                     result = std::to_string(internal_form[0]);
@@ -298,8 +301,9 @@ std::string Pager::create_data_page(std::vector<std::map<std::string, std::strin
     assert(rows.size() * table_def.get_row_size() < page_size - 1);
     std::size_t current_index = DATAPAGE_START;
     constexpr std::size_t SIZES[] = {4, 1, 4, 0 /* N/A */, 1};
-
     std::string page = paging::get_empty_page(page_size);
+
+    page[0] = DATA_PAGE_HEADER;
 
     for (auto row : rows)
     {
@@ -347,9 +351,9 @@ std::string Pager::create_data_page(std::vector<std::map<std::string, std::strin
             case VarType::INT:
                 ll = std::stoll(external);
                 result.resize(4);
-                result[0] = ll / (256 * 256 * 256);
-                result[1] = ll / (256 * 256);
-                result[2] = ll / (256);
+                result[0] = (ll / (256 * 256 * 256)) % 256;
+                result[1] = (ll / (256 * 256)) % 256;
+                result[2] = (ll / 256) % 256;
                 result[3] = ll % 256;
                 break;
             case VarType::DOUBLE:
