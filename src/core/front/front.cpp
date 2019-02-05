@@ -2,7 +2,13 @@
 
 char *Front::next_line()
 {
+#ifdef __linux__
     return readline(buffer.length() == 0 ? PROMPT_WORD.c_str() : PROMPT_WORD_CONTINUE.c_str());
+#else
+	std::string* line = new std::string();
+	std::getline(std::cin, *line);
+	return (char*) line->c_str();
+#endif
 }
 
 void Front::start_loop()
@@ -15,7 +21,9 @@ void Front::start_loop()
     {
         if (strlen(buf) > 0)
         {
+#ifdef __linux__
             add_history(buf);
+#endif
             loop(std::string(buf));
         }
     }
