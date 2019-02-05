@@ -4,6 +4,10 @@ MetaSystem::MetaSystem(std::string_view file, std::shared_ptr<DbConnector> db)
 {
     database_file = file;
     this->db = db;
+    if (file != "")
+    {
+        std::cout << db->open_file(database_file) << std::endl;
+    }
 }
 
 bool MetaSystem::process(const std::vector<std::string> &tokens)

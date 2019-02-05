@@ -8,7 +8,15 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
 
     for (const std::string &s : tokens)
     {
+        std::cout << "   " << s << std::endl;
         raw_name += s;
+    }
+
+    if (length == 0)
+    { // virtual operand for, eg + -5
+        value = "0";
+        value_only = true;
+        return;
     }
 
     while (tokens[start_index] == "(" && tokens[end_index] == ")")
@@ -18,12 +26,6 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
     }
     length = end_index - start_index + 1;
 
-    if (length == 0)
-    { // virtual operand for, eg + -5
-        value = "";
-        value_only = true;
-        return;
-    }
     if (length == 1)
     { // probably a variable or a constant
         value = tokens[0];
@@ -46,6 +48,7 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
         }
         return;
     }
+
     int open = 0;
     unsigned int lowest_priority = 0;
     unsigned int lowest_priority_index = 0;
