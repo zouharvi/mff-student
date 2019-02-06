@@ -42,6 +42,7 @@ namespace paging
 std::string get_empty_page(std::size_t);
 
 std::string get_empty_header_page();
+std::string get_empty_header_page(std::size_t);
 
 std::string get_empty_table_page();
 
