@@ -47,11 +47,11 @@ Delete::Delete(const std::vector<std::string> &tokens, bool &ok)
         condition = std::make_unique<Expression>(std::vector<std::string>{"1"}, ok);
     }
 
-    if (ZIMADB_DEBUG)
-    {
-        std::map<std::string, std::string> vars;
-        std::cout << "Delete condition empty eval: " << condition->eval_cast<bool>(vars, ok) << std::endl;
-    }
+    // if (ZIMADB_DEBUG)
+    // {
+    //     std::map<std::string, std::string> vars;
+    //     std::cout << "Delete condition empty eval: " << condition->eval_cast<bool>(vars, ok) << std::endl;
+    // }
 }
 
 void Delete::bad_syntax(bool &ok, std::string extra)

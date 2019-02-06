@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ../../bin/zimadb <<EOF
-.debug off
 .open ahoj.zima
 CREATE TABLE rostlinka (age int, name varchar);
 INSERT INTO rostlinka (age, name) values (24, "Sofie");
