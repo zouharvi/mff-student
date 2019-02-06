@@ -149,6 +149,7 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
     std::size_t datapage_nr;
     std::size_t index;
     bool new_page = table_def.empty_data_page == 0;
+    bool found_place = false;
 
     if (table_def.empty_data_page != 0)
     {
@@ -177,6 +178,7 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
                     index = locations[i-1].second.second + 1;
                     page_data[index] = row;
                     table_def.empty_data_page = datapage_nr;
+                    found_place = true;
                     break;
                 }
             }
@@ -185,6 +187,13 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
             {
                 page_data = {};
                 new_page = true;
+            }
+            else if(!found_place)
+            {
+                index = locations[locations.size()-1].second.second + 1;
+                page_data[index] = row;
+                table_def.empty_data_page = datapage_nr;
+                found_place = true;
             }
         }
     }
