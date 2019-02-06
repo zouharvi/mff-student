@@ -14,13 +14,26 @@ std::string paging::get_empty_header_page()
 {
     std::string page("\0");
     page.resize(4096);
-    for (int i = 0; i < 4096; i++)
+    for (std::size_t i = 0; i < 4096; i++)
         page[i] = '\0';
 
     page.replace(0,MAGIC_HEADER.length(), MAGIC_HEADER);
     page[LAST_PAGE_OFFSET + 1] = 1;
     return page;
 }
+
+std::string paging::get_empty_header_page(std::size_t page_size)
+{
+    std::string page("\0");
+    page.resize(page_size);
+    for (std::size_t i = 0; i < page_size; i++)
+        page[i] = '\0';
+
+    page.replace(0,MAGIC_HEADER.length(), MAGIC_HEADER);
+    page[LAST_PAGE_OFFSET + 1] = 1;
+    return page;
+}
+
 
 std::string paging::get_empty_table_page()
 {
@@ -60,7 +73,7 @@ std::size_t paging::get_freelist_page_successor(std::size_t page_nr, FileIO &fil
 
 std::string paging::create_header_page(HeaderData data, std::size_t page_size)
 {
-    std::string header_page = get_empty_header_page();
+    std::string header_page = get_empty_header_page(page_size);
     header_page[LAST_PAGE_OFFSET] = (data.last_page_number / 256) % 256;
     header_page[LAST_PAGE_OFFSET + 1] = data.last_page_number % 256;
     header_page[FREE_OFFSET] = (data.first_free_page / 256) % 256;

@@ -381,7 +381,6 @@ std::vector<std::vector<std::string>> FileIO::select_provisional(std::unique_ptr
 
             result_rows.push_back(std::vector<std::string>());
 
-            // TODO: is this really correct? Probably not...
             if (query->condition != nullptr && query->condition->eval_cast<bool>(data, eval_ok) && eval_ok)
             {
                 std::string expr_result;

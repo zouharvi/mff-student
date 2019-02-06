@@ -220,7 +220,8 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
 std::string Pager::delete_records(Query &query, FileIO &fileio)
 {
     Delete *data = (Delete *)(query.data.get());
-    auto pointer = btree.find(BASE_TABLE_TREE_ROOT, data->table_name->name, fileio);
+    std::string table_name = data->table_name->name;
+    auto pointer = btree.find(BASE_TABLE_TREE_ROOT, table_name, fileio);
     auto table_def = get_table_definition(pointer.first, fileio);
     auto locations = btree.find_all_locations(pointer.second, fileio);
 
@@ -267,7 +268,6 @@ std::vector<std::map<std::string, std::string>> Pager::select(TableName &tablena
 
     std::vector<std::map<std::string, std::string>> page_rows, result;
     std::size_t current_page = 0;
-    bool ok = true;
 
     for (std::size_t i = 0; i < locations.size(); ++i)
     {
@@ -388,8 +388,8 @@ std::vector<std::map<std::string, std::string>> Pager::parse_data_page(std::size
                     result = std::to_string(internal_form[0]);
                     break;
                 case VarType::DOUBLE:
-                    // TOIMPLEMENT
-                    result = "0";
+                    double *internal = (double *)(internal_form.c_str());
+                    result = std::to_string(*internal);
                     break;
                 }
             }
@@ -436,6 +436,7 @@ std::string Pager::create_data_page(std::vector<std::map<std::string, std::strin
 
             int i;
             long long ll;
+            double d;
             switch (std::get<0>(column))
             {
             case VarType::VARCHAR:
@@ -465,8 +466,13 @@ std::string Pager::create_data_page(std::vector<std::map<std::string, std::strin
                 result[3] = ll % 256;
                 break;
             case VarType::DOUBLE:
-                result = "\0\0\0\0";
-                // TOIMPLEMENT
+                d = std::stod(external);
+                char * c = (char *)(&d);
+                result = c[0];
+                for(std::size_t i=1; i <= 3; ++i)
+                {
+                    result += c[i];
+                }
                 break;
             }
             page.replace(current_index, len, result);
