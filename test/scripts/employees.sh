@@ -21,5 +21,5 @@ INSERT INTO sec (sec_id, sec_level) VALUES (3, 50);
 
 SELECT * FROM emp, sec;
 SELECT * FROM emp, sec WHERE emp_id = sec_id;
-SELECT emp_name FROM emp, sec WHERE emp_id = sec_id AND emp_age > 30;
+SELECT emp_name, emp_age FROM emp, sec WHERE (emp_id = sec_id) AND (sec_level >= 7);
 EOF

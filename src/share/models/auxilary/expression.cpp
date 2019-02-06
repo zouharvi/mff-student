@@ -12,18 +12,38 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
     }
 
     if (length == 0)
-    { // virtual operand for, eg + -5
+    { // virtual operand for eg + -5
+
         value = "0";
         value_only = true;
         return;
     }
 
-    while (tokens[start_index] == "(" && tokens[end_index] == ")")
+    // strip outer parenthesis if they match
+    bool continue_matching = true;
+    while (length > 1 && tokens[start_index] == "(" && continue_matching)
     {
-        start_index++;
-        end_index--;
+        int open = 0;
+        for (size_t i = start_index; i < end_index; i++)
+        {
+            if (tokens[i] == "(")
+                open++;
+            else if (tokens[i] == ")")
+                open--;
+            if (open == 0)
+            {
+                continue_matching = false;
+                break;
+            }
+        }
+        if (continue_matching && tokens[end_index] == ")")
+        {
+            start_index++;
+            end_index--;
+            length = end_index - start_index + 1;
+        }
     }
-    length = end_index - start_index + 1;
+
 
     if (length == 1)
     { // probably a variable or a constant
@@ -42,9 +62,12 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
         }
         else
         {
-            if(value == "*") {
+            if (value == "*")
+            {
                 wildcard_all = true;
-            } else {
+            }
+            else
+            {
                 is_variable = true;
                 required_vars.insert(value);
             }
@@ -382,7 +405,6 @@ unsigned int Expression::get_priority(std::string op)
         return 2;
     if (op == "<")
         return 2;
-
 
     return 0;
 }
