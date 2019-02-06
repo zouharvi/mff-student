@@ -164,6 +164,7 @@ bool BTree::delete_position(std::pair<std::size_t, std::size_t> location, FileIO
     }
     else
     {
+        fileio.rewrite_page(location.first, create_page(node, fileio.get_page_size()));
         return merge(node, location.first, fileio);
     }
 }
