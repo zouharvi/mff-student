@@ -504,7 +504,7 @@ TableDefinition Pager::parse_table_page(std::string &page, FileIO &fileio)
         current_char++;
         if (type == VarType::VARCHAR)
         {
-            size = page[current_char] * 256 + page[current_char + 1];
+            size = (unsigned char)(page[current_char]) * 256 + (unsigned char)(page[current_char + 1]);
             current_char += 2;
         }
 
