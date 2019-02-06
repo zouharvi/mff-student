@@ -47,6 +47,9 @@ class Expression
     }
     std::set<std::string> required_vars;
 
+    // *
+    bool wildcard_all = false;
+
   private:
     template <typename T>
     T static cast(std::string, bool &);

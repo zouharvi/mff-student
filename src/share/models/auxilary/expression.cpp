@@ -42,8 +42,12 @@ Expression::Expression(const std::vector<std::string> &tokens, bool &ok)
         }
         else
         {
-            is_variable = true;
-            required_vars.insert(value);
+            if(value == "*") {
+                wildcard_all = true;
+            } else {
+                is_variable = true;
+                required_vars.insert(value);
+            }
         }
         return;
     }
