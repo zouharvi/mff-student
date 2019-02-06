@@ -141,9 +141,40 @@ std::string Pager::add_records(Query &query, FileIO &fileio)
     std::map<std::string, std::string> row, dummy = std::map<std::string, std::string>();
     bool ok = true;
 
-    for (i = 0; i < data->columns.size(); ++i)
+    for (i = 0; i < table_def.columns.size(); ++i)
     {
-        row.insert(std::make_pair(data->columns[i], data->expressions[i].eval(dummy, ok))); // These should all be constant, so no checks for validity should be necessary
+        bool inserted = false;
+        for(std::size_t j = 0; j < data->columns.size(); ++j)
+        {
+            if(std::get<2>(table_def.columns[i]) == data->columns[j])
+            {
+                row.insert(std::make_pair(data->columns[j], data->expressions[j].eval(dummy, ok))); // These should all be constant, so no checks for validity should be necessary
+                inserted = true;
+                break;
+            }
+            
+        }
+
+        if(!inserted)
+        {
+            std::string str;
+            switch(std::get<0>(table_def.columns[i]))
+            {
+                case VarType::BOOLEAN:
+                case VarType::TINYINT:
+                case VarType::DOUBLE:
+                case VarType::INT:
+                    row.insert(std::make_pair(std::get<2>(table_def.columns[i]), "0"));
+                    break;
+                case VarType::VARCHAR:
+                    str = paging::get_empty_page(std::get<1>(table_def.columns[i]));
+                    row.insert(std::make_pair(std::get<2>(table_def.columns[i]), ""));
+                    break;
+                default:
+                    row.insert(std::make_pair(std::get<2>(table_def.columns[i]), ""));
+            }
+        }
+        
     }
 
     std::size_t datapage_nr;
