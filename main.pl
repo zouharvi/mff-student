@@ -21,7 +21,7 @@ p([6,6] of c).
 p([7,1] of b).
 p([7,6] of c).
 
-% Example above
+% Figure of example above
 %   1 2 3 4 5 6 7
 %   -------------
 % 1|a . a 2 . . b|
@@ -61,10 +61,7 @@ point_correct([A|Rest]) :- number(A), point_correct(Rest).
 extract_classes([], []).
 extract_classes([_ of X|Rest], [X|CRest]) :- extract_classes(Rest, CRest).
 
-% % Unpacks a tuple (from bagof)
-% % unpack_tuple(+List, ?Output)
-% unpack_tuple([], []).
-% unpack_tuple([(P)|Rest], [P|TRest]) :- unpack_tuple(Rest, TRest).
+
 
 % DISTANCE/METRICS
 
