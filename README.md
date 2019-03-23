@@ -111,7 +111,7 @@ R = [2.6, 0.82].
 
 ### Constraints 
 
-Data points are numeric and can be of any dimensions, but the number of such dimensions must be constant within the dataset. In Prolog this means, that all points are lists (of the same size) of numbers. Target classes must be nonvar.
+Data points are numeric and can be of any dimensions, but the number of such dimensions must be constant within the dataset. In Prolog this means, that all points are lists (of the same size) of numbers. Target classes must be nonvar. Regression is used if target values are numeric and multidimensional in case they are all lists of numbers.
 
 ### Accuracy
 
