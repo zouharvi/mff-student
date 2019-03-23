@@ -21,6 +21,7 @@ p([6,6] of c).
 p([7,1] of b).
 p([7,6] of c).
 
+
 % Figure of example above
 %   1 2 3 4 5 6 7
 %   -------------
@@ -39,6 +40,7 @@ p([7,6] of c).
 % 3. knn(4, [6, 4], C).
 
 
+
 % DATA VALIDATION & MANIPULATION
 
 % Checks that the given data list is correctly formatted
@@ -48,7 +50,7 @@ data_correct([]).
 
 % Data_correct(+Data, +Dimension)
 data_correct([], _).
-data_correct([X of _|Rest], N) :- point_correct(X), length(X, N), data_correct(Rest, N).
+data_correct([X of Class|Rest], N) :- nonvar(Class), point_correct(X), length(X, N), data_correct(Rest, N).
 
 % Checks whether a given point contains only numbers
 % (could be merged with length in data_correct/2)
@@ -96,6 +98,7 @@ sort_by_distance(In, Out, Base) :- merge_sort(In, Out, Base).
 split([], [], []).
 split([X|XS], [X|R1], R2) :- split(XS, R2, R1).
 
+% Merge two sorted lists
 merge_b(XS, [], XS, _) :- !.
 merge_b([], YS, YS, _) :- !.
 merge_b([X|XS], [Y|YS], R, Base) :-
@@ -109,7 +112,8 @@ merge_b([X|XS], [Y|YS], R, Base) :-
 % base cases
 merge_sort([], [], _) :- !.
 merge_sort([X], [X], _) :- !.
-% split and mereg
+
+% split and merge
 merge_sort([A1,A2|ARest], S, Base) :-
   split([A1,A2|ARest], LL, LR),
   merge_sort(LL, LS, Base),
