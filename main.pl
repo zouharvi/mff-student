@@ -1,45 +1,5 @@
 :- op(1000, xfx, [of]).
 
-% Data points for knn
-% p([x,y] of class)
-p([1,1] of a).
-p([1,3] of a).
-p([1,7] of b).
-p([2,2] of a).
-p([2,3] of a).
-p([2,5] of b).
-p([3,2] of a).
-p([4,1] of a).
-p([4,5] of c).
-p([4,6] of b).
-p([4,7] of b).
-p([5,5] of b).
-p([5,6] of c).
-p([6,2] of b).
-p([6,5] of c).
-p([6,6] of c).
-p([7,1] of b).
-p([7,6] of c).
-
-
-% Figure of example above
-%   1 2 3 4 5 6 7
-%   -------------
-% 1|a . a 2 . . b|
-% 2|. a a . b . .|
-% 3|. a . . . . .|
-% 4|a . . . c b b|
-% 5|. . . . b c .|
-% 6|. b . 3 c c .|
-% 7|b 1 . . . c .|
-%   -------------
-
-% Run the following example for points indicated on the plane
-% 1. knn(4, [2, 7], C).
-% 2. knn(4, [1, 4], C).
-% 3. knn(4, [6, 4], C).
-
-
 
 % DATA VALIDATION & MANIPULATION
 
@@ -54,26 +14,26 @@ data_correct([]).
 data_correct([], _).
 data_correct([X of Class|Rest], N) :-
     nonvar(Class),
-    point_correct(X),
+    list_of_numbers(X),
     length(X, N),
     data_correct(Rest, N).
 
 % Checks whether a given point contains only numbers
 % (could be merged with length in data_correct/2)
-% point_correct(+Point)
-point_correct([]).
-point_correct([A|Rest]) :-
+% list_of_numbers(+Point)
+list_of_numbers([]).
+list_of_numbers([A|Rest]) :-
     number(A),
-    point_correct(Rest).
+    list_of_numbers(Rest).
 
 % Extracts classes from data list
-% extract_classes(+Data, ?Classes)
-extract_classes([], []).
-extract_classes([_ of X|Rest], [X|CRest]) :- extract_classes(Rest, CRest).
+% extract_targets(+Data, ?Classes)
+extract_targets([], []).
+extract_targets([_ of X|Rest], [X|CRest]) :- extract_targets(Rest, CRest).
 
 
 
-% DISTANCE/METRICS
+% DISTANCE/METRICS/NUMERIC
 
 % A is closer to C than B
 % closer(+A, +B, +C)
@@ -85,12 +45,65 @@ closer(A of _, B of _, C) :-
 % Performs squares of differences of two lists element-wise
 % diff_squared(+A, +B, -C)
 diff_squared([], [], 0).
-diff_squared([A|ARest], [B|BRest], Total) :-
-    T is A - B,
-    TS is T * T,
-    diff_squared(ARest, BRest, TRest),
-    Total is TRest + TS.
+diff_squared(A, B, Total) :-
+    diff_list(A, B, Diff),
+    square_list(Diff, Square),
+    sum_list(Square, Total).
 
+% Computes the difference of two lists
+% diff_list(+A, +B, ?C)
+diff_list([], [], []).
+diff_list([A|ARest], [B|BRest], [T|TRest]) :-
+    T is A-B,
+    diff_list(ARest, BRest, TRest).
+
+% Computes the squares a lists
+% square_list(+A, ?C)
+square_list([], []).
+square_list([A|ARest], [T|TRest]) :-
+    T is A*A,
+    square_list(ARest, TRest).
+
+% Computes the sum a lists
+% sum_list(+A, ?C)
+sum_list([], 0).
+sum_list([A|ARest], Total) :-
+    sum_list(ARest, TRest),
+    Total is TRest + A.
+
+% Computes the average of a numeric list
+% avg_list(+List, ?Result)
+avg_list(List, Result) :-
+    sum_list(List, Sum),
+    length(List, N),
+    Result is Sum / N.
+
+% Computes piece-wise average of a list of numeric lists
+% avg_list_pw(+List, -ResList)
+avg_list_pw([], []).
+avg_list_pw([L|List], [R|Rest]) :-
+    avg_list(L, R),
+    avg_list_pw(List, Rest).
+
+% Matrix transposition
+% transp(+X, ?R)
+transp([], []) :- !.
+transp([[]|Arest], []) :- !, all_empty(Arest).
+transp(A, [B|Brest]) :-
+    extract_col(A, B, Arest),
+    transp(Arest, Brest),
+    !.
+% extract_col(+Matrix, ?Column, ?MatrixRest)
+extract_col([], [], []).
+extract_col([[A1|Arest]|MatrixRest], [A1|ColRest], [Arest|MatrixRight]) :-
+    extract_col(MatrixRest, ColRest, MatrixRight).
+
+% asserts all lists in a list are empty
+all_empty([]).
+all_empty([[]]).
+all_empty([A|Arest]) :-
+    length(A, 0),
+    all_empty(Arest).
 
 
 % SORTING
@@ -134,13 +147,14 @@ merge_sort([A1,A2|ARest], S, Base) :-
 
 % Takes first N elements from a list (if they exist)
 % take(+N, +List, ?FirstNElements)
-% OK if the list is empty, but something is remaining
-% Otherwise substract one and recurse
+% N is less than zero, cut
 take(N, _, Xs) :-
     N =< 0, !,
     N =:= 0,
     Xs = [].
+% OK if the list is empty, but something is remaining
 take(_, [], []).
+% Otherwise substract one and recurse
 take(N, [X|Xs], [X|Ys]) :-
     M is N-1,
     take(M, Xs, Ys).
@@ -176,7 +190,7 @@ freqs_unique(List, [U|Unique], [[U, N]|Freqs]) :-
 % If multiple classes have the same frequency, then the first occuring
 % in the list is chosen
 % most_frequent(+List, -Class)
-most_frequent(List, [MClass, MFreq]) :-
+most_frequent(List, MClass) :-
     freqs(List, Freqs),
     most_frequent_f(Freqs, [MClass, MFreq]),
     MFreq >= 0.
@@ -204,9 +218,26 @@ knn(K, FV, OC) :-
 
 % Alternatively the data can be passed as a list 
 % knn(+Data, +K, +FeatureVector, -OutputClass)
-knn(Data, K, FV, OC) :-
+knn(Data, K, FV, Result) :-
     data_correct(Data),
     sort_by_distance(Data, Sorted, FV),
     take(K, Sorted, Neighbours),
-    extract_classes(Neighbours, Classes),
-    most_frequent(Classes, [OC, _]).
+    extract_targets(Neighbours, Targets),
+    [T|_] = Targets,
+    interpolate(Targets, T, Result).
+
+% Interpolate is used to agerage/find most common
+% class in the target data. Sample is the resulting
+% structure (class, number of list of numbers)
+% interpolate(+Targets, +Sample, -Result)
+interpolate(Targets, Sample, Result) :-
+    number(Sample), !,
+    avg_list(Targets, Result).
+
+interpolate(Targets, Sample, Result) :-
+    list_of_numbers(Sample), !,
+    transp(Targets, TargetsT),
+    avg_list_pw(TargetsT, Result).
+
+interpolate(Targets, _, Result) :-
+    most_frequent(Targets, Result).

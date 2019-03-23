@@ -1,11 +1,11 @@
 # prolog-knn
-Simple k-nearest neighbors algorithm (KNN) implementation in Prolog for points on the plane.
+Simple k-nearest neighbors algorithm (KNN) implementation in Prolog for points on the plane. It can be used to predict classes, average values and averages in multidimensional space.
 
 # User Documentation
-To run a K-NN algorithm with parameter K on some point P simply use `knn(K, P, Class)`, provided that you specified data points using the `p` facts before. For the whole usecase see [Example](#example). The other way of using this program is to provide a dataset represented in a list of terms with the `of` topmost operator (see [Constraints](#constraints)). The usage is very straightforward: `knn(Dataset, K, P, Class)`. Euclidean distance is used for computing nearest neighbours.
+To run a K-NN algorithm with parameter K on some point P simply use `knn(K, P, Result)`, provided that you specified data points using the `p` facts before. For the whole usecase see [Example of Classification](#example-classification) or [Example of Regression](#example-regression). The other way of using this program is to provide a dataset represented in a list of terms with the `of` topmost operator (see [Constraints](#constraints)). The usage is very straightforward: `knn(Dataset, K, P, Result)`. Euclidean distance is used for computing nearest neighbours.
 
 
-# Example
+# Example Classification
 In this example the data points in a matrix are represented using the `p` facts and the `of` operator.
 
 ```
@@ -57,6 +57,58 @@ Class = c.
 ```
 
 
+# Example Regression
+In this example the data points in a matrix are used to predict vector of real values.
+
+```
+p([1,1] of [9, -6]).
+p([1,3] of [7, -5]).
+p([1,7] of [4, -2]).
+p([2,2] of [8, -5.2]).
+p([2,3] of [6, -3.1]).
+p([2,5] of [5, -2]).
+p([3,2] of [6, -3]).
+p([4,1] of [5, -2.1]).
+p([4,5] of [4, -2]).
+p([4,6] of [3, 0]).
+p([4,7] of [3, 0.1]).
+p([5,5] of [2, 2]).
+p([5,6] of [1, 4]).
+p([6,2] of [4, 8]).
+p([6,5] of [1, 5]).
+p([6,6] of [1, 2.7]).
+p([7,1] of [4, 5.7]).
+p([7,6] of [0, 20]).
+```
+
+This dataset is depicted in the following figure (only the first dimension):
+
+```
+  1 2 3 4 5 6 7
+  -------------
+1|9 . 7 B . . 4|
+2|. 8 6 . 5 . .|
+3|. 6 . . . . .|
+4|5 . . . 4 3 3|
+5|. . . . 2 1 .|
+6|. 4 . C 1 1 .|
+7|4 A . . . 0 .|
+  -------------
+```
+
+Running several queries for points of interest (denoted with a capital letter) we obtain class predictions:
+```
+?- knn(4, [1,4], R).
+R = [6.5, -3.825].
+
+?- knn(8, [7,2], R).
+R = [2.875, 4.7875].
+
+?- knn(5, [4,6], R).
+R = [2.6, 0.82].
+```
+
+
 ### Constraints 
 
 Data points are numeric and can be of any dimensions, but the number of such dimensions must be constant within the dataset. In Prolog this means, that all points are lists (of the same size) of numbers. Target classes must be nonvar.
@@ -77,8 +129,8 @@ The program generally proceeds in the following order:
 
 1. Check for data validity
 2. Data sorted by distance (merge sort)
-3. K nearest neighbours (and classes) are extracted
-4. Most frequent class is found
+3. K nearest neighbours (and target data) are extracted
+4. Result is interpolated from closest data
 
 
 ### Misc
