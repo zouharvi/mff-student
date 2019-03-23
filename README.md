@@ -137,8 +137,11 @@ The program generally proceeds in the following order:
 
 To fulfill the main functionality, several other helper functions are included:
 
-- `diff_square` computes variance between datapoints and baseline
+- `diff_square` computes variance between datapoints and baseline + various other list operations
+- `closer` is usesed as a distance comparator between datapoints
 - `take` selects first `N` elements from a list
 - `count` counts the number of occurences of a term in a list
 - `freqs` computes frequency of terms in a list
 - `most_frequent` extracts the most frequent term in a list
+- `transp` transpose a matrix
+- `interpolate` interpolates data based on targets
