@@ -45,18 +45,26 @@ p([7,6] of c).
 
 % Checks that the given data list is correctly formatted
 % data_correct(+Data)
-data_correct([X of Class|Rest]) :- length(X, N), data_correct([X of Class|Rest], N).
+data_correct([X of Class|Rest]) :-
+    length(X, N),
+    data_correct([X of Class|Rest], N).
 data_correct([]).
 
 % Data_correct(+Data, +Dimension)
 data_correct([], _).
-data_correct([X of Class|Rest], N) :- nonvar(Class), point_correct(X), length(X, N), data_correct(Rest, N).
+data_correct([X of Class|Rest], N) :-
+    nonvar(Class),
+    point_correct(X),
+    length(X, N),
+    data_correct(Rest, N).
 
 % Checks whether a given point contains only numbers
 % (could be merged with length in data_correct/2)
 % point_correct(+Point)
 point_correct([]).
-point_correct([A|Rest]) :- number(A), point_correct(Rest).
+point_correct([A|Rest]) :-
+    number(A),
+    point_correct(Rest).
 
 % Extracts classes from data list
 % extract_classes(+Data, ?Classes)
@@ -128,10 +136,14 @@ merge_sort([A1,A2|ARest], S, Base) :-
 % take(+N, +List, ?FirstNElements)
 % OK if the list is empty, but something is remaining
 % Otherwise substract one and recurse
-take(N, _, Xs) :- N =< 0, !, N =:= 0, Xs = [].
+take(N, _, Xs) :-
+    N =< 0, !,
+    N =:= 0,
+    Xs = [].
 take(_, [], []).
-take(N, [X|Xs], [X|Ys]) :- M is N-1, take(M, Xs, Ys).
-
+take(N, [X|Xs], [X|Ys]) :-
+    M is N-1,
+    take(M, Xs, Ys).
 
 
 
