@@ -7,7 +7,7 @@ SQLite-like database implementation from scratch (semestral project by Petr Chme
 
 
 ## Documentation
-Read concept assignment in `doc_meta/concept.md`.
+Read concept assignment, user and technical docuementation in `doc_meta/`.
 
 ## Build
 `make` (**ZimaDB** is already the default target)
