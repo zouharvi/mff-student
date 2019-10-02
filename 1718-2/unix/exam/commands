@@ -1,0 +1,16 @@
+logout
+login
+su
+exit
+id, whoami, who am i
+who, w
+uname [-amnrsv]
+last
+sync, fsck
+ls [-dbclps], file
+chmod
+cp, mv, rm, touch, cd, pwd, mkdir, rmdir (who needs this)
+cat, more, less, head [-n], tail [-+n], wc [-cwl], tee, od
+diff, commm
+cut, paste, split, tr [-cds], sort
+find 

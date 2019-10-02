@@ -1,0 +1,41 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{3.3}
+\rhead{Vilém Zouhar}
+
+\section*{Popis}
+Nejprve nalezneme minimální $A-B$ řez. Z něj pak odstraníme $k$ hran s největším průtokem (přiřazený tokem $f_m$).
+
+\section*{Důkaz}
+Nemám to rozmyšlené. Je to spíše myšlenka u které by mě zajímalo, zdali jde správným směrem.
+
+
+\section*{Řez}
+Řez nalezneme v reziduálním grafu pomocí výpočtu maximálního toku. Ze zdroje prohledáváme třeba BFS, čímž dostaneme množinu $A$ (do stoku se dostat nemůžeme, jinak bychom právě nalezli zlepšující cestu) a zbytek vrcholů je $B$.
+
+\section*{Složitost}
+Výpočet řezu trvá $O(n(n+m) + n+m)$, pro získání $k$ $A-B$ hran je potřebujeme seřadit, což je $O(m\cdot log(m)) = O(m\cdot log(n))$. Celkově tedy stále $O(n(n+m))$.
+
+\end{document}

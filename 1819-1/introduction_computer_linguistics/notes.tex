@@ -1,0 +1,370 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+\newcommand{\imwb}[2]{\textbf{#1} - #2 \\}
+\newcommand{\imwc}[2]{\textbf{#1} - #2}
+\newcommand{\ims}[1]{\textbf{#1}}
+
+\begin{document}
+\pagenumbering{arabic}
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{Úvod do počítačové lingvistiky}
+\rhead{Vilém Zouhar}
+
+Stručný zápis témat a krátkých vysvětlivek k předmětu Úvod do počítačové lingvistiky vyučované doc. Kuboněm na MFF v ZS18/19. Zdrojem tohoto textu je samotná přednáška, ale také doplňková skripta prof. Hajičkové (Úvod do teoretické a počítačové lingvistiky - 1. svazek) a materiály poskytované k tomuto předmětu.
+
+% Principy kvantity, kvality, relace a způsobu.
+\subsection*{Přirozený jazyk}
+Funkce:
+\begin{itemize}
+\item popis věcí a jevů v reálném světě
+\item popis abstraktních struktur
+\item komunikace směřující k řešení
+\item popis samotného jazyka
+\end{itemize}
+
+Zásady:
+\begin{itemize}
+\item všeobecnost (nejčastější způsob komunikace)
+\item využitelnost (je agilní a nestárne)
+\item obsah (je úplný, včetně meta popisu)
+\item vágnost (jistá neurčitost je základem inovativního myšlení)
+\item vícevrstevnost (dokáže popisovat i různé úrovně komunikace)
+\item zkratkovitost (bývá kratší než dotazy v umělých jazycích)
+\end{itemize}
+
+Víceznačnost:
+Občas formální problém, ale i častý základ vtipu, nebo myšlenky.
+\pagebreak
+\section*{Morfologie}
+Počátek už v -400 v popisu sanskrtu. Předmětem morfologie je \ims{studium vnitřní struktury slov}.
+
+\imwb{Lexikologie}{slova jako jednotky slovní zásoby}
+\imwb{Lexikografie}{sestavování slovníků}
+\imwb{Morfém}{nejmenší znaková jednotka jazyka nesoucí význam (lexikální|gramatický); skládá se ze sémat}
+\imwb{Séma}{nejmenší znaková jednotka jazyka vztahující se k formě}
+\imwb{Foném}{nejmenší zvuková jednotka}
+\begin{center}
+Za.hrad.ou \\
+Předpona (prefix) . mofrém (lexikální) . morfém (gramatický, skládá se ze tří sémat (3. p., č. j., r. ž.))
+\end{center}
+\begin{center}
+Dom.ům
+morfém (lexikální) . morfém (gramatický - dvě sémata (plurál + dativ))
+\end{center}
+
+\imwb{Skoňování}{deklinace}
+\imwb{Časování}{konjugace}
+\imwb{Tvaroslovné dublety}{kolize v odvození z různých slovních základů | žena (1/5), tři (5/4), stát (5/1), už (5/6}
+\imwb{Alternace}{změna hlásek uvnitř kmene v tvarování | vůz - vozu, švec - ševce, prkno - prken}
+\imwb{Alomorfy}{varianty téhož morfému/kmene | -řík-, -říc-, -řek-}
+\imwb{Autosémantická slova}{nesou význam | podstatná, přídavná jména, zájmena, číslovky, slovesa, příslovce, citoslovce (většinou ohebá - první čtyři se skloňují, slovesa časují a některá příslovce stupňuj)}
+\imwb{Synsémantická slova}{nemají samy o sobě plnohodnotný význam | obvykle předložky, spojky, částice (všechna neohebná) }
+
+\subsection*{Morfologická typologie}
+\begin{itemize}
+\item \imwc{analytické (izolační)}{slovo = morfém | angličtina, čínština} 
+\item \imwc{syntetické (flektivní, aglutinační)}{slovo > morfém, }  \\
+u flektivních jazyků (slovanské) mají afixy více funkcí, zatímco u aglutinačních jazyků (maďarština) je zřejmá korespondence a řetězí se častěji
+\item \imwc{polysyntetické ("přehnané aglutinační")}{v případě, kdy třeba sloveso dostane takové množství afixů, že nese význam věty | eskymánština } 
+\end{itemize}
+	
+	
+\subsection*{Metody zpracování morfologie}
+Založeno na:
+\begin{itemize}
+\item slovo jako posloupnost morfémů
+\item slovo = $P_\alpha \cdots (P_b(P_a($kořen$))\cdots)$, kde $P_i$ je pravidlo
+\item je dána tabulka vzorů + všechny jejich tvary; u každého slova určíme vzor a z toho odvodíme gramatické kategorie
+\end{itemize}
+
+\subsection*{Dvojúrovňová morfologie}
+Místo funkce, která generuje výsledné slovo se provádí dva výpočty zároveň: lexikální a povrchový.
+\begin{center}
+	\texttt{b a b y + 0 s} \\
+	\texttt{b y b i 0 e s} \\
+	\texttt{0} obvykle značí prázdné místo (protějšek nemá žádnou realizaci) \\
+	spojuje se do zápisu: \texttt{b:b a:y b:b y:i +:0 0:e s:s} \\
+	některé stavy ohlašují gramatické kategorie (třeba \texttt{s:s $\rightarrow$ plural})
+\end{center}
+Poměrně nový přístup. Doposud byl problém ten, že dva různé generovací průběhy mohly skončit ve stejném slově a tudíž zpětná analýza není jednoznačná.
+
+\subsection*{Česká morfologie}
+Každé slovo má 13 (+2 rezerva) značek, které mají dle pozice svůj význam a popisují morfologické kvality.
+\begin{center}
+\textit{nejnezajímavější}\\
+\texttt{AAFP3----3N----}
+adjective . regular . feminine . plural . dative . - . superlative . negated . - \\
+no poss. gender, no poss. number, no person, no tense, no voice, base variant
+\end{center} 
+\imwc{Lemma}{slovníková reprezentace základního tvaru | lesům, lesy, lesích $\rightarrow$ les} \\
+\text{}\hspace{1.5cm} stát/slov. $\rightarrow$ stát-1, šel $\rightarrow$ jít
+
+\subsection*{Morfologická analýza}
+\begin{center}
+$\rightarrow$ \\
+\texttt{Prezident rezignoval na svou funkci.} \\
+
+$\leftarrow$ \\
+\end{center}
+\texttt{<csts>\\
+<f cap>Prezident<MMl>prezident<MMt>NNMS1-----A----\\
+<f>rezignoval<MMl>rezignovat\_:T<MMt>VpYS---XR-AA---\\
+<f>na<MMl>na<MMt>RR--4----------<MMt>RR--6----------\\ <f>svou<MMl>svůj-1\_\^(přivlast.)<MMt>P8FS4---------1<MMt>P8FS7---------1\\
+<f>funkci<MMl>funkce<MMt>NNFS3-----A----<MMt>NNFS4-----A----\\
+<MMt>NNFS6-----A----\\
+<D>\\
+<d>.<MMl>.<MMt>Z:-------------\\
+</csts>}
+
+Použití:
+\begin{itemize}
+\item \imwc{morfologická analýza}{výsledek je seznam lemmat a značek (klidně více dvojic)}
+\item \imwc{morfologické značkování}{výběr správné dvojice lemma-značka}
+\item \imwc{částečná morfologická desambiguace}{pomocí pravidel jazyka zahazujeme značky, které by v daném postavení nemohly reprezentovat správnou větu}
+\item \imwc{lemmatizace}{výběr správného lemmatu, ze kterého byl odvozen vstupní tvar (třeba pro vyhledávání v textu)}
+\item \imwc{stemming}{odříznutí koncovky, dostaneme kořen slova}
+\item \imwc{generování}{výběr správného slovního tvaru, pokud známe lemma a dostatek gramatických kategorií}
+\end{itemize}
+
+\subsection*{Kontrola překlepů}
+\begin{enumerate}
+	\item nalézt všechny výskyty a opravit je
+	\item opravená verze musí sedět do kontextu
+	\item neznámá slova nejsou chyby
+	\item no false positive
+	\item co nejvíce automatická korekce
+	\item vše počítat co nejrychleji
+\end{enumerate}
+
+Dva triviální přístupy:
+\begin{enumerate}
+\item porovnání řetězců se slovy ve slovníku 
+	\begin{itemize}
+	\item seznam všech možných slovních tvarů daného jazyka / seznam lemmat + morfologická analýza
+	\item výhoda: spolehlivé a jednoduché
+	\item nevýhoda: závislé na kvalitě slovníku, který se musí udržovat; neznámá slova jsou chybná
+	\end{itemize}
+\item srovnání skupin znaků (dvojice, trojice, .. n-gramy) a hledání nedovolených kombinací
+	\begin{itemize}
+	\item výhoda: výpočetně rychlé, nezávislé na slovníku
+	\item nevýhoda: spousta chybných slov se skládá ze správných kombinací znaků
+	\end{itemize}
+\end{enumerate}
+
+Vylepšení:
+\begin{itemize}
+\item počítat se vznikem chyb (časté chyby, blízkost kláves, ..)
+\item pravopisné chyby, ne jen překlep (mně x mě, shoda podmětu s přísudkem)
+\item heuristicky (či strojové učení) na neznámá slova
+\item vzít v potaz i kontext slova
+\item na základě confidence chyby jeden z možných návrhů:
+\begin{enumerate}
+	\item nic nenabízet
+	\item chcete A, nebo B
+	\item potvrďte B
+	\item auto oprava na B
+\end{enumerate}
+\end{itemize}
+
+\subsection*{ASIMUT}
+Automatická Selekce Informací Metodou Úplného Textu
+
+\subsubsection*{Vyhledávací modul} 
+Jazyk pro vyhledávání, např. \textit{vzdálenost!, odstup! -3- rodinný! -1- domek!}. Vlastně docela triviální.
+
+\subsubsection*{Jazykový modul}
+\begin{itemize}
+\item pracuje s předpokladem, že slova se stejnou koncovkou mají stejné skloňování
+\item složen z retrográdního slovníku, seznamu vzorů a výjimek
+\item algoritmus 
+\begin{itemize}
+\item odzadu porovnávej vstupní slovo až do doby, než je jasné, jak se dané slovo skloňuje (popř. výjimka)
+\item speciální kódování české diakritiky (pomocí čísel)
+\item lze sepsat do pravidel v binárním stromu
+\end{itemize}
+\item výhoda: dobrej nápad
+\item nevýhoda:
+\begin{itemize}
+\item počet výjimek může být příliš velký
+\item není vždy jasné určit vzor na základě jen koncovky a málo pravidel
+\item příliš hrubá klasifikace $\rightarrow$ příliš mnoho možných koncovek $\rightarrow$ přegenerování
+\item verze pro slovesa funguje ještě hůř (časování)
+\end{itemize}
+\item \imwc{negativní slovník}{obsahuje slova, která nejsou důležitá pro dotazování (spojky, citoslovce apod.) a jsou v první fázi odstraněna z textu}
+\item \imwc{konkordance}{všem důležitým slovním tvarům se přiřadila adresa a frekvence výskytu a pak se hledalo jen na konkordanci; slova v negativním slovníku měla adresu, ale nulovou frekvenci pro určení vzdálenosti mezi významovými slovy}
+\end{itemize}
+
+\subsection*{MOZAIKA}
+\begin{itemize}
+\item MOSAIC (Morphemic Oriented System of Automatic Indexing and Condensation)
+\item indexace obvykle řešena pomocí slovníku klíčových slov + v dokumentu spočtena četnost
+\item MOZAIKA řeší relevanci + více pojmů pro jeden denotát
+\item založeno na pozorování části gramatiky: \textit{-or, -er} je konatel děje, \textit{-ity, -ness} vlastnost apod. (en)
+\item je třeba pro každou tématickou oblast (např. elektrické inženýrství) vytvořit slovník takových přípon
+\end{itemize}
+
+Algoritmus: \begin{itemize}
+\item vstup je text i s formátováním
+\item projde to lemmatizací a morfologickou analýzou
+\item pokud je slovo irelevantní k danému tématu, tak se vyhodí (negativní slovník)
+\item kondenzace jmenných skupin pomocí jednoduché gramatiky (operační zesilovač TESLA KC 415 $\rightarrow$ zesilovač (s vyšší váhou)
+\item váhy na základě pozice výskytů v textu (uprostřed nejméně důležité, na konci a začátku textu nejvíce)
+\item normalizace dle délky dokumentů
+\item výstup je seznam deseti nejvýznamnějších termínů v dokumentu $\rightarrow$ další zpracování pro vnější účely
+\end{itemize}
+
+Výhody: \begin{itemize}
+\item není nutné vytvářet masivní slovník klíčových slov
+\item kondenzace jmenných skupin je chytré
+\end{itemize}
+
+Nevýhody: \begin{itemize}
+\item pracné vytváření tématických slovníků a pravidel
+\item zájmena by měla zvyšovat četnost, ale to MOZAIKA nedetekuje
+\end{itemize}
+
+\pagebreak
+\section*{Syntax}
+\subsubsection*{Závislostní strom}
+\begin{itemize}
+\item rozumný pro jazyky s volným slovosledem (zejména slovanské)
+\item přehledný, zachycuje zřejmé syntaktické vztahu mezi členy
+\item neříká však nic o tom, jak sestrojit
+\item ne všechny vztahy jsou řídící a podřízený (např. Petr a Pavel)
+\item lze zploštit
+\end{itemize}
+
+
+\subsubsection*{Složkový strom}
+\begin{itemize}
+\item vhodný pro jazyky s pevným slovosledem
+\item méně přehledný, obsahuje uzly, které nejsou větné členy, předpokládá bezkontext
+\item lze automaticky zpracovat lépe (lze třeba uzávorkovat)
+\item lze zploštit
+\end{itemize}
+
+\subsubsection*{Neprojektivní konstrukce}
+\begin{itemize}
+\item obvykle uspořádáváme vrcholy tak, jak jsou ve větě
+\item strom nad danou větou je neprojektivní, pokud obsahuje neprojektivní závislost
+\item \imwc{neprojektivní závislost}{závislost mezi dvěma slovy oddělenými ve větě třetím slovem, které (ani nepřímo) nezávisí na žádném z nich}
+\item při splácnutí nelze nakreslit šipky bez křížení, nelze uzávorkovat
+\item existují v mnoha jazycích
+\end{itemize}
+
+\subsection*{Transformační gramatika}
+Historie:
+\begin{itemize}
+\item Deskriptivismus: popis a klasifikace faktů, ale nikoliv vysvětlení (povrchové)
+\item Analytická syntax
+\item Logický přístup: surface \& deep structure (různé výrazy mohou reprezentovat stejný význam, ale zároveň význam může mít více reprezentujících výrazů)
+\end{itemize}
+
+\subsection*{Noam Chomsky}
+3 komponenty: \begin{itemize}
+\item \imwc{Báze}{bezkontextová pravidla generující složkové stromy (phrase markers)}
+\item \imwc{Transformační komponent}{pravidla operující na celých úrovních, vytváří povrchovou strukturu věty}
+\item \imwc{Fonologický komponent}{pravidla generující fonetické interpretace}
+\end{itemize}
+
+\subsubsection*{Tree Adjoining Grammars}
+\begin{itemize}
+\item podobná myšlenka přepisování, ale přepisují se celé stromy, nikoliv jen řetězce
+\item při substituci se musí vkládaný kořen a nahrazovaný list shodovat
+\item algoritmus končí až když už nelze nic substituovat (nebo není třeba)
+\item síla bezkontextových gramatik, ale lze udělat i silnější (s modifikacemi)
+\end{itemize}
+
+\subsubsection*{Lexial Functional Grammar}
+\begin{itemize}
+\item c-structures: spojují slova do frází
+\item f-structures: reprezentace funkčních vztahů ve větě (např. shoda), matice atribut-hodnota
+\item každá c-struktura spojena s pouze jednou f-strukturou, ale ne naopak
+\end{itemize}
+
+\subsubsection*{Kategoriální gramatiky}
+\begin{itemize}
+\item každý slovní tvar má přiřazen kategorii (např. [S\\NP]/NP)
+\item malé množství pravidel typu: [X/Y => X]
+\end{itemize}
+
+\subsubsection*{Unifikační gramatiky}
+\begin{itemize}
+\item každý objekt má seznam vlastností/atributů (v neuspořádané množině)
+\item unifikace je pak spojování tohoto seznamu; je dovolena pouze pokud nejsou konfliktní atributy (jinak sporná sestava)
+\item spojují se však vlastnosti, které spolu nesouvisí, takže výrazy mají u sebe nerelevantní údaje
+\text{} \tab řešení: typované sestavy rysů (typ určuje možné vlastnosti)
+\item sestavy rysů pak obsahují kombinaci rysů, jenž popisují konkrétní jev (např. shoda)
+\end{itemize}
+
+\subsubsection*{HPSG}
+Hot Potato Soup with Garlic \\
+Generování řetězců pomocí pozice v hiearchii
+
+\subsubsection*{Augmented Transition Networks}
+3 typy hran, přechod mezi sítěmi
+
+\subsection*{Q-systémy}
+\begin{itemize}
+\item transformace grafů (vět)
+\item stromy jsou linearizovány (s neprojektivními konstrukcemi se dá nějak vypořádat)
+\item přesně definované typy objektů: atomy, stromy a seznamy stromů
+\item jednopísmenné proměnné, logické operátory
+\item spojování vrcholů, gramatická pravidla
+\end{itemize}
+
+\subsection*{Funkční generativní popis, valence}
+\begin{itemize}
+\item ještě větší štěpení: 5 rovin (fonetická, fonologická, morfématická, povrchová, tektogramatická)
+\item tektogramatická rovina nejvyšší, závislosti
+\item valence (povolené kombinace různých členů - aktantů), Vallex \begin{itemize}
+	\item vytváří formy (Lojban)
+	\item TG rovina má členy: konator/aktor, patient, adresát, origo, efekt (každý pouze jednou, ale lze triviálně koordinovat)
+	\item každý aktant může být ještě obligatorní/fakultativní (obligatorní nesmí chybět)
+	\item aktant je obligatorní, pokud nemůžeme odpovědět na otázku pomocí \textit{nevím}
+	\item \textit{Moji přátelé přijeli}. Kam? \textbf{Nevím}, Odkud? Nevím. \textit{Kam} tedy má obligatorního aktanta
+\end{itemize}
+\end{itemize}
+
+\subsection*{Kontrola gramatiky}
+\begin{itemize}
+	\item dobrá heuristika je řešit pouze nejčastější chyby
+	\item nechceme žádné false positive (precision blízko 1, na recall kašleme)
+	\item jazyky s volným slovosledem jsou problematické
+\end{itemize}
+
+\subsubsection*{RFODG}
+Robust Free-Order Dependency Grammar je použití ručně psaných sjednocovacích gramatik. Různé fáze výpočtu (pozitivní projektivní, negativní projektivní/pozitivní neprojektivní, negativní neprojektivní). Různé gramatiky mohou popisovat i chybné věty.
+
+\subsubsection*{LanGR}
+Pravidla opět psaná ručně. Nejsou aplikována systematicky (neuspořádaně), ale cyklicky. 
+
+\section*{Automatický překlad přirozených jazyků}
+Kromě samotného slovníku slov je třeba znát tvarosloví (morfologie), pravopis (syntax), ustálená spojení (idiomy). Slovníky však nejsou 1:1, neboť reflektují kulturu. Závisí taky na kontextu z předchozích vět (podobný problém lemmatizace).
+
+Obvykle se posunujeme v analýze směrem k interlingvě a v nějakém bodě provedeme transfer a vygenerujeme cílový text.
+
+\subsubsection*{Historie}
+Už od války - první vyvrcholení v USA utnuto ALPACem, pokračování v Evropě. Žádně extra dobré výsledky. Řešením bylo omezit doménu. Systém TAUM - METEO (vytvořili k tomu Q-systémy) první úspěšný. Pak pokusy s SYSTRAN a EUROTRA. VERBMOBIL chtěl kromě překladu dělat rozpoznávání a syntézu řeči (rok 2000). 
+
+
+
+
+\section*{Konec}
+Nějak tak jsem si uvědomil, že pěkněji zpracované poznámky jsou na \href{http://wiki.matfyz.cz/wiki/PFL012-pozn\%C3\%A1mky}{mff wiki}. Obsah přednášek se moc nemění během let, tudíž je asi rozumnější řídit se tím.
+\end{document}

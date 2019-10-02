@@ -1,0 +1,17 @@
+add ahoj hello hi
+add aha well
+add auto car
+add auto automobile
+add nazdar hi
+find ahoj
+find auto
+rfind hello
+rfind hi
+pfind ah
+del ahoj hello
+del auto
+find ahoj
+find auto
+rfind hi
+pfind ah
+rfind hello

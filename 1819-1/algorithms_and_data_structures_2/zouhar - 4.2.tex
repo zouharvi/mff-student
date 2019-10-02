@@ -1,0 +1,44 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{4.2}
+\rhead{Vilém Zouhar}
+
+Došlo k nepěknému přetížení slova \textit{zdroj}. Toto slovo tedy budu používat jako v zadání a onen speciální vrchol budu označovat \textit{source}. Zároveň \textit{stok} přejmenuji na \text{terminal}.
+
+\section*{Popis}
+Vytvoříme si opět bipartitní graf. Partita $A$ bude tvořena projekty a partita $B$ zdroji. $A$ zapojíme do source orientovaně $(s, a)$. Obdobně pro každý zdroj zapojíme do terminálu $(z,t)$. Na závěr mezi vrcholy z $A$ a $B$ přidáme orientovanou hranu $(a,b)$ právě tehdy, jestliže je $b$ předpokladem (zdrojem) $a$. Kapacity hran prvního typu budou odměny za projekty, druhého typu to jsou ceny zdrojů a posledního budou všechny nekonečno. Každá hrana je orientovaná ve smyslu od source do terminal.
+
+\section*{Myšlenka a důkaz}
+Úlohu budeme řešit přes minimální řez, ale pod kapotou to je stejně maximální tok. U minimálního řezu se jen lépe ukazuje myšlenka. Vytvoříme tedy minimální řez v našem grafu (jedna část ($C$) nutně obsahuje source a druhá terminal). Představíme si, že jsme už dostali peníze za všechny projekty, které jsou možné a v grafu si jen vybíráme, které projekty neuděláme. Tím se tedy snažíme minimalizovat jakoukoliv změnu (ztrátu). Rozvážíme si příklad projektu $p$ a dvou zdrojů $z_1, z_2$. V řezu můžou nastat tyto možnosti:
+\begin{itemize}
+\item $s \in D, p \notin D$: pak zaplatíme ale cenu, která je úměrná velikosti hrany $(s,p)$, což je právě cena projektu. Tedy jako bychom se museli vzdát dříve přidělených peněz. \\
+\item $s \in D, p \in D, (z_1 \notin D \vee z_2 \notin D)$: tady jsme se rozhodli pro projekt $p$, ale nezahrnuli jsme alespoň jeden ze zdrojů, tedy musíme zaplatit nekonečno, což je pro řez nepřípustné.
+\item $s \in D, p \in D, (z_1 \in D \wedge z_2 \in D)$: nechali jsme si projekt, ale zároveň zaplatili cenu dvou zdrojů (neboť $t \notin D$). Pro další projekt, který používá tyto zdroje, nemusíme platit navíc nic.
+\end{itemize}
+
+\section*{Algoritmus a složitost}
+Máme celkem $N = l+k$ vrcholů a až $M=lk$ hran. Minimální řez nalezneme opět pomocí algoritmu maximálního toku, což jde údajně (James B Orlin's + KRT) až v $O(MN) = O((l+k)lk)$
+
+\end{document}

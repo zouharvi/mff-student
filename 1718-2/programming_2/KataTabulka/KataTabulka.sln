@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KataTabulka", "KataTabulka\KataTabulka.csproj", "{01EEEB3E-B104-4397-B48F-FBC66EAF1F76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01EEEB3E-B104-4397-B48F-FBC66EAF1F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EEEB3E-B104-4397-B48F-FBC66EAF1F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01EEEB3E-B104-4397-B48F-FBC66EAF1F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01EEEB3E-B104-4397-B48F-FBC66EAF1F76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B566CC2-47C3-4B2D-8EEC-65E69C06DCCE}
+	EndGlobalSection
+EndGlobal

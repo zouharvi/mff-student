@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\begin{document}
+\vspace{-4cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{3. domácí úkol | Vilém Zouhar}}
+
+\section{}
+Využijeme vztahu dokázaného v ZS: $x^n - y^n = (x-y)(\sum_{i=1}^{n} x^{n-i}y^{i-1})$.
+\begin{align*}
+	&\int \frac{x^{17}-5}{x-1} dx = \int \frac{(x-1)(\sum_{i=0}^{16} x^{i})}{x-1}dx  - \int \frac{4}{x-1} dx = \bigg(\sum_{i=0}^{16} \int x^{i} dx \bigg) - 4\ln|x-1| =  \\
+	& \sum_{i=0}^{16} \frac{x^{i+1}}{i+1} - 4\ln|x-1| +c = \\
+	& \frac{x^{17}}{17}+\frac{x^{16}}{16}+\frac{x^{15}}{15}+\frac{x^{14}}{14}+\frac{x^{13}}{13}+\frac{x^{12}}{12}+\frac{x^{11}}{11}+\frac{x^{10}}{10}\frac{x^{9}}{9}+\frac{x^{8}}{8}+\frac{x^{7}}{7}+\frac{x^{6}}{6}+\frac{x^{5}}{5}+\frac{x^{4}}{4}+\frac{x^{3}}{3}+\frac{x^{2}}{2}+x- 4\ln|x-1| +c
+\end{align*}
+
+Původní je definovaná na $\mathbf{R} \backslash \{1\}$, výsledný integrál taky, tedy platí pro intervaly: $(-\infty, 1)$ a $(1, \infty)$.
+
+
+\section{}
+\begin{align*}
+	& \int \ln(x+\sqrt{1+x^2}) dx = \textit{[per partes]} = x\cdot \ln(x+\sqrt{1+x^2}) - \int \frac{2x}{2\sqrt{1+x^2}}  = \hspace{6cm}\\
+	& \hspace{1cm} \bigg[f = 1, F = x, G = \ln(x+\sqrt{1+x^2}), g = \frac{1+\frac{x}{\sqrt{1+x^2} }}{x+\sqrt{1+x^2}} = \frac{1}{\sqrt{1+x^2}}\bigg] \\
+	& \hspace{1cm} \bigg[\int \frac{2x}{2\sqrt{1+x^2}} = \textit{[sub. $y =1+x^2, y'=2x$]} = \frac{1}{2} \int y^{-\frac{1}{2}} dy= 2 y^{\frac{1}{2}} +c = \sqrt{1+x^2} +c\bigg]  \\ 
+	& = x\cdot \ln(x+\sqrt{1+x^2}) - \sqrt{1+x^2} + c 
+\end{align*}
+
+Původní funkce je definovaná na $\mathbf{R}$ (neboť argument logaritmu je vždy kladný). Primitivní funkce je také definovaná na celém $\mathbf{R}$.
+
+\section{}
+\begin{align*}
+	& \int \frac{\cos^2x}{\sin x \cdot (1-\cos x)} dx = \hspace{15cm}\\
+	& \hspace{1cm} \bigg[\textit{sub. } t = \tan\frac{x}{2}, 1\cdot dx = \frac{2}{1+t^2} dt, \sin x = \frac{2t}{t^2+1}, \cos x = \frac{1-t^2}{1+t^2} \bigg] \\
+	& = \int \frac{\bigg(\frac{1-t^2}{1+t^2} \bigg)^2}{\frac{2t}{t^2+1} \cdot \bigg(1 - \frac{1-t^2}{1+t^2}\bigg)} \cdot \frac{2}{1+t^2} dt = \int \frac{(1-t^2)^2\cdot (1+t^2)}{(1+t^2)^2\cdot t \cdot (1+t^2 - 1 + t^2)} dt = \frac{1}{2}\int \frac{(1-t^2)^2}{(1+t^2)\cdot t^3} dt = \\
+	& \hspace{1cm} \bigg[  \frac{1-2t^2+t^4}{(1+t^2)\cdot t^3} = \frac{At+B}{1+t^2} + \frac{C}{t^3} + \frac{D}{t^2} + \frac{E}{t} \Rightarrow (A, B, C, D, E) = (4, 0, 1, 0, -3) \bigg]\\
+	& = \frac{1}{2} \bigg[ \int 2\frac{2t}{1+t^2} dt + \int \frac{1}{t^3} - \int \frac{3}{t}\bigg] = \\
+	& \hspace{1cm} \bigg[ \int 2\frac{2t}{1+t^2} dt = [\textit{sub. } y = 1+t^2, y'= 2t] = \int 2\frac{1}{y} dy = 2\ln|y| +c = 2\ln|1+t^2|+c  \bigg] \\
+	& = \frac{1}{2} \bigg[ 2\ln|1+t^2| + \frac{-1}{2 t^2} - 3 \ln|t| \bigg] +c = \frac{2\ln|1+\tan^2 \frac{x}{2}|-\frac{1}{2\tan^2 \frac{x}{2}}-3\ln | \tan\frac{x}{2}|}{2} +c 
+\end{align*}
+Původní funkce je definovaná na $\mathbf{R} \backslash \bigcup_{k \in \mathbf{Z}} \{k\cdot \pi \}$, integrál taky na intervalech: $\mathbf{R} \backslash \bigcup_{k \in \mathbf{Z}} \{k\cdot \pi \}$ (kvůli $\tan$ ve jmenovateli)
+
+\end{document}

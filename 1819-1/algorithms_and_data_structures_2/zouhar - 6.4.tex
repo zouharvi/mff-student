@@ -1,0 +1,53 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{6.4}
+\rhead{Vilém Zouhar}
+
+\section*{Počítání}
+\subsection*{$(1,-1,1,\ldots,1,-1)$}
+\begin{align*}
+	& v_i = \sum_{k=0}^{n-1} \omega_i^k (-1)^k = \sum_{k=0}^{\frac{n}{2}-1} \omega_i^{2k} - \sum_{k=0}^{\frac{n}{2}-1} \omega_i^{2k+1} = \big(n' = \frac{n}{2}\big) = \sum_{k=0}^{n'-1} \big(\omega_i^{2}\big)^k - \sum_{k=0}^{n'-1} \omega_i \big(\omega_i^{2}\big)^k \text{ (poloviční $n$)} = \\
+	& = 0 - 0 = 0 \text{ (součet všek mocnin primitivních odmocnin 1 pro dané n')}
+\end{align*}
+\subsection*{$(1,0,1,\ldots,1,0)$}
+\begin{align*}
+	& v_i = \sum_{k=0}^{\frac{n}{2}-1} \omega_i^{k} = \big(n' = \frac{n}{2}\big) = \sum_{k=0}^{n'-1} \big(\omega_i^{2}\big)^k = 0 \text{ (součet všek mocnin primitivních odmocnin 1 pro dané n')}
+\end{align*}
+\subsection*{$(k,k,k,\ldots,k,k)$}
+\begin{align*}
+	& v_i = k \cdot \sum_{l=0}^{n-1} \omega_i^{l} = 0 \text{ (součet všek mocnin primitivních odmocnin 1 pro dané n)}
+\end{align*}
+\subsection*{$(\omega^0,\omega^1, \omega^2,\ldots,\omega^{n-2},\omega^{n-1})$}
+\begin{align*}
+	& v_i = \sum_{k=0}^{n-1} \omega_i{k+k} = \sum_{l=0}^{\frac{n}{2}-1} \big(\omega_i^{2}\big)^l = 0 \text{ (součet všek mocnin primitivních odmocnin 1 pro dané n')}
+\end{align*}
+\subsection*{$(\omega^0,\omega^2, \omega^4,\ldots,\omega^{2n-4},\omega^{2n-2})$}
+\begin{align*}
+	& v_i = \sum_{k=0}^{n-1} \omega_i{k+2k} = \sum_{l=0}^{\frac{n}{3}-1} \big(\omega_i^{3}\big)^l = 0 \text{ (součet všek mocnin primitivních odmocnin 1 pro dané n')}
+\end{align*}
+
+\end{document}

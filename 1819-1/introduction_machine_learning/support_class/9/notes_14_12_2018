@@ -1,0 +1,22 @@
+# Excercies 1
+Given FPR = 5%, proportion of positives = 1/21, required precision = 1/3, what is the recall?
+
+P = 1/21, FP = 20/21*0.05, TP = 1/(21*2)
+
+Write a function
+
+```
+drawROC = function(positives, precision) {
+	recs = c()
+	sequence = seq(0, 1, 0.001)
+	for(FPR in sequence) {
+		FP = (1-positives)*FPR
+		TP = FP*precision/(1-precision)
+		REC = TP/positives
+		recs = c(recs, min(1,REC))
+	}
+	plot(sequence, recs, type='l', xlab='FPR', ylab='Recall',
+		main=paste('Pos: ' , round(positives, 2), ' prec: ', round(precision, 2)))
+}
+drawROC(1/21, 1/3)
+```

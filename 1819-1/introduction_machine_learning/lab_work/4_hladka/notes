@@ -1,0 +1,18 @@
+for(i in 1:MAX_IT) { th[i+1] <- (th[i] - ALPHA*fd(th[i])); print(th[i]); points(th[i] , f(th[i])); }
+
+plot((-100):100, f((-100):100), type='n')
+lines((-100):100, f((-100):100))
+
+
+
+### linear model
+
+m = lm(..)
+plot(...)
+coef(m)
+lines(..)
+
+
+### polynom model
+m.15 = lm(mpg ~ poly(weight, 15), data=sorted)
+lines(sorted$weight, predict(m.15), type='l', col='green', lwd=3)

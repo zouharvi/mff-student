@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while IFS= read -r line; do
+	if [ -z $(grep "$line" "$2") ]; then echo "$line"; fi
+done < "$1"
+
+# iterate all lines, check if line is contained
+

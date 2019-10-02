@@ -1,0 +1,66 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=1cm,bottom=1cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{7. domácí úkol | Vilém Zouhar}}
+
+\section{}
+\subsection{Popis}
+Pokud leží nějaký vrchol na cyklu, tak pak jeho vzdálenost od sebe sama (po puštění Floyd Warshalla) je záporná. Pokud \textit{detekovat} znamená rozhodnout, zdali v grafu záporný cyklus je, nebo není, pak stačí pustit Floyd Warshalla a projít vzdálenosti vrcholů od sebe samých.
+\subsection{Korektnost}
+Koreknost Floyd Warshalla rozebrána na přednášce. Úprava zjevná.
+\subsection{Pseudokód}
+\begin{lstlisting}[language=Python]
+d = Floyd-Warshall(G)
+for i in range(n):
+	if d[i,i] < 0:
+		return true
+return false
+\end{lstlisting}
+\subsection{Složitost}
+Floyd Warshall trvá $O(n^3)$ časově a $O(n^2)$ prostorově. Naše úpravy na tom nic nemění.
+
+\section{}
+\subsection{Popis}
+Na konci Bellman Forda se pokusíme udělat relax na všechny možné hrany. Pokud někde podmínka relaxu vyjde, je zjevné, že se tam nachází záporný cyklus s hranou, kterou jsme právě zpracovali. Bellman Ford si při relaxu ukládat ke každému vrcholu i jeho předchůdce. Tedy pokud budeme brát předchůdce z vrcholu, u kterého se nám podařilo relaxovat, tak dostaneme kýžený záporný cyklus. Musíme si akorát pamatovat, které vrcholy jsme už našly a pak vzít jen ty, které tvoří cyklus. Celá cesta totiž rozhodně cyklus být nemusí.
+\subsection{Korektnost}
+Koreknost Bellman Forda rozebrána na přednášce. Předchůdce každého vrcholu určuje jeho nejkratší cestu k $s$. Pokud existuje v grafu záporný cyklus, pak se k $s$ dostaneme nejlépe právě přes něj.
+\subsection{Pseudokód}
+Možná $\pm 1$ chyby..
+\begin{lstlisting}[language=Python]
+Bellman-Ford(G, s)
+a = null
+for each edge (u, v) with weight w in edges:
+	if d[u] + w < d[v]:
+		a = u
+		break
+if a == null:
+	return "Negative cycle not found"
+else:
+	arr = [0]*n // indexing by verticies
+	i = 1
+	for j in range(m):
+		if arr[a] != 0:
+			return arr, i // verticies with their number higher than i
+					 are part of a negative cycle
+		arr[a] = i++
+\end{lstlisting}
+\subsection{Složitost}
+Složitost Bellman Forda je  $O(mn)$, naše úprava rozhodně neudělá řádově víc operací než kolik je počet hran.
+
+\end{document}

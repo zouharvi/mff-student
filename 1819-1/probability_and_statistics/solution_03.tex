@@ -1,0 +1,96 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{3. cvičení (17. 10. 2018)}
+\rhead{Vilém Zouhar}
+
+\section{}
+\subsection{}
+\begin{align*}
+& A = \{ (2, \cdots), (4, \cdots), (6, \cdots) \} \\
+& B = \{ (\cdots, 1), (\cdots, 3), (\cdots, 5) \} \\
+& C = \{ (1,2), \cdots \} \rightarrow 6 \cdot 3 \\
+\\
+& P[A|C] = \frac{P[A\cap C]}{P[C]} = \frac{9}{18} = 0.5
+\end{align*}
+\subsection{}
+\begin{align*}
+& 0.25 = P[A\cap B] = P[(\{2,4,6\},\{1,3,5\}] = 0.5 \cdot 0.5 = P[A] \cdot P[B] \\
+& \cdots \rightarrow \text{jsou}
+\end{align*}
+\subsection{}
+\begin{align*}
+& P[A\cap B \cap C] = P[A \cap B] \rightarrow \text{nejsou}
+\end{align*}
+
+\section{}
+\begin{align*}
+& \text{nezávislé} \wedge P[A\cap B] = 0 \rightarrow P[A]\cdot P[B] = 0 \rightarrow A = \emptyset \vee B = \emptyset
+\end{align*}
+
+\section{}
+\subsection{}
+\begin{align*}
+& P[A|(A\wedge B' \wedge C') \vee (A'\wedge B \wedge C') \vee (A'\wedge B' \wedge C)] = \frac{P[A\wedge B' \wedge C']}{P[(A\wedge B' \wedge C'] + P[A'\wedge B \wedge C'] + P[A'\wedge B' \wedge C]}
+\end{align*}
+\subsection{}
+\begin{align*}
+& F_X(0) = P[x \le 0] = P[A' \wedge B' \wedge C'] \approx 0.2 \\
+& F_X(1) = F_X(0) + P[x = 1] = F_X(0) + P[A' \wedge B' \wedge C] + P \cdots \approx 0.7 \\
+& F_X(2) \approx 0.9 \\
+& F_X(3) = 1
+\end{align*}
+
+\section{}
+\subsection{}
+\begin{align*}
+& P[x = k] = \frac{{a \choose k} {N-a \choose n-k} }{{N \choose n}}
+\end{align*}
+\subsection{}
+\begin{align*}
+& P[x \ge \frac{n}{2}] = 1 - P[x < \frac{n}{2}] = 1 - F_X(n/2) = 1 -  
+\end{align*}
+\section{}
+\begin{align*}
+& X(k) = P[x = k] = \sum_0^n i \cdot {n \choose i} \cdot  \big(\frac{3}{14}\big)^i \cdot \big(\frac{11}{14}\big)^{n-i} = \frac{3}{14}n
+\end{align*}
+
+\section{}
+\subsection{}
+\begin{align*}
+& P(x = k) = 0.8^{i-1}\cdot 0.2, E[X] = \sum_1^\infty i\cdot 0.8^{i-1}\cdot 0.2 = 5, F_X(k) = \sum_1^k 0.8^{i-1}\cdot 0.2 \\
+& X \tilde{\hspace{0.4cm} } Geom(0.2)
+\end{align*}
+\subsection{} 
+\begin{align*}
+& P(x>5) = 1-F_x(5)
+\end{align*}
+\subsection{}
+\begin{align*}
+& P(x>10|x>5) = P(x>5)
+\end{align*}
+
+\section{}
+\begin{align*}
+& \sum_{a=0}^k {k \choose a} \frac{A! * B! * (A+B-k-1)!}{(A-a-1)!*(B-k+a)!*(A+B)!} \\
+& \sum_{a=0}^k {k \choose a} \frac{(A+a)! * (B+k-a-1)! * (A+B-1)!}{(A-1)!*(B-1)!*(A+B+k)!}
+\end{align*}
+\end{document}

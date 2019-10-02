@@ -1,0 +1,108 @@
+#################################################################################
+#################################################################################
+
+### R code for the Word Sense Disambiguation task
+
+### Decision tree classifier
+
+### Barbora Hladka, Martin Holub
+
+### MFF UK in Prague, 2013
+
+### http://ufal.mff.cuni.cz/course/npfl054
+
+#################################################################################
+#################################################################################
+#################################################################################
+
+### Task: Assign the correct sense to the target word "line" ("lines", "lined")
+
+### Objects: Sentences containing the target word ("line", "lines", "lined")
+
+### Target class: SENSE = {CORD, DIVISION, FORMATION, PHONE, PRODUCT, TEXT}
+
+### Features
+	## feature	type	definition
+	##---------------------------------------------------------------------------------------------------------------				
+	## A1	binary		L-1 is one of	trail | strong | nylon | tow | safety | shroud | anchor | exercise | rope
+	## A2	binary		L-1 is one of	fine | racial | class | thin | bright | legal | regional | political | partisan | ethic | draw | clear
+	## A3	binary		L-1 is one of	long | checkout | straight
+	## A4	binary		L-1 is one of	telephone | access | direct | gab | customer | open | subscriber | free | complaint | chat | private | phone | subscribe
+	## A5	binary		L-1 is one of	computer | car | products | ibm | product | broad | minicomputer | broad | truck | model | care | vax | apparel | jeep | drug | cosmetics | sportswear | clothing | shoe
+	## A6	binary		L-1 is one of	open | famous | good | funny | every | cover | close
+	## A7	binary		L+1 is one of	increase | charge | open | busy | grow
+	## A8	binary		L+1 is one of	extension | include | last
+	## A9	binary		L+1 is	between		
+	## A10	binary		L-1 or L-2 or L-3 or L-4 is one of	toll-* | direct | phone | subscribe
+	## A11	binary		TW.Sfun	prep_on		
+	## A12	categorical	L-1			
+	## A13	categorical	L-2			
+	## A14	categorical	L-3			
+	## A15	categorical	L+1			
+	## A16	categorical	T-1			
+	## A17	categorical	T+1			
+	## A18	categorical	T+2			
+	## A19	categorical	TW.Form	( = line | lines | lined )		
+	## A20	categorical	TW.Sfun			
+
+	## Legend			
+	## 	TW		target word
+	## 	L-n		lemma of the n-th word before TW
+	## 	L+n		lemma of the n-th word after TW
+	## 	T-n		morhological tag of the n-th word before TW
+	## 	T+n		morhological tag of the n-th word after TW
+	## 	TW.Form		form of the target word
+	##	TW.Sfun		syntactic function of the target word
+
+#######################################################################################
+#######################################################################################
+
+################################
+### Getting example data    ###
+################################
+
+## Read a file with examples
+examples <- read.table("wsd.development.csv", header=T,
+		       colClasses="factor"
+		       )
+
+## Review the data
+
+## Display the internal structure of the example data
+# str(examples)
+
+## Get the number of input examples
+num.examples <- nrow(examples)
+
+## Set the number of training examples = 90% of all examples
+num.train <- round(0.9 * num.examples)
+
+## Set the number of test examples = 10% of all examples
+num.test <- num.examples - num.train
+
+## Check the numbers
+num.examples
+num.train
+num.test
+
+## Randomly split examples into training and test data using sample()
+## Use set.seed() to be able to reconstruct the experiment with the SAME training and test sets
+
+set.seed(123)
+s <- sample(num.examples) 
+
+### Get the training set
+## First, generate indices of training examples
+indices.train <- s[1:num.train]
+
+## Second, get the training examples
+train <- examples[indices.train,]
+
+### Get the test set 
+indices.test <- s[(num.train+1):num.examples]
+test <- examples[indices.test,]
+
+## Check the results
+# str(train)
+# str(test)
+

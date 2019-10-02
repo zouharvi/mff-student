@@ -1,0 +1,18 @@
+Table for learning_rate 0.01
+
+decay_rate | final learning_rate | log(rate, final)  | log(e, final)
+0.5        | 9.765625e-06        |                   | 
+1          | 0.01                | x                 | 
+2          | 10.24               | 3.356             | 2.32
+3          | 590.49              | 5.808             | 6.38
+5          | 97656.25            | 7.138             | 11.48
+10         | 100000000           | 8                 | 18.42
+
+
+decay_rate | final | learning_rate 
+2          | 1024  | 1
+2          | 2018  | 2
+2          | 10240 | 10
+
+learning_rate * decay_rate ^ epochs = final
+final = (final/lr)^(1/epoch)

@@ -1,0 +1,76 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{5. cvičení (31. 10. 2018)}
+\rhead{Vilém Zouhar}
+
+\section{}
+\begin{align*}
+	& SSS, SSD, SDS, DSS, SDD, DSD, DDS, DDD \\
+\end{align*}
+
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+      Y-X  & 0 & 1 & 2 & 3 & S\\ \hline
+0          & $0$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{3}{8}$ \\ \hline
+1          & $0$ & $\frac{1}{8}$  & $\frac{1}{8}$ & $0$ & $\frac{2}{8}$ \\ \hline
+2          & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $\frac{3}{8}$ \\ \hline
+S          & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ & 1 \\ \hline
+\end{tabular}
+\end{table}
+
+\text{Jsou závislé (jinak by nebyla nula u celonenulových sloupcích/řádcích)}
+
+\section{}
+
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+      Z-X  & 0 & 1 & 2 & 3 & S\\ \hline
+0          & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $\frac{3}{8}$ \\ \hline
+1          & $0$ & $\frac{1}{8}$  & $\frac{1}{8}$ & $0$ & $\frac{2}{8}$ \\ \hline
+2          & $0$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{3}{8}$ \\ \hline
+S          & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ & 1 \\ \hline
+\end{tabular}
+\end{table}
+
+\section{}
+$P[L=8] =1$ (konstantní je nezávislá se vším)
+
+\section{}
+...
+
+\section{}
+$c= 1$ \\
+\begin{align*}
+	& f_Y(y) = \int_0^1 (x+y) dx = [x^2/2 +xy]_0^1 = y+1/2 \\
+	& 1/2
+\end{align*}
+
+
+\section{} 
+\begin{align*}
+	& f_Y(y) = 1/2 \cdot e^{-y/2}, f_X	(x) = e^{-x} \\
+	& f_Y \cdot f_X = f \rightarrow \text{ nezávislé} \\
+	& ???
+\end{align*}
+\end{document}

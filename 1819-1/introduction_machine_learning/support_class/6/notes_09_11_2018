@@ -1,0 +1,25 @@
+###############
+# Excercise 1 #
+###############
+
+X continuous random variable uniformly distributed ranged [0,1]
+
+a) determine density, distribution (CNF) function
+b) Y=X^2, determine density and distribution (CNF) function
+
+
+##############################
+# Test results data analysis #
+##############################
+
+data found on http://ufal.mff.cuni.cz/~holub/2018/docs/test1.eval.anonymous.csv
+
+a) distribution of scores and evaluation
+   histogram, median
+b) draw histogram by reviewer, score distribution by reviewer
+
+
+###################
+# Test excercises #
+###################
+..

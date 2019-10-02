@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx} 
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{8. domácí úkol | Vilém Zouhar}}
+
+\section{}
+Jedná se o podíl dvou polynomů více proměnných, kde polynom ve jmenovateli má jeden reálný kořen $(0,0)$. Definiční obor tedy tvoří $(\mathbf{R} \backslash \{0\})^2$, kde je funkce spojitá (aritmetické operace zachovávají spojitost). Stačí zjistit, zdali lze v počátku funkci spojitě dodefinovat. Budeme se blížit $x \rightarrow 0$ a $y$ po přímce $kx$.
+\begin{align*}
+ \lim_{x \rightarrow 0} \lim_{y \rightarrow kx} \frac{2x^2y}{x^4+y^2} = \lim_{x \rightarrow 0} \frac{2kx^3}{x^4 + k^2x^2} = \lim_{x \rightarrow 0} \frac{2kx}{x^2 + k^2} 
+\end{align*}
+Existuje pro $k \ne 0$, což ale činí problém, tedy existuje přímka, která vede na neexistující limitu. $ \Rightarrow $ \\
+Původní limita neexistuje a nelze tak funkci spojitě dodefinovat
+
+
+\section{}
+V čitateli je součin spojitých funkcí, ve jmenovateli polynom s kořeny $(a,-a)$. Definičním oborem je rovina bez osy druhého a čtvrtého kvadrantu ($\mathbf{R}^2 \backslash\{(a,-a), a\in\mathbf{R} \}$).
+\begin{align*}
+	& \lim_{y \rightarrow -x} \frac{\sin(x)+\sin(y)}{x+y} = \lim_{y \rightarrow -x} \frac{2\sin((x+y)/2)\cos((x-y)/2)}{x+y} = \text{AL} = \lim_{y \rightarrow -x} \cos((x-y)/2) \cdot \lim_{y \rightarrow -x} \frac{\sin ((x+y)/2)}{(x+y)/2} \\
+	& = \text{(ze spojitosti $cos$) } \cos((x+x)/2) \cdot \lim_{{(x+y)/2 = \alpha} \rightarrow 0} \frac{\sin (\alpha)}{\alpha} = \cos(x) \cdot 1
+\end{align*}
+Na ose druhého a třetího kvadrantu tedy můžeme funkci spojitě dodefinovat jako $\cos(x)$.
+
+\section{}
+Definice otevřené množiny: $A \text{ otevřená } \Leftrightarrow \forall x\in A: \exists \epsilon >0: U_\epsilon(x) \subseteq A$. \\
+Platí, že: $\forall x \in \mathbf{R}^n: \forall \epsilon >0: \exists \delta > 0: \forall y: |x-y| < \delta \Rightarrow |f(x)-f(y)|<\epsilon$ Za $\epsilon$ volíme $-f(x)$, což je kladná hodnota. Pak:
+$\forall x \in \mathbf{R}^n: \exists \delta > 0: \forall y: |x-y| < \delta \Rightarrow |f(x)-f(y)|<-f(x)$ Nyní dva případy:
+\begin{enumerate}
+	\item $f(x)-f(y)\le 0$: Pak druhá část výroku (nerovnost): $-f(x)+f(y)<-f(x) \Rightarrow f(y) < 0 \Rightarrow y \in M$
+	\item $f(x)-f(y) > 0$: Pak $f(x) > f(y)$, ale víme, že $f(x) < 0$, tedy $0 > f(x) > f(y) \Rightarrow y \in M$ \text{(neřešíme $\epsilon$)} 
+\end{enumerate}
+Ze spojitosti máme zaručené, že delta okolí, kde všechny funkční hodnoty jsou záporné, vždy existuje a z toho tedy je $M$ otevřená.
+\end{document}

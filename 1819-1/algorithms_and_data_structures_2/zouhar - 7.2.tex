@@ -1,0 +1,58 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{7.2}
+\rhead{Vilém Zouhar}
+
+\section*{XOR}
+Za toto jsem dostal zápočet na IPS I., tak nevím, jak moc se to sem hodí. Zprávu $N$ zašifrujeme do čísla $Z$ o základu $2$ (triviálně umíme skoro vždy). Pro každou $k$-tici generálů $G_i$ uděláme následovné:
+\begin{enumerate}
+	\item každý generál $l$ dostane náhodné binární číslo $g_i^l$ délky $|Z|$
+	\item číslo $Z_i = Z \oplus g_i^1 \oplus g_i^2 \oplus \ldots \oplus g_i^k$ zveřejníme
+	\item zveřejníme všech seznam generálů ve všech ${n \choose k}$ skupinách
+\end{enumerate}
+\text{}\\
+Pak zřejmě:
+\begin{enumerate}
+	\item pokud se sejde nějaká $k$-tice $G_i$, pak mají k dispozici čísla $Z_i, g_i^1, g_i^2, \ldots, g_i^k$
+	\item zprávu $Z$ dekonstruují jako $Z = Z_i \oplus g_i^1 \oplus g_i^2 \oplus \ldots \oplus g_i^k$
+	\item stačí již dešifrovat zprávu $Z$ do původní $N$ 
+\end{enumerate}
+
+Kritická část je šifrování pomocí $XOR$, ale:
+\begin{align*}
+	& Z_i = Z \oplus g_i^1 \oplus g_i^2 \oplus \ldots \oplus g_i^k = Z \oplus Q_k \\
+	& Z_i \oplus Q_k = Z \oplus Q_k \oplus Q_k = Z \oplus 0 = Z
+\end{align*}
+
+Nevýhodou je, že musíme vygenerovat ${n \choose k} \cdot k \cdot |Z|$ bitů a ty rozdistribuovat. Pokud se to však podaří, pak neprozradíme ani jeden bit informace v procesu (\textit{not a bit}), neboť $XOR$ náhodným číslem je opět náhodné číslo..
+
+\section*{Algebraický přístup}
+Předchozí řešení je dost technické. Úloha lze snad řešit i víc matematicky. Předpokládáme, že zprávu $N$ zašifrujeme do $k$-dimenzionálního prostoru (např. rozdělíme na $n$ částí). Pak vygenerujeme $n$ různých nadrovin, které procházejí tímto bodem a jejich parametry rozdáme generálům. Jestliže se jich sejde alespoň $k$, tak jejich nadroviny jednoznačně určí původní $N$ (méně určí nadrovinu o dimenzi nižší, což však nestačí).
+
+Nevýhodou je, že předpokládáme zašifrovatelnost do bodu v nějakém prostoru. To je mnohem silnější předpoklad než u $XOR$ řešení. Pokud však můžeme o $N$ něco předpokládat, tak $k-1$ generálů má nadrovinu o jedna nižší dimenzi, kde se zpráva nachází, což může být problém.
+
+Druhé řešení se mi líbí v tom, že každý generál dostane pouze jednu sadu parametrů, nikoliv pro každou možnou skupinu.
+\end{document}

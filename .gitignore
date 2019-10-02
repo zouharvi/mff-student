@@ -1,0 +1,9 @@
+*.db
+*.swp
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.dvi
+*.py[cod]
+__pycache__/

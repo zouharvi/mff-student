@@ -1,0 +1,48 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[bottom]{footmisc}
+%\setlength\parindent{0pt} % indent
+
+\hyphenation{thatshouldnot}
+
+\begin{document}
+
+\title{NLP Applications 11\\NMT, Ondřej Bojar}
+\author{Vilém Zouhar}
+\date{May 2019}
+\maketitle 
+
+\section*{Introduction}
+
+Because of travel difficulties I arrived about 20 minutes late. Despite promising a lecture solely on his cooperation with the Czech Police on Vietnamese SMS translation, he talked mostly abotu neural machine translation.
+
+\section*{Neural Machine Translation}
+
+Ondřej Bojar explained concepts such as representation learning, machine translation as classification, language model + conditioning etc. He went deeper and introduced the encoder-decoder architecture. He explained it as it evolved an at each step provided an counterexample, which broke the whole idea. This sounded really interesting, but it is obvious, that prior knowledge from NPFL114 is required.
+
+\section*{Representation}
+
+He summed up his paper (Cífka, Bojar 2018) about transfering optimal representation for some task (eg. MT) to a different one (eg. TREC). This was quite amusing as I haven't seen anything like this before. He was also very eager to answer all our questions.
+
+\section*{The Future of NMT}
+
+Ondřej Bojar spent some time talking about the probable future of NMT. He stressed that currently even though neural machine translation sometimes surpasses human translators, it does not understand anything about the sentences. At the end he also mentioned the ELITR project he is a participant of.
+
+
+\section*{Cooperation with Czech Police}
+
+In the last 10 minutes he talked about his aforementioned project with the Czech Police. This was interesting, but not as much if you have read the interview \footnote{\href{https://www.idnes.cz/zpravy/domaci/strojovy-preklad-ondrej-bojar-vietnamstina-sms-policie-rozhovor.A190207\_144212\_domaci\_brzy}{idnes.cz/zpravy/domaci/strojovy-preklad-ondrej-bojar-vietnamstina-sms-policie-rozhovor}}
+
+\section*{Summary}
+
+Ondřej Bojar is an amazing speaker and as is common with him, he has problems with cramming all the content into just 90 minutes. Even though this lecture (especially the neural machine translation part) required some knowledge of deep learning (ideally from NPFL114) it was very enjoyable and I hope he will repeat this talk for the next year students.
+
+\end{document}

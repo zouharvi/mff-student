@@ -1,0 +1,64 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{9. domácí úkol | Vilém Zouhar}}
+
+\section{}
+Definiční obor: $D_f = \mathbf{R}^2$ \\
+Spojitost v bodě $(0,0)$:
+\begin{align*}
+	& (|x|-|y|)^2 \le 0 \Rightarrow |x|^2 + |y|^2 \le 2|xy| \Rightarrow x^2 + y^2 \le 2|xy| \Rightarrow \sqrt{x^2 + y^2} \le \sqrt{2|xy|} \\
+	& \text{Chceme: } \forall \epsilon >0 \exists \delta >0: \forall x: |x-0| < \delta \Rightarrow |\frac{xy}{\sqrt{x^2 +y^2}}-0| < \epsilon \\
+	& |\frac{xy}{\sqrt{x^2 +y^2}}| \le |\frac{xy}{\sqrt{2|xy|}}| = |\frac{\sqrt{|xy|} sgn(xy)}{\sqrt{2}}| < \epsilon \\
+	& \Rightarrow \forall \epsilon >0 \exists \delta >0: \forall x: |x-0| < \delta \Rightarrow |\frac{xy}{\sqrt{x^2 +y^2}}-0| < \epsilon \Rightarrow \text{funkce spojitá v (0,0)} \\
+\end{align*}
+Parciální derivace:
+\begin{align*}
+	& \frac{\partial f}{\partial x} (x,y) = \frac{x^3}{(x^2 + y^2)^{\frac{3}{2}}} \hspace{1cm} (x,y) \ne (0,0) \\
+	& \frac{\partial f}{\partial x} (0,0) = \lim_{t \to 0} \frac{f(t,0) - f(0,0)}{t} = \lim_{t \to 0} \frac{\frac{t\cdot 0}{\sqrt{t^2+0^2}}}{t} = \lim_{t \to 0} \frac{1}{|t|} = \infty \\
+	& \frac{\partial f}{\partial y} (x,y) = \frac{y^3}{(x^2 + y^2)^{\frac{3}{2}}} \hspace{1cm} (x,y) \ne (0,0) \\
+	& \frac{\partial f}{\partial y} (0,0) = \lim_{t \to 0} \frac{f(t,0) - f(0,0)}{t} = \lim_{t \to 0} \frac{\frac{t\cdot 0}{\sqrt{t^2+0^2}}}{t} = \lim_{t \to 0} \frac{1}{|t|} = \infty \hspace{1cm} \text{(symetricky)} \\
+\end{align*}
+
+\section{}
+Definiční obor: $D_f = \mathbf{R}^2 \backslash \{ (a,-a), a \in \mathbf{R} \}$ \\
+Spojité dodefinování:
+\begin{align*}
+	& \lim_{x \to -y^-} \arctan(\frac{x-y}{x+y}) = \text{(ze spojitosti $\arctan$)} = \arctan(\lim_{x \to -y^-} \frac{x+y}{x-y}) = \frac{\pi}{2}  \\
+	& \lim_{x \to -y^+} \arctan(\frac{x-y}{x+y}) = \text{(ze spojitosti $\arctan$)} = \arctan(\lim_{x \to -y^+} \frac{x+y}{x-y}) = -\frac{\pi}{2} 
+	& \Rightarrow \text{nelze spojitě dodefinovat}
+\end{align*}
+Parciální derivace:
+\begin{align*}
+	& \frac{\partial f}{\partial x} (x,y) = \frac{1}{1+\frac{(x-y)^2}{(x+y)^2}} \cdot \frac{\partial f}{\partial x}\frac{x-y}{x+y} = \frac{(x+y)^2}{(x+y)^2+(x-y)^2} \cdot \frac{(x+y) - (x-y)}{(x+y)^2} = \frac{y}{x^2+y^2} \hspace{1cm} (x,y) \ne (0,0) \\
+	& \frac{\partial f}{\partial x} (0,0)\hspace{0.3cm} \text{neexistuje} \\
+	& \frac{\partial f}{\partial y} (x,y) = \frac{1}{1+\frac{(x-y)^2}{(x+y)^2}} \cdot \frac{\partial f}{\partial y}\frac{x-y}{x+y} = \frac{(x+y)^2}{(x+y)^2+(x-y)^2} \cdot \frac{-(x+y) - (x-y)}{(x+y)^2} = \frac{-x}{x^2+y^2} \hspace{1cm} (x,y) \ne (0,0) \\
+	& \frac{\partial f}{\partial y} (0,0)\hspace{0.3cm} \text{neexistuje} \\
+	& \frac{\partial^2 f}{\partial x^2} (x,y) = \frac{-2xy}{(x^2+y^2)^2} \hspace{1cm} (x,y) \ne (0,0) \\
+	& \frac{\partial^2 f}{\partial x^2} (0,0)\hspace{0.3cm} \text{neexistuje} \\
+	& \frac{\partial^2 f}{\partial y^2} (x,y) = \frac{2xy}{(x^2+y^2)^2} \hspace{1cm} (x,y) \ne (0,0) \\
+	& \frac{\partial^2 f}{\partial y^2} (0,0)\hspace{0.3cm} \text{neexistuje} \\
+\end{align*}
+
+\section{}
+\begin{align*}
+	& \nabla \sin(xyz) = (yz \cos(xyz),xz \cos(xyz),xy \cos(xyz)) = g(x,y,z) \\
+	& D_{(2,1,1)} f(1,1,0) = g(1, 1, 0) \cdot (2, 1, 1) = (0, 0, 1 \cos(0)) \cdot (2, 1, 1) = 1
+\end{align*}
+\end{document}

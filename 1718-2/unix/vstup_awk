@@ -1,0 +1,16 @@
+graph(5)
+0 1 0 0 0
+1 0 0 1 1
+0 0 0 1 1
+0 1 1 0 0
+0 1 1 0 0
+exist(4,5)
+exist(4,2)
+add(5,4)
+delete(2,4)
+exist(4,5)
+exist(4,2)
+degree(2)
+neighbours(2)
+isolate(2)
+degree(2)

@@ -1,0 +1,15 @@
+print 42
+$value = 42
+print $value
+
+$left = cell $value 43
+$right = cell 1 2
+$top = cell $left $right
+print $top
+$top2 = $top
+print $top2
+
+$leftRight = right $left
+print $leftRight
+$rightLeft = left $right
+print $rightLeft

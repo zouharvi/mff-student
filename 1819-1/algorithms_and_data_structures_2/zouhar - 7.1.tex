@@ -1,0 +1,40 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{7.1}
+\rhead{Vilém Zouhar}
+
+\section*{cos}
+\begin{align*}
+	& \cos(\alpha) + i\sin(\alpha) = e^{i\alpha} \\
+	& \cos(-\alpha) + i\sin(-\alpha) = \cos(\alpha) - i\sin(\alpha) = e^{-i\alpha} \\
+	& \cos(\alpha) = \frac{e^{i\alpha} +  e^{-i\alpha}}{2} \\
+	& \beta = \frac{2k}{n} \\
+	& DFT(\cos(\beta k))_k = \sum_{j=0}^{n-1} e^{i \beta kj} \frac{e^{i \beta k} +  e^{-i \beta k}}{2} = 1/2 \cdot \sum_{j=0}^{n-1} \big[ e^{2i \beta k (j+1)} + e^{2i \beta k (j-1)}\big] = \\
+	& = 1/2 \cdot \sum_{j=0}^{n-1} \big[  \omega_n^{k(j+1)} + \omega_n^{k(j-1)} \big] \\
+	& \text{Pro } k(j+1) \equiv n \vee k(j-1) \equiv n: DFT(\cos(\beta k))_k = n/2 \\
+	& \text{Jinak }  DFT(\cos(\beta k))_k = 0
+\end{align*}
+\end{document}

@@ -1,0 +1,27 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+class inc {
+    public:
+        inc() {};
+        bool operator() (int& x) {
+            x += i++;
+        };
+        
+    private:
+        int i = 1;
+};
+
+int main()
+{
+    vector<int> vec = {1, 2, 5, 10, 11};
+    
+    for_each(vec.begin(), vec.end(), inc());
+    for(auto x : vec)
+        cout << x << endl;
+
+    return 0;
+}

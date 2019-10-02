@@ -1,0 +1,70 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{1. cvičení (3. 10. 2018)}
+\rhead{Vilém Zouhar}
+
+\section{}
+\subsection{}
+$$ \frac{{95 \choose 3}}{{100 \choose 3}} $$
+\subsection{}
+$$ \frac{{95 \choose 1} \cdot {5 \choose 2}}{{100 \choose 3}} + \frac{{5 \choose 3}}{{100 \choose 3}} $$
+\subsection{}
+\subsubsection{}
+$$ \frac{95^3}{100^3} $$
+\subsubsection{}
+$$ \frac{95^2\cdot 5 \cdot 3}{100^3} $$
+
+\section{}
+\subsection{}
+$$ P(A_i) = P([i\text{-tý dopis správně}]) = \frac{1}{n} $$
+$$ P(A_i \cap A_j) = \frac{1}{n\cdot(n-1)} $$
+$$ \cdots $$
+$$ P(A_1 \cup A_2 \cup \cdots A_n) = \sum_{I\subseteq [n]} (-1)^{|I|+1} P(\bigcup_{i\in I} A_i) = \sum_{I\subseteq [n]} (-1)^{|I|+1} \frac{(n-|I|)!}{n!} = \sum_{k=1}^n (-1)^{k+1} \cdot {n \choose k} \frac{(n-k)!}{n!} = \sum_{k=1}^n \frac{(-1)^{k+1}}{k!} $$
+$$ \sum_{k=0}^n \frac{(-1)^{k+1}}{k!} +1 = 1 - \sum_{k=0}^n \frac{(-1)^{k}}{k!} $$
+\subsection{}
+$$ \text{V limitě: } 1-e^{-1} $$
+\pagebreak
+
+\section{}
+\subsection{}
+$$ {r \choose k}(\frac{1}{n})^k\cdot (1-\frac{1}{n})^{r-k} $$
+\subsection{}
+\begin{align*}
+	& B_j := [\text{Na j-tém cvičení nikdo}] \\
+	& Z = P([\text{na každém cvičení alespoň jeden}]) = 1 - P([\exists \text{ cvičení bez studentů}]) \\
+	& P(B_j) = (1-\frac{1}{n})^r \\
+	& P(B_j \cap B_k) = (1-\frac{2}{n})^r \\
+	& \cdots \\
+	& Z = P(B_1 \cup B_2 \cup \cdots \cup B_n) = \sum_{I \subseteq [n]} (-1)^{|I| +1} \cdot P(\bigcup_{i\in I} B_i) = \sum_{I \subseteq [n]} (-1)^{|I| +1}  (1-\frac{|I|}{n})^r = -\sum_{k=1}^n (-1)^k {n \choose k} (1-\frac{k}{n})^r \\
+	& \frac{-1}{n^r} \sum_{k=1}^n (-1)^k (n-k)^r \cdot {n \choose k}
+\end{align*}
+\subsection{}
+TODO
+
+\section{}
+\subsection{}
+$$ 1-\big(\frac{364}{365}\big)^n $$
+\subsection{}
+$$ 1-\prod_{i=1}^n \frac{365-i}{365} = 1 - \frac{365!}{365^n (365-n)!} $$
+\subsection{}
+$$ \frac{1}{2} \ge \frac{365!}{365^n (365-n)!} \rightarrow 23$$
+\end{document}

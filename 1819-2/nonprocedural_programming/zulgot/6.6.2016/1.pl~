@@ -1,0 +1,6 @@
+splay(Val, T, V):- helper(Val, T, 0, V).
+
+helper(X, t(C, P, t(A, X, B)), 0, V):- V=t(t(B, P, C), X, A).
+helper(X, t(t(A, X, B), P, C), 0, V):- V=t(A, X, t(B, P, C)).
+
+rotate(Val, Deep, Tree, V):-

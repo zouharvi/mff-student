@@ -1,0 +1,138 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{4. cvičení (24. 10. 2018)}
+\rhead{Vilém Zouhar}
+
+\section{}
+\subsection{}
+\begin{align*}
+f(x) =
+\begin{cases}
+1 \tab x \in [0,1] \\
+0 \tab else \\
+\end{cases}
+\end{align*}
+\subsection{}
+\begin{align*}
+& F(x) = \begin{cases}
+0 \tab x \in (-\infty, 0) \\
+x \tab else \\
+1 \tab x \in (1,\infty) \\
+\end{cases}
+\\ \\
+& P(0.5) = 0 \\
+& P(X \le 0.5) = 0.5 
+\end{align*}
+\subsection{}
+\begin{align*}
+& Y = X^2, F_Y(y) = P(Y \le y) = P(X^2 \le y) = P(X \le \sqrt{y}) = F(\sqrt(x)) \rightarrow \sqrt(x) \\
+& f_y(x) \rightarrow \frac{1}{2\sqrt(x)}
+\end{align*}
+
+\subsection{}
+\begin{align*}
+T = (b-a)\cdot X + a
+\end{align*}
+
+\section{}
+\subsection{}
+\begin{align*}
+\int_0^\infty ce^{-x/5} dx = 5c \cdot [e^{-y}]_0^\infty = 5c [0+1] = 1 \Rightarrow c = 1/5
+\end{align*}
+
+
+\subsection{}
+\begin{align*}
+F(t) = \int_0^t 0.2 \cdot e^{-x/5}  = 0.2 \cdot [-e^{-x/5}]_0^t = 1 - e^{-t/5}
+\end{align*}
+
+
+\subsection{}
+\begin{align*}
+F(X \ge 5) = 1 - F(X < 5) = 1/e
+\end{align*}
+
+
+\subsection{}
+\begin{align*}
+F(X \in (2,5)) = F(X \le 5) - F(X \le 2) = - 1/e + 1/e^{2/5}
+\end{align*}
+
+
+\subsection{}
+\begin{align*}
+P(X \ge 10 | X \ge 5) = \frac{P(X \ge 10 \wedge X \ge 5)}{P(X \ge 5)} = \frac{P(X \ge 10)}{1/e} = \frac{1/e^2}{1/e} = 1/e 
+\end{align*}
+
+\subsection{}
+\begin{align*}
+& Y = 5 + 3X \\
+& P(Y \le y) = P(5 + 3X \le y) = P(X \le (y-5)/3) = 1 - e^{-\frac{y-5}{15}} = F_Y(y), y \in [5, infty) \\
+& f_Y(y) = 1/15 \cdot e^ {\frac{y-5}{15}}, y \in [5, \infty) \\
+& F(Y \ge 35) = 1 - F(Y \le 35) = e^{-2}
+\end{align*}
+
+\subsection{}
+\begin{align*}
+& Z = \lceil X \rceil \\
+& P(Z = z) = P(\lceil X \rceil = z) = P(X \in [z-1, z)) = \cdots \text{diskrétní rozdělení} \\
+& \text{Druhý je vždy lepší}
+\end{align*}
+
+\subsection{}
+\begin{align*}
+& U=1 - e^{-X/5} = F(X) \\
+& P(U \le u) = P(F(X) \le u) = P(X \le F^{-1}(u)) = F(F^{-1}(u)) = u (u \in [0,1))
+\end{align*}
+
+\subsection{}
+\begin{align*}
+\text{Strčíme tam } F^{-1} \rightarrow P(F^{-1}(x) \le u) = P(x \le F(u)) = F_X(F_U(u)) = F_U(u)
+\end{align*}
+
+\section{}
+\subsection{}
+\begin{align*}
+& c \int_0^2 1 - |x-1| dx = 1 \\
+& c \int_0^1 x\tab dx + c \int_1^2 2  -x\tab dx = 1\\
+& c[x^2/2]_0^1 + c[2x -x^2/2]_1^2 = 1 \\
+& c/2 + c[4 - 2 - 2 + 1/2] = 1 \\
+& c = 1
+\end{align*}
+
+\subsection{}
+\begin{align*}
+F(t) &= \int_0^t 1 - |x-1| dx, t \in (0,2) \\
+&= \frac{(x-1)^2 sgn(1-x) + 2x -1}{2} \\
+&P(X \ge 1/2) = 1 - P(X \le 1/2) = 7/8
+\end{align*}
+
+\section{}
+\subsection{}
+\begin{align*}
+& \int_{-\infty}^\infty c\cdot e^{-|x|} = c[ \int_{-\infty}^0 e^{x} dx + \int_0^{\infty} e^{-x} dx] = c[ [e^x]_{-\infty}^0 = [e^{-x}]_0^\infty] = \\
+& = c [ 1 + 1] = 1 \Rightarrow c = 1/2 \\
+& |F(t)| = 1/2 \cdot \int_0^t e^x dx = e^{-t} - 1 \\
+& P(X \ge 2) = 1 - P(X \le 2) = 1 - 1/2 \cdot (e^2 - 1) = 1 - e^{-2}/2 \approx 93.23%
+\end{align*}
+
+\end{document}

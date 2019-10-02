@@ -1,0 +1,32 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{Eliška | Vilém Zouhar}}
+
+\begin{align}
+	& a(x) = x\cdot a(x) + x^2 \cdot a(x) + 2 \rightarrow a(x) = \frac{-2}{x^2+x-1} = \frac{-2}{(x-\frac{1+\sqrt{5}}{2})(x-\frac{1-\sqrt{5}}{2})} = \\
+	& \frac{cosi..}{\frac{2}{1-\sqrt{5}} x + 1} + \frac{cosi..}{\frac{-2}{\sqrt{5}+1} x + 1} \rightarrow \lambda_1 = \frac{2}{-1+\sqrt{5}}, \lambda_2 = \frac{2}{\sqrt{5}+1} \\
+	& a_n = \alpha (\frac{2}{-1+\sqrt{5}})^n + \beta (\frac{2}{\sqrt{5}+1})^n + \gamma \\
+	& 0 = \alpha + \beta + \gamma \\
+	& 1 = \alpha \frac{2}{-1+\sqrt{5}} + \beta \frac{2}{\sqrt{5}+1} + \gamma \\
+	& 3 = \alpha (\frac{2}{-1+\sqrt{5}})^2 + \beta (\frac{2}{\sqrt{5}+1})^2 +\gamma \\
+	& \Rightarrow a_n = \sqrt{5} (\frac{2}{-1+\sqrt{5}})^n + (\frac{2}{\sqrt{5}+1})^n  -\frac{4}{\sqrt(5)-1}
+\end{align}
+
+\end{document}

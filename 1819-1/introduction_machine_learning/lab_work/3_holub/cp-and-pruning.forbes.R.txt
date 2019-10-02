@@ -1,0 +1,89 @@
+##################################################################################
+#################################################################################
+
+### Demo R code -- decision trees pruning
+
+### Martin Holub
+
+### MFF UK in Prague, 2014
+
+### http://ufal.mff.cuni.cz/course/npfl054
+
+#################################################################################
+# PROFIT PREDICTION -- FORBES2000
+#
+# demonstration of complexity of nodes
+# (used for pruning)
+#
+# the code requires the HSAUR package
+# if not installed, use install.packages("HSAUR")
+
+library(HSAUR)
+library(rpart)
+
+# this code works with the Forbes 2000 list is a ranking of the world's
+# biggest companies, measured by sales, profits, assets and market value.
+#
+# to get info about the Forbes2000 data set, use help(Forbes2000)
+
+F <- Forbes2000				# just a copy
+
+# for simplicity, the numerical value 'profits' will be reduced to a binary attribute
+F$profits[is.na(F$profits)] <- 0	# NAs are replaced by 0
+F$profits <- factor(F$profits > 0.2)
+
+message("The binary value 'profits' is to be predicted")
+print(table(F$profits))
+
+# splitting the data  
+set.seed(123); s <- sample(2000)
+data.train <- s[1:1000]
+data.test <- s[1001:2000]
+# length(unique(c(data.train,data.test)))	# just to check
+
+# to train the model/hypothesis
+m = rpart(profits ~ category + sales + assets + marketvalue, F[data.train, 1:8], cp=0.001)
+
+# to see the resulting DT
+plot(m)    # only its topology
+dev.new()
+plot(m, branch=1, uniform=T); text(m, use.n=T,  digits=3, all=T)
+# info in the nodes:
+# 	-- splitting condition
+#	-- which category would be chosen in that node
+#	-- proportion of the data set in that node: #FALSEs/#TRUEs
+# 
+# to get familiar with the tree, look at the picture and try
+# > F.train = F[data.train,]
+# > table(F.train$profits[F.train$marketvalue < 4.44])
+#
+#   FALSE  TRUE 
+#     363    87 
+
+
+# to see cp values
+printcp(m)
+
+# 'rel error' is the training error relative to the MFC error
+# 	-- MFC error is the numer of misclassifications using the MFC classifier
+#      = 497
+#	-- so without any splitting 'rel error' is 100%
+#	-- after the first split (node 1) we have 'rel error' = (140+87)/497 = 0.4567404
+#	-- after first three splits (nodes 1,3,6) 'rel error' = (87+92+13+8)/497 = 0.4024145
+
+dev.new()
+plotcp(m)
+
+# each node is assigned a value of complexity:
+cat("\nNumber of nodes = ", nrow(m$frame), "\n")    # number of all nodes (half + 1 are leaves)
+cat("\nComplexity of all nodes:\n"); print(m$frame[c("var","n","complexity")])
+
+# Complexity of a node is the amount by which splitting that node improves the relative error
+# 	-- e.g. complexity of the root node is 1 - 0.4567404 = 0.5432596
+
+
+
+
+
+
+

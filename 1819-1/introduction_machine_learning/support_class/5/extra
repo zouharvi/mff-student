@@ -1,0 +1,64 @@
+######
+# P1 #
+######
+
+# Done in notes
+
+######
+# P2 #
+######
+A = c(0.818, 0.810, 0.822, 0.809, 0.815, 0.816)
+B = c(0.815, 0.811, 0.820, 0.811, 0.814, 0.814)
+t.test(A, B, paired=T)
+
+# conclusion: We don't reject the hypothesis that the performance is the same
+
+
+######
+# P3 #
+######
+
+A = c(171.2, 163.5, 172.9, 208.4, 178.4, 164.3, 180.5, 173.6, 185.7, 183.4, 177.8, 158.1, 182.0, 181.1, 182.8)
+B = c(180.6, 189.0, 166.9, 174.1, 167.2, 170.3, 181.8)
+#B = c(177, 179.0, 176.9, 176.1, 177.2, 177.3, 177.8) # much more closer to A
+ 
+mA = mean(A)
+mB = mean(B)
+mT = mean(c(A,B))
+
+tA = (mA - mT)/sd(A) * sqrt(length(A) - 1)
+tB = (mB - mT)/sd(B) * sqrt(length(B) - 1)
+
+pvA = 2*pt(-abs(tA), df=length(A)-1)
+pvB = 2*pt(-abs(tB), df=length(B)-1)
+
+# pvA is the probability, that A has the same mean as (A,B)
+# pvB is the probability, that B has the same mean as (A,B)
+
+# since pvA is not greater or equal to 0.95, we don't reject the hypothesis, that the true means are different
+# similarly for pvB
+
+# critical value:
+cvA01 = abs(qt(0.1/2, df=length(A)))
+
+# confidence interval:
+c(mA - sd(A)/sqrt(length(A)) * cvA01, mA + sd(A)/sqrt(length(A)) * cvA01)
+# does mB fall into this interval?
+# if so, we don't reject the hypothesis, that A and B have the same mean
+
+
+######
+# P4 #
+######
+
+A = c(0.853, 0.859, 0.863, 0.871, 0.832, 0.848, 0.863, 0.860, 0.850, 0.849)
+B = c(0.851, 0.848, 0.862, 0.871, 0.835, 0.836, 0.860, 0.859, 0.841, 0.843)                   
+C = A-B
+
+# hypothetical mean of C is 0
+
+tC = (mean(C) - 0)/sd(C) * sqrt(length(C)-1)
+pv = pt(-abs(tC),df=length(C)-1) # 0.0170808
+
+# pv < 0.05, we reject the hypothesis that C doesn't have the mean 0
+# ??

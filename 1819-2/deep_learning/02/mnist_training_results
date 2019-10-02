@@ -1,0 +1,7 @@
+SGD optimizer, learning_rate 0.01 | 94.43
+SGD optimizer, learning_rate 0.01, momentum 0.9 | 97.69
+SGD optimizer, learning_rate 0.1 | 97.84
+Adam optimizer, learning_rate 0.001 | 97.57
+Adam optimizer, learning_rate 0.01 | 96.07
+Adam optimizer, exponential decay, learning_rate 0.01 and learning_rate_final 0.001 | 98.23
+Adam optimizer, polynomial decay, learning_rate 0.01 and learning_rate_final 0.0001 | 97.81

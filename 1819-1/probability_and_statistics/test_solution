@@ -1,0 +1,74 @@
+# 1
+## a
+Z | prob
+0 | 6C4/9C4
+1 | (6C3 * 3C1)/9C4
+2 | (6C2 * 3C2)/9C4
+3 | (6C1 * 3C3)/9C4
+4, 5, ... | 0
+
+## b
+E[Č'] = |Č| - E[lost Č]
+E[lost Č] = 0*... + 1*0... + 2*(6C2 * 3C3)/(9C5) + 3*(6C3 * 3C2)/(9C5) + 4*(6C4 * 3C1)/(9C5) + 5*6C5/9C5 = 10/3
+E[Č'] = 2.66...
+
+alternative:
+
+E[Č'] = 4/9 * 6
+
+test:
+```
+flowers = c(0,0,0,1,1,1,1,1,1)
+mean(sapply(1:1000, function(...) sum(sample(flowers)[1:4])))
+```
+
+
+# 2
+## a
+chceme 100*P[Blanka vyhraje] = 100*P[V]
+P[V] = 1/3 * P[1 bílá] + 2/3 * P[2 bílé] + 3/3 * P[3 bíle] = 1/3 * (10C1 * 5C2)/15C3 + 2/3 * (10C2 * 5C1)/15C3 + 10C3/15C3 = 2/3
+měla by vsadit 66.66..
+
+Edit: Když nebereme tuto hru jako sázkovou kancelář, ale symetricky, tak musí vsadit 200,-
+
+## b
+P[bílá] = \sum I[X_i == bílá]/30
+
+## c
+??
+
+
+
+# 3
+## a
+\lambda = 9
+X_i = počet vadných v i. krabici
+P[\sum X_i < 855] = P[ (\mean X_i - E[X])*\sqrt(100)/\sqrt(var(X)) < (855 - E[X])/\sqrt(100*var(X))] = P[ ... < (855 - 900)/30] = P[... < -1.5] \approx \quantile(-1.5) = 1-\quantile(1.5) = 0.0668 \approx 7%
+
+## b
+E[b] = E[100 - v] = 100 - E[v] = 91
+var(b) = var(100 - v) = var(100) + var(v) = 0 + 9
+
+## c
+Y_i = 100-X_i
+0.9 < P[ \sum Y_i > 8000] = 1 - P[ \sum Y_i < 8000] = 1 - P[ ... < (8000 - n*91)/sqrt(9*91)] \approx 1 - \quantile( (8000 - 91n)/\sqrt(9*91) ) 
+ \quantile( (8000 - 91n)/\sqrt(9*91) ) < 0.1 
+ (8000 - 91n)/\sqrt(9*91)  < -1.2816 
+n > 88.3151
+
+
+# 4
+## a
+E[X^k Y^l] = \int_0^1 \int_x^1 2* x^k y^l dy dx 
+E[X] = 1/3
+E[Y] = 2/3
+E[XY] = 1/4
+E[X^2] = 1/6
+E[Y^2] = 1/2
+E[X^2Y^2] = 1/9
+var(X) = E[X^2] - E[X]^2 = 1/6 - 1/9 = 1/18
+var(Y) = E[Y^2] - E[Y]^2 = 1/2 - 4/9 = 1/18
+cov(X,Y) = E[XY] - E[X]E[Y] = 1/4 - 2/9 = 1/36
+
+## b
+P[X < Y/2] = \int_0^1 \int_0^{y/2} 2 dx dy = 1/2

@@ -1,0 +1,8 @@
+Mějme konečný deterministický automat. (reprezentaci si máme zvolit) 
+Cílem je najít nejkratší synchronizační slovo s, nebo říct, že neexistuje. 
+Synchronizační slovo je takové slovo nad vstupní abecedou, že když nad ním spustíme výpočet, tak se automat vždy dostane do nějakého stejného stavu bez ohledu na to, ve kterém stavu začínal. (https://en.wikipedia.org/wiki/Synchronizing_word) 
+Součástí zadání je horní odhad délky slova - pokud synchronizační slovo existuje, má délku nejvýše (n^3-n)/6, kde n je počet stavů automatu. 
+Úloha je NP-úplná, takže je potřeba řešit to hrubou silou s tím, že máme zkusit najít nějakou heuristiku. 
+
+Jinak, ověřit, zda řešení existuje lze v polynomiálním čase. Stačí si všimnout, že synchronizační slovo existuje právě tehdy, když pro každou dvojici stavů existuje slovo, po kterém se z obou dostaneme do stejného stavu. Existenci takového slova pro každou dvojici lze vyřešit iterativním generováním všech možných dvojic, které jsou sjednotitelné. (Stav S je vždy sjednotitelný se stavem S. Navíc, pokud stavy A,B jsou sjednotitelné, a existuje písmeno, kterým se dokážu na jeden krok dostat z C do A, a zároveň z D do B, pak i stavy C,D jsou sjednotitelné.) Pokud se mi takto povede vygenerovat všechny dvojice stavů, pak každé dva stavy jsou sjednotitelné, a tedy synchronizační slovo existuje. Pokud se mi takto nějakou dvojici vygenerovat nepodaří, pak dané dva stavy nejsou sjednotitelné, a tedy synchronizační slovo neexistuje. 
+Ale tohle už jsem tam stihl jenom popsat.

@@ -1,0 +1,66 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{5. domácí úkol | Vilém Zouhar}}
+
+\section{}
+\subsection{Popis}
+Budeme vždy hladově přidávat maximální hranu až dokud nepropojíme dva chtěné vrcholy. Některé hrany však přeskončíme, konkrétně ty mezi vrcholy, které jsme už někde potkali a jsou součástí našeho stromu. Ve stromě jsou už cesty jednoznačné, tedy je stačí projít BFS a tuto cestu najít. Je to vlastně Jarníkův algoritmus.
+\subsection{Korektnost}
+Pro korektnost se stačí jen zamyslet, které hrany opomeneme a musíme odargumentovat, že ty nemůžou být součástí správného řešení. \begin{itemize}
+	\item Hrany, které jsou mezi již objevenými vrcholy by v našem stromě vytvořily cyklus (maximalita bez kružnic stromu), ale ta druhá strana cyklu musí nutně mít menší minimální hranu, tedy původní cesta nám stačí.
+	\item Hrany, které jsou menší než všechny v našem stromě. Pokud existuje cesta v našem stromě, pak si rozhodně nepomůžeme, když přidáme nějaké menší hrany.
+\end{itemize}
+\subsection{Pseudokód}
+\begin{lstlisting}[language=Python]
+tree = jarnik(G)
+output( BFS(u, v, tree) )
+\end{lstlisting}
+\subsection{Složitost}
+Děláme BFS a Jarníkův algoritmus. BFS trvá lineárně, ale Jarníkův algoritmus za pomocí matice sousednosti $O(n^2)$, za pomocí binární haldy $O((m+n)\cdot \log(n))$ a za pomocí fibonacciho haldy $O(m+n\cdot \log(n))$, celkově tedy $O(m+n\cdot \log(n))$. Neumím ukázat, že to nelze vyřešit lineárně, ale určitě nejde, protože je to pravda.
+
+\section{}
+\subsection{Popis}
+Každý cyklus $(a,b,c,d)$ délky $4$ můžeme rozbít na sjednocení dvou cest $(a, c)$ a $(c, a)$. Stačí tedy pro každou dvojici $\{a,c\}$ najít vhodné $\{c ,d\}$, aby $w(a,b)+w(b,c)+w(c,d)+w(d,a)$ bylo co nejmenší. Cesty $(a, c)$ a $(c, a)$ můžeme ale hledat samostatně.
+\subsection{Korektnost}
+Pro každou dvojici zkoušíme všechna doplnění na čtyřcyklus, není co pokazit.
+\subsection{Pseudokód}
+\begin{lstlisting}[language=Python]
+t_min = 0
+res = (/, /, /, /)
+for vertex a in V:
+    for vertex c in V:
+       min_ac = infty
+       min_ca = infty
+       b, d = /, /
+       for vertex x in V:
+           if w(a,x) + w(x, c) < min_ac:
+               min_ac = w(a,x) + w(x, c)
+               b = x
+           if w(c,x) + w(x, a) < min_ca:
+               min_ca = w(c,x) + w(x, a)
+               d = x
+       if w(a,b) + w(b, c)+ w(c, d)+ w(d, a) < t_min:
+           t_min = w(a,b) + w(b, c)+ w(c, d)+ w(d, a)
+           res = (a, b, c, d)
+output(res)   
+\end{lstlisting}
+\subsection{Složitost}
+Děláme tři vnořené for cykly délky $n$. Poslední for cyklus by šel vylepšit, pokud bychom procházeli jen sousedy $a$, nebo $b$, ale v úplném grafu bychom dopadli stejně lineárně s $n$, tedy celková složitost algoritmu je $O(n^3)$.
+\end{document}

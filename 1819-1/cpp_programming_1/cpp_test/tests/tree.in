@@ -1,0 +1,23 @@
+$l1 = cell 1 2
+$r1 = cell 3 4
+$l = cell $l1 $r1
+print $l
+
+$l2 = cell 5 6
+$r2 = cell 7 8
+$r = cell $l2 $r2
+print $r
+
+$all = cell $l $r
+print $all
+
+$c = left $all
+print $c
+$c = right $c
+print $c
+
+$c = cell $all 10
+print $c
+
+$c = cell -1 $all
+print $c

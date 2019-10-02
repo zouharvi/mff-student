@@ -1,0 +1,19 @@
+Terminal graphics editor (TermiGRAPH)
+=====================================
+display graphics, but input commands only from terminal, such as:
+- show coords
+- move ptr 
+- draw [SHAPE]
+- apply [FILTER]
+- BONUS: each operation is timed
+- file input
+
+
+MySQL query interpreter
+=======================
+respond to basic MySQL queries, such as
+- CREATE TABLE
+- UPDATE
+- INSERT
+- DELETE
+- SELECT

@@ -1,0 +1,37 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{5.1}
+\rhead{Vilém Zouhar}
+
+\section*{Potenciálová metoda}
+$ \Phi_i := \text{\# pushů od poslední relokace (ověřeno, že rezerva a ani hustota nejsou dostatečně silné)} $
+\begin{align*}
+	& \text{operace} & \Delta \Phi_i  \hspace{3cm}  & C_i & A_i \\
+	& \text{PUSH-SIMPLE} & 1  \hspace{3cm}  & 1 & 2 \\
+	& \text{PUSH-RELOC} & -i  \hspace{3cm}  & i+1 & 1 
+\end{align*}
+Celkem: $O(1)$
+
+\end{document}

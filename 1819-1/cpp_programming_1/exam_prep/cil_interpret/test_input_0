@@ -1,0 +1,15 @@
+# $0 = 1
+ldconst -6
+ldconst 4
+add
+out
+
+ldconst 0
+brt jump_here
+
+ldconst -1
+ldconst 10
+
+jump_here:
+mul
+out

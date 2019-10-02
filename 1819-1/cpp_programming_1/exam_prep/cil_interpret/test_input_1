@@ -1,0 +1,34 @@
+# $0 = 1
+ldconst 1
+stloc 0
+
+# $1 = 1
+ldconst 1
+stloc 1
+
+goto LOOPCOND
+
+LOOPSTART: pop # result of $0 < 7
+
+# $1 *= $0
+ldloc 1
+ldloc 0
+mul
+stloc 1
+
+# $0 += 1
+ldloc 0
+ldconst 1
+add
+stloc 0
+
+# echo $1
+ldloc 1
+out
+pop
+
+# $0 < 7
+LOOPCOND: ldloc 0
+ldconst 7
+lt
+brt LOOPSTART

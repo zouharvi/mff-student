@@ -1,0 +1,73 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{10. domácí úkol | Vilém Zouhar}}
+
+\section{}
+\subsection{Popis}
+Stačí z každého vrcholu spustit DFS a dívat se, zdali náhodou nemáme součet $K$, např. kdykoliv se vnořujeme dál. Pokud ano, tak odpovíme obsahem zásobníku. Při zanořování tedy přičteme cenu cesty z akumulátoru, při vynořování naopak odečteme zpět.
+\subsection{Korektnost}
+Pro každý vrchol dfs projde všechny cesty, které tímto vrcholem začínají.
+
+\subsection{Pseudokód}
+\begin{lstlisting}[language=Python]
+def DFS(root):
+	...
+	while s.not_empty():
+		u, acc = s.pop()
+		if acc == K:
+			output(s)
+		forearch v in s.neighbours:
+			s.push(v, acc+d(u,v))
+	...
+foreach v in G:
+	DFS(v)
+\end{lstlisting}
+
+\subsection{Složitost}
+$n\cdot DFS \Rightarrow O(n^2)$ časově a $O(n)$ paměťově. Děláme jen konstantně mnoho operací navíc a v každý moment běží právě jednou DFS. Jelikož může existovat klidně řádově $n^2$ cest, které bychom museli vypsat, tak je časová složitost optimální.
+
+
+\section{}
+\subsection{Popis}
+Intervaly si zesortíme podle jejich začátku a pak je postupně projdeme. Budeme si pamatovat kolik jich je otevřených a vždy, když se budeme zanořovat, tak přičteme počet otevřených. Musíme si ale taky pamatovat, kdy uzavíráme interval. Proto třízení budou dvě.
+\subsection{Korektnost}
+Z matematického hlediska opravdu můžeme postupně přičítat počet aktuálně otevřených a dostaneme tak celkový počet dvojic.
+
+\subsection{Pseudokód}
+\begin{lstlisting}[language=Python]
+beg = sorted(intervals, => beg)
+end = sorted(intervals, => end) # queues
+open = 0
+total = 0
+while end.not_empty():
+	if beg.top() < end.top():
+		beg.pop()
+		total += ++open
+	else:
+		a = end.top()
+		open- -
+output(total)
+
+\end{lstlisting}
+
+\subsection{Složitost}
+Dvojité sortění trvá $O(n \cdot \log(n))$, paměťově nepotřebujeme nic navíc, tedy $O(n)$.
+
+\end{document}

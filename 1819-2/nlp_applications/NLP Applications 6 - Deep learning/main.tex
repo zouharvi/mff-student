@@ -1,0 +1,44 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[bottom]{footmisc}
+%\setlength\parindent{0pt} % indent
+
+\hyphenation{thatshouldnot}
+
+\begin{document}
+
+\title{NLP Applications 6\\Petr Baudiš, Deep learning}
+\author{Vilém Zouhar}
+\date{Mar 2019}
+\maketitle 
+
+\section*{Introduction}
+
+For Petr Baudiš this was the first time he gave a lecture in this seminar. He is a \textit{Chief AI Architect} at Rossum, a startup specializing at automated data extraction. At the beginning he promised us some ideas about deep learning as a software product and differences between approaches to problems from the perspective of a deep learning practicioner and software engineer. His first attempt in business included a small start up, which generated API for image recognition based on user-provided data. This wasn't very successful, but nevertheless interesting.
+
+\section*{Invoices}
+
+The lecturer started this section with an example of a real world problem: 1 billion invoices are generated every day and about 80\% are processed manually, which is expensive, time-consuming, sometimes inaccure and generally an awful work. This part got interactive and we were to brainstorm some approaches to extracting invoice data from raw data. NLP in terms of document processing is usually thought of with textual-only data. Invoice documents have usually some additional visual structure, which needs to be incorporated into the extraction as well. This unfortunately cannot be solved with rule-based approaches, becase there are too many \textit{standards} and it is generally hugely variant. Even though this problem is omnipresent, few people interest themselves with it and hence there are not many baselines and it is hard to advertise.
+
+\section*{Approaches}
+
+The most similar problem is named-entity recognition, but this poses several other technical difficulties, such as preprocessing the visually structured text, which is the hardest problem. The main issue with OCR is having variable length output for fixed size input. This can usually be remedied with recurrent neural networks, but this approach can't be scaled up due to the lack of paralelism support. We were once again to find a solution to this problem, while funnily enough, the solution was on the slides all along (although unannotated). The approach they finally settled with was \textit{skim-reading}, which identifies important places in the document and these are in turn passed through the rest of the pipeline.
+
+\section*{Additional advice}
+
+By the end of the lecture he gave us some general insights into deep learning in practice. He boiled it down into two credos \textit{get lots of data} and \textit{just hack a model as fast as possible and don't concern yourself with top-notch baselines}. He also devoted some time to discussion about overfitting, which is not always undesirable.
+
+\section*{Summary}
+
+I think this was the best lecture this semester. I am not sure if it can be attributed to my current obsession with deep learning or to objective quality of the lecture, but it was generally well prepared and about an interesting topic.
+
+
+\end{document}

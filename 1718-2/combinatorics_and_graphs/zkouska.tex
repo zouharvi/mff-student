@@ -1,0 +1,414 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\fr}{$\frown$}
+\newcommand{\qed}{\hspace{0.2cm}\square}
+\newcommand{\led}{\hspace{0.2cm}$\square$}
+\newcommand{\tab}{\hspace{1cm}}
+\newcommand{\di}{\hspace{0.05cm}\text{d}i}
+\newcommand{\hlava}[1]{\text{} \\ \text{} \\ \text{} \hspace{-0.27cm} \textbf{#1} \\}
+\newcommand{\str}[1]{\hspace{0.05cm} \fbox{s. #1} }
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.14cm}\text{Poznámky ke zkoušce z kombinatoriky a grafů 1. | Vilém Zouhar}}
+\\\\
+Na zkoušce bude zkoušena znalost tří definic, věty s důkazem, přehledu z jednoho tématu a ktomu několik jednoduchých doprovodných úloh. Seznam není kompletní ani závazný --- může být požadována znalost pojmů a fakt neuvedených v tomto seznamu.\\
+\hlava{Definujte pojem vytvořující funkce posloupnosti}
+
+Vytvořující funkce posloupnosti $(a_i)_1^\infty$ je mocninná řada $\sum_{i=0}^\infty a_i\cdot x^0  = a_0 + a_1 x  + a_2 x^2 \dots \ $. Z mocninné řady $f$ můžeme vydobýt členy posloupnosti za pomocí derivace: $a_i = \frac{f^{(i)}(0)}{i!}$. Různé operace s funkcí ovlivní posloupnost, kterou vytvořuje. Chová se lineárně k základním operacím. Zajímavá je např. derivace: $b_i = i\cdot  a_{i+1}$.
+\str{4} 
+
+\hlava{Definujte zobecněný binomický koeficient}\\
+$r \in \mathbf{R}, k \in \mathbf{N}_0, { r \choose k} = \frac{r\cdot (r-1) \cdot (r-2) \cdot (r-3) \cdot \dots \cdot (r-(k-1))}{k!}$
+\str{4}
+
+\hlava{Defingujte zobecněnou binomickou větu}
+$r,x \in \mathbf{R}, (1+x)^r = \sum_{k=0}^\infty {r \choose k} x^k$, funkce vytvořuje posloupnost binomických koeficientů. Důkaz: podívejme se na taylorův rozvoj dané funkce v bodě 0. Koeficienty jsou přesně daná kombinační čísla.
+\str{4}
+
+\hlava{Definujte pojem projektivní rovina a její řád}
+$(V, P) \text{je konečná projektivní rovina} \Leftrightarrow P \subseteq 2^V \text{a platí tři axiomy/podmínky:}$ \\
+$ P0: \exists \text{č}\subseteq V: |\text{č}|=4 \wedge \forall p \in P: |\text{č} \cap p| \le 2 $ \\
+$ P1: \forall p,q \in P, p \ne q: |p \cap q| = 1 $ \\
+$ P2: \forall a,b \in V, a \ne b: \exists p \in P: \{a,b\} \subseteq p$ \\
+Řád projektivní roviny je \textit{velikost libovolné přímky $-1$}. Nezáleží na tom jaké, páč jsou všechny stejně velké (důkaz později). \str{7}
+
+\hlava{Definujte pojem duální množinový systém}
+Duální množinový systém konečné projektivní roviny je konečná projektivní rovina, kde jsou role bodů a přímek prohozeny.
+$(V,P) \rightarrow (P, P'): P':= \{ \{q: v \in q, q \in P \}, v \in V\}$ \str{9}
+
+\hlava{Definujte pojem reálná projektivní rovina}
+Za body volíme přímky procházející počátkem, za přímky roviny, které nimi prochází. Formálně: $V = \{\{(\alpha a, \alpha b, \alpha c), \alpha \ne 0\}: a, b, c \in \mathbf{R}\}, \hspace{0.1cm} P = \{ a, b, c: a+b+c=0, a, b, c \ne 0\}$ \str{10}
+
+\hlava{Definujte pojem latinský čtverec a ortogonální latinské čtverce}
+Latinský čtverec búno na symbolech $[n]$ je matice, která v každém řádku a každém sloupci obsahuje každý symbol z dané množiny právě jednou. Latinské čtverce $M, N$ jsou ortogonální, pokud $\forall m \in s(M), n in s(N) \exists i,j: M_{i,j} = m \wedge N_{i,j} = n$ \str{10}
+
+\hlava{Definujte pojem kostry grafu}
+Kostra grafu $G$ je jeho podgraf na všech vrcholech, který je strom. \str{13}
+
+\hlava{Definujte Laplaceovu matici}
+Laplaceova matice multigrafu $G = (V, E)$ je rozměrů $|V| \times |V|$:  \[ L_{i,j}= \begin{cases} 
+	deg(v) & i=j \\
+	-\# \text{hran mezi $v_i$ a $v_j$} & i \ne j \end{cases} \] \str{16}
+	
+\hlava{Definujte pojmy hranové a vrcholové dvousouvislosti grafu}
+Graf je vrcholově, resp. hranové dvousouvislý právě tehdy pokud nemá artikulaci, resp. most. \str{17}
+
+\hlava{Definujte pojmy vrcholové \textit{k}-souvislosti grafu}
+Vrcholová souvislost \[ K_v(G) = 
+\begin{cases}
+	min |S| & S \subseteq V: G \backslash S \text{nesouvislý}, \text{(vrcholový řez)} \\
+	n-1 & \text{pro } G = K_n \\
+	1 & \text{pro } G = K_1
+\end{cases}
+\]
+Graf je vrcholově \textit{t}-souvislý právě tehdy, pokud vrcholová souvislost $K_v(G) \ge t$. Pomůcka: každý 7-souvislý graf je zároveň 2-souvislý a 1-souvislý (souvislý). \str{17}
+
+
+\hlava{Definujte pojmy hranové\textit{k}-souvislosti grafu}
+Hranová souvislost \[ K_e(G) = 
+\begin{cases}
+min |F| & S \subseteq V: G \backslash F \text{nesouvislý}, \text{(hranový řez)} \\
+1 & \text{pro } G = K_1
+\end{cases}
+\]
+Graf je hranově \textit{t}-souvislý právě tehdy, pokud hranová souvislost $K_e(G) \ge t$. \str{17}
+
+\hlava{Definujte pojmy artikulace a most}
+Artikulace, resp. most je vrcholový, resp. hranový řez velikosti $1$. \str{17}
+
+\hlava{Definujte pojmy síť a tok}
+Síť je ohodnocený orientovaný graf s dvěma význačnými vrcholy. Formálně je to čtveřice $(G, c, z, s)$, kde $G$ je patřičný orientovaný graf, $c: E(G) \rightarrow \mathbf{R}^+$ jsou kapacity hran, $z, s$ je zdroj a stok. \\
+Tok je přiřazení hodnot hranám v síti tak, že jsou v rozmezí $(0, \text{kapacita})$ a pro každý vrchol kromě zdroje a stoku platí, že to co přiteče opět odteče. \str{18}
+
+\hlava{Definujte pojmy řez a elementární řez}
+Řez $R$ v síti je taková podmnožina hran, že každá cesta vedoucí $z \rightarrow s$ nějakou hranu z $R$. Elementární řez $R_A = \{(a,b): a \in A \wedge b \notin A, A \subset V: z \in A, s \notin A\}$. \str{18}
+	
+\hlava{Definujte pojem zlepšující cesta}
+Obvykle k cestě $f: (z, \dots,  s)$. Spočítáme \[ s := min_{e \in E(G)} \begin{cases} 
+	c(e) - f(e) & e \text{je hrana ve směru původní cesty} \\
+	f(e) & e \text{je hrana proti směru} \\
+\end{cases} \]
+Pokud je $s > 0$, pak se jedná o zlepšující cestu, kde
+Pak nová cesta $f': z, \dots, s$ je definovaná: \[ f'(e) = \begin{cases}
+	f(e) + s & \text{po směru} \\
+	f(e) - s & \text{proti směru}
+\end{cases} \] 
+Adekvátně můžeme upravit původní tok a tím jej zlepšit o $s$. \str{22}
+
+\hlava{Definujte systém různých reprezentantů}
+SRR množinového systému \textbf{M} je prosté zobrazení: $z: \textbf{M} \rightarrow \cup M_i: z(M_i) \in M_i$ \str{23}
+
+\hlava{Definujte pojem párování v grafu}
+Párování v grafu $(V,E)$ je graf $(V,E')$, kde stupeň každého vrcholu je nejvýše $1$. U perfektní párování požadujeme 1-regularitu grafu.
+
+\hlava{Definujte Ramseyovo číslo}
+$R(k,l)$ je nejmenší $n$ takové, že každý graf na $n$ vrcholech obsahuje buď nezávislou množinu velikosti alespoň $k$, nebo kliku velikosti alespoň $l$. \str{26}
+
+\hlava{Definujte Hammingovu vzdálenost}
+Počet symbolů ve kterých se dvě slova stejné délky liší. $dst(x,y) = |\{i: x_i \ne y_i \}|$. Splňuje $\triangle$ nerovnost. Pokud odešleme $x$ a přijmeme $y$, tak $dst(x,y)$ je počet chyb. \str{29}
+
+\hlava{Definujte kombinatorickou kouli}
+Se středem $x$ a poloměrem $t$ je $B(x,t) := \{y: dist(x,y) \le t\}$. \str{30}
+
+\hlava{Nadefinujte Hadamardův kód a určete jeho parametry}
+Z Hadamardovy matice $HH^T = n\cdot I$ a doplňku $-H$ vezmeme řádky. Takto jsme vytvořili $2n$ slov délky $n$. Parametry jsou: $(n, 1+\log_2(n), n/2)_2$ \str{30}
+
+\hlava{Definujte pojem lineární kód o parametrech $[n, k, d]_q$}
+Kód $C$, jehož prvky jsou podprostorem $\mathbb{K}^n, |C| = q^k, d := min_{x\ne y}\{dist(x,y)\} = min \{ dist(x,0)\}$
+
+\hlava{Definujte pojmy duální kód a kontrolní matice kódu}
+Duální kód $C^\perp$ z lineárního kódu $C$ je tvořen vektory $y: \forall x\in C: y^T \cdot x = 0$. \\
+Kontrolní matice $C$ je generující matice $C^\perp$. Je-li generující matice $C$ tvořena $(I_k B)$, pak kontrolní matici vytvoříme jako $S:= (-B^T I_{n-k})$. Poté $\forall x \in C: S\cdot x = 0$. 
+\pagebreak
+
+\hlava{Uveďte a dokažte horní a dolní odhady faktoriálu $n!$ takové, že se liší o fator $n$}
+$e\cdot \big( \frac{n}{e}\big)^n \le n! \le ne\cdot \big( \frac{n}{e}\big)^n$ Pravou nerovnost lze ukázat indukcí, u té první je to problematické. Proto je snazší dělat odhad pomocí integrálu. \\
+\begin{align*}
+	 & \ln n! = \sum_1^n \ln i \ge \int_1^n \ln i \di = [i\ln i -i ]_1^n = n\ln n - n + 1 \Rightarrow n! \ge e^{n\ln n - n + 1} = e\cdot \big( \frac{n}{e}\big)^n \\
+	 & \ln n! = \sum_1^n \ln i \le \int_1^{n+1} \ln i \di = [i\ln i -i ]_1^{n+1} = (n+1)\ln (n+1) - (n+1) + 1 \dots \text{pro } (n-1)! \rightarrow n \ln n - n + 1 \\
+	 & \hspace{2cm}  \Rightarrow n \cdot (n-1)! \le n\cdot e^{n \ln n - n + 1} = n e\cdot \big( \frac{n}{e} \big)^n \qed
+\end{align*}
+
+\hlava{Uveďte a dokažte horní a dolní odhady kombinačního čísla ${ 2m \choose m}$ takové, že se liší o faktor $\sqrt{2}$}
+$\frac{2^{2n}}{2\sqrt{n}} \le { 2n \choose n} \le \frac{2^{2n}}{\sqrt{2n}}$. Ukážeme jen první nerovnost. Druhá lze podobně, doknce snadněji.
+\begin{align*}
+	& P_n := \frac{1\cdot 3 \cdot \dots \cdot (2n-1)}{2\cdot 4 \cdot \dots \cdot 2n} =\frac{(2n)!}{(2\cdot 4 \cdot \dots \cdot 2n)^2} = \frac{(2n)!}{2^{2n} \cdot n!^2 } \Rightarrow \text{ chceme } \frac{1}{2\sqrt{n}} \le P_n \\
+	& 1 > \Big(1-\frac{1}{3^2} \Big)\Big(1-\frac{1}{5^2} \Big)\dots \Big(1-\frac{1}{(2n-1)^2} \Big) = \frac{2\cdot 4 \cdot 4 \cdot 6 \cdot \dots \cdot 2n}{1 \cdot 3 \cdot 3 \cdot 5 \cdot 5 \cdot \dots \cdot (2n-1)} = \frac{1}{4n \cdot P_n^2} \Rightarrow P_n \ge \frac{1}{2\sqrt{n}} \qed 
+\end{align*}
+
+\hlava{Zformulujte a dokažte větu o počtu bodů a přímek projektivní roviny řádu $n$}
+V KPR řádu $n$ je $n^2 +n +1$ přímek a bodů. Stupeň každého vrcholu je $n+1$.
+Zvolíme přímku $p$ a bod $x$ mimo ni (pro každé $x$ z P0 taková dvojice musí existovat). Přímka $p$ má $n+1$ bodů, každý bod má s $x$ právě jednu společnou přímku. Tedy stupeň je alespoň $n+1$. Pokud by $x$ procházela nějaká přímka navíc, pak by se musela protnout s $p$, ale všechny její body jsme již vyčerpali. \\
+Pro počet bodů uvažme všechny body, které jsme v předchozím postupu potkali. Napočítali jsme $n+1$ na $p$, pak $1$ za $x$, ale také $n-1$ za každou přímku $x$ procházející. Tedy alespoň $n+1 +1 + (n-1)(n+1) = n^2+n+1$. Kdyby někde existoval bod, který jsme nezapočítali, tak by musel mít s $x$ společnou přímku, to ale už nemůže, neboť jsme $x$ již nasytili. \led
+
+\hlava{Zformulujte a dokažte větu o duálním systému k projektivní rovině}
+$A$ je KPR $\Rightarrow d(A)$ je KPR. Platí i ekvivalence, neboť duál duálu je původní KPR. \\
+1. P0: č = $\{\overline{ab},\overline{ad},\overline{bc},\overline{cd} \}$. Průnik jakýchkoliv tří je prázdný. \\
+2. P1: $\forall p_1^d, p_2^d \in P_d |p_1^d \cap p_2^d| = 1$, plyne z původního P2: $\forall v_1, v_2 \in V=P_d \exists! p \in P = V_d : \{v_1, v_2\} \in p$ \\
+3. P2: $\forall v^d_1, v^d_2 \in V_d \exists! p_d \in P^d : \{v_1^d, v_2^d\} \in p_d$, plyne z původního P1: $\forall p_1, p_2 \in P = V_d |p_1 \cap p_2| = 1 \qed$ 
+
+\hlava{Zformulujte a dokažte větu o konstrukci projektivní roviny z algebraického tělesa}
+$\exists T_n$ konečné algebraické těleso řádu $n$, pak $\exists $ KPR řádu $n$. \\
+$ V :=\{ \{(\alpha a, \alpha b, \alpha c ): \alpha \ne 0 \} : a,b,c \in T_n, (a,b,c) \ne (0,0,0) \}, P := \{ \{ xa+yb+zc=0: (a, b, c) \in V\}, (x, y, z) \in T_n^3\} $ \\
+$ |V| = \frac{n^3-1 }{n-1} = n^2 + n + 1$ \\
+P0: č $= \{ (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)\}$ \\
+P1: $\forall p_1, p_2 \in P: |p_1 \cap p_2| = 1 \Leftarrow xa+ yb +zc = 0 \wedge x'a + y'b + z'c = 0 $ má kernel dimenze $1$, tedy definuje jednu třídu bodu. \\
+P1: $\forall v_1, v_2 \in V \exists p \in P: \{v_1, v_2\} \in p \Leftarrow xa+ yb +zc = 0 \wedge xa' + yb' + zc' = 0 $ má kernel dimenze $1$, tedy definuje jednu třídu přímky (opět se leší jen alfanásobkem). \led
+
+\hlava{Zformulujte a dokažte větu o vztahu mezi projektivními rovinami a latinskými čtverci}
+Existuje $n-1$ ortogonálních latinských čtverců rozměru $n$ právě tehdy když existuje KPR řádu $n$.
+Nejprve zleva doprava. Vytvoříme si body $r, s, l_1, l_2, \dots, l_{n-1}, m_{1,1}, m_{1,2}, \dots, m_{1,n}, \dots, m_{n,n}$. Dále přímky čtyř typů:
+I. $\{r, s, l_1, l_2, \dots, l_{n-1}\}$ \\
+II. $\{r, m_{1,1}, m_{1,2}, \dots, m_{1,n} \}, \{r, m_{2,1}, m_{2,2}, \dots, m_{2,n} \}, \dots, \{r, m_{n,1}, m_{n,2}, \dots, m_{n,n} \}$ \\
+III. $\{s, m_{1,1}, m_{2,1}, \dots, m_{n,1} \}, \{r, m_{1,2}, m_{2,2}, \dots, m_{n,2} \}, \dots, \{r, m_{1,n}, m_{2,n}, \dots, m_{n,n} \}$ \\
+IV. $\{\{l_i, m_{i,s(i,s,r)}: s,r \in [n] \}, i \in [n-1] \}$, kde $r(i, s, r) = $ pozice symbolu $s$ v $i.$ latinském čtverci v řádku $r$. \\
+Ověříme axiomy: \\
+P0: č $= \{r, s, m_{1,1}, m_{2,2}\}$ \\
+P1: \\ 
+I a II, III, nebo IV $\rightarrow$ průsečíkem je $r$, $s$, resp. $l_i$. \\
+II a III $\rightarrow$ patřičné místo v matici \\
+IV a II, nebo III $\rightarrow$ každý symbol je v řádku, resp. sloupci právě jednou \\
+P2: \\
+Triviální. Zajímavé jsou pouze $m_{a,b}, m_{c,d}$ v obecné poloze. Pokud určují různé symboly, pak z lemma pro $n-1$ ortogonálních latinských čtverců plyne, že pro každé dvě okénka $(a,b), (c,d)$ existuje latinský čtverec, ve kterém si jsou hodnoty rovny $\rightarrow$ IV. \\
+Obráceně si vezmeme z KPR libovolnou přímku a její body označíme $\{ r, s, l_1, \dots, l_{n-1}\}$ Zbytek bodů označme za $m_{i,j}$, těch musí být $n^2$. Získáme takto latinské čtverce z principu popsaného výše. Jedná se o latinské čtverce, neboť průnik každé symbolové přímky z $l_i$ je s řádkem a sloupcem jednoznačný. Jednoznačné průniky IV nám dávají ortogonalitu všech čtverců. \led
+
+
+\hlava{Zformulujte a dokažte větu o počtu koster grafu $K_n$ prostřednictvím zakořeněných stromů}
+Počet koster grafu $K_n$ je $n^{n-2}$. \\
+Dvěma způsoby spočítáme počet zakořeněných koster, tj. trojice (kostra, kořen, očíslování). \\
+1. \#koster $\cdot n \cdot (n-1)!$  \\
+2. Pomocí povykos. $\prod_1^n n \cdot (n-i)$, vybereme kam bude směřovat šipka (může kamkoliv), pak odkud (pouze z vrcholu, který zatím nemá výstupní hranu). $=n^{n-1} (n-1)! \Rightarrow \#koster = n^{n-2}$ \led
+
+\hlava{Počet koster za pomocí Laplaceovy matice $\star$}
+Pozorování 1: $\kappa(G) = \kappa(G\backslash e) + \kappa(G \circ e)$ \\
+Pozorování 2: \[L'= L-\begin{bmatrix} 
+1 & 0 & \cdots 0 \\
+0 & \cdots \\
+\vdots \\
+\end{bmatrix} \Rightarrow |L| = |L^{1,1}| + |L'| \] \\
+Důkaz indukcí. Platí pro malý případ, pak indukční krok, ve kterém odebereme hranu.
+\begin{align*}
+L'=L-\begin{bmatrix} 
+1 & -1 & \cdots 0 \\
+-1 & 1 & 0 \cdots \\
+0 & \vdots \\
+\end{bmatrix} = \text{Laplaceova matice grafu } G \backslash e\\
+L^{1,1} = \text{Laplaceova matice grafu } G \circ e\\
+|L^{1,1}| = |(L^{1,1})^{1,1}| + |L'^{1,1}| = K(G\circ e) + K(G \backslash e) = K(G) \qed
+\end{align*}
+
+\hlava{Zformulujte a dokažte větu o počtu koster grafu $K_n$ prostřednictvím determinantů}
+Počet koster grafu $K_n$ je $n^{n-2}$. \\
+Laplaceova matice je \[\begin{bmatrix} 
+n-1 & -1 & \cdots -1 \\
+-1 & n-1 \cdots \\
+\vdots \\
+\end{bmatrix} \rightarrow \begin{bmatrix} 
+1 & 1 & \cdots 1 \\
+-1 & n-1 & -1\cdots \\
+-1 & -1 \vdots \\
+\end{bmatrix} 
+\rightarrow \begin{bmatrix} 
+	1 & 1 & \cdots 1 \\
+	0 & n & 0\cdots \\
+	0 & 0 & n & \vdots \\
+\end{bmatrix} \]\\
+Dostali jsme se k dolní trojúhelníkové matice, jejiž součin na diagonále je $n^{n-2}$, což je zároveň její determinant a z předchozí věty i počet koster grafu $K_n$. \led
+
+\hlava{Zformulujte a dokažte větu o počtu stromů s předepsaným skóre}
+Graf $G$ má $\frac{(n-2)!}{(d_1-1)!(d_2-1)!\cdots (d_n-1)!}$ koster se skóre $(d_1, d_2, \cdots, d_n)$ \\
+Důkaz indukcí podle hran. Pokud je graf např. cesta pak tvrzení platí. Jinak vybereme vrchol stupně $1$ (takový musí existovat, bůno je poslední), který odebereme. Mohli jsme jej ale odebrat od $n-1$ ostatních vrcholů, proto: $\sum_1^{n-1} \frac{(n-3)!}{(d_1-1)!\cdots(d_i-2)!\cdots(d_{n-1}-1)!} = \frac{(n-3)!(d_1+d_2+\cdots +d_{n-1} - (n-1) )}{(d_1-1)!(d_2-1)!\cdots (d_n-1)!} = \frac{(n-3)!(2n-3 - (n-1) )}{(d_1-1)!(d_2-1)!\cdots (d_n-1)!} = \frac{(n-2)!}{(d_1-1)!(d_2-1)!\cdots (d_n-1)!} \qed$
+
+\hlava{Zformulujte a dokažte větu o počtu nezávislých množin v množinovém systému (Spernerova)}
+Pokud je nějaký množinový systém uspořádán inkluzí, pak je velikost největšího antiřetězce nejvýše ${n \choose \lfloor \frac{n}{2} \rfloor}$. \\
+Dvojím způsobem spočítáme $(M, R)$, kde $M$ je prvkem nejdelšího antiřetězce a $R$ je nejdelší antiřetězec. 1. $\#(M, R) \le \#R = n!$, neboť pokud by $(M_i, R)$ a zároveň $(M_j, R)$, pak $M_i, M_j$ nejsou neporovnatelné. Každý řetězec odpovídá jednoznačné permutaci. 2. $\#(M,R) = \sum |M_i|!(n-|M_i|)! \Rightarrow \sum |M_i|!(n-|M_i|)! \le n! \Rightarrow \sum {n \choose |M_i|}^{-1} \le 1 \Rightarrow \#M{n \choose \lfloor \frac{n}{2} \rfloor}^{-1} \le 1 \Rightarrow \#M \le {n \choose \lfloor \frac{n}{2} \rfloor}^{-1} \qed $
+
+\hlava{Zformulujte a dokažte větu o maximálním počtu hran v $n$-vrcholovém grafu bez čtyřcyklů}
+Graf bez čtyřcyklů má nejvýše $(n^{3/2}+n)/2$ hran. \\
+Dvojím způsobem budeme počítat vidličky. 1. $ \#V \le {n \choose 2}$. 2. Z vidličkosti $\#V = \sum {deg(v_i)  \choose 2}$\\
+\begin{align*}
+\Rightarrow & \sum {deg(v_i)  \choose 2} \le {n \choose 2} \\
+	& \sum_1^n (deg(v_i)-1)^2 \le n^2 \\
+	& a := (deg(v_i)-1, deg(v_i)-1,deg(v_i)-1, \cdots, deg(v_i)-1), b = (1,1,1,\cdots,1) \\
+	& <a,b> \le ||a||\cdot||b|| \Rightarrow \sum (deg(v_i)-1) \le \sqrt{n} \sqrt{\sum (deg(v_i)-1)^2} \le \sqrt{n} \cdot |n| \\
+	& 2|E|-n \le \sqrt{n} \cdot |n| \qed
+\end{align*}
+
+\hlava{Zformulujte a dokažte větu, která popisuje, jak vytvořit všechny 2-souvislé grafy, a dokažte ji}
+Graf je 2-souvislý právě tehdy, jestliže lze vytvořit z nějakého cyklu přidáváním uší.\\
+Implikace zprava doleva je triviální. Cyklus je dvousouvislý a přidáním ucha nevznikne artikulace. \\
+Naopak uvažme největší graf $H$, který lze vytvořit z 2-souvislého grafu přidáváním uší. Takový jistě existuje, neboť v původním grafu musí exitsovat alespoň jedna kružnice. Pro spor $H \ne G$, vezmeme $x\in G \backslash H$ takový, že $x$ má souseda $y$ v $H$. Odebereme $y$, pak jistě ale musí do zbytku $H$ vést z $x$ nějaká cesta. Tím jsme však vytvořili ucho. \led
+
+\hlava{Zformulujte a dokažte větu, která popisuje grafy, v nichž dvojice vrcholů určují kružnice}
+Jedná se o dvousouvislé grafy. Indukcí podle počtu uší. Z $G$ odebereme libovolné ucho a rozebereme případy:
+$x \in U, y \in U$, pak existuje jedna cesta v uchu, druhá mezi koncovými body ucha $\rightarrow$ kružnice. \\
+$x \notin Y, y \notin U$, pak z indukčního předpokladu existuje kružnice. \\
+$x \in U, y \notin U$, pak z jednoho konce ucha $k_1$ vede kružnice do $y$, z druhého konce ucha $k_2$ taky, ale co když se nám kružnice protnou? V tom případě zvolíme patřičné části kružnice. To funguje i tehdy, neexistuje dvojice částí kružnic, které by byly disjunktní (seskládáme z polovin kružnic). \led
+
+\hlava{Zformulujte a dokažte větu, která charakterizuje vrcholově t-souvislé grafy (Mengerova) $\frown$}
+Graf je vrcholově $t$-souvislý právě tehdy když pro každou dvojici vrcholů existuje $t$ vrcholově disjunktních cest mezi nimi. \\
+Implikace zprava doleva je zřejmá, neboť jakýkoliv řez by musel mít velikost alespoň $t$, aby přerušil všechny cesty. Pro druhou implikaci nejprve dokážeme pomocné tvrzení, které je silnější: Pokud pro $|A|=|B|=t$ neexistuje $(A,B)$ řez velikosti menší, než $t$, pak $\exists t$ disjunktních cest mezi $A$ a $B$. \\
+Indukcí podle $|E|$: aby neexistoval $(A,B)$ řez velikosti $t$, pak $A=B$, tedy $\exists t$ disjunktních cest. Jinak uvažme nějakou hranu $e$. Pokud $G\backslash e$ nemá žádný $(A,B)$ řez velikosti $< t-1$, pak jsme z IP vyhráli. Pokud $\exists$ velikosti $t-1$, pak každá cesta $(A,B)$ prochází buď daným řezem, nebo hranou $e$ a to vždy stejným směrem. Konce $e$ budiž $u,v$. Pak $G$ nemá $(A,S_u)$ řez velikosti menší $t-1$. Pokud by měl, pak by to byl i řez v $(A,B)$. Dále $G\backslash e$ nemá $(A,S_u)$ řez velikosti menší $t-1$. Pokud by měl, pak by existovala cesta v $G$, která by protla $S$, pak $v$, pak $u$, což je alespor s minimalitou řezu. Pak ale z IP existuje $t$ disjunktních cest mezi $A$ a $S_u$, stejně jako $S_v$ a $B$. Ty můžeme spojit a máme chtěné cesty. \\
+Za využití pomocného tvrzení vybereme $A=N(x), B=N(y)$ (pro případ, kdy $x$ sousedí s $y$ tuto hranu budeme považovat za jednu cestu). Pak $|A| = |B| = t$, jinak by stupeň vrcholu byl méňě než $t$. Použijeme předchozí lemma a našli jsme $t$ disjunktních cest. \led
+
+\hlava{Zformulujte a dokažte větu, která charakterizuje hranově t-souvislé grafy (Ford-Fulkersonova)}
+Graf je hranově $t$-souvislý právě tehdy když pro každou dvojici vrcholů existuje $t$ hranově disjunktních cest mezi nimi. \\
+Za každý vrchol připojíme list. Pak vytvoříme line graph, na který použijeme Mengerovu větu. Je-li line graph vrcholově $t$-souvislý, pak je hranově $t$-souvislý i původní graf (naopak neplatí). \led
+
+\hlava{Zformulujte a dokažte větu, která dává do vztahu toky a řezy v sítích \fr}
+Jedná se o dvě věty: $\forall $ tok $f, \forall $ elem. řez $R_A$: $w(f) = \sum_{u \in A, v \notin A} f(u,v) - \sum_{u \in A, v \notin A} f(v,u)$. \\
+Důkaz za pomocí definice toku a vlastnosti každého vrcholu. $w(f) = \sum_{(z,v)\in E} f(z,v) - \sum_{(v,z)\in E} f(v,z),  \forall v \ne z, s: 0 = \sum_{u: (v,u)\in E} f(v,u) - \sum_{u: (u,v)\in E} f(u,v) \Rightarrow w(f) = \sum_{u \in A} (\sum_{u: (v,u)\in E} f(v,u) - \sum_{u: (u,v)\in E} f(u,v)) = \sum_{u,v \in A, (u,v)\in E ( f(u,v) - f(v,u)} + \sum_{u \in A, v \notin A} f(u,v) - \sum_{u \in A, v \notin A} f(v,u) = \sum_{u \in A, v \notin A} f(u,v) - \sum_{u \in A, v \notin A} f(v,u)$ \\ \\
+Druhá: (minimaxová): Velikost největšího toku odpovídá velikosti nejmenšího řezu. \\
+První ukážeme nerovnost, pak rovnost v určitém případě, nakonec existenci.\\
+1. Pro $R$ volíme $R_A$: $w(f) = \sum_{u \in A, v \notin A} f(u,v) - \sum_{u \in A, v \notin A} f(v,u) \le \sum_{u \in A, v \notin A} f(u,v) \le \sum_{u \in A, v \notin A} c(u,v) = c(R_A) \le c(R)$ \\
+2. Dokud lze, tak nacházíme zlepšující cesty, tím se přibližujeme ke kapacitě řezu, kterou přesáhnout nelze. \\
+3. Jestliže vybíráme z celých, nebo racionálních čísel, tak po konečném počtu kroků skončíme. V reálných to platit nemusí. \led
+
+\hlava{Zformulujte a dokažte větu o existenci systému různých reprezentantů (Hallova) \fr}
+$\mathbf{M}$ má SRR $\Leftrightarrow \forall J \subseteq I: |\cup_{j \in J} M_j| \ge |J|$ \\
+Implikace zleva doprava je trivální obměnou. Pokud by to neplatilo, tedy bychom našli nějaké množiny, jejichž sjednocení je méně, než jejich počet, pak rozhodně nemůže existovat SRR. \\
+Obráceně vytvoříme z grafu incidence síť, kde za $\mathbf{M}$ připojíme ke všem množinám $z$ a za sjednocení prvků připojíme $s$. Všechny hrany mají kapacitu $1$. Prvním odhadem zjistíme, že nejmenší řez nemůže být větší než $min\{deg(z), deg(s)\} \ge $ (z podmínky) $|M|=|I|$. Pak každou hranu v řezu, která by byla mezi $A$ a $B$ (množiny a sjednocení) můžeme beztrestně nahradit hranou mezi $z,A$, nebo $B,s$. Tím si totiž nikdy nepohoršíme. Označme $A_r, B_r$ vrcholy v $A, B$, které jsou incidentní s hranami v řezu. Jistě nevede žádná hrana mezi $A \backslash A_r$ do $B \backslash B_r$, jinak by to nebyl řez. Velikost nejmenšího řezu je $|A| + |B|$, ale jelikož všechny hrany z $A\backslash A_r$ vedou do $B$, tak z Hallovy podmínky $|A\backslash A_r| \le |B|$, tedy $w(f) \ge |A| + |A\backslash A_r| = |I|$. Velikost toku nemůže být víc jak $|I|$, tedy jsme našli párování a SRR. \led
+
+\hlava{Zformulujte a dokažte větu o hranové barevnosti bipartitních grafů}
+$k$-regulární bipartitní graf je také $k$-barevný. \\
+Indukcí dle $k$. Pro $k=0,1$ triviální (máme 0, 1 barvu). Jinak v bipartitním grafu nalezneme párování (z $A$ vede $|A|\cdot k$ hran, což se musí trefit do alespoň $|A|$ vrcholů v $B$), toto párování obarvíme barvou $k$, odebereme jej a zbytek obarvíme $k-1$ barvami z IP. \led
+
+\hlava{Zformulujte a dokažte větu o doplnění latinských obdelníků}
+Jakýkoliv latinský obdelník o rozměrech $n \times k$ lze doplnit na latinský čtverec. \\
+Vytvoříme bipartitní graf, kde $A = $ sloupce, $B = [n]$ a hrana existuje, pokud sloupec daný symbol ještě neobsahuje. Jedná se o $n-k$ regulární bipartitní graf. Tedy jej můžeme obarvit. Každá barva je pak další řádek. \led
+
+\hlava{Zformulujte a dokažte větu o vztahu bistochastických a permutačních matic \fr}
+Bistochastická matice má sloupcové i řádkové sloupce rovny 1 ($Aj = A^Tj = j, a_{ij} \in <0,1>$). Permutační matice je jednotková s proházenými řádky (permutační s prvky 0, nebo 1). \\
+Bistochastické matice tvoří konvexní obal permutačních matic (každá bistochastická matice je konvexní kombinací permutačních matic). \\
+Pomocné tvrzení: Z každého řádku a sloupce bistochastické matice si chceme vybrat nenulový prvek (v bistochastické matici je to kladný prvek). Formálně pro každou bistochastickou matici (se součtem $s$) $A \exists \pi \in S_n: \forall i: a_{i \pi(i)} > 0$. \\
+Sestavíme pomocný graf na $I= X = [n]$ takový, že $(i,x) \in E \Leftrightarrow a_{ix} >0$. Ověříme Hallovu podmínku. $\forall J \subseteq I: \sum_{i \in J, (i,x) \in E} a_{ix} = |J|\cdot s \le \sum{(i', x) \in E, x \in N(J)=\cup M_i'} a_{ix} = |\cup M_i'|\cdot s$ (součet každého řádku je $s$, řádků máme $|J|$, součet každého sloupce je $s$, součet sloupců je tedy vyšší, ale roven $s$). $\Rightarrow |J| \le |\cup M_i| \Rightarrow$ splněna Hallova podmínka, tedy existuje párování a našli jsme permutaci $\pi$. \\
+Důkaz indukcí podle počtu nenulových prvků. Pro $A$ se součty $s$ nalezneme pomocí předchozího tvrzení pomocnou permutaci $A_\pi$, určíme $m := min_i a_{i\pi(i)}$ a odečteme od $A$ matici $m\cdot A_\pi$. Výsledná matice má řádkové i sloupcové součty stále stejné (o $s$) a o alespoň jeden nulový prvek více, tedy z IP. Ještě zbývá ukázat, že kombinace je konvexní. Nemůžeme ale z řádku odečíst víc, než je jeho součet, což je však přesně $1$. \led
+
+\hlava{Zformulujte a dokažte Ramseyovu větu pro grafy a k barev (včetně případu k = 2) \fr}
+Pozorování 1: $R(k,1) = R(1,l) = 1$ \\
+Pozorování 2: $\forall k, l \ge 2: R(k,l) \le R(k-1,l)+R(k,l-1)$. Mějme graf $G$ na $R(k-1,l)+R(k,l-1)$ vrcholech, $u \in V, B = N(u), A=V\backslash N(u)$, pak $A \ge R(k-1,l)$, nebo $B \ge R(k,l-1)$, jinak bychom nedosáhli chtěného počtu vrcholů. Buď v $A$ existuje klika velikosti $l$, nebo nezávislá množina velikosti $k-1$, do které pak můžeme přidat $u$. U $B$ symetricky opačně. \led \\
+Pozorování 3: $R(k,l) \le { {k+l-2} \choose {k-1} }$. Indukcí $R(k,l) \le R(k-1,l) + R(k,l-1) \le { {k+l-3} \choose {k-2} } + { {k+l-3} \choose {k-1} }  = { {k+l-2} \choose {k-1} }$ \\
+První věta: $\forall k,r \in \mathbb{N} \exists n \in \mathbb{N}: $ obarvíme-li hrany $K_n$ pomocí $r$ barev, pak v něm existuje $k$ vrcholů, které indukují jednobarevný podgraf (klika a nezávislá množina je jen pro $r=2$). Značení: $n_{r,k}$.\\
+Důkaz indukcí dle počtu barev ($r$): $n_{1,k} = k$. \\ 
+$n_{r, k} \le R(k, n_{r-1,k})$ Jednu barvu označíme jako bílou, zbylé slijeme dohromady. Pak jistě nalezneme buď bílý podgraf velikosti $k$, nebo duhový podgraf velikosti $n_{r-1,k}$, což máme zajištěno, že na něm nějaká klika velikosti $k$ existuje. \led
+
+\hlava{Zformulujte a dokažte Ramseyovu větu pro systémy p-tic \fr}
+Druhá věta: neobarvujeme dvojice, ale $p$-tice: $\forall k, p, r \in \mathbb{R} \exists n\in \mathbb{N}: $ obarvíme-li ${ { \lfloor n \rfloor } \choose p}$ pomocí $p$ barev, potom $\exists A \subseteq \lfloor n \rfloor: { A \choose p} $ je jednobarevná. \\
+Důkaz indukcí podle $p$. $p=1$ Dirichletův princip, $p=2$ 1. zobecnění Ramseyho čísla. \\
+Pro indukční krok nejprve lemma: $\forall r$-obarvení $p$-tic množiny $B: |B| = 1 + n_{r,p-1}(k). (n_{r,p}(k) = n_{r,k} \text{ pro $p$-tice})$. A pro $\forall x \in B \exists B' \subseteq B: |B'| = k: x \notin B': \forall t \in { B' \choose {p-1}} \cup \{x\} \text{ mají stejnou barvu }$. Pro dostatečně velké $B$ a libovolné $x \in B \exists B': $ $p-1$-tice z $B'$ a $x$ mají stejnou barvu. \\
+Důkaz: $c: {B \choose p} \rightarrow [ r ], def c:= { {B \backslash x} \choose p-1} \rightarrow [ r ]: c'(Y) := c(Y \cup \{x\})$. Z IP: $B \backslash x$ obsahuje $B': |B'| = k: c $ je konstantní na ${B' \choose p-1}$. $p$-tice v $B'$ mají stejnou barvu. Barva takové $p-1$ tice je jako barva $p-tice$ s $x$.  Z konstrukce $c'$ plyne, že $B'$ je hledaná množina. \\
+Nyní ukážeme $n_{r,p}(k) \le 1+n_{r,p-1}(1+n_{r,p-1}(1+ \cdots (n_{r,p-1}(p-1)))\cdots) = n_{r,p}^\star(k)$. Hloubka je $t = r\cdot(r-p)+1$. \\
+Dostaneme obarvení $B_0:[n_{r,p}^\star(k)]$ a $c: {B_0 \choose p} \rightarrow [r]$. Nyní aplikujeme to lemma t-krát a konstruujeme posloupnost prvků $x_i$, barev $r_i$, množin $B_i$, $B_i := B_{i-1}'$, $x_i$ je prvek zvolený v $i$-tém kroku, $r_i$ je barva, že všechny $p$-tice z $x_i$ do $B_i$ jsou barvy $r_i$. Opakujeme tvoření vějířů. Z Dirichletova principu pro posloupnost barev $b_1, \cdots, b_t$ implikuje, že alespoň jedna z barev se vyskytne $k-p+1$ krát. Prvky $x_i$ odpovídající této barvě tvoří množinu $C = {x_{i_1}, \cdots x_{i_l}}, |C| \ge k -p +1$, pak hledanou množinu $A$ lze vzít libovolnou z $C \cup B_t$ velikosti $k$. $|C\cup B_t| \ge (k-p+1)+p-1 = k$. Libovolná $p$tice z ${ A \choose p}$ obsahuje prvek z $C$, ale z volby má stejnou barvu jako všechny ostatní. Důležité je si uvědomit, že se vždy zanořujeme do množiny, která je obarvená zeshora. \led
+
+\hlava{Zformulujte a dokažte větu o existenci bodů v konvexní poloze (Erdős–Szekeresova věta)\fr}
+$\forall k \exists n: $ každá $n$-tice bodů v $\mathbb{R}^2$ v obecné poloze obsahuje $k$ bodů v konvexní poloze. \\
+Pozorování: Každých 5 bodů obsahuje konvexní 4-úhelník. Pokud konvexní obal přímo tvoří 5,4-úhelník, tak máme vyhráno. Opačně tvoří trojúhelník s dvěma body uvnitř. Vezmeme tedy rozumnou stranu trojúhelníka a tyto dva body a máme 4-úhelník (dvěma body uděláme přímku a dva vrcholy leží na nějaké straně). \\
+Důkaz: $n := n_{2,4}(k)$. Červená barva čtveřice $\rightarrow$ jsou v konvexní poloze, modrá barva čtveřice $\rightarrow$ nejsou v konvexní poloze. Z 2. zobecnění Ramseyho věty najdeme $k$ bodů stejné barvy. Ale pokud je $k \ge 5$, pak z pozorování víme, že musí vytvářet konvexní 4-úhelník. Tedy jediná jednobarevná množina čtveřic celkově $k$ bodů je ta červená. Pokud víc jak pětice není v konvexní poloze, tak je to kvůli tomu, že nějaká čtveřice není v konvexní poloze (triangulace). \led
+
+\hlava{Zformulujte a dokažte větu o dolním odhadu Ramseyových čísel \fr}
+Horní odhad: $R(k,k) \le { 2k-2 \choose k-1} \le 4^k$ \\
+Dolní odhad: $R(k,k) \ge \sqrt{2}^k \rightarrow $ Pro každé $k \ge 3$ existuje graf na $2^{k/2}$ vrcholech takový, že $\omega(G) <k \wedge \alpha(G) < k$ \\
+Důkaz pravděpodobnostní: Zvolíme náhodný graf, kde $p := \frac{1}{2}$ pravděpodobnost výběru hrany. Vybereme $K \subseteq V, |K| = k, A_K $ je jev, že $G|_K$ je klika. $p(A_K) = 2^{-{k \choose 2}}$, $B_K $ je jev, že $G|_K$ je nezávislá. $p(B_K) = 2^{-{k \choose 2}}$. $p(\omega(G)) \ge k \vee p(\alpha(G)) \ge k \le \sum_{K \subseteq G} p(A_K) + p(B_K) = { 2^{k/2} \choose k}\cdot 2^{- {k \choose 2}} \cdot 2 < 1$ (z horního odhadu kombinačního čísla) $\Rightarrow$ existuje graf, který nemá ani dostatečně velkou kliku, ani nezávislou množinu.
+
+\hlava{Zformulujte a dokažte větu o horním odhadu na velikost samoopravného kódu \fr}
+$|C| \le \frac{q^n}{V(t)}$ \\
+Plyne triviálně z hladového hledání kódu. Kdybychom hledali náhodou nejlépe, tak koule, které odstraňujeme jsou vždy disjunktní. Pokud nastane rovnost, nazýváme kód perfektním. Dolní odhad podobně, ale bereme vždy plnou kombinatorickou kouli $ V(d=1) $ \led
+
+
+\hlava{Zformulujte postup, jakým se kódují a dekódují lineární kódy a dokažte, že tento postup je korektní. \fr}
+Nejprve lemma: $s $ je na $B(0,t)$ prosté. \\
+Důkaz: kdyby ne, pak $\exists y,y' \in B(0,t): s(y) = s(y') \Rightarrow 0 = s(y-y') \Rightarrow y-y' \in C \Rightarrow dist(y-y', 0) = dist(y, y') \ge 2t+1$, ale $dist(y,y') \le dist(y, 0) + dist(y', 0) = 2t \Rightarrow $ spor \led.\\ 
+Za pomocí syndromu a následujících kroků: \\
+1. $y \in B(x,t) \Rightarrow s(x-y) \in B(0,t) \Rightarrow s^{-1}(s(x-y)) = x-y $ (z lemma) \\
+2. $x\in C: s(y-x) = s(y) - s(x) = s(y)$  \\
+3. $x = y-(y-x) = y - s^{-1}(s(y-x)) = y - s^{-1}(s(y)-s(x)) = y - s^{-1}(s(y))$
+
+\pagebreak
+
+\hlava{Sepište přehledově, co víte o odhadu faktoriálu}
+Faktoriál umíme odhadnout dvěma způsoby (i s důkazy), aproximovat jedním. Binomický koeficient obecně jedním odhadem. Prostřední binomický koeficient dvakrát.
+
+\hlava{Sepište přehledově, co víte o vytvořujících funkcích}
+Řešení rekurencí, slovní úlohy, kde nás zajímají výběry, vliv operací funkce na posloupnost a naopak.
+
+\hlava{Sepište přehledově, co víte o řešení rekurentních rovnic}
+Vytvoření charakteristického polynomu, např. Fibonacci. Lze řešit maticově (diagonalizace).
+
+\hlava{Sepište přehledově, co víte o projektivních rovinách a latinských čtvercích}
+Zmíněné věty a lemmata, zejména vztah OLČ a KPR. Nakreslení roviny, reálná projektivní rovina, aplikace LČ.
+
+\hlava{Sepište přehledově, co víte o počítání koster v grafu}
+S předepsaným skóre, jako determinant, cayleyho formule třemi způsoby, rekurentně.
+
+\hlava{Sepište přehledově, co víte o mírách souvislosti grafu}
+Zejména Mengerova a Ford-Fulkersonova věta. Lze si pomoct Hallovou podmínkou a toky v sítích.
+
+\hlava{Sepište přehledově, co víte o tocích v sítích}
+Minimaxová věta, kapacita toku přes řez. 
+
+\hlava{Sepište přehledově, co víte o systémech různých reprezentantů}
+Hallova podmínka, lze si pomoct toky v sítích.
+
+\hlava{Sepište přehledově, co víte o Ramseyově teorii}
+Ramseyho číslo, zobecnění holubníku, dirichletova principu, 1. zobecnění, 2. zobecnění. Použití v důkazu ES věty.
+
+\hlava{Sepište přehledově, co víte o samoopravných kódech}
+Opakovaný kód, kód z KPR, hammingova vzdálenost, definice kódu. \href{http://vilix.xyz/s/noise\_simulator/}{Transmission noise simulator} - opakování znaků a slov: miniprojekt ze střední.
+
+\pagebreak
+\hlava{Přehledově vše z poznámek:}
+
+\hlava{Odhady faktoriálu a binomických koeficientů}
+Tři odhady faktoriálu a tři odhady binomického koeficientu. \str{0}
+
+\hlava{Vytvořující funkce}
+Definice vyvořující funkce ($\sum_{i=0}^\infty a_ix^i = a(x)$), operace s vytvořující funkcí (součet, násobení skalárem, posun vpravo, vlevo o $k$ pozic, dosazení $\alpha x$, dosazení $x^k$, derivace, integrál, součin (konvoluce)). \\
+Definice reálného binomického koeficientu, zobecnění binomické věty, důsledek pro $(1-x)^{-n}$, řešení rekurentně zadaných posloupností, počet binárních stromů. \str{3}
+
+\hlava{Konečné projektivní roviny}
+Definice konečné projektivní roviny, věta o stejně velkých přímkách, definice řádu projektivní roviny, věta o počtech v konečné projektivní rovině. \\
+Definice grafu incidence, definice duálního množinového systému a věta o jeho KPR, věta o KPR řádu algebraického tělesa. \\
+Reálná projektivní rovina \fr \str{6}
+
+\hlava{Latinské čtverce}
+Definice latinského čtverce a ortogonality, čtyři drobná pozorování o ortogonalitě, lemma o nejvýše $n-1$ ortogonálních latinských čtverců, věta o konstrukci mezi KPR a OLČ. \str{10}
+
+\hlava{Kostry}
+Definice kostry, tři důkazy Cayleyho formule, omezení bez $C_4$, Spernerova věta o nejdelším antiřetězci, počet koster s předepsaným skóre, rekurence pro počet koster. \\
+Definice Laplaceovy matice, trik s linearitou determinantu, počet koster jako determinant. \str{13}
+
+\hlava{Souvislost}
+Definice vrcholového a hranového řezu, vrcholové a hranové souvislosti, lemma o porovnání vrcholové a hranové souvislosti, definice artikulace a mostu, ušaté lemma, důsledek dva na kružnici. \\
+Mengerova věta a její zobecnění, Ford-Fulkersonova věta, definice $(A,B)$ řezu \str{17}
+
+\hlava{Toky v sítích}
+Definice sítě, toku, řezu v síti, kapacity řezu, elementárního řezu. Pozorování o inkluzi elementárního řezu ($R_A \subseteq R$), velikost toku přes řez, minimaxová věta.
+\str{20}
+
+\hlava{Sytémy různých reprezentantů}
+Definice systému různých reprezentantů, incidenčního grafu, párování, Hallova podmínka, definice vrcholového pokrytí, Kőnigova věta, důsledek o $k$ barevnosti úplného $k$-regulárního bipartitního grafu. \\
+Definice latinského obdelníka, věta o doplnění obdelníka, definice bistochastické matice, Birkhoff-von Neumannova věta o bistochastických maticích, definice konvexní kombinace. \str{23}
+
+\hlava{Ramseyova teorie}
+Definice Ramseyova čísla, konečnost $R(k,l)$ (rekurentně) a omezení ze shora binomicky, 1. zobecnění (na $k$ barevnost) a patřičná konečnost, 2. zobecnění (na $p$-tice), Erdős–Szekeresova věta ($\Rightarrow$ $er$(Erdős) = 0, $er$(Szekeres) $\le 1$), horní a dolní odhad $R(k,k)$.
+\str{26}
+
+\hlava{Samoopravné kódy}
+Definice abecedy, slova, množiny všech slov, Hammingova vzdálenost, (blokový) kód a jeho parametry, triviální kódy z opakování a KPR, definice Hadamardových kódů a tvorba pro mocniny $2$, pozorování o efektu permutací a bijekcí na parametry kódu, definice kombinatorické koule, vzdálenosti, pozorování o $(B(x,t) \cap B(y,t) = \emptyset \Leftrightarrow dist(x,y) \ge 2t+1$. \\
+Tvrzení o objemu kombinatorické koule, Hammingův odhad, Gilbert-Varshamova mez, definice lineárního kódu, pozorování o měření vzdálenosti, definice syndromu, lemma o prostém syndromu, postup dekódování lineárního kódu, definice generující matice, dekódování maticově (tvorba syndromu), definice duálního kódu, definice kontrolní matice, Hammingovy kódy a jejich pomocné tvrzení. \str{29}
+\end{document}

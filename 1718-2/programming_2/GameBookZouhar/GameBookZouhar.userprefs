@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{EC42A11A-7D06-4DE8-A04F-01EA20006D98}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GameBookZouhar/Program.cs">
+    <Files>
+      <File FileName="GameBookZouhar/Program.cs" Line="22" Column="67" />
+      <File FileName="GameBookZouhar/Book.cs" Line="11" Column="10" />
+      <File FileName="GameBookZouhar/Page.cs" Line="11" Column="13" />
+      <File FileName="GameBookZouhar/Option.cs" Line="8" Column="9" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.GameBookZouhar PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

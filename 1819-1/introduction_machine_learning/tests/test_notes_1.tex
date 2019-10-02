@@ -1,0 +1,111 @@
+% !TeX spellcheck = en_US
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{1st IML test notes}
+\rhead{Vilém Zouhar}
+
+\subsubsection*{Probability}
+$ P(A) = |A|/|\Omega| $
+\subsubsection*{Conditional probability}
+$ P(A|B) = P(A,B)/P(B) $
+\subsubsection*{Statistical independence}
+$ A\ ind.\ B \Leftrightarrow P(A|B) = P(A) (P(A,B) = P(A)\cdot P(B) $
+\subsubsection*{Entropy}
+$ H(X) = \sum_{x \in X} p(x) \cdot log_2(1/p(x)) $
+\subsubsection*{Conditional entropy}
+$ H(X|Y) = \sum_{x \in X, y \in Y} p(x, y) \cdot \log_2(p(y)/p(x,y)) $ \\
+$ = H(X,Y) - H(Y) = \sum_{x \in X, y \in Y} p(x, y) \cdot \log_2(1/p(x,y)) - \sum_{y \in Y} p(y) \cdot \log_2(1/p(y))$ 
+$ I(H,X) = \sum_{x \in X, y \in Y} p(x,y) \cdot \log_2(p(x,y)/(p(x)\cdot p(y))) $
+
+\noindent\rule{\textwidth}{1pt}
+
+\subsubsection*{Evaluation measures, Confusion matrix}
+\begin{itemize}
+\item accuracy: $(TP+TN)/total$
+\item error rate: $(FP+FN)/total$
+\item precision: $TP/total\ positive$
+\item sensitivity/recall: $TP/actual\ yes$ (true positive rate)
+\item specificity: $TN/actual\ no$ (true negativity rate)
+\item prevalence: $actual\ yes/total$
+\item Cohen's Kappa: $\frac{p_A-\sum p(,i)\cdot p(i,)}{1-\sum p(,i)\cdot p(i,)}$
+\item F score: $F_1 = 2\frac{precision \cdot recall}{precision + recall}$ (can be generalized to $F_\beta$)
+\end{itemize}
+\subsubsection*{Inter-rater agreement}
+$ sum\ diagnoal/all$
+
+\noindent\rule{\textwidth}{1pt}
+
+\subsection*{Statistical data analysis}
+\begin{itemize}
+\item expected value of a random variable $X$: $E[X] = \sum_{x \in X} p(x) \cdot x$
+\item variance: $\sigma^2 = Var(X) = E[(X-\mu)^2] = \sum p_i \cdot (x_i - \mu)^2, \mu = avg(X)$ \\
+    \tab variance of a set = $\frac{1}{n} \sum (x-\mu)^2$
+\item covariance: $\sigma_{XY}$ \\
+    \text{} \tab $E[(X-\mu)(Y-\mu)] = \sum p_i \cdot (x_i - E[X])(y_i - E[Y])$ \\
+    \text{} \tab sample covariance: $\rho_{X,Y} = \frac{1}{N-1}\sum_1^N (x_i - \bar{x})(y_i - \bar{y})$
+
+\item Pearson correlation coefficient (correlation): $ -1 \le \rho_{X,Y} = \frac{cov(X,Y)}{\sigma_X \sigma_Y} \le 1$
+\item standard deviation: $\sigma_X = \sqrt{\sigma_X^2}$
+\item median: $ 2-q(1) $
+\item quantiles: $ k-q_X(m) = X_l: |{i: X_i \le X_l}| = \frac{x\cdot |X|}{k} \cdots X_l = X_{\frac{x\cdot |X|}{k}} $
+\end{itemize}
+
+\subsubsection*{Pearson's $\chi^2$ test}
+...
+
+\noindent\rule{\textwidth}{1pt}
+
+\subsection*{Clustering}
+\begin{itemize}
+\item partitioning of data set
+\item centroid: $\mu(C_i) = \frac{1}{|C_i|} \sum_{x \in C_i} x$
+\item within-cluster variation: $L(C_i) = 2 \sum_{x \in C_i} d(x, \mu(C_i))$ ($d$ is the distance function)
+\item total within-cluster variation: $L(C_1, \cdots ) = \sum L(C_i)$
+\item optimalization task: $argmin_{C_1, C_2, \cdots} L(C_1, \cdots)$
+\end{itemize}
+
+\subsubsection*{K-means}
+\begin{enumerate}
+\item $C^0_1 = x_{random}, C^0_2 = x_{random}, \cdots $ 
+\item centroid update (compute $\mu(C_i)$)
+\item data assignment (assign data to closest centroid)
+\item if clusters remain the same, done, else goto $2$
+\end{enumerate}
+
+\subsection*{Dendrograms}
+\begin{itemize}
+\item rooted binary tree
+\item $height = distance$ (node location at the $y$ axis is the dissimilarity between child groups)
+\item two methods: \begin{enumerate}
+	\item merge two most similar clusters
+	\item top down ??
+\end{enumerate}
+\item closest clusters $(C_{n_1}, C_{n_2}) = argmin_{C_u, C_v} d(C_u, C_v)$ ($d$ is the linkage function)
+\item \begin{enumerate}
+	\item single linkage: minimum between clusters ($d(C_i, C_j) = min_{x\in C_i, y\in C_j} d(x,y)$)
+	\item complete linkage: maximum between clusters ($d(C_i, C_j) = max_{x\in C_i, y\in C_j} d(x,y)$)
+	\item average linkage: avg between all elements in clusters ($d(C_i, C_j) = \frac{1}{|C_i||C_j|} \sum_{x\in C_i, y\in C_j} d(x,y)$)
+\end{enumerate}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,79 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{9. domácí úkol | Vilém Zouhar}}
+
+\section{}
+\begin{itemize}
+	\item $log_b(a) = log_2(4) = 2; f(n) \in O(n^{2 - \epsilon}) \Rightarrow T(n) \in \Theta(n^2)$
+	\item $log_b(a) = log_3(3) = 1; f(n) \in \Theta(n^1\log^0(n)) \Rightarrow T(n) \in \Theta(n \cdot \log(n))$
+	\item $log_b(a) = log_4(16) = 2; f(n) \in \Sigma(n^{2 + \epsilon}) \Rightarrow T(n) \in \Theta(n!)$
+\end{itemize}
+
+\section{}
+\subsection{Popis}
+Budeme různě skákat po poli a využívat toho, že Mirek změnil odebráním prvku paritu. Pokud se podívám na jakékoliv sudé místo v poli, tak stojím na začátku dvojice právě tehdy, pokud v dosavadní posloupnosti Mirek ještě nic neukradl. V tomto případě nás zajímá problém jen v poli $a[index, ]$, opačně v $a[, index]$
+
+\subsection{Korektnost}
+Rozebrána v popisu.
+
+\subsection{Pseudokód}
+\begin{lstlisting}[language=Python]Mi
+def solve(i, j):
+	index = (j-i)/2
+	
+	if s[index-1] != s[index] and s[index-1] != s[index+1]:
+		output(s[index])
+		exit()
+	
+	if index % 2 == 0:
+		s[index] == s[index+1]?solve(index+2, j):solve(i, index-2)
+	else:
+		solve(i, index)
+\end{lstlisting}
+
+\subsection{Složitost}
+Paměťove se můžeme zanořit nejvíce v logaritmu a stejně by to šlo přepsat do iterativní formy bez zásobníku. V každém kroku dělíme problém na jeden poloviční velikosti a zbytková funkce je konstantní. To odpovídá $\Theta(n^{\log_2(1)} \cdot \log^0(n)$, tedy celkově $O(\log(n))$.
+
+\section{}
+\subsection{Popis}
+Využijeme pozorování, že největší obdelník vždy obsahuje alespoň jeden sloupeček. Budeme tedy procházet všechny sloupečky zleva doprava a budeme si rozmýšlet všechny jejich varianty. Začátky obdelníků budou v zásobníku a jejich pravé konce budeme procházet. Šířku obdelníku umíme spočítat v konstantě. Když načteme další sloupeček, tak budeme odebírat ze zásobníku, dokud vršek zásobníku není menší nebo roven. Při odebírání také budeme vždy kontrolovat, zdali jsme nenašli něco lepšího.
+
+\subsection{Korektnost}
+Opomíjíme pouze obdelníčky, které jsou obsahově menší, ostatní procházíme všechny.
+
+
+\subsection{Pseudokód}
+\begin{lstlisting}[language=Python]
+b = 0
+for i in range(n):
+	while gram[stack.top()] > gram[i]:
+		b = best(b, stack.top()*(i-stack.pop()))
+	if gram[i] > gram[i-1]:
+		stack.push(i)
+		
+while s.not_empty():
+		b = best(b, stack.top()*(n-stack.pop()))
+output(b)
+\end{lstlisting}
+
+\subsection{Složitost}
+Každý obdelník zpracujeme právě jednou, tedy $\Theta(n)$.
+
+\end{document}

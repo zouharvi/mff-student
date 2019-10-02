@@ -1,0 +1,41 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{8.2}
+\rhead{Vilém Zouhar}
+
+\section*{BMerge}
+\subsection*{a)}
+Pro $n = 1$ (nenastane) vracíme $x_0$, pro $n \le 2$ pak $min(x_0, x_1), max(x_0, x_1)$ a je setřízeno. Pokud začneme od listů (takhle bude stejně konstruovaná síť), pak z indukce stačí rozhodnout už jen obecný případ. Jestliže máme v $(a_0, \ldots, a_{n-1})$ a $(b_0, \ldots, b_{n-1})$ setřízené, pak máme setřízené $(x_0, \ldots, x_{n-1})$ jednotlivě na sudých a lichých místech. Pak spouštíme porovnání $C_i$ na $C(x_{2i}, x_{2i+1}) \forall i \in \frac{n}{2})$ a podle velikosti je prohodíme. Po tomto porovnání budou tyto dvě čísla seřazená, ale nutně musí být i seřazená s dvojicí vedle, neboť $x_{2i+1} \le x_{2i+3} \wedge x_{2i} \le x_{2i+2}$. Můžeme to rozebrat po příkladech:
+\begin{itemize}
+\item $C_i$, $C_{i+2}$ prohodí, pak nemůže být $x_{2i} \ge x_{2i+3}$, jinak by $x_{2i+1} \ge x_{2i+3}$ \\
+\item $C_i$, $C_{i+2}$ neprohodí, pak nemůže být $x_{2i+1} \ge x_{2i+2}$ opět z tranzitivity \\
+\item $C_i$ prohodí, $C_{i+2}$ neprohodí, nebo naopak, pak nemůže být $x_{2i} \ge x_{2i+2}$, resp  $x_{2i+1} \ge x_{2i+3}$ přímo z definice setřízených posloupností \\
+\end{itemize}
+
+\subsection*{b)}
+Pokud máme vstup délky $n$, pak uděláme dvě subsítě pro liché a sudé prvky a přidáme mezi každé obdvojice komparátor (prvky této obdvojice však nemusí být v síti vedle sebe; subsítě jsou proloženy přes sebe). Triviální komparátor použijeme pro $n=2$.
+
+\end{document}

@@ -1,0 +1,81 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings, graphicx, multicol}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{mathrsfs}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+% \newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{note}{Note}
+\newtheorem{algorithm}{Algorithm}
+
+\newcommand{\baseAll}[3]{\begin{#1}{#2} \begin{flushleft} #3 \end{flushleft} \end{#1}}
+\newcommand{\de}[2]{\baseAll{definition}{#1}{#2}}
+\newcommand{\ve}[2]{\baseAll{theorem}{#1}{#2}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.1cm}\text{Matematická analýza | Vilém Zouhar}}
+\vspace{1cm} \\
+Krátké komentáře relevantní k přednášce a \href{https://iuuk.mff.cuni.cz/~tereza/teaching-files-17/popis-zkouskyMA2.pdf}{zkoušce} z Matematické analýzy 2 přednášena v LS 2017/2018 Terezou Klimošovou. 
+
+\de{Derivace funkce}{$ f'(a) := \lim_{t \rightarrow 0} \frac{f(a+t)-f(a)}{t} $}
+\de{Primitivní funkce}{ $ F $ je primitivní funkce $ f $ na intervalu $I  \Leftrightarrow \forall x \in I: F'(x) = f(x)$}
+\de{Supremum, infimum}{ $ sup(M) := min\{x: \forall m \in M: x \ge m\}$}
+\ve{O množině primitivních funkcí}{Všechny primitivní funkce k $f$ na $I$ jsou právě $\{F+c, c \in \mathbb{R}\}$, kde $F$ je nějaká primitivní funkce k $f$ na $I$ \\ $"\subseteq"$ $H := F-G, H' = f'-f' = 0 \Rightarrow H = d \in \mathbb{R} \Rightarrow H = d = F - G \Rightarrow G = F - d$ \\ $"\supseteq"$ $(F+c)' = F' + c' = f$}
+\ve{Primitivní funkce je spojitá}{$F$ má vlastní derivaci $\forall \alpha \in I: F'(\alpha)=f(\alpha) \Rightarrow F$  na $I$ spojitá. Ze ZS víme, že derivace implikuje spojitost.}
+\ve{Linearita primitivní funkce}{$\int \alpha f+ \beta g dx = \alpha F + \beta G +c $ \\ $( \alpha F + \beta G +c)' = \alpha F'+\beta G' +0 = \alpha f+\beta g  $}
+\ve{Funkce s primitivní funkcí má Darbouxovu vlastnost (nabývá mezihodnot)}{Uvažme mezihodnotu $c: f(x_1) < c < f(x_2) $ pro $x_1 < x_2 \in I$. $H(x) := F(x) - cx $ spojitá s derivací: $H'(x) = (F(x) - cx)' = f(x)-c$. $H$ někde nabývá svého minima $h^\star \in [x_1,x_2]$. Jelikož $H'(x_1) <0 \Rightarrow x \in (x_1, x_1 + \delta) H(x) < H(x_1) \Rightarrow x \ne x^\star$, stejně $H(x_2) \cdots x_2 \ne x^\star \Rightarrow x^\star \in (x_1,x_2)$. Podle kritéria minima $0 = H(x^\star) = f(x^\star) - c \Rightarrow f(x^\star) = c$}
+\ve{Integrace per partes}{$(f\cdot g)' = f'g + f'g \Rightarrow f \cdot g = \int f'g + \int fg' \Rightarrow \int f'g = f\cdot g - \int fg'$}
+\ve{První věta o substituci}{$[\phi: (\alpha, \beta) \rightarrow (a,b), f: (a,b) \rightarrow \mathbb{R}, \phi'( (\alpha, \beta) ) \in \mathbb{R}] \Rightarrow \int f(\phi)\phi' = F(\phi) +c$\\Důkaz:  $F'(\phi) = F'(\phi)\phi' = f(\phi)\phi'$}
+\ve{Druhá věta o substituci}{Pokud navíc $\phi((\alpha, \beta)) = (a,b) \wedge \phi' \ne 0 na (\alpha, \beta), $ pak $G = \int f(\phi)\phi' $\ na\ $(\alpha, \beta) \Rightarrow \int f = G(\phi^{-1}) + c$ na $(a,b)$\\Důkaz: Z podmínek je $\phi$ ostře rostoucí/klesající bijekce $(\alpha,\beta) \leftrightarrow (a,b) \Rightarrow \exists \phi^{-1}, $ pak $(G(\phi^{-1}))' = G'(\phi^{-1}) (\phi^{-1})' = f(\phi(\phi^{-1}))\phi'(\phi^{-1}) \cdot \frac{1}{\phi'(\phi^{-1})} =f $ (zlomek z integrálu inverzní funkce)}
+\de{Dělení intervalu}{Pro\ $[a,b]: D := (a_0, \cdots, a_k): a=a_0 < a_1 < \cdots < a_k = b$. Pro body\ $C: c_i \in [x_{i-1}, x_i)$???}
+\de{Norma dělení}{$\lambda(D):= max_{i \in [k]} \{|x_{i-1}-x_i\}$}
+\de{Zjemnění dělení}{$D=(a_0,a_1,\cdots, a_k), D'=(b_0, b_1,\cdots, b_k), \forall i \in [k] \exists j \in [l]: a_i = b_j (k<l),\ $ pak $D'$ zjemňuje/je zjemněním $D$ }
+\de{Riemannova suma}{$f: [a,b]\rightarrow \mathbb{R}, D,C \cdots R(f,D,C) = \sum_{i=1}^{k} |x_{i-1}-x_i| \cdot f(c_i)=\sum_{i=1}^{k} |I_i| \cdot f(c_i)$}
+\de{Riemannův integrál}{$(R)\int f_a^b = I \Leftrightarrow \forall \epsilon \exists \delta: \forall D: \lambda(D) < \delta \Rightarrow |I-R(f,D,C)| < \epsilon $}
+\de{Zápis Riemannova integrálu, třída Riemannovsky integrovatelných funkcí}{$I=(R)\int_a^b, \mathscr{R}(a,b)\ $ je třída integrovatelných funkcí na $[a,b]$}
+\de{Horní a dolní sumy a integrály}{Pro dělení intervalu $[a,b], D$ a funkci $f:[a,b]\rightarrow\mathbb{R}:$\\
+Horní Riemannova suma je $S(f,D)=\sum_{i=1}^k|I_i|\cdot M_i$, kde $M_i=\sup_{x\in I_i}f(x)$.\\
+Dolní Riemannova suma je $s(f,D)=\sum_{i=1}^k|I_i|\cdot m_i$, kde $M_i=\inf_{x\in I_i}f(x)$.\\
+Horní Riemannův integrál je $\overline{\int_{a}^b}f=\inf_{D}S(f,D)$.\\
+Dolní Riemannův integrál je $\underline{\int_{a}^b}f=\sup_{D}s(f,D)$.}
+\de{Druhá definice Riemannova integrálu (Darbouxova)}{Funkce má na intervalu $[a,b]\ (R)\int f,\ $ pokud $\overline{\int_a^b} f = \underline{\int_a^b} f$ }
+\ve{Zjemnění přibližuje}{$s(f,D') \ge s(f,D) \wedge S(f,D') \le S(f,D)$\\Důkaz: Na papíře. 3/2. Není však požadován.}
+\ve{$s \le S$}{$s(f,D) \le s(f, D\cup D'), \le S(f, D\cup D') \le S(f,D')$}
+\ve{Dolní integrál nejvýše horní}{???}
+\ve{Kritérium integrovatelnosti}{$f \in \mathscr{R}(a,b) \Leftrightarrow \forall \epsilon >0 \exists D: 0 \le S(f,D) - s(f,D)< \epsilon$\\Důkaz:\ $"\Rightarrow"\ \underline{\int_a^b}f = \overline{\int_a^b}f = \int_a^b f, e > 0: s(f,E_1) > \underline{\int_a^b}f -\frac{\epsilon}{2} = \int_a^b f -\frac{\epsilon}{2} \cdots S(f,E_1\cup E_2)-s(f,E_1\cup E_2) < \int_a^b f + \frac{\epsilon}{2} - (\int_a^b f + \frac{\epsilon}{2} ) = \epsilon$\\ $"\Leftarrow"\ \overline{\int_a^b}f  \le S(f,D) < s(f,D) + \epsilon \le \underline{\int_a^b}f + \epsilon \Rightarrow \overline{\int_a^b}f - \underline{\int_a^b}f < \epsilon \Rightarrow \overline{\int_a^b}f = \underline{\int_a^b}f \in \mathbb{R} $}
+\de{Množina míry $0$}{$\sum_{i=1}^\infty |I_i| < \epsilon \wedge M \subset \bigcup_{i=1}^\infty I_i\ $. Konečné i spočetné množiny mají nulovou míru. Podmnožina množiny s nulovou mírou má také nulovou míru. Sjednocení množin s nulovou mírou má nulovou míru. Interval s kladnou délkou nemá nulovou míru.}
+\ve{Lebesgueovo kritérium integrovatelnosti}{Funkce $f: [a,b] \rightarrow \mathbb{R}\ $ má Riemannův integrál, právě když je omezená a množina jejích bodů nespojitosti má nulovou míru.\\ Bez důkazu.}
+\ve{Monotonie $\ \Rightarrow\ $ integrovatelnost}{Důkaz: BÚNO $f$ neklesá. $\forall [\alpha, \beta] \subset [a,b]: inf_{[\alpha, \beta]}f = f(\alpha), sup_{[\alpha, \beta]} f = f(\beta). \lambda(D) < \epsilon. S(f,D) - s(f,D) = \sum(a_{i+1}-a_i) (sup_{I_i} f - inf_{I_i} f) = \sum(a_{i+1}-a_i) (f(a_{i+1}) - f(a_i)) \le \epsilon \sum (f(a_{i+1}) - f(a_i))=\epsilon(f(b) - f(a))$}
+\de{Stejnoměrná spojitost}{Na intervalu $I$: $\forall \epsilon >0 \exists \delta > 0: x, x' \in I, |x-x'| < \delta \Rightarrow |f(x) - f(x')| < \epsilon$}
+\ve{Na kompaktu spojitost $\ \Rightarrow\ $ stejnoměrná spojitost}{Pro spor předpokládejme, že je funkce spojitá na intervalu $[a,b]$, ale není na něm stejnoměrně spojitá, tj. $\exists \epsilon>0 \forall \delta >0 \exists x, x' \in I: |x-x'|<\delta \wedge |f(x)-f(x')|>\epsilon$ ???}
+\ve{Spojitost $\ \Rightarrow\ $ integrovatelnost}{Dle předchozího tvrzení: $\delta >0: |f(x)-f(x')|<\epsilon, sup_{[\alpha,\beta]} f - int_{[\alpha,\beta]} f \le \epsilon (\forall {[\alpha,\beta]} \subset [a,b], \beta - \alpha < \delta)$ Vezmeme libovolné dělení s $\lambda(D) < \delta: S(f,D) - s(f,D) = \sum ( a_{i+1} - a_i)(sup_{I_i} f - int_{I_i} f) \le \epsilon \sum (a_{i+1}-a_i) = \epsilon(b-a) \Rightarrow f \in \mathscr{R}(a,b)$}
+\ve{Linearita Riemannova integrálu}{$\int_a^b f = \int_a^cf+\int_c^b f $\ (pokud existují)}
+\de{Newtonův integrál}{$(N) \int_a^b f = F(b^-) - F(a^+)$ (limity)}
+\de{Gamma funkce}{$\Gamma(z) = \int_0^\infty x^{z-1}e^{-x}$}
+\ve{Spojitost a stejnoměrná spojitost na kompaktu}{???}
+\ve{První základní věta analýzy}{???}
+\ve{Druhá základní věta analýzy}{???}
+\ve{Délka křivky}{$d=\int_a^b \sqrt{1+(f'(x))^2} = \int_a^b \sqrt{(\phi'(t))^2 + (\psi'(t))^2}$}
+\ve{Objem rotačního tělesa}{$V= \pi \int_a^b f(t)^2 dt$}
+\ve{Integrální kritérium konvergence}{$f\ $ nezáporná. $\sum f(n) K \Leftrightarrow \int_a^\infty f < +\infty$\\ Důkaz: \ $\sum_{a+1}^b f(i) = s(f,D) \le \int_a^b f \le S(f,D) = \sum_a^{b-1} f(i)$}
+\de{Otevřená množina}{$\Leftrightarrow \forall x \in M \exists r > 0: B(x,r) \subset M, B(x,r) := \{y \in \mathbb{R}^n : d(x,y) < r\}$}
+\de{Vícerozměrná spojitost}{$\Leftrightarrow \forall \epsilon > 0 \exists \delta > 0: ||x-a|| < \delta \Rightarrow |f(x)-f(a)|<\epsilon$}
+\de{Vícerozměrný interval - box}{$I = [a_1, b_1] \times [a_2, b_2] \times \cdots \times [a_n, b_n], a_i < b_i. |I| = \Pi (b_i-a_i)$}
+\de{Vícerozměrné dělení}{$I=[a_1, b_1]\times \cdots \times [a_n,b_n], D = \{[c_1^{j_1},c_1^{j_1+1}]\times[c_2^{j_2},c_2^{j_2+1}]\times\cdots\times[c_n^{j_n},c_n^{j_n}], (c_i^0, c_i^1, \cdots, c_i^{k_i}) \text{\ je dělení\ } [a_i, b_i], j_i \in [k_i-1] \forall i \}$}
+\de{Směrová derivace}{$D_v f(a) := \lim_{t\rightarrow 0} \frac{f(a+tv)-f(a)}{t}$}
+\end{document}

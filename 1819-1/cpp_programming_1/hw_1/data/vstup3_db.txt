@@ -1,0 +1,18 @@
+AAAA
+--
+aa aaONE aaTWO bb
+BBBB
+--
+bb bbONE bbTWO aa
+CCCCC
+--
+dd555cc11
+DDDDD
+--
+555cc
+EEEE
+--
+cc2332dd
+FFF
+--
+cccc2332

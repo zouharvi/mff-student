@@ -1,0 +1,50 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{10.1}
+\rhead{Vilém Zouhar}
+
+\section*{NzMn}
+Nejprve zjistíme velikost největší nezávislé množiny, formálně jako $K = argmax_{k \in n..0} \{ NzMn(G,k) \}$ (očekáváme, že argmax to prochází uspořádaně a zastaví se na prvním maximu. Iterativně by to šlo zapsat jako:
+
+\begin{lstlisting}
+for K in n..0:
+	if NzMn(G, K) == 1:
+		break
+\end{lstlisting}
+
+Následně budeme procházet všechny vrcholy a u každého rozhodneme, zdali existuje nezávislá množina velikosti $K$ s ním, nebo bez něj. V kódu by šlo zapsat:
+
+\begin{lstlisting}
+for i in 1..n:
+	if NzMn(G \ i, K) == 1:
+		G = G \ v_i		
+out (G)
+\end{lstlisting}
+
+Pokud tedy u nějakého vrcholu zjistíme, že neovlivňuje existenci nezávislé množiny velikosti $K$, pak jej můžeme z grafu odebrat. Nakonec v grafu zůstanou jen vrcholy největší nezávislé množiny.
+
+Obojí nás jistě stálo $O(n \cdot T)$, tudíž jsme polynomiální vzhledem k $T$.
+\end{document}

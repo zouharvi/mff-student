@@ -1,0 +1,35 @@
+Excercise 1: How many times do we need to roll a die to get the first six?
+- random experiment
+- \mathbb{N} possible outcomes
+- 1/6 + 1/6 * 5/6 + 1/6 * (5/6)^2 + ...
+- P_k = 1/6 * (5/6)^(k-1)
+- What is the expected value?
+        E[P_k] = \sum_1^\infty k * P_k = 1/6 * \sum_1^\infty k * (5/6)^(k-1)
+- How to calculate the sum?
+- - Do a derivative of geometric series sum
+- - R code with large numbers: sum(1/6*(1:10000)*(5/6)^(1:10000-1))
+- Other solution: roll imaginary dice in R:
+        10^8/sum(sample(1:6, 10^8, rep=T)==6)
+
+Excercise 2: You roll a die 6 times. How many different numbers will you get?
+- random experiment
+- {1,2,3,4,5,6} possible outcomes
+- P_k = probability of getting just k different numbers
+- - P_1 = (1/6)^6 * 6 = (1/6)^5 = 0.013% (very rare)
+- - P_6 = (6*5*4*3*2*1)/6^6 = 1.543%
+- - P_2 = too complicated, better estimate it using R code:
+        for(i in 1:10000) { s[i] = length(unique(sample(1:6, 6, rep=T))) }; table(s)/10000
+- Use dynamic programming: sequentially compute the whole table P( m, k)
+- - P(3,1) = P(2,1) * 1/6
+- - Generalization: P(m,1) = P(m-1,1) * 1/6
+- - P(3,2) = P(2,1) * 5/6 + P(2,2) * 2/6
+       In the first case we need a different number than the one chosen in P(2,1)
+       In the second case we need to complement the two different number from P(2,2)
+- - P(3,3) = P(2,2) * 4/6
+- - P(m,k) = P(m-1,k-1) * (6-k+1) / 6 + P(m-1,k) * k / 6
+
+HW 1: How many times should you roll a dice to get all six numbers?
+
+HW 2: Compute table from Excercise 2 in R + output a graph of the probability of getting just k different numbers after m rolls.
+
+Send the result by email.

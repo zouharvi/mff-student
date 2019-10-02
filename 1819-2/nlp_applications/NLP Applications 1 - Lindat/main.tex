@@ -1,0 +1,53 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[bottom]{footmisc}
+%\setlength\parindent{0pt} % indent
+
+\begin{document}
+
+\title{NLP Applications 1\\Pavel Straňák, LINDAT}
+\author{Vilém Zouhar}
+\date{Feb 2019}
+\maketitle 
+
+\section*{Introduction}
+
+The first NLP Applications lecture was about the Lindat/Clarin Centre. It provides linguistics data and services mostly for researchers outside NLP, but also to anyone interested. Pavel Straňák, a researcher at the Institute of Formal and Applied Linguistics, started the presentation by giving an example of a journalist, who may have acces to vast amounts of audio recordings, may want to make searches on this data. He could then make use of the tools provided by the Lindat Centre, apply speach recognition software and then start querying the resulting text data, which can even be annotated.
+
+The Lindat Center distinguishes itself from other repositories mostly by active participation and maintenance of stored artifacts. Pavel Straňák mentioned that all accepted datasets or corpora require specified licenses. He stressed the importance for supplying each dataset with a particular license, because of the issues connected with not supplying a license or sipmly using licenses intended for software. This surprised me, because I never supplied a license when I published anything online (eg. on GitHub) or my Individual Software Project (NPRG045). By his own words, not providing a license is just laziness and puts the problem on the user.
+
+Other advantages of the Lindat Centre include various search tools, filters, easy citations and guarantee of long term storage and persistent identifiers. He mentioned the abbreviation DOI (Digital Object Identifier), which I did not know before and later found out, that ISBN, ESBN and magnet links are exactly this. 
+
+He went on to showcase most commonly used tools stored on Lindat.
+
+\section*{KonText\footnote{https://ufal.mff.cuni.cz/lindat-kontext}}
+
+KonText is an application for querying corpora. Pavel Straňák said, that it's just like grep, but simpler and more usable. This upset and amused the audience in the room in ratio about 1:1. We were shown an example of several queries on the English-Hindi corpus.
+
+\section*{PML TreeQuery\footnote{https://lindat.mff.cuni.cz/services/pmltq/\#!/home}}
+
+The other example was a tool for browsing online treebanks using a very expressive domain specific language. Just several years ago many languages had different syntactic annotation paradigms. Eventually the Universal Dependency caught on. We were shown only a very simple query (object of a verb), which I think is a shame, because it looked intriguing. I was interested in in the computational background of this project, because the query, although simple, took only about half a second to complete on a big corpus. Pavel Straňák admitted that on larger corpora their approach would fail, because they precompute graph indicies and store them in relational database. This allows the queries to be fast, but at the cost of increasing storage requirements.
+
+\pagebreak{}
+
+\section*{Treex\footnote{http://ufal.mff.cuni.cz/treex}, Česílko, UDPipe\footnote{http://ufal.mff.cuni.cz/udpipe}}
+
+The next three demos were very brief and I did not understand much. Treex appears to be somethings similar to the Standford NLP Toolkit. Česílko (CS-SK) is the only rule based translator, because this approach can be used only on languages, which are very similar. I did not really understand what exactly does UDPipe do. First I thought it was a text feature exctractor, but later it turned out it is a tool, which produces all necessary data for the unversal dependencies.
+
+\section*{Lindat Translation\footnote{https://lindat.mff.cuni.cz/services/transformer/}}
+
+I was most excited about this part, because I use this system for my own project (Ptakopět both v1 and v2). Pavel Straňák talked briefly about the recent development in machine translation. He also mentioned how easy it is to use the API for most of the Lindat service.
+
+\section*{Future plans}
+
+Future plans include billing service for commercial usage. I think this is a good move, because it will certainly bring more attention to this project.
+
+\end{document}
