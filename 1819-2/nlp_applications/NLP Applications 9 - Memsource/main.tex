@@ -1,0 +1,47 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[bottom]{footmisc}
+%\setlength\parindent{0pt} % indent
+
+\hyphenation{thatshouldnot}
+
+\begin{document}
+
+\title{NLP Applications 9\\Memsource, Dalibor Frívaldský, Aleš Tomchyna}
+\author{Vilém Zouhar}
+\date{Apr 2019}
+\maketitle 
+
+\section*{Introduction}
+
+Both Dalibor Frívaldský and Aleš Tomchyna are MFF alumni. Memsource, a company they work for, provides many different tools for translators. They company was founded despite the fact, that at the time there were plenty of other translator workbench solutions (Trados, Wordfast, memoQ, etc). Such tools were outdated and missed the cloud based functionality Memsource sought to provide. Since then (early 2011) they have grown much bigger and now serve big customers. Up to 2016 they were completely language agnostic and now support roughly 400 different language\footnote{I find this strange, becuase according to some simple statistics (\href{https://thetranslationcompany.com/news/blog/language-news/worlds-translated-books/}{thetranslationcompany.com/news/blog/language-news/worlds-translated-books/}) The Bible was translated to 670 different languages and other books to 200-300 different languages, which indicates, that there is roughly 300 active writing systems.}.
+
+\section*{Standard Usage}
+
+Their user stakeholders are project managers, translators and content owners. We were shown a demo of uploading, managing and translating a sample document and using translation memory. Overall the system seemed to be very robust, reliable and easy to use.
+
+\section*{Technology}
+
+Their research and development team uses basic AI/ML/DL setup: TensorFlow, scikit, gensin and many more. Because of the necessity to scale up, they use Amazon AWS, Kafka, Spache Spark and Databricks for their pipelines. This enumberation of technologies they use was perhaps unnecessary.
+
+On the other hand I enjoyed Aleš Tomchyna talking in depth about MT Quality Estimation (based on Transformer architecture), as it is something I do for my software project and presumably for my bachelor's thesis.
+
+The following topic was tag placement, which I didn't know was really an issue, but got me interested. I only wish they would elaborate more on the final approaches they use.
+
+\section*{Miscellaneous use of ML}
+
+The rest of the lecture was devoted to automated project management, understanding incoming text, document as topic vectors, etc. This part did not interest me as much as Mr. Tomchyna's speech.
+
+\section*{Summary}
+
+I enjoyed this lecture mostly because of the technical details they provided. If they replaced the introduction of their company with more NLP related information, this lecture would be perfect.
+
+\end{document}

@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{5. domácí úkol | Vilém Zouhar}}
+
+\section{}
+\begin{align*}
+	& \int \frac{\sqrt{x^2 -9}}{x}\ dx = [sub.:\  u^2 = x^2-9 \Rightarrow x = \sqrt{u^2+9}, "dx = \frac{u}{\sqrt{u^2+9}}du"] = \int \frac{u}{\sqrt{u^2+9}} \cdot \frac{u}{\sqrt{u^2+9}} du = \\
+	& \int \frac{u^2}{u^2+9} du = \int 1\ du - 9 \int \frac{1}{u^2+9} du = \\
+	& \hspace{1.5cm} \int \frac{1}{u^2+9} du = [sub.:\ y = u/3, "du = 3\ dy"] = \frac{1}{3} \int \frac{1}{y^2+1} dy = \frac{1}{3} \arctan(u/3) +C \\
+	& = u-3 \arctan(u/3) + C = \sqrt{x^2-9} -  3 \arctan(\frac{\sqrt{x^2-9}}{3}) +C \\
+	& \text{Počítáme Newtonův integrál. Funkce je na $[3, 5]$ spojitá, tedy:} \\
+	& \int _3^5 \frac{\sqrt{x^2 -9}}{x}\ dx =  \bigg[\sqrt{x^2-9} -  3 \arctan(\frac{\sqrt{x^2-9}}{3}) \bigg]_3^5=\\
+	& \lim_{x \rightarrow 5^-}(\sqrt{x^2-9} -  3 \arctan(\frac{\sqrt{x^2-9}}{3}) - \lim_{x \rightarrow 3^+}(\sqrt{x^2-9} -  3 \arctan(\frac{\sqrt{x^2-9}}{3}) = \text{(z AL + jednostranných spojitostí)}\\
+	& 4-3\arctan(4/3) \approx  1.21811435... 
+\end{align*}
+\section{}
+\begin{align*}
+	& \int x^n \cdot e^{-x}\ dx = [per\ partes] = x^n \cdot e^{-x} + n \cdot \int x^{n-1}e^{-x}\ dx \\
+	& \text{z toho rekurentní vzorec: } F_n(x) = x^n \cdot e^{-x} + n \cdot F_n(x),\ F_0(x) = -e^{-x} + C \\
+	& \text{z toho suma: } F_n(x) = e^{-x} \cdot \sum_{i=0}^{n-1} \frac{n!\cdot x^{n-i}}{(n-i)!} -e^{-x} + C = e^{-x} \cdot [\sum_{i=1}^{n} \frac{n!\cdot x^i}{i!} -n!] + C \\
+	& \text{Newtonův integrál: (sčítáme všude spojité funkce)\ } I = \int _0^{\infty} x^n \cdot e^{-x}\ dx = \bigg[e^{-x} \cdot [\sum_{i=1}^{n} \frac{n!\cdot x^i}{i!} -n!]\bigg]_0^{\infty} = \\
+	& \lim_{x\rightarrow \infty}\bigg[e^{-x} \cdot  [\sum_{i=1}^{n} \frac{n!\cdot x^i}{i!} -n!]\bigg] - \lim_{x\rightarrow 0^+} \bigg[e^{-x} \cdot [\sum_{i=1}^{n} \frac{n!\cdot x^i}{i!} -n!]\bigg] \text{(N je libovolné konečné, tedy můžeme použít AL)} \\
+	& \lim_{x\rightarrow \infty} \frac{x^l}{e^x} = 0\ \text{ (můžeme třeba l-krát použít l'Hospitalovo pravidlo, nebo porovnat polynom s exponenciálou)} \\
+	& \lim_{x\rightarrow 0^+} \frac{x^l}{e^x} = \text{ze spojitostí funkcí: } = 1 (l=0),\ 0 (l\ne 0) \\
+	& \Rightarrow I = n!\cdot \bigg[[\sum_{i=1}^{n} \frac{\lim_{x\rightarrow \infty} e^{-x} \cdot x^i}{i!} -\lim_{x\rightarrow \infty} e^{-x} ]\bigg] -  n!\cdot \bigg[[\sum_{i=1}^{n} \frac{\lim_{x\rightarrow 0^+} e^{-x} \cdot x^i}{i!} -\lim_{x\rightarrow 0^+} e^{-x} ]\bigg] = n! [ \sum 0 - 0] - n! [ \sum 0 - 1] \\
+	& = n!
+\end{align*}
+\section{}
+\begin{align*}
+	& \int |\cos x|\ dx \rightarrow \sin x \cdot sgn(\cos x) + C\ \text{ (nespojitá v $\pi/2+k\pi$, je třeba slepit)} \\
+	& \text{Části hledané spojité funkce označíme: } F_k(x) = \sin x \cdot sgn(\cos x) +kL \text{ na } (-\pi/2 + k\pi, \pi/2+k\pi) \\
+	& F_k(x) = -1 +kL \text{ pro } x = -\pi/2 + k\pi \hspace{0.2cm} \text{, Rozdíl funkčních hodnot je $2$, tedy $L=2$} \\
+	& \int_0^a |\cos x|\ dx = [F(x)]_0^{49/6\pi} = F_8(49/6\pi)-F_0(0) = \frac{1}{2}+ 2\cdot 8 - 0 = 16.5
+\end{align*}
+\end{document}

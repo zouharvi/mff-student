@@ -1,0 +1,38 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{1.2}
+\rhead{Vilém Zouhar}
+
+\section*{Popis}
+Zeptáme se, zdali můžeme osekat $A$ na $B$ a pak symetricky naopak. Jestliže je $B$ obsažen v $A$, pak můžeme procházet zároveň (tj. pokud se budeme zanořovat do indexu $i$, tak musíme být schopni se do něj zanořit v obou stromech, atd..) oba stromy bez toho, aniž bychom při DFS procházce stromu $B$ v $A$ něco přeskočili. Najít ale vhodný počáteční vrchol v $A$ může být problém. Můžeme si tedy DFS projít strom $A$, ze směrů poskládat slovo (při zanořování připojíme ke slovu číslo hrany, při vynořování zaznačíme $v$). To stejné provedeme i se stromem $B$. Nyní máme slova $S_A$ a $S_B$. Pakliže najdeme v $S_A$ slovo $S_B$, tak jsme schopni udělat stejnou DFS pochůzku, která je pro $B$ kompletní a pro $A$ minimálně validní (nepřeskakuje žádné vrcholy a je možné vše projít).
+
+\section*{Správnost}
+Rozebraná v sekci $\textit{Popis}$. Pakliže najdeme výstupní slovo v jiném, pak jsme schopni udělat danou pochůzku bez přeskakování, tedy je možné vybrat kořen, odstranit rodiče a zahodit nějaké množství hran zleva a zprava (tj. prostředek nechat ucelený). Proto jsme schopni větší strom osekat.
+
+\section*{Složitost}
+Každý strom musíme projít a postavit z něj slovo, z toho plyne alespoň $O(a+b)$ paměťově i časově. Vybudování automatu + samotné vyhledávání je lineární k oběma složkám, tedy $O(a+b)$ i s tím, že musíme algoritmus spustit symetricky dvakrát: $out = contains(A,B)\hspace{0.3cm}||\hspace{0.3cm}contains(B,A)$. 
+
+
+\end{document}

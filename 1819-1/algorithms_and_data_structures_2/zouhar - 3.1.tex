@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{3.1}
+\rhead{Vilém Zouhar}
+
+\section*{Popis}
+Nejprve vyřešíme problém pro hranovou $k$-souvislost a pak vrcholovou souvislost převedeme na hranovou. Jestliže je graf hranově $k$-souvislý, pak se po šikovném odebrání alespoň $k$ hran stane nesouvislým, tedy rozpadne se na alespoň dvě komponenty. Pokud se podíváme na původní graf, pak z vět z KG1 plyne, že mezi komponentami neexistovalo $k$ vrcholově disjunktních cest. \\
+Vyberme si tedy náhodný vrchol. Ten náleží do nějaké ze dvou množin vrcholů, které se po odebrání $k$ hran stanou komponentami souvislosti. BÚNO $x \in K_1$. Pak $I(a,b):= \#\text{hranově disjunktních cest mezi } a, b$. \\
+Pak graf má hranovou souvislost: $q = \min \{ I(x,b),\ b \in V \}$.
+
+\section*{Důkaz}
+Sporem předpokládejme, že graf má hranovou $w$-souvislost $w \ne q$. Zcela jistě $q > w$, neboť jinak bychom použili oněch $q$ disjunktních cest a graf by se nám rozpadl. Ani druhá nerovnost neplatí, neboť kdyby existovaly jiné dva vrcholy $(j,k): w = I(j,k) < q$, pak po odebrání $w$ hran dostaneme dvě komponenty $j \in K_1, k \in K_2$, ale $v \in K_1$ a mezi $j, v$ v komponentě $K_1$ existuje alespoň $q$ hranově disjunktních cest, neboť tak jsme $q$ vypočítali. Potom ale $q = I(v, k) = I(j, k) = w$, což je spor s předpokladem nerovnosti. 
+
+\section*{Převedení problému}
+Každý vrchol v můžeme rozdělit na $v', v"$. Každou sousedící hranu $\{u,v\}$ v původním grafu rozdělíme na dvě orientované: $(u,v'), (v", u)$. Navíc zapojíme hranu $(v',v")$. V takto vzniklém grafu odpovídá hranová souvislost vrcholové souvislosti v původním grafu, neboť odebráním $(x', x")$ hrany odebíráme vrchol a odebrání $(x", y')$ hrany si nepolepšíme, než kdybychom odebrali $(x', x")$, nebo $(y',y")$ (až na patologické případy). Šla by též udělat o něco komplexnější konstrukce duálního grafu.
+
+\section*{Algoritmus}
+\begin{enumerate}
+\item Zkonstruujeme graf $G^D$ dle popisu výše
+\item Zvolíme náhodné $x'$ a vypočítáme $\min \{ I(x',b'),\ b \in V'^D \}$ za pomocí hledání maximálního toku (každé hraně přiřadíme kapacitu $1$)
+\end{enumerate}
+
+\section*{Složitost}
+Krok $1$ je lineární k počtu vrcholů a hran, tedy $O(m+n)$. Následně musíme spočítat $I(x', b')$, což trvá $O(n^2 (n+m))$. To je zároveň složitost tohoto řešení.
+
+\end{document}

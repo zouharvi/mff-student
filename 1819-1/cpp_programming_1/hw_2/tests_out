@@ -1,0 +1,17 @@
+3
+5
+6
+
+((89 * x) + (89 * x))
+79.5
+(-12 * ((x * 8) * (x * 8)))
+
+(((5 * x) + (5 * x)) + 4)
+((x + x) + 2)
+((((((4 * x) + (4 * x)) * x) + ((4 * x) * x)) - ((3 * x) + (3 * x))) + 2)
+
+Input error
+Input error
+Input error
+Input error
+Input error

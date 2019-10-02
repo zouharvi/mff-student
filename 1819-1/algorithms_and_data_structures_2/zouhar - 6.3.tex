@@ -1,0 +1,62 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{6.3}
+\rhead{Vilém Zouhar}
+
+\section*{Inverze}
+\begin{comment} 
+\begin{align*}
+	& \Omega_2 =  \left[\begin{array}{rr|rr} \omega^0 & \omega^0 & 1 & 0 \\ \omega^0 & \omega^1 & 0 & 1  \end{array} \right]
+	\rightarrow \left[\begin{array}{rr|rr} 1 & 1 & \frac{1}{\omega^0} & 0 \\ 0 & \omega^1-\omega^0 & -1 & 1  \end{array} \right]
+	\rightarrow \left[\begin{array}{rr|rr} 1 & 0 & 1+\frac{1}{\omega^1-1} & -\frac{1}{\omega^1-1} \\ 0 & 1 & \frac{-1}{\omega^1 - 1} & \frac{1}{\omega^1-1}  \end{array} \right]
+	\rightarrow \left[\begin{array}{rr|rr} 1 & 0 & 1+\frac{\omega^1+1}{\omega^2+1} & -\frac{\omega^1+!}{\omega^2+1} \\ 0 & 1 & \frac{-\omega^1-1}{\omega^2 + 1} & \frac{\omega^1+1}{\omega^2+%f
+	1}  \end{array} \right]
+	\\
+	\\
+	& \Omega_3 =  \left[\begin{array}{rrr|rrr}
+		\omega^0 & \omega^0 & \omega^0 & 1 & 0 & 0 \\
+		\omega^0 & \omega^1 & \omega^2 & 0 & 1 & 0 \\
+		\omega^0 & \omega^2 & \omega^4 & 0 & 0 & 1 \end{array} \right] 	\rightarrow 
+	 \left[\begin{array}{rrr|rrr}
+		1 & 1 & 1 & 1 & 0 & 0 \\
+		0 & \omega^1 - 1 & \omega^2 -1 & -1 & 1 & 0 \\
+		0 & \omega^2 - 1 & \omega^4 -1 & -1 & 0 & 1 \end{array} \right] 	\rightarrow 
+\end{align*}
+\end{comment}
+
+\begin{align*}
+	& _n\Omega^T = _n\Omega, A = _n\Omega^{-1}, _n\Omega_{ij} = _n\omega^{ij} =  e^{2\pi ij/n } \\
+	& \text{chceme: } (A \times \Omega)_{i*} = [e_i], \text{ pak volíme } A_{i*} = (e^{-2\pi i/n}, e^{-2\pi 2 i/n}, e^{-2\pi 3 i/n}, \ldots) \\
+	& \text{(nezáleží, zdali bereme řádky, nebo sloupce, poněvadž je matice symetrická)} \\
+	& \text{potom } (A \times \Omega)_{ij} = \sum_{k=0}^{n-1} e^{-2\pi k i/n + 2\pi k j/n} = \sum_{k=0}^{n-1} e^{2\pi k (j-i)/n} = \sum_{k=0}^{n-1} (\omega^{j-i})^k, \\
+	& \text{avšak pro $i\ne j$ se jedná o součet všech mocnin od primitivní odmocniny z $1$, což je $0$:} \\
+	& \tab \tab \Bigg( \sum_0^{n-1} e^{2\pi (j-i) k/n} = \frac{\bigg(e^{2\pi (j-i) k/n}\bigg)^n-1}{e^{2\pi (j-i) k/n}-1} = \frac{0}{\ldots} \Bigg) \\
+	& \text{pro $i = j$ je to však součet $0 \ldots n-1$ mocnin čísla $1$, což je $n$, proto normujeme: } \\
+	& A'_{ij} = \frac{e^{-2\pi ij/n}}{n}, A' = \Omega^{-1}
+\end{align*}
+
+\end{document}

@@ -1,0 +1,76 @@
+###########
+# Warm-up #
+###########
+
+Q: 7 women, 5 men, choosing 4. What is the probability that the first and the third one will be a woman?
+A: 7/22, but correct solution next time.
+
+############################
+# Mean, variance estimates #
+############################
+
+Population example: sd = 10, mean = 180
+
+```
+plot(140:220, dnorm(140:220, mean=180, sd=10), type='l')
+population = rnorm(10^6, 180, 10)
+mean(population)
+var(population)
+```
+
+Now mean, variance estimation (biased)
+
+```
+sample_size = 25
+s1 = sample(10^6, sample_size, rep=F)
+mean(population[s1])
+var(population[s1])
+```
+
+Estimator: f_mean = 1/sample_size \sum x_i
+Bias definition: bias = true_mean - E[f]
+bias = 0 iff estimator is unbiased
+
+
+```
+EXPERIMENT_SIZE = 10000
+estimates = integer(EXPERIMENT_SIZE)
+for(i in 1:EXPERIMENT_SIZE) {
+	s1 = sample(10^6, sample_size, rep = F);
+	estimates[i] = mean(population[s1]);
+}
+mean(estimates)
+```
+
+var (X) = E[(X-E[X])^2] = E[X^2] - E[X]^2
+
+
+```
+for(i in 1:EXPERIMENT_SIZE) {
+	s1 = sample(10^6, sample_size, rep = F);
+	estimates[i] = mean((population[s1]-mean(population[s1]))^2);
+}
+mean(estimates)
+```
+
+Q: The answer is not exactly 100. Why?
+A: The variance is biased. (proof: https://en.wikipedia.org/wiki/Bias_of_an_estimator#Sample_variance)
+
+`sample_variance = 1/( (sample_size-1) sum (x_i - mean(x) )`
+R function `var` can also be used
+
+```
+for(i in 1:EXPERIMENT_SIZE) {
+	s1 = sample(10^6, sample_size, rep = F);
+	estimates[i] = var(population[s1]);
+}
+mean(estimates)
+```
+
+The answer is closer to the true variance, because the new estimator is unbiased.
+
+############
+# Proteins #
+############
+
+# code in https://github.com/zouharvi/mff-stuff/blob/master/introduction_machine_learning/lab_work/7_holub/PLR_random_forests.R

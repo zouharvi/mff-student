@@ -1,0 +1,38 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{3.2}
+\rhead{Vilém Zouhar}
+
+\section*{Popis}
+Pakliže $f_m (e_1) \le c'(e_1)$, tak $f'_m = f_m$. Jinak pro $e_1 = (a,b)$ vezmeme $b$ a pomocí $BFS$ najdeme cestu $P_s$ do stoku, obdobně pro $a$ nalezneme cestu $P_z$ do zdroje. Na těchto cestách snížíme tok o 1, čímž dostaneme validní tok (nemusí být maximální). Aby byl maximální, tak spustíme na reziduálním grafu (lze in-place původního) ze zdroje do stoku BFS, které pokud nalezne zlepšující cestu, tak můžeme vylepšit (o 1). Tím jsme skončili, neboť $|f_m| = |f'_m|$ a maximální tok nového grafu nemůže být větší, neboť je slabší. Pokud nenajdeme žádnou zlepšující cestu, tak jsme taky skončili, neboť platí lemma o souvislosti existence zlepšující cesty a maximalitou toku.
+
+
+\section*{$P_z$, $P_s$}
+Na výpočet těchto cest nepoužíváme jen původní graf, ale využíváme hrany, po kterých teče alespoň komodita velikosti $1$. Existenci těchto cest pak máme zaručenou z Kirchhofova zákona.
+
+\section*{Složitost}
+Na výpočet $P_z$, $P_s$ potřebujeme $O(m+n)$. To stejné pro výpočet zlepšující cesty, tedy zároveň je to i složitost řešení.
+
+\end{document}

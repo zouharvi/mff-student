@@ -1,0 +1,28 @@
+Dávám: Aritmetika, Třídění, Binární stromy ,Operátory - asociativita, priorita, výrokový počet, Negace, Nedeterminismus (např. pro kombinace), Řezy, Neúplně definované datové struktury - rozdílové seznamy, grafy DFS/BFS, kombinace, bagof atd.
+
+Nedávám: Assert, retract, koncová rekurze
+
+SPEŠL:
+If -> Then ; Else
+bagof, setof, findall
+grafy
+assert, retract
+kombinace
+map_insert, maplist
+Asociativní seznam - [a-b, c-d] atd.
+I/O
+univ, functor, arg
+
+
+Procvičit:
+Podívat se na a->b a a-[b,c] (jedná se o asociativní seznamy)
+Vsechny funkce co v prologu clovek používá (alespon ty ktery jsou)
+quicksort
+mergesort
+**udelat binarni strom - vlož, vypusť, remove
+udelat avl strom
+rotace na stromu
+sjednoceni/rozdil binarniho stromu
+**frontu/zasobnik
+dfs/bfs na jednoduchym grafu.
+Příklady ze zkoušek.

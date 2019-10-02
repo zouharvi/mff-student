@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sort a b | uniq -d
+# uniq -d shows duplicate lines (must be adjacent)
+# do not use -D!
+
+# same as du_1_3, but negate; preservers order
+while IFS= read -r line; do
+	if [ ! -z $(grep "$line" "$2") ]; then echo "$line"; fi
+done < "$1"
+

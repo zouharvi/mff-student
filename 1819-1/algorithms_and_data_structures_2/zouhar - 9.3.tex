@@ -1,0 +1,33 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{9.3}
+\rhead{Vilém Zouhar}
+
+\section*{Binární odčítačka}
+Je to možná trochu cheatování, ale využil bych vlastnosti dvojkového doplňku. Tedy pokud máme na vstupu $X, Y$ a chceme $X - Y$, pak flipneme $Y$ (a přičteme 1) a použijeme binární sčítačku na $X, -Y$, výsledek pak $X + -Y = X - Y$. Sčítání použijeme tedy dvakrát a jeho hloubka je $O(log\ n)$. Počet hradel tedy bude stále $O(n^2)$.
+
+
+\end{document}

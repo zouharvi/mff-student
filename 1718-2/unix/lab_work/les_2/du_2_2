@@ -1,0 +1,4 @@
+#!/bin/bash
+
+head -n  1 B.in | rev > B.out
+tail -n +2 B.in >> B.out 

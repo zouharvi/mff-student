@@ -1,0 +1,33 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{6.1}
+\rhead{Vilém Zouhar}
+
+\section*{Goldberg}
+Toto nechci odevzdávat jako úkol, jen by mě zajímalo, zdali to lze řešit touto strukturou. Uhádat složitosti se mi totiž nepodařilo. Klíčové je uchovávání aktivních vrcholů. Ty si budeme uchovávat v poli indexovaném výškami. V $i$-tém políčku $b$ tedy bude první prvek spojového seznamu vrcholů s výškou $i$. Graf jinak reprezentujeme seznamem sousedů. Používáme variantu, kdy vybíráme nejvyšší aktivní vrchol a zvyšujeme vždy o jedna více, než minimum vhodného souseda.
+
+
+\end{document}

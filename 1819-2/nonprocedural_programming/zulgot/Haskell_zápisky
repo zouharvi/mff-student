@@ -1,0 +1,36 @@
+Přehled jakžtakž:
+Typy, funkce, podmínky, undefined, lex konvence, seznamy, standartní funkce, vytváření cyklu z funkcí, operátory a jejich deklarace, uživatelské datové typy (nerekurzivní a rekurzivní), datové konstruktory, pojmenované položky, stromy, regulární typy, klíčové slovo type, newtype, skládání funkcí, stráže, nekonečné datové struktury a funkce, lambda funkce, pattern matching, polymorfní typy, polymorfizmus a typové třídy, Maybe + lookup, přetížení, nekonečné datové struktury, prohledávání do šířky a hloubky, grafy, let/in, where,
+
+Přehled co projet: Monády, Array, Akumulační pole, funkce jako výsledek, typové třídy - idey (Eq, deriving, Ord, Show, Read, Enum, Num)
+
+
+SPEŠL:
+Either
+unfold, fold, scan, concat, map, zip, filter, !!, 
+flip
+[x*3 | x <- seznam ]
+lambda funkce -(\x -> x + 1) 4
+let, where, if-then-else, case-of ???
+currying- Currying is the process of transforming a function that takes multiple arguments into a function that takes just a single argument and returns another function if any arguments are still needed. 
+defenice nových datatypů, record, parametry datatypů,
+nový data berou konstruktory a z parametrů dělají nový datatype
+data neco vs type neco - The Haskell keywords type and data are different, though: data allows you to introduce a new algebraic data type, while type just makes a type synonym.
+recursive datastructures
+`div` `mod` `rem` `quot` `elem`
+Tuple
+Logic operators: &&, ||, not(), <, >, >=, <=, ==, //
+all@(x:xs)
+instance, class
+
+Listy funkce - and, or, any, all, takeWhile, dropWhile, splitAt, span, group, find, lookup atd.
+Char funkce - isSpace, isUpper, toUpper atd.
+Map (Dictionary) - key-value, list of pairs, first is key, second value - insert, null, size, lookup,
+
+The thing before the -> is the parameter that a function takes and the thing after it is what it returns.
+
+
+allEq (x:x:xs) = allEq (x:xs) - Chyba
+allEq (x1:x2:xs)= x1==x2 && allEq (x2:xs) - OK
+
+[(x,y,z)| x<-[1,2], y<-[3,4], let z = x+y] 
+  ~~> [(1,3,4),(1,4,5),(2,3,5),(2,4,6)]

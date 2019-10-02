@@ -1,0 +1,62 @@
+############
+# HW recap #
+############
+
+Count the number of non-decreasing sequences of length 6.
+1. by simulation (generate random sequences of length 6)
+2. by counting all such sequences (doable, since there are only 46656 sequences)
+   results in bad coding practice:
+```
+   for(x1 in 1:6)
+    for(x2 in x1:6)
+     for(x3 in x2:6)
+      for(x4 in x3:6)
+       for(x5 in x4:6)
+        for(x6 in x5:6) count = count + 1;
+```
+3. use dynamic programming:
+   p(S,K) = probability of a non-decreasing sequence that start with number S and has length K.
+   p(S,1) = 100%
+   p(6,K) = 1/6^(k-1)
+   p(S,K) = 1/6 * \sum_{s'=S}^6 p(s',k-1)
+   Solution: \sum_{s'=1}^6 1/6 * p(s',6) = p(1,7)
+
+# HW: implement this recursive function
+
+
+#####################
+# Statistical tests #
+#####################
+http://ufal.mff.cuni.cz/~holub/2018/docs/Exercises-on-t-test.2017.pdf
+
+Excercise 1:
+```
+a = c(8,8,9,10,12,16)
+mean(a) # 10.5
+sd(a) # 3.082207
+# t statistics
+t = (mean(a)-9)/sd(a)*sqrt(length(a)) # 1.192079
+# p values
+p = 2*pt(-t,df=length(a)-1) # 0.286718
+# critical values
+cv5 = abs(qt(0.05/2,df=length(a)-1)) # 2.570582
+cv1 = abs(qt(0.01/2,df=length(a)-1)) # 4.032143
+# confidence intervals:
+ci5L = mean(a)-sd(a)/sqrt(length(a))*cv5
+ci5R = mean(a)+sd(a)/sqrt(length(a))*cv5
+ci1L = mean(a)-sd(a)/sqrt(length(a))*cv1
+ci1R = mean(a)+sd(a)/sqrt(length(a))*cv1
+c(ci5L,ci5R) # 7.265422, 13.734578
+c(ci1L,ci1R) # 5.426331, 15.573669
+```
+
+Notes:
+    The lower the alpha, the broader the interval.
+    The lower the alpha, the further is the critiacl value.
+
+Conclusion: 3 ways to decide ( values for alpha = 0.05 ): 
+1. compare p value to alpha ( 0.286718 > 0.05 )
+2. compare critical value and t statistic ( 1.192079 < 2.570582 )
+3. compare confidence interval ( 9 is in [7.265422, 13.734578] )
+
+Hence we don't reject the null hypothesis.

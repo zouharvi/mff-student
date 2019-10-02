@@ -1,0 +1,95 @@
+#####################
+# Warm-up excercise #
+#####################
+How many dice should we roll so that we have >= 95% of getting at least one six?
+
+## solve analytically:
+1- (5/6)^n <= 0.95 (solve for n -> log_{5/6} (0.05) \approx 17)
+
+## check in R:
+a = 0
+for(i in 1:10^5) { a = a + (match(6, sample(1:6, 100, rep=T)) <= 17); }
+a/10^5 # should be about 0.95
+
+## alternative in R (without for loop):
+m = matrix(sample(1:6, 17*10^6, rep=T), 10^6, 17)
+x = apply(m, 1, function(x) { match(6, x); })
+sum(x <= 17, na.rm=T)/10^6
+
+## even better alternative in R (without for loop)
+m = matrix(sample(1:6, 17*10^6, rep=T), 10^6, 17)
+x = apply(m, 1, function(x) { sum(x==6) > 0; })
+sum(x)/10^6
+
+
+## measuring function call time
+system.time({ R code to be measured})
+## we measure that the naive solution takes 6.2s, the second one 2.4s and the last one 1.8s
+
+
+############
+# HW recap # 
+############
+
+## First part
+Pr { a <= women height <= b } = \int_a^b f(x) dx, where `f` is the density function
+\int_a^b f(x) dx = F(b) - F(a) --> pbinom(b, mean, sd) - pbinom(a, mean, sd)
+Pr { men height >= a } = 1 - F(b)
+
+## Who is more typical?
+We calculate the percentage of men/women typically close to the given value 
+
+Standard score, also z-score(x) := (x - mean)/sd
+we can transform the distribution into standard normal distribution and then
+compare the distance to respective means (zeroes)
+
+Draw a diagram to properly understand how it works
+
+Compute the percentage of the whole population, that is more typical than
+1) a man with 178cm
+2) a woman with 169cm
+
+area = 2*(pnorm(169, 167.2, sqrt(50))-0.5)
+or by comparing zscore
+
+
+#######################
+# Follow-up questions #
+#######################
+Compute the height of a man taller than just 70% of the whole population
+The solution is the quantile function `qnorm(0.7, 180.3, sqrt(100))`
+quantile function is the inverse to the distribution function, hence F^{-1}
+To check: `pnorm(185.544004, 180.3, sqrt(100))`
+
+
+################################
+# Standard normal distribution #
+################################
+parameters: (0,1)
+2*(pnorm(1, 0, 1) -0.5)
+2*(pnorm(2, 0, 1) -0.5)
+2*(pnorm(3, 0, 1) -0.5) = pnorm(3,0,1) - pnorm(-3,0,1)
+
+
+What is the interval (-z,z), that covers 90% of the population:
+qnorm(0.95)
+
+Any normal distribution can be turned into standard normal distribution
+
+########################
+# HW1 of another topic #
+########################
+There's a group of 12 people, 7 women, 5 men.
+4 of them are randomly selected.
+x _ x _
+1 2 3 4
+What is the probability of the first one and the 3rd one being women?
+
+Can be solved analytically and by simulation.
+
+########################
+# HW2 of another topic #
+########################
+You roll a die 6 times. What is the probability of the sequence being non decreasing?
+
+Can be solved by simulation, but also precisely in R.

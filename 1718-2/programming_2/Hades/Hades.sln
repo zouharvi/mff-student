@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hades", "Hades\Hades.csproj", "{D7C88FD1-6E6A-428A-AC6C-3E3542DC5971}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7C88FD1-6E6A-428A-AC6C-3E3542DC5971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C88FD1-6E6A-428A-AC6C-3E3542DC5971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C88FD1-6E6A-428A-AC6C-3E3542DC5971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C88FD1-6E6A-428A-AC6C-3E3542DC5971}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83495BF6-FBD1-4F3B-9909-362ADB30C40B}
+	EndGlobalSection
+EndGlobal

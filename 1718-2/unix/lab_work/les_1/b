@@ -1,0 +1,15 @@
+1:
+man bash
+/HISTSIZE
+
+2:
+date +"%d. %m. %Y"
+
+3:
+
+4:
+ls > ./dir
+6:
+echo -e '\n\n\n' > soubor_3
+
+

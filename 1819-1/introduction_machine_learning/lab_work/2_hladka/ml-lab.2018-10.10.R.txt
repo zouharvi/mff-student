@@ -1,0 +1,438 @@
+#################################################################################
+#################################################################################
+
+### Data analysis, clustering
+
+### Barbora Hladka, Martin Holub
+
+### MFF UK, 2018/19
+
+### http://ufal.mff.cuni.cz/course/npfl054
+
+#################################################################################
+#################################################################################
+
+### Data: 
+	# MOVa
+
+	# USArrests 
+	# NLI
+
+#################################################################################
+#################################################################################
+
+## feature frequency
+
+fr <- function(x){
+  # expects a vector of 1s and 0s
+  # outputs number of 1s
+  
+  c <- sum(sapply(x, as.numeric))
+  return( c )
+} 
+
+##############################
+
+## A plot of the total within-groups sums of squares 
+## against the number of clusters in a K-means solution 
+## Credit: http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/
+
+wssplot <- function(data, nc=15, seed=1234){
+           wss <- (nrow(data)-1)*sum(apply(data,2,var))
+           for (i in 2:nc){
+               set.seed(seed)
+               wss[i] <- sum(kmeans(data, centers=i)$withinss)}
+               plot(1:nc, 
+		wss,
+		type = "b",
+		xlab = "Number of clusters",
+		ylab="Within groups sum of squares")
+		}
+
+##############################
+
+# extract the members of each cluster
+
+print_clusters <- function(data, labels, k) {
+	for (i in 1:k) {
+		print(paste("cluster", i))
+		print(data[labels==i,])
+		}
+}
+ 
+##########################################################################
+###############		1. Data Analysis	                   ###############
+##########################################################################
+
+#### MOV data
+
+## download https://ufal.mff.cuni.cz/~hladka/2016/docs/mov.development.csv
+## download https://ufal.mff.cuni.cz/~hladka/2015/docs/load-mov-data.R
+
+## read the MOV data
+source("load-mov-data.R")
+ls()
+ 
+###############
+## EXERCISE #1: For each genre-related feature compute its feature frequency, 
+##              work with the movie data frame
+###############
+
+m <- movies[, c(4:21)]
+
+# compute feature frequency for each feature
+ff <- apply(m, 2, fr)
+f <- sort(ff)
+table(f)  
+
+# get and shorten feature names genre_*
+n <- substring(names(f), 7)
+
+# plot feature frequencies
+plot(f, main = "MOV task: genre-related features",
+	xlab = "", ylab ="fr(A)",
+	xaxt = 'n',  pch = 19, type = "o",
+	cex.main = 1.5,
+	cex.axis = 1.5,
+	cex.lab = 1.5)
+
+axis(1, at = seq(1,length(n), by = 1),
+	labels = n, par(cex.axis = 1), las = 2)
+
+###############
+## EXERCISE 2: Meet the USArrests data set
+###############
+
+d <- USArrests
+attributes(d)
+dim(USArrests)
+
+state.names <- row.names(d)
+
+attach(d)
+
+par(mfrow=c(2,2))
+barplot(Murder,
+	names.arg = state.names,
+	las = 2,
+	ylab = "Murder rate per 100,000",
+	main = "USA in 1973")
+
+barplot(Rape,
+	names.arg = state.names,
+	las = 2,
+	ylab = "Rape rate per 100,000",
+	main = "USA in 1973")
+ 
+hist(Rape,
+	main = "Rape rate per 100,000",
+	xlab = "rape rate",
+	ylab = "frequency")
+
+
+plot(Rape, Murder,
+	ylab = "Murder rate",
+	xlab = "Rape rate",
+	main = "Scatter plot of Murder vs. Rape",
+	pch = 20,
+	cex = 2)
+
+
+# Pearson correlation coefficient
+
+cor(Murder, Rape)
+cor(Rape, UrbanPop)
+cor(Murder, UrbanPop)
+plot(Murder ~ UrbanPop)
+
+detach()
+
+##########################################################################
+###############		2. Clustering                      ###############
+##########################################################################
+
+
+###############
+## EXERCISE #1: K-means clustering with the USArrests data
+###############
+
+## Assaults and rapes
+examples <- d[,c(2,4)]
+
+# nstart = 20
+# nstart: how many random sets should be chosen?
+
+# k = 3
+set.seed(1234)
+km.3.20 <- kmeans(examples,
+		centers = 3,
+		nstart = 20)
+km.3.20$tot.withinss
+km.3.20$withinss
+
+# k = 6
+set.seed(1234)
+km.6.20 <- kmeans(examples,
+	centers = 6,
+	nstart = 20)
+km.6.20$tot.withinss
+km.6.20$iter
+
+# plotting k = 3
+plot(examples,
+	col = km.3.20$cluster+1,
+	main = "K-means, K = 3, nstart = 20",
+	xlab = "assaults",
+	ylab = "rapes",
+	pch = 2,
+	cex = 2)
+
+text(examples,
+	labels=state.names,
+	col = km.3.20$cluster+1,
+	cex = 1.0,
+	pos = 3)
+
+points(km.3.20$centers,
+	col = 2:4,
+	pch = 3,
+	cex = 3,
+	lwd = 3)
+
+
+# plotting k = 6
+plot(examples,
+	col = km.6.20$cluster+1,
+	main = "K-means, K = 6, nstart = 20",
+	xlab = "assaults",
+	ylab = "rapes",
+	pch = 20,
+	cex = 2)
+
+text(examples,
+	labels=state.names,
+	col = km.6.20$cluster+1,
+	cex = 1.0,
+	pos = 3)
+
+points(km.6.20$centers,
+	col = 2:7,
+	pch = 3,
+	cex = 3,
+	lwd = 3)
+
+
+## all features
+
+# k = 3, nstart = 20
+d <- USArrests
+set.seed(1234)
+km.3 <- kmeans (d,
+		centers = 3,
+		nstart = 20)
+km.3$tot.withinss
+km.3$withinss
+
+# total within-groups sums of squares against 
+# the number of clusters in a K-means solution
+wssplot(d)
+
+###############
+## EXERCISE #2: Suppose the distance matrix
+###############
+
+#     0.3  0.4   0.7
+# 0.3      0.5   0.8
+# 0.4 0.5        0.45
+# 0.7 0.8  0.45  
+
+## On the basis of this dissimilarity matrix, sketch the dendrogram 
+## that results from hierarchically clustering these four 
+## observations using single linkage.
+
+###############
+## EXERCISE #3: Hierarchical clustering with the USArrests data
+###############
+
+hc.complete <- hclust(dist(d), method = "complete")
+hcdc <- as.dendrogram(hc.complete)
+hc.average <- hclust(dist(d), method = "average")
+hcda <- as.dendrogram(hc.average)
+hc.single <- hclust(dist(d), method = "single")
+hcds <- as.dendrogram(hc.single)
+
+# draw dendrogram
+
+library('dendextend') # draw cool dendrograms
+
+par(mfrow=c(1,3))
+plot(hcdc,  main = "Complete", xlab="", sub="", cex=.9)
+plot(hcda,  main = "Average",  xlab="", sub="", cex=.9)
+plot(hcds,  main = "Single",   xlab="", sub="", cex=.9)
+
+par(mfrow=c(1,2))
+
+# draw dendrogram with red borders around the 3 clusters
+# color leaf nodes
+labelColors <- c("green", "blue", "orange")
+
+# get three clusters
+hc <- cutree(hc.complete, 3)
+
+# function to get color labels
+colLab <- function(n) {
+    if (is.leaf(n)) {
+        a <- attributes(n)
+        labCol <- labelColors[hc[which(names(hc) == a$label)]]
+        attr(n, "nodePar") <- c(a$nodePar, lab.col = labCol)
+    }
+    n
+}
+
+# using dendrapply
+clusDendro <- dendrapply(hcdc, colLab)
+
+# make plot
+plot(clusDendro,
+	main = "USArrests data, hclust with complete linkage, k=3",
+	type = "rectangle")
+
+
+rect.dendrogram(hcdc, k=3, , border="red")
+
+# visualize the clusters
+# set up the colors for the 3 clusters on the plot
+
+color <- rep("green", times=nrow(d))
+color[hc==2] <- "blue"
+color[hc==3] <- "orange"
+plot(examples,
+	main = "Visualization using two features",
+	xlab = "assaults",
+	ylab = "rapes",
+	pch = 20,
+	cex = 1,
+	col = color)
+
+text(examples,
+	labels=state.names,
+	cex = 1.0,
+	pos = 3,
+	col = color)
+##### end of par(mfrow=c(1,2))
+
+# get the members of the clusters
+lapply(1:3, function(nc) state.names[hc == nc])
+
+# extract the members of each cluster
+print_clusters(examples, hc, 3)
+
+## compare clusters by K-means and HC
+km <- km.3$cluster
+hc <- cutree(hc.complete,3)
+table(km, hc)
+
+
+###############
+## EXERCISE #4: Hierarchical clustering with the NLI data
+###############
+
+library(tm)
+
+### Meet the data
+
+## download https://ufal.mff.cuni.cz/~hladka/2018/docs/nli.5.langs.75docs.zip and extract it
+
+
+## read true labels
+doc.info <- read.table("../README", sep='\t')
+true.labels <- doc.info[,2]
+
+## create Corpus
+docs <- Corpus(DirSource("."))
+
+# read a particular document
+writeLines(as.character(docs[[30]]))
+
+## create a document-term matrix	
+# = matrix that lists all occurrences of words in the corpus.
+# documents are represented by rows and the terms (or words) by columns.
+# If a word occurs in a particular document n times,
+# then the matrix entry for corresponding to that row and column is n.
+# if it doesn’t occur at all, the entry is 0.
+
+dtm1 <- DocumentTermMatrix(docs)
+
+## create a tf-idf matrix	
+dtm2 <- DocumentTermMatrix(docs,
+           control = list(weighting = function(x) weightTfIdf(x, normalize = FALSE),
+                          stopwords = FALSE))
+
+# convert dtms to matrix
+m1 <- as.matrix(dtm1)
+m2 <- as.matrix(dtm2)
+
+# compute distance between document vectors
+d1 <- dist(m1)
+d2 <- dist(m2)
+
+
+### Run hierarchical clustering
+
+hc.complete2 <- hclust(dist(d2), method = "complete")
+hc.average2 <- hclust(dist(d2), method = "average")
+hc.single2 <- hclust(dist(d2), method = "single")
+
+hcdc2 <- as.dendrogram(hc.complete2)
+hcda2 <- as.dendrogram(hc.average2)
+hcds2 <- as.dendrogram(hc.single2)
+
+# assign colors to the true classes
+# red -- SPA
+# blue -- ZHO
+# green -- DEU
+# chocolate -- ARA
+# purple -- TEL
+# c('red', 'blue', 'green', 'chocolate', 'purple')
+labelColors <- c("#FF0000", "#0000FF", "#008000", "#D2691E", "#800080")
+
+# function to get colors for leaf nodes in dendrogram
+colLabNLI <- function(n) {
+    if (is.leaf(n)) {
+        a <- attributes(n)
+        labCol <- labelColors[doc.info[ doc.info$V1 == a$label,2]]
+        attr(n, "nodePar") <- c(a$nodePar, lab.col = labCol)
+    }
+    n
+}
+
+# color leafs by their true values
+clusDendro <-  dendrapply(hcdc2, colLabNLI)
+
+# make plot
+plot(clusDendro, 
+	type = "rectangle",
+	ylab = "Height", 
+	main = "NLI: Agglomerative hierarchical clustering with complete linkage")
+
+# add a legend
+legend(40, 450,
+	legend = c("Spanish", "Chinese", "German", "Arabic", "Telugu"),
+	col = c("#FF0000", "#0000FF", "#008000", "#D2691E", "#800080"),
+	lty = 1,
+	lwd = 2,
+	text.font = 2,
+	cex = 1)
+
+# get 5 clusters and visualize them
+hc2 <- cutree(hc.complete2, 5)
+rect.dendrogram(hcdc2, k=5 , border="red")
+
+# get the members of the clusters
+table(hc2)
+sapply(unique(hc2),function(g) table(true.labels[hc2 == g]))
+
+
+
+
+

@@ -1,0 +1,78 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings, graphicx, multicol}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+\newcommand{\al}[2]{\begin{algorithm}{#1} #2 \end{algorithm}}
+\newcommand{\de}[2]{\begin{definition}{#1} #2 \end{definition}}
+\newcommand{\te}[2]{\begin{theorem}{#1} #2 \end{theorem}}
+
+% \newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{note}{Note}
+\newtheorem{algorithm}{Algorithm}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{ADS 1 | Vilém Zouhar}}
+\vspace{1cm}
+
+\al{Eucleidův algoritmus}{}
+\de{Asymptotická notace}{}
+\de{Fronta, zásobník, spojový seznam}{}
+\al{BFS, DFS}{}
+\de{Halda}{}
+\de{Reprezentace grafu (matice sousednosti a vzdálenosti, seznam hran, matice incidence, seznam následníků/sousedů )}{}
+\te{Vlastnost DFS}{Stromové hrany tvoří orientovaný les}
+\de{Topologické očíslování}{}
+\te{Cyklus v DFS}{}
+\al{Topologické očíslování v DFS}{}
+\al{Nalezení silně souvislých komponent}{}
+\te{Vlastnosti algoritmů kritických cest}{TODO}
+\al{DAG}{}
+\al{Dijkstra}{Korektnost: Sporem přesuneme vrchol z $Q$ do $S$ s tím, že $\delta (s,u) \ne d(u)$ }
+\al{Bellman-Ford}{}
+\al{APSP násobení matic}{}
+\al{Floyd-Warshal}{}
+\de{Lehká a bezpečná hrana}{}
+\te{Lehká hrana je bezpečná}{}
+\al{Jarník}{}
+\al{Borůvka}{}
+\al{Kruskal}{}
+\de{Binární vyhledávací strom}{}
+\de{Dokonale vyvážený strom}{}
+\de{Červenočerný strom}{}
+\de{Výška uzlu, černá výška uzlu}{}
+\te{Podstrom obsahuje minimálně $2^{bh(x)}$ listů}{}
+\te{Výška nejvýše $2\log_2(n+1)$}{}
+\te{Delete a insert v ČČ stromu}{}
+\de{AVL strom}{}
+\de{B strom}{}
+\te{Master theorem}{}
+\te{Lemma pro master theorem}{}
+\al{Strassenův algoritmus násobení čtvercových matic}{}
+\al{Quickselect}{}
+\al{Blum - medián lineárně}{}
+\al{Vnitřní třídění}{}
+\al{Union-find}{}
+\al{Hashování}{}
+\te{Průměrný čas úspěšného a neúspěšného vyhledávání při řetězení}{}
+\de{Univerzální množina hashovacích funkcí}{}
+\te{Očekávaný počet kolizí na univerzální množině}{}
+\te{Konstrukce univerzální množiny hashovacích funkcí}{}
+\te{Řešení kolizí}{}
+\te{Průměrný čas úspěšného a neúspěšného vyhledávání při otevřeném adresování}{}
+\te{}{}
+\end{document}

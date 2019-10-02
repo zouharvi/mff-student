@@ -1,0 +1,42 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{6.2}
+\rhead{Vilém Zouhar}
+
+\section*{Odmocniny}
+\begin{align*}
+	& 1 = \cos(0) + i\sin(0) \\
+	& (\cos(\phi)+i\cdot \sin(\phi))^n = \textit{(de Moivrova věta)} = \cos(n\phi) + i\cdot \sin(n\phi) = 1 \Rightarrow \phi = 2\pi/n \\
+	& \omega = \cos(2\pi/n)+i\cdot \sin(2\pi/n) = \textit{(analýza)} = e^{i\cdot \frac{2\pi}{n}} \textit{ po umocnění $1$}\\
+	& \textit{Je jich $n-1$: } (\omega^k)^n = (\omega^n)^k = 1^k = 1, \textit{sporem } 1 < a < b < n, \omega^a=\omega^b \Rightarrow \omega^{a-b} = 1 \Rightarrow \textit{ spor s výběrem } a, b \\  
+	& \tab \Rightarrow |\{\omega^k| 1 < k < n\}| = n-1 \\	
+	& \cos(\frac{2k\pi}{n}) i\cdot \sin(\frac{2k\pi}{n}) \ne 1 \text{ pro } 1 < k < n, \text{ neboť $\sin$ musí být $0$ a $\cos$ zase $1$} \\
+	& \text{Ověřili jsme dvě potřebné vlastnosti čísla $\omega$ pro primitivní mocninu, nyní zápis v $\exp$ tvaru} \\
+	& \text{Všechny primitivní odmocniny: } \cos(\frac{2k\pi}{n}) i\cdot \sin(\frac{2k\pi}{n}) = e^{\frac{2k\pi}{n}}, 1 < k < n
+\end{align*}
+
+
+\end{document}

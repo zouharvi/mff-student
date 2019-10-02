@@ -1,0 +1,143 @@
+--------------
+01 - 06 - 2018
+1) Najděte pomocí master theoremu složitost T(n) = 2 T(n/5) + T(n/2) + n a poté dokažte jeho správnost substituční metodou
+2) Budujeme ropovod, který vede severo-jižním směrem (rovně), na který je kolmými přípojkami napojeno n vrtů ropy, každý má nějaké zadané souřadnice (x_i,y_i), každá vždy unikátní. Chceme co nejmenší součet délek přípojek. Určete optimální algoritmus a čas.
+poznámky: Ropovod může vést skrz nějaký vrt a souřadnice můžou být reálné (ne celočíselné).
+3) orientovaný graf je polosouvislý, pokud pro libovolnou dvojici existuje cesta z jednoho do druhého nebo naopak (nebo obě). Popište optimální algoritmus na určení, zda graf je či není polosouvislý a určete jeho časovou složitost.
+
+1) Vyjde 9/10 < 1, takže lineární (prostě master theorem, není co vymejšlet - zjednodušená verze je i na wiki)
+2) Je to jen složitě položená otázka na to, že hledáme medián všech x_i. To se dá ukázat tim, že se to nakreslí a pak se řekne, že když na jedný straně je připojeno víc přípojek než na druhý, tak posunutím k nim se jejich celková délka sníží (o násobek rozdílu počtů na jedné a druhé straně - např napravo 5 a nalevo 3, tak posunutím ropovodu napravo o metr se součet zmenší o 1*(5-3)=2, o dva metry.)
+Čas je lineární, používá se algoritmus na hledání mediánu
+3) To je vyřešitelný přes nalezení silně souvislých komponent (mělo by být součástí přednášky) a pak z výsledného acyklického orientovaného grafu, jehož vrcholama jsou ty komponenty, se jen ověří, zda je to orientovaná cesta (lze uvést protipříklady A->B<-C a A<-B->C, kdyby se to větvilo v nějakém B, že mezi A a C není žádná cesta; kdyby přecejen byla nějak okolo, tak určitě není acyklickej, což je spor)
+čas je Theta(n+m)
+
+Pak u ústní dává věci typu "napište princip dvojitého hashování" nebo "dokažte časovou složitost n log n Kruskalova algoritmu".
+
+--------------
+16 - 06 - 2018
+1) BVS - komutativita delete 
+Pokud odstraníme x a poté y, bude to to samé, jako když odstraníme y a poté x? Dokázat nebo najít protipříklad. 
+https://stackoverflow.com/questions/2990486/deletion-procedure-for-a-binary-search-tree 
+2) vážený průměr v O(n) 
+Máme klíče x1.. x n a váhy k nim w1 .. wn. Obě dvě řady nesetřízené, přirozená čísla. 
+Vážený průměr: takové xi, že součet x1 .. xi-1 je nejvýše polovina součtu všech vah, xi+1 .. xn je je nejvýše polovina součtu všech vah. Spočítejte v O(n) 
+https://cs.stackexchange.com/questions/56299/find-a-weighted-median-for-unsorted-array-in-linear-time 
+3) Nejkratší (co se týče POČTU hran) negativní cyklus v ohodnoceném grafu. (Pokud není, oznámí, že není). 
+Nejlepší řešení asi "násobení matic" ukázané na přednášce (při hledání nejkratších cest mezi všemi vrcholy). Kontrolovat diagonálu, jestli tam není záporné číslo. Složitost by měla být v nejhorším n4. (Doufám, že nekecám, řešil jsem to jinak a neměl jsem to správně). 
+
+U ustní např.: Definovat AVL strom a dokázat výšku, rozšířený Euklid, nějaké vlastnosti čč-stromu. 
+
+--------------
+25 - 05 - 2018
+Zadani vypadalo priblizne takhle:
+1) Dokazte nebo vyvratte: pokud do cerveno-cerneho stromu pridame prvek a vzapeti na to je jej zase vymazeme, vysledny strom bude shodny s puvodnim.
+2) Dokazte nebo vyvratte: Mame orientovany graf G a na nem orientovanou cestu z x do y, potom pokud spustime libovolne DFS pak pokud DFS nalezne vrchol x drive nez y pak y bude v danem DFS strome (ne nutne primym) naslednikem x.
+3) Nalezeni nejspolehlivejsi cesty: Mame orientovany graf G a jeho hrany jsou ohodnocene 0<=s(u,v)<=1, kde s(u,v) je pravdepodobnost spolehlivosti hrany. Tyto pravdepodobnosti hran jsou na sobe nezavisle, tedy pravdepodobnost, ze dve libovolne hrany s(x,y) a s (u,v) budou spolehlive je rovna s(u,v) * s(x,y). Vymyslete co nejefektivnejsi algoritmus, ktery nalezne nejspolehlivejsi cestu. Urcete a dokazte slozitost+spravnost.
+
+U ustni jsem dostal minimalni kostry(definice + dokazat vetu ze slajdu + Jarnik-Prim, Boruvka-Kruskal; zkousejiciho muze zajimat i detailnejsi rozebrani casove slozitosti, popripade proc je algoritmus korektni)
+
+RESENI(ten kdo si chce zapocitat necht uz dal necte):
+1) Neplati, existuje protipriklad na trech vrcholech, ktery bude mit po dane uprave stejny tvar ale ruznou barevnost.
+2) Neplati, protipriklad x<=>z=>y, pokud bychom spustili DFS z bodu 'z', potom nalezneme nalezneme prvni x a potom y ale y nebude naslednikem x.
+3) Upraveny Dijkstra. (Každou váhu proženeme -log)
+
+--------------
+12 - 06 - 2014
+1) T(n)=2T(n/5)+T(n/2)+n a pro vhodné n_0 (můžete si zvolit) platí T(n)=1 pro n<=n_0. Najděte f(n), aby T(n)=theta(f(n)) a dokažte substituční metodou. 
+2) V rovině jsou dány ropné vrty na pozicích (x_i,y_i) - žádné dva nemají stejnou x-ovou ani y-ovou souřadnici. Chceme postavit ropovod, který povede v severojižním směru. Každý vrt k němu bude připojenou přípojkou vedoucí kolmo na ropovod. Najděte ideální pozici ropovodu, aby součet délek přípojek byl co nejmenší. Určete a zdůvodněte složitost algoritmu. 
+3) Orientovaný graf nazveme polosouvislý, pokud mezi každými dvěma vrcholy vede cesta alespoň jedním směrem. Zjistěte, jestli je graf na vstupu polosouvislý a určete složitost algoritmu. Algoritmy z přednášky můžete používat bez důkazu jejich složitosti. 
+
+1) Zřejmě T(n)>=n, indukcí T(n)<=10n. 
+2) na y-ových souřadnicích nezáleží. Hledáme, x, že f(x)=sum |x-x_i| je minimální. Kdyby bylo nalevo od x méně bodů než napravo, posunutím x o jedna doprava se hodnota zmenší (několik absolutních hodnot se o jedna zvětší a více se jich o jedna zmenší). Stačí tedy najít medián a případně vybrat správný ze dvou středů (je-li sudo vrcholů). Složitost O(n). 
+3) Hledáme SSK jako na přednášce - DFS nám dá pořadí vrcholů, sestavíme transponovaný graf a pouštíme DFS v daném pořadí vrcholů. Jednotlivé stromy, které dostáváme jsou jednotlivé SSK. Navíc víme, že všechny hrany vedou jen v rámci stromu nebo zpět. Stačí si tedy všimnout, že graf je polosouvislý vede-li z každého stromu nějaká hrana do toho předchozího.
+
+--------------
+24 - 06 - 2014
+1) Dokažte nebo vyvraťte tvrzení: Každý binární strom je možné převést na řetězec (tj. strom takový, že každý vrchol má nejvýše jednoho syna) pomocí O(n) rotací z operací insert a delete v červenočerném stromě, kde n je počet vrcholů stromu. 
+2) Mějme hashovací funkci h(x): U\rightarrow \{0,1,\dots m-1\}, kde m je velikost hashovací tabulky a mocnina dvojky. Tabulka používá otevřené adresování pomocí níže uvedeného algoritmu. 
+    (1) i := h(x)  // x je hledany klic 
+        j := 0 
+    (2) otestujeme pozici i v tabulce 
+        - pokud na ni je x -> koncime (success) 
+        - pokud na ni neni x a otestovali jsme m pozic -> koncime (fail) 
+        - jinak -> pokracujeme na dalsi krok 
+    (3) j := j + 1 (mod m) 
+        i := i + j (mod m) 
+        jump (2) 
+Určete, o jaký druh otevřeného adresování se jedná. Dokažte, že algoritmus otestuje všechna políčka tabulky dříve, než otestuje jednu pozici podruhé. Důkaz proveďte dopočítáním konstant. 
+3) Je dána ohodnocená silniční síť, kde váha každé silnice reprezentuje maximální výšku vozidla, které touto silnicí může projet. Rádi bychom ze startovního města S do každého města na mapě dopravili velkoobjemný náklad. Napište co nejrychlejší algoritmus, kterým zjistíme pro každé město největší výšku vozidla, kterým se tam dostaneme.
+
+1) Tvrzení platí. V libovolném stromu se můžeme ponořit do minima a rotovat doleva, dokud má nějakého pravého syna. Jakmile pravý syn dojde, vyšplháme se do otce a celý postup opakujeme. Jakmile dojdeme až do kořene stromu, máme řetězec. Je tedy jen zapotřebí dokázat, že tento postup provede O(n) rotací. To ale přímo vyplývá z toho, že jakmile vrchol zrotujeme, už nám nikdy nebude překážet - máme n vrcholů, proto O(n).
+2) Pokud si proměnnou i rozepíšeme jako posloupnost jejích hodnot v jednotlivých iteracích, dostaneme h(x), h(x)+1, h(x)+1+2, h(x)+1+2+3, ... h(x)+aritmetická řada. Součet aritmetické řady je \frac{n}{2}(1+n), což je O(n^2) - proto je druhem otevřeného adresování kvadratické zkoušení (quadratic probing). Důkaz, že se tato strategie nezacyklí před prozkoumáním všech položek tabulky, je hodně ošklivý. Já se ve svém řešení odkázal na přednášku, kde to bylo dokázáno, a pak jsem to pro jistotu doplnil o stručné vyjádření myšlenky důkazu (zabralo půl strany). Zkoušející ale na to jen kouknul, zkontroloval slovo "kvadratický" a hodnoty konstant a vzal to bez větších problémů.
+3) Úlohu lze vyřešit jednoduchou modifikací Dijkstrova algoritmu. Inicializujeme výšky: d(S)=\infty,d(*)=0, v prioritní frontě otočíme pořadí na sestupné a relax hrany (u,v) vypadá takto: d(v)=\max \{d(v),\min\{d(u),\delta(u,v)\}\}, kde d(x) je počítaná výška a \delta(x,y) je váha hrany (silnice). Takto pozměněný algoritmus má úplně stejné vlastnosti jako původní Dijkstra (složitost, konečnost). Správnost vyplývá z toho, že prioritní fronta je maximová, takže před uzavřením vrcholu určitě projdeme všechny ostatní vrcholy, které by mohly jeho výšku ovlivnit. Maximum v relaxu používáme, protože chceme výšku jen vylepšovat. Minimum uvnitř relaxu reprezentuje cestu s-u-v, na které nás zajímá nejmenší výška hrany, protože ta omezuje projíždějící auta.
+
+U ústní části jsem dostal Kruskala/Borůvku, spolužák vedle měl Dijkstru, konstrukce univerzální množiny, Floyd-Warshall
+
+--------------
+08 - 06 - 2012
+1) Odhadnout f(n) takové, že T(n) = T(n/3) + 2T(n/4) + 3n náleží theta(f(n)) a dokázat substituční metodou; navíc předpokládáme, že pro vhodné n0 T(n0) je O(1). 
+2) Platí/neplatí: Y je cesta od kořene k listu v AVL-stromu. X je množina prvků vlevo od Y, Z množina prvků vpravo od Y. Pak pro každé x z X, y z Y a z ze Z platí: 
+klíč(x) <= klíč(y) <= klíč(z). 
+3) Platí/neplatí: máme orientovaný graf, v něm vrchol u, jehož vstupní i výstupní stupeň je >=1. Potom každý DFS strom, do něhož náleží u, má alespoň dva vrcholy. Navíc G neobsahuje smyčky. 
+
+Můj názor 
+1) f(n) = n; položíme n0 = 12. Vyjde z IP že d>=12, c<=6, potom pro n-->n+1 vyjde c<=18, d>=18, tedy pro n>=12 6n <= T(n) <= 18(n).
+2) neplatí; obecně platí jen pro x, y a z ze stejné hladiny podstromu, vtip je v tom, že y může být otcem x nebo z, ale nepřímým, tudíž x může být v pravém podstromu y a vice versa 
+3) platí; buď byl u od někud objeven a tedy DFS strom má kořen různý od u, tedy má vrcholy alespoň dva, nebo DFS v u začínalo a došlo do některého ze sousedních vrcholů, které existují, protože podle zadání deg out (u) >= 1 a na u není smyčka.
+
+Trojka neplati, staci si vziat trivialny protipriklad X --> U --> V. Ak DFS prechadza vrcholy v poradi V, U, X, tak z U-cka narazime len na cierny vrchol V, a tak U tvori DFS strom s 1 vrcholom.
+
+--------------
+14 - 06 - 2012
+1) Libovolný binární vyhledávací strom na n vrcholech lze upravit pomocí O(n) rotací na spojový seznam. (Myšleno takové rotace, jaké se používají k vyvažování Č-Č nebo AVL stromů.) Tvrzení jsme měli dokázat nebo vyvrátit. 
+2) Úloha na téma hashování, konkrétně na otevřené adresování. Byl tam kousek kódu (insert nebo search) a z něho jsme měli poznat, o jaký typ zkoušení jde.. Měli jsme ukázat jestli je to lineární nebo kvadratické zkoušení tím, že najdeme konstanty c,d pro h(x,i)=(h´(x) + c i + d i^2) mod m. A taky dokázat, že v případě plné hashovací tabluky insert opravdu vyzkouší všechna pole aniž by na nějaké sáhnul dvakrát (byl tam předpoklad, že velikost tabulky m = 2^k a vycházelo c=1/2, d=1/2. 
+3) Máme orientovaný graf s ohodnocenými hranami a výchozí bod s. Hrany jsou silnice a ohodnocení udává, jaké nejvyšší auto může po cestě ještě projet (představujte si např. výšku mostu přes silnici). Navrhněte algoritmus, který pro každý vrchol grafu spočte, jaké nejvyšší auto se tam může dostat po nějaké cestě z výchozího bodu s. 
+
+Takže tolik k písemce, odpoledne je pak ústní část a na ní jsou lidi zváni podle času odevzdání písemky. Zkoušejí pánové Ondřej Čepek a Petr Kučera. Já jsem dostal hledání SSK v grafu, měl jsem to bez chyby a z písemky dva body ze tří, takže celkově za jedna :)
+
+--------------
+04 - 06 - 2012
+Pisemna cast: 
+1. Je dan vztah T(n) = 2T(n/2+1)+n2. Pro vhodne zvolene n0 plati, ze pro vsechna n mensi nez n0 T(n) = 1. Odhadnete funkci f, pro kterou plati T(n) = theta(f(n)) a svuj odhad dokazte substitucni metodou. 
+2. Popiste a napiste v "Pascalu" algoritmus, ktery na vstupu dostane dve setrizene posloupnosti X a Y (kazda z nich ma delku N) a ma v case O(log N) najit jeden z medianu vsech 2N cisel z X i Y. 
+3. Vymyslete algoritmus na nasobeni matic velikosti n x kn a kn x n, ktery pouziva jako podprogram Strassenuv algoritmus. Pro obe mozna poradi soucinu zjistete casovou slozitost a porovnejte ji se slozitosti klasickeho nasobiciho algoritmu. 
+
+U ustni casti jsem mel definici AVL stromu, dukaz jeho logaritmicke vysky a diskuzi o Kruskalovu algoritmu na hledani minimalni kostry grafu a jeho casove slozitosti.
+
+--------------
+02 - 06 - 2010
+akze jako vzdy pisemna na 3 body - 1,5 bodu potreba pro to, aby clovek mohl postoupit k ustni. 
+
+1) dokazte/vyvratte: pokud vlozime do cerveno-cerneho stromu prvek a ihned jej zase odebereme, tak strom bude identicky s puvodnim stromem pred vlozenim prvku. 
+NEPLATI. Staci ukazat, ze po vlozeni prvku se strom zarotuje, prebarvi nebo oboje, to samy po deletu a strom uz neni identickej s puvodnim... 
+2) dokazte/vyvratte: mame orientovany graf,kde vede cesta mezi x a y. Pokud na to pustime DFS a na x narazime jako na prvni, pak y je jeho naslednikem (ne nutne primym). 
+NEPLATI. Zduvodneni nevim, pac sem to koumal na posledni minutu a snazil sem se dokazat, ze to plati  :D 
+3) mame graf a v nem nejaky bod A, B a dalsi body. Pro kazdou hranu plati, ze je nejak spolehliva ( cislo x, pro ktere 0<=x<=1 , ktere udava s jakou pravdepodobnosti hrana neselze). Pri pruchodu se spolehlivost hran nasobi (jako pravdepodobnost...). Vymyslete a napiste algoritmus, ktery pobezi v co nejlepsim case a najde nejspolehlivejsi cestu mezi A a B. 
+Idealnim resenim byl modifikovany Dijkstr. Hrany je nejspis treba pred pouzitim zlogaritmovat, jinak by tam mohly vznikat zaporny cykly.. sel pouzit i Bellman-Ford, ale ten je casove narocnejsi..ale myslim, ze to proslo.. 
+
+jinak u ustni sem dostal vsechno co vim o cerveno-cernych stromech..docela zalezi na vysledku pisemny casti..kdyz to mate nejak dobre, tak mate i narok na nejakou zachranou otazku, kdyby vam nesedlo tema... 
+jinak dalsi otazky, co sem slysel: AVL stromy, casova slozitost Quicksortu, hledani SSK, Kruskal a jako doplnujici nekdo dostal popsat, jak funguje Floyd-Warshall. 
+btw-za zneni druhy otazky nerucim...
+
+Dvojka by mala platit na zaklade tvrdenia, ktore nam Cepek dokazoval na prednaske: Y je naslednikom X v DFS strome <=> v case d(X) existovala cesta z X do Y po bielych vrcholoch. X bol objaveny skor, teda zjavne taka cesta musela vtedy existovat, kedze Y nemohol byt sedy ani cierny. 
+
+U trojky nevidim dovod na logaritmizaciu, kedze vsetky cisla su 0<=x<=1, a tak ked nasobime nejaku celkovu spolahlivost, nemoze sa tym zvysit. Spolahlivost sa bude iba znizovat a my pri Dijkstrovi vyberame vzdy nepreskumany vrchol s najvacsou spolahlivostou a Relax uskutocnime, ak je spolahlivost nejakeho vrcholu mensia, ako by sa dala dostat z aktualneho vrcholu cez nejaku hranu.
+
+Dvojka predsa neplati, tu je protipriklad: Y <--A <--> X, kde <--> je smycka. Ak DFS zacne v A, jedinym predchodcom Y bude A.
+
+--------------
+30 - 05 - 2007
+1. Dokažte nebo vyvraťte, zda MFF-SORT(A,1,n) správně setřídí pole n čísel. 
+MFF-SORT (A,i,j) 
+begin 
+if A[i] > A[j] then PROHOĎ (A[i],A[j]); //pouze prohodí čísla 
+if i+1<j then 
+begin 
+k := dolnimez((j-i+1)/3); 
+MFF-SORT(A,i,j-k); 
+MFF-SORT(A,i+k,j); 
+MFF-SORT(A,i,j-k) 
+end 
+end; 
+2. Asymptoticky určetě těsně složitost algoritmu MFF-SORT (jako funkci pro počet tříděných čísel, tj. funkci pro n). 
+3. Máme mřížku p x p a zadány buňky pomocí souřadnic [xi,yi]. Určete algoritmus, který jako vstup dostane pole n náhodně vybraných buněk (1<=i<=n a 1<=xi,yi<=p) a v očekávaném lineárním čase O(n), zjistí, zda se v poli nachází dvojice sousedních buněk. Sousední buňky jsou takové, jejichž xi se liší max o 1 a yi také max o 1. N je dostatečně malé, tak, že lze vygenerovat pole velikosti O(n). Váš algortimus však nesmí být závislý na p.

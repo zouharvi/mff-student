@@ -1,0 +1,59 @@
+###################
+# 7 women & 5 men #
+###################
+
+# 3 different solutions, but all combinatorics
+# probably the simplest solution: (7 * 6 * 10 * 9)/(12 * 11 * 10 * 9) = 7/22
+
+
+###################################
+# task from the third lab session #
+###################################
+data = read.csv('xy.100.csv', header=TRUE, sep='\t')
+print(data)
+p = prop.table(table(data))
+
+# Are X, Y statistically independent?
+# We should create a null hypthesis (that they are independent)
+
+p.x = prop.table(table(data[1]))
+p.y = prop.table(table(data[2]))
+
+# Chi-square test of independence
+
+# what is the distribution of sum z_i^2, if z_i ~ N(0,1)
+cur = numeric(1000000);
+for(i in 1:10) cur = cur + rnorm(1000000)^2;
+plot(density(cur))
+
+# this distribution is called Chi-squared distribution (with k degrees of freedom)
+# \Chi_k^2
+
+# Pearson's \Chi^2 test (for 
+# \Chi^2 = \sum_{i,j} \frac{(O_{i,j} - E_{i,j})^2}{E_{i,j}}
+
+expected = p.x %*% t(p.y) * nrow(data)
+chi.2s = sum((table(data) - expected)^2/ expected)
+
+# display the distribution
+x_v = nrow(unique(data[1]))
+y_v = nrow(unique(data[2]))
+dof = ((x_v-1)*(y_v-1))
+cur = numeric(1000000);
+for(i in 1:dof) cur = cur + rnorm(1000000)^2;
+plot(density(cur))
+
+# Null hypothesis: X, Y are independent
+# If X,Y independent \Rightarrow \Chi^2 statistic has \Chi^2_dof distribution
+
+pv = (1-pchisq(chi.2s, df = 2))*100
+# pv = 1.86814 < 5 \Rightarrow null hypothesis rejected (5% is good enough significance level)
+# data was generated independently, hence we made a wrong decision (though rational)
+
+# HW
+# Compute critical values for \Chi^2_2, \alpha = 1%, 5%, 10%
+
+# Solution
+qchisq(0.99, 2) # 9.21034
+qchisq(0.95, 2) # 5.991465
+qchisq(0.90, 2) # 4.60517

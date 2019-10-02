@@ -1,0 +1,106 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr} % styling, headers and footers
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+%\lhead{3. domácí úkol}
+\rhead{Vilém Zouhar}
+Přehledový seznam vět ke zkoušece z Lineární Algebry II na informatice 2018
+
+\newcommand{\itemv}{\item $\tau$ \hspace{0.2cm}}
+\newcommand{\itemd}{\item $\delta$ \hspace{0.2cm}}
+\section{Skalární součin}
+\begin{itemize}
+    \itemd Definice skalárního součinu, standardního skalárního součinu, normy, normy indukované skalárním součinem, metriky
+    \itemd Definice kolmosti, ortogonálního a ortonormálního systému vektorů
+    \itemv Pythagorova věta, trojúhelníková nerovnost, Cauchy Schwarzova nerovnost, rovnoběžníkové pravidlo
+    \itemv Ortonormální systém je lineráně nezávislý, furierovy koeficienty
+    \itemv Gram-Schmidtova ortogonalizace, všude ortonormální báze + rozšíření
+    \itemv Besselova nerovnost, Parsevalova rovnost
+\end{itemize}
+
+\section{Ortogonální doplněk, Ortogonální projekce, Ortogonální matice}
+\begin{itemize}
+    \itemd Definice ortogonálního doplňku
+    \itemv Dva seznamy vlastností ortogonálního doplňku
+    \itemd Definice ortogonální projekce
+    \itemv Výpočet dané projekce, ortogonální doplněk řádkového prostoru je kernel + důsledky
+    \itemv Projekce do sloupcového prostoru, ortogonální projekce do doplňku, metoda nejmenších čtverců
+    \itemd Definice ortogonální a unitární matice
+    \itemv Vlastnosti ortogonálních matic, součin ortogonálních matic, ortogonální matice a součin
+    \itemv Ortogonální matice a lineární zobrazení, stačí 2
+\end{itemize}
+
+\section{Determinanty}
+\begin{itemize}
+    \itemd $sgn$ permutace, definice determinantu, 
+    \itemv Řádková linearita determinantu, determinant a elementární úpravy, determinat a singularita
+    \itemv Determinant součinu, determinant $A^{-1}$, Laplaceův rozvoj, Cramerovo pravidlo
+    \itemd Adjungovaná matice
+    \itemv $A\cdot adj(A)$, $A^{-1}$ přes adjungovanou matici, celočíselné hodnoty
+    \itemv Objem rovnoběžnostěnu
+\end{itemize}
+
+\section{Vlastní čísla}
+\begin{itemize}
+    \itemd Definice vlastního čísla a příslušeného vlastního vektoru, charakteristický polynom, geometrická násobnost
+    \itemv Ekvivalentní definice (charakterizace), vlastní čísla a charakteristický polynom
+    \itemd Stopa, spektrum, spektrální poloměr
+    \itemv Vlastní čísla, determinant a stopa, vlastní čísla a matice, vlastní číslo komplexně sdružené
+    \itemd Definice matice spole4nice
+    \itemv Chrakteristický polynom matice společnice
+    \itemv Cayley-Hammilton $\star$, důsledek Cayley-Hammilton $\star$
+    \itemd Definice podobnosti, diagonalizovatelnost
+    \itemv Podobné matice a vlastní čísla
+    \itemv Charakterizace diagonalizovatelnosti, lineárně nezávislé vlastní vektory
+    \itemv Vlastní čísla $AB$ a $BA$
+    \itemd Jordanova buňka, Jordanova normální forma, hermitovská transpozice
+    \itemv Podobnost Jordanově normální formě, vlastní čísla hermitovských matic
+    \itemv Spektrální rozklad symetrických matic
+    \itemv Courant-Fischer o uspořádání vlastních čísel, Perronova, Gerschgorinovy disky
+    \itemv Mocninná metoda, Deflace vlastního čísla
+\end{itemize}
+
+\section{Pozitivní definitnost}
+\begin{itemize}
+    \itemd Definice pozitivní definitnosti
+    \itemv Základní vlastnosti (linearita, inverze), charakterizace pozitivně definitních matic
+    \itemv Rekurence pro pozitivní definitnost, Choleského rozklad, Gaussova eliminace a pozitivní definitnost
+    \itemv Sylvestrovo kritérium, skalární součin a pozitivní definitnost, odmocnina z matie
+\end{itemize}
+
+\section{Bilineární a kvadratické formy}
+\begin{itemize}
+    \itemd Definice bilineárních a kvadratických forem, definice příslušné matice
+    \itemv Maticové vyjádření, dva důsledky
+    \itemv Matice kvadratické formy při změně báze, Sylvestrův zákon setrvačnosti, dva důsledky
+    \itemd Signature kvadratické formy, matice Householderovy transformace
+    \itemv Householderova transformace
+\end{itemize}
+
+\section{Rozklady}
+\begin{itemize}
+    \itemv QR rozklad
+    \itemv SVD rozklad
+\end{itemize}
+
+\renewcommand{\itemv}{} \renewcommand{\itemd}{} % don't know how to undefine this, lol
+
+\end{document}

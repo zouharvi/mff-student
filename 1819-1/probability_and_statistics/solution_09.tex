@@ -1,0 +1,46 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{9. cvičení (5. 12. 2018)}
+\rhead{Vilém Zouhar}
+
+\section{}
+\subsection{}
+$ \sim Bi(n,p) $
+
+\subsection{}
+Je třeba napočítat ručně (tabulka).
+
+\subsection{}
+Pro $n=2$:
+\begin{align*}
+	& P(X_1 + X_2 = k) = \sum_0^\infty P(X_1 + X_2 = k| X_2 = l)\cdot P(X_2 = l) = \sum_0^k P(X_1 k-l)\cdot P(X_2 = l) = \sum_0^k \frac{\lambda^{k-l}e^{-\lambda}}{(k-l)!} \cdot \frac{\lambda^l e^{-\lambda}}{l!} = \\
+	& \frac{e^{-2\lambda}\lambda^k}{k!} \sum_0^k \frac{k!}{(k-l)!l!} = \frac{e^{-2\lambda}\lambda^k}{k!} 2^k = \frac{e^{-2\lambda}(2\lambda)^k}{k!} \rightarrow \sim Po(2\lambda)
+\end{align*} 
+Obecně $n\lambda$
+
+\section{}
+$ P(\sum_0^{100} X_i > 60) = P(\frac{ \sum_0^{100} X_i - 50}{\sqrt{100 \frac{1}{2}\cdot(1-\frac{1}{2})}} > \frac{60 - 50}{5}) = 1-P(\frac{ \sum_0^{100} X_i - 50}{\sqrt{100 \frac{1}{2}\cdot(1-\frac{1}{2})}} < 2) \approx 1-\Phi(2) $
+
+\section{}
+\subsection{}
+Prostě CLV na vše
+\end{document}

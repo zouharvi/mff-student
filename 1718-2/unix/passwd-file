@@ -1,0 +1,3 @@
+idris:x:1000:1000:Oliver Masek,,,:/home/idris:/bin/bash
+prys:x:1001:1001:Pavel Rysavy,,,:/home/prys:/bin/bash
+lynx:x:100:1002:Linda Zahalkova,,,:/home/lyn:/bin/bash

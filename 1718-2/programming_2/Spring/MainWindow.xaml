@@ -1,0 +1,18 @@
+﻿<Window x:Class="Spring.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spring"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="399" VerticalAlignment="Top" Width="123" Margin="5,10,0,0">
+            <Button x:Name="LoadGraph" Content="Load" Click="LoadGraph_Click"/>
+            <Button x:Name="SimStep" Content="Simulate" Margin="0,5,0,0" Click="SimStep_Click"/>
+            <Button x:Name="SpanningTree" Content="Min. spanning tree" Margin="0,5,0,0" Click="SpanningTree_Click"/>
+        </StackPanel>
+        <Canvas x:Name="canvasBoard" HorizontalAlignment="Left" Height="399" Margin="133,10,0,0" VerticalAlignment="Top" Width="649" Background="#FFD4D4D4"/>
+
+    </Grid>
+</Window>

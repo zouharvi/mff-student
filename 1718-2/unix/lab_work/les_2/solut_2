@@ -1,0 +1,29 @@
+1:
+man bash
+/HISTSIZE
+
+2:
+date +"%d. %m. %Y"
+
+3:
+cat c | tr  ". " "/\0"
+
+4:
+ls > ./dir
+
+5:
+soubor_1: Ahoj
+soubor_2: Ahoj soubor_3?
+
+6:
+echo -e '\n\n\n' > soubor_3
+echo $'ahoj\nsvete'
+
+7:
+head -n 11 a > tmp_1; tail -n 4 a > tmp_2; cat tmp_1 tmp_2 > b; rm tmp_1 tmp_2
+
+8:
+:)
+
+9:
+cut -f1,7 -d":" /etc/passwd

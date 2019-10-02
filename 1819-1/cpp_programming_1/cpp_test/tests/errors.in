@@ -1,0 +1,38 @@
+
+=
+$missingValue =
+		  
+		$x   =   cell	 1	 2
+  print		$x
+invalidKeyword $x
+$x = cell 3
+$x = cell 3 4 $extraArgument
+$x = left
+$x = left $x $extraArgument
+$x = right
+$x = right $x $extraArgument
+print
+print $x $extraArgument
+$x = 8 $extraArgument
+print $x
+
+$with_underscore = $x
+print $with_underscore
+$$doubleDollar = $x
+noDollar = $x
+print noDollar
+
+$50 = 50
+print $50
+
+$val = 42
+print $val
+$val = $unknownVariableInvalidAssignment
+print $val
+
+$val = left $val
+print $val
+$val = right $val
+print $val
+$val = left 8
+print $val

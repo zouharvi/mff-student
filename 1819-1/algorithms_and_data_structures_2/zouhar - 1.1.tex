@@ -1,0 +1,83 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt} % removes horizontal bars from headers and footers
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{1.1}
+\rhead{Vilém Zouhar}
+
+\section*{Popis}
+Vstup si pojmenujeme $T = AB$ s tím, že chceme vytvořit výstup $T = BA$. Velikosti si označíme: $|A| = a, |B| = b$. Algoritmus funguje jednoduše tak, že se snaží opravit místo $T[a]$. Definujeme si funkci $where(i)$, která vrací hodnotu, kam patří znak z $i-$té pozice v původním řetězci. Ta vypadá následovně. Slovně všechny znaky v $A$ posune o $b$ doprava a opačně pro znaky v $B$.
+\begin{lstlisting}
+def where(i):
+	if i < a:
+		return b + i
+	else:
+		return i - a
+\end{lstlisting}
+
+Nyní se budeme soustředit na prvek $T[a]$, ze kterého budeme napravovat zbytek řetězce. Začneme $swap(a, where(a))$, což je samozřejmě to stejné, jako $swap(a, 0)$. Vyhodnocené číslo $0$ si uložíme do proměnné $t$. Na indexu $0$ je už správný znak, takže se zde už swapovat s ničím nebude. Následně jen $(a+b)-$krát provedeme $\{ swap(a, where(t)); t = where(t); \}$
+
+\section*{Pseudokód}
+\begin{lstlisting}
+def where(i):
+	if i < a:
+		return b + i
+	else:
+		return i - a
+
+t = a
+for i in 0..a+b:
+	swap(a, where(t))
+	t = where(t)
+\end{lstlisting}
+Funkce $swap$ je definovaná očekávaným způsobem. Pracuje na konstantní paměti v konstantním čase.
+
+\section*{Složitost}
+Děláme konstantní práci na $\textit{každém znak}$. Výsledkem je $O(a+b)$. Používáme jen konstantní paměť navíc.
+
+\section*{Správnost}
+Pro $a=b$ tento postup selže, neboť hned na začátku si na $T[a]$ nastavíme správnou hodnotu, takže by se tento případ musel ošetřit zvlášť. Místo důkazu správnosti zbylých případů mě napadlo jiné, snad rozumnější, řešení (druhá strana).
+
+\pagebreak
+
+\section*{Popis}
+Tento algoritmus pracuje s překlápěním. Nejprve si překlopíme celé pole a pak jednotlivé části.
+
+\section*{Pseudokód}
+\begin{lstlisting}
+def flip(i, j):
+	for z in i..j/2:
+		swap(z, j-z)
+
+flip(0, a+b)
+flip(0, b)
+flip(b+1, a+b)
+\end{lstlisting}
+
+\section*{Složitost}
+Na každém znaku uděláme dvě konstantní operace. Paměť navíc, kromě pro swapy, nepotřebujeme. Celkem $O(a+b)$ časově a $O(1)$ paměťově.
+
+\section*{Správnost}
+Můžeme se podívat, co se stane s prvkem původně: $T[x]$. Pro případ $x < a$ nejprve dostaneme $T[a+b-x]$, ale pak $T[b + a+b - a - b + x]\hspace{0.2cm}..\hspace{0.2cm}T[b+x]$, což jsme chtěli. Symetricky pro $x \ge a$.
+
+\end{document}

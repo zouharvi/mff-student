@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{7. cvičení (14. 11. 2018)}
+\rhead{Vilém Zouhar}
+
+\section{}
+Stačí spočítat kovarianci (speciální $E$), směrodatné odchylky a pak vhodit do zlomku.
+
+\section{}
+Úplně stejně. Výsledek by měl být však jiný, než v jedničce.
+
+\section{}
+\subsection{}
+Po integraci vyjde, že $c=4$
+\subsection{}
+Je třeba vypočítat $var(XY)$, proto $E[XY]$ a $E[X^2Y^2$.
+\subsection{}
+Jsou. (není to však opačná implikace?)
+\subsection{}
+Vhodně do matice $4\times 4$ naházíme $var(X), cov(X,Y), cov(Y, X), var(Y)$
+\subsection{}
+Střední hodnota je přímo lineární. U variace je nutné nezapomenout na všechny kovariace (ty jsou však v tomto případě nulové).
+
+\section{}
+Přes integrály: $cov(X,Y) = 0$\\
+Výsledný vektor nemá hustotu. Jsou závislé, neboť $P[x \in (-0.5, 0.5)] \cdot P[x^2 \in (0.5, 1)] \ne P[x \in (-0.5, 0.5) \wedge x^2 \in (0.5, 1)]$
+
+\section{}
+Integrál kruhu. Rozhodně tedy musí být závislé (všechny nezávislé jsou v kvádru)
+
+\section{}
+$Y_i \rightarrow Bi(1, p), X \rightarrow Bi(n, p)$\\
+$ EX = E[\sum Y_i] = \sum E[Y_i] = np$ \\
+$var(X) = \sum var(Y_i) = \sum var(Y_i) + \sum \sum cov(Y_i, Y_j) = np(1-p) + 0$
+
+\end{document}

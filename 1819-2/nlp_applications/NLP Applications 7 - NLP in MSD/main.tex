@@ -1,0 +1,53 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[bottom]{footmisc}
+%\setlength\parindent{0pt} % indent
+
+\hyphenation{thatshouldnot}
+
+\begin{document}
+
+\title{NLP Applications 7\\NLP in MSD, Lena Rampula}
+\author{Vilém Zouhar}
+\date{Apr 2019}
+\maketitle 
+
+\section*{Introduction}
+
+Lena Rampula is LCT Erasmus Mundus (Groningen and Prague) alumni, which is something I'm considering, although in different locations. She works at Merck \& Co. (MSD), a multinational pharma company. In the introduction she promised us an overview about what their interpretation of machine learning and NLP in context of pharmacy includes.
+
+\section*{Standard Usage}
+
+The first section started with a brief summary of their project engineering process (eg. money and energy investment, management, etc). Then, according to expectations, she justified their usage of NLP with the statement: \textit{anywhere where you have text, you have NLP}. In their terms this means translating documentation and information leaflets to all countries they operate in. This can be of course automatized and can possibly save lots of resources, but this is nothing exceptional for a multinational company. 
+
+\section*{Voice Recognition}
+
+Lena Rampula devoted some time to explanation of a very specific example in laboratories. This included laboratory researchers having to constantly walk in and out of a sterile environment just to scribble some notes. In this case a robust voice recognition could be deployed to fix this nuisance.
+
+\section*{Archives}
+
+The lecturer mentioned the issue of \textit{dark data}, which is something one meets when their get acces to data large enough. When MSD acquires some other company, or has to receive some data, it is usually strucutred in a way that does not fit the rest of the MSD ecosystem. (There's also a federal regulation issuing companies to archive certain data for 100 years\footnote{\href{https://www.snia.org/sites/default/education/tutorials/2009/fall/data/MaryBaker\_Retaining\_Information\_for\_100\_Years.pdf}{snia.org/sites/default/education/tutorials/2009/fall/data/MaryBaker\_Retaining\_Information\_for\_100\_Years.pdf}}.) In this case they have to use some smart information extraction techniques to sort and classify the data, find relevant information, filter false positives, etc.
+
+\section*{Deep BGC}
+
+This part was a bit harder to understand. It was about modernizing and approach in DNA sequence segmentation. The legacy approach included hidden markov models, but it was modernized to BiLSTM and achieved drastic improvements. The full name is \textit{Biosynthetic Gene Cluster detection and classification\footnote{\href{https://pypi.org/project/deepbgc/}{pypi.org/project/deepbgc/}}}. Because of a strong similarity between standard NLP tasks and this kind of sequence segmentation, they deployed already existing tools intended for NLP (eg. word2vec).
+
+\pagebreak
+
+\section*{Rest of the lecture}
+
+Unfortunately because of an unpleasant migrane I had to leave the lecture, but I was later briefed by a student, who attended this lecture a year before. According to her, the lecturer talked specifically about the technologies they used in their company (Python with standard NLTK toolkit, Elastic, Kibana, NacTem, Mitie and Spacy), which to me sounded uninteresting, but I was assured, that it was much more interesting live. Other topics included document obfuscation and some more information extraction. They were also quizzed, which was, according to her, a nice way to get them engaged. All in all, it was apparent, that the lectures were vastly different.
+
+\section*{Summary}
+
+I really enjoyed the part of the lecture I attended. Lena Rampular is a very good and fluent speaker and it was satisfying to listen to her. I am sad because I had to leave, since I have some question related to the first sections (eg. what is the use of BiLSTM and why LSTM is not enough).
+
+\end{document}

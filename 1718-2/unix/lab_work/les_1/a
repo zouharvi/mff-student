@@ -1,0 +1,69 @@
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/bin/false
+daemon:x:2:2:daemon:/sbin:/bin/false
+adm:x:3:4:adm:/var/adm:/bin/false
+lp:x:4:7:lp:/var/spool/lpd:/bin/false
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/bin/false
+news:x:9:13:news:/usr/lib/news:/bin/false
+uucp:x:10:14:uucp:/var/spool/uucppublic:/bin/false
+operator:x:11:0:operator:/root:/bin/bash
+man:x:13:15:man:/usr/share/man:/bin/false
+postmaster:x:14:12:postmaster:/var/spool/mail:/bin/false
+xdm:x:32:32:XDM:/var/xdm:/bin/bash
+smmsp:x:209:209:smmsp:/var/spool/mqueue:/bin/false
+portage:x:250:250:portage:/var/tmp/portage:/bin/false
+nobody:x:65534:65534:nobody:/:/bin/false
+sshd:x:22:22:added by portage for openssh:/var/empty:/sbin/nologin
+messagebus:x:101:198:added by portage for dbus:/dev/null:/sbin/nologin
+mysql:x:60:60:added by portage for mysql:/dev/null:/sbin/nologin
+ldap:x:439:439:added by portage for openldap:/usr/lib64/openldap:/sbin/nologin
+apache:x:81:81:added by portage for apache:/var/www:/sbin/nologin
+avahi:x:102:195:added by portage for avahi:/dev/null:/sbin/nologin
+pulse:x:103:103:added by portage for pulseaudio:/var/run/pulse:/sbin/nologin
+cron:x:16:16:added by portage for cronbase:/var/spool/cron:/sbin/nologin
+dictd:x:104:998:added by portage for dictd:/dev/null:/sbin/nologin
+tcpdump:x:105:996:added by portage for tcpdump:/dev/null:/sbin/nologin
+fetchmail:x:106:995:added by portage for fetchmail:/var/lib/fetchmail:/sbin/nologin
+distcc:x:240:2:added by portage for distcc:/dev/null:/sbin/nologin
+hsqldb:x:107:993:added by portage for hsqldb:/dev/null:/bin/sh
+sockd:x:108:2:added by portage for dante:/etc/socks:/sbin/nologin
+colord:x:109:989:added by portage for colord:/var/lib/colord:/sbin/nologin
+games:x:36:35:added by portage for emacs-common-gentoo:/usr/games:/bin/bash
+gpsd:x:110:14:added by portage for gpsd:/dev/null:/sbin/nologin
+saned:x:111:997:added by portage for sane-backends:/dev/null:/sbin/nologin
+polkitd:x:112:988:added by portage for polkit:/var/lib/polkit-1:/sbin/nologin
+rplayd:x:113:987:added by portage for rplay:/dev/null:/sbin/nologin
+kdm:x:114:986:added by portage for kdm:/var/lib/kdm:/sbin/nologin
+sabayon-admin:x:115:985:added by portage for sabayon:/var/lib/sabayon:/sbin/nologin
+lighttpd:x:116:983:added by portage for lighttpd:/var/www/localhost/htdocs:/sbin/nologin
+tomcat:x:265:265:added by portage for tomcat:/dev/null:/sbin/nologin
+timidity:x:117:18:added by portage for timidity++:/var/lib/timidity:/sbin/nologin
+sage:x:118:982:added by portage for sage-notebook:/var/lib/sage:/bin/bash
+at:x:25:25:added by portage for at:/var/spool/at/atjobs:/sbin/nologin
+stunnel:x:119:981:added by portage for stunnel:/dev/null:/sbin/nologin
+nx:x:120:120:added by portage for nxnode:/var/lib/nxserver/home:/usr/bin/nxserver
+monotone:x:121:980:added by portage for monotone:/var/lib/monotone:/sbin/nologin
+aspnet:x:122:979:added by portage for xsp:/tmp:/sbin/nologin
+firebird:x:450:450:added by portage for firebird:/usr/lib64/firebird:/bin/bash
+gkrellmd:x:123:977:added by portage for gkrellm:/dev/null:/sbin/nologin
+festival:x:124:18:added by portage for festival:/dev/null:/sbin/nologin
+mon:x:799:799:monitoring vytizeni:/home/mon:/bin/bash
+cacad:x:9001:110:Cisco network academy user:/afs/ms/u/c/cacad:/bin/bash
+geoclue:x:125:976:added by portage for geoclue:/var/lib/geoclue:/sbin/nologin
+mongodb:x:126:974:added by portage for mongodb:/var/lib/mongodb:/sbin/nologin
+x2gouser:x:127:972:added by portage for x2goserver:/var/lib/x2go:/sbin/nologin
+x2goprint:x:128:971:added by portage for x2goserver:/var/spool/x2goprint:/sbin/nologin
+collectd:x:129:970:added by portage for collectd:/var/lib/collectd:/sbin/nologin
+ceph:x:130:967:added by portage for ceph:/var/lib/ceph:/sbin/nologin
+postgres:x:70:70:added by portage for postgresql:/var/lib/postgresql:/bin/sh
+etcd:x:131:966:added by portage for etcd:/var/lib/etcd:/sbin/nologin
+sddm:x:132:965:added by portage for sddm:/var/lib/sddm:/sbin/nologin
+haproxy:x:133:964:added by portage for haproxy:/dev/null:/sbin/nologin
+tor:x:134:963:added by portage for tor:/var/lib/tor:/sbin/nologin
+syncthing:x:135:962:added by portage for syncthing:/var/lib/syncthing:/sbin/nologin
+strelaysrv:x:136:961:added by portage for syncthing:/var/lib/strelaysrv:/sbin/nologin
+spamd:x:137:137:added by portage for spamassassin:/home/spamd:/sbin/nologin
+icecast:x:138:65533:added by portage for icecast:/dev/null:/sbin/nologin

@@ -1,0 +1,56 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{7. domácí úkol | Vilém Zouhar}}
+\section{}
+Zadaná funkce je prostá $\rightarrow$ můžeme najít inverzi $\rightarrow$ můžeme prohodit osy a rotovat kolem osy $x$. Z původní funkce $y=x^{\frac{1}{3}}$  dostaneme po prohození $y=x^3$. Pak použijeme vzorec na rotaci kolem osy $x$.
+\begin{align*}
+&V = \pi \int_1^2 (x^3)^2 dx = \pi \bigg[ \frac{x^7}{7} \bigg]_1^2 = \frac{127}{7} 
+\end{align*}
+
+\section{}
+\begin{align*}
+& \bigg( \frac{1}{x} \bigg)' = \frac{-1}{x^2}; \hspace{0.5cm} \Bigg( \bigg( \frac{1}{x} \bigg)' \Bigg)^2 = \frac{1}{x^4} \\
+& \text{Obecně:}\\
+& \int \frac{1}{x} \sqrt{1+\frac{1}{x^4}} dx = \int \frac{\sqrt{1+x^4}}{x^3} dx = [sub. z=x^2, "dz=2x dx"] = \int \frac{\sqrt{1+z^2}}{2z^2} dz = \\
+& \hspace{1cm} \int \frac{1}{z^2\sqrt{z^2+1}} dz = [sub. z = \tan(\alpha), "dz = 1/\cos^2(\alpha)] = \\
+& \hspace{1cm} \int \frac{1}{\tan^2(\alpha) \sqrt{1+\tan^2(\alpha)}} d\alpha = \int \frac{1}{\tan^2(\alpha) \sqrt{1+\tan^2(\alpha)}} d\alpha = \\
+& \hspace{1cm} \int \frac{\cos(\alpha) \cos^2(\alpha)}{\sin^2(\alpha)\cos^2(\alpha)} d\alpha = \int \frac{\cos(\alpha)}{\sin^2(\alpha)} d\alpha = [sub. u = \sin(\alpha); "du = \cos(\alpha) d\alpha"] = \\
+& \hspace{1cm} \int \frac{1}{u^2} du = \frac{-1}{u} + C = \frac{-1}{\sin(\alpha)} +C = \frac{-\sqrt{1+z^2}}{z} + C \\
+& = \frac{1}{2} \bigg[ \int \frac{1}{\sqrt{z^2+1}} dz + \int \frac{1}{z^2\sqrt{z^2+1}} dz \bigg] = \frac{1}{2} \bigg[ \sinh^{-1}(z) - \frac{\sqrt{z^2+1}}{z} \bigg] + C = \\
+& = \frac{1}{2} \bigg[ \sinh^{-1}(x^2) - \frac{\sqrt{x^4+1}}{x^2}\bigg] + C \\
+& \text{Nyní určitý integrál:} \\
+& \int_1^\infty \frac{1}{x} \sqrt{1+\frac{1}{x^4}} dx = \lim_{x \rightarrow \infty} \frac{1}{2} \bigg[ \sinh^{-1}(x^2) - \frac{\sqrt{x^4+1}}{x^2}\bigg] - \lim_{x \rightarrow 1} \frac{1}{2} \bigg[ \sinh^{-1}(x^2) - \frac{\sqrt{x^4+1}}{x^2}\bigg] = \\
+& \frac{1}{2} \bigg[ \lim_{x \rightarrow \infty}  \sinh^{-1}(x^2) - \lim_{x \rightarrow \infty}  \frac{\sqrt{x^4+1}}{x^2} - K \bigg] \text{(původní pravá limita je ze spojité funkce, tedy nějaké konečné reálné $K$)} = \\
+& \frac{1}{2} \bigg[ \lim_{x \rightarrow \infty}  \sinh^{-1}(x^2) - 1 - K \bigg] = \frac{1}{2} \bigg[ \lim_{x \rightarrow \infty}  \ln(x+\sqrt{x^2+1}) - 1 - K \bigg] = \infty \\
+& \text{Z toho usoudíme, že povrch je nekonečný. Místo pracného výpočtu integrálu jsme však mohli použít integrační kritérium,} \\
+& \text{které je ve skutečnosti tvaru ekvivalence a zjistili bychom, že povrch je $\infty$.} \\
+& \text{(z kritéria a pozorování, že $\frac{\sqrt{1+x^4}}{x^3}$ je skoro $\frac{\sqrt{x^4}}{x^3}=\frac{1}{x}$, což víme, že tvoří nekonvergující řadu pro přirozená $x$,} \\
+& \text{tedy daný integrál (pro konečnou spodní mez a nekonečnou horní) je nekonečno)} 
+% TODO: urcity integral, treba ukazat, ze v nekonecnu je plocha ??????
+\end{align*}
+
+\section{}
+\begin{align*}
+& \int^a_{\frac{1}{a}} \frac{\ln(x)}{x} dx = [sub. z = \ln(x); "dz = \frac{1}{x} dx"] = \int^{\ln{a}}_{\ln(\frac{1}{a})} z\hspace{0.3cm} dz = \\
+& \frac{1}{2} \bigg[ z^2 \bigg]_{\ln(a)}^{\ln(\frac{1}{a})} = \frac{\ln^2(a)}{2}-\frac{\ln^2(a^{-1})}{2} = \frac{\ln^2(a)}{2}-\frac{(-\ln(a))(-\ln(a))}{2} = \\
+& \frac{\ln^2(a)}{2}-\frac{(\ln^2(a)}{2} = 0 
+\end{align*}
+
+\end{document}

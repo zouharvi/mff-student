@@ -1,0 +1,11 @@
+EAEA
+A900 ; LDA 00
+4C0E ; JMP condition
+851F ; STA $1F
+A61F ; LDX $1F
+9520 ; STA $20, X
+6901 ; ADD $01
+C90D ; CMP $0D
+B002 ; BCS $02
+4C06 ; JMP body
+EAEA

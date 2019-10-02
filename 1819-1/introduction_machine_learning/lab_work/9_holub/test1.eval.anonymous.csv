@@ -1,0 +1,88 @@
+Faculty	Nationality	Course	Gender	Entry	Score	Lang	Version	Review	Eval	1a	1b	1c	2a	2b	2b1	2b2	2c	2d	2e	2f	2g	3a	3b
+MFF	CZ	Y	M	10	20	CZ	A	BH	perfect	2	3		1	2			1	1	1	1	1	5	2
+MFF	CZ	N	M	9	20	CZ	B	MH	perfect	1	2	2	1		1	1	1	1	1	1	1	5	2
+MFF	SK	Y	M	11	20	CZ	A	MH	perfect	2	3		1	2			1	1	1	1	1	5	2
+MFF	CZ	Y	M	10	20	CZ	A	BH	perfect	2	3		1	2			1	1	1	1	1	5	2
+MFF	CZ	Y	M	9	20	CZ	B	BH	perfect	1	2	2	1		1	1	1	1	1	1	1	5	2
+MFF			M		20	CZ	B	MH	perfect	1	2	2	1		1	1	1	1	1	1	1	5	2
+MFF	CZ	Y	M	13	20	CZ	A	MH	perfect	2	3		1	2			1	1	1	1	1	5	2
+MFF	CZ	Y	M	9	19	CZ	A	BH	perfect	2	3		1	2			1	1	1	1	0	5	2
+PřF	CZ	Y	F	13	19	CZ	B	MH	perfect	1	2	1	1		1	1	1	1	1	1	1	5	2
+MFF	SK	Y	M	10	19	CZ	A	MH	perfect	2	3		1	2			1	1	1	1	1	4	2
+MFF	CZ	Y	M	9	19	CZ	A	BH	perfect	2	3		1	2			1	1	1	1	0	5	2
+MFF	CZ	Y	M	13	19	CZ	B	MH	perfect	1	2	1	1		1	1	1	1	1	1	1	5	2
+MFF	CZ	N	M	13	19	EN	B	MH	perfect	1	2	2	1		1	1	1	1	1	1	1	5	1
+MFF			M		18	CZ	A	BH	good	2	3		1	2			1	1	1	1	1	3	2
+MFF	CZ	Y	M	10	18	CZ	B	BH	good	1	2	0	1		1	1	1	1	1	1	1	5	2
+MFF			M		18	EN	B	MH	good	1	2	1	0		1	1	1	1	1	1	1	5	2
+MFF			M		18	EN	B	MH	good	0	2	1	1		1	1	1	1	1	1	1	5	2
+PřF	CZ	Y	M	9	18	CZ	A	MH	good	2	2		1	2			1	1	1	1	0	5	2
+MFF	CZ	Y	M	9	18	CZ	A	BH	good	2	3		1	2			1	1	0	1	0	5	2
+MFF	CN	N	M	11	18	EN	B	MH	good	0	2	1	1		1	1	1	1	1	1	1	5	2
+MFF	?	N	M	5	17	EN	B	MH	good	1	2	0	1		1	1	1	1	1	1	0	5	2
+MFF	CZ	Y	M	9	17	CZ	B	MH	good	1	2	0	1		1	1	1	1	1	1	0	5	2
+MFF	CZ	Y	M	7	17	CZ	B	BH	good	1	2	0	1		1	1	1	1	1	1	0	5	2
+MFF	CZ	Y	F	11	17	CZ	B	MH	good	1	1	1	1		1	1	1	1	1	1	0	5	2
+MFF	CZ	Y	F	11	17	CZ	A	BH	good	2	1		1	2			1	1	1	1	0	5	2
+MFF	other	Y	F	9	17	CZ	B	BH	good	1	2	2	1		1	1	1	1	1	1	1	3	1
+PřF	CZ	Y	F	12	16	CZ	A	BH	good	2	0		1	2			1	1	1	1	1	5	1
+MFF	CZ	N	M	12	16	CZ	A	BH	good	2	3		1	2			1	1	1	1	1	2	1
+MFF	CZ	Y	F	10	16	CZ	B	BH	good	1	2	0	1		1	1	1	1	0	1	0	5	2
+MFF	CZ	Y	M	10	15	CZ	A	BH	moderate	1	1		1	1			1	1	1	1	0	5	2
+	?	?	F		15	CZ	B	MH	moderate	0	1	0	1		1	1	1	1	1	1	0	5	2
+MFF	SK	Y	M	6	15	CZ	A	MH	moderate	2	3		1	2			1	0	1	1	1	3	0
+PřF	CZ	N	M	4	15	EN	A	MH	moderate	0	1		1	2			1	1	1	1	0	5	2
+MFF	SK	Y	M	10	15	CZ	A	MH	moderate	1	1		1	1			1	1	1	1	0	5	2
+MFF	JP	Y	M	11	15	EN	B	MH	moderate	0	1	0	1		1	1	1	1	1	1	1	4	2
+MFF	SK	Y	M	10	15	CZ	A	MH	moderate	2	3		1	2			1	1	1	1	1	2	0
+MFF	CZ	Y	M	8	15	CZ	A	MH	moderate	2	3		1	2			1	1	1	1	1	2	0
+MFF	FR	N	M	9	14	EN	B	MH	moderate	0	0	1	0		1	1	1	1	1	1	0	5	2
+MFF	CZ	Y	M	9	13	CZ	A	MH	moderate	2	2		1	1			1	1	1	1	0	3	0
+MFF	SK	Y	M	6	13	CZ	A	BH	moderate	1	0		1	0			1	1	1	0	1	5	2
+MFF	SK	Y	M	11	13	CZ	A	BH	moderate	1	0		1	0			1	1	1	0	1	5	2
+MFF			M		13	CZ	B	BH	moderate	1	0	0	1		1	1	1	1	0	1	1	3	2
+MFF	CZ	Y	M	10	12	CZ	A	MH	moderate	2	3		1	0			1	1	1	0	1	1	1
+MFF	CZ	Y	M	6	12	CZ	A	MH	moderate	1	1		1	0			1	1	0	1	0	4	2
+PřF	CZ	Y	F	11	11	CZ	A	MH	moderate	2	0		1	2			1	1	0	1	0	2	1
+MFF	CZ	N	M	5	11	CZ	A	BH	moderate	1	0		1	2			1	1	1	1	0	2	1
+MFF	FR	N	M	8	10	EN	B	MH	weak	1	2	1	1		1	1	0	0	0	0	0	3	0
+	RU	?	F		10	EN	B	MH	weak	1	2	1	1		0	0	1	1	1	1	0	1	0
+MFF	UK	N	M	8	10	EN	B	MH	weak	1	1	0	1		1	1	1	1	1	1	1	0	0
+MFF	HU	N	M	8	10	EN	B	MH	weak	1	2	1	0		1	1	1	1	1	1	0	0	0
+MFF	?	?	M	5	9	EN	B	MH	weak	0	1	0	1		0	0	1	1	1	1	1	2	0
+MFF	CZ	N	M	1	9	CZ	B	MH	weak	0	0	0	1		1	1	0	0	0	1	0	5	0
+MFF			M		9	EN	B	MH	weak	1	0	0	1		1	1	1	1	1	1	1	0	0
+MFF	CZ	Y	M	12	9	CZ	A	MH	weak	0	0		1	2			1	1	1	1	0	2	0
+MFF	SK	Y	F	10	9	CZ	A	BH	weak	1	0		1	2			1	1	0	0	0	3	0
+MFF			M		8	EN	B	MH	weak	1	0	0	1		0	0	0	0	0	0	0	4	2
+MFF	CZ	Y	M	12	8	CZ	A	MH	weak	1	0		0	1			1	1	1	1	0	1	1
+MFF	SK	N	M	4	8	CZ	B	BH	weak	1	0	0	1		1	0	0	0	0	0	0	3	2
+MFF	IN	Y	M	7	7	EN	B	MH	poor	0	2	0	1		0	0	1	1	1	1	0	0	0
+MFF			M		7	CZ	A	BH	poor	1	0		1	0			1	1	0	0	0	2	1
+MFF	SK	Y	M	13	6	EN	A	MH	poor	2	2		1	0			0	0	0	1	0	0	0
+MFF	UA	N	M	1	6	EN	B	MH	poor	1	1	1	1		0	1	0	0	0	1	0	0	0
+MFF	?	N	M	4	5	EN	B	MH	poor	0	0	0	1		1	1	0	0	1	1	0	0	0
+MFF			F		3	EN	A	MH	poor	1	0		0	0			1	1	0	0	0	0	0
+	?	?	?	4																			
+	CZ	Y	?	11																			
+MFF			M																				
+	SK	Y	M	11																			
+MFF	CZ	Y	M	5																			
+MFF	CZ	N	M	6																			
+MFF			M																				
+MFF			M																				
+MFF			M																				
+MFF	CZ	Y	M	13																			
+MFF			M																				
+MFF	CZ	Y	M	9																			
+MFF			F																				
+	CZ	N	M	9																			
+MFF	CZ	N	M	5																			
+MFF			M																				
+MFF			M																				
+MFF			M																				
+MFF			M																				
+MFF	CZ	N	M	5																			
+	CZ	Y	M	13																			
+MFF			M																				
+PřF	UA	N	M	12																			

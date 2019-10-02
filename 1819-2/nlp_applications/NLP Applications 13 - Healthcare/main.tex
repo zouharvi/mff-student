@@ -1,0 +1,57 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[bottom]{footmisc}
+%\setlength\parindent{0pt} % indent
+
+\hyphenation{thatshouldnot}
+
+\begin{document}
+
+\title{NLP Applications 13\\Changing Discovery and Prevention of Healthcare-Associated Infections in Hospitals\\Lenka Vraná}
+\author{Vilém Zouhar}
+\date{May 2019}
+\maketitle
+
+\section*{Introduction}
+Datlowe was established in 2014 with the main project of NLP in banking. Later it acquired an investor, but even later split into two groups: NLP in banking and NLP in healthcare. They focused on healthcare, because banks usually already have large analytical departments, but healthcare institutions have nothing of this sort.
+
+\section*{HAI\footnote{healthcare associated infections, 5\% of all cases}}
+Some of these infections are preventable, so the hospital needs to know about this problem. The are two ways to combat this issue: active and passive (biased data).
+
+Datlowe develops a system HAIDi, which aims to detect such cases. The lecturer then explained the high level design of this system. It consists of three main parts: NLP, reasoning and detection. The later two parts and language independent.
+
+We were showcased usage of the Snomed-CT, a systematized nomenclature of clinical terms and then explained the issue regarding basing the system on keywords.\footnote{\href{http://datlowe.cz/six-reasons-why-keywords-are-not-enough-for-text-mining/}{datlowe.cz/six-reasons-why-keywords-are-not-enough-for-text-mining/}} This constant refocusing was difficult.
+
+\section*{Keywords}
+According to Lenka Vraná, using keywords as a basis for any NLP related system is not wise. The main causes are:
+\begin{itemize}
+    \item synonyms 
+    \item acronyms and abbrevations
+    \item reasoning
+    \item typos
+    \item incomplete information
+    \item negative statements
+\end{itemize}
+Unfortunately she didn't go into further detail about these issues. In my opinion, the only significant ones are the last two.
+
+\hspace{2cm}
+
+\section*{Reasoning}
+The lecturer then devoted some time into details about splitting concepts in clinical texts (separating clauses of symptoms). After several minutes we discovered, that what she means by \textit{reasoning} is just \textit{feature extraction}.
+
+At the end of this sections, she talked briefly about user experience for the medical staff, which actually sounded interesting. she then mentioned the results of deploying HAIDi and mentioned the imbalance of positive and negative cases in this domain. Allegedly the increased HAI detection up to 360\%.
+
+Before the end of the lecture, she showcased us their application, but I was rather confused by her demo.
+
+\section*{Summary}
+I didn't have any significant problems with the lecture, except for the sometimes unintelligible speech of the lecturer. Unfortunately this topic did not appeal to me as much as the one throughout the semester.
+
+\end{document}

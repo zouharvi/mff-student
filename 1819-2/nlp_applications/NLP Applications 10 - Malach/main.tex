@@ -1,0 +1,51 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2.1cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[bottom]{footmisc}
+%\setlength\parindent{0pt} % indent
+
+\hyphenation{thatshouldnot}
+
+\begin{document}
+
+\title{NLP Applications 10\\Malach, Pavel Pecina}
+\author{Vilém Zouhar}
+\date{May 2019}
+\maketitle 
+
+\section*{Introduction}
+
+Pavel Pecina started his talk with brief history of the Malach project. It all started with the 1993 movie \textit{Schindler's List}, which was a precursor to recording testimonies of the Holocaust survivors. Steven Spielberg started a foundation \footnote{Survivors of the Shoah Visual History Foundation \href{https://sfi.usc.edu/}{https://sfi.usc.edu/}}. This foundation recorded interview from 52 000 survivors, liberators and rescuers. They manually catalogized 10\% of all testimonies. NSF proposed a project to improve the access to large multilingual spoken word collections.
+
+The lecturer went into great detail about all historical aspects of data collection (by Visual History Foundation/Institute), which was very well put and quite interesting to listen to. This included various details, such as number of interviews, total cost, methodology etc. He also mentioned the participation of Czech annotators and interviewees in this project.
+
+\section*{Cataloging and annotations}
+
+The cataloging was split into two levels: interview-level annotation and segment-level annotation. In this part he also explained the whole GUI the annotators used, which was quite informative. He also mentioned the shortcoming this approach had. He also tried to explain the advantage of \textit{real-time annotating}, but I seem to have missed his main point.
+
+At this point he also recapped the main goal of the cataloguing project (automatic recognition, automatic topic boundary tagging, environment for cross-language information retrieval and browsing). This project faced challenges such as low \textit{language quality} (difficult even for human listeners), colloquial expressions and pronunciations etc.
+
+\section*{Speech Recognition}
+
+Despite the technical difficulties, the finalspeech recognition results error rate was about 20\%. The lecturer explained the general process of deploying such system. I felt as if something was missing in this part.
+
+\section*{Information Retrieval}
+
+The approach they used for information retrieval was \textit{bag of words}, which I do not believe to be  very sophisticated (there exist much more advanced methods of representing the content of a document). I would definietly like to hear more technical details about document \& speech information retrieval. I found it interesting, that they use the whole speech recognition pipeline mostly for internal purposes.
+
+\section*{Evaluation}
+
+Despite otherwise great lecture, I was disappointed by this part. Mr. Pecina talked about quality requirements, different types of testing etc, which are topics of a different lecture (NSWI041). He also talked about basic problems related to measurements (eg. precision vs recall).
+
+\section*{Summary}
+
+I generally enjoyed this talk and consider it very informative. I was, however, lost at several places, because I was unsure about what project the lecturer was talking about at that moment.
+
+\end{document}

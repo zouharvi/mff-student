@@ -1,0 +1,7 @@
+users:x:100:idris,prys,lynx
+admin:x:120:idris
+unix:x:121:prys,lynx
+idris:x:1000:
+prys:x:1001:
+lynx:x:1002:
+anaconda:x:1001

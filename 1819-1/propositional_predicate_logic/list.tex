@@ -1,0 +1,170 @@
+% !TeX spellcheck = cs_CZ
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{Dec 2018}
+\rhead{Vilém Zouhar}
+
+Neúplný seznam definic, vět a poznatků ke zkoušce z Výrokové a predikátové logiky
+
+\newcommand{\bP}{$\mathbf{P}$}
+\newcommand{\ph}{$\phi$}
+
+\section{Úvod, tablo}
+
+\subsection{Definice}
+\begin{itemize}
+\item četnost/arita relace a funkce, mohutnost
+\item jazyk výrokové logiky, formule
+\item množina všech výrokových formulí nad jazykem \bP
+\item množina všech výrokových proměnných ve formuli \ph
+\item ohodnocení výroku, vytvořující strom výroku
+\item model, třída všech modelů; pravdivý, lživý, splnitelný, nezávislý, ekvivalentní model
+\item CNF, DNF, literál, prázdná konjunkce/disjunkce, (elementární) konjunkce a klauzule
+\item SAT
+\item jednotková klauzule, Hornova klauzule, Hornův výrok
+\item teorie, model teorie, třída modelů teorie
+\item pravdivý, lživý, nezávislý, splnitelný, ekvivalentní v teorii
+\item sporná, kompletní teorie, extenze (jednoduchá, konzervativní) teorie, ekvivalentní teorie
+\item důsledek teorie
+\item algebra výroků
+\item korektnost a úplnost dokazovacích systémů
+\item tablo, zamítnutí, důkaz, redukovaná položka, sporná, dokončená větev, dokončené, sporné tablo
+\item atomické tablo, konečné tablo z [prázdné] teorie, systematické tablo
+\item množina teorémů teorie (vs. důsledky)
+\item sporná, kompletní, extenze (jednoduchá, konzervativní), ekvivalentní teorie
+\end{itemize}
+
+\subsection{Věty}
+\begin{itemize}
+\item Cantorova věta
+\item Königovo lemma
+\item 2-SAT polynomiálně + korektnost a úplnost
+\item Horn-SAT
+\item počty výroků
+\item konečnost tablo důkazu
+\item lemma o shodnosti větve s modelem
+\item korektnost tablo důkazu
+\item lemma o tvaru shodnosti větve s modelem 
+\item úplnost tablo důkazu
+\item věta o kompaktnosti
+\end{itemize}
+
+\pagebreak
+
+\section{Rezoluční metoda, konec VL}
+
+\subsection{Definice}
+\begin{itemize}
+\item literál, množinová reprezentace CNF, (částečné|totální) ohodnocení
+\item rezoluční pravidlo, rezoluční důkaz
+\item rezoluční strom, rezoluční uzávěr
+\item redukce dosazením
+\item lineární důkaz, (počáteční|centrální|boční) klauzule
+\item fakt, pravidlo, cíl
+\end{itemize}
+
+\subsection{Věty}
+\begin{itemize}
+\item korektnost rezoluce
+\item lemma: formule splnitelná právě když jedna z jejich redukcí \textit{l} je
+\item důsledek: formule není splnitelná právě když každá větev obsahuje spor
+\item úplnost rezoluce
+\item korektnost LI rezoluce
+\item úplnost LI rezoluce pro Hornovy formule
+\end{itemize}
+
+\pagebreak
+
+\section{Úvod PL, tablo}
+
+\subsection{Definice}
+\begin{itemize}
+\item jazyk, signatura jazyka, term, atomická formule, formule
+\item (vázaný|volný) výskyt proměnné, (otevřené|uzavřené) formule
+\item instance, substituovatelný term, varianta
+\item struktura pro jazyk
+\item hodnota (termu|(atomické|) formule), platnost formule při ohodnocení
+\item platnost ve struktuře
+\item teorie jazyka, model teorie, třída modelů teorie
+\item (pravdivá|lživá|nezávislá) v teorii, důsledek teorie
+\item (sporná|kompletní) teorie, (jednoduchá|konzervativní) extenze, (elementárně) ekvivalentní
+\item (indukovaná|generovaná|) podstruktura, restrikce
+\item (redukt|expanze) struktury do jazyka
+\item definovatelné množiny
+\item kongruence pro (funkci|relaci)
+\item dokončené tablo, kanonický model (s rovností|)
+\end{itemize}
+
+\subsection{Věty}
+\begin{itemize}
+\item $T, \neg \phi $ nemá model $ \Leftrightarrow T \models \phi$
+\item věta o konstantách
+\item dokončenost systematického tabla PL
+\item konečnost sporného tabla PL
+\item význam axiomu rovnosti
+\item lemma o shodnosti s kořenem
+\item korektnost tablo metody pro PL
+\item lemma o shodnosti kanonického modelu
+\item úplnost tablo metody pro PL
+\end{itemize}
+
+\pagebreak
+
+\section{Skolem, Herbrand}
+
+\subsection{Definice}
+\begin{itemize}
+\item vytýkání kvantifikátorů
+\item prenexní (normální|) tvar
+\item Skolemova varianta
+\item Herbrandův modely
+\end{itemize}
+
+\subsection{Věty}
+\begin{itemize}
+\item Löwenheim-Skolemova věta
+\item kompaktnost v PL
+\item věta o rozšiřování teorií
+\item extenze o definici relace
+\item extenze o definici funkce
+\item extenze o definici (spousta lemmat a důsledků)
+\item převody na prenexní tvar
+\item vlastnosti Skolemovy varianty
+\item Skolemova věta
+\end{itemize}
+
+\pagebreak
+
+
+\section{Rezoluce PL}
+
+\subsection{Definice}
+\begin{itemize}
+\item unifikace
+\end{itemize}
+
+\subsection{Věty}
+\begin{itemize}
+\item korektnost unifikace
+\end{itemize}
+
+\end{document}

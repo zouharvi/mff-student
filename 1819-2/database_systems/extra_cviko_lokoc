@@ -1,0 +1,100 @@
+OLTP (online transactional processing)
+OLAP (online analytical processing)
+klíč - minimální množina atributů určující všechny ostatní
+nadklíč - neminimální množina atributů ...
+
+2NF
+3NF
+BCNF
+
+A = {a, b, c, d, e, f}
+FZ = {a->bc, b->c, bc->f}
+
+1.
+vsechny klice, minimalni pokryti
+- {a, d, e} {a->b, b->c, b->f} 
+redundantni atributy, redundantni zavislost
+- {c}, {a->c, bc->f}
+
+
+Hledani redundantnich atributu:
+? bc -> f ?
+{b}+ = pokud obsahuje f, pak c je redundantni ({b, c,f} => muzeme pridat FZ b->f)
+{c}+ = pokud obsahuje f, pak b je redundantni ({c})
+
+Hledani redundantni zavislosti:
+Spolecne s predchozim krokem.
+Hledani minimalniho pokryti:
+Zmensime a zavislost "a->bc" rozdelime na "a->b, a->c"
+
+2.
+a -> b porusuje 2NF
+b -> c porusuje 3NF
+b -> f porusuje 3NF
+
+Dva algoritmy: dekompozice a synteza
+
+Dekompozice:
+Pro odebranou zavislost zalozime novou tabulku. Zaciname obvykle tim, co nejmene poskodi zbytek zavislosti
+
+1. krok: A1 = {_b_, f} F1 = {b->f} A = {_a, b, c, _d, _e} F = {a->b, b->c}
+2. krok: A2 = {_b_, c} F2 = {b->c} A = {_a, b, _d, _e} F = {a->b}
+3. krok: A3 = {_a_, b} F3 = {a->b} A4 = {_a, _d, _e} F = {}
+
+Zanechava pokryti: generuje sjednoceni vsech FZ puvodni FZ?
+Bezeztratovost: je join tabulek puvodni tabulka?
+Alg. dekompozice je bezeztratovy
+
+Synteza:
+a->b, b->cf (naparuje podle levych stran)
+
+A1 = {_a, b} a->b
+A2 = {_b, c, f} b->c
+Alg. syntezy zachovava pokryti, ale nikoliv bezeztratovost
+pridam tabulku puvodniho klice: A3 = {_a, _d, _e}
+
+
+
+Priklad 1 z minuleho roku 1:
+A = {Cen, Cis, Kus, Min, Odv, Prc, Naz, Typ}
+F = {CenMinPrc->Odv, Cis->Naz, CisKusNaz->Cen, KusTyp->MinPrc}
+
+Minimalni pokryti, vsechny klice
+{CisKus->Cen, Cis->Naz, CenMinPrc->Odv, KusTyp->Min, KusTyp->Prc} {Cis, Kus, Typ}
+Redundantni atributy, zavislosti
+{Naz}, {CisKusNaz->Cen}
+
+Synteza do 3NF
+A1 = {_Cis, _Kus, Cen} FZ = {CisKus->Cen}
+A2 = {_Cis, Naz} FZ = {Cis->Naz}
+A3 = {_Cen, _Min, _Prc, Odv} FZ = {CenMinPrc->Odv}
+A4 = {_Kus, _Typ, Min, Prc} FZ = {KusTyp->MinPrc} (opet jsme sloucili podle levych stran)
+Neni bezeztratova (joinujeme po celých klíčích, nikoliv po jednotlivých prvcích klíčů),
+proto pridame A5 = {_Cis, _Kus, _Typ}
+
+Priklad 1 z minuleho roku 2:
+A = {D, L, M, O, P, T, V}
+F = {D->M, M->DTV, OP->DMT}
+
+Minimalni pokryti, vsechny klice:
+{OP->D, D->M, M->D, M->V, M->T}, {L, O, P} POZOR: porovnat se vsemi puvodnimi atributy!!!
+(díváme se, zdali vede více cest z nějakého vrcholu do jiného}
+Redundantni atributy, zavislosti:
+{}, {}
+
+Synteza do 3NF:
+A1 = {_D, M} {D->M}
+A2 = {_M, T, V, D} {M->DVT} -->> sjednotime A12 = {_D_, _M_, T, V} (kazdy samostatne klicem), (slucujeme, nebot jsou funkcne zavislostni}
+A3 = {_OP, D} {OP->D}
+A4 = {_L, _O, _P}
+
+Priklad 1 z minuleho roku 2:
+A = {A, B, D, E, F, P, R}
+F = {A->P, B->D, BF->R, D->BF, F->B}
+
+Redundantni atributy, zavislosti:
+{F}, {BF->R} => {A->P, B->D, B->R, D->B, D->F, F->B}
+Minimalni pokryti, klice:
+{A->P, B->D, B->R, D->F, F->B} {{A, E, D}, {A, E, F}, {A, E, B}} (B=D=F)
+
+Synteza:

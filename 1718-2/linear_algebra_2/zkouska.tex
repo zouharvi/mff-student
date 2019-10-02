@@ -1,0 +1,143 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings, graphicx, multicol}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+% \newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{note}{Note}
+\newtheorem{algorithm}{Algorithm}
+
+\begin{document}
+\text{}\vspace{-0.1cm}
+{\fontfamily{pbk}\fontsize{12}{15}\selectfont \hspace{-0.5cm}\text{Lineární algebra | Vilém Zouhar}}
+\vspace{1cm}
+\begin{definition}{Standardní skalární součin} \end{definition}
+\begin{definition}{Skalární součin} \end{definition}
+\begin{definition}{Skalární součin nad $\mathbb{C}$} \end{definition}
+\begin{definition}{Norma indukovaná skalárním součinem} \end{definition}    
+\begin{definition}{Kolmost} \end{definition}
+\begin{theorem}{Pythagorova věta} \end{theorem}
+\begin{theorem}{Couchy-Schwarzova nerovnost} \end{theorem}
+\begin{theorem}{Trojúhelníková nerovnost} \end{theorem}
+\begin{definition}{Norma} \end{definition}
+\begin{theorem}{Každá norma indukovaná skalárním součinem je norma} \end{theorem}
+\begin{definition}{Obecná norma} \end{definition}
+\begin{theorem}{Rovnoběžníkové pravidlo} \end{theorem}
+\begin{definition}{Metrika} \end{definition}
+\begin{definition}{Ortogonalita} \end{definition}
+\begin{definition}{Ortonormalita} \end{definition}
+\begin{theorem}{Ortonormální nezávislí} \end{theorem}
+\begin{theorem}{Furierovy koeficienty} \end{theorem}
+\begin{algorithm}{Gram-Schmidtova ortogonalizace} \end{algorithm}
+\begin{theorem}{Všude ortonormální báze} \end{theorem}
+\begin{theorem}{Rozšíření na ortonormální} \end{theorem}
+\begin{theorem}{Besselova a Parselova nerovnost} \end{theorem}
+\begin{definition}{Ortogonální doplněk} \end{definition}
+\begin{theorem}{1. tvrzení o doplňku} \end{theorem}
+\begin{theorem}{2. tvrzení o doplňku} \end{theorem}
+\begin{definition}{Ortogonální projekce} \end{definition}
+\begin{theorem}{O projekci} \end{theorem}
+\begin{theorem}{Matice projekce (Grammova matice)} \end{theorem}
+\begin{theorem}{Ortogonální doplněk prostoru je jádro matice} \end{theorem}
+\begin{theorem}{Důsledek ortogonálního doplňku} \end{theorem}
+\begin{theorem}{Projekce do sloupcového prostoru} \end{theorem}
+\begin{theorem}{Projekce do doplňku} \end{theorem}
+\begin{theorem}{Metoda nejmenších čtverců} \end{theorem}
+\begin{definition}{Ortogonální matice} \end{definition}
+\begin{theorem}{Ekvivalentní definice ortogonální matice} \end{theorem}
+\begin{theorem}{$Q_1 \cdot Q_2$ je ortogonální} \end{theorem}
+\begin{note}{Householderova matice} \end{note}
+\begin{theorem}{Vlastnosti ortogonálních matic} \end{theorem}
+\begin{theorem}{Grammova matice} \end{theorem}
+\begin{theorem}{Ortogonální zobrazení zachovává skalární součin} \end{theorem}
+\begin{theorem}{Stačí 2 podmínky} \end{theorem}
+\begin{definition}{Znaménko permutace} \end{definition}
+\begin{definition}{Determinant} \end{definition}
+\begin{theorem}{Determinant transponované matice} \end{theorem}
+\begin{theorem}{Řádková linearita determinantu} \end{theorem}
+\begin{theorem}{Determinant a elementární úpravy} \end{theorem}
+\begin{theorem}{$\det(A\cdot B) = \det(A) \cdot \det(B)$} \end{theorem}
+\begin{theorem}{$\det(A^{-1})$} \end{theorem}
+\begin{theorem}{Determinant rekurentně, Laplaceúv rozvoj} \end{theorem}
+\begin{theorem}{Cramerovo pravidlo} \end{theorem}
+\begin{definition}{Adjungova matice} \end{definition}
+\begin{theorem}{O Adjungově matici} \end{theorem}
+\begin{theorem}{Důsledek pro $\det$ Adjungovy matice} \end{theorem}
+\begin{theorem}{Celočíselné hodnoty} \end{theorem}
+\begin{theorem}{Objem rovnoběžnostěnu} \end{theorem}
+\begin{definition}{Vlastní čísla} \end{definition}
+\begin{theorem}{Ekvivalentní definice} \end{theorem}
+\begin{definition}{Charekteristický polynom} \end{definition}
+\begin{theorem}{$n$ kořenů} \end{theorem}
+\begin{theorem}{Ekvivalence s vlastním číslem} \end{theorem}
+\begin{definition}{Spektrum} \end{definition}
+\begin{theorem}{Trace, determinant a vlastní čísla} \end{theorem}
+\begin{theorem}{Matice a vlastní čísla} \end{theorem}
+\begin{theorem}{Reálná matice a sdružená vlastní čísla} \end{theorem}
+\begin{definition}{Geometrická a algebraická násobnost} \end{definition}
+\begin{definition}{Matice společnice} \end{definition}
+\begin{theorem}{Polynomy a matice společnice} \end{theorem}
+\begin{theorem}{Cayley-Hamilton} \end{theorem}
+\begin{theorem}{Důsledek Cayley-Hamilton} \end{theorem}
+\begin{definition}{Podobnost} \end{definition}
+\begin{theorem}{Podobnost $\Rightarrow$ stejná vlastní čísla} \end{theorem}
+\begin{definition}{Diagonalizovatelnost} \end{definition}
+\begin{theorem}{Ekvivalence diagonalizovatelnosti} \end{theorem}
+\begin{theorem}{Vlastní vektory jsou lineárně nezávislé} \end{theorem}
+\begin{theorem}{Vlastní čísla $AB, BA$} \end{theorem}
+\begin{note}{Fibonacciho odbočka} \end{note}
+\begin{definition}{Jordanova buňka} \end{definition}
+\begin{definition}{Jordanova normální forma} \end{definition}
+\begin{theorem}{Podobnost ze čtvercových matic} \end{theorem}
+\begin{definition}{Symetrické matice} \end{definition}
+\begin{definition}{Hermitovská matice} \end{definition}
+\begin{theorem}{Vlastní čísla a hermitovské matice} \end{theorem}
+\begin{theorem}{Spektrální rozklad} \end{theorem}
+\begin{theorem}{Největší a nejmenší vlastní čísla} \end{theorem}
+\begin{theorem}{Omezení na největší vlastní čísla} \end{theorem}
+\begin{theorem}{Gerschgorinovy disky a vlastní čísla} \end{theorem}
+\begin{algorithm}{Mocninná metoda} \end{algorithm}
+\begin{theorem}{Konvergence mocninné metody} \end{theorem}
+\begin{theorem}{Úprava vlastních čísel} \end{theorem}
+\begin{definition}{Pozitivní (semi)definitnost} \end{definition}
+\begin{theorem}{Tvrzení o pozitivní definitnosti} \end{theorem}
+\begin{theorem}{Ekvivalentní tvrzení o pozitivní definitnosti} \end{theorem}
+\begin{theorem}{Rekurentní vzoreček na testování positivní definitnosti} \end{theorem}
+\begin{theorem}{Choleského rozklad} \end{theorem}
+\begin{algorithm}{Výpočet rozkladu} \end{algorithm}
+\begin{theorem}{Pozitivně definitní symetrické matice a převod} \end{theorem}
+\begin{theorem}{Sylvestrovo kritérium} \end{theorem}
+\begin{theorem}{Kritérium se skalárním součinem} \end{theorem}
+\begin{theorem}{Odmocnina z matice} \end{theorem}
+\begin{definition}{Bilineární forma} \end{definition}
+\begin{definition}{Kvadratická forma} \end{definition}
+\begin{definition}{Symetrizace} \end{definition}
+\begin{definition}{Matice bilineární a kvadratické formy} \end{definition}
+\begin{theorem}{Každá matice popisuje bilineární formu} \end{theorem}
+\begin{theorem}{Každá forma se dá vyjádřit jako matice} \end{theorem}
+\begin{theorem}{Při změně báze} \end{theorem}
+\begin{theorem}{Sylvestrův zákon setrvačnosti} \end{theorem}
+\begin{theorem}{Dva důsledky setrvačnosti} \end{theorem}
+\begin{definition}{Signatura kvadratické formy} \end{definition}
+\begin{theorem}{Householderova transformace} \end{theorem}
+\begin{theorem}{Důsledek Householderovy transformace} \end{theorem}
+\begin{theorem}{QR rozklad} \end{theorem}
+\begin{theorem}{SVD rozklad} \end{theorem}
+\begin{theorem}{Singuláry a SVD} \end{theorem}
+\begin{algorithm}{SVD} \end{algorithm}
+\begin{definition}{Tvrzení o SVD} \end{definition}
+ \end{document}

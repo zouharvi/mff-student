@@ -1,0 +1,31 @@
+print 42
+
+$list = cell 4 -1
+$list = cell 3 $list
+$list = cell 2 $list
+$list = cell 1 $list
+
+$l = $list
+print $l
+$v = left $l
+print $v
+
+$l = right $l
+print $l
+$v = left $l
+print $v
+
+$l = right $l
+print $l
+$v = left $l
+print $v
+
+$l = right $l
+print $l
+$v = left $l
+print $v
+
+$l = right $l
+print $l
+$v = left $l
+print $v
