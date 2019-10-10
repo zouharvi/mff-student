@@ -1,29 +1,14 @@
 ﻿<Properties StartupItem="Football.csproj">
   <MonoDevelop.Ide.ItemProperties.Football PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Form1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SpinachAgents.cs">
     <Files>
-      <File FileName="Form1.cs" Line="15" Column="47" />
-      <File FileName="SpinachAgents.cs" Line="54" Column="29" />
-      <File FileName="AgentPlayer.cs" Line="99" Column="26" />
-      <File FileName="SimpleAgents.cs" Line="18" Column="10" />
+      <File FileName="SpinachAgents.cs" Line="79" Column="2" />
+      <File FileName="Form1.cs" Line="13" Column="35" />
+      <File FileName="TeamAI.cs" Line="278" Column="39" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Football" expanded="True">
-            <Node name="Football" expanded="True">
-              <Node name="Form1.cs" selected="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

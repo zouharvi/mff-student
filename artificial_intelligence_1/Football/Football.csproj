@@ -57,7 +57,6 @@
     <Compile Include="AgentPlayer.cs" />
     <Compile Include="AgentTeamAI.cs" />
     <Compile Include="DistributedAI.cs" />
-    <Compile Include="SimpleAgents.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ZoneBasedAITeam.cs" />
     <Compile Include="AIRandomTeam.cs" />
@@ -101,7 +100,7 @@
     <Compile Include="ShooterTeam.cs" />
     <Compile Include="Simulator.cs" />
     <Compile Include="TeamAI.cs" />
-    <Compile Include="SimpleAgents %28copy%29.cs" />
+    <Compile Include="SpinachAgents.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
