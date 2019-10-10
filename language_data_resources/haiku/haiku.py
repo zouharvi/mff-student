@@ -64,7 +64,7 @@ def computeHaiku(sentence):
     return [a, b, c]
 
 with open('34225-0.txt', 'r') as f:
-    raw = f.read().replace('\n', '')
+    raw = f.read().replace('\n', ' ').replace('  ', ' ')
 
 # split to sentences
 sentences = re.split('\\.|\\?|\\!', raw)
