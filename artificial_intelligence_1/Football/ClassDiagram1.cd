@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Football.AgentPlayer" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAABEAAIASAgAQAIAAAAAAAABAAAQAAAAAAAIAACAA=</HashCode>
+      <FileName>AgentPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.AgentTeamAI" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAIAIAAAAAQAA=</HashCode>
+      <FileName>AgentTeamAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.AIRandomTeam" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAIAAAAAAAAAAAAgAAAAAAAAACAA=</HashCode>
+      <FileName>AIRandomTeam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.DistributedAI" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABACgACSAAQAwAQQBABAAAAAAECAAAAAAAAAAAAgA=</HashCode>
+      <FileName>DistributedAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.DrawingUnit" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBAAAAAADAAAEAAAAIAAIAAASAAAAAIEUCAAIAAAAA=</HashCode>
+      <FileName>DrawingUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Form1" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAIACAAAASAAAAIAAAAIAAAABACAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.MovingObject" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACCAAAAAAAAAAAAACAAAAAACACARRgAAAAAA=</HashCode>
+      <FileName>MovingObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Player" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAlAAAAAAAAAAAAIAQAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Playground" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAwAQQCMABAggAQAQAAAAAAACAgAAgAEAGAAACAAAA=</HashCode>
+      <FileName>Playground.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Program" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.AIShooterTeam" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ShooterTeam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.AgentSimpleDefender" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimpleAgents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.AgentSimpleBallSeeker" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimpleAgents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.AgentSimpleOffender" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimpleAgents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Simulator" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMIkhAAEAAAgACygEAIIAAASUQAABAA4oBLBAAAIABA=</HashCode>
+      <FileName>Simulator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.TeamAI" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQERAAMAEAMMAmAAAEBAAACBIAlECiEAIAloJAIQAI=</HashCode>
+      <FileName>TeamAI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Utils" Collapsed="true">
+    <Position X="14" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggQEQAAAAIAMBAkEAAEBBAASBAIBACAAAJQAoJAEAQo=</HashCode>
+      <FileName>Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.AIZoneBasedTeam" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAACAwAgAAAAAAAgAAAAAAAAAAQAAABACAAA=</HashCode>
+      <FileName>ZoneBasedAITeam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Properties.Resources" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Football.Properties.Settings" Collapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

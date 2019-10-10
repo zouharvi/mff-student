@@ -1,0 +1,6 @@
+**/Debug/*
+**/Release/*
+**/bin/*
+**/.vs/*
+*.exe
+*.obj
