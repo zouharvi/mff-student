@@ -9,7 +9,6 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage[colorinlistoftodos]{todonotes}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{wasysym} % smileys
 \usepackage{fancyhdr}
@@ -22,7 +21,7 @@
 \begin{document}
 
 \thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
-\lhead{1st homework, 08 - 09 - 2019}
+\lhead{1st homework, 08 - 10 - 2019}
 \rhead{Vilém Zouhar}
 
 LD := left divisible $\forall a, b \in G: \exists x: a\cdot x = b$\\
@@ -30,12 +29,12 @@ RD := right divisible $\forall a, b \in G: \exists x: x\cdot a = b$\\
 LC := left cancellative\\
 RC := right cancellative\\
 
-\textbf{Proposition:} A semigroup G is a group iff it has a unit and is LC and RD. \\
+\textbf{Proposition:} A semigroup G is a group iff it has a unit and is LC and LD. In this case LD could be replaced with RD, as we will see in the proof. \\
 
 \textbf{Proof:}
 
-$\Rightarrow$ ($G$ is a group $\rightarrow$ G has a unit and is LC and RD):\\
-Since $G$ is a group, then it is also divisible and cancellative, hence is LC and RD. In this direction we only need to prove the existence of a unit.
+$\Rightarrow$ ($G$ is a group $\rightarrow$ G has a unit and is LC and LD):\\
+Since $G$ is a group, then it is also divisible and cancellative, hence is LC and LD. In this direction we only need to prove the existence of a unit.
 \begin{align*}
  & \forall g,h \in G: \exists l_g, r_g, l_h, r_h: l_g \cdot g = g \cdot r_g,\ l_h \cdot g = g \cdot r_h \text{ (RD, LD)}\\
  & (g\cdot r_g) \cdot h = g\cdot h = g \cdot (l_h \cdot h) = (g \cdot l_h) \cdot h \ \text(associativity)\\
@@ -46,24 +45,26 @@ Since $G$ is a group, then it is also divisible and cancellative, hence is LC an
  & \text{then } u_g = u_h = u \text{ is a unit of } G
 \end{align*}
 
-$\Leftarrow$ ($S$ is a semigroup with a unit and is LC and RD $\rightarrow$ it is a group):\\
-We only need to prove $S$ is LD and RC for it to be a group.\\
+$\Leftarrow$ ($S$ is a semigroup with a unit and is LC and LD $\rightarrow$ it is a group):\\
+We only need to prove $S$ is RD and RC for it to be a group.\\
 
-LD:
+RD:
 \begin{align*}
- & \forall x \in S\ \exists x_l \in S: x_l\cdot x = u \text{ (unit of G, RD)} \\
- & \text{let } q = x\cdot x_l \\
- & q\cdot q = (x\cdot x_l)\cdot(x\cdot x_l) = x\cdot (x_l\cdot x)\cdot x_l = x\cdot (u \cdot x_l) = x\cdot x_l = q \text{ (associativity)} \\
- & \text{similarly for q: } \exists q_l\in S: q_l\cdot q = u \\
- & x \cdot x_l = q = u\cdot q = (q_l \cdot q) \cdot q = q_l \cdot (q\cdot q) = q_l \cdot q = u
+ & \forall x \in S\ \exists x_r \in S: x\cdot x_r = u \text{ (unit of G, LD)} \\
+ & \text{let } q = x\cdot x_r \\
+ & q\cdot q = (x_r\cdot x)\cdot(x_r\cdot x) = x_r\cdot (x\cdot x_r)\cdot x = x_r\cdot (u \cdot x) = x_r\cdot x = q \text{ (associativity)} \\
+ & \text{similarly for q: } \exists q_r\in S: q\cdot q_r = u \text{ (LD)}  \\
+ & x_r \cdot x = q = q\cdot u = q \cdot (q \cdot q_r)  = (q \cdot q)\cdot q_r = q \cdot q_r = u
 \end{align*}
 
-We've shown, that for $x \in S$ if we start from the left inverse ($x_l\cdot x = u$), then it is also the right inverse ($x\cdot x_l = u$). $\forall x, b\in S\ \exists c:\ x\cdot c = b$, let $b=x_l\cdot b$, then $x\cdot (x_l \cdot b) = u\cdot b = b$. This means, that $S$ is DL.\\
+We've shown, that $\forall x \in S\ \exists x': x'\cdot x = x \cdot x' = u$. This means, we've found the inverse. We can multiply the resulting equation from left by $y$ and get the final form for RD. $\forall y, x \in S\ \exists x': (y\cdot x')\cdot x = y\cdot u = y$, thus $\forall y, x \in S\ \exists t: t\cdot x = y$. \\
+
+\textbf{Note:} If we started from RD, we could prove LD, since we used only the one sided divisibility and the existence of a unit. This means, that for each semigroup with a unit, LD is equivalent to RD. Proof follows easily from the previous one.\\
 
 RC:
 \begin{align*}
  & \forall g, a, b \in S, \text{ for which } a\cdot g = b\cdot g: \\
- & \exists g': gg' = u \text{ (LD)} \\
+ & \exists g': g\cdot g' = u \text{ (LD)} \\
  & (a\cdot g)\cdot g' = (b\cdot g)\cdot g' \\
  & a\cdot(g\cdot g') = b\cdot (g\cdot g') \text { (associativity)} \\
  & a\cdot u = b \cdot u \\
@@ -73,43 +74,4 @@ This showed, that $\forall g, a, b \in S: (a\cdot g = b\cdot g) \Rightarrow a = 
 
 Since $S$ is also LD and RC, we can conclude, that it is a group. $\square$ \\
     
-\textbf{Note:}
-
-The first implication would hold true even if we replaced RD with LD, but this wouldn't be true for the second one. We show this with a counterexample: 
-\begin{align*}
- & S = \{0, 1, 2\} \\
- & \forall a, b \in S \backslash \{0\}: a\times b = b, 0\times a = a \times 0 = a\\
- & \hspace{1cm} \text{for } a, b \in \{1,2\}:\ a\times (b\times c) = a\times c = c = b\times c = (a\times b)\times c\\
- & \hspace{1cm} \text{for } a, b, \text{ or } c = 0 \text{ associativity also holds (intuitively or by an exhaustive proof)} \\
- & 0 \text{ is obviously the unit by definition} \\
- & \forall a, b \in S: \exists x \in S: a\times x = b \text{ for } x = b \text{ (LD holds)} \\
- & \forall x, a, b \in S: x\times a = x\times b \Rightarrow a = b \text { because } x\times a = a \text{ and } x\times b = b \text{ (LC holds)} \\
- & x \times 1 = 2, \text{ has no solutions, because } x \times 1 = 1 \text{ (is not RD)}
-\end{align*}
-We constructed a semigroup with a unit and which is LD and LC, but which is not RD. $\square$
-
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
