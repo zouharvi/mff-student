@@ -38,7 +38,7 @@ namespace StateSpaceSearch
         public int solutionCost;
         protected List<StateCostPair> successors = new List<StateCostPair>();
 		protected int branchingSum, branchingCount, maxGVal;
-        private Process proc;
+        protected Process proc;
 
         protected virtual void addToClosedList(State state)
         {
@@ -78,7 +78,8 @@ namespace StateSpaceSearch
 			printMessage("Max GVal: " + maxGVal, quiet);
 			printMessage("Speed: " + (gValues.Count / (now - start).TotalSeconds).ToString("0.00") + " states per second", quiet);
 			printMessage("Average branching: " + (((double)branchingSum) / branchingCount).ToString("0.00"), quiet);
-            printMessage("Memory used: " + (proc.PrivateMemorySize64/1024.0/1024/1024).ToString("0.00") + "GB", quiet);
+            printMessage("Memory used: " + (proc.PrivateMemorySize64/1024.0/1024).ToString("0.00") + "MB", quiet);
+            printMessage("| yes | " + (proc.PrivateMemorySize64/1024.0/1024).ToString("0.00") + " | " + maxGVal + " | " + gValues.Count + " | " + (now - start).TotalSeconds, quiet);
 			printMessage("\n", quiet);
 		}
 
@@ -193,7 +194,7 @@ namespace StateSpaceSearch
                 base.search(s);
                 maxDepth = nextDepth;
             }
-            printMessage("Time total: " + (DateTime.Now - start).TotalSeconds + " seconds", quiet);
+            printMessage("| yes | " + (proc.PrivateMemorySize64/1024.0/1024).ToString("0.00") + " | " + maxGVal + " | " + gValues.Count + " | " + (DateTime.Now - start).TotalSeconds, quiet);
 
             if(maxDepth == MAX_MAX_DEPTH)
                 Console.WriteLine("No solution found at MAX_MAX_DEPTH");
