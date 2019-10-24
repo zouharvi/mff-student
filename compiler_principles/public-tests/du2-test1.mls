@@ -1,0 +1,25 @@
+{
+    DU2
+    testovaci program 1
+}
+
+program du2test1;
+{ deklarace promennych { tady byl jeste jeden komentar }}
+var i,j:integer;
+    r:real;
+    s:string;
+begin
+    i := 2;
+    j := i+2;
+    r := 3.14159;
+    if(j>i) then
+	begin
+	    c := 'a';
+	    s := 'bubak';
+	end
+    else
+        begin
+            c := '''';
+            s := 'Test ''apostrofu''';
+        end
+end.

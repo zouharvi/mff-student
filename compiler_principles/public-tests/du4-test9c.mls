@@ -1,0 +1,17 @@
+program du4test9;
+
+const
+  c1=-20;
+  c2='qwe';
+  c3=false;
+  c4=+1.2e3;
+
+procedure proc2;
+const
+  c2=c1;
+begin
+end;
+
+begin
+
+end.

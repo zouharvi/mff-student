@@ -1,0 +1,24 @@
+program du6test3;
+
+label 2, 3, 4, 5;
+var i:integer;
+
+begin
+	goto 2;
+	i := 5;
+2:	
+	i := 6;
+3:
+	i := 7;
+	goto 4;
+	i := 1;
+	goto 3;
+4:
+	i := 8;
+	goto 5;
+	goto 2;
+	goto 5;
+	goto 2;
+5:
+	writes( 'done');	
+end.

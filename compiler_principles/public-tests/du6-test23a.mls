@@ -1,0 +1,21 @@
+program du6test;
+
+type
+  ar1=array [1..10] of integer;
+  
+var 
+  a1:ar1;
+  i:integer;
+
+procedure replacememeber(a:ar1; i,r:integer);
+begin
+  a[i]:=r
+end;
+
+begin
+  for i:=1 to 10 do a1[i]:=i;
+  replacememeber(a1,5,-5);
+  for i:=1 to 10 do writei(a1[i]);
+  writeln;
+  
+end.

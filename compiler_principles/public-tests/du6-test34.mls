@@ -1,0 +1,17 @@
+program du6test;
+
+label 1,2,3,4,5,6;
+
+procedure p;
+label 1,2;
+begin
+  1: goto 2;
+  writes('Tudy ne');
+  2: writei(1);
+end;
+
+begin
+  1: goto 2;
+  writes('Tudy ne');
+  2: writeln;
+end.

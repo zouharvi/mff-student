@@ -1,0 +1,17 @@
+program du6test;
+
+type
+  ar1=array [1..10] of integer;
+  
+var 
+  a1:ar1;
+  a2:array[2..2] of ar1;
+  i:integer;
+
+begin
+  for i:=1 to 10 do a1[i]:=i;
+  a2[2]:=a1;
+  for i:=1 to 10 do writei(a2[2][i]);
+  writeln;
+  
+end.

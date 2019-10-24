@@ -1,0 +1,9 @@
+program du4test5c;
+
+type
+  rng = 1..10;
+  ar2 = array [rng] of string;
+
+begin
+
+end.

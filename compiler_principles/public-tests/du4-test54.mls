@@ -1,0 +1,13 @@
+program du4test5d;
+
+function fnc2:int;
+begin
+end;
+
+procedure proc2;
+begin
+end;
+
+begin
+
+end.

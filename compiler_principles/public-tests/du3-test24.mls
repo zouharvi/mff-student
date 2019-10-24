@@ -1,0 +1,7 @@
+program zapoctak;
+
+begin
+for i:=zac to vyrazdlzka-konst do
+ begin
+ end
+end.

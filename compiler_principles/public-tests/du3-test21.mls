@@ -1,0 +1,7 @@
+program zapoctak;
+
+const maximum=2147483647;
+
+begin
+  clrscr;
+end.

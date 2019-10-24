@@ -1,0 +1,7 @@
+PrOgRaM du1test2;
+labl 3;
+var r:rel;
+    k:@int;
+begin
+    r:=3e+3.+3.0e-2+4.0E;
+end.

@@ -1,0 +1,16 @@
+program du6test;
+
+type
+  ar1=record a:integer; b:real; c:integer; end;
+  
+var 
+  a1,a2:ar1;
+  i:integer;
+
+begin
+  a1.a := 1; a1.b := 2; a1.c := 3;
+  a2:=a1;
+  writei(a2.a);writer(a2.b);writei(a2.c);
+  writeln;
+  
+end.

@@ -1,0 +1,8 @@
+program du4test5a;
+
+type
+  ar1 = array [1..2,3..4] of array [5..6] of string;
+
+begin
+
+end.

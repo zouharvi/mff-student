@@ -1,0 +1,11 @@
+program du4test5b;
+
+const
+  c1=20;
+
+type
+  ar2 = array [11..c1] of string;
+
+begin
+
+end.

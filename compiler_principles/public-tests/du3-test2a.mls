@@ -1,0 +1,20 @@
+program zapoctak;
+
+label 1,2,3;
+
+const 
+  c1 = 'ahoj';
+  c2 = 23;
+
+type
+  t1 = integer;
+  t2 = array [1..10] of array [2..20] of real;
+
+var
+  v1, v2 : integer;
+  v3: array [1..10] of array [2..20] of real;
+
+
+begin
+  clrscr
+end.

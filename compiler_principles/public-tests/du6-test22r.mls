@@ -1,0 +1,25 @@
+program du6test;
+
+type
+  ar1=record a:integer; b:real; c:integer; end;
+  
+var 
+  a1:ar1;
+  i:integer;
+
+function getmember(a:ar1; i:integer):real;
+begin
+  if i = 0 then
+    getmember:=a.a
+  else if i = 1 then
+    getmember:=a.b
+  else
+    getmember:=a.c;
+end;
+
+begin
+  a1.a := 1; a1.b := 2; a1.c := 3;
+  writer(getmember(a1,1));
+  writeln;
+  
+end.

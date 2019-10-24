@@ -1,0 +1,5 @@
+program zapoctak;
+
+begin
+  znak:=vyrazcislo[j][1]
+end.

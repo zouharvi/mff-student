@@ -1,0 +1,10 @@
+program du6test;
+
+function two:integer;
+begin
+  two:=2;
+end;
+
+begin
+  if 1>two then writes('Blbe') else writes('Dobre');
+end.

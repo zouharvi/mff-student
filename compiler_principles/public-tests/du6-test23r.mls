@@ -1,0 +1,26 @@
+program du6test;
+
+type
+  ar1=record a:integer; b:real; c:integer; end;
+  
+var 
+  a1:ar1;
+  i:integer;
+
+procedure replacememeber(a:ar1; i,r:integer);
+begin
+  if i = 0 then
+    a.a:=r
+  else if i = 1 then
+    a.b:=r
+  else
+    a.c:=r;
+end;
+
+begin
+  a1.a := 1; a1.b := 2; a1.c := 3;
+  replacememeber(a1,1,-5);
+  writei(a1.a);writer(a1.b);writei(a1.c);
+  writeln;
+  
+end.

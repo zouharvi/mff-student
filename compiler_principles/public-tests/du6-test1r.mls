@@ -1,0 +1,143 @@
+program du6test1;
+
+const
+	a = 1;
+	b = 3;
+	c = 10;
+	d = 1.0;
+	e = 2.718;
+	f = 5e5;
+
+type
+	ARRI = record a,b,c:INTEGER; end;
+
+var 
+	i, j, k : integer;
+	x, y, z : real;
+	gvi, gwi : ARRI;
+	
+procedure addvi( pvi : ARRI; var pwi : ARRI);
+var
+	n : integer;
+	lvi : ARRI;
+begin
+	lvi := pwi;
+	for n := a to c do
+		lvi.a := lvi.a + pvi.a;
+	pwi := lvi;
+end;
+	
+procedure d3i( s : string; p, q, r: integer);
+begin
+	writes( s);
+	writes( ': ');
+	writei( p);
+	writes( ' ');
+	writei( q);
+	writes( ' ');
+	writei( r);
+	writeln;
+end;
+
+procedure d3r( s : string; p, q, r: real);
+begin
+	writes( s);
+	writes( ': ');
+	writer( p);
+	writes( ' ');
+	writer( q);
+	writes( ' ');
+	writer( r);
+	writeln;
+end;
+
+procedure paramtestinteger( p, q : integer; r : integer);
+begin
+	d3i( 'paramtestinteger', p, q, r);
+end;
+
+procedure globalintegerexpressions;
+begin
+	d3i( 'globalintegerexpressions', i-j+k, i+j*k, i+k div j);
+end;
+
+procedure localintegerexpressions;
+var 
+	i, jj, k : integer;
+begin
+	i := a;
+	jj := b;
+	k := c;
+
+	d3i( 'localintegerassignment', i, jj, k);
+	
+	d3i( 'localintegerexpressions', i-jj+k, i+jj*k, i+k div jj);
+end;
+
+procedure paramtestreal( p : real; q, r : real);
+begin
+	d3r( 'paramtestreal', p, q, r);
+end;
+
+procedure globalrealexpressions;
+begin
+	d3r( 'globalrealexpressions', x-y+z, x+y*z, x+y / z);
+end;
+
+procedure localrealexpressions;
+var 
+	x, yy, z : real;
+begin
+	x := d;
+	yy := e;
+	z := f;
+
+	d3r( 'localrealassignment', x, yy, z);
+	
+	d3r( 'localrealexpressions', x-yy+z, x+yy*z, x+yy / z);
+end;
+
+begin
+	for j := a to c do
+	begin
+		gwi.a := a + j;
+		gwi.b := b + j;
+		gwi.c := c - j;
+	end;
+
+	gvi := gwi;
+	
+	addvi( gvi, gwi);		
+
+	for j := a to c do
+		d3i( 'addvi', j, gvi.a, gwi.a);
+
+	i := a;
+	j := b;
+	k := c;
+
+	d3i( 'mainintegerassignment', i, j, k);
+	
+	d3i( 'mainintegerexpressions', i-j+k, i+j*k, i+k div j);
+	
+	globalintegerexpressions;
+	
+	localintegerexpressions;
+	
+	paramtestinteger( i, j, k);
+	
+	x := d;
+	y := e;
+	z := f;
+	
+	d3r( 'mainrealassignment', x, y, z);
+	
+	d3r( 'mainrealexpressions', x-y+z, x+y*z, x+y / z);
+	
+	globalrealexpressions;
+	
+	localrealexpressions;
+	
+	paramtestreal( x, y, z);
+	
+end.

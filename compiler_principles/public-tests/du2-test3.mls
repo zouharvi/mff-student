@@ -1,0 +1,22 @@
+{
+    DU2
+    testovaci program 3
+    { trosku to nevyslo }}
+}
+
+program du2test3;
+type struktura = 
+	record
+		i:integer;
+		j,k:real;
+	end;
+
+begin
+    i := 2940387297643256437;
+    j := i+2j;
+    r := 3.14159eb;
+    s := 'ble, konec radky
+    c := '
+    c := 'c
+end.
+{ nekdo to zapomnel zavrit

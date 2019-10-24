@@ -1,0 +1,11 @@
+program zapoctak;
+
+begin
+  if vyrazcislo[i]='x' then
+    begin
+     readln(pom);
+    end;
+  if i<=vyrazdlzka then
+    begin
+    end;
+end.

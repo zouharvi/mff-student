@@ -1,0 +1,42 @@
+{
+    DU3
+    testovaci program 1
+}
+
+program du3test1;
+label 5;
+var i,j:integer;
+    r:real;
+    p:integer;
+procedure p1;
+const c1=15;
+begin
+    i := c1;
+end;
+procedure p2 (var v1:real);
+const c2=16;
+begin
+    r := c2*v1;
+end;
+function f1 (v1,v2:integer; var v3:real):real;
+type ts1=array [0..9,0..4] of integer;
+var s1 : ts1;
+begin
+    f1 := s1[v1,v2]*v3;
+end;
+begin
+    p1;
+    r:=4.9e-5;
+  5:
+    p2(r);
+    if f1(1,2,r)=0.0 then
+        if f1(3,4,r)<=8 then
+	    for i := 0 to 9 do
+		for j := 0 to 4 do
+		   r := r+f1(i,j,r)
+        else
+            goto 5;
+    repeat
+        i := i+j
+    until i>10
+end.

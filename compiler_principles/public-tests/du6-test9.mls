@@ -1,0 +1,19 @@
+program du6test;
+
+var b:boolean;
+
+function two:integer;
+begin
+  two:=2;
+end;
+
+function addone(i:integer):integer;
+begin
+  addone:=i+1;
+end;
+
+begin
+  b:=(1>2) or ((2>=1+two) and (addone(-1)=0));
+  if b then writes('Blbe') else writes('Dobre');
+  writeln;
+end.

@@ -1,0 +1,61 @@
+program du5test4;
+label 729;
+
+const dva = 2;
+
+type
+  arr = array[1..2,3..4] of integer;
+
+var
+  cislo:integer;
+  s:string;
+  pole:arr;
+
+function multiply(i,j:integer):integer;
+label 729;
+var
+  a : array[3..4] of array[1..2] of integer;
+  b : integer;
+begin
+  b := 3;
+  a[b][dva] := i*j;
+  multiply:=a[3][2];
+end;
+
+function jedna:integer;
+begin
+  jedna:=1;
+end;
+
+function plusjedna(i:integer):integer;
+begin
+  plusjedna := i+1;
+end;
+
+procedure vypisdvakrat(i:integer);
+var
+  r:real;
+begin
+  r:=i*2;
+  writer(r);
+  
+end;
+
+begin
+  cislo := multiply(5,6);
+  pole[1][3] := 30/11;
+  pole[1][4] := 30 mod 11;
+  pole[2][3] := pole[1][3]*2;
+  cislo:=1;
+  writei(pole[cislo][3]);
+  pole[2][4] := pole[1][4]*2;
+  cislo:=10;
+  vypisdvakrat(cislo);
+  cislo:=5*2 + 10 mod (4-1);
+  s := 'ahoj';
+  s := s+' lidi';
+  writes(s);
+  writei(jedna);
+  writei(plusjedna(2));
+  writeln;
+end.

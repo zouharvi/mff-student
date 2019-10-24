@@ -1,0 +1,31 @@
+program du4test2;
+
+label 1,2,3;
+
+var
+  i,j:integer;
+  b:boolean;
+  r:real;
+  s:string;
+
+procedure proc1(param1:integer);
+label 10;
+var
+  lokal:integer;
+begin
+
+end;
+
+function fnc1(var param1:integer; param2:real):string;
+begin
+
+end;
+
+function fnc2:integer;
+begin
+
+end;
+
+begin
+
+end.

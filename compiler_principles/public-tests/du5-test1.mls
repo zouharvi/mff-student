@@ -1,0 +1,47 @@
+program du5test4;
+
+var
+  cislo:integer;
+  s:string;
+
+function multiply(i,j:integer):integer;
+begin
+  multiply:=i*j;
+end;
+
+function jedna:integer;
+begin
+  jedna:=1;
+end;
+
+function plusjedna(i:integer):integer;
+begin
+  plusjedna := i+1;
+end;
+
+procedure vypisdvakrat(i:integer);
+var
+  r:real;
+begin
+  r:=i*2;
+  writer(r);
+  
+end;
+
+begin
+  cislo := multiply(5,6);
+  writei(cislo);
+  cislo := 30 div 11;
+  writei(cislo);
+  cislo := 30 mod 11;  
+  writei(cislo);
+  cislo:=10;
+  vypisdvakrat(cislo);
+  cislo:=5*2 + 10 mod (4-1);
+  s := 'ahoj';
+  s := s+' lidi';
+  writes(s);
+  writei(jedna);
+  writei(plusjedna(2));
+  writeln;
+end.

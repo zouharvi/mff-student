@@ -1,0 +1,7 @@
+program du6test;
+
+label 1,2,3,4,5,6;
+
+begin
+  goto 6;
+end.

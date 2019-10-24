@@ -1,0 +1,6 @@
+program zapoctak;
+
+
+begin
+{>>>}assign(f,'c:\Jana\studenti\pascal\starin~1\Helptxt')
+end.

@@ -1,0 +1,9 @@
+program zapoctak;
+
+begin
+ while not eof(f) do
+ begin
+  readln(f, riadok);
+  writeln(riadok);
+ end
+end.

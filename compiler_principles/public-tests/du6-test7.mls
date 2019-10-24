@@ -1,0 +1,17 @@
+program du6test;
+
+procedure doit;
+var i,j:integer;
+begin
+  j:=10;
+  repeat
+    writei(j);
+    j:=j-1;  
+  until j=0;
+  writei(j);
+  writeln;
+end;
+
+begin
+  doit;
+end.

@@ -1,0 +1,44 @@
+program du5test4;
+label 729;
+
+const dva = 2;
+
+type
+  rec = record
+    i:integer;
+    r:real;
+    s:string;
+  end;
+  rec2 = record
+    prvni,druhy:rec;
+  end;
+
+var
+  cislo:integer;
+  s:string;
+  zaznam:rec;
+
+function multiply(i,j:integer):integer;
+label 729;
+var
+  a : rec;
+  b : rec2;
+begin
+end;
+
+function jedna:integer;
+begin
+end;
+
+function plusjedna(i:integer):integer;
+begin
+end;
+
+procedure vypisdvakrat(i:integer);
+var
+  r:real;
+begin
+end;
+
+begin
+end.

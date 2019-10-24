@@ -1,0 +1,15 @@
+program du4test5e;
+
+procedure proc1(param1:integer; param2:real);
+begin
+
+end;
+
+function fnc1(var param1,param2:integer; param3:real):string;
+begin
+
+end;
+
+begin
+
+end.

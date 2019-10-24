@@ -1,0 +1,5 @@
+program zapoctak;
+
+begin
+  write(trunc(pom))
+end.

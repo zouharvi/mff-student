@@ -1,0 +1,36 @@
+program du1test;
+
+procedure test;
+var
+	a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z:integer;
+begin
+  a := 0;
+  a := a + 1;
+  writei(a);
+  
+  if (a = 1) then begin
+	  b := 1;
+	  b := b + 1;
+	  writei(b);
+	end
+	else begin
+	  c := 2;
+	  c := c + 1;
+	  writei(c);
+
+	  if b = 2 then begin
+	  	a := 0;
+	  end;
+	end;
+
+  d := 3;
+  e := 4;
+  d := d + 1;
+  e := e + 1;
+  writei(d);
+  writei(e);
+end;
+
+begin
+	test;
+end.

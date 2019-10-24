@@ -1,0 +1,81 @@
+program du5test4;
+
+const dva = 2;
+
+type
+  rec = record
+    i:integer;
+    r:real;
+    s:string;
+  end;
+  rec2 = record
+    prvni,druhy:rec;
+  end;
+
+var
+  cislo:integer;
+  s:string;
+  zaznam:rec;
+
+function multiply(i,j:integer):integer;
+var
+  a : rec;
+  b : rec2;
+begin
+  a.i:=j;
+  a.r:=i/2;
+  a.s:='He';
+  b.prvni.i:=i;
+  b.druhy.i:=j;
+  a.i:=b.prvni.i;
+  b.druhy.r:=a.r*b.druhy.i;
+  multiply:=b.druhy.i;
+end;
+
+function jedna:integer;
+begin
+  jedna:=1;
+end;
+
+function plusjedna(i:integer):integer;
+begin
+  plusjedna := i+1;
+end;
+
+procedure vypisdvakrat(i:integer);
+var
+  r:real;
+begin
+  r:=i*2;
+  writer(r);
+  
+end;
+
+begin
+  cislo := multiply(5,6);
+  writer(cislo);
+  writeln;
+  zaznam.r:=30/11;
+  zaznam.i:=30 div 11;
+  writer(zaznam.r);
+  writeln;
+  writer(2*zaznam.i);
+  writeln;
+  writei(2*(30 div 11));
+  writeln;
+  zaznam.i:=zaznam.i*2;
+  vypisdvakrat(zaznam.i);
+  writeln;
+  cislo:=5*2 + 10 mod (4-1);
+  writei(cislo);
+  writeln;
+  s := 'ahoj';
+  s := s+' lidi';
+  writes(s);
+  writeln;
+  writei(jedna);
+  writeln;
+  writei(plusjedna(2));
+  writeln;
+  writeln;
+end.

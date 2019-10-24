@@ -1,0 +1,283 @@
+program zapoctak;
+
+
+{Kalkulacka}
+{Katarina Starinska, 1rocnik, kruh 58}
+{Zimny semester 2005/2006}
+{Programovanie PRM044}
+
+
+const epsilon=0000001;             {vyuziva sa pri zaokruhlovani}
+{>>>}maximum=2147483647;
+type tvyraz = string;
+var vyraz:tvyraz;         {uprava vstupneho vyrazu}
+puvodni:tvyraz;       {vyraz ziskany zo vstupu Zachovava sa kvoli
+                           viacnasobnemu zadavaniu premennej}
+stop:boolean;
+
+
+procedure pomoc;          {zavola help}
+var f:text;
+riadok:string;
+begin
+{>>>}assign(f,'c:\Jana\studenti\pascal\starin~1\Helptxt');
+reset(f);
+ClrScr;
+{>>>}while not eof(f) do
+ begin
+  readln(f, riadok);
+  writeln(riadok);
+ end;
+writeln;
+writeln;
+close(f);
+end;
+
+
+procedure posuvaj(zac, konst: integer);        {pri zlepovani vznikli medzery-> posunie sa vyraz za medzerou}
+var i: integer;
+begin
+{>>>}for i:=zac to vyrazdlzka-konst do
+ begin
+  {>>>}vyrazcislo[i]:=vyrazcislo[i+konst];
+  vyrazpriorita[i]:=vyrazpriorita[i+konst];
+ end;
+end;
+
+
+procedure premenna;                  {premennej x, priradi cislo zo vstupu}
+var i, j, dlzka:integer;
+pom:string;
+kontrola:boolean;
+begin
+i:=1;
+kontrola:=false;
+while (kontrola=false) do
+ begin
+  if vyrazcislo[i]='x' then
+    begin
+     writeln('Zadajte hodnotu x ''k'' konci program''h'' zavola help');
+     readln(pom);
+     kontrola:=true;
+{>>>}    end;
+  if i<=vyrazdlzka then
+    i:=i+1
+   else
+    begin
+     kontrola:=true;
+     stop:=true;
+    end;
+ end;
+if pom='k' then
+  halt;
+if pom='h' then
+ begin
+  pomoc;
+  exit;
+ end;
+dlzka:=length(pom);
+i:=1;
+while i<=vyrazdlzka do
+ begin
+  if vyrazcislo[i]='x' then
+   begin
+    for j:=vyrazdlzka downto i do
+      vyrazcislo[j+dlzka+1]:=vyrazcislo[j];
+    vyrazcislo[i]:='(';
+    for j:=1 to dlzka do
+      vyrazcislo[i+j]:=pom[j];
+    vyrazcislo[i+dlzka+1]:=')';
+    vyrazdlzka:=vyrazdlzka+dlzka+1;
+   end;
+  i:=i+1;
+ end;
+end;
+
+
+
+
+
+procedure priority;                {urci prioritu operatorov:
+                                    kladne cisla su zatvorky; 0=cislice;
+                                    -1=+,-; -2=*,/; -3=astatne funkcie}
+var i, j, pocet:integer;
+znak:char;
+pom:tvyraz;
+pom2:string;
+begin
+pocet:=0;
+i:=1;
+j:=1;
+pomcislo[0]:='';
+{>>>}pompriorita[0]:=-10;
+while j<=vyrazdlzka do
+ begin
+  pompriorita[i]:=0;
+  {>>>}znak:=vyrazcislo[j][1];
+  i:=i+1;
+  j:=j+1;
+ end;
+pomdlzka:=i-1;
+vyraz:=pom;
+while pocet>0 do          {doplni zatvorky ')', ak na konci chybaju}
+ begin
+  inc(vyrazdlzka);
+  vyrazpriorita[vyrazdlzka]:=pocet;
+  vyrazcislo[vyrazdlzka]:=')';
+  dec(pocet);
+ end;
+end;
+
+
+procedure nacitaj;    {nacita vyraz zo suboru, nacitava po znakoch,
+                      v procedure Premenna, zlepuje viacpismenove funkcie(log, sin,)}
+var f:text;
+a:char;
+begin
+assign(f,'c:\Jana\studenti\pascal\starin~1\vstuptxt');
+reset(f);
+vyrazdlzka:=1;
+while not eoln(f) do
+ begin
+  read(f,a);
+  vyrazcislo[vyrazdlzka]:=a;
+  inc(vyrazdlzka);
+ end;
+dec(vyrazdlzka);
+close(f);
+puvodni:=vyraz;
+end;
+
+
+procedure zlep;         {v nacitaj sa nacitalo cislo 3 5, tu sa zlepi na 35}
+var posun:integer;
+i:integer;
+begin
+vyrazpriorita[0]:=-10;                {zarazka, kvoli pretekaniu}
+posun:=0;
+for i:=1 to vyrazdlzka do
+ begin
+   begin
+    if priorita[i]=priorita[i-1] then
+      begin
+       cislo[i-1-posun]:=cislo[i-1-posun]+cislo[i];
+       posun:=posun+1;
+      end
+     else
+      begin
+       cislo[i-posun]:=cislo[i];
+       priorita[i-posun]:=priorita[i];
+      end;
+   end;
+ end;
+vyrazdlzka:=vyrazdlzka-posun;
+end;
+
+
+procedure vypis;
+var i:integer;
+pom:real;
+pom2, code:integer;
+begin
+for i:=1 to vyrazdlzka do
+ begin
+  val(vyrazcislo[i], pom, code);
+  if code<>0 then
+    write(vyrazcislo[i])
+   else
+    if (pom>-maximum) and (pom<maximum) then
+      begin
+       if pom<>trunc(pom) then
+         write(pom)
+        else
+         {>>>}write(trunc(pom));
+      end
+     else
+     write(pom);
+ end;
+writeln;
+end;
+
+
+procedure pocitaj(zac, kon:integer);        {zac, kon ukazuju na najvnutornejsiu zatvorku
+                                            podla priority operatorov sa vyhodnoti vyraz medzi zac a kon}
+var i, j, k, code:integer;
+posun, konst, pom1:integer;
+vysledok:real;
+pom, pom2:real;
+begin
+posun:=0;
+konst:=0;
+ begin
+  for j:=-3 to -1 do
+   begin
+    i:=zac;
+    while i<=kon-posun do
+     begin
+      if priorita[i]=j then
+        begin
+         str(vysledok, cislo[i-konst+1]);
+         priorita[i-konst+1]:=0;
+         posuvaj(i-konst+2, konst);
+         i:=i-konst+1;
+         posun:=posun+konst;
+        end;
+      i:=i+1;
+     end;
+   end;
+  dlzka:=dlzka-posun;
+  if cislo[zac]='(' then
+    begin
+     posuvaj(kon-posun,1);
+     posuvaj(zac, 1);
+     dlzka:=dlzka-2;
+    end;
+ end;
+end;
+
+
+procedure najdi;              {najde najvnutornejsie zatvorky a ich poziciu
+                              oznaci ako zac a kon}
+var zac, kon, i:integer;
+begin
+ begin
+  repeat
+   zac:=1;
+   for i:=2 to dlzka do
+    begin
+     if (priorita[i]>priorita[zac]) and (priorita[i]>0) then
+       zac:=i;
+    end;
+   if priorita[zac]>0 then
+     begin
+      kon:=zac+1;
+      while priorita[kon]<>priorita[zac] do
+       kon:=kon+1;
+     end
+    else
+     kon:=dlzka;
+   pocitaj(zac, kon);
+   vypis;
+  until dlzka=1;
+ end;
+end;
+
+
+begin
+pomoc;
+nacitaj;
+stop:=false;
+repeat               {je mozne viackrat zadat hodnotu x
+                     pre jeden vyraz s tymto parametrom}
+
+ vyraz:=puvodni;
+ premenna;
+ vypis;
+ priority;
+ zlep;
+ vypis;
+ najdi;
+ writeln;
+ writeln;
+until stop=true;
+end.

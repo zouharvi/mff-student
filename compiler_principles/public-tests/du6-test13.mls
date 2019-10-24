@@ -1,0 +1,45 @@
+program du1test;
+
+procedure test;
+label 2, 3, 100;
+
+var
+	a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z:integer;
+begin
+  a := 0;
+  a := a + 1;
+  writei(a);
+  
+  goto 3;
+  2:
+  
+  b := 1;
+  b := b + 1;
+  writei(b);
+
+  if b = 2 then begin
+  	a := 0;
+  	goto 100;
+  end;
+  
+  3:
+  
+  c := 2;
+  c := c + 1;
+  writei(c);
+  
+  goto 2;
+  
+  100:
+
+  d := 3;
+  e := 4;
+  d := d + 1;
+  e := e + 1;
+  writei(d);
+  writei(e);
+end;
+
+begin
+	test;
+end.

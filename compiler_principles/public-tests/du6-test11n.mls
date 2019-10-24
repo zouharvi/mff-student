@@ -1,0 +1,15 @@
+program du6test;
+
+var i:integer;
+
+procedure addone(var i:integer);
+begin
+  i:=i+1;
+end;
+
+begin
+  i:=1;
+  addone(i+1);
+  writei(i);
+  writeln;
+end.

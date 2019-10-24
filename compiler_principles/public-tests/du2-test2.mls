@@ -1,0 +1,17 @@
+{
+    DU2
+    testovaci program 2
+    { trosku to nevyslo }}
+}
+
+program du2test2;
+type pole = array[3..4] of integer;
+begin
+    i := 2940387297643256437;
+    j := i+2j;
+    r := 3.14159eb;
+    s := 'ble, konec radky
+    c := '
+    c := 'c
+end.
+{ nekdo to zapomnel zavrit

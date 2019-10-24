@@ -1,0 +1,57 @@
+program du4test2;
+
+label 1,2,3;
+
+const
+  c1=20;
+
+type
+  bod = record
+    x,y:integer;
+    d:real;
+  end;
+  usecka = record
+    b1,b2:bod;
+    delka:real;
+    jmeno:string;
+  end;
+  str = string;
+  int = integer;
+
+var
+  i,j:integer;
+  b:boolean;
+  r:real;
+  s:str;
+  u:usecka;
+
+procedure proc1(param1:integer);
+label 10;
+const c3=30;
+type lokalniusecka = usecka;
+var
+  lokal:lokalniusecka;
+begin
+
+end;
+
+function fnc1(var param1,param2:integer; param3:real):string;
+begin
+
+end;
+
+function fnc2:int;
+begin
+end;
+
+function fnc3(var u1:usecka; u2,u3:usecka):int;
+begin
+end;
+
+procedure proc2;
+begin
+end;
+
+begin
+
+end.

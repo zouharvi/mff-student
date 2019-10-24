@@ -1,0 +1,5 @@
+program zapoctak;
+
+begin
+  pompriorita:=-10
+end.

@@ -1,0 +1,47 @@
+program du4test5;
+
+label 1,2,3;
+
+const
+  c1=20;
+
+type
+  rng = 1..10;
+  ar1 = array [1..2,3..4] of array [5..6] of string;
+  ar2 = array [rng,11..c1] of string;
+  str = string;
+  int = integer;
+
+var
+  i,j:integer;
+  b:boolean;
+  r:real;
+  s:str;
+  pole:ar1;
+
+procedure proc1(param1:integer);
+label 10;
+const c3=30;
+type lokalnipole = array [c1..c3] of int;
+var
+  lokal:lokalnipole;
+begin
+
+end;
+
+function fnc1(var param1,param2:integer; param3:real):string;
+begin
+
+end;
+
+function fnc2:int;
+begin
+end;
+
+procedure proc2;
+begin
+end;
+
+begin
+
+end.
