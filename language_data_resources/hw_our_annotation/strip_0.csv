@@ -6,11 +6,11 @@
 1.0,p24,Kolik Kč zaplatí žadatel?,Wie viel zahlt ein Antragsteller?
 0.3,z20,Jakou osobnost připomíná jméno "Rodó"?,Was für eine Persönlichkeit erinnert mich an den Namen "Rose"?
 0.6,z38,Co bylo rozpuštěno po indickém povstání v roce 1857?,Was wurde nach dem indischen Aufstand 1857 aufgelöst?
-0.9,z10,Jak se nazýval nový&#44; velmi nepopulární režim?,Wie hieß das neue&#44; sehr unpopuläre Regime?
+0.4,z10,Jak se nazýval nový&#44; velmi nepopulární režim?,Wie hieß das neue&#44; sehr unpopuläre Regime?
 1.0,p07,K čemu používáme tyto informace?,Wofür verwenden wir diese Informationen?
 0.7,z58,Kdo představil první kvantifikovaný model atomu v roce 1913?,Wer hat 1913 das erste atomisierte Modell vorgestellt?
 0.9,p25,Kdo vždy jednohlasně prohlašuje&#44; kdo je otcem dítěte?,Wer sagt immer einstimmig&#44; wer der Vater des Kindes ist?
-0.9,z05,Kdo odmítl dekret prezidenta Ronalda Reagana z roku 12291?,Wer lehnte das Dekret von Präsident Ronald Reagan aus dem Jahr 12291 ab?
+0.5,z05,Kdo odmítl dekret prezidenta Ronalda Reagana z roku 12291?,Wer lehnte das Dekret von Präsident Ronald Reagan aus dem Jahr 12291 ab?
 1.0,z48,Co mohou tato zařízení používat?,Was können diese Geräte verwenden?
 1.0,z31,Kdo je klíčovým motivem tohoto tématu?,Wer ist das Hauptmotiv für dieses Thema?
 1.0,t30,Není možné otevřít obraz typu BMP (jen JPG a PNG).,Es ist unmöglich&#44; ein Bild der BMP (nur JPG und PNG) zu öffnen.
@@ -45,6 +45,6 @@
 0.5,t24,Formát data nelze změnit z M-D-Y na DD-MM-YY.,Die Datenformation kann nicht von M-D-Y in D-M-Y umgewandelt werden.
 1.0,t06,Příkaz "Duplicate" není dostupný pro jednostranné formuláře.,Der Befehl "Duplicate" ist für einseitige Formulare nicht verfügbar.
 1.0,z26,Jaký orgán byl svržen v říjnové revoluci?,Welches Organ wurde im Oktober von der Revolution gestürzt?
-1.0,z52,Co navštívili Napoleon III.&#44; Victoria a Albert v Paříži?,Was haben Napoleon III&#44; Victoria und Albert in Paris besucht?
+0.7,z52,Co navštívili Napoleon III.&#44; Victoria a Albert v Paříži?,Was haben Napoleon III&#44; Victoria und Albert in Paris besucht?
 0.7,z39,Pro který hudební nástroj jsou napsány všechny Chopinovy skladby?,Für welches Musikinstrument sind Chopins ganzen Songs geschrieben?
-0.3,z20,Na kterého spisovatele odkazuje jméno "Rodó"?,Auf welchen Schriftsteller bezieht er den Namen "Rose"?
+0.5,z20,Na kterého spisovatele odkazuje jméno "Rodó"?,Auf welchen Schriftsteller bezieht er den Namen "Rose"?
