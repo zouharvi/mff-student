@@ -10,3 +10,5 @@ The file is comma separated: `SCORE,ID,SRC,MT`:
 - `ID` is the stimuli id, it can be ignored for this purpose
 - `SRC` original sentence
 - `MT` machine translated sentence
+
+Note: commas in fields are escaped to `&#44;`
