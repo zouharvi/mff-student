@@ -25,9 +25,9 @@ namespace StateSpaceSearch
             //ZDE VYBERTE PROBLEM:
 
             // Fifteen Puzzle:
-            problemInstance = new FifteenPuzzleProblem();
-            visualizer = new FifteenPuzzleVisualizer();
-            problemInstance.readFromFile("FP1.txt");
+            // problemInstance = new FifteenPuzzleProblem();
+            // visualizer = new FifteenPuzzleVisualizer();
+            // problemInstance.readFromFile("FP1.txt");
             // problemInstance.readFromFile("FP2.txt");
             // problemInstance.readFromFile("FP3.txt");
 
@@ -40,10 +40,10 @@ namespace StateSpaceSearch
             // problemInstance = TSPProblem.createRandom(10, new Random(123));
 
             // Rubik's cube:
-            // problemInstance = new RubicsCubeProblem();
-            // visualizer = new CubeVisualizer();
+            problemInstance = new RubicsCubeProblem();
+            visualizer = new CubeVisualizer();
             // problemInstance.readFromFile("2");
-            // problemInstance.readFromFile("3");
+            problemInstance.readFromFile("3");
 
 
             //zbytek neni potreba menit
@@ -55,9 +55,8 @@ namespace StateSpaceSearch
 
         private void button1_Click(object sender, EventArgs e)
         {
-			//ZDE NASTAVTE SVUJ SearchEngine
-
-			eng = new SearchEngine(SearchEngine.AlgType.DFS);
+//			eng = new SearchEngine(SearchEngine.AlgType.DFS);
+			eng = new IDS();
 
 			eng.search(currentState);
             

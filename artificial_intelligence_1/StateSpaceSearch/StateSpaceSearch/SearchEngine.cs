@@ -172,5 +172,34 @@ namespace StateSpaceSearch
         }
 
     }
+    
+    class IDS : SearchEngine
+    {
+        private int maxDepth = 0;
+        private int nextDepth = 0;
+        private const int MAX_MAX_DEPTH = int.MaxValue;
 
+        public IDS() : base(AlgType.DFS) { }
+
+        public override void search(State s)
+        {
+            while(result == null && maxDepth != MAX_MAX_DEPTH)
+            {
+                nextDepth = MAX_MAX_DEPTH;
+                base.search(s);
+                maxDepth = nextDepth;
+            }
+
+            if(maxDepth == MAX_MAX_DEPTH)
+                Console.WriteLine("No solution found at MAX_MAX_DEPTH");
+        }
+
+        protected override void addToOpenList(State s, int gValue, State pred)
+        {
+            if(gValue <= maxDepth)
+                base.addToOpenList(s, gValue, pred);
+            if(gValue > maxDepth && gValue < nextDepth)
+                nextDepth = gValue;
+        }
+    }
 }
