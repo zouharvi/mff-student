@@ -38,6 +38,7 @@ namespace StateSpaceSearch
         public int solutionCost;
         protected List<StateCostPair> successors = new List<StateCostPair>();
 		protected int branchingSum, branchingCount, maxGVal;
+        private Process proc;
 
         protected virtual void addToClosedList(State state)
         {
@@ -77,6 +78,7 @@ namespace StateSpaceSearch
 			printMessage("Max GVal: " + maxGVal, quiet);
 			printMessage("Speed: " + (gValues.Count / (now - start).TotalSeconds).ToString("0.00") + " states per second", quiet);
 			printMessage("Average branching: " + (((double)branchingSum) / branchingCount).ToString("0.00"), quiet);
+            printMessage("Memory used: " + (proc.PrivateMemorySize64/1024.0/1024/1024).ToString("0.00") + "GB", quiet);
 			printMessage("\n", quiet);
 		}
 
@@ -100,6 +102,7 @@ namespace StateSpaceSearch
                     openNodes = new StackLIFO<State>();
                     break;
             }
+            proc = Process.GetCurrentProcess();
         }
 
         public virtual void search(State s)
@@ -134,7 +137,7 @@ namespace StateSpaceSearch
                     DateTime end = DateTime.Now;
                     searchTime = (end - start);
                     int GVAL = gValues[currentState].gValue;
-                    printMessage("search ended in " + searchTime.TotalSeconds + " seconds, plan length: " + GVAL, quiet);
+                    printMessage("Plan length: " + GVAL, quiet);
                     printSearchStats(quiet);
                     this.result = extractSolution(currentState);
                     this.solutionCost = GVAL;
@@ -183,12 +186,14 @@ namespace StateSpaceSearch
 
         public override void search(State s)
         {
+            DateTime start = DateTime.Now;
             while(result == null && maxDepth != MAX_MAX_DEPTH)
             {
                 nextDepth = MAX_MAX_DEPTH;
                 base.search(s);
                 maxDepth = nextDepth;
             }
+            printMessage("Time total: " + (DateTime.Now - start).TotalSeconds + " seconds", quiet);
 
             if(maxDepth == MAX_MAX_DEPTH)
                 Console.WriteLine("No solution found at MAX_MAX_DEPTH");
