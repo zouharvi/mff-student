@@ -1,0 +1,50 @@
+% !TeX spellcheck = cs_CZ
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{2nd homework, 15-10-2019}
+\rhead{Vilém Zouhar}
+
+\textbf{Theorem: } Non-empty subuniverses (closed under the binary operation) of finite groups by the first definition (associative, cancellative and divisible) are subgroups.
+
+\textbf{Proof: }
+Consider a subuniverse $(S,\cdot)$ of finite $(G, \cdot)$.\\
+
+Associativity: $S$ has an associative operator, because $G$ is a group and thus also has an associative operator. \\
+
+Cancellative: Similarly $S$ is cancellative, because $G$ is a group:
+
+\begin{align*}
+	&\forall x, y, k \in G: k\cdot x = k\cdot y \rightarrow x = y \\
+	&\Rightarrow \\
+	&\forall x, y, k \in S \subseteq G: k\cdot x = k\cdot y \rightarrow x = y
+\end{align*}
+
+Divisibility:
+
+We consider $x \in S, n = |S|$. If $x\cdot x \cdot x = x$, then $x$ is a unit and is its own inverse.
+
+We also consider $T = \{x, x^1, \ldots, x^{n+1}\}$. From the pigeon principle it follows, that $\exists i, j: i < j: x^i = x^j$. This can be rewritten into: $x^i \cdot e = x^i \cdot x^{j-i}$. From the cancellative property $e = x^{j-i}$. Further, $x^{j-i-1} \in H$ (either $j-i>1 \rightarrow a^{j-i-1} \in S$ or $j-i=1 \rightarrow x^0 = e \in S$).
+
+But $x\cdot x^{j-i-1} = x^{j-i} = e$, so for all $x\in S$ there exists an inverse and by extent (described in my previous homework) $S$ is divisible.
+
+
+\end{document}
