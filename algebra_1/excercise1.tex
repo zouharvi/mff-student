@@ -1,0 +1,132 @@
+% !TeX spellcheck = cs_CZ
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{1st excercise, 30-10-2019}
+\rhead{Vilém Zouhar}
+
+\section{}
+\begin{align*}
+	\forall a, &b \in G: \\
+	a^2b^2 &= (ab)^2 \\
+	aabb &= abab \\
+	a^{-1}aabbb^{-1} &= a^{-1}abab^{-1} \\
+	ab &= ba \\
+\end{align*}
+
+Thus we can conclude, that $G$ is abelian.
+
+\section{}
+
+\subsection*{Intersection}
+
+\subsubsection*{Identity}
+
+Since $e \in H$ and $e \in K$, then $e \in H \cap K$.
+
+\subsubsection*{Inverse}
+
+$\forall x \in H \cap K: x \in H, x \in K \Rightarrow x^{-1} \in H, x^{-1} \in K \Rightarrow x^{-1} \in H \cap K$.
+
+\subsubsection*{Closure under multiplication}
+
+$\forall x,y \in H \cap K: x,y \in H, x,y \in K \Rightarrow xy \in H, xy \in K \Rightarrow xy \in H \cap K$.
+
+
+Thus we can conclude, that $H\cap K$ form a subgroup.
+
+\subsection*{Union}
+
+Consider $A = \{id, (12)\}, B = \{id, (13)\} \subseteq S_3$. Then both $A$ and $B$ are subgroups, but $(12)(13) = (123) \notin A \cup B$.
+
+So it is not true, that $A \cup B$ must be a group.
+
+\section{}
+
+$S_3 = \{id, (12), (13), (23), (123), (132) \}$
+
+\begin{tabular}{ | l | l |}
+	\hline
+	elements & normal \\
+	\hline
+	$\{id\}$ & yes \\
+	\hline
+	$\{id, (12)\}$ & no \\
+	\hline
+	$\{id, (13)\}$ & no \\
+	\hline
+	$\{id, (23)\}$ & no \\
+	\hline
+	$\{id, (123), (132)\}$ & yes \\
+	\hline
+	$\{id, (12), (13), (23), (123), (132)\}$ & yes \\
+	\hline
+\end{tabular}
+
+\section{}
+
+\subsection*{Subgroup}
+
+\subsubsection*{Identity}
+
+$\forall g \in G: ge = eg \Rightarrow e \in Z(G)$.
+
+\subsubsection*{Closure under multiplication}
+$forall a, b \in Z(G): \forall g \in G: ag = ga, ab = ba \Rightarrow g(ab) = abg = (ab)g \Rightarrow ab \in Z(G)$.
+
+\subsubsection*{Inverse}
+
+$\forall x \in Z(G): \forall g \in G: x^{-1}(gx)x^{-1} = x^{-1}(xg)x^{-1} \Rightarrow x^{-1}g = gx^{-1} \Rightarrow x^{-1} \in Z(G)$.
+
+
+\subsection*{Normality}
+
+$\forall g\in G: g\cdot Z(G) = Z(G) \cdot g$, since $Z(G)$ commutes with every element of $G$, but this is also the definition of normality, because every left coset is also (exactly) a right coset.
+
+\section{}
+
+\subsection*{Subgroup}
+
+\newcommand{\sln}{\text{SL}_n(\mathbb{R})}
+\newcommand{\gln}{\text{GL}_n(\mathbb{R})}
+
+\subsubsection*{Identity}
+
+$det(I_n) = 1 \Rightarrow I_n \in \sln, \forall x \in \sln: xI_n = I_nx = x$.
+
+\subsubsection*{Closure under multiplication}
+$forall a, b \in \sln: det(ab) = 1 \Rightarrow = ab \in \sln$.
+
+\subsubsection*{Inverse}
+
+$\forall x \in \sln: det(x^{-1}) = \frac{1}{det(x)} = 1 \Rightarrow x^{-1} \in \sln$.
+
+\subsection*{Normality}
+
+Using the alternative definition of normality:
+
+$\forall g \in \gln, \forall x \in \sln: det(gxg^{-1}) = \frac{det(g)\cdot 1}{det(g)} = 1 \Rightarrow gxg^{-1} \in \sln$.
+
+\subsection*{Quotient group}
+
+$\gln/\sln = \{\{ x \in \gln: det(x) = r\}, r \in \mathbb{R} \backslash \{0\}\}$ (sets of matricies of given determinant)	
+\end{document}
