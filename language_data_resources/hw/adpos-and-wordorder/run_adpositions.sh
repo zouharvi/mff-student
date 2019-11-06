@@ -2,6 +2,6 @@
 
 for a in sample/*/sample.conllu; do
     printf '%50s ' $a;
-    udapy .Adpositions < $a;
+    udapy -q .Adpositions < $a;
 done | tee results.txt
 

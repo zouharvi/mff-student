@@ -1,18 +1,4 @@
-"""tutorial.Adpositions block template.
-
-Example usage::
-
- for a in */sample.conllu; do
-    printf '%50s ' $a;
-    udapy tutorial.Adpositions < $a;
- done | tee results.txt
-
- # What are the English postpositions?
- cat UD_English/sample.conllu | udapy -TM util.Mark \
-   node='node.upos == "ADP" and node.parent.precedes(node)' | less -R
-"""
 from udapi.core.block import Block
-
 
 class Adpositions(Block):
     """Compute the number of prepositions and postpositions."""
@@ -39,5 +25,4 @@ class Adpositions(Block):
         total = self.prepositions + self.postpositions or 1
         prep = 100 * self.prepositions / total
         post = 100 * self.postpositions / total
-        print(f'prepositions {prep:.2f}, postpositions {post:.2f}, count disagreement {self.disagreement}')
-
+        print(f'prepositions {prep:6.2f}, postpositions {post:6.2f}, count disagreement {self.disagreement}')
