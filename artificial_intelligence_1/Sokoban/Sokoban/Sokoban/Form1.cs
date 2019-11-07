@@ -25,10 +25,10 @@ namespace Sokoban
            
             //  ZDE NASTAVTE SVOU HEURISTIKU
 
+            // heuristic = new BlindHeuristicVilda();
             // heuristic = new BlindHeuristic();
-            heuristic = new BlindHeuristicVilda();
-            // heuristic = new SimpleDistanceHeuristic();
-            //heuristic = new AdvancedDistanceHeuristic();
+            heuristic = new SimpleDistanceHeuristic();
+            // heuristic = new AdvancedDistanceHeuristic();
             //heuristic = new WeightedHeuristic(new AdvancedDistanceHeuristic(), 10);
           
 

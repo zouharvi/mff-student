@@ -445,65 +445,73 @@ namespace Sokoban
         }
     }
 
-    class BlindHeuristicVilda : Heuristic
+     class BlindHeuristicVilda : Heuristic
     {
+        const int LOW_INF = int.MaxValue;
+        const float CRATE_TO_TARGET_W = 1;
+        const float TARGET_TO_CRATE_W = 1;
+        const float SOKOBAN_TO_CRATE_W = 1/5;
+        List<Coords> targets = new List<Coords>();
         Board board;
-        List<Coords> targets;
-        public override void init(Board b)
+        public override void init(Board board)
         {
-            this.board = b;
-            targets = new List<Coords>();
-            
-			for (int i = 0; i < b.size.x; i++)
-			{
-				for (int j = 0; j < b.size.y; j++)
-				{
-                    if(b[i,j].state == CellState.target)
-                        targets.Add(new Coords(i,j));
-                }
-            }
+            this.board = board;
+            for (int i = 0; i < board.size.x; i++)
+                for (int j = 0; j < board.size.y; j++)
+                    if(board[i,j].state == CellState.target)
+                        targets.Add(new Coords(i, j));
         }
 
-        public bool isTarget(Coords crate, List<Coords> targets) {
-            foreach(Coords target in targets) {
+        private bool isTarget(Coords crate)
+        {
+            foreach (Coords target in targets)
                 if (target.x == crate.x && target.y == crate.y)
                     return true;
-            }
             return false;
         }
 
-        private int getDistance(Coords c1, Coords c2)
+        private int calculateDistance(Coords a, Coords b)
         {
-            return Math.Abs(c1.x-c2.x) + Math.Abs(c1.y-c2.y);
+            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
         }
+
         public override int getValue(Coords[] state)
         {
             int distance = 0;
-            int nearestCrateDist = int.MaxValue;
-            Coords sokobanPos = state.Last();
-			for(int i = 0; i < state.Length-1; i++)
-			{
-                // Targets
-                int nearestTargetDist = int.MaxValue;
-                foreach(Coords target in targets) {
-                    nearestTargetDist = Math.Min(nearestTargetDist, getDistance(target, state[i]));
-                }
-                distance += 2*nearestTargetDist;
 
-                // Crates in corners are really bad
-                if(Solver.isCorner(state[i], this.board) && !isTarget(state[i], targets)) {
-                    distance += 1000;
-                }
+            Coords sokobanPos = state[state.Length - 1];
+            int distSokToCrt = int.MaxValue;
+           
+            for(int i = 0; i < state.Length-1; i++)
+            {
+                // Crates in non-target corners are Inf not good
+                if(Solver.isCorner(state[i], board) && !isTarget(state[i]))
+                    return LOW_INF;
 
-                // User to crate
-                nearestCrateDist = Math.Min(nearestCrateDist, getDistance(sokobanPos, state[i]));
-                // Console.WriteLine(getDistance(sokobanPos, state[i]));
+                // Distance between crates and targets
+                int distCrtToTrg = int.MaxValue;
+                foreach (Coords target in targets)
+                    distCrtToTrg = Math.Min(distCrtToTrg, calculateDistance(target, state[i]));
+                distance += (int) (CRATE_TO_TARGET_W * distCrtToTrg);
+
+                // Distance between crates and sokoban
+                distSokToCrt = Math.Min(distSokToCrt, calculateDistance(sokobanPos, state[i]));
             }
-            // Console.WriteLine(nearestCrateDist);
-            distance += 2*(nearestCrateDist-1);
+            distance += (int) (SOKOBAN_TO_CRATE_W*distSokToCrt);
+
+            foreach(Coords target in targets)
+            {
+                // Distance between targets and crates
+                int distTrgToCrt = int.MaxValue;
+                for (int i = 0; i < state.Length - 1; i++)
+                    distTrgToCrt = Math.Min(distTrgToCrt, calculateDistance(state[i], target));
+                distance += (int) (TARGET_TO_CRATE_W * distSokToCrt);
+            }
+
             return distance;
         }
     }
+
     class BlindHeuristic : Heuristic
     {
         public override void init(Board b)
