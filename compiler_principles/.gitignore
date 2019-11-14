@@ -1,3 +1,9 @@
 *.o
 *.out
 *.exe
+build.gcc/*.cpp
+build.gcc/*.hpp
+build.gcc/*.hh
+build.gcc/*.output
+build.gcc/*.backup
+build.gcc/tmp/*
