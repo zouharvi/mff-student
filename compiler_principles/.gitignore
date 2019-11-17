@@ -1,5 +1,4 @@
 *.o
-*.out
 *.exe
 build.gcc/*.cpp
 build.gcc/*.hpp
