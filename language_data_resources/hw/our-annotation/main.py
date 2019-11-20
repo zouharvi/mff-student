@@ -73,3 +73,4 @@ kappa = (pa-pe)/(1-pe)
 print(f'IAA: {pa*100:0.2f}%')
 print(f'By chance: {pe*100:0.2f}%')
 print(f'Cohen\'s Kappa:: {kappa*100:0.2f}%')
+

@@ -1,4 +1,5 @@
 from udapi.core.block import Block
+import sys
 
 class Adpositions(Block):
     """Compute the number of prepositions and postpositions."""
@@ -16,10 +17,12 @@ class Adpositions(Block):
                 self.prepositions += 1
                 if node.feats['AdpType'] == 'Post':
                     self.disagreement += 1
+                    print(f'Post: {node.root.compute_text()}', file=sys.stderr)
             else: 
                 self.postpositions += 1
                 if node.feats['AdpType'] in ['Prep', 'Voc']:
                     self.disagreement += 1
+                    print(f'Prep/Voc: {node.root.compute_text()}', file=sys.stderr)
 
     def process_end(self):
         total = self.prepositions + self.postpositions or 1
