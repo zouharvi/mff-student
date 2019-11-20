@@ -1,6 +1,6 @@
 """tutorial.AddCommas block template."""
 from udapi.core.block import Block
-import sys
+import sys, random
 
 # nickname = Vilda
 
@@ -13,9 +13,6 @@ class AddCommas(Block):
     def __init__(self, language='en', **kwargs):
         super().__init__(**kwargs)
         self.language = language
-
-    # def process_tree(self, tree):
-    #     printE(tree.compute_text())
 
     def process_node(self, node):
         if self.should_add_comma_before(node):
@@ -60,14 +57,6 @@ class AddCommas(Block):
         if prev_node is None:
             return False
 
-        if self.language == 'en':
-            if prev_node.lemma == 'however':
-                if node.next_node != None:
-                    return True
-            if node.lemma == 'but':
-                if node.next_node != None and node.ord > 1:
-                    printE(f'{node.ord}: {node.root.compute_text()}')
-                    return True
         if self.language == 'cs':
             if node.ord > 1:
                 # 83% prec, 30% rec
@@ -76,9 +65,6 @@ class AddCommas(Block):
                         # printE(f'{node.lemma} -- {node.root.compute_text()}')
                         return True
                 
-                # terrible
-                # if self.closestVerb(node.prev_node) != self.closestVerb(node):
-                #     return True
                 govVerb1 = self.getGovVerb(node.prev_node)
                 if (govVerb1 is not None) and (not 'dirtyD' in govVerb1.misc) and govVerb1.feats['VerbForm'] != 'Inf':
                     govVerb2 = self.getGovVerb(node)
@@ -92,38 +78,36 @@ class AddCommas(Block):
                 # 91% prec, 15% rec
                 if node.upos == 'SCONJ' and node.parent.upos == 'VERB':
                     return True
-                # > jednotku, propadne | Tomu, kdo nezaplatil, nebo nezaplatil včas vydraženou provozní jednotkupropadne dražební jistota.
-
-                # if node.lemma == 'než':
-                #     govVerb = self.getGovVerb(node)
-                #     if govVerb != None and govVerb.ord >= node.ord and govVerb.ord - node.ord <= 5:
-                #         return True
-                # if node.lemma == 'tak':
-                #     return True
 
                 # 94% prec, 30% rec
                 if node.lemma in ['neboť', 'zda', 'proč']:
                     return True
-                if node.lemma in ['ve', 'v', 'se', 's'] and \
-                     (node.next_node != None and node.next_node.lemma in ['který', 'která', 'které', 'kteří', 'kterého', 'kterých', 'kterému', 'kterým', 'kterou', 'kterým', 'kterými']):
+                if node.upos == 'ADP' and (node.next_node != None and (node.next_node.feats['PronType'] == 'Rel' or node.next_node.lemma == 'který')):
                     return True
-                if node.prev_node.lemma not in ['ve', 'v', 'se', 's'] and \
-                    node.lemma in ['který', 'která', 'které', 'kteří', 'kterého', 'kterých', 'kterému', 'kterým', 'kterou', 'kterým', 'kterými']:
+                if node.prev_node.upos != 'ADP' and (node.feats['PronType'] == 'Rel' or node.lemma == 'který'):
                     return True
-                if node.lemma == 'například' and node.prev_node.lemma != 'jako' and node.prev_node.upos not in ['AUX', 'VERB']:
+                if node.lemma == 'například' and node.prev_node.lemma not in ['jako', 'že'] and node.prev_node.upos not in ['AUX', 'VERB']:
                     return True
-                if node.lemma == 'jako' and (node.next_node != None and node.next_node.lemma == 'například'):
+                if node.lemma in ['jako', 'že'] and (node.next_node != None and node.next_node.lemma == 'například'):
                     return True
                 if node.form in ['co'] and node.upos in ['SCONJ', 'PRON']:
                     return True
                 if node.lemma in ['aby', 'že', 'protože'] and node.upos == 'SCONJ':
                     return True
+
+                return False
             else:
                 # set the first conj to dirty
                 self.hasParentConj(node, leftLimit=node.ord)
-                # set the first gov verb to dirty
-                # govVerb = self.getGovVerb(node)
-                # if govVerb != None:
-                #     govVerb.misc['dirtyD'] = True
+                return False
 
-        return False
+        elif self.language == 'en':
+            EPSILON = 150
+            COMMAS_YES = 1594+EPSILON
+            COMMAS_ALL  = 38186
+            return random.random() < COMMAS_YES/COMMAS_ALL
+        elif self.language == 'fr':
+            EPSILON = 5
+            COMMAS_YES = 83+EPSILON
+            COMMAS_ALL  = 2294
+            return random.random() < COMMAS_YES/COMMAS_ALL
