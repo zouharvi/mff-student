@@ -111,3 +111,9 @@ class AddCommas(Block):
             COMMAS_YES = 83+EPSILON
             COMMAS_ALL  = 2294
             return random.random() < COMMAS_YES/COMMAS_ALL
+        elif self.language == 'de':
+            EPSILON = 10
+            COMMAS_YES = 291 +EPSILON
+            COMMAS_ALL  = 9264
+            return random.random() < COMMAS_YES/COMMAS_ALL
+        return False
