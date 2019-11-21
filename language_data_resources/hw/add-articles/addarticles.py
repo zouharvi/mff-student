@@ -14,14 +14,6 @@ class AddArticles(Block):
         if node.next_node == None:
             printE(node.root.compute_text())
 
-        if self.add_the_before(node):
-            if node.ord <= 1 or node.prev_node == '"':
-                the = node.create_child(form="The", lemma="The", upos="DET", deprel="det")
-            else:
-                the = node.create_child(form="the", lemma="the", upos="DET", deprel="det")
-            the.shift_before_node(node)
-            return
-
         if self.add_a_before(node):
             if node.ord <= 1:
                 the = node.create_child(form="A", lemma="A", upos="DET", deprel="det")
@@ -30,6 +22,14 @@ class AddArticles(Block):
             the.shift_before_node(node)
             return
 
+        if self.add_the_before(node):
+            if node.ord <= 1 or node.prev_node == '"':
+                the = node.create_child(form="The", lemma="The", upos="DET", deprel="det")
+            else:
+                the = node.create_child(form="the", lemma="the", upos="DET", deprel="det")
+            the.shift_before_node(node)
+            return
+            
     def has_noun_parent_right(self, node):
         if node.ord == 0:
             return False
