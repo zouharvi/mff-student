@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cd sample
-cp UD_English/sample.conllu gold.conllu
+cp UD_English/train.conllu gold.conllu
 cat gold.conllu | udapy -q -s \
   util.Eval node='if node.upos=="DET" and node.lemma in {"a", "the"}: node.remove(children="rehang")' \
   > without.conllu

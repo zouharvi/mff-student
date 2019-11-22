@@ -16,8 +16,8 @@ for i in range(len(text)-1):
 
 bigramsA = list(filter(lambda x: x[0] == 'a', bigrams))
 counterA = Counter(bigramsA)
-printCounterSignificant(counterA, 9)
+printCounterSignificant(counterA, 5)
 
 bigramsT = list(filter(lambda x: x[0] == 'the', bigrams))
 counterT = Counter(bigramsT)
-printCounterSignificant(counterT, 20)
+printCounterSignificant(counterT, 15)
