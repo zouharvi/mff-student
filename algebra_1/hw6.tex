@@ -1,0 +1,50 @@
+% !TeX spellcheck = cs_CZ
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{6th homework, 19-11-2019}
+\rhead{Vilém Zouhar}
+
+% \textbf{Lemma 1} Cyclic groups are abelian.
+
+% \textbf{Proof} 
+
+% \begin{align*}
+%	& \forall x, y \in C: x = a^i, y = a^j, x\cdot y = a^i \cdot a^j = a^{i+j} = a^j \cdot a^i = y \cdot x
+%\end{align*}
+
+%\vspace{1cm}
+
+%\textbf{Statement} $S_4/V \cong S_3$
+
+%\textbf{Proof}
+
+\begin{align*}
+	& V = \{id, (12)(34), (13)(24), (14)(23)\} \\
+	& |S_4| = 24, |V| = 4 \\
+	& |S_4/V| = 6 \\
+\end{align*}
+
+There are two groups of the order of $6$. Namely $C_6$ and $S_3$. By showing that $S_4/V$ is not isomorphic to $C_6$, we actually show that it is isomorphic to $S_3$.
+
+For $C_6$ it is true, that elements are of order 6: $\forall x \in C_6: x^6 = x^1$ and $x \ne x^i \forall i \in \{2,3,4,5\}$. This is not true for $S_4$, because it contains elements of maximum order of $4$. Since $V \subseteq S_4$, then there cannot be an element of order 6 in $S_4/V$.
+
+\end{document}

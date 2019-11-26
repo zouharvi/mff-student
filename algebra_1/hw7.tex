@@ -1,0 +1,69 @@
+% !TeX spellcheck = cs_CZ
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{7th homework, 26-11-2019}
+\rhead{Vilém Zouhar}
+
+\textbf{Prove } $nZ/mZ \equiv Z_{m/n}$ for $n | m$.
+
+\vspace{1cm}
+
+\textbf{Proof:}
+
+
+LHS:
+
+\begin{align*}
+	nZ = & \{0, \pm n, \pm 2n, \ldots\} \\
+	mZ = & \{0, \pm m, \pm 2m, \ldots\} \\
+	nZ/mZ = & \{ \{0, \pm m, \pm 2m, \ldots\}, \{n, n \pm m, n \pm 2m, \ldots\}, \{2n, 2n \pm m, 2n \pm 2m, \ldots\}, \ldots \}
+\end{align*}
+
+For $nZ/mZ$ we can use a handy transversal $\tau$ with the smallest positive elements from each coset. Such elements are $\{0, n, 2n, \ldots, (k-1)n\}$, where $k = \frac{m}{n}$. 
+
+\vspace{1cm}
+
+RHS:
+
+\begin{align*}
+	Z_{m/n} & = \{0, 1, 2, 3, \ldots, \frac{m}{n}-1\}
+\end{align*}
+
+\vspace{1cm}
+
+Mapping:
+
+We propose a mapping $\psi: Z_{m/n} \rightarrow \tau(nZ/mZ) $ such that $\psi: x \mapsto nx$. Clearly this is a surjective function, because $\forall y \in \{0, n, 2n, \ldots, m-n\} \exists x \in \{0, 1, 2, \ldots, \frac{m}{n}-1\}: nx = y$. Furthermore it is also injective, because $\forall a, b \in \{0, 1, 2, \ldots, \frac{m}{n}-1\}: na = nb \Rightarrow a=b$. From this we conclude, that $\psi$ is bijective.
+
+\text{}\\
+
+No we only need to show, that $\psi$ is an isomorphism. We denote $a + b \mod x$ as $a +_x b$.
+
+\begin{align*}
+ & \forall a,b \in \{0, n, 2n, \ldots, m-n\}: \\
+ & \psi(a +_{m/n} b) = n(a+_{m/n} b) = na+_m nb = \psi(a) +_m \psi(b) \\
+\end{align*}
+
+Since we found an isomorphism between a transversal of $nZ/mZ$ and $Z_{m/n}$ we conclude, that $nZ/mZ \equiv Z_{m/n}$.
+
+
+\end{document}
