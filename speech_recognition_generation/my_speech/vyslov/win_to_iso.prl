@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+# 1999, Author: Pavel Ircing; ircing@kky.zcu.cz
+
+while(<>)
+{  
+  
+  s/\x8A/\xA9/g;
+  s/\x9A/\xB9/g;
+  s/\x8D/\xAB/g;
+  s/\x9D/\xBB/g;
+  s/\x8E/\xAE/g;
+  s/\x9E/\xBE/g;
+  
+  s/\x0D//g;
+   
+  print $_;
+}   
+    

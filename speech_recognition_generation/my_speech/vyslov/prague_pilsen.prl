@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+# 1999, Author: Pavel Ircing; ircing@kky.zcu.cz
+
+# transduce phonetic alphabet from Prague to Pilsen
+
+while (<>)
+{
+  $string=$_;
+  
+  $string=~ s/au/aw/g;
+  $string=~ s/ch/x/g;
+  $string=~ s/cz/ch/g;
+  $string=~ s/dzs/dzh/g;
+  $string=~ s/es/e s/g;
+  $string=~ s/eu/ew/g;
+  $string=~ s/ou/ow/g;
+  $string=~ s/rsz/rsh/g;
+  $string=~ s/rzs/rzh/g;
+  $string=~ s/sz/sh/g;
+  $string=~ s/ts/dz/g;
+  $string=~ s/zs/zh/g;
+  
+  print $string;
+}  

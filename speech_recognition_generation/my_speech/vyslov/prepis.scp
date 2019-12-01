@@ -1,0 +1,124 @@
+# Hrubý fonetický pøepis (skript programu sed, pou¾íván ve spojení s init.scp)
+# 11.9.1997 Autor: Nino Peterek, peterek@ufal.ms.mff.cuni.cz
+
+# namapování nechtìných znakù na model ticha
+s/^.*[0-9].*$/sil/g
+
+# náhrada víceznakových fonémù speciálním znakem, pøípadnì rozepsání znaku na více fonémù
+s/CH/#/g
+s/W/V/g
+s/Q/KV/g
+s/D®/&/g
+s/DZ/@/g
+s/X/KS/g
+
+# o¹etøení Ì 
+s/\([BPFV]\)Ì/\1JE/g
+s/DÌ/ÏE/g
+s/TÌ/«E/g
+s/NÌ/ÒE/g
+s/MÌ/MÒE/g
+
+# zmìkèující i
+s/DI/ÏI/g
+s/TI/«I/g
+s/NI/ÒI/g
+s/DÍ/ÏÍ/g
+s/TÍ/«Í/g
+s/NÍ/ÒÍ/g
+
+# asimilace znìlosti
+s/B$/P/g
+s/B\([PT«KS©CÈ#F]\)/P\1/g
+s/B\([BDÏGZ®@&H]\)$/P\1/g
+s/P\([BDÏGZ®@&H]\)/B\1/g
+s/D$/T/g
+s/D\([PT«KS©CÈ#F]\)/T\1/g
+s/D\([BDÏGZ®@&H]\)$/T\1/g
+s/T\([BDÏGZ®@&H]\)/D\1/g
+s/Ï$/«/g
+s/Ï\([PT«KS©CÈ#F]\)/«\1/g
+s/Ï\([BDÏGZ®@&H]\)$/«\1/g
+s/«\([BDÏGZ®@&H]\)/Ï\1/g
+s/V$/F/g
+s/V\([PT«KS©CÈ#F]\)/F\1/g
+s/V\([BDÏGZ®@&H]\)$/F\1/g
+s/F\([BDÏGZ®@&H]\)/V\1/g
+s/G$/K/g
+s/G\([PT«KS©CÈ#F]\)/K\1/g
+s/G\([BDÏGZ®@&H]\)$/K\1/g
+s/K\([BDÏGZ®@&H]\)/G\1/g
+s/Z$/S/g
+s/Z\([PT«KS©CÈ#F]\)/S\1/g
+s/Z\([BDÏGZ®@&H]\)$/S\1/g
+s/S\([BDÏGZ®@&H]\)/Z\1/g
+s/®$/©/g
+s/®\([PT«KS©CÈ#F]\)/©\1/g
+s/®\([BDÏGZ®@&H]\)$/©\1/g
+s/©\([BDÏGZ®@&H]\)/®\1/g
+s/H$/#/g
+s/H\([PT«KS©CÈ#F]\)/#\1/g
+s/H\([BDÏGZ®@&H]\)$/#\1/g
+s/#\([BDÏGZ®@&H]\)/H\1/g
+s/@$/C/g
+s/@\([PT«KS©CÈ#F]\)/C\1/g
+s/@\([BDÏGZ®@&H]\)$/C\1/g
+s/C\([BDÏGZ®@&H]\)/@\1/g
+s/&$/È/g
+s/&\([PT«KS©CÈ#F]\)/È\1/g
+s/&\([BDÏGZ®@&H]\)$/È\1/g
+s/È\([BDÏGZ®@&H]\)/&\1/g
+s/Ø$/>/g
+s/Ø\([PT«KS©CÈ#F]\)/>\1/g
+s/Ø\([BDÏGZ®@&H]\)$/>\1/g
+s/\([PT«KS©CÈ#F]\)Ø/\1>/g
+
+
+#zbytek
+s/NK/ng K/g
+s/NG/ng G/g
+s/MV/mg V/g
+s/MF/mg F/g
+s/N«/Ò«/g
+s/NÏ/ÒÏ/g
+s/NÒ/Ò/g
+s/CC/C/g
+s/DD/D/g
+s/JJ/J/g
+s/KK/K/g
+s/LL/L/g
+s/NN/N/g
+s/MM/M/g
+s/SS/S/g
+s/TT/T/g
+s/ZZ/Z/g
+s/ÈÈ/È/g
+s/©©/©/g
+s/-//g
+
+# závìreèný pøepis na HTK abecedu
+s/>/rsz /g
+s/EU/eu /g
+s/AU/au /g
+s/OU/ou /g
+s/Á/aa /g
+s/È/cz /g
+s/Ï/dj /g
+s/É/ee /g
+s/Í/ii /g
+s/Ò/nj /g
+s/Ó/oo /g
+s/Ø/rzs /g
+s/©/sz /g
+s/«/tj /g
+s/Ú/uu /g
+s/Ù/uu /g
+s/Ý/ii /g
+s/®/zs /g
+s/Y/i /g
+s/&/dzs /g
+s/@/ts /g
+s/#/ch /g
+s/!//g
+s/\([A-Z]\)/\1 /g
+s/$/ sp/g

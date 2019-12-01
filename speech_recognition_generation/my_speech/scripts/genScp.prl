@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+$j=1;
+$n=40;
+$PATH1="/home/vilda/my_speech/recordings/converted";
+$PATH2="/home/vilda/my_speech/recordings/mfc";
+while ($j <= $n)
+{
+	if($j <= 9) {
+ 		print "$PATH1/S0$j.wav $PATH2/S0$j.mfc\n"; 
+	} else {
+ 		print "$PATH1/S$j.wav $PATH2/S$j.mfc\n"; 
+	}
+	$j=$j+1;
+}
+

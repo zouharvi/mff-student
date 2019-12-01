@@ -1,1 +1,4 @@
 hw_kmeans/data/*
+my_speech/recordings/raw/*.wav
+my_speech/recordings/converted/*.wav
+my_speech/recordings/mfc/*.mfc

@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+# 1999, Author: Pavel Ircing; ircing@kky.zcu.cz
+
+# replace infrequent phonemes in dictionary
+
+while (<>)
+{
+  $string=$_;
+  
+  $string=~ s/dz/c/g;
+  $string=~ s/dzh/ch/g;
+  $string=~ s/ew/e u/g;
+  $string=~ s/mg/m/g;
+  $string=~ s/oo/o/g;
+    
+  print $string;
+}  

@@ -1,0 +1,10 @@
+#!/bin/sh
+cat $1 |
+while read i
+do
+  echo -n "$i       "
+  echo "$i" |
+  sed -f ./init.scp|sed -f ./prepis.scp | tr A-Z a-z | ./prague_pilsen.prl | ./replace_infreq.prl
+
+done > $2
+
