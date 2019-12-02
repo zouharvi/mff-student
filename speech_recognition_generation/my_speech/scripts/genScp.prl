@@ -1,14 +1,16 @@
 #!/usr/bin/perl
 $j=1;
-$n=40;
-$PATH1="/home/vilda/my_speech/recordings/converted";
-$PATH2="/home/vilda/my_speech/recordings/mfc";
+$n=20;
+$PATH1="/afs/ms/u/z/zouharvi/mff-things/speech_recognition_generation/my_speech/recordings/converted";
+$PATH2="/afs/ms/u/z/zouharvi/mff-things/speech_recognition_generation/my_speech/recordings/mfc";
 while ($j <= $n)
 {
 	if($j <= 9) {
- 		print "$PATH1/S0$j.wav $PATH2/S0$j.mfc\n"; 
+ 		#print "$PATH1/T0$j.wav $PATH2/T0$j.mfc\n"; 
+ 		print "$PATH2/T0$j.mfc\n"; 
 	} else {
- 		print "$PATH1/S$j.wav $PATH2/S$j.mfc\n"; 
+ 		#print "$PATH1/T$j.wav $PATH2/T$j.mfc\n"; 
+ 		print "$PATH2/T$j.mfc\n"; 
 	}
 	$j=$j+1;
 }

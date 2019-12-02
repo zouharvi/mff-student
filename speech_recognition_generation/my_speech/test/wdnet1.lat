@@ -1,0 +1,3320 @@
+VERSION=1.0
+N=1190 L=2128 
+I=0    W=!NULL               
+I=1    W=!NULL               
+I=2    W=ZDALIPAK            
+I=3    W=V\315\251           
+I=4    W=KOLIK               
+I=5    W=JE                  
+I=6    W=!NULL               
+I=7    W=VYHODNO\253         
+I=8    W=LEV\301             
+I=9    W=Z\301VORKA          
+I=10   W=NULA                
+I=11   W=!NULL               
+I=12   W=JEDNA               
+I=13   W=DVA                 
+I=14   W=T\330I              
+I=15   W=\310TY\330I         
+I=16   W=P\314T              
+I=17   W=\251EST             
+I=18   W=SEDM                
+I=19   W=OSM                 
+I=20   W=DEV\314T            
+I=21   W=NEKONE\310NO        
+I=22   W=DESET               
+I=23   W=STO                 
+I=24   W=TIS\315C            
+I=25   W=PLUS                
+I=26   W=!NULL               
+I=27   W=M\315NUS            
+I=28   W=KR\301T             
+I=29   W=D\314LENO           
+I=30   W=NA                  
+I=31   W=NULA                
+I=32   W=!NULL               
+I=33   W=JEDNA               
+I=34   W=DVA                 
+I=35   W=T\330I              
+I=36   W=\310TY\330I         
+I=37   W=P\314T              
+I=38   W=\251EST             
+I=39   W=SEDM                
+I=40   W=OSM                 
+I=41   W=DEV\314T            
+I=42   W=NEKONE\310NO        
+I=43   W=DESET               
+I=44   W=STO                 
+I=45   W=TIS\315C            
+I=46   W=INVERZ              
+I=47   W=!NULL               
+I=48   W=ODMOCNINA           
+I=49   W=Z                   
+I=50   W=FAKTORI\301L        
+I=51   W=Z                   
+I=52   W=NULA                
+I=53   W=JEDNA               
+I=54   W=DVA                 
+I=55   W=T\330I              
+I=56   W=\310TY\330I         
+I=57   W=P\314T              
+I=58   W=\251EST             
+I=59   W=SEDM                
+I=60   W=OSM                 
+I=61   W=DEV\314T            
+I=62   W=NEKONE\310NO        
+I=63   W=DESET               
+I=64   W=STO                 
+I=65   W=TIS\315C            
+I=66   W=PRAV\301            
+I=67   W=Z\301VORKA          
+I=68   W=!NULL               
+I=69   W=NULA                
+I=70   W=JEDNA               
+I=71   W=DVA                 
+I=72   W=T\330I              
+I=73   W=\310TY\330I         
+I=74   W=P\314T              
+I=75   W=\251EST             
+I=76   W=SEDM                
+I=77   W=OSM                 
+I=78   W=DEV\314T            
+I=79   W=NEKONE\310NO        
+I=80   W=DESET               
+I=81   W=STO                 
+I=82   W=TIS\315C            
+I=83   W=PLUS                
+I=84   W=!NULL               
+I=85   W=M\315NUS            
+I=86   W=KR\301T             
+I=87   W=D\314LENO           
+I=88   W=NA                  
+I=89   W=LEV\301             
+I=90   W=Z\301VORKA          
+I=91   W=NULA                
+I=92   W=!NULL               
+I=93   W=JEDNA               
+I=94   W=DVA                 
+I=95   W=T\330I              
+I=96   W=\310TY\330I         
+I=97   W=P\314T              
+I=98   W=\251EST             
+I=99   W=SEDM                
+I=100  W=OSM                 
+I=101  W=DEV\314T            
+I=102  W=NEKONE\310NO        
+I=103  W=DESET               
+I=104  W=STO                 
+I=105  W=TIS\315C            
+I=106  W=PLUS                
+I=107  W=!NULL               
+I=108  W=M\315NUS            
+I=109  W=KR\301T             
+I=110  W=D\314LENO           
+I=111  W=NA                  
+I=112  W=NULA                
+I=113  W=!NULL               
+I=114  W=JEDNA               
+I=115  W=DVA                 
+I=116  W=T\330I              
+I=117  W=\310TY\330I         
+I=118  W=P\314T              
+I=119  W=\251EST             
+I=120  W=SEDM                
+I=121  W=OSM                 
+I=122  W=DEV\314T            
+I=123  W=NEKONE\310NO        
+I=124  W=DESET               
+I=125  W=STO                 
+I=126  W=TIS\315C            
+I=127  W=INVERZ              
+I=128  W=!NULL               
+I=129  W=ODMOCNINA           
+I=130  W=Z                   
+I=131  W=FAKTORI\301L        
+I=132  W=Z                   
+I=133  W=NULA                
+I=134  W=JEDNA               
+I=135  W=DVA                 
+I=136  W=T\330I              
+I=137  W=\310TY\330I         
+I=138  W=P\314T              
+I=139  W=\251EST             
+I=140  W=SEDM                
+I=141  W=OSM                 
+I=142  W=DEV\314T            
+I=143  W=NEKONE\310NO        
+I=144  W=DESET               
+I=145  W=STO                 
+I=146  W=TIS\315C            
+I=147  W=PRAV\301            
+I=148  W=Z\301VORKA          
+I=149  W=!NULL               
+I=150  W=NULA                
+I=151  W=JEDNA               
+I=152  W=DVA                 
+I=153  W=T\330I              
+I=154  W=\310TY\330I         
+I=155  W=P\314T              
+I=156  W=\251EST             
+I=157  W=SEDM                
+I=158  W=OSM                 
+I=159  W=DEV\314T            
+I=160  W=NEKONE\310NO        
+I=161  W=DESET               
+I=162  W=STO                 
+I=163  W=TIS\315C            
+I=164  W=INVERZ              
+I=165  W=!NULL               
+I=166  W=ODMOCNINA           
+I=167  W=Z                   
+I=168  W=FAKTORI\301L        
+I=169  W=Z                   
+I=170  W=LEV\301             
+I=171  W=Z\301VORKA          
+I=172  W=NULA                
+I=173  W=!NULL               
+I=174  W=JEDNA               
+I=175  W=DVA                 
+I=176  W=T\330I              
+I=177  W=\310TY\330I         
+I=178  W=P\314T              
+I=179  W=\251EST             
+I=180  W=SEDM                
+I=181  W=OSM                 
+I=182  W=DEV\314T            
+I=183  W=NEKONE\310NO        
+I=184  W=DESET               
+I=185  W=STO                 
+I=186  W=TIS\315C            
+I=187  W=PLUS                
+I=188  W=!NULL               
+I=189  W=M\315NUS            
+I=190  W=KR\301T             
+I=191  W=D\314LENO           
+I=192  W=NA                  
+I=193  W=NULA                
+I=194  W=!NULL               
+I=195  W=JEDNA               
+I=196  W=DVA                 
+I=197  W=T\330I              
+I=198  W=\310TY\330I         
+I=199  W=P\314T              
+I=200  W=\251EST             
+I=201  W=SEDM                
+I=202  W=OSM                 
+I=203  W=DEV\314T            
+I=204  W=NEKONE\310NO        
+I=205  W=DESET               
+I=206  W=STO                 
+I=207  W=TIS\315C            
+I=208  W=INVERZ              
+I=209  W=!NULL               
+I=210  W=ODMOCNINA           
+I=211  W=Z                   
+I=212  W=FAKTORI\301L        
+I=213  W=Z                   
+I=214  W=NULA                
+I=215  W=JEDNA               
+I=216  W=DVA                 
+I=217  W=T\330I              
+I=218  W=\310TY\330I         
+I=219  W=P\314T              
+I=220  W=\251EST             
+I=221  W=SEDM                
+I=222  W=OSM                 
+I=223  W=DEV\314T            
+I=224  W=NEKONE\310NO        
+I=225  W=DESET               
+I=226  W=STO                 
+I=227  W=TIS\315C            
+I=228  W=PRAV\301            
+I=229  W=Z\301VORKA          
+I=230  W=NULA                
+I=231  W=JEDNA               
+I=232  W=DVA                 
+I=233  W=T\330I              
+I=234  W=\310TY\330I         
+I=235  W=P\314T              
+I=236  W=\251EST             
+I=237  W=SEDM                
+I=238  W=OSM                 
+I=239  W=DEV\314T            
+I=240  W=NEKONE\310NO        
+I=241  W=DESET               
+I=242  W=STO                 
+I=243  W=TIS\315C            
+I=244  W=VYN\301SOB          
+I=245  W=LEV\301             
+I=246  W=Z\301VORKA          
+I=247  W=NULA                
+I=248  W=!NULL               
+I=249  W=JEDNA               
+I=250  W=DVA                 
+I=251  W=T\330I              
+I=252  W=\310TY\330I         
+I=253  W=P\314T              
+I=254  W=\251EST             
+I=255  W=SEDM                
+I=256  W=OSM                 
+I=257  W=DEV\314T            
+I=258  W=NEKONE\310NO        
+I=259  W=DESET               
+I=260  W=STO                 
+I=261  W=TIS\315C            
+I=262  W=PLUS                
+I=263  W=!NULL               
+I=264  W=M\315NUS            
+I=265  W=KR\301T             
+I=266  W=D\314LENO           
+I=267  W=NA                  
+I=268  W=NULA                
+I=269  W=!NULL               
+I=270  W=JEDNA               
+I=271  W=DVA                 
+I=272  W=T\330I              
+I=273  W=\310TY\330I         
+I=274  W=P\314T              
+I=275  W=\251EST             
+I=276  W=SEDM                
+I=277  W=OSM                 
+I=278  W=DEV\314T            
+I=279  W=NEKONE\310NO        
+I=280  W=DESET               
+I=281  W=STO                 
+I=282  W=TIS\315C            
+I=283  W=INVERZ              
+I=284  W=!NULL               
+I=285  W=ODMOCNINA           
+I=286  W=Z                   
+I=287  W=FAKTORI\301L        
+I=288  W=Z                   
+I=289  W=NULA                
+I=290  W=JEDNA               
+I=291  W=DVA                 
+I=292  W=T\330I              
+I=293  W=\310TY\330I         
+I=294  W=P\314T              
+I=295  W=\251EST             
+I=296  W=SEDM                
+I=297  W=OSM                 
+I=298  W=DEV\314T            
+I=299  W=NEKONE\310NO        
+I=300  W=DESET               
+I=301  W=STO                 
+I=302  W=TIS\315C            
+I=303  W=PRAV\301            
+I=304  W=Z\301VORKA          
+I=305  W=!NULL               
+I=306  W=NULA                
+I=307  W=JEDNA               
+I=308  W=DVA                 
+I=309  W=T\330I              
+I=310  W=\310TY\330I         
+I=311  W=P\314T              
+I=312  W=\251EST             
+I=313  W=SEDM                
+I=314  W=OSM                 
+I=315  W=DEV\314T            
+I=316  W=NEKONE\310NO        
+I=317  W=DESET               
+I=318  W=STO                 
+I=319  W=TIS\315C            
+I=320  W=PLUS                
+I=321  W=!NULL               
+I=322  W=M\315NUS            
+I=323  W=KR\301T             
+I=324  W=D\314LENO           
+I=325  W=NA                  
+I=326  W=LEV\301             
+I=327  W=Z\301VORKA          
+I=328  W=NULA                
+I=329  W=!NULL               
+I=330  W=JEDNA               
+I=331  W=DVA                 
+I=332  W=T\330I              
+I=333  W=\310TY\330I         
+I=334  W=P\314T              
+I=335  W=\251EST             
+I=336  W=SEDM                
+I=337  W=OSM                 
+I=338  W=DEV\314T            
+I=339  W=NEKONE\310NO        
+I=340  W=DESET               
+I=341  W=STO                 
+I=342  W=TIS\315C            
+I=343  W=PLUS                
+I=344  W=!NULL               
+I=345  W=M\315NUS            
+I=346  W=KR\301T             
+I=347  W=D\314LENO           
+I=348  W=NA                  
+I=349  W=NULA                
+I=350  W=!NULL               
+I=351  W=JEDNA               
+I=352  W=DVA                 
+I=353  W=T\330I              
+I=354  W=\310TY\330I         
+I=355  W=P\314T              
+I=356  W=\251EST             
+I=357  W=SEDM                
+I=358  W=OSM                 
+I=359  W=DEV\314T            
+I=360  W=NEKONE\310NO        
+I=361  W=DESET               
+I=362  W=STO                 
+I=363  W=TIS\315C            
+I=364  W=INVERZ              
+I=365  W=!NULL               
+I=366  W=ODMOCNINA           
+I=367  W=Z                   
+I=368  W=FAKTORI\301L        
+I=369  W=Z                   
+I=370  W=NULA                
+I=371  W=JEDNA               
+I=372  W=DVA                 
+I=373  W=T\330I              
+I=374  W=\310TY\330I         
+I=375  W=P\314T              
+I=376  W=\251EST             
+I=377  W=SEDM                
+I=378  W=OSM                 
+I=379  W=DEV\314T            
+I=380  W=NEKONE\310NO        
+I=381  W=DESET               
+I=382  W=STO                 
+I=383  W=TIS\315C            
+I=384  W=PRAV\301            
+I=385  W=Z\301VORKA          
+I=386  W=!NULL               
+I=387  W=NULA                
+I=388  W=JEDNA               
+I=389  W=DVA                 
+I=390  W=T\330I              
+I=391  W=\310TY\330I         
+I=392  W=P\314T              
+I=393  W=\251EST             
+I=394  W=SEDM                
+I=395  W=OSM                 
+I=396  W=DEV\314T            
+I=397  W=NEKONE\310NO        
+I=398  W=DESET               
+I=399  W=STO                 
+I=400  W=TIS\315C            
+I=401  W=INVERZ              
+I=402  W=!NULL               
+I=403  W=ODMOCNINA           
+I=404  W=Z                   
+I=405  W=FAKTORI\301L        
+I=406  W=Z                   
+I=407  W=LEV\301             
+I=408  W=Z\301VORKA          
+I=409  W=NULA                
+I=410  W=!NULL               
+I=411  W=JEDNA               
+I=412  W=DVA                 
+I=413  W=T\330I              
+I=414  W=\310TY\330I         
+I=415  W=P\314T              
+I=416  W=\251EST             
+I=417  W=SEDM                
+I=418  W=OSM                 
+I=419  W=DEV\314T            
+I=420  W=NEKONE\310NO        
+I=421  W=DESET               
+I=422  W=STO                 
+I=423  W=TIS\315C            
+I=424  W=PLUS                
+I=425  W=!NULL               
+I=426  W=M\315NUS            
+I=427  W=KR\301T             
+I=428  W=D\314LENO           
+I=429  W=NA                  
+I=430  W=NULA                
+I=431  W=!NULL               
+I=432  W=JEDNA               
+I=433  W=DVA                 
+I=434  W=T\330I              
+I=435  W=\310TY\330I         
+I=436  W=P\314T              
+I=437  W=\251EST             
+I=438  W=SEDM                
+I=439  W=OSM                 
+I=440  W=DEV\314T            
+I=441  W=NEKONE\310NO        
+I=442  W=DESET               
+I=443  W=STO                 
+I=444  W=TIS\315C            
+I=445  W=INVERZ              
+I=446  W=!NULL               
+I=447  W=ODMOCNINA           
+I=448  W=Z                   
+I=449  W=FAKTORI\301L        
+I=450  W=Z                   
+I=451  W=NULA                
+I=452  W=JEDNA               
+I=453  W=DVA                 
+I=454  W=T\330I              
+I=455  W=\310TY\330I         
+I=456  W=P\314T              
+I=457  W=\251EST             
+I=458  W=SEDM                
+I=459  W=OSM                 
+I=460  W=DEV\314T            
+I=461  W=NEKONE\310NO        
+I=462  W=DESET               
+I=463  W=STO                 
+I=464  W=TIS\315C            
+I=465  W=PRAV\301            
+I=466  W=Z\301VORKA          
+I=467  W=NULA                
+I=468  W=JEDNA               
+I=469  W=DVA                 
+I=470  W=T\330I              
+I=471  W=\310TY\330I         
+I=472  W=P\314T              
+I=473  W=\251EST             
+I=474  W=SEDM                
+I=475  W=OSM                 
+I=476  W=DEV\314T            
+I=477  W=NEKONE\310NO        
+I=478  W=DESET               
+I=479  W=STO                 
+I=480  W=TIS\315C            
+I=481  W=A                   
+I=482  W=LEV\301             
+I=483  W=Z\301VORKA          
+I=484  W=NULA                
+I=485  W=!NULL               
+I=486  W=JEDNA               
+I=487  W=DVA                 
+I=488  W=T\330I              
+I=489  W=\310TY\330I         
+I=490  W=P\314T              
+I=491  W=\251EST             
+I=492  W=SEDM                
+I=493  W=OSM                 
+I=494  W=DEV\314T            
+I=495  W=NEKONE\310NO        
+I=496  W=DESET               
+I=497  W=STO                 
+I=498  W=TIS\315C            
+I=499  W=PLUS                
+I=500  W=!NULL               
+I=501  W=M\315NUS            
+I=502  W=KR\301T             
+I=503  W=D\314LENO           
+I=504  W=NA                  
+I=505  W=NULA                
+I=506  W=!NULL               
+I=507  W=JEDNA               
+I=508  W=DVA                 
+I=509  W=T\330I              
+I=510  W=\310TY\330I         
+I=511  W=P\314T              
+I=512  W=\251EST             
+I=513  W=SEDM                
+I=514  W=OSM                 
+I=515  W=DEV\314T            
+I=516  W=NEKONE\310NO        
+I=517  W=DESET               
+I=518  W=STO                 
+I=519  W=TIS\315C            
+I=520  W=INVERZ              
+I=521  W=!NULL               
+I=522  W=ODMOCNINA           
+I=523  W=Z                   
+I=524  W=FAKTORI\301L        
+I=525  W=Z                   
+I=526  W=NULA                
+I=527  W=JEDNA               
+I=528  W=DVA                 
+I=529  W=T\330I              
+I=530  W=\310TY\330I         
+I=531  W=P\314T              
+I=532  W=\251EST             
+I=533  W=SEDM                
+I=534  W=OSM                 
+I=535  W=DEV\314T            
+I=536  W=NEKONE\310NO        
+I=537  W=DESET               
+I=538  W=STO                 
+I=539  W=TIS\315C            
+I=540  W=PRAV\301            
+I=541  W=Z\301VORKA          
+I=542  W=!NULL               
+I=543  W=NULA                
+I=544  W=JEDNA               
+I=545  W=DVA                 
+I=546  W=T\330I              
+I=547  W=\310TY\330I         
+I=548  W=P\314T              
+I=549  W=\251EST             
+I=550  W=SEDM                
+I=551  W=OSM                 
+I=552  W=DEV\314T            
+I=553  W=NEKONE\310NO        
+I=554  W=DESET               
+I=555  W=STO                 
+I=556  W=TIS\315C            
+I=557  W=PLUS                
+I=558  W=!NULL               
+I=559  W=M\315NUS            
+I=560  W=KR\301T             
+I=561  W=D\314LENO           
+I=562  W=NA                  
+I=563  W=LEV\301             
+I=564  W=Z\301VORKA          
+I=565  W=NULA                
+I=566  W=!NULL               
+I=567  W=JEDNA               
+I=568  W=DVA                 
+I=569  W=T\330I              
+I=570  W=\310TY\330I         
+I=571  W=P\314T              
+I=572  W=\251EST             
+I=573  W=SEDM                
+I=574  W=OSM                 
+I=575  W=DEV\314T            
+I=576  W=NEKONE\310NO        
+I=577  W=DESET               
+I=578  W=STO                 
+I=579  W=TIS\315C            
+I=580  W=PLUS                
+I=581  W=!NULL               
+I=582  W=M\315NUS            
+I=583  W=KR\301T             
+I=584  W=D\314LENO           
+I=585  W=NA                  
+I=586  W=NULA                
+I=587  W=!NULL               
+I=588  W=JEDNA               
+I=589  W=DVA                 
+I=590  W=T\330I              
+I=591  W=\310TY\330I         
+I=592  W=P\314T              
+I=593  W=\251EST             
+I=594  W=SEDM                
+I=595  W=OSM                 
+I=596  W=DEV\314T            
+I=597  W=NEKONE\310NO        
+I=598  W=DESET               
+I=599  W=STO                 
+I=600  W=TIS\315C            
+I=601  W=INVERZ              
+I=602  W=!NULL               
+I=603  W=ODMOCNINA           
+I=604  W=Z                   
+I=605  W=FAKTORI\301L        
+I=606  W=Z                   
+I=607  W=NULA                
+I=608  W=JEDNA               
+I=609  W=DVA                 
+I=610  W=T\330I              
+I=611  W=\310TY\330I         
+I=612  W=P\314T              
+I=613  W=\251EST             
+I=614  W=SEDM                
+I=615  W=OSM                 
+I=616  W=DEV\314T            
+I=617  W=NEKONE\310NO        
+I=618  W=DESET               
+I=619  W=STO                 
+I=620  W=TIS\315C            
+I=621  W=PRAV\301            
+I=622  W=Z\301VORKA          
+I=623  W=NULA                
+I=624  W=JEDNA               
+I=625  W=DVA                 
+I=626  W=T\330I              
+I=627  W=\310TY\330I         
+I=628  W=P\314T              
+I=629  W=\251EST             
+I=630  W=SEDM                
+I=631  W=OSM                 
+I=632  W=DEV\314T            
+I=633  W=NEKONE\310NO        
+I=634  W=DESET               
+I=635  W=STO                 
+I=636  W=TIS\315C            
+I=637  W=INVERZ              
+I=638  W=!NULL               
+I=639  W=ODMOCNINA           
+I=640  W=Z                   
+I=641  W=FAKTORI\301L        
+I=642  W=Z                   
+I=643  W=LEV\301             
+I=644  W=Z\301VORKA          
+I=645  W=NULA                
+I=646  W=!NULL               
+I=647  W=JEDNA               
+I=648  W=DVA                 
+I=649  W=T\330I              
+I=650  W=\310TY\330I         
+I=651  W=P\314T              
+I=652  W=\251EST             
+I=653  W=SEDM                
+I=654  W=OSM                 
+I=655  W=DEV\314T            
+I=656  W=NEKONE\310NO        
+I=657  W=DESET               
+I=658  W=STO                 
+I=659  W=TIS\315C            
+I=660  W=PLUS                
+I=661  W=!NULL               
+I=662  W=M\315NUS            
+I=663  W=KR\301T             
+I=664  W=D\314LENO           
+I=665  W=NA                  
+I=666  W=NULA                
+I=667  W=!NULL               
+I=668  W=JEDNA               
+I=669  W=DVA                 
+I=670  W=T\330I              
+I=671  W=\310TY\330I         
+I=672  W=P\314T              
+I=673  W=\251EST             
+I=674  W=SEDM                
+I=675  W=OSM                 
+I=676  W=DEV\314T            
+I=677  W=NEKONE\310NO        
+I=678  W=DESET               
+I=679  W=STO                 
+I=680  W=TIS\315C            
+I=681  W=INVERZ              
+I=682  W=!NULL               
+I=683  W=ODMOCNINA           
+I=684  W=Z                   
+I=685  W=FAKTORI\301L        
+I=686  W=Z                   
+I=687  W=NULA                
+I=688  W=JEDNA               
+I=689  W=DVA                 
+I=690  W=T\330I              
+I=691  W=\310TY\330I         
+I=692  W=P\314T              
+I=693  W=\251EST             
+I=694  W=SEDM                
+I=695  W=OSM                 
+I=696  W=DEV\314T            
+I=697  W=NEKONE\310NO        
+I=698  W=DESET               
+I=699  W=STO                 
+I=700  W=TIS\315C            
+I=701  W=PRAV\301            
+I=702  W=Z\301VORKA          
+I=703  W=NULA                
+I=704  W=JEDNA               
+I=705  W=DVA                 
+I=706  W=T\330I              
+I=707  W=\310TY\330I         
+I=708  W=P\314T              
+I=709  W=\251EST             
+I=710  W=SEDM                
+I=711  W=OSM                 
+I=712  W=DEV\314T            
+I=713  W=NEKONE\310NO        
+I=714  W=DESET               
+I=715  W=STO                 
+I=716  W=TIS\315C            
+I=717  W=SE\310TI            
+I=718  W=LEV\301             
+I=719  W=Z\301VORKA          
+I=720  W=NULA                
+I=721  W=!NULL               
+I=722  W=JEDNA               
+I=723  W=DVA                 
+I=724  W=T\330I              
+I=725  W=\310TY\330I         
+I=726  W=P\314T              
+I=727  W=\251EST             
+I=728  W=SEDM                
+I=729  W=OSM                 
+I=730  W=DEV\314T            
+I=731  W=NEKONE\310NO        
+I=732  W=DESET               
+I=733  W=STO                 
+I=734  W=TIS\315C            
+I=735  W=PLUS                
+I=736  W=!NULL               
+I=737  W=M\315NUS            
+I=738  W=KR\301T             
+I=739  W=D\314LENO           
+I=740  W=NA                  
+I=741  W=NULA                
+I=742  W=!NULL               
+I=743  W=JEDNA               
+I=744  W=DVA                 
+I=745  W=T\330I              
+I=746  W=\310TY\330I         
+I=747  W=P\314T              
+I=748  W=\251EST             
+I=749  W=SEDM                
+I=750  W=OSM                 
+I=751  W=DEV\314T            
+I=752  W=NEKONE\310NO        
+I=753  W=DESET               
+I=754  W=STO                 
+I=755  W=TIS\315C            
+I=756  W=INVERZ              
+I=757  W=!NULL               
+I=758  W=ODMOCNINA           
+I=759  W=Z                   
+I=760  W=FAKTORI\301L        
+I=761  W=Z                   
+I=762  W=NULA                
+I=763  W=JEDNA               
+I=764  W=DVA                 
+I=765  W=T\330I              
+I=766  W=\310TY\330I         
+I=767  W=P\314T              
+I=768  W=\251EST             
+I=769  W=SEDM                
+I=770  W=OSM                 
+I=771  W=DEV\314T            
+I=772  W=NEKONE\310NO        
+I=773  W=DESET               
+I=774  W=STO                 
+I=775  W=TIS\315C            
+I=776  W=PRAV\301            
+I=777  W=Z\301VORKA          
+I=778  W=!NULL               
+I=779  W=NULA                
+I=780  W=JEDNA               
+I=781  W=DVA                 
+I=782  W=T\330I              
+I=783  W=\310TY\330I         
+I=784  W=P\314T              
+I=785  W=\251EST             
+I=786  W=SEDM                
+I=787  W=OSM                 
+I=788  W=DEV\314T            
+I=789  W=NEKONE\310NO        
+I=790  W=DESET               
+I=791  W=STO                 
+I=792  W=TIS\315C            
+I=793  W=PLUS                
+I=794  W=!NULL               
+I=795  W=M\315NUS            
+I=796  W=KR\301T             
+I=797  W=D\314LENO           
+I=798  W=NA                  
+I=799  W=LEV\301             
+I=800  W=Z\301VORKA          
+I=801  W=NULA                
+I=802  W=!NULL               
+I=803  W=JEDNA               
+I=804  W=DVA                 
+I=805  W=T\330I              
+I=806  W=\310TY\330I         
+I=807  W=P\314T              
+I=808  W=\251EST             
+I=809  W=SEDM                
+I=810  W=OSM                 
+I=811  W=DEV\314T            
+I=812  W=NEKONE\310NO        
+I=813  W=DESET               
+I=814  W=STO                 
+I=815  W=TIS\315C            
+I=816  W=PLUS                
+I=817  W=!NULL               
+I=818  W=M\315NUS            
+I=819  W=KR\301T             
+I=820  W=D\314LENO           
+I=821  W=NA                  
+I=822  W=NULA                
+I=823  W=!NULL               
+I=824  W=JEDNA               
+I=825  W=DVA                 
+I=826  W=T\330I              
+I=827  W=\310TY\330I         
+I=828  W=P\314T              
+I=829  W=\251EST             
+I=830  W=SEDM                
+I=831  W=OSM                 
+I=832  W=DEV\314T            
+I=833  W=NEKONE\310NO        
+I=834  W=DESET               
+I=835  W=STO                 
+I=836  W=TIS\315C            
+I=837  W=INVERZ              
+I=838  W=!NULL               
+I=839  W=ODMOCNINA           
+I=840  W=Z                   
+I=841  W=FAKTORI\301L        
+I=842  W=Z                   
+I=843  W=NULA                
+I=844  W=JEDNA               
+I=845  W=DVA                 
+I=846  W=T\330I              
+I=847  W=\310TY\330I         
+I=848  W=P\314T              
+I=849  W=\251EST             
+I=850  W=SEDM                
+I=851  W=OSM                 
+I=852  W=DEV\314T            
+I=853  W=NEKONE\310NO        
+I=854  W=DESET               
+I=855  W=STO                 
+I=856  W=TIS\315C            
+I=857  W=PRAV\301            
+I=858  W=Z\301VORKA          
+I=859  W=!NULL               
+I=860  W=NULA                
+I=861  W=JEDNA               
+I=862  W=DVA                 
+I=863  W=T\330I              
+I=864  W=\310TY\330I         
+I=865  W=P\314T              
+I=866  W=\251EST             
+I=867  W=SEDM                
+I=868  W=OSM                 
+I=869  W=DEV\314T            
+I=870  W=NEKONE\310NO        
+I=871  W=DESET               
+I=872  W=STO                 
+I=873  W=TIS\315C            
+I=874  W=INVERZ              
+I=875  W=!NULL               
+I=876  W=ODMOCNINA           
+I=877  W=Z                   
+I=878  W=FAKTORI\301L        
+I=879  W=Z                   
+I=880  W=LEV\301             
+I=881  W=Z\301VORKA          
+I=882  W=NULA                
+I=883  W=!NULL               
+I=884  W=JEDNA               
+I=885  W=DVA                 
+I=886  W=T\330I              
+I=887  W=\310TY\330I         
+I=888  W=P\314T              
+I=889  W=\251EST             
+I=890  W=SEDM                
+I=891  W=OSM                 
+I=892  W=DEV\314T            
+I=893  W=NEKONE\310NO        
+I=894  W=DESET               
+I=895  W=STO                 
+I=896  W=TIS\315C            
+I=897  W=PLUS                
+I=898  W=!NULL               
+I=899  W=M\315NUS            
+I=900  W=KR\301T             
+I=901  W=D\314LENO           
+I=902  W=NA                  
+I=903  W=NULA                
+I=904  W=!NULL               
+I=905  W=JEDNA               
+I=906  W=DVA                 
+I=907  W=T\330I              
+I=908  W=\310TY\330I         
+I=909  W=P\314T              
+I=910  W=\251EST             
+I=911  W=SEDM                
+I=912  W=OSM                 
+I=913  W=DEV\314T            
+I=914  W=NEKONE\310NO        
+I=915  W=DESET               
+I=916  W=STO                 
+I=917  W=TIS\315C            
+I=918  W=INVERZ              
+I=919  W=!NULL               
+I=920  W=ODMOCNINA           
+I=921  W=Z                   
+I=922  W=FAKTORI\301L        
+I=923  W=Z                   
+I=924  W=NULA                
+I=925  W=JEDNA               
+I=926  W=DVA                 
+I=927  W=T\330I              
+I=928  W=\310TY\330I         
+I=929  W=P\314T              
+I=930  W=\251EST             
+I=931  W=SEDM                
+I=932  W=OSM                 
+I=933  W=DEV\314T            
+I=934  W=NEKONE\310NO        
+I=935  W=DESET               
+I=936  W=STO                 
+I=937  W=TIS\315C            
+I=938  W=PRAV\301            
+I=939  W=Z\301VORKA          
+I=940  W=NULA                
+I=941  W=JEDNA               
+I=942  W=DVA                 
+I=943  W=T\330I              
+I=944  W=\310TY\330I         
+I=945  W=P\314T              
+I=946  W=\251EST             
+I=947  W=SEDM                
+I=948  W=OSM                 
+I=949  W=DEV\314T            
+I=950  W=NEKONE\310NO        
+I=951  W=DESET               
+I=952  W=STO                 
+I=953  W=TIS\315C            
+I=954  W=A                   
+I=955  W=LEV\301             
+I=956  W=Z\301VORKA          
+I=957  W=NULA                
+I=958  W=!NULL               
+I=959  W=JEDNA               
+I=960  W=DVA                 
+I=961  W=T\330I              
+I=962  W=\310TY\330I         
+I=963  W=P\314T              
+I=964  W=\251EST             
+I=965  W=SEDM                
+I=966  W=OSM                 
+I=967  W=DEV\314T            
+I=968  W=NEKONE\310NO        
+I=969  W=DESET               
+I=970  W=STO                 
+I=971  W=TIS\315C            
+I=972  W=PLUS                
+I=973  W=!NULL               
+I=974  W=M\315NUS            
+I=975  W=KR\301T             
+I=976  W=D\314LENO           
+I=977  W=NA                  
+I=978  W=NULA                
+I=979  W=!NULL               
+I=980  W=JEDNA               
+I=981  W=DVA                 
+I=982  W=T\330I              
+I=983  W=\310TY\330I         
+I=984  W=P\314T              
+I=985  W=\251EST             
+I=986  W=SEDM                
+I=987  W=OSM                 
+I=988  W=DEV\314T            
+I=989  W=NEKONE\310NO        
+I=990  W=DESET               
+I=991  W=STO                 
+I=992  W=TIS\315C            
+I=993  W=INVERZ              
+I=994  W=!NULL               
+I=995  W=ODMOCNINA           
+I=996  W=Z                   
+I=997  W=FAKTORI\301L        
+I=998  W=Z                   
+I=999  W=NULA                
+I=1000 W=JEDNA               
+I=1001 W=DVA                 
+I=1002 W=T\330I              
+I=1003 W=\310TY\330I         
+I=1004 W=P\314T              
+I=1005 W=\251EST             
+I=1006 W=SEDM                
+I=1007 W=OSM                 
+I=1008 W=DEV\314T            
+I=1009 W=NEKONE\310NO        
+I=1010 W=DESET               
+I=1011 W=STO                 
+I=1012 W=TIS\315C            
+I=1013 W=PRAV\301            
+I=1014 W=Z\301VORKA          
+I=1015 W=!NULL               
+I=1016 W=NULA                
+I=1017 W=JEDNA               
+I=1018 W=DVA                 
+I=1019 W=T\330I              
+I=1020 W=\310TY\330I         
+I=1021 W=P\314T              
+I=1022 W=\251EST             
+I=1023 W=SEDM                
+I=1024 W=OSM                 
+I=1025 W=DEV\314T            
+I=1026 W=NEKONE\310NO        
+I=1027 W=DESET               
+I=1028 W=STO                 
+I=1029 W=TIS\315C            
+I=1030 W=PLUS                
+I=1031 W=!NULL               
+I=1032 W=M\315NUS            
+I=1033 W=KR\301T             
+I=1034 W=D\314LENO           
+I=1035 W=NA                  
+I=1036 W=LEV\301             
+I=1037 W=Z\301VORKA          
+I=1038 W=NULA                
+I=1039 W=!NULL               
+I=1040 W=JEDNA               
+I=1041 W=DVA                 
+I=1042 W=T\330I              
+I=1043 W=\310TY\330I         
+I=1044 W=P\314T              
+I=1045 W=\251EST             
+I=1046 W=SEDM                
+I=1047 W=OSM                 
+I=1048 W=DEV\314T            
+I=1049 W=NEKONE\310NO        
+I=1050 W=DESET               
+I=1051 W=STO                 
+I=1052 W=TIS\315C            
+I=1053 W=PLUS                
+I=1054 W=!NULL               
+I=1055 W=M\315NUS            
+I=1056 W=KR\301T             
+I=1057 W=D\314LENO           
+I=1058 W=NA                  
+I=1059 W=NULA                
+I=1060 W=!NULL               
+I=1061 W=JEDNA               
+I=1062 W=DVA                 
+I=1063 W=T\330I              
+I=1064 W=\310TY\330I         
+I=1065 W=P\314T              
+I=1066 W=\251EST             
+I=1067 W=SEDM                
+I=1068 W=OSM                 
+I=1069 W=DEV\314T            
+I=1070 W=NEKONE\310NO        
+I=1071 W=DESET               
+I=1072 W=STO                 
+I=1073 W=TIS\315C            
+I=1074 W=INVERZ              
+I=1075 W=!NULL               
+I=1076 W=ODMOCNINA           
+I=1077 W=Z                   
+I=1078 W=FAKTORI\301L        
+I=1079 W=Z                   
+I=1080 W=NULA                
+I=1081 W=JEDNA               
+I=1082 W=DVA                 
+I=1083 W=T\330I              
+I=1084 W=\310TY\330I         
+I=1085 W=P\314T              
+I=1086 W=\251EST             
+I=1087 W=SEDM                
+I=1088 W=OSM                 
+I=1089 W=DEV\314T            
+I=1090 W=NEKONE\310NO        
+I=1091 W=DESET               
+I=1092 W=STO                 
+I=1093 W=TIS\315C            
+I=1094 W=PRAV\301            
+I=1095 W=Z\301VORKA          
+I=1096 W=NULA                
+I=1097 W=JEDNA               
+I=1098 W=DVA                 
+I=1099 W=T\330I              
+I=1100 W=\310TY\330I         
+I=1101 W=P\314T              
+I=1102 W=\251EST             
+I=1103 W=SEDM                
+I=1104 W=OSM                 
+I=1105 W=DEV\314T            
+I=1106 W=NEKONE\310NO        
+I=1107 W=DESET               
+I=1108 W=STO                 
+I=1109 W=TIS\315C            
+I=1110 W=INVERZ              
+I=1111 W=!NULL               
+I=1112 W=ODMOCNINA           
+I=1113 W=Z                   
+I=1114 W=FAKTORI\301L        
+I=1115 W=Z                   
+I=1116 W=LEV\301             
+I=1117 W=Z\301VORKA          
+I=1118 W=NULA                
+I=1119 W=!NULL               
+I=1120 W=JEDNA               
+I=1121 W=DVA                 
+I=1122 W=T\330I              
+I=1123 W=\310TY\330I         
+I=1124 W=P\314T              
+I=1125 W=\251EST             
+I=1126 W=SEDM                
+I=1127 W=OSM                 
+I=1128 W=DEV\314T            
+I=1129 W=NEKONE\310NO        
+I=1130 W=DESET               
+I=1131 W=STO                 
+I=1132 W=TIS\315C            
+I=1133 W=PLUS                
+I=1134 W=!NULL               
+I=1135 W=M\315NUS            
+I=1136 W=KR\301T             
+I=1137 W=D\314LENO           
+I=1138 W=NA                  
+I=1139 W=NULA                
+I=1140 W=!NULL               
+I=1141 W=JEDNA               
+I=1142 W=DVA                 
+I=1143 W=T\330I              
+I=1144 W=\310TY\330I         
+I=1145 W=P\314T              
+I=1146 W=\251EST             
+I=1147 W=SEDM                
+I=1148 W=OSM                 
+I=1149 W=DEV\314T            
+I=1150 W=NEKONE\310NO        
+I=1151 W=DESET               
+I=1152 W=STO                 
+I=1153 W=TIS\315C            
+I=1154 W=INVERZ              
+I=1155 W=!NULL               
+I=1156 W=ODMOCNINA           
+I=1157 W=Z                   
+I=1158 W=FAKTORI\301L        
+I=1159 W=Z                   
+I=1160 W=NULA                
+I=1161 W=JEDNA               
+I=1162 W=DVA                 
+I=1163 W=T\330I              
+I=1164 W=\310TY\330I         
+I=1165 W=P\314T              
+I=1166 W=\251EST             
+I=1167 W=SEDM                
+I=1168 W=OSM                 
+I=1169 W=DEV\314T            
+I=1170 W=NEKONE\310NO        
+I=1171 W=DESET               
+I=1172 W=STO                 
+I=1173 W=TIS\315C            
+I=1174 W=PRAV\301            
+I=1175 W=Z\301VORKA          
+I=1176 W=NULA                
+I=1177 W=JEDNA               
+I=1178 W=DVA                 
+I=1179 W=T\330I              
+I=1180 W=\310TY\330I         
+I=1181 W=P\314T              
+I=1182 W=\251EST             
+I=1183 W=SEDM                
+I=1184 W=OSM                 
+I=1185 W=DEV\314T            
+I=1186 W=NEKONE\310NO        
+I=1187 W=DESET               
+I=1188 W=STO                 
+I=1189 W=TIS\315C            
+J=0     S=149  E=1    
+J=1     S=0    E=2    
+J=2     S=2    E=3    
+J=3     S=0    E=4    
+J=4     S=3    E=4    
+J=5     S=4    E=5    
+J=6     S=5    E=6    
+J=7     S=7    E=6    
+J=8     S=0    E=7    
+J=9     S=6    E=8    
+J=10    S=8    E=9    
+J=11    S=9    E=10   
+J=12    S=10   E=11   
+J=13    S=12   E=11   
+J=14    S=13   E=11   
+J=15    S=14   E=11   
+J=16    S=15   E=11   
+J=17    S=16   E=11   
+J=18    S=17   E=11   
+J=19    S=18   E=11   
+J=20    S=19   E=11   
+J=21    S=20   E=11   
+J=22    S=21   E=11   
+J=23    S=22   E=11   
+J=24    S=23   E=11   
+J=25    S=24   E=11   
+J=26    S=9    E=12   
+J=27    S=9    E=13   
+J=28    S=9    E=14   
+J=29    S=9    E=15   
+J=30    S=9    E=16   
+J=31    S=9    E=17   
+J=32    S=9    E=18   
+J=33    S=9    E=19   
+J=34    S=9    E=20   
+J=35    S=9    E=21   
+J=36    S=9    E=22   
+J=37    S=9    E=23   
+J=38    S=9    E=24   
+J=39    S=11   E=25   
+J=40    S=25   E=26   
+J=41    S=27   E=26   
+J=42    S=28   E=26   
+J=43    S=29   E=26   
+J=44    S=30   E=26   
+J=45    S=11   E=27   
+J=46    S=11   E=28   
+J=47    S=11   E=29   
+J=48    S=11   E=30   
+J=49    S=26   E=31   
+J=50    S=31   E=32   
+J=51    S=33   E=32   
+J=52    S=34   E=32   
+J=53    S=35   E=32   
+J=54    S=36   E=32   
+J=55    S=37   E=32   
+J=56    S=38   E=32   
+J=57    S=39   E=32   
+J=58    S=40   E=32   
+J=59    S=41   E=32   
+J=60    S=42   E=32   
+J=61    S=43   E=32   
+J=62    S=44   E=32   
+J=63    S=45   E=32   
+J=64    S=52   E=32   
+J=65    S=53   E=32   
+J=66    S=54   E=32   
+J=67    S=55   E=32   
+J=68    S=56   E=32   
+J=69    S=57   E=32   
+J=70    S=58   E=32   
+J=71    S=59   E=32   
+J=72    S=60   E=32   
+J=73    S=61   E=32   
+J=74    S=62   E=32   
+J=75    S=63   E=32   
+J=76    S=64   E=32   
+J=77    S=65   E=32   
+J=78    S=26   E=33   
+J=79    S=26   E=34   
+J=80    S=26   E=35   
+J=81    S=26   E=36   
+J=82    S=26   E=37   
+J=83    S=26   E=38   
+J=84    S=26   E=39   
+J=85    S=26   E=40   
+J=86    S=26   E=41   
+J=87    S=26   E=42   
+J=88    S=26   E=43   
+J=89    S=26   E=44   
+J=90    S=26   E=45   
+J=91    S=9    E=46   
+J=92    S=46   E=47   
+J=93    S=49   E=47   
+J=94    S=51   E=47   
+J=95    S=9    E=48   
+J=96    S=48   E=49   
+J=97    S=9    E=50   
+J=98    S=50   E=51   
+J=99    S=47   E=52   
+J=100   S=47   E=53   
+J=101   S=47   E=54   
+J=102   S=47   E=55   
+J=103   S=47   E=56   
+J=104   S=47   E=57   
+J=105   S=47   E=58   
+J=106   S=47   E=59   
+J=107   S=47   E=60   
+J=108   S=47   E=61   
+J=109   S=47   E=62   
+J=110   S=47   E=63   
+J=111   S=47   E=64   
+J=112   S=47   E=65   
+J=113   S=32   E=66   
+J=114   S=66   E=67   
+J=115   S=67   E=68   
+J=116   S=69   E=68   
+J=117   S=70   E=68   
+J=118   S=71   E=68   
+J=119   S=72   E=68   
+J=120   S=73   E=68   
+J=121   S=74   E=68   
+J=122   S=75   E=68   
+J=123   S=76   E=68   
+J=124   S=77   E=68   
+J=125   S=78   E=68   
+J=126   S=79   E=68   
+J=127   S=80   E=68   
+J=128   S=81   E=68   
+J=129   S=82   E=68   
+J=130   S=6    E=69   
+J=131   S=6    E=70   
+J=132   S=6    E=71   
+J=133   S=6    E=72   
+J=134   S=6    E=73   
+J=135   S=6    E=74   
+J=136   S=6    E=75   
+J=137   S=6    E=76   
+J=138   S=6    E=77   
+J=139   S=6    E=78   
+J=140   S=6    E=79   
+J=141   S=6    E=80   
+J=142   S=6    E=81   
+J=143   S=6    E=82   
+J=144   S=68   E=83   
+J=145   S=83   E=84   
+J=146   S=85   E=84   
+J=147   S=86   E=84   
+J=148   S=87   E=84   
+J=149   S=88   E=84   
+J=150   S=68   E=85   
+J=151   S=68   E=86   
+J=152   S=68   E=87   
+J=153   S=68   E=88   
+J=154   S=84   E=89   
+J=155   S=89   E=90   
+J=156   S=90   E=91   
+J=157   S=91   E=92   
+J=158   S=93   E=92   
+J=159   S=94   E=92   
+J=160   S=95   E=92   
+J=161   S=96   E=92   
+J=162   S=97   E=92   
+J=163   S=98   E=92   
+J=164   S=99   E=92   
+J=165   S=100  E=92   
+J=166   S=101  E=92   
+J=167   S=102  E=92   
+J=168   S=103  E=92   
+J=169   S=104  E=92   
+J=170   S=105  E=92   
+J=171   S=90   E=93   
+J=172   S=90   E=94   
+J=173   S=90   E=95   
+J=174   S=90   E=96   
+J=175   S=90   E=97   
+J=176   S=90   E=98   
+J=177   S=90   E=99   
+J=178   S=90   E=100  
+J=179   S=90   E=101  
+J=180   S=90   E=102  
+J=181   S=90   E=103  
+J=182   S=90   E=104  
+J=183   S=90   E=105  
+J=184   S=92   E=106  
+J=185   S=106  E=107  
+J=186   S=108  E=107  
+J=187   S=109  E=107  
+J=188   S=110  E=107  
+J=189   S=111  E=107  
+J=190   S=92   E=108  
+J=191   S=92   E=109  
+J=192   S=92   E=110  
+J=193   S=92   E=111  
+J=194   S=107  E=112  
+J=195   S=112  E=113  
+J=196   S=114  E=113  
+J=197   S=115  E=113  
+J=198   S=116  E=113  
+J=199   S=117  E=113  
+J=200   S=118  E=113  
+J=201   S=119  E=113  
+J=202   S=120  E=113  
+J=203   S=121  E=113  
+J=204   S=122  E=113  
+J=205   S=123  E=113  
+J=206   S=124  E=113  
+J=207   S=125  E=113  
+J=208   S=126  E=113  
+J=209   S=133  E=113  
+J=210   S=134  E=113  
+J=211   S=135  E=113  
+J=212   S=136  E=113  
+J=213   S=137  E=113  
+J=214   S=138  E=113  
+J=215   S=139  E=113  
+J=216   S=140  E=113  
+J=217   S=141  E=113  
+J=218   S=142  E=113  
+J=219   S=143  E=113  
+J=220   S=144  E=113  
+J=221   S=145  E=113  
+J=222   S=146  E=113  
+J=223   S=107  E=114  
+J=224   S=107  E=115  
+J=225   S=107  E=116  
+J=226   S=107  E=117  
+J=227   S=107  E=118  
+J=228   S=107  E=119  
+J=229   S=107  E=120  
+J=230   S=107  E=121  
+J=231   S=107  E=122  
+J=232   S=107  E=123  
+J=233   S=107  E=124  
+J=234   S=107  E=125  
+J=235   S=107  E=126  
+J=236   S=90   E=127  
+J=237   S=127  E=128  
+J=238   S=130  E=128  
+J=239   S=132  E=128  
+J=240   S=90   E=129  
+J=241   S=129  E=130  
+J=242   S=90   E=131  
+J=243   S=131  E=132  
+J=244   S=128  E=133  
+J=245   S=128  E=134  
+J=246   S=128  E=135  
+J=247   S=128  E=136  
+J=248   S=128  E=137  
+J=249   S=128  E=138  
+J=250   S=128  E=139  
+J=251   S=128  E=140  
+J=252   S=128  E=141  
+J=253   S=128  E=142  
+J=254   S=128  E=143  
+J=255   S=128  E=144  
+J=256   S=128  E=145  
+J=257   S=128  E=146  
+J=258   S=113  E=147  
+J=259   S=147  E=148  
+J=260   S=148  E=149  
+J=261   S=150  E=149  
+J=262   S=151  E=149  
+J=263   S=152  E=149  
+J=264   S=153  E=149  
+J=265   S=154  E=149  
+J=266   S=155  E=149  
+J=267   S=156  E=149  
+J=268   S=157  E=149  
+J=269   S=158  E=149  
+J=270   S=159  E=149  
+J=271   S=160  E=149  
+J=272   S=161  E=149  
+J=273   S=162  E=149  
+J=274   S=163  E=149  
+J=275   S=229  E=149  
+J=276   S=230  E=149  
+J=277   S=231  E=149  
+J=278   S=232  E=149  
+J=279   S=233  E=149  
+J=280   S=234  E=149  
+J=281   S=235  E=149  
+J=282   S=236  E=149  
+J=283   S=237  E=149  
+J=284   S=238  E=149  
+J=285   S=239  E=149  
+J=286   S=240  E=149  
+J=287   S=241  E=149  
+J=288   S=242  E=149  
+J=289   S=243  E=149  
+J=290   S=622  E=149  
+J=291   S=623  E=149  
+J=292   S=624  E=149  
+J=293   S=625  E=149  
+J=294   S=626  E=149  
+J=295   S=627  E=149  
+J=296   S=628  E=149  
+J=297   S=629  E=149  
+J=298   S=630  E=149  
+J=299   S=631  E=149  
+J=300   S=632  E=149  
+J=301   S=633  E=149  
+J=302   S=634  E=149  
+J=303   S=635  E=149  
+J=304   S=636  E=149  
+J=305   S=702  E=149  
+J=306   S=703  E=149  
+J=307   S=704  E=149  
+J=308   S=705  E=149  
+J=309   S=706  E=149  
+J=310   S=707  E=149  
+J=311   S=708  E=149  
+J=312   S=709  E=149  
+J=313   S=710  E=149  
+J=314   S=711  E=149  
+J=315   S=712  E=149  
+J=316   S=713  E=149  
+J=317   S=714  E=149  
+J=318   S=715  E=149  
+J=319   S=716  E=149  
+J=320   S=1095 E=149  
+J=321   S=1096 E=149  
+J=322   S=1097 E=149  
+J=323   S=1098 E=149  
+J=324   S=1099 E=149  
+J=325   S=1100 E=149  
+J=326   S=1101 E=149  
+J=327   S=1102 E=149  
+J=328   S=1103 E=149  
+J=329   S=1104 E=149  
+J=330   S=1105 E=149  
+J=331   S=1106 E=149  
+J=332   S=1107 E=149  
+J=333   S=1108 E=149  
+J=334   S=1109 E=149  
+J=335   S=1175 E=149  
+J=336   S=1176 E=149  
+J=337   S=1177 E=149  
+J=338   S=1178 E=149  
+J=339   S=1179 E=149  
+J=340   S=1180 E=149  
+J=341   S=1181 E=149  
+J=342   S=1182 E=149  
+J=343   S=1183 E=149  
+J=344   S=1184 E=149  
+J=345   S=1185 E=149  
+J=346   S=1186 E=149  
+J=347   S=1187 E=149  
+J=348   S=1188 E=149  
+J=349   S=1189 E=149  
+J=350   S=84   E=150  
+J=351   S=84   E=151  
+J=352   S=84   E=152  
+J=353   S=84   E=153  
+J=354   S=84   E=154  
+J=355   S=84   E=155  
+J=356   S=84   E=156  
+J=357   S=84   E=157  
+J=358   S=84   E=158  
+J=359   S=84   E=159  
+J=360   S=84   E=160  
+J=361   S=84   E=161  
+J=362   S=84   E=162  
+J=363   S=84   E=163  
+J=364   S=6    E=164  
+J=365   S=164  E=165  
+J=366   S=167  E=165  
+J=367   S=169  E=165  
+J=368   S=6    E=166  
+J=369   S=166  E=167  
+J=370   S=6    E=168  
+J=371   S=168  E=169  
+J=372   S=165  E=170  
+J=373   S=170  E=171  
+J=374   S=171  E=172  
+J=375   S=172  E=173  
+J=376   S=174  E=173  
+J=377   S=175  E=173  
+J=378   S=176  E=173  
+J=379   S=177  E=173  
+J=380   S=178  E=173  
+J=381   S=179  E=173  
+J=382   S=180  E=173  
+J=383   S=181  E=173  
+J=384   S=182  E=173  
+J=385   S=183  E=173  
+J=386   S=184  E=173  
+J=387   S=185  E=173  
+J=388   S=186  E=173  
+J=389   S=171  E=174  
+J=390   S=171  E=175  
+J=391   S=171  E=176  
+J=392   S=171  E=177  
+J=393   S=171  E=178  
+J=394   S=171  E=179  
+J=395   S=171  E=180  
+J=396   S=171  E=181  
+J=397   S=171  E=182  
+J=398   S=171  E=183  
+J=399   S=171  E=184  
+J=400   S=171  E=185  
+J=401   S=171  E=186  
+J=402   S=173  E=187  
+J=403   S=187  E=188  
+J=404   S=189  E=188  
+J=405   S=190  E=188  
+J=406   S=191  E=188  
+J=407   S=192  E=188  
+J=408   S=173  E=189  
+J=409   S=173  E=190  
+J=410   S=173  E=191  
+J=411   S=173  E=192  
+J=412   S=188  E=193  
+J=413   S=193  E=194  
+J=414   S=195  E=194  
+J=415   S=196  E=194  
+J=416   S=197  E=194  
+J=417   S=198  E=194  
+J=418   S=199  E=194  
+J=419   S=200  E=194  
+J=420   S=201  E=194  
+J=421   S=202  E=194  
+J=422   S=203  E=194  
+J=423   S=204  E=194  
+J=424   S=205  E=194  
+J=425   S=206  E=194  
+J=426   S=207  E=194  
+J=427   S=214  E=194  
+J=428   S=215  E=194  
+J=429   S=216  E=194  
+J=430   S=217  E=194  
+J=431   S=218  E=194  
+J=432   S=219  E=194  
+J=433   S=220  E=194  
+J=434   S=221  E=194  
+J=435   S=222  E=194  
+J=436   S=223  E=194  
+J=437   S=224  E=194  
+J=438   S=225  E=194  
+J=439   S=226  E=194  
+J=440   S=227  E=194  
+J=441   S=188  E=195  
+J=442   S=188  E=196  
+J=443   S=188  E=197  
+J=444   S=188  E=198  
+J=445   S=188  E=199  
+J=446   S=188  E=200  
+J=447   S=188  E=201  
+J=448   S=188  E=202  
+J=449   S=188  E=203  
+J=450   S=188  E=204  
+J=451   S=188  E=205  
+J=452   S=188  E=206  
+J=453   S=188  E=207  
+J=454   S=171  E=208  
+J=455   S=208  E=209  
+J=456   S=211  E=209  
+J=457   S=213  E=209  
+J=458   S=171  E=210  
+J=459   S=210  E=211  
+J=460   S=171  E=212  
+J=461   S=212  E=213  
+J=462   S=209  E=214  
+J=463   S=209  E=215  
+J=464   S=209  E=216  
+J=465   S=209  E=217  
+J=466   S=209  E=218  
+J=467   S=209  E=219  
+J=468   S=209  E=220  
+J=469   S=209  E=221  
+J=470   S=209  E=222  
+J=471   S=209  E=223  
+J=472   S=209  E=224  
+J=473   S=209  E=225  
+J=474   S=209  E=226  
+J=475   S=209  E=227  
+J=476   S=194  E=228  
+J=477   S=228  E=229  
+J=478   S=165  E=230  
+J=479   S=165  E=231  
+J=480   S=165  E=232  
+J=481   S=165  E=233  
+J=482   S=165  E=234  
+J=483   S=165  E=235  
+J=484   S=165  E=236  
+J=485   S=165  E=237  
+J=486   S=165  E=238  
+J=487   S=165  E=239  
+J=488   S=165  E=240  
+J=489   S=165  E=241  
+J=490   S=165  E=242  
+J=491   S=165  E=243  
+J=492   S=0    E=244  
+J=493   S=244  E=245  
+J=494   S=245  E=246  
+J=495   S=246  E=247  
+J=496   S=247  E=248  
+J=497   S=249  E=248  
+J=498   S=250  E=248  
+J=499   S=251  E=248  
+J=500   S=252  E=248  
+J=501   S=253  E=248  
+J=502   S=254  E=248  
+J=503   S=255  E=248  
+J=504   S=256  E=248  
+J=505   S=257  E=248  
+J=506   S=258  E=248  
+J=507   S=259  E=248  
+J=508   S=260  E=248  
+J=509   S=261  E=248  
+J=510   S=246  E=249  
+J=511   S=246  E=250  
+J=512   S=246  E=251  
+J=513   S=246  E=252  
+J=514   S=246  E=253  
+J=515   S=246  E=254  
+J=516   S=246  E=255  
+J=517   S=246  E=256  
+J=518   S=246  E=257  
+J=519   S=246  E=258  
+J=520   S=246  E=259  
+J=521   S=246  E=260  
+J=522   S=246  E=261  
+J=523   S=248  E=262  
+J=524   S=262  E=263  
+J=525   S=264  E=263  
+J=526   S=265  E=263  
+J=527   S=266  E=263  
+J=528   S=267  E=263  
+J=529   S=248  E=264  
+J=530   S=248  E=265  
+J=531   S=248  E=266  
+J=532   S=248  E=267  
+J=533   S=263  E=268  
+J=534   S=268  E=269  
+J=535   S=270  E=269  
+J=536   S=271  E=269  
+J=537   S=272  E=269  
+J=538   S=273  E=269  
+J=539   S=274  E=269  
+J=540   S=275  E=269  
+J=541   S=276  E=269  
+J=542   S=277  E=269  
+J=543   S=278  E=269  
+J=544   S=279  E=269  
+J=545   S=280  E=269  
+J=546   S=281  E=269  
+J=547   S=282  E=269  
+J=548   S=289  E=269  
+J=549   S=290  E=269  
+J=550   S=291  E=269  
+J=551   S=292  E=269  
+J=552   S=293  E=269  
+J=553   S=294  E=269  
+J=554   S=295  E=269  
+J=555   S=296  E=269  
+J=556   S=297  E=269  
+J=557   S=298  E=269  
+J=558   S=299  E=269  
+J=559   S=300  E=269  
+J=560   S=301  E=269  
+J=561   S=302  E=269  
+J=562   S=263  E=270  
+J=563   S=263  E=271  
+J=564   S=263  E=272  
+J=565   S=263  E=273  
+J=566   S=263  E=274  
+J=567   S=263  E=275  
+J=568   S=263  E=276  
+J=569   S=263  E=277  
+J=570   S=263  E=278  
+J=571   S=263  E=279  
+J=572   S=263  E=280  
+J=573   S=263  E=281  
+J=574   S=263  E=282  
+J=575   S=246  E=283  
+J=576   S=283  E=284  
+J=577   S=286  E=284  
+J=578   S=288  E=284  
+J=579   S=246  E=285  
+J=580   S=285  E=286  
+J=581   S=246  E=287  
+J=582   S=287  E=288  
+J=583   S=284  E=289  
+J=584   S=284  E=290  
+J=585   S=284  E=291  
+J=586   S=284  E=292  
+J=587   S=284  E=293  
+J=588   S=284  E=294  
+J=589   S=284  E=295  
+J=590   S=284  E=296  
+J=591   S=284  E=297  
+J=592   S=284  E=298  
+J=593   S=284  E=299  
+J=594   S=284  E=300  
+J=595   S=284  E=301  
+J=596   S=284  E=302  
+J=597   S=269  E=303  
+J=598   S=303  E=304  
+J=599   S=304  E=305  
+J=600   S=306  E=305  
+J=601   S=307  E=305  
+J=602   S=308  E=305  
+J=603   S=309  E=305  
+J=604   S=310  E=305  
+J=605   S=311  E=305  
+J=606   S=312  E=305  
+J=607   S=313  E=305  
+J=608   S=314  E=305  
+J=609   S=315  E=305  
+J=610   S=316  E=305  
+J=611   S=317  E=305  
+J=612   S=318  E=305  
+J=613   S=319  E=305  
+J=614   S=244  E=306  
+J=615   S=244  E=307  
+J=616   S=244  E=308  
+J=617   S=244  E=309  
+J=618   S=244  E=310  
+J=619   S=244  E=311  
+J=620   S=244  E=312  
+J=621   S=244  E=313  
+J=622   S=244  E=314  
+J=623   S=244  E=315  
+J=624   S=244  E=316  
+J=625   S=244  E=317  
+J=626   S=244  E=318  
+J=627   S=244  E=319  
+J=628   S=305  E=320  
+J=629   S=320  E=321  
+J=630   S=322  E=321  
+J=631   S=323  E=321  
+J=632   S=324  E=321  
+J=633   S=325  E=321  
+J=634   S=305  E=322  
+J=635   S=305  E=323  
+J=636   S=305  E=324  
+J=637   S=305  E=325  
+J=638   S=321  E=326  
+J=639   S=326  E=327  
+J=640   S=327  E=328  
+J=641   S=328  E=329  
+J=642   S=330  E=329  
+J=643   S=331  E=329  
+J=644   S=332  E=329  
+J=645   S=333  E=329  
+J=646   S=334  E=329  
+J=647   S=335  E=329  
+J=648   S=336  E=329  
+J=649   S=337  E=329  
+J=650   S=338  E=329  
+J=651   S=339  E=329  
+J=652   S=340  E=329  
+J=653   S=341  E=329  
+J=654   S=342  E=329  
+J=655   S=327  E=330  
+J=656   S=327  E=331  
+J=657   S=327  E=332  
+J=658   S=327  E=333  
+J=659   S=327  E=334  
+J=660   S=327  E=335  
+J=661   S=327  E=336  
+J=662   S=327  E=337  
+J=663   S=327  E=338  
+J=664   S=327  E=339  
+J=665   S=327  E=340  
+J=666   S=327  E=341  
+J=667   S=327  E=342  
+J=668   S=329  E=343  
+J=669   S=343  E=344  
+J=670   S=345  E=344  
+J=671   S=346  E=344  
+J=672   S=347  E=344  
+J=673   S=348  E=344  
+J=674   S=329  E=345  
+J=675   S=329  E=346  
+J=676   S=329  E=347  
+J=677   S=329  E=348  
+J=678   S=344  E=349  
+J=679   S=349  E=350  
+J=680   S=351  E=350  
+J=681   S=352  E=350  
+J=682   S=353  E=350  
+J=683   S=354  E=350  
+J=684   S=355  E=350  
+J=685   S=356  E=350  
+J=686   S=357  E=350  
+J=687   S=358  E=350  
+J=688   S=359  E=350  
+J=689   S=360  E=350  
+J=690   S=361  E=350  
+J=691   S=362  E=350  
+J=692   S=363  E=350  
+J=693   S=370  E=350  
+J=694   S=371  E=350  
+J=695   S=372  E=350  
+J=696   S=373  E=350  
+J=697   S=374  E=350  
+J=698   S=375  E=350  
+J=699   S=376  E=350  
+J=700   S=377  E=350  
+J=701   S=378  E=350  
+J=702   S=379  E=350  
+J=703   S=380  E=350  
+J=704   S=381  E=350  
+J=705   S=382  E=350  
+J=706   S=383  E=350  
+J=707   S=344  E=351  
+J=708   S=344  E=352  
+J=709   S=344  E=353  
+J=710   S=344  E=354  
+J=711   S=344  E=355  
+J=712   S=344  E=356  
+J=713   S=344  E=357  
+J=714   S=344  E=358  
+J=715   S=344  E=359  
+J=716   S=344  E=360  
+J=717   S=344  E=361  
+J=718   S=344  E=362  
+J=719   S=344  E=363  
+J=720   S=327  E=364  
+J=721   S=364  E=365  
+J=722   S=367  E=365  
+J=723   S=369  E=365  
+J=724   S=327  E=366  
+J=725   S=366  E=367  
+J=726   S=327  E=368  
+J=727   S=368  E=369  
+J=728   S=365  E=370  
+J=729   S=365  E=371  
+J=730   S=365  E=372  
+J=731   S=365  E=373  
+J=732   S=365  E=374  
+J=733   S=365  E=375  
+J=734   S=365  E=376  
+J=735   S=365  E=377  
+J=736   S=365  E=378  
+J=737   S=365  E=379  
+J=738   S=365  E=380  
+J=739   S=365  E=381  
+J=740   S=365  E=382  
+J=741   S=365  E=383  
+J=742   S=350  E=384  
+J=743   S=384  E=385  
+J=744   S=385  E=386  
+J=745   S=387  E=386  
+J=746   S=388  E=386  
+J=747   S=389  E=386  
+J=748   S=390  E=386  
+J=749   S=391  E=386  
+J=750   S=392  E=386  
+J=751   S=393  E=386  
+J=752   S=394  E=386  
+J=753   S=395  E=386  
+J=754   S=396  E=386  
+J=755   S=397  E=386  
+J=756   S=398  E=386  
+J=757   S=399  E=386  
+J=758   S=400  E=386  
+J=759   S=466  E=386  
+J=760   S=467  E=386  
+J=761   S=468  E=386  
+J=762   S=469  E=386  
+J=763   S=470  E=386  
+J=764   S=471  E=386  
+J=765   S=472  E=386  
+J=766   S=473  E=386  
+J=767   S=474  E=386  
+J=768   S=475  E=386  
+J=769   S=476  E=386  
+J=770   S=477  E=386  
+J=771   S=478  E=386  
+J=772   S=479  E=386  
+J=773   S=480  E=386  
+J=774   S=321  E=387  
+J=775   S=321  E=388  
+J=776   S=321  E=389  
+J=777   S=321  E=390  
+J=778   S=321  E=391  
+J=779   S=321  E=392  
+J=780   S=321  E=393  
+J=781   S=321  E=394  
+J=782   S=321  E=395  
+J=783   S=321  E=396  
+J=784   S=321  E=397  
+J=785   S=321  E=398  
+J=786   S=321  E=399  
+J=787   S=321  E=400  
+J=788   S=244  E=401  
+J=789   S=401  E=402  
+J=790   S=404  E=402  
+J=791   S=406  E=402  
+J=792   S=244  E=403  
+J=793   S=403  E=404  
+J=794   S=244  E=405  
+J=795   S=405  E=406  
+J=796   S=402  E=407  
+J=797   S=407  E=408  
+J=798   S=408  E=409  
+J=799   S=409  E=410  
+J=800   S=411  E=410  
+J=801   S=412  E=410  
+J=802   S=413  E=410  
+J=803   S=414  E=410  
+J=804   S=415  E=410  
+J=805   S=416  E=410  
+J=806   S=417  E=410  
+J=807   S=418  E=410  
+J=808   S=419  E=410  
+J=809   S=420  E=410  
+J=810   S=421  E=410  
+J=811   S=422  E=410  
+J=812   S=423  E=410  
+J=813   S=408  E=411  
+J=814   S=408  E=412  
+J=815   S=408  E=413  
+J=816   S=408  E=414  
+J=817   S=408  E=415  
+J=818   S=408  E=416  
+J=819   S=408  E=417  
+J=820   S=408  E=418  
+J=821   S=408  E=419  
+J=822   S=408  E=420  
+J=823   S=408  E=421  
+J=824   S=408  E=422  
+J=825   S=408  E=423  
+J=826   S=410  E=424  
+J=827   S=424  E=425  
+J=828   S=426  E=425  
+J=829   S=427  E=425  
+J=830   S=428  E=425  
+J=831   S=429  E=425  
+J=832   S=410  E=426  
+J=833   S=410  E=427  
+J=834   S=410  E=428  
+J=835   S=410  E=429  
+J=836   S=425  E=430  
+J=837   S=430  E=431  
+J=838   S=432  E=431  
+J=839   S=433  E=431  
+J=840   S=434  E=431  
+J=841   S=435  E=431  
+J=842   S=436  E=431  
+J=843   S=437  E=431  
+J=844   S=438  E=431  
+J=845   S=439  E=431  
+J=846   S=440  E=431  
+J=847   S=441  E=431  
+J=848   S=442  E=431  
+J=849   S=443  E=431  
+J=850   S=444  E=431  
+J=851   S=451  E=431  
+J=852   S=452  E=431  
+J=853   S=453  E=431  
+J=854   S=454  E=431  
+J=855   S=455  E=431  
+J=856   S=456  E=431  
+J=857   S=457  E=431  
+J=858   S=458  E=431  
+J=859   S=459  E=431  
+J=860   S=460  E=431  
+J=861   S=461  E=431  
+J=862   S=462  E=431  
+J=863   S=463  E=431  
+J=864   S=464  E=431  
+J=865   S=425  E=432  
+J=866   S=425  E=433  
+J=867   S=425  E=434  
+J=868   S=425  E=435  
+J=869   S=425  E=436  
+J=870   S=425  E=437  
+J=871   S=425  E=438  
+J=872   S=425  E=439  
+J=873   S=425  E=440  
+J=874   S=425  E=441  
+J=875   S=425  E=442  
+J=876   S=425  E=443  
+J=877   S=425  E=444  
+J=878   S=408  E=445  
+J=879   S=445  E=446  
+J=880   S=448  E=446  
+J=881   S=450  E=446  
+J=882   S=408  E=447  
+J=883   S=447  E=448  
+J=884   S=408  E=449  
+J=885   S=449  E=450  
+J=886   S=446  E=451  
+J=887   S=446  E=452  
+J=888   S=446  E=453  
+J=889   S=446  E=454  
+J=890   S=446  E=455  
+J=891   S=446  E=456  
+J=892   S=446  E=457  
+J=893   S=446  E=458  
+J=894   S=446  E=459  
+J=895   S=446  E=460  
+J=896   S=446  E=461  
+J=897   S=446  E=462  
+J=898   S=446  E=463  
+J=899   S=446  E=464  
+J=900   S=431  E=465  
+J=901   S=465  E=466  
+J=902   S=402  E=467  
+J=903   S=402  E=468  
+J=904   S=402  E=469  
+J=905   S=402  E=470  
+J=906   S=402  E=471  
+J=907   S=402  E=472  
+J=908   S=402  E=473  
+J=909   S=402  E=474  
+J=910   S=402  E=475  
+J=911   S=402  E=476  
+J=912   S=402  E=477  
+J=913   S=402  E=478  
+J=914   S=402  E=479  
+J=915   S=402  E=480  
+J=916   S=386  E=481  
+J=917   S=481  E=482  
+J=918   S=482  E=483  
+J=919   S=483  E=484  
+J=920   S=484  E=485  
+J=921   S=486  E=485  
+J=922   S=487  E=485  
+J=923   S=488  E=485  
+J=924   S=489  E=485  
+J=925   S=490  E=485  
+J=926   S=491  E=485  
+J=927   S=492  E=485  
+J=928   S=493  E=485  
+J=929   S=494  E=485  
+J=930   S=495  E=485  
+J=931   S=496  E=485  
+J=932   S=497  E=485  
+J=933   S=498  E=485  
+J=934   S=483  E=486  
+J=935   S=483  E=487  
+J=936   S=483  E=488  
+J=937   S=483  E=489  
+J=938   S=483  E=490  
+J=939   S=483  E=491  
+J=940   S=483  E=492  
+J=941   S=483  E=493  
+J=942   S=483  E=494  
+J=943   S=483  E=495  
+J=944   S=483  E=496  
+J=945   S=483  E=497  
+J=946   S=483  E=498  
+J=947   S=485  E=499  
+J=948   S=499  E=500  
+J=949   S=501  E=500  
+J=950   S=502  E=500  
+J=951   S=503  E=500  
+J=952   S=504  E=500  
+J=953   S=485  E=501  
+J=954   S=485  E=502  
+J=955   S=485  E=503  
+J=956   S=485  E=504  
+J=957   S=500  E=505  
+J=958   S=505  E=506  
+J=959   S=507  E=506  
+J=960   S=508  E=506  
+J=961   S=509  E=506  
+J=962   S=510  E=506  
+J=963   S=511  E=506  
+J=964   S=512  E=506  
+J=965   S=513  E=506  
+J=966   S=514  E=506  
+J=967   S=515  E=506  
+J=968   S=516  E=506  
+J=969   S=517  E=506  
+J=970   S=518  E=506  
+J=971   S=519  E=506  
+J=972   S=526  E=506  
+J=973   S=527  E=506  
+J=974   S=528  E=506  
+J=975   S=529  E=506  
+J=976   S=530  E=506  
+J=977   S=531  E=506  
+J=978   S=532  E=506  
+J=979   S=533  E=506  
+J=980   S=534  E=506  
+J=981   S=535  E=506  
+J=982   S=536  E=506  
+J=983   S=537  E=506  
+J=984   S=538  E=506  
+J=985   S=539  E=506  
+J=986   S=500  E=507  
+J=987   S=500  E=508  
+J=988   S=500  E=509  
+J=989   S=500  E=510  
+J=990   S=500  E=511  
+J=991   S=500  E=512  
+J=992   S=500  E=513  
+J=993   S=500  E=514  
+J=994   S=500  E=515  
+J=995   S=500  E=516  
+J=996   S=500  E=517  
+J=997   S=500  E=518  
+J=998   S=500  E=519  
+J=999   S=483  E=520  
+J=1000  S=520  E=521  
+J=1001  S=523  E=521  
+J=1002  S=525  E=521  
+J=1003  S=483  E=522  
+J=1004  S=522  E=523  
+J=1005  S=483  E=524  
+J=1006  S=524  E=525  
+J=1007  S=521  E=526  
+J=1008  S=521  E=527  
+J=1009  S=521  E=528  
+J=1010  S=521  E=529  
+J=1011  S=521  E=530  
+J=1012  S=521  E=531  
+J=1013  S=521  E=532  
+J=1014  S=521  E=533  
+J=1015  S=521  E=534  
+J=1016  S=521  E=535  
+J=1017  S=521  E=536  
+J=1018  S=521  E=537  
+J=1019  S=521  E=538  
+J=1020  S=521  E=539  
+J=1021  S=506  E=540  
+J=1022  S=540  E=541  
+J=1023  S=541  E=542  
+J=1024  S=543  E=542  
+J=1025  S=544  E=542  
+J=1026  S=545  E=542  
+J=1027  S=546  E=542  
+J=1028  S=547  E=542  
+J=1029  S=548  E=542  
+J=1030  S=549  E=542  
+J=1031  S=550  E=542  
+J=1032  S=551  E=542  
+J=1033  S=552  E=542  
+J=1034  S=553  E=542  
+J=1035  S=554  E=542  
+J=1036  S=555  E=542  
+J=1037  S=556  E=542  
+J=1038  S=481  E=543  
+J=1039  S=481  E=544  
+J=1040  S=481  E=545  
+J=1041  S=481  E=546  
+J=1042  S=481  E=547  
+J=1043  S=481  E=548  
+J=1044  S=481  E=549  
+J=1045  S=481  E=550  
+J=1046  S=481  E=551  
+J=1047  S=481  E=552  
+J=1048  S=481  E=553  
+J=1049  S=481  E=554  
+J=1050  S=481  E=555  
+J=1051  S=481  E=556  
+J=1052  S=542  E=557  
+J=1053  S=557  E=558  
+J=1054  S=559  E=558  
+J=1055  S=560  E=558  
+J=1056  S=561  E=558  
+J=1057  S=562  E=558  
+J=1058  S=542  E=559  
+J=1059  S=542  E=560  
+J=1060  S=542  E=561  
+J=1061  S=542  E=562  
+J=1062  S=558  E=563  
+J=1063  S=563  E=564  
+J=1064  S=564  E=565  
+J=1065  S=565  E=566  
+J=1066  S=567  E=566  
+J=1067  S=568  E=566  
+J=1068  S=569  E=566  
+J=1069  S=570  E=566  
+J=1070  S=571  E=566  
+J=1071  S=572  E=566  
+J=1072  S=573  E=566  
+J=1073  S=574  E=566  
+J=1074  S=575  E=566  
+J=1075  S=576  E=566  
+J=1076  S=577  E=566  
+J=1077  S=578  E=566  
+J=1078  S=579  E=566  
+J=1079  S=564  E=567  
+J=1080  S=564  E=568  
+J=1081  S=564  E=569  
+J=1082  S=564  E=570  
+J=1083  S=564  E=571  
+J=1084  S=564  E=572  
+J=1085  S=564  E=573  
+J=1086  S=564  E=574  
+J=1087  S=564  E=575  
+J=1088  S=564  E=576  
+J=1089  S=564  E=577  
+J=1090  S=564  E=578  
+J=1091  S=564  E=579  
+J=1092  S=566  E=580  
+J=1093  S=580  E=581  
+J=1094  S=582  E=581  
+J=1095  S=583  E=581  
+J=1096  S=584  E=581  
+J=1097  S=585  E=581  
+J=1098  S=566  E=582  
+J=1099  S=566  E=583  
+J=1100  S=566  E=584  
+J=1101  S=566  E=585  
+J=1102  S=581  E=586  
+J=1103  S=586  E=587  
+J=1104  S=588  E=587  
+J=1105  S=589  E=587  
+J=1106  S=590  E=587  
+J=1107  S=591  E=587  
+J=1108  S=592  E=587  
+J=1109  S=593  E=587  
+J=1110  S=594  E=587  
+J=1111  S=595  E=587  
+J=1112  S=596  E=587  
+J=1113  S=597  E=587  
+J=1114  S=598  E=587  
+J=1115  S=599  E=587  
+J=1116  S=600  E=587  
+J=1117  S=607  E=587  
+J=1118  S=608  E=587  
+J=1119  S=609  E=587  
+J=1120  S=610  E=587  
+J=1121  S=611  E=587  
+J=1122  S=612  E=587  
+J=1123  S=613  E=587  
+J=1124  S=614  E=587  
+J=1125  S=615  E=587  
+J=1126  S=616  E=587  
+J=1127  S=617  E=587  
+J=1128  S=618  E=587  
+J=1129  S=619  E=587  
+J=1130  S=620  E=587  
+J=1131  S=581  E=588  
+J=1132  S=581  E=589  
+J=1133  S=581  E=590  
+J=1134  S=581  E=591  
+J=1135  S=581  E=592  
+J=1136  S=581  E=593  
+J=1137  S=581  E=594  
+J=1138  S=581  E=595  
+J=1139  S=581  E=596  
+J=1140  S=581  E=597  
+J=1141  S=581  E=598  
+J=1142  S=581  E=599  
+J=1143  S=581  E=600  
+J=1144  S=564  E=601  
+J=1145  S=601  E=602  
+J=1146  S=604  E=602  
+J=1147  S=606  E=602  
+J=1148  S=564  E=603  
+J=1149  S=603  E=604  
+J=1150  S=564  E=605  
+J=1151  S=605  E=606  
+J=1152  S=602  E=607  
+J=1153  S=602  E=608  
+J=1154  S=602  E=609  
+J=1155  S=602  E=610  
+J=1156  S=602  E=611  
+J=1157  S=602  E=612  
+J=1158  S=602  E=613  
+J=1159  S=602  E=614  
+J=1160  S=602  E=615  
+J=1161  S=602  E=616  
+J=1162  S=602  E=617  
+J=1163  S=602  E=618  
+J=1164  S=602  E=619  
+J=1165  S=602  E=620  
+J=1166  S=587  E=621  
+J=1167  S=621  E=622  
+J=1168  S=558  E=623  
+J=1169  S=558  E=624  
+J=1170  S=558  E=625  
+J=1171  S=558  E=626  
+J=1172  S=558  E=627  
+J=1173  S=558  E=628  
+J=1174  S=558  E=629  
+J=1175  S=558  E=630  
+J=1176  S=558  E=631  
+J=1177  S=558  E=632  
+J=1178  S=558  E=633  
+J=1179  S=558  E=634  
+J=1180  S=558  E=635  
+J=1181  S=558  E=636  
+J=1182  S=481  E=637  
+J=1183  S=637  E=638  
+J=1184  S=640  E=638  
+J=1185  S=642  E=638  
+J=1186  S=481  E=639  
+J=1187  S=639  E=640  
+J=1188  S=481  E=641  
+J=1189  S=641  E=642  
+J=1190  S=638  E=643  
+J=1191  S=643  E=644  
+J=1192  S=644  E=645  
+J=1193  S=645  E=646  
+J=1194  S=647  E=646  
+J=1195  S=648  E=646  
+J=1196  S=649  E=646  
+J=1197  S=650  E=646  
+J=1198  S=651  E=646  
+J=1199  S=652  E=646  
+J=1200  S=653  E=646  
+J=1201  S=654  E=646  
+J=1202  S=655  E=646  
+J=1203  S=656  E=646  
+J=1204  S=657  E=646  
+J=1205  S=658  E=646  
+J=1206  S=659  E=646  
+J=1207  S=644  E=647  
+J=1208  S=644  E=648  
+J=1209  S=644  E=649  
+J=1210  S=644  E=650  
+J=1211  S=644  E=651  
+J=1212  S=644  E=652  
+J=1213  S=644  E=653  
+J=1214  S=644  E=654  
+J=1215  S=644  E=655  
+J=1216  S=644  E=656  
+J=1217  S=644  E=657  
+J=1218  S=644  E=658  
+J=1219  S=644  E=659  
+J=1220  S=646  E=660  
+J=1221  S=660  E=661  
+J=1222  S=662  E=661  
+J=1223  S=663  E=661  
+J=1224  S=664  E=661  
+J=1225  S=665  E=661  
+J=1226  S=646  E=662  
+J=1227  S=646  E=663  
+J=1228  S=646  E=664  
+J=1229  S=646  E=665  
+J=1230  S=661  E=666  
+J=1231  S=666  E=667  
+J=1232  S=668  E=667  
+J=1233  S=669  E=667  
+J=1234  S=670  E=667  
+J=1235  S=671  E=667  
+J=1236  S=672  E=667  
+J=1237  S=673  E=667  
+J=1238  S=674  E=667  
+J=1239  S=675  E=667  
+J=1240  S=676  E=667  
+J=1241  S=677  E=667  
+J=1242  S=678  E=667  
+J=1243  S=679  E=667  
+J=1244  S=680  E=667  
+J=1245  S=687  E=667  
+J=1246  S=688  E=667  
+J=1247  S=689  E=667  
+J=1248  S=690  E=667  
+J=1249  S=691  E=667  
+J=1250  S=692  E=667  
+J=1251  S=693  E=667  
+J=1252  S=694  E=667  
+J=1253  S=695  E=667  
+J=1254  S=696  E=667  
+J=1255  S=697  E=667  
+J=1256  S=698  E=667  
+J=1257  S=699  E=667  
+J=1258  S=700  E=667  
+J=1259  S=661  E=668  
+J=1260  S=661  E=669  
+J=1261  S=661  E=670  
+J=1262  S=661  E=671  
+J=1263  S=661  E=672  
+J=1264  S=661  E=673  
+J=1265  S=661  E=674  
+J=1266  S=661  E=675  
+J=1267  S=661  E=676  
+J=1268  S=661  E=677  
+J=1269  S=661  E=678  
+J=1270  S=661  E=679  
+J=1271  S=661  E=680  
+J=1272  S=644  E=681  
+J=1273  S=681  E=682  
+J=1274  S=684  E=682  
+J=1275  S=686  E=682  
+J=1276  S=644  E=683  
+J=1277  S=683  E=684  
+J=1278  S=644  E=685  
+J=1279  S=685  E=686  
+J=1280  S=682  E=687  
+J=1281  S=682  E=688  
+J=1282  S=682  E=689  
+J=1283  S=682  E=690  
+J=1284  S=682  E=691  
+J=1285  S=682  E=692  
+J=1286  S=682  E=693  
+J=1287  S=682  E=694  
+J=1288  S=682  E=695  
+J=1289  S=682  E=696  
+J=1290  S=682  E=697  
+J=1291  S=682  E=698  
+J=1292  S=682  E=699  
+J=1293  S=682  E=700  
+J=1294  S=667  E=701  
+J=1295  S=701  E=702  
+J=1296  S=638  E=703  
+J=1297  S=638  E=704  
+J=1298  S=638  E=705  
+J=1299  S=638  E=706  
+J=1300  S=638  E=707  
+J=1301  S=638  E=708  
+J=1302  S=638  E=709  
+J=1303  S=638  E=710  
+J=1304  S=638  E=711  
+J=1305  S=638  E=712  
+J=1306  S=638  E=713  
+J=1307  S=638  E=714  
+J=1308  S=638  E=715  
+J=1309  S=638  E=716  
+J=1310  S=0    E=717  
+J=1311  S=717  E=718  
+J=1312  S=718  E=719  
+J=1313  S=719  E=720  
+J=1314  S=720  E=721  
+J=1315  S=722  E=721  
+J=1316  S=723  E=721  
+J=1317  S=724  E=721  
+J=1318  S=725  E=721  
+J=1319  S=726  E=721  
+J=1320  S=727  E=721  
+J=1321  S=728  E=721  
+J=1322  S=729  E=721  
+J=1323  S=730  E=721  
+J=1324  S=731  E=721  
+J=1325  S=732  E=721  
+J=1326  S=733  E=721  
+J=1327  S=734  E=721  
+J=1328  S=719  E=722  
+J=1329  S=719  E=723  
+J=1330  S=719  E=724  
+J=1331  S=719  E=725  
+J=1332  S=719  E=726  
+J=1333  S=719  E=727  
+J=1334  S=719  E=728  
+J=1335  S=719  E=729  
+J=1336  S=719  E=730  
+J=1337  S=719  E=731  
+J=1338  S=719  E=732  
+J=1339  S=719  E=733  
+J=1340  S=719  E=734  
+J=1341  S=721  E=735  
+J=1342  S=735  E=736  
+J=1343  S=737  E=736  
+J=1344  S=738  E=736  
+J=1345  S=739  E=736  
+J=1346  S=740  E=736  
+J=1347  S=721  E=737  
+J=1348  S=721  E=738  
+J=1349  S=721  E=739  
+J=1350  S=721  E=740  
+J=1351  S=736  E=741  
+J=1352  S=741  E=742  
+J=1353  S=743  E=742  
+J=1354  S=744  E=742  
+J=1355  S=745  E=742  
+J=1356  S=746  E=742  
+J=1357  S=747  E=742  
+J=1358  S=748  E=742  
+J=1359  S=749  E=742  
+J=1360  S=750  E=742  
+J=1361  S=751  E=742  
+J=1362  S=752  E=742  
+J=1363  S=753  E=742  
+J=1364  S=754  E=742  
+J=1365  S=755  E=742  
+J=1366  S=762  E=742  
+J=1367  S=763  E=742  
+J=1368  S=764  E=742  
+J=1369  S=765  E=742  
+J=1370  S=766  E=742  
+J=1371  S=767  E=742  
+J=1372  S=768  E=742  
+J=1373  S=769  E=742  
+J=1374  S=770  E=742  
+J=1375  S=771  E=742  
+J=1376  S=772  E=742  
+J=1377  S=773  E=742  
+J=1378  S=774  E=742  
+J=1379  S=775  E=742  
+J=1380  S=736  E=743  
+J=1381  S=736  E=744  
+J=1382  S=736  E=745  
+J=1383  S=736  E=746  
+J=1384  S=736  E=747  
+J=1385  S=736  E=748  
+J=1386  S=736  E=749  
+J=1387  S=736  E=750  
+J=1388  S=736  E=751  
+J=1389  S=736  E=752  
+J=1390  S=736  E=753  
+J=1391  S=736  E=754  
+J=1392  S=736  E=755  
+J=1393  S=719  E=756  
+J=1394  S=756  E=757  
+J=1395  S=759  E=757  
+J=1396  S=761  E=757  
+J=1397  S=719  E=758  
+J=1398  S=758  E=759  
+J=1399  S=719  E=760  
+J=1400  S=760  E=761  
+J=1401  S=757  E=762  
+J=1402  S=757  E=763  
+J=1403  S=757  E=764  
+J=1404  S=757  E=765  
+J=1405  S=757  E=766  
+J=1406  S=757  E=767  
+J=1407  S=757  E=768  
+J=1408  S=757  E=769  
+J=1409  S=757  E=770  
+J=1410  S=757  E=771  
+J=1411  S=757  E=772  
+J=1412  S=757  E=773  
+J=1413  S=757  E=774  
+J=1414  S=757  E=775  
+J=1415  S=742  E=776  
+J=1416  S=776  E=777  
+J=1417  S=777  E=778  
+J=1418  S=779  E=778  
+J=1419  S=780  E=778  
+J=1420  S=781  E=778  
+J=1421  S=782  E=778  
+J=1422  S=783  E=778  
+J=1423  S=784  E=778  
+J=1424  S=785  E=778  
+J=1425  S=786  E=778  
+J=1426  S=787  E=778  
+J=1427  S=788  E=778  
+J=1428  S=789  E=778  
+J=1429  S=790  E=778  
+J=1430  S=791  E=778  
+J=1431  S=792  E=778  
+J=1432  S=717  E=779  
+J=1433  S=717  E=780  
+J=1434  S=717  E=781  
+J=1435  S=717  E=782  
+J=1436  S=717  E=783  
+J=1437  S=717  E=784  
+J=1438  S=717  E=785  
+J=1439  S=717  E=786  
+J=1440  S=717  E=787  
+J=1441  S=717  E=788  
+J=1442  S=717  E=789  
+J=1443  S=717  E=790  
+J=1444  S=717  E=791  
+J=1445  S=717  E=792  
+J=1446  S=778  E=793  
+J=1447  S=793  E=794  
+J=1448  S=795  E=794  
+J=1449  S=796  E=794  
+J=1450  S=797  E=794  
+J=1451  S=798  E=794  
+J=1452  S=778  E=795  
+J=1453  S=778  E=796  
+J=1454  S=778  E=797  
+J=1455  S=778  E=798  
+J=1456  S=794  E=799  
+J=1457  S=799  E=800  
+J=1458  S=800  E=801  
+J=1459  S=801  E=802  
+J=1460  S=803  E=802  
+J=1461  S=804  E=802  
+J=1462  S=805  E=802  
+J=1463  S=806  E=802  
+J=1464  S=807  E=802  
+J=1465  S=808  E=802  
+J=1466  S=809  E=802  
+J=1467  S=810  E=802  
+J=1468  S=811  E=802  
+J=1469  S=812  E=802  
+J=1470  S=813  E=802  
+J=1471  S=814  E=802  
+J=1472  S=815  E=802  
+J=1473  S=800  E=803  
+J=1474  S=800  E=804  
+J=1475  S=800  E=805  
+J=1476  S=800  E=806  
+J=1477  S=800  E=807  
+J=1478  S=800  E=808  
+J=1479  S=800  E=809  
+J=1480  S=800  E=810  
+J=1481  S=800  E=811  
+J=1482  S=800  E=812  
+J=1483  S=800  E=813  
+J=1484  S=800  E=814  
+J=1485  S=800  E=815  
+J=1486  S=802  E=816  
+J=1487  S=816  E=817  
+J=1488  S=818  E=817  
+J=1489  S=819  E=817  
+J=1490  S=820  E=817  
+J=1491  S=821  E=817  
+J=1492  S=802  E=818  
+J=1493  S=802  E=819  
+J=1494  S=802  E=820  
+J=1495  S=802  E=821  
+J=1496  S=817  E=822  
+J=1497  S=822  E=823  
+J=1498  S=824  E=823  
+J=1499  S=825  E=823  
+J=1500  S=826  E=823  
+J=1501  S=827  E=823  
+J=1502  S=828  E=823  
+J=1503  S=829  E=823  
+J=1504  S=830  E=823  
+J=1505  S=831  E=823  
+J=1506  S=832  E=823  
+J=1507  S=833  E=823  
+J=1508  S=834  E=823  
+J=1509  S=835  E=823  
+J=1510  S=836  E=823  
+J=1511  S=843  E=823  
+J=1512  S=844  E=823  
+J=1513  S=845  E=823  
+J=1514  S=846  E=823  
+J=1515  S=847  E=823  
+J=1516  S=848  E=823  
+J=1517  S=849  E=823  
+J=1518  S=850  E=823  
+J=1519  S=851  E=823  
+J=1520  S=852  E=823  
+J=1521  S=853  E=823  
+J=1522  S=854  E=823  
+J=1523  S=855  E=823  
+J=1524  S=856  E=823  
+J=1525  S=817  E=824  
+J=1526  S=817  E=825  
+J=1527  S=817  E=826  
+J=1528  S=817  E=827  
+J=1529  S=817  E=828  
+J=1530  S=817  E=829  
+J=1531  S=817  E=830  
+J=1532  S=817  E=831  
+J=1533  S=817  E=832  
+J=1534  S=817  E=833  
+J=1535  S=817  E=834  
+J=1536  S=817  E=835  
+J=1537  S=817  E=836  
+J=1538  S=800  E=837  
+J=1539  S=837  E=838  
+J=1540  S=840  E=838  
+J=1541  S=842  E=838  
+J=1542  S=800  E=839  
+J=1543  S=839  E=840  
+J=1544  S=800  E=841  
+J=1545  S=841  E=842  
+J=1546  S=838  E=843  
+J=1547  S=838  E=844  
+J=1548  S=838  E=845  
+J=1549  S=838  E=846  
+J=1550  S=838  E=847  
+J=1551  S=838  E=848  
+J=1552  S=838  E=849  
+J=1553  S=838  E=850  
+J=1554  S=838  E=851  
+J=1555  S=838  E=852  
+J=1556  S=838  E=853  
+J=1557  S=838  E=854  
+J=1558  S=838  E=855  
+J=1559  S=838  E=856  
+J=1560  S=823  E=857  
+J=1561  S=857  E=858  
+J=1562  S=858  E=859  
+J=1563  S=860  E=859  
+J=1564  S=861  E=859  
+J=1565  S=862  E=859  
+J=1566  S=863  E=859  
+J=1567  S=864  E=859  
+J=1568  S=865  E=859  
+J=1569  S=866  E=859  
+J=1570  S=867  E=859  
+J=1571  S=868  E=859  
+J=1572  S=869  E=859  
+J=1573  S=870  E=859  
+J=1574  S=871  E=859  
+J=1575  S=872  E=859  
+J=1576  S=873  E=859  
+J=1577  S=939  E=859  
+J=1578  S=940  E=859  
+J=1579  S=941  E=859  
+J=1580  S=942  E=859  
+J=1581  S=943  E=859  
+J=1582  S=944  E=859  
+J=1583  S=945  E=859  
+J=1584  S=946  E=859  
+J=1585  S=947  E=859  
+J=1586  S=948  E=859  
+J=1587  S=949  E=859  
+J=1588  S=950  E=859  
+J=1589  S=951  E=859  
+J=1590  S=952  E=859  
+J=1591  S=953  E=859  
+J=1592  S=794  E=860  
+J=1593  S=794  E=861  
+J=1594  S=794  E=862  
+J=1595  S=794  E=863  
+J=1596  S=794  E=864  
+J=1597  S=794  E=865  
+J=1598  S=794  E=866  
+J=1599  S=794  E=867  
+J=1600  S=794  E=868  
+J=1601  S=794  E=869  
+J=1602  S=794  E=870  
+J=1603  S=794  E=871  
+J=1604  S=794  E=872  
+J=1605  S=794  E=873  
+J=1606  S=717  E=874  
+J=1607  S=874  E=875  
+J=1608  S=877  E=875  
+J=1609  S=879  E=875  
+J=1610  S=717  E=876  
+J=1611  S=876  E=877  
+J=1612  S=717  E=878  
+J=1613  S=878  E=879  
+J=1614  S=875  E=880  
+J=1615  S=880  E=881  
+J=1616  S=881  E=882  
+J=1617  S=882  E=883  
+J=1618  S=884  E=883  
+J=1619  S=885  E=883  
+J=1620  S=886  E=883  
+J=1621  S=887  E=883  
+J=1622  S=888  E=883  
+J=1623  S=889  E=883  
+J=1624  S=890  E=883  
+J=1625  S=891  E=883  
+J=1626  S=892  E=883  
+J=1627  S=893  E=883  
+J=1628  S=894  E=883  
+J=1629  S=895  E=883  
+J=1630  S=896  E=883  
+J=1631  S=881  E=884  
+J=1632  S=881  E=885  
+J=1633  S=881  E=886  
+J=1634  S=881  E=887  
+J=1635  S=881  E=888  
+J=1636  S=881  E=889  
+J=1637  S=881  E=890  
+J=1638  S=881  E=891  
+J=1639  S=881  E=892  
+J=1640  S=881  E=893  
+J=1641  S=881  E=894  
+J=1642  S=881  E=895  
+J=1643  S=881  E=896  
+J=1644  S=883  E=897  
+J=1645  S=897  E=898  
+J=1646  S=899  E=898  
+J=1647  S=900  E=898  
+J=1648  S=901  E=898  
+J=1649  S=902  E=898  
+J=1650  S=883  E=899  
+J=1651  S=883  E=900  
+J=1652  S=883  E=901  
+J=1653  S=883  E=902  
+J=1654  S=898  E=903  
+J=1655  S=903  E=904  
+J=1656  S=905  E=904  
+J=1657  S=906  E=904  
+J=1658  S=907  E=904  
+J=1659  S=908  E=904  
+J=1660  S=909  E=904  
+J=1661  S=910  E=904  
+J=1662  S=911  E=904  
+J=1663  S=912  E=904  
+J=1664  S=913  E=904  
+J=1665  S=914  E=904  
+J=1666  S=915  E=904  
+J=1667  S=916  E=904  
+J=1668  S=917  E=904  
+J=1669  S=924  E=904  
+J=1670  S=925  E=904  
+J=1671  S=926  E=904  
+J=1672  S=927  E=904  
+J=1673  S=928  E=904  
+J=1674  S=929  E=904  
+J=1675  S=930  E=904  
+J=1676  S=931  E=904  
+J=1677  S=932  E=904  
+J=1678  S=933  E=904  
+J=1679  S=934  E=904  
+J=1680  S=935  E=904  
+J=1681  S=936  E=904  
+J=1682  S=937  E=904  
+J=1683  S=898  E=905  
+J=1684  S=898  E=906  
+J=1685  S=898  E=907  
+J=1686  S=898  E=908  
+J=1687  S=898  E=909  
+J=1688  S=898  E=910  
+J=1689  S=898  E=911  
+J=1690  S=898  E=912  
+J=1691  S=898  E=913  
+J=1692  S=898  E=914  
+J=1693  S=898  E=915  
+J=1694  S=898  E=916  
+J=1695  S=898  E=917  
+J=1696  S=881  E=918  
+J=1697  S=918  E=919  
+J=1698  S=921  E=919  
+J=1699  S=923  E=919  
+J=1700  S=881  E=920  
+J=1701  S=920  E=921  
+J=1702  S=881  E=922  
+J=1703  S=922  E=923  
+J=1704  S=919  E=924  
+J=1705  S=919  E=925  
+J=1706  S=919  E=926  
+J=1707  S=919  E=927  
+J=1708  S=919  E=928  
+J=1709  S=919  E=929  
+J=1710  S=919  E=930  
+J=1711  S=919  E=931  
+J=1712  S=919  E=932  
+J=1713  S=919  E=933  
+J=1714  S=919  E=934  
+J=1715  S=919  E=935  
+J=1716  S=919  E=936  
+J=1717  S=919  E=937  
+J=1718  S=904  E=938  
+J=1719  S=938  E=939  
+J=1720  S=875  E=940  
+J=1721  S=875  E=941  
+J=1722  S=875  E=942  
+J=1723  S=875  E=943  
+J=1724  S=875  E=944  
+J=1725  S=875  E=945  
+J=1726  S=875  E=946  
+J=1727  S=875  E=947  
+J=1728  S=875  E=948  
+J=1729  S=875  E=949  
+J=1730  S=875  E=950  
+J=1731  S=875  E=951  
+J=1732  S=875  E=952  
+J=1733  S=875  E=953  
+J=1734  S=859  E=954  
+J=1735  S=954  E=955  
+J=1736  S=955  E=956  
+J=1737  S=956  E=957  
+J=1738  S=957  E=958  
+J=1739  S=959  E=958  
+J=1740  S=960  E=958  
+J=1741  S=961  E=958  
+J=1742  S=962  E=958  
+J=1743  S=963  E=958  
+J=1744  S=964  E=958  
+J=1745  S=965  E=958  
+J=1746  S=966  E=958  
+J=1747  S=967  E=958  
+J=1748  S=968  E=958  
+J=1749  S=969  E=958  
+J=1750  S=970  E=958  
+J=1751  S=971  E=958  
+J=1752  S=956  E=959  
+J=1753  S=956  E=960  
+J=1754  S=956  E=961  
+J=1755  S=956  E=962  
+J=1756  S=956  E=963  
+J=1757  S=956  E=964  
+J=1758  S=956  E=965  
+J=1759  S=956  E=966  
+J=1760  S=956  E=967  
+J=1761  S=956  E=968  
+J=1762  S=956  E=969  
+J=1763  S=956  E=970  
+J=1764  S=956  E=971  
+J=1765  S=958  E=972  
+J=1766  S=972  E=973  
+J=1767  S=974  E=973  
+J=1768  S=975  E=973  
+J=1769  S=976  E=973  
+J=1770  S=977  E=973  
+J=1771  S=958  E=974  
+J=1772  S=958  E=975  
+J=1773  S=958  E=976  
+J=1774  S=958  E=977  
+J=1775  S=973  E=978  
+J=1776  S=978  E=979  
+J=1777  S=980  E=979  
+J=1778  S=981  E=979  
+J=1779  S=982  E=979  
+J=1780  S=983  E=979  
+J=1781  S=984  E=979  
+J=1782  S=985  E=979  
+J=1783  S=986  E=979  
+J=1784  S=987  E=979  
+J=1785  S=988  E=979  
+J=1786  S=989  E=979  
+J=1787  S=990  E=979  
+J=1788  S=991  E=979  
+J=1789  S=992  E=979  
+J=1790  S=999  E=979  
+J=1791  S=1000 E=979  
+J=1792  S=1001 E=979  
+J=1793  S=1002 E=979  
+J=1794  S=1003 E=979  
+J=1795  S=1004 E=979  
+J=1796  S=1005 E=979  
+J=1797  S=1006 E=979  
+J=1798  S=1007 E=979  
+J=1799  S=1008 E=979  
+J=1800  S=1009 E=979  
+J=1801  S=1010 E=979  
+J=1802  S=1011 E=979  
+J=1803  S=1012 E=979  
+J=1804  S=973  E=980  
+J=1805  S=973  E=981  
+J=1806  S=973  E=982  
+J=1807  S=973  E=983  
+J=1808  S=973  E=984  
+J=1809  S=973  E=985  
+J=1810  S=973  E=986  
+J=1811  S=973  E=987  
+J=1812  S=973  E=988  
+J=1813  S=973  E=989  
+J=1814  S=973  E=990  
+J=1815  S=973  E=991  
+J=1816  S=973  E=992  
+J=1817  S=956  E=993  
+J=1818  S=993  E=994  
+J=1819  S=996  E=994  
+J=1820  S=998  E=994  
+J=1821  S=956  E=995  
+J=1822  S=995  E=996  
+J=1823  S=956  E=997  
+J=1824  S=997  E=998  
+J=1825  S=994  E=999  
+J=1826  S=994  E=1000 
+J=1827  S=994  E=1001 
+J=1828  S=994  E=1002 
+J=1829  S=994  E=1003 
+J=1830  S=994  E=1004 
+J=1831  S=994  E=1005 
+J=1832  S=994  E=1006 
+J=1833  S=994  E=1007 
+J=1834  S=994  E=1008 
+J=1835  S=994  E=1009 
+J=1836  S=994  E=1010 
+J=1837  S=994  E=1011 
+J=1838  S=994  E=1012 
+J=1839  S=979  E=1013 
+J=1840  S=1013 E=1014 
+J=1841  S=1014 E=1015 
+J=1842  S=1016 E=1015 
+J=1843  S=1017 E=1015 
+J=1844  S=1018 E=1015 
+J=1845  S=1019 E=1015 
+J=1846  S=1020 E=1015 
+J=1847  S=1021 E=1015 
+J=1848  S=1022 E=1015 
+J=1849  S=1023 E=1015 
+J=1850  S=1024 E=1015 
+J=1851  S=1025 E=1015 
+J=1852  S=1026 E=1015 
+J=1853  S=1027 E=1015 
+J=1854  S=1028 E=1015 
+J=1855  S=1029 E=1015 
+J=1856  S=954  E=1016 
+J=1857  S=954  E=1017 
+J=1858  S=954  E=1018 
+J=1859  S=954  E=1019 
+J=1860  S=954  E=1020 
+J=1861  S=954  E=1021 
+J=1862  S=954  E=1022 
+J=1863  S=954  E=1023 
+J=1864  S=954  E=1024 
+J=1865  S=954  E=1025 
+J=1866  S=954  E=1026 
+J=1867  S=954  E=1027 
+J=1868  S=954  E=1028 
+J=1869  S=954  E=1029 
+J=1870  S=1015 E=1030 
+J=1871  S=1030 E=1031 
+J=1872  S=1032 E=1031 
+J=1873  S=1033 E=1031 
+J=1874  S=1034 E=1031 
+J=1875  S=1035 E=1031 
+J=1876  S=1015 E=1032 
+J=1877  S=1015 E=1033 
+J=1878  S=1015 E=1034 
+J=1879  S=1015 E=1035 
+J=1880  S=1031 E=1036 
+J=1881  S=1036 E=1037 
+J=1882  S=1037 E=1038 
+J=1883  S=1038 E=1039 
+J=1884  S=1040 E=1039 
+J=1885  S=1041 E=1039 
+J=1886  S=1042 E=1039 
+J=1887  S=1043 E=1039 
+J=1888  S=1044 E=1039 
+J=1889  S=1045 E=1039 
+J=1890  S=1046 E=1039 
+J=1891  S=1047 E=1039 
+J=1892  S=1048 E=1039 
+J=1893  S=1049 E=1039 
+J=1894  S=1050 E=1039 
+J=1895  S=1051 E=1039 
+J=1896  S=1052 E=1039 
+J=1897  S=1037 E=1040 
+J=1898  S=1037 E=1041 
+J=1899  S=1037 E=1042 
+J=1900  S=1037 E=1043 
+J=1901  S=1037 E=1044 
+J=1902  S=1037 E=1045 
+J=1903  S=1037 E=1046 
+J=1904  S=1037 E=1047 
+J=1905  S=1037 E=1048 
+J=1906  S=1037 E=1049 
+J=1907  S=1037 E=1050 
+J=1908  S=1037 E=1051 
+J=1909  S=1037 E=1052 
+J=1910  S=1039 E=1053 
+J=1911  S=1053 E=1054 
+J=1912  S=1055 E=1054 
+J=1913  S=1056 E=1054 
+J=1914  S=1057 E=1054 
+J=1915  S=1058 E=1054 
+J=1916  S=1039 E=1055 
+J=1917  S=1039 E=1056 
+J=1918  S=1039 E=1057 
+J=1919  S=1039 E=1058 
+J=1920  S=1054 E=1059 
+J=1921  S=1059 E=1060 
+J=1922  S=1061 E=1060 
+J=1923  S=1062 E=1060 
+J=1924  S=1063 E=1060 
+J=1925  S=1064 E=1060 
+J=1926  S=1065 E=1060 
+J=1927  S=1066 E=1060 
+J=1928  S=1067 E=1060 
+J=1929  S=1068 E=1060 
+J=1930  S=1069 E=1060 
+J=1931  S=1070 E=1060 
+J=1932  S=1071 E=1060 
+J=1933  S=1072 E=1060 
+J=1934  S=1073 E=1060 
+J=1935  S=1080 E=1060 
+J=1936  S=1081 E=1060 
+J=1937  S=1082 E=1060 
+J=1938  S=1083 E=1060 
+J=1939  S=1084 E=1060 
+J=1940  S=1085 E=1060 
+J=1941  S=1086 E=1060 
+J=1942  S=1087 E=1060 
+J=1943  S=1088 E=1060 
+J=1944  S=1089 E=1060 
+J=1945  S=1090 E=1060 
+J=1946  S=1091 E=1060 
+J=1947  S=1092 E=1060 
+J=1948  S=1093 E=1060 
+J=1949  S=1054 E=1061 
+J=1950  S=1054 E=1062 
+J=1951  S=1054 E=1063 
+J=1952  S=1054 E=1064 
+J=1953  S=1054 E=1065 
+J=1954  S=1054 E=1066 
+J=1955  S=1054 E=1067 
+J=1956  S=1054 E=1068 
+J=1957  S=1054 E=1069 
+J=1958  S=1054 E=1070 
+J=1959  S=1054 E=1071 
+J=1960  S=1054 E=1072 
+J=1961  S=1054 E=1073 
+J=1962  S=1037 E=1074 
+J=1963  S=1074 E=1075 
+J=1964  S=1077 E=1075 
+J=1965  S=1079 E=1075 
+J=1966  S=1037 E=1076 
+J=1967  S=1076 E=1077 
+J=1968  S=1037 E=1078 
+J=1969  S=1078 E=1079 
+J=1970  S=1075 E=1080 
+J=1971  S=1075 E=1081 
+J=1972  S=1075 E=1082 
+J=1973  S=1075 E=1083 
+J=1974  S=1075 E=1084 
+J=1975  S=1075 E=1085 
+J=1976  S=1075 E=1086 
+J=1977  S=1075 E=1087 
+J=1978  S=1075 E=1088 
+J=1979  S=1075 E=1089 
+J=1980  S=1075 E=1090 
+J=1981  S=1075 E=1091 
+J=1982  S=1075 E=1092 
+J=1983  S=1075 E=1093 
+J=1984  S=1060 E=1094 
+J=1985  S=1094 E=1095 
+J=1986  S=1031 E=1096 
+J=1987  S=1031 E=1097 
+J=1988  S=1031 E=1098 
+J=1989  S=1031 E=1099 
+J=1990  S=1031 E=1100 
+J=1991  S=1031 E=1101 
+J=1992  S=1031 E=1102 
+J=1993  S=1031 E=1103 
+J=1994  S=1031 E=1104 
+J=1995  S=1031 E=1105 
+J=1996  S=1031 E=1106 
+J=1997  S=1031 E=1107 
+J=1998  S=1031 E=1108 
+J=1999  S=1031 E=1109 
+J=2000  S=954  E=1110 
+J=2001  S=1110 E=1111 
+J=2002  S=1113 E=1111 
+J=2003  S=1115 E=1111 
+J=2004  S=954  E=1112 
+J=2005  S=1112 E=1113 
+J=2006  S=954  E=1114 
+J=2007  S=1114 E=1115 
+J=2008  S=1111 E=1116 
+J=2009  S=1116 E=1117 
+J=2010  S=1117 E=1118 
+J=2011  S=1118 E=1119 
+J=2012  S=1120 E=1119 
+J=2013  S=1121 E=1119 
+J=2014  S=1122 E=1119 
+J=2015  S=1123 E=1119 
+J=2016  S=1124 E=1119 
+J=2017  S=1125 E=1119 
+J=2018  S=1126 E=1119 
+J=2019  S=1127 E=1119 
+J=2020  S=1128 E=1119 
+J=2021  S=1129 E=1119 
+J=2022  S=1130 E=1119 
+J=2023  S=1131 E=1119 
+J=2024  S=1132 E=1119 
+J=2025  S=1117 E=1120 
+J=2026  S=1117 E=1121 
+J=2027  S=1117 E=1122 
+J=2028  S=1117 E=1123 
+J=2029  S=1117 E=1124 
+J=2030  S=1117 E=1125 
+J=2031  S=1117 E=1126 
+J=2032  S=1117 E=1127 
+J=2033  S=1117 E=1128 
+J=2034  S=1117 E=1129 
+J=2035  S=1117 E=1130 
+J=2036  S=1117 E=1131 
+J=2037  S=1117 E=1132 
+J=2038  S=1119 E=1133 
+J=2039  S=1133 E=1134 
+J=2040  S=1135 E=1134 
+J=2041  S=1136 E=1134 
+J=2042  S=1137 E=1134 
+J=2043  S=1138 E=1134 
+J=2044  S=1119 E=1135 
+J=2045  S=1119 E=1136 
+J=2046  S=1119 E=1137 
+J=2047  S=1119 E=1138 
+J=2048  S=1134 E=1139 
+J=2049  S=1139 E=1140 
+J=2050  S=1141 E=1140 
+J=2051  S=1142 E=1140 
+J=2052  S=1143 E=1140 
+J=2053  S=1144 E=1140 
+J=2054  S=1145 E=1140 
+J=2055  S=1146 E=1140 
+J=2056  S=1147 E=1140 
+J=2057  S=1148 E=1140 
+J=2058  S=1149 E=1140 
+J=2059  S=1150 E=1140 
+J=2060  S=1151 E=1140 
+J=2061  S=1152 E=1140 
+J=2062  S=1153 E=1140 
+J=2063  S=1160 E=1140 
+J=2064  S=1161 E=1140 
+J=2065  S=1162 E=1140 
+J=2066  S=1163 E=1140 
+J=2067  S=1164 E=1140 
+J=2068  S=1165 E=1140 
+J=2069  S=1166 E=1140 
+J=2070  S=1167 E=1140 
+J=2071  S=1168 E=1140 
+J=2072  S=1169 E=1140 
+J=2073  S=1170 E=1140 
+J=2074  S=1171 E=1140 
+J=2075  S=1172 E=1140 
+J=2076  S=1173 E=1140 
+J=2077  S=1134 E=1141 
+J=2078  S=1134 E=1142 
+J=2079  S=1134 E=1143 
+J=2080  S=1134 E=1144 
+J=2081  S=1134 E=1145 
+J=2082  S=1134 E=1146 
+J=2083  S=1134 E=1147 
+J=2084  S=1134 E=1148 
+J=2085  S=1134 E=1149 
+J=2086  S=1134 E=1150 
+J=2087  S=1134 E=1151 
+J=2088  S=1134 E=1152 
+J=2089  S=1134 E=1153 
+J=2090  S=1117 E=1154 
+J=2091  S=1154 E=1155 
+J=2092  S=1157 E=1155 
+J=2093  S=1159 E=1155 
+J=2094  S=1117 E=1156 
+J=2095  S=1156 E=1157 
+J=2096  S=1117 E=1158 
+J=2097  S=1158 E=1159 
+J=2098  S=1155 E=1160 
+J=2099  S=1155 E=1161 
+J=2100  S=1155 E=1162 
+J=2101  S=1155 E=1163 
+J=2102  S=1155 E=1164 
+J=2103  S=1155 E=1165 
+J=2104  S=1155 E=1166 
+J=2105  S=1155 E=1167 
+J=2106  S=1155 E=1168 
+J=2107  S=1155 E=1169 
+J=2108  S=1155 E=1170 
+J=2109  S=1155 E=1171 
+J=2110  S=1155 E=1172 
+J=2111  S=1155 E=1173 
+J=2112  S=1140 E=1174 
+J=2113  S=1174 E=1175 
+J=2114  S=1111 E=1176 
+J=2115  S=1111 E=1177 
+J=2116  S=1111 E=1178 
+J=2117  S=1111 E=1179 
+J=2118  S=1111 E=1180 
+J=2119  S=1111 E=1181 
+J=2120  S=1111 E=1182 
+J=2121  S=1111 E=1183 
+J=2122  S=1111 E=1184 
+J=2123  S=1111 E=1185 
+J=2124  S=1111 E=1186 
+J=2125  S=1111 E=1187 
+J=2126  S=1111 E=1188 
+J=2127  S=1111 E=1189 
