@@ -1,0 +1,47 @@
+% !TeX spellcheck = cs_CZ
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} % beware the difference between \thispagestyle and \pagestyle
+\lhead{8th homework, 03-12-2019}
+\rhead{Vilém Zouhar}
+
+\section{}
+
+\begin{align*}
+	\Phi(p^m)
+	& = \#\text{numbers relatively prime to } p^m \\
+	& = \#\text{numbers less than } p^m - \#\text{numbers not relatively prime to } p^m \\
+	& = |\{0, 1, 2, \ldots, p^m-1\}| - \#\text{numbers with $p$ in factor decomposition} \\
+	& = p^m - |\{0, p, 2p, 3p, \ldots, \ldots\}| \\
+	& = p^m - p^m/p = p^m - p^{m-1}
+\end{align*}
+
+\section{}
+
+We can prove that $\Phi(ab) = \Phi(a)\Phi(b)$ by showing, that there exists a mapping between $Z_{ab}$ and $Z_a \times Z_b$. Such function $\alpha: Z_{ab} \rightarrow Z_a \times Z_b $ can be: $\alpha(x) = (x \mod a, x \mod b)$.
+
+If $\alpha(x) = \alpha(y)$, then $x \equiv y \mod a$ and $x \equiv y \mod b$, thus $x \equiv y \mod ab$ and $x, y$ are equal in $Z_{ab}$.
+
+Vice versa, the conditions $x = x_1 \mod a$ and $x = x_2 \mod b$ specify a unique solution $x \in Z_{ab}$.
+
+This proves, that we can construct a bijection between $Z_{ab}$ and $Z_a \times Z_b$. Thus $|Z_{ab}| = |Z_a||Z_b|$ and $\Phi(ab) = \Phi(a)\Phi(b)$.
+
+\end{document}
