@@ -2,3 +2,4 @@
 
 wget http://ufal.mff.cuni.cz/~popel/udapi/ud20sample.tgz
 tar -xf ud20sample.tgz
+rm ud20sample.tgz
