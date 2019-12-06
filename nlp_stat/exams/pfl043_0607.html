@@ -1,0 +1,847 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0061)http://ufal.mff.cuni.cz/~hajic/courses/pfl043/0607/final.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   
+   <meta name="Author" content="Jan Hajic">
+   <meta name="GENERATOR" content="Mozilla/4.7 [en] (X11; I; Linux 2.2.12-20smp i686) [Netscape]">
+   <title>NLP / Midterm Exam questions</title>
+</head>
+<body text="#000000" bgcolor="#FFE8B0" link="#330099" vlink="#006666" alink="#6666CC">
+<no body="" bgcolor="#fffcf0" link="#330099" vlink="#006666" alink="#6666cc" text="#000000">
+<center>
+<h1>
+600.465 Introduction to NLP (Fall 1999)</h1></center>
+
+<center>
+<h1>
+Final Exam</h1></center>
+
+<center>
+<h1>
+Date: Dec 21 9am (<font color="#F00000">90 min.</font>)</h1></center>
+
+<center>
+<h1>
+<font color="#0000F0">SSN:</font>__________________________________</h1></center>
+
+<center>
+<h1>
+<font color="#0000F0">Name:</font>_________________________________</h1></center>
+
+<hr width="100%">
+<hr width="100%">
+<br>&nbsp; If asked to compute something for which you have the numbers,
+that really means to compute the final number, not just to write the formula<sup>1</sup>.
+If asked for a formula, write down the formula.
+<h2>
+1. The Basics: Probability, Smoothing Entropy, and Cross-Entropy</h2>
+<font size="-1">Suppose your training data contains (only) the sentence (</font><font size="-2">http://www.petpainter.com,&nbsp;
+slightly adapted</font><font size="-1">)</font>
+<p><tt><font size="+1">We specialize in petbirds including but not limited
+to dogs , cats , and horses .</font></tt>
+</p><p><font size="-1">You are building a bigram language model p(w<sub>i</sub>|w<sub>i-1</sub>)
+using maximum likelihood estimation. You do <b>not</b> add any special
+symbols/words to the beginning and end of the data (i.e., you use separate
+unigram distribution for the first position in any given data).</font>
+</p><ul>
+<li>
+<font size="-1">What is the (raw) probability of </font><tt><font size="+1">p(cats|,)</font></tt><font size="-1">?
+________________________________</font></li>
+</ul>
+
+<ul>
+<li>
+<font size="-1">What is the definition of the training data probability,
+using the bigram approximation?</font></li>
+</ul>
+<font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+________________________________________________________</font>
+<ul>
+<li>
+<font size="-1">What is the entropy and perplexity of the raw bigram distribution?</font></li>
+</ul>
+<font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+___________________________</font><font size="-1"></font>
+<p><font size="-1">Now let's turn to the issues of smoothing and cross-entropy.
+Suppose this is your test data </font>(<font size="-2">http://hometown.aol.com/~arkful</font>):
+</p><p><tt><font size="+1">We also have gift baskets for dogs , cats , and horses
+and their owners .</font></tt>
+<br><font size="-1"></font>&nbsp;
+</p><ul>
+<li>
+<font size="-1">What is the cross-entropy of the raw distribution extracted
+from the above training data if applied to this test data?</font></li>
+</ul>
+<font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+__________________________________________________</font>
+<ul>
+<li>
+<font size="-1">What is the cross-entropy on the same test data, when you
+use a linearly smoothed distribution p<sub>µ</sub>(w<sub>i</sub>|w<sub>i-1</sub>)
+=&nbsp; µ p(w<sub>i</sub>|w<sub>i-1</sub>) + (1- µ)/32. Suppose
+the parameter µ has been set to 0.5 on some heldout data, and that
+if you have "undefined value" for p(w<sub>i</sub>|w<sub>i-1</sub>) from
+the training data (either because you have not seen the history w<sub>i-1
+</sub>or
+you are dealing with the first position of the test data), you take p(w<sub>i</sub>|w<sub>i-1</sub>)
+= 1/32.</font></li>
+</ul>
+<font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+__________________________________________________</font>
+<br>&nbsp;
+<h2>
+2. Maximum Entropy</h2>
+
+<ul>
+<li>
+<font size="-1">What is the general form of so-called Maximum Entropy (ME)
+model?</font></li>
+</ul>
+<font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+p(y|x) =&nbsp; ____________________________________________</font>
+<ul>
+<li>
+<font size="-1">Let's assume S = {f<sub>1</sub>, f<sub>2</sub>, ..., f<sub>n</sub>}
+are all the binary valued (0/1) features you are supposed to use (and find
+the weights of).&nbsp; What is the general form of the constraints put
+on the model?</font></li>
+</ul>
+<font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+_______________________________________</font>
+<ul>
+<li>
+<font size="-1">Suppose you use only two binary (0/1) valued features, f
+and g, defined as follows:</font></li>
+</ul>
+<font size="-1"></font>
+<p><br><font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+f(y,x) = 1 iff y = , or and, and there is no other comma to the left of
+y (within the same sentence).</font>
+<br><font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+g(y,x) = 1 iff y = and, and there is a comma immediately in front of it.</font><font size="-1"></font>
+</p><p><font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Write down the constraints of the corresponding ME model, using the training
+data from the part 1:</font>
+</p><p><tt><font size="+1">&nbsp;&nbsp; We specialize in petbirds including but
+not limited to dogs , cats , and horses .</font></tt>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+__________________________________________________________
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+__________________________________________________________
+</p><ul>
+<li>
+<font size="-1">What can you say about the weights associated with these
+two features, after performing the maximum netropy training? (If possible,
+compute their values and write them down, too.)</font></li>
+</ul>
+
+<p><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lambda<sub>f</sub>&nbsp; = __________________________________________________________
+</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lambda<sub>g</sub>&nbsp; = __________________________________________________________
+<br>&nbsp;
+</p><h2>
+3. Tagging</h2>
+
+<ul>
+<li>
+<font size="-1">Describe three different approaches to tagging. Include formulas
+if/where appropriate.</font></li>
+</ul>
+
+<dd>
+<font size="-1">1. ____________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">2. ____________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">3. ____________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">______________________________________________________________________________</font></dd>
+
+<h2>
+</h2>
+
+<h2>
+4. Shift-Reduce Parsing</h2>
+<font size="-1">Let's assume the following Context-Free Grammar&nbsp; G (here
+with seven numbered rules):</font>
+<br>&nbsp;
+<dd>
+<tt><font size="+2"></font></tt></dd>
+
+<dd>
+<tt><font size="+2">#1 S -&gt; A R</font></tt></dd>
+
+<dd>
+<tt><font size="+2">#2 A -&gt; A B</font></tt></dd>
+
+<dd>
+<tt><font size="+2">#3 A -&gt; a</font></tt></dd>
+
+<dd>
+<tt><font size="+2">#4 B -&gt; b</font></tt></dd>
+
+<dd>
+<tt><font size="+2">#5 R -&gt; B R C</font></tt></dd>
+
+<dd>
+<tt><font size="+2">#6 R -&gt; r</font></tt></dd>
+
+<dd>
+<tt><font size="+2">#7 C -&gt; c</font></tt></dd>
+
+<dd>
+<font size="+2"></font></dd>
+
+<dd>
+<font size="+2"></font></dd>
+
+<ul>
+<li>
+<font size="-1">Decide which of the following strings belong to the language
+defined by the grammar G:</font></li>
+</ul>
+
+<dd>
+<tt><font size="+1"></font></tt></dd>
+
+<dd>
+<tt><font size="+1">aaaabr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font></tt>Yes/No:
+____________</dd>
+
+<dd>
+<tt><font size="+1">abbbrcc&nbsp;&nbsp;&nbsp;&nbsp; </font></tt>Yes/No: ____________</dd>
+
+<dd>
+<tt><font size="+1">ar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></tt>Yes/No: ____________</dd>
+
+<dd>
+</dd>
+
+<dd>
+</dd>
+
+<ul>
+<li>
+<font size="-1">Create the shift-reduce parse tables for this grammar.</font></li>
+</ul>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<ul>
+<li>
+<font size="-1">Show how the shift-reduce parser parses the string&nbsp;
+<tt>abbbrc</tt>:</font></li>
+</ul>
+<font size="-1"></font>
+<br><font size="-1"></font>&nbsp;
+<dd>
+<font size="-1">Input stack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+State tack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Rule (Reduction)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Backtracking stack</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<h2>
+</h2>
+
+<h2>
+5. Statistical Parsing</h2>
+
+<ul>
+<li>
+<font size="-1">What is a Probabilistic CFG? Use five sentences at most.</font></li>
+</ul>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+<font size="-1"></font>
+<p><br><font size="-1">Now suppose the following "treebank" data, where the
+pair of symbols ( ... )XX denotes a (sub)tree rooted in a nonterminal XX.</font><font size="-1"></font>
+</p><p><font size="-1">Sentence 1:</font>
+</p><p><tt><font size="+1">(((the)DET (dog)N)NP ((saw)V (((the)DET (cat)N)NP
+((with)PREP (((a)DET (telescope)N)NP ((with)PREP ((a)DET (mirror)N)NP)PP)NP)PP)M2)VP)S</font></tt>
+</p><p><font size="-1">Sentence 2:</font>
+</p><p><tt><font size="+1">(((the)DET (dog)N)NP ((saw)V (((the)DET (cat)N)NP
+((with)PREP ((a)DET (mirror)N)NP)PP )NP)VP)S</font></tt>
+<br>&nbsp;
+</p><ul>
+<li>
+<font size="-1">Draw the usual parse trees, with terminal symbols (words)
+as leaves, and other nodes labeled by nonterminals:</font></li>
+</ul>
+<font size="-1"></font>
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+the dog saw the cat with a telescope with a mirror</font></tt>
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+</p><p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+the dog saw the cat with a mirror</font></tt>
+<br>&nbsp;
+<br>&nbsp;
+</p><ul>
+<li>
+<font size="-1">Write down the (general, non-lexicalized) CFG grammar G as
+extracted from this training data.</font></li>
+</ul>
+
+<dd>
+#01 ______________________________</dd>
+
+<dd>
+#02 ______________________________</dd>
+
+<dd>
+#03 ______________________________</dd>
+
+<dd>
+#04 ______________________________</dd>
+
+<dd>
+#05 ______________________________</dd>
+
+<dd>
+#06 ______________________________</dd>
+
+<dd>
+#07 ______________________________</dd>
+
+<dd>
+#08 ______________________________</dd>
+
+<dd>
+#09 ______________________________</dd>
+
+<dd>
+#10 ______________________________</dd>
+
+<dd>
+#11 ______________________________</dd>
+
+<dd>
+#12 ______________________________</dd>
+
+<dd>
+#13 ______________________________</dd>
+
+<dd>
+#14 ______________________________</dd>
+
+<dd>
+#15 ______________________________</dd>
+
+<ul>
+<li>
+<font size="-1">Now draw the <b><u>lexicalized</u></b> parse tree for the
+<b>second</b> sentence, assuming that&nbsp; whenever there is a choice
+of heads in any given subtree, chose (in the following precedence order):
+VP, V, PREP, N, NP.</font></li>
+</ul>
+<font size="-1"></font>
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+the dog saw the cat with a mirror</font></tt>
+</p><p><font size="-1">OK. Now you have everything to answer these "numerical"
+questions:</font>
+<br><font size="-1"></font>&nbsp;
+</p><ul>
+<li>
+<font size="-1">Estimate p(NP -&gt;&nbsp; NP PP) = _______________</font></li>
+</ul>
+
+<ul>
+<li>
+<font size="-1">Estimate p(NP -&gt; PREP N) = _______________</font></li>
+</ul>
+
+<ul>
+<li>
+<font size="-1">Estimate p(VP -&gt;&nbsp; V NP) = _______________</font></li>
+</ul>
+
+<ul>
+<li>
+<font size="-1">Estimate p(VP -&gt; V M2) = _______________</font></li>
+</ul>
+<font size="-1"></font>
+<p><br><font size="-1">Suppose we stick to the usual three independence asumptions
+and define a probability of a parse tree <u>s</u> (of a sentence W) as
+a simple product of p(&lt;rule&gt;) over all rules used in the course of generation
+of the sentence W.</font>
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;
+<br><font size="-1"></font>&nbsp;<font size="-1"></font>
+</p><p><font size="-1">Describe the main idea of the algorithm to compute:</font>
+</p><ul>
+<li>
+<font size="-1">(a) the best parse given a sentence and a model. Use five
+sentences at most.</font></li>
+</ul>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<br><font size="-1"></font>&nbsp;
+<ul>
+<li>
+<font size="-1">(b) the probability of a string given the model. Use five
+sentences at most.</font></li>
+</ul>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<dd>
+<font size="-1">__________________________________________________________________________________</font></dd>
+
+<br><font size="-1"></font>&nbsp;
+<ul>
+<li>
+<font size="-1">What is then the probablity of the following parse tree,
+using the estimated nonlexicalized PCFG:</font></li>
+
+<dd>
+<font size="-1">p(&nbsp; (((the)DET (dog)N)NP&nbsp; ((saw)V&nbsp; ((the)DET
+(cat)N)NP)VP)S ) = ______________</font></dd>
+</ul>
+
+<ul>
+<li>
+<font size="-1">What is the probability of the training data parse of sentence
+2?</font></li>
+
+<dd>
+<font size="-1">p(s|sentence<sub>2</sub>) = _____________</font></dd>
+</ul>
+
+<ul>
+<li>
+<font size="-1">What is the probability of the string "the dog saw the cat
+with a mirror"?</font></li>
+
+<dd>
+<font size="-1">p(sentence<sub>2</sub>) = _____________</font></dd>
+</ul>
+
+<ul>
+<li>
+<font size="-1">Now a lexicalized grammar question. What is the (raw) probability
+estimate of the lexicalized rule p(PP(with) -&gt; PREP(with) NP(mirror))?
+[Imagine you generate the lexicalized rules, too, under the same independence
+assumptions; however, to answer this question, there is no need to generate
+them all, of course. However, do not forget to look at <b>both</b> training
+sentences!]</font></li>
+
+<dd>
+<font size="-1">p(PP(with) -&gt; PREP(with) NP(mirror)) = __________________</font></dd>
+</ul>
+<font size="-1">And that's it for today!</font>
+<br><font size="-1">============================================================================</font><font size="-1"></font>
+<p>Now check <b><u>if you have filled in your name and SSN</u></b>. Also,
+please carefully check your answers and hand the exam in.&nbsp;
+</p><hr width="100%"><sup>1</sup> Use of calculators is allowed.
+<br>
+<hr width="100%">
+
+
+</no></body></html>

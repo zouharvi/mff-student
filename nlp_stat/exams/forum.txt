@@ -1,0 +1,32 @@
+Pisomka bola zrejme velmi podobna ako zrejme uz skoro 20 rokov :-) (vid tu http://ufal.mff.cuni.cz/~hajic/courses/pfl043/0304/midterm.html ale tam su nejake zmatky v zadani pozeram, tak to napisem strucne sem)
+1) pismenka a,b,c, ich bigramove pravdepodobnosti su p(a,a)=1/4, p(a,c)=1/4, p(b,a)=1/8, p(b,b)=0, p(c,a)=1/4, pL(a)=1/2 [tj ze a je v bigrame vlavo] je, pRb=1/8 [b je v bigrame vpravo]
+da sa spocitat p(b|c)? preco? ak ano, spocitaj p(b|c)
+2) napis sekvenciu, z ktorej by presne vyplynulo dane rozdelenie z (1), spocitaj entropiu pomocou vzorceka cez data na sekvencii "baac" a perplexitu
+3) spocitaj bodovu spolocnu informaciu I'(b,a)
+4) vymenuj a popis 3 metody smoothingu a napis vzorec pre trigramovu linearnu interpolaciu
+5) dana veta, ktore 2 slova by sa ako prve zlucili do rovnakej triedy?
+6) maximalna entropia (ktoru sme prebrali naviac oproti normalnym slidom). Cinkla kocka, na ktorej p(4)=1/2, p(1)=1/8 a p(2)+p(3)=1/4. Urcite psti 2,3,5 a 6, aby bola maximalna entropia.
+Minuly rok bola vraj ale ina: 6') napisat 2 zakladne vlastnosti Skrytych Markovovych modelov a popisat jeho sucasti.
+
+ODPOVEDE (na tu ukazkovu pisomku v odkaze):
+1) tabulka z opraveneho zadania p(lavy,horny)
+   a   b   c
+a 1/4  ?  1/4 > 1/2
+b 1/8  0   ?
+c  ?   ?  1/4   
+       v
+      1/8
+
+p(a,a) + p(a,b) + p(a,c) = pL(a) -> 1/4 + ? + 1/4 = 1/2 -> p(a,b) = 0
+p(a,b) + p(b,b) + p(c,b) = pR(b) -> 0 + 0 + ? = 1/8 -> p(c,b) = 1/8
+Teraz uz dokopy cela tabulka ma sucet 1, takze zvysok, tj p(c,a) a p(b,c) su 0. Podobne aj sucty, teda potrebne pL(c) = 0+1/8+1/4=3/8
+Pozadovana p(b|c) = p(c,b) / pL(c) = (1/8) / (3/8) = 1/3
+2) napr. aaccbaacc alebo accbaaacc
+|T| = 3 (lebo "baac" su 3 bigramy), teda (pozor, ze vo vzorci su podmienene psti, nie zdruzene) H_data(p) = -1/3 * [ log2(p(a|b)) + log2(p(a|a)) + log2(p(c|a)) ] = -1/3 * ( log2(1) + log2(1/2) + log2(1/2) ) = -1/3 * (0-1-1) = 2/3; perplexita G_data(p) = 2^(2/3) = ...
+3) I_bodova(b,a) =log2( p(b,a) / [ pL(b)*pR(a) ] ) = log2( 1/8 / (1/8*3/8)) = cca 1,42
+4) napr. pridavanie 1, pridavanie menej nez 1, good-turing, linearna interpolacia, bucketed smoothing. popisy vid slidy
+vzorec pre interpolaciu 3gramov: p'(wi|wi-2,wi-1) = λ3*p3(wi|wi-2,wi-1) + λ2*p2(wi|wi-1) + λ1*p1(wi) + λ0 / |V| ... V je slovnik
+5) proste tie slova, ktore maju rovnakych susedov. v ukazke v odkaze to su "W" a "Bush", v nasej to bolo nejake "suggests" a "boiling"
+6) p(2) = 1/8, p(3) = 1/8, p(5) = 1/16, p(6) = 1/16 (dokopy musi byt 1 a snazime sa o co najrovnomernejsie rozdelenie, ale za splnenia zadanych podmienok)
+6') limited hstory, time invariance, komponenty S...mnozina stavov, s0.. pociatocny stav, Y..vystupna abeceda, Ps .. pravdepodobnosti prechodov SxS, Py .. pravdepodobnosti vystupu z hran SxSxY
+6''(z ukazky): Trellis je na zistenie pravdopodobnosti zadaneho slova, Viterbi na zistenie najpravdepodobnejsej postupnosti stavov, ktora k slovu viedla

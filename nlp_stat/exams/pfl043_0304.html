@@ -1,0 +1,201 @@
+
+<!-- saved from url=(0063)http://ufal.mff.cuni.cz/~hajic/courses/pfl043/0304/midterm.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   
+   <meta name="Author" content="Jan Hajic">
+   <title>NLP / Midterm Exam answers</title>
+</head>
+
+<body bgcolor="#ffe8b0" link="#330099" vlink="#006666" alink="#6666cc" text="#000000">
+<no body="" bgcolor="#fffcf0" link="#330099" vlink="#006666" alink="#6666cc" text="#000000">
+
+<center>
+<h1>600.465 Introduction to NLP (Fall 2000)<br>
+</h1>
+<h2>Midterm Exam<br>
+</h2>
+<h2>Date: Oct 30, 2000 2pm (<font color="#f00000">30 min.</font>)</h2>
+</center>
+
+<center>
+
+Name: ___________________________________________<br>
+<br>
+SSN: ___________________________________________
+
+</center>
+
+<hr width="100%">
+<br>&nbsp;
+
+If asked to compute something for which you have the numbers, that
+really means to compute the final number, not just to write the
+formula. If asked for a formula, write down the formula.
+
+<p>
+</p><h2>1. Probability</h2>
+
+Let S = { a, b, c } (the sample space), and p be the joint
+distribution on a sequence of two events (i.e. on S x S, ordered).  If
+you know that p(a,a) [a followed by a] = 0.5, p(c,c) [c followed by
+c] = 0.25, p(b,a) [b followed by a] = 0.25, 
+p(b,b) [b followed by b] = 0, p(a,c) [a followed by c]
+= 0.125, pL(a) [unigram probability of a as a left-hand bigram member] = .25,
+and pR(b) [unigram probability of b as the right-hand bigram 
+member] = 0.125, is it enough to compute
+p(b|c) (i.e., the probability of seeing b if we already know that the
+preceding event generated c)?
+
+<ul><li>Yes / No: _______<br>
+<br>
+</li><li>why? _________________________________________________________________
+<br>
+<br>
+______________________________________________________________________
+<br>
+<br>
+______________________________________________________________________
+<br>
+<br>
+</li><li>If yes, compute: p(b|c) = _________________________________________
+</li></ul>
+
+<h2>2. Estimation and Cross-entropy</h2>
+
+Use the bigram distribution p from question 1.
+
+<ul><li>Write one example of a data sequence which faithfully follows the
+distribution (i.e., a training data from which we would get the above
+bigram distribution using the MLE method):<br>
+<br>
+<br>
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;
+_____&nbsp;&nbsp;<br>
+<br>
+
+</li><li>What is the cross-entropy H<sub>data</sub>(p) in bits and the
+perplexity<sup>1</sup> G<sub>data</sub>(p) of the bigram distribution from
+question 1 if computed against the following data (use the data-oriented formula for conditional distribution derived from p):<br>
+<br>
+data = <font size="+1"><tt>b a a b</tt></font><br>
+<br>
+H<sub>data</sub>(p) = ___________________________
+&nbsp;&nbsp;
+G<sub>data</sub>(p) =  ___________________________
+<br>
+<br>
+
+
+</li></ul>
+
+<h2>3. Mutual information</h2>
+
+Use the bigram distribution from question 1.
+
+<ul>
+<li>What is the pointwise mutual information of a and b (in this order)?<br>
+<br>I<sub>pointwise</sub>(b,a) = ___________________________________________
+<br>
+</li></ul>
+
+<h2>4. Smoothing and the sparse data problem</h2>
+
+<ul>
+<li>Name three methods of smoothing:<br>
+
+<p>
+</p><ul>
+<li>_________________________________________________<br><br>
+</li><li>_________________________________________________<br><br>
+</li><li>_________________________________________________<br><br>
+</li></ul>
+
+</li><li>
+If you were to design a trigram language model, how would the final smoothed
+distribution be defined if you use the linear interpolation smoothing method?
+<br>
+<br>
+<ul>
+<li>_______________________________________________________________________
+<br>
+</li></ul><br>
+</li></ul>
+
+<h2>5. Classes based on Mutual Information</h2>
+
+Suppose you have the following data:<br><br>
+
+<font size="+1"><tt>It is interesting to watch , at least from
+the foreign policy perspective , how the wannabe president George W . 
+differs from his father , the former president George Bush .
+</tt></font><br><br>
+
+What is the best pair of candidates for the first merge, if you use
+the greedy algorithm for classes based on bigram mutual information
+(i.e. the homework #2 algorithm)? Use your judgment, not computation;
+in case of two or more best candidates, write as many as you can
+find.<br> <br>
+
+<ul><li>
+Word(s) 1: ____________________________________________________________
+<br>
+Word(s) 2: ____________________________________________________________
+</li></ul><br>
+
+<h2>6. Hidden Markov Models</h2>
+
+<ul>
+<li>What is the Trellis algorithm good for? (Use max. 5 sentences for
+the answer.)<br><br>
+
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+
+</li><li>What is the Viterbi algorithm good for? (Use max. 5 sentences for
+the answer.)<br><br>
+
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+_________________________________________________________________________
+<br><br>
+
+
+</li></ul>
+
+Now check <u><b>if you have filled in your name and SSN</b></u>. Also,
+please carefully check your answers and hand the exam in.
+
+<hr width="100%">
+
+<sup>1</sup> The cross-entropy and perplexity computation is the only one computation
+here for which you might need a calculator; but it is ok if you use an
+expression (use the appropriate (integer) numbers, though!).
+
+<hr width="100%">
+
+
+
+
+
+</no></body></html>
