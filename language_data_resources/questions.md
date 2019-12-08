@@ -1,17 +1,53 @@
-## Questions on basic types of corpora
-- What is a corpus?
-- How can you classify corpora? Give at least three criteria.
-- What is an annotation? What kinds of annotation do you know?
-- Explain terms sentence segmentation and tokenization. Give examples on non-trivial situations. lemmatization, tagging?
-- Explain what lemmatization is and why it is used.
-- Explain what a balanced corpus is. Why this notion is problematic?
-- Explain what POS tagging is and give examples of tag sets. Give examples of situations in which tagging is non-trivial even for a human.
-- Explain the main sources of variability of POS tag sets accross different corpora.
-- Explain the main property of positional tag sets. Give examples of positional and non-positional tag sets.
-- Give examples of at least three corpora (of any type). What is their size? (very roughly, order of magnitude is enough; do not forget to mention units)
+# Questions on basic types of corpora
+### What is a corpus?
+A structured set of usually texts (there are also speech/spoken corpora)
 
-## Questions on parallel corpora
-- What is a parallel corpus?
+### How can you classify corpora? Give at least three criteria.
+- Monolingual/multilingual
+- Chronic/diachronic (evolution, changes)
+- Annotated/unannotated
+- Written/spoken
+
+### What is an annotation? What kinds of annotation do you know?
+Added information (usually of linguistic focus) usually in machine readable way
+
+### Explain terms sentence segmentation and tokenization. Give examples on non-trivial situations. lemmatization, tagging?
+Sentence segmentation is the task of establishing sentence boundaries for usually texts with missing punctiation. This is common usually
+in speech recognition, where the input (without further LM processing) is just a sequence of words.
+
+Tokenization is the task of distinguishing tokens (usually words and punctuation marks) from a sequence (usually of characters). For example 
+in parsing web pages the content is filled with HTML tags, but we would like to extract just a sequence of tokens (from the language).
+Problematic for languages which use something vastly different that the Latin script or similar, as an explicit word separator (space) may
+be missing.
+
+### Explain what lemmatization is and why it is used.
+Finding the correct (intended) lemma for a given word form. Used for disambiguation in language models.
+
+### Explain what tagging is and why it is used.
+Tagging assigns tags to word forms in a sentence. (Morphological analysis generates all possible for a given form.)
+
+### Explain what a balanced corpus is. Why this notion is problematic?
+Ideally all possible proportions correspond to the real language, but that's impossible (without having all of the language)
+Usually we just focus on a single proportion, like genre
+
+### Explain what POS tagging is and give examples of tag sets. Give examples of situations in which tagging is non-trivial even for a human.
+Assigning correct POS tags to words in a sentence. For English __Penn Treebank POS tagset__ or __Negra corpus tagset__.
+Lots of sentences are ambiguous. Humans have around 5% error rates.
+
+### Explain the main sources of variability of POS tag sets accross different corpora.
+Different languages work differently. TODO
+
+### Explain the main property of positional tag sets. Give examples of positional and non-positional tag sets.
+Prague dependency treebank (PDT, positional) vs. Penn Treebank (non-positional)
+Positional tags have properties, which can be filled by different symbols - lots of combinations.
+
+### Give examples of at least three corpora (of any type). What is their size? (very roughly, order of magnitude is enough; do not forget to mention units)
+Usually measured in tokens. SYNv7 (5G tokens with interp.), Brown Corpus (1MW tokens), English Gigaword (1GW) 
+
+# Questions on parallel corpora
+### What is a parallel corpus?
+
+
 - What types (levels) of alignment can be present in parallel corpora?
 - Give examples of situations in which document alignment can be problematic.
 - Give examples of situations in which sentence alignment can be problematic.
@@ -70,4 +106,4 @@
 - What is the difference between moral and economic authors' rights? How can you transfer them to some other person/entity?
 - Explain main features of GNU GPL.
 - Explain main features of Creative Commons.
-- There are four on-off elements defined in the Creative Commons license family (by, nc, sa, nd). Why it does not lead to 24=16 possible licenses?
+- There are four on-off elements defined in the Creative Commons license family (by, nc, sa, nd). Why it does not lead to 2^4=16 possible licenses?
