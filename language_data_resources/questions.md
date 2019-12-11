@@ -89,7 +89,7 @@ Ok.. TODO: will there be a grammar documentation?
 Dependency and phrase-structure trees.
 
 ### What is a trace (in phrase-structure trees).
-TODO:
+Places in the PS tree in which the theory/grammar expects something, but is somewhere else. 
 
 ### How do we recognize presence/absence of a dependency relation between two words (in dependency treebanking).
 One is a descendant of the other. TODO: is this all?
@@ -209,11 +209,39 @@ A measure of how significant an agreement between two annotators is. Let `p_o` b
 then `k = (p_o-p_e)/(1-p_e)`. It becomes obvious when it's drawn on a line segment.
 
 ## Questions on licensing
-- In the Czech legal system, if you create an artifact, who/what protects your author's rights?
-- In the Czech legal system, if you create an artifact, what should you do in order to allow an efficient protection of your author's rights?
-- In the Czech legal system, if you create an artifact and you want to make it usable by anyone for free, what should you do?
-- In the Czech legal system, what are the implications of attaching a copyright notice (e.g. "(C)opyright Josef Novák, 2018") compared to simply mentioning the author's name?
-- What is the difference between moral and economic authors' rights? How can you transfer them to some other person/entity?
-- Explain main features of GNU GPL.
-- Explain main features of Creative Commons.
-- There are four on-off elements defined in the Creative Commons license family (by, nc, sa, nd). Why it does not lead to 2^4=16 possible licenses?
+
+Questions on the Czech legal system will not be in the test.
+
+### In the Czech legal system, if you create an artifact, who/what protects your author's rights?
+TODO
+
+### In the Czech legal system, if you create an artifact, what should you do in order to allow an efficient protection of your author's rights?
+TODO
+
+### In the Czech legal system, if you create an artifact and you want to make it usable by anyone for free, what should you do?
+TODO
+Set the appropriate license.
+
+### In the Czech legal system, what are the implications of attaching a copyright notice (e.g. "(C)opyright Josef Novák, 2018") compared to simply mentioning the author's name?
+None.
+
+### What is the difference between moral and economic authors' rights? How can you transfer them to some other person/entity?
+TODO
+Moral rights cannot be transferred, econodmic rights can.
+
+### Explain main features of GNU GPL.
+TODO
+Is viral.
+
+### Explain main features of Creative Commons.
+A license family based on 4 elements.
+- by - give credit
+- nc - non commercial
+- sa - share alike, preserve license
+- nd - no derivates, work cannot be modified 
+
+### There are four on-off elements defined in the Creative Commons license family (by, nc, sa, nd). Why it does not lead to 2^4=16 possible licenses?
+`by` is always present
+`by - sa - nd` is missing
+`by - nc - sa - nd` is missing 
+The rest (6) is present.
