@@ -1,0 +1,6 @@
+# fonemy nezavysle na sobe
+HBuild phone_dict (vstup) phone_dict.lat (vystup)
+# zerogram
+HBuild test_dict test_dict.lat
+
+HResults recout.mlf <-> test_phones.mlf
