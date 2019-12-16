@@ -35,7 +35,9 @@ Assigning correct POS tags to words in a sentence. For English __Penn Treebank P
 Lots of sentences are ambiguous. Humans have around 5% error rates.
 
 ### Explain the main sources of variability of POS tag sets accross different corpora.
-Different languages work differently. VTODO
+Different languages use different grammars and hence require different tag sets.
+Also when creating a corpus the authors have to decide for some guidelines. And there is no reason to use a very specific POS tag set
+for all corpora. The authors have to choose a certain level of granuality they want the data to be annotated with.
 
 ### Explain the main property of positional tag sets. Give examples of positional and non-positional tag sets.
 Prague dependency treebank (PDT, positional) vs. Penn Treebank (non-positional)
@@ -76,14 +78,14 @@ Ok.
 Ok.
 
 ### Draw a phrase-structure tree for a given Czech or English sentence.
-Ok.. TODO: will there be a grammar documentation?
+Ok.. STUDY
 
 ### Name at least four treebanks and describe their main properties.
-- Penn Treebank - first one
-- Prague Dependency Treebank - VTODO 
-- NEGRA - VTODO
-- TIGER - VTODO
-- BulTreebank - HPSG bulgarian 
+- Penn Treebank - first one, constituency
+- Prague Dependency Treebank - developed with cooperation of ÚFAL, dependency 
+- NEGRA - German newspaper, constituency
+- TIGER - Also German newspaper, improves upon NEGRA by e.g. relation/coordination annotation, constituency
+- BulTreebank - HPSG bulgarian, constituency
 
 ### Describe two main types of syntactic trees used in treebanks.
 Dependency and phrase-structure trees.
@@ -92,16 +94,27 @@ Dependency and phrase-structure trees.
 Places in the PS tree in which the theory/grammar expects something, but is somewhere else. 
 
 ### How do we recognize presence/absence of a dependency relation between two words (in dependency treebanking).
-One is a descendant of the other. TODO: is this all?
+kongruence - shodou gramatických kategorií
+rekce - určení gramatických kategorií nadřízeným členem (např. sloveso vyžaduje urč. pád svých doplnění)
+juxtapozicí - přimykáním (tj. závislý člen se prostě nachází poblíž nadřízeného ve slovosledu)
+https://cs.wikipedia.org/wiki/Z%C3%A1vislostn%C3%AD_syntax#Empirick%C3%A9_projevy_syntaktick%C3%BDch_vztah%C5%AF
 
 ### Give at least two examples of situations in which the "treeness assumption" on intra-sentence dependency relations is clearly violated.
-TODO:
+Agreement between different parts of subtrees.
+Or traces?
+Some "treebanks/sembanks" allow this, like AMR, which are permissible towards DAGs.
+It's usuall a case of agreement between nodes in two distinct subtrees. More generally this is called syntactic movement/discontinuities and is usually solved by "traces", which create a cycle. 
+
+"John wants _who_ to win?" -> "Who wants John to win?"
+"Why I _should_ trust you?" -> "Why _should_ I trust you?" 
 
 ### Give at least two examples of situations (e.g. syntactic constructions) for which annotation conventions for dependency analysis must be chosen since there are multiple solutions possible that are similarly good from the common sense view.
-VTODO
+Coordination. Either the coordinating element is the root, but this is not CFG friendly, or it is hanged left to right or right to lest.
+Transgressives. Are they adjectives or special verbs? In English it's "obviously" adjectives, in Czech it's rather verbs. But what about in Polish? That's something in between.
+Doplněk - "stal se lékařem" 
 
 ### Why coordination is difficult to capture in dependency trees (compared to e.g. predicate-argument structure)?
-VTODO
+See above. 
 
 ## Universal Dependencies
 
@@ -114,20 +127,25 @@ Enumeration of nodes follow. There is always an implicit `root` node with index 
 and syntactic annotation.
 
 ### When working with Universal Dependencies which tools are suitable for automatic parsing, manual annotation, querying, automatic transformations and validity checking? Name at least one tool for each task.
-TODO: - like default core blocks?
+automatic parsing - hw_parse, UDPipe
+manual annotation - TrEd
+querying - custom blocks
+automatic transformations - custom blocks 
+validity checking - UD tool `validate.py`
 
 ## Other phenomena for which annotated corpora exist
 
 ### Explain what coreference is and how it can be annotated.
-TODO:
 Coreference - multiple words in a sentence/paragraph refer to the same object (denotát). Usually the first one is a noun or a proper name and the second one is a pronoun. 
+I guess we can put two coreferencing words (that target the same object) to the same set, so we can annotate it like C1, C2, C1..
 
 ### Explain what named entities are and how they can be annotated.
-TODO:
 A real world object, which can be denoted with a proper name.
+We can either classify words in a sequence as True/False, or add additional information, such as [Jim]\_{person}, [2006]\_{time}
 
 ### Explain what sentiment (in the context of NLP) is and how it can be annotated.
-Identification of subjective attitudes from the text. TODO: covered only breafly, how to annotate?
+Identification of subjective attitudes from the text.
+Probably classification of whole texts or sentence. Assuming only one dimension (positive-negative), it can be annotated on some numerical scale.
 
 ## Lexical data resources
 ### What is WordNet? What do its nodes and edges represent?
@@ -136,7 +154,9 @@ Y is hyperonym of X if every X is also Y
 hyponyms vice versa
 
 ### What is EuroWordNet? How the interlinking through the hub language works?
-TODO: hub language?
+A semantic web composed of multiple WordNets, which are connected via interlingual index.
+A hub language may be chosen, such as English. Correspondence between CS-EN and DE-EN is done manually, but 
+correspondence between CS-DE can be done via the EN hub: CS-EN-DE.
 
 ### What is a synset?
 A group of synonyms.
@@ -162,7 +182,7 @@ https://ufal.mff.cuni.cz/derinet
 ### What is valency? Give an example of a data resource that captures valency and describe its main properties.
 The number and types of arguments, that bind with a specific verb. Examples are intransitive, transitive and ditransitive verbs.
 Moreover it distinguishes functors, such as actor, patient, effect, locative. Vallex at MFF.
-TODO: Is FrameNet also a valency dictionary, or is it somewhat more general?
+FrameNet (although it's more general)
 
 ## Evaluation
 ### Give at least two examples of situations in which measuring a percentage accuracy is not adequate.
@@ -177,7 +197,17 @@ A combination of both precision and recall. It penalizes systems with focus on o
 Fb (recall is b times more important than precision) = (1+b) (prec * recall) / (b^2 prec + recall)
 
 ### What is k-fold cross-validation?
-VTODO
+A resampling method, usually for low data and models which are very sensitive as to what is chosen as the training and testing dataset.
+Basically we split the data into groups, and each group is at one time a test set.
+
+- Shuffle the dataset randomly.
+- Split the dataset into k groups
+- For each unique group:
+- - Take the group as a hold out or test data set
+- - Take the remaining groups as a training data set
+- - Fit a model on the training set and evaluate it on the test set
+- - Retain the evaluation score and discard the model
+- Summarize the skill of the model using the sample of model evaluation scores
 
 ### Explain BLEU (the exact formula not needed, just the main principles).
 John John John John | john loves his sister Mary (100% unigram precision)
@@ -187,18 +217,19 @@ Unigram precision on words (actually an accuracy) = #words in both/#words in tra
 Bigram precision on words (actually an accuracy) = #bigrams in both/#bigrams in translated
 ...
 
+(p_1 * p_2 * p_3 * p_4)^(1/4)
 
 ### Explain the purpose of brevity penalty in BLEU.
 It's easy to cheat by translating only easily translated sentences.
-
-TODO: - self study
+Graph the BP function (output length is on the x axis, reference length is just a marked point)
+min(1, exp(1-o/r))
 
 ### What is Labeled Attachment Score (in parsing)?
 The percentage of words that are assigned both the correct syntactic head and the correct dependency label.
 
 ### What is Word Error Rate (in speech recognition)?
-Computed from the Levenshtein distance between true and predicted word sequence as (#sub+#ins+#del)/total.
-TODO: or is it (#sub+#ins+#del)/(#sub+#del+#cor)
+Computed from the Levenshtein distance between true and predicted word sequence as (#sub+#ins+#del)/(total in reference).
+Its also (#sub+#ins+#del)/(#sub+#del+#cor)
 
 ### What is inter-annotator agreement? How can it be measured?
 Measure of how well can two different annotators make the same decision for a certain category. Usualy the trace of
@@ -213,25 +244,39 @@ then `k = (p_o-p_e)/(1-p_e)`. It becomes obvious when it's drawn on a line segme
 Questions on the Czech legal system will not be in the test.
 
 ### In the Czech legal system, if you create an artifact, who/what protects your author's rights?
-TODO
+NOT ON THE TEST
 
 ### In the Czech legal system, if you create an artifact, what should you do in order to allow an efficient protection of your author's rights?
-TODO
+NOT ON THE TEST
 
 ### In the Czech legal system, if you create an artifact and you want to make it usable by anyone for free, what should you do?
-TODO
+NOT ON THE TEST
 Set the appropriate license.
 
 ### In the Czech legal system, what are the implications of attaching a copyright notice (e.g. "(C)opyright Josef Novák, 2018") compared to simply mentioning the author's name?
 None.
 
 ### What is the difference between moral and economic authors' rights? How can you transfer them to some other person/entity?
-TODO
-Moral rights cannot be transferred, econodmic rights can.
+Moral rights
+- Cannot be transfered to another person
+- The right to be identified as the author
+- The right to object to any distortion or mutilation or the work
+- It is always a person who keeps the moral rights
+Economic rights
+- Can be transfered, as any other property
+- Limited in time
+- Allow the to profit financially from the publication, distribution, adaptation...
+- It can be an institution (e.g. your employer) who keeps the economic rights.
 
 ### Explain main features of GNU GPL.
-TODO
-Is viral.
+is given permission to modify, copy and redistribute the work or any derivative version
+can charge a fee for such service
+must accompany binaries with source codes, if the binaries are distributed  (which is not obligatory)
+most important: may not impose further restrictions on the rights granted by GPL
+
+The original work is protected by author's rights (is copyrighted)
+therefore the licensee can use the work only within the terms defined by the author.
+If the author says in the license that the work and its derivations can be further distributed only under the very same license, the licensee has to follow it.
 
 ### Explain main features of Creative Commons.
 A license family based on 4 elements.
