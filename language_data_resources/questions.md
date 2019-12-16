@@ -9,9 +9,9 @@ A structured set of usually texts (there are also speech/spoken corpora)
 - Written/spoken
 
 ### What is an annotation? What kinds of annotation do you know?
-Added information (usually of linguistic focus) usually in machine readable way
+Added information (usually of linguistic focus) mostly in machine readable way
 
-### Explain terms sentence segmentation and tokenization. Give examples on non-trivial situations. lemmatization, tagging?
+### Explain terms sentence segmentation and tokenization. Give examples on non-trivial situations.
 Sentence segmentation is the task of establishing sentence boundaries for usually texts with missing punctiation. This is common usually
 in speech recognition, where the input (without further LM processing) is just a sequence of words.
 
@@ -28,11 +28,12 @@ Tagging assigns tags to word forms in a sentence. (Morphological analysis genera
 
 ### Explain what a balanced corpus is. Why this notion is problematic?
 Ideally all possible proportions correspond to the real language, but that's impossible (without having all of the language)
-Usually we just focus on a single proportion, like genre
+Usually we just focus on a single proportion, like genre,
 
 ### Explain what POS tagging is and give examples of tag sets. Give examples of situations in which tagging is non-trivial even for a human.
 Assigning correct POS tags to words in a sentence. For English __Penn Treebank POS tagset__ or __Negra corpus tagset__.
 Lots of sentences are ambiguous. Humans have around 5% error rates.
+Some cannot be solved without without semantics/pragmatics: `The movie was entertaining.` Is `entertaining` a verb or an adjective?
 
 ### Explain the main sources of variability of POS tag sets accross different corpora.
 Different languages use different grammars and hence require different tag sets.
@@ -52,7 +53,7 @@ Usually measured in tokens. SYNv7 (5G tokens with interp.), Brown Corpus (1MW to
 Two or more corpora with alignment between some units.
 
 ### What types (levels) of alignment can be present in parallel corpora?
-Document, paragraph, sentence, word/node alignment.
+Document, paragraph, sentence, word, node alignment.
 
 ### Give examples of situations in which document alignment can be problematic.
 Given two unorganized corpora about which we know there are documents of the same content (but in different languages), then matching documents can be problematic.
@@ -67,18 +68,19 @@ Generally languages aren't translated word by word, so there is almost never a c
 - Books - there's plenty of them, but only usually aligned on chapter/paragraph level
 - System messages/localization - usually paragraph/sentence aligned, usually lots of language pairs, very IT domain specific 
 - Subtitles - widely available, phrase aligned, but usually direct speech domain
+- .. OPUS
 Tools: fast_align, hunalign, Giza, Giza++, IBM models
 
-## Questions on treebanking
+# Questions on treebanking
 
 ### Either assign Penn Treebank POS tags to words in a given English sentence (short tagset documentation of Penn Treebank tags will be available to you), or assign CNK-style morphological tags to words in a given Czech sentence (short tagset documentation will be available to you). You can choose the language.
-Ok.
+Ok. TODO
 
 ### Draw a dependency tree for a given Czech or English sentence.
-Ok.
+Ok. TODO
 
 ### Draw a phrase-structure tree for a given Czech or English sentence.
-Ok.. STUDY
+Ok. TODO
 
 ### Name at least four treebanks and describe their main properties.
 - Penn Treebank - first one, constituency
@@ -86,12 +88,13 @@ Ok.. STUDY
 - NEGRA - German newspaper, constituency
 - TIGER - Also German newspaper, improves upon NEGRA by e.g. relation/coordination annotation, constituency
 - BulTreebank - HPSG bulgarian, constituency
+- Universal Depenceincies - universal, depencency
 
 ### Describe two main types of syntactic trees used in treebanks.
-Dependency and phrase-structure trees.
+Dependency and phrase-structure trees. Nodes in dependency trees are words from the sentence, while in phrase structure trees they are only the leaves. 
 
 ### What is a trace (in phrase-structure trees).
-Places in the PS tree in which the theory/grammar expects something, but is somewhere else. 
+Places in the PS tree in which the theory/grammar expects something, but is somewhere else. Also reffered to as syntactic movement.
 
 ### How do we recognize presence/absence of a dependency relation between two words (in dependency treebanking).
 kongruence - shodou gramatických kategorií
@@ -101,7 +104,6 @@ https://cs.wikipedia.org/wiki/Z%C3%A1vislostn%C3%AD_syntax#Empirick%C3%A9_projev
 
 ### Give at least two examples of situations in which the "treeness assumption" on intra-sentence dependency relations is clearly violated.
 Agreement between different parts of subtrees.
-Or traces?
 Some "treebanks/sembanks" allow this, like AMR, which are permissible towards DAGs.
 It's usuall a case of agreement between nodes in two distinct subtrees. More generally this is called syntactic movement/discontinuities and is usually solved by "traces", which create a cycle. 
 
@@ -111,20 +113,20 @@ It's usuall a case of agreement between nodes in two distinct subtrees. More gen
 ### Give at least two examples of situations (e.g. syntactic constructions) for which annotation conventions for dependency analysis must be chosen since there are multiple solutions possible that are similarly good from the common sense view.
 Coordination. Either the coordinating element is the root, but this is not CFG friendly, or it is hanged left to right or right to lest.
 Transgressives. Are they adjectives or special verbs? In English it's "obviously" adjectives, in Czech it's rather verbs. But what about in Polish? That's something in between.
-Doplněk - "stal se lékařem" 
+Doplněk - "chlapec ležel nemocen" - "nemocen" je závislé na dvou slovech
+UD Copula - "it is sweet" (because some languages omit the verb)
 
 ### Why coordination is difficult to capture in dependency trees (compared to e.g. predicate-argument structure)?
 See above. 
 
-## Universal Dependencies
+# Universal Dependencies
 
 ### How are Universal Dependencies different from other treebanks?
-The UD grammar can easily accomodate lots of languages, which makes it ideal for studying cross-language phenomena as well as writing software, that can potentially work across the whole framework.
+The UD grammar can easily accomodate lots of languages, which makes it ideal for studying cross-language phenomena as well as writing software, that can potentially work across the whole framework. As we seen, even when optimizing a rule based code on one language, it somewhat transfers (with some loss) also to other languages.
 
 ### Describe the CoNLL-U format used in Universal Dependencies.
 The file is divided up to segments for each sentence. There is a line with surface representation of the whole sentence (human readable space separated words together with punct.)
-Enumeration of nodes follow. There is always an implicit `root` node with index `0`. Each node has a parent assigned (it's order). Each node also contains usually lemma, morphological
-and syntactic annotation.
+Enumeration of nodes follow. There is always an implicit `root` node with index `0`. Each node has a parent assigned (it's position). Each node also contains usually lemma, morphological and syntactic (dependency type) annotation.
 
 ### When working with Universal Dependencies which tools are suitable for automatic parsing, manual annotation, querying, automatic transformations and validity checking? Name at least one tool for each task.
 automatic parsing - hw_parse, UDPipe
@@ -133,7 +135,7 @@ querying - custom blocks
 automatic transformations - custom blocks 
 validity checking - UD tool `validate.py`
 
-## Other phenomena for which annotated corpora exist
+# Other phenomena for which annotated corpora exist
 
 ### Explain what coreference is and how it can be annotated.
 Coreference - multiple words in a sentence/paragraph refer to the same object (denotát). Usually the first one is a noun or a proper name and the second one is a pronoun. 
@@ -146,8 +148,9 @@ We can either classify words in a sequence as True/False, or add additional info
 ### Explain what sentiment (in the context of NLP) is and how it can be annotated.
 Identification of subjective attitudes from the text.
 Probably classification of whole texts or sentence. Assuming only one dimension (positive-negative), it can be annotated on some numerical scale.
+There can be multiple scales, for example for irony.
 
-## Lexical data resources
+# Lexical data resources
 ### What is WordNet? What do its nodes and edges represent?
 Nodes are synsets, edges are relations (hypernyms, hyponms)
 Y is hyperonym of X if every X is also Y
@@ -184,7 +187,7 @@ The number and types of arguments, that bind with a specific verb. Examples are 
 Moreover it distinguishes functors, such as actor, patient, effect, locative. Vallex at MFF.
 FrameNet (although it's more general)
 
-## Evaluation
+# Evaluation
 ### Give at least two examples of situations in which measuring a percentage accuracy is not adequate.
 Evaluating system for tumor detection. It can easily get 99% by predicting False, but that's just because of true negatives.
 Evaluating system for comma insertion. It can easily get high accuracy by predicting Not-comma, but that's just because of true negatives.
@@ -239,7 +242,7 @@ normalized confusion matrix (normalized so that it all sums to 1)
 A measure of how significant an agreement between two annotators is. Let `p_o` be observed agreement and `p_e` agreement by chance,
 then `k = (p_o-p_e)/(1-p_e)`. It becomes obvious when it's drawn on a line segment.
 
-## Questions on licensing
+# Questions on licensing
 
 Questions on the Czech legal system will not be in the test.
 
