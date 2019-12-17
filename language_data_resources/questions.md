@@ -1,4 +1,5 @@
 # Questions on basic types of corpora
+
 ### What is a corpus?
 A structured set of usually texts (there are also speech/spoken corpora)
 
@@ -33,7 +34,9 @@ Usually we just focus on a single proportion, like genre,
 ### Explain what POS tagging is and give examples of tag sets. Give examples of situations in which tagging is non-trivial even for a human.
 Assigning correct POS tags to words in a sentence. For English __Penn Treebank POS tagset__ or __Negra corpus tagset__.
 Lots of sentences are ambiguous. Humans have around 5% error rates.
-Some cannot be solved without without semantics/pragmatics: `The movie was entertaining.` Is `entertaining` a verb or an adjective?
+Some cannot be solved without without semantics/pragmatics:
+`The movie was entertaining.` Is `entertaining` a verb or an adjective?
+`Visiting relatives can be exhausting`
 
 ### Explain the main sources of variability of POS tag sets accross different corpora.
 Different languages use different grammars and hence require different tag sets.
@@ -109,6 +112,7 @@ It's usuall a case of agreement between nodes in two distinct subtrees. More gen
 
 "John wants _who_ to win?" -> "Who wants John to win?"
 "Why I _should_ trust you?" -> "Why _should_ I trust you?" 
+Doplněk - "chlapec ležel nemocen" - "nemocen" je závislé na dvou slovech
 
 ### Give at least two examples of situations (e.g. syntactic constructions) for which annotation conventions for dependency analysis must be chosen since there are multiple solutions possible that are similarly good from the common sense view.
 Coordination. Either the coordinating element is the root, but this is not CFG friendly, or it is hanged left to right or right to lest.
@@ -123,6 +127,7 @@ See above.
 
 ### How are Universal Dependencies different from other treebanks?
 The UD grammar can easily accomodate lots of languages, which makes it ideal for studying cross-language phenomena as well as writing software, that can potentially work across the whole framework. As we seen, even when optimizing a rule based code on one language, it somewhat transfers (with some loss) also to other languages.
+Other treebanks are automatically transformed to UD.
 
 ### Describe the CoNLL-U format used in Universal Dependencies.
 The file is divided up to segments for each sentence. There is a line with surface representation of the whole sentence (human readable space separated words together with punct.)
@@ -151,6 +156,7 @@ Probably classification of whole texts or sentence. Assuming only one dimension 
 There can be multiple scales, for example for irony.
 
 # Lexical data resources
+
 ### What is WordNet? What do its nodes and edges represent?
 Nodes are synsets, edges are relations (hypernyms, hyponms)
 Y is hyperonym of X if every X is also Y
@@ -175,11 +181,11 @@ Homographs + homophones = homonyms
 See above.
 
 ### Give an example of an NLP tool/lexicon that captures inflectional morphology, explain what it can be used for and describe its main properties.
-MorphoDiTa
+MorphoDiTa, can do morphological analysis, lemmatization and generation
 http://ufal.mff.cuni.cz/morphodita
 
 ### Give an example of a NLP tool/lexicon that captures derivational morphology, explain what it can be used for and describe its main properties.
-DeriNet, part of Universal Derivations (UDer)
+DeriNet, part of Universal Derivations (UDer) produces tree-like graphs of morphological derivations (the more distant, the more the word is different - sort of)
 https://ufal.mff.cuni.cz/derinet
 
 ### What is valency? Give an example of a data resource that captures valency and describe its main properties.
@@ -188,6 +194,7 @@ Moreover it distinguishes functors, such as actor, patient, effect, locative. Va
 FrameNet (although it's more general)
 
 # Evaluation
+
 ### Give at least two examples of situations in which measuring a percentage accuracy is not adequate.
 Evaluating system for tumor detection. It can easily get 99% by predicting False, but that's just because of true negatives.
 Evaluating system for comma insertion. It can easily get high accuracy by predicting Not-comma, but that's just because of true negatives.
@@ -272,14 +279,16 @@ Economic rights
 - It can be an institution (e.g. your employer) who keeps the economic rights.
 
 ### Explain main features of GNU GPL.
-is given permission to modify, copy and redistribute the work or any derivative version
-can charge a fee for such service
-must accompany binaries with source codes, if the binaries are distributed  (which is not obligatory)
-most important: may not impose further restrictions on the rights granted by GPL
+- is given permission to modify, copy and redistribute the work or any derivative version
+- can charge a fee for such service
+- must accompany binaries with source codes, if the binaries are distributed  (which is not obligatory)
+- most important: may not impose further restrictions on the rights granted by GPL
 
-The original work is protected by author's rights (is copyrighted)
-therefore the licensee can use the work only within the terms defined by the author.
-If the author says in the license that the work and its derivations can be further distributed only under the very same license, the licensee has to follow it.
+- The original work is protected by author's rights (is copyrighted)
+- The licensee can use the work only within the terms defined by the author
+- If the author says in the license that the work and its derivations can be further distributed only under the very same license, the licensee has to follow it
+
+https://cs.wikipedia.org/wiki/GNU_General_Public_License
 
 ### Explain main features of Creative Commons.
 A license family based on 4 elements.
@@ -292,4 +301,4 @@ A license family based on 4 elements.
 `by` is always present
 `by - sa - nd` is missing
 `by - nc - sa - nd` is missing 
-The rest (6) is present.
+The rest (6) is present
