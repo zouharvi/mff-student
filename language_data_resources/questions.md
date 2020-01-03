@@ -10,10 +10,10 @@ A structured set of usually texts (there are also speech/spoken corpora)
 - Written/spoken
 
 ### What is an annotation? What kinds of annotation do you know?
-Added information (usually of linguistic focus) mostly in machine readable way
+Added information (usually of linguistic focus) mostly in machine readable way. POS tagging, sentiment, named entity recognition
 
 ### Explain terms sentence segmentation and tokenization. Give examples on non-trivial situations.
-Sentence segmentation is the task of establishing sentence boundaries for usually texts with missing punctiation. This is common usually
+Sentence segmentation is the task of establishing sentence boundaries for usually texts with missing punctuation. This is common usually
 in speech recognition, where the input (without further LM processing) is just a sequence of words.
 
 Tokenization is the task of distinguishing tokens (usually words and punctuation marks) from a sequence (usually of characters). For example 
