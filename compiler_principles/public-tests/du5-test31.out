@@ -1,0 +1,85 @@
+Everything is OK
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+STRING type="T1"
+INTEGER type="T2"
+REAL type="T3"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_PROCEDURE name="D3I":
+	PMODE_BY_VALUE name="S" type="T1"
+	PMODE_BY_VALUE name="P" type="T2"
+	PMODE_BY_VALUE name="Q" type="T2"
+	PMODE_BY_VALUE name="R" type="T2"
+	SKIND_LOCAL_VARIABLE name="P" type="T2"
+	SKIND_LOCAL_VARIABLE name="Q" type="T2"
+	SKIND_LOCAL_VARIABLE name="R" type="T2"
+	SKIND_LOCAL_VARIABLE name="S" type="T1"
+SKIND_PROCEDURE name="D3R":
+	PMODE_BY_VALUE name="S" type="T1"
+	PMODE_BY_VALUE name="P" type="T3"
+	PMODE_BY_VALUE name="Q" type="T3"
+	PMODE_BY_VALUE name="R" type="T3"
+	SKIND_LOCAL_VARIABLE name="P" type="T3"
+	SKIND_LOCAL_VARIABLE name="Q" type="T3"
+	SKIND_LOCAL_VARIABLE name="R" type="T3"
+	SKIND_LOCAL_VARIABLE name="S" type="T1"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_PROCEDURE name="GLOBALINTEGEREXPRESSIONS":
+SKIND_PROCEDURE name="GLOBALREALEXPRESSIONS":
+SKIND_GLOBAL_VARIABLE name="I" type="T2"
+SKIND_TYPE name="INTEGER" type="T2"
+SKIND_GLOBAL_VARIABLE name="J" type="T2"
+SKIND_GLOBAL_VARIABLE name="K" type="T2"
+SKIND_PROCEDURE name="LOCALINTEGEREXPRESSIONS":
+	SKIND_LOCAL_VARIABLE name="I" type="T2"
+	SKIND_LOCAL_VARIABLE name="JJ" type="T2"
+	SKIND_LOCAL_VARIABLE name="K" type="T2"
+SKIND_PROCEDURE name="LOCALREALEXPRESSIONS":
+	SKIND_LOCAL_VARIABLE name="X" type="T3"
+	SKIND_LOCAL_VARIABLE name="YY" type="T3"
+	SKIND_LOCAL_VARIABLE name="Z" type="T3"
+SKIND_PROCEDURE name="PARAMTESTINTEGER":
+	PMODE_BY_VALUE name="P" type="T2"
+	PMODE_BY_VALUE name="Q" type="T2"
+	PMODE_BY_VALUE name="R" type="T2"
+	SKIND_LOCAL_VARIABLE name="P" type="T2"
+	SKIND_LOCAL_VARIABLE name="Q" type="T2"
+	SKIND_LOCAL_VARIABLE name="R" type="T2"
+SKIND_PROCEDURE name="PARAMTESTREAL":
+	PMODE_BY_VALUE name="P" type="T3"
+	PMODE_BY_VALUE name="Q" type="T3"
+	PMODE_BY_VALUE name="R" type="T3"
+	SKIND_LOCAL_VARIABLE name="P" type="T3"
+	SKIND_LOCAL_VARIABLE name="Q" type="T3"
+	SKIND_LOCAL_VARIABLE name="R" type="T3"
+SKIND_FUNCTION name="READI" type="T2":
+SKIND_FUNCTION name="READR" type="T3":
+SKIND_FUNCTION name="READS" type="T1":
+SKIND_TYPE name="REAL" type="T3"
+SKIND_TYPE name="STRING" type="T1"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T3"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_GLOBAL_VARIABLE name="X" type="T3"
+SKIND_GLOBAL_VARIABLE name="Y" type="T3"
+SKIND_GLOBAL_VARIABLE name="Z" type="T3"
+****************************
+****** PROGRAM OUTPUT ******
+mainintegerassignment: 1 3 10
+mainintegerexpressions: 8 31 4
+globalintegerexpressions: 8 31 4
+localintegerassignment: 1 3 10
+localintegerexpressions: 8 31 4
+paramtestinteger: 1 3 10
+mainrealassignment: 1 2.718 500000
+mainrealexpressions: 499998 1.359e+06 1.00001
+globalrealexpressions: 499998 1.359e+06 1.00001
+localrealassignment: 1 2.718 500000
+localrealexpressions: 499998 1.359e+06 1.00001
+paramtestreal: 1 2.718 500000
+****************************

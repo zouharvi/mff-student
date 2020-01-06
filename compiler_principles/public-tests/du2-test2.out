@@ -1,0 +1,50 @@
+Error (line 5): Unexpected end of comment
+7: program
+7: identifier [DU2TEST2]
+7: ;
+8: type
+8: identifier [POLE]
+8: =
+8: array
+8: [
+8: unsigned integer 3
+8: ..
+8: unsigned integer 4
+8: ]
+8: of
+8: identifier [INTEGER]
+8: ;
+9: begin
+10: identifier [I]
+10: :=
+Warning (line 10): Integer number '2940387297643256437' is out of range, will be truncated
+10: unsigned integer 437836405
+10: ;
+11: identifier [J]
+11: :=
+11: identifier [I]
+11: sign/add oper +
+Error (line 11): Integer number '2j' is malformed
+11: unsigned integer 2
+11: ;
+12: identifier [R]
+12: :=
+Error (line 12): Real number '3.14159eb' is malformed
+12: real number 3.14159
+12: ;
+13: identifier [S]
+13: :=
+Error (line 13): EOL in string
+13: string [ble, konec radky]
+14: identifier [C]
+14: :=
+Error (line 14): EOL in string
+14: string []
+15: identifier [C]
+15: :=
+Error (line 15): EOL in string
+15: string [c]
+16: end
+16: .
+Error (line 18): EOF in comment
+There were some errors 7 and warnings 1

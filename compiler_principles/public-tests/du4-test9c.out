@@ -1,0 +1,29 @@
+Everything is OK
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+INTEGER type="T1"
+STRING type="T2"
+REAL type="T3"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_CONST name="C1" value="-20" type="T1"
+SKIND_CONST name="C2" value="qwe" type="T2"
+SKIND_CONST name="C3" value="0" type="T0"
+SKIND_CONST name="C4" value="1200" type="T3"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_TYPE name="INTEGER" type="T1"
+SKIND_PROCEDURE name="PROC2":
+	SKIND_CONST name="C2" value="-20" type="T1"
+SKIND_FUNCTION name="READI" type="T1":
+SKIND_FUNCTION name="READR" type="T3":
+SKIND_FUNCTION name="READS" type="T2":
+SKIND_TYPE name="REAL" type="T3"
+SKIND_TYPE name="STRING" type="T2"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T3"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T2"
+****************************

@@ -1,0 +1,30 @@
+1: program
+1: identifier
+1: ;
+1: identifier
+1: unsigned integer 0
+1: ;
+1: var
+1: identifier
+1: :
+1: identifier
+1: ;
+1: identifier
+1: :
+Error (line 1): Unknown character '@'(0x40) on the input
+1: identifier
+1: ;
+1: begin
+1: identifier
+1: :=
+1: real number 0
+1: .
+1: sign/add oper +
+1: real number 0
+1: sign/add oper +
+1: real number 0
+1: identifier
+1: ;
+1: end
+1: .
+There were some errors 1 and warnings 0

@@ -1,0 +1,48 @@
+Warning (line 7): Label '5' declared but never used
+Everything is nearly OK, although there were 1 warnings
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+REAL type="T1"
+INTEGER type="T2"
+RANGE type="T3" lower_bound="0" upper_bound="9"
+RANGE type="T4" lower_bound="0" upper_bound="4"
+ARRAY type="T5" index_type="T4" element_type="T2"
+ARRAY type="T6" index_type="T3" element_type="T5"
+STRING type="T7"
+LABEL name="5"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_FUNCTION name="F1" type="T1":
+	PMODE_BY_VALUE name="V1" type="T2"
+	PMODE_BY_VALUE name="V2" type="T2"
+	PMODE_BY_REFERENCE name="V3" type="T1"
+	SKIND_LOCAL_VARIABLE name="A1" type="T6"
+	SKIND_TYPE name="S1" type="T6"
+	SKIND_LOCAL_VARIABLE name="V1" type="T2"
+	SKIND_LOCAL_VARIABLE name="V2" type="T2"
+	SKIND_PARAMETER_BY_REFERENCE name="V3" type="T1"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_GLOBAL_VARIABLE name="I" type="T2"
+SKIND_TYPE name="INTEGER" type="T2"
+SKIND_GLOBAL_VARIABLE name="J" type="T2"
+SKIND_GLOBAL_VARIABLE name="P" type="T2"
+SKIND_PROCEDURE name="P1":
+	SKIND_CONST name="C1" value="15" type="T2"
+SKIND_PROCEDURE name="P2":
+	PMODE_BY_REFERENCE name="V1" type="T1"
+	SKIND_CONST name="C2" value="16" type="T2"
+	SKIND_PARAMETER_BY_REFERENCE name="V1" type="T1"
+SKIND_GLOBAL_VARIABLE name="R" type="T1"
+SKIND_FUNCTION name="READI" type="T2":
+SKIND_FUNCTION name="READR" type="T1":
+SKIND_FUNCTION name="READS" type="T7":
+SKIND_TYPE name="REAL" type="T1"
+SKIND_TYPE name="STRING" type="T7"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T7"
+****************************

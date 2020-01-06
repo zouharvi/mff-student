@@ -1,0 +1,27 @@
+Everything is OK
+****** CANONICAL DUMP ******
+RANGE type="T0" lower_bound="1" upper_bound="10"
+STRING type="T1"
+ARRAY type="T2" index_type="T0" element_type="T1"
+BOOLEAN type="T3"
+INTEGER type="T4"
+REAL type="T5"
+SKIND_TYPE name="AR2" type="T2"
+SKIND_TYPE name="BOOLEAN" type="T3"
+SKIND_CONST name="FALSE" value="0" type="T3"
+SKIND_TYPE name="INTEGER" type="T4"
+SKIND_FUNCTION name="READI" type="T4":
+SKIND_FUNCTION name="READR" type="T5":
+SKIND_FUNCTION name="READS" type="T1":
+SKIND_TYPE name="REAL" type="T5"
+SKIND_TYPE name="RNG" type="T0"
+SKIND_TYPE name="STRING" type="T1"
+SKIND_CONST name="TRUE" value="1" type="T3"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T4"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T5"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T1"
+****************************

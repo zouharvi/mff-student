@@ -1,0 +1,34 @@
+Everything is OK
+****** CANONICAL DUMP ******
+RANGE type="T0" lower_bound="1" upper_bound="10"
+INTEGER type="T1"
+ARRAY type="T2" index_type="T0" element_type="T1"
+RANGE type="T3" lower_bound="2" upper_bound="2"
+ARRAY type="T4" index_type="T3" element_type="T2"
+BOOLEAN type="T5"
+REAL type="T6"
+STRING type="T7"
+SKIND_GLOBAL_VARIABLE name="A1" type="T2"
+SKIND_GLOBAL_VARIABLE name="A2" type="T4"
+SKIND_TYPE name="AR1" type="T2"
+SKIND_TYPE name="BOOLEAN" type="T5"
+SKIND_CONST name="FALSE" value="0" type="T5"
+SKIND_GLOBAL_VARIABLE name="I" type="T1"
+SKIND_TYPE name="INTEGER" type="T1"
+SKIND_FUNCTION name="READI" type="T1":
+SKIND_FUNCTION name="READR" type="T6":
+SKIND_FUNCTION name="READS" type="T7":
+SKIND_TYPE name="REAL" type="T6"
+SKIND_TYPE name="STRING" type="T7"
+SKIND_CONST name="TRUE" value="1" type="T5"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T6"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T7"
+****************************
+****** PROGRAM OUTPUT ******
+12345678910
+****************************

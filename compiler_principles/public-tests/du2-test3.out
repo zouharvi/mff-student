@@ -1,0 +1,54 @@
+Error (line 5): Unexpected end of comment
+7: program
+7: identifier [DU2TEST3]
+7: ;
+8: type
+8: identifier [STRUKTURA]
+8: =
+9: record
+10: identifier [I]
+10: :
+10: identifier [INTEGER]
+10: ;
+11: identifier [J]
+11: ,
+11: identifier [K]
+11: :
+11: identifier [REAL]
+11: ;
+12: end
+12: ;
+14: begin
+15: identifier [I]
+15: :=
+Warning (line 15): Integer number '2940387297643256437' is out of range, will be truncated
+15: unsigned integer 437836405
+15: ;
+16: identifier [J]
+16: :=
+16: identifier [I]
+16: sign/add oper +
+Error (line 16): Integer number '2j' is malformed
+16: unsigned integer 2
+16: ;
+17: identifier [R]
+17: :=
+Error (line 17): Real number '3.14159eb' is malformed
+17: real number 3.14159
+17: ;
+18: identifier [S]
+18: :=
+Error (line 18): EOL in string
+18: string [ble, konec radky]
+19: identifier [C]
+19: :=
+Error (line 19): EOL in string
+19: string []
+20: identifier [C]
+20: :=
+Error (line 20): EOL in string
+20: string [c]
+21: end
+21: .
+Error (line 23): EOF in comment
+There were some errors 7 and warnings 1

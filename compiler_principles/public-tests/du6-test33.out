@@ -1,0 +1,38 @@
+Warning (line 3): Label '1' defined but never used
+Warning (line 3): Label '2' declared but never used
+Warning (line 3): Label '3' declared but never used
+Warning (line 3): Label '4' declared but never used
+Warning (line 3): Label '5' declared but never used
+Warning (line 3): Label '6' declared but never used
+Everything is nearly OK, although there were 6 warnings
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+INTEGER type="T1"
+REAL type="T2"
+STRING type="T3"
+LABEL name="1"
+LABEL name="2"
+LABEL name="3"
+LABEL name="4"
+LABEL name="5"
+LABEL name="6"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_TYPE name="INTEGER" type="T1"
+SKIND_FUNCTION name="READI" type="T1":
+SKIND_FUNCTION name="READR" type="T2":
+SKIND_FUNCTION name="READS" type="T3":
+SKIND_TYPE name="REAL" type="T2"
+SKIND_TYPE name="STRING" type="T3"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T3"
+****************************
+****** PROGRAM OUTPUT ******
+
+****************************

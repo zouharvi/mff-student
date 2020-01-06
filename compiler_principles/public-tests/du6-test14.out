@@ -1,0 +1,52 @@
+Everything is OK
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+INTEGER type="T1"
+REAL type="T2"
+STRING type="T3"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_TYPE name="INTEGER" type="T1"
+SKIND_FUNCTION name="READI" type="T1":
+SKIND_FUNCTION name="READR" type="T2":
+SKIND_FUNCTION name="READS" type="T3":
+SKIND_TYPE name="REAL" type="T2"
+SKIND_TYPE name="STRING" type="T3"
+SKIND_PROCEDURE name="TEST":
+	SKIND_LOCAL_VARIABLE name="A" type="T1"
+	SKIND_LOCAL_VARIABLE name="B" type="T1"
+	SKIND_LOCAL_VARIABLE name="C" type="T1"
+	SKIND_LOCAL_VARIABLE name="D" type="T1"
+	SKIND_LOCAL_VARIABLE name="E" type="T1"
+	SKIND_LOCAL_VARIABLE name="F" type="T1"
+	SKIND_LOCAL_VARIABLE name="G" type="T1"
+	SKIND_LOCAL_VARIABLE name="H" type="T1"
+	SKIND_LOCAL_VARIABLE name="I" type="T1"
+	SKIND_LOCAL_VARIABLE name="J" type="T1"
+	SKIND_LOCAL_VARIABLE name="K" type="T1"
+	SKIND_LOCAL_VARIABLE name="L" type="T1"
+	SKIND_LOCAL_VARIABLE name="M" type="T1"
+	SKIND_LOCAL_VARIABLE name="N" type="T1"
+	SKIND_LOCAL_VARIABLE name="O" type="T1"
+	SKIND_LOCAL_VARIABLE name="P" type="T1"
+	SKIND_LOCAL_VARIABLE name="Q" type="T1"
+	SKIND_LOCAL_VARIABLE name="R" type="T1"
+	SKIND_LOCAL_VARIABLE name="S" type="T1"
+	SKIND_LOCAL_VARIABLE name="T" type="T1"
+	SKIND_LOCAL_VARIABLE name="U" type="T1"
+	SKIND_LOCAL_VARIABLE name="V" type="T1"
+	SKIND_LOCAL_VARIABLE name="W" type="T1"
+	SKIND_LOCAL_VARIABLE name="X" type="T1"
+	SKIND_LOCAL_VARIABLE name="Y" type="T1"
+	SKIND_LOCAL_VARIABLE name="Z" type="T1"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T3"
+****************************
+****** PROGRAM OUTPUT ******
+1245****************************

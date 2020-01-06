@@ -1,0 +1,38 @@
+Everything is OK
+****** CANONICAL DUMP ******
+INTEGER type="T1"
+REAL type="T2"
+RECORD type="T0">
+	FIELD name="A" type="T1"/>
+	FIELD name="B" type="T2"/>
+	FIELD name="C" type="T1"/>
+RECORD:
+RECORD type="T3">
+	FIELD name="Z" type="T0"/>
+RECORD:
+BOOLEAN type="T4"
+STRING type="T5"
+SKIND_GLOBAL_VARIABLE name="A1" type="T0"
+SKIND_GLOBAL_VARIABLE name="A2" type="T3"
+SKIND_TYPE name="AR1" type="T0"
+SKIND_TYPE name="BOOLEAN" type="T4"
+SKIND_CONST name="FALSE" value="0" type="T4"
+SKIND_GLOBAL_VARIABLE name="I" type="T1"
+SKIND_TYPE name="INTEGER" type="T1"
+SKIND_FUNCTION name="READI" type="T1":
+SKIND_FUNCTION name="READR" type="T2":
+SKIND_FUNCTION name="READS" type="T5":
+SKIND_TYPE name="REAL" type="T2"
+SKIND_TYPE name="STRING" type="T5"
+SKIND_CONST name="TRUE" value="1" type="T4"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T5"
+****************************
+****** PROGRAM OUTPUT ******
+123
+****************************
