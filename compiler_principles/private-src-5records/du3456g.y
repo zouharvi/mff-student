@@ -13,25 +13,18 @@
 
 %code requires
 {
-    // this code is emitted to du3456g.hpp
-
-    // allow references to semantic types in %type
 #include "dutables.hpp"
-
 #include "du3456sem.hpp"
-
-    // avoid no-case warnings when compiling du3g.hpp
 #pragma warning (disable:4065)
-
-// adjust YYLLOC_DEFAULT macro for our api.location.type
 #define YYLLOC_DEFAULT(res,rhs,N)    (res = (N)?YYRHSLOC(rhs, 1):YYRHSLOC(rhs, 0))
-// supply missing YY_NULL in bfexpg.hpp
 #define YY_NULL    0
 #define YY_NULLPTR 0
 }
 
-%param{ mlc::yyscan_t2 yyscanner }    // formal name "yyscanner" is enforced by flex
+%param{ mlc::yyscan_t2 yyscanner }
 %param{ mlc::MlaskalCtx* ctx }
+
+%start mlaskal
 
 %code
 {
@@ -269,8 +262,7 @@ const_def:
                     case TCAT_UNDEF:
                     case TCAT_RECORD:
                     case TCAT_RANGE:
-                    case TCAT_ARRAY:
-                    // NOTHING YET...
+                    default:
                     break;
                 }
             } break;
@@ -355,9 +347,7 @@ type_def:
                     $IDENTIFIER,
                     ((record_specifier*)&*$type)->_val);
             break;
-
-            case type_specifier::type::ARRAY_TYPE:
-                // SHOULD NOT HAPPEN
+            default:
             break;
         }
     }
@@ -396,9 +386,7 @@ var_def:
             case type_specifier::type::RECORD_TYPE:
                 type = ((record_specifier*)&*$type)->_val;
             break;
-
-            case type_specifier::type::ARRAY_TYPE:
-                // SHOULD NOT HAPPEN
+            default:
             break;
         }
 
@@ -1373,12 +1361,10 @@ unsigned_constant_noidentifier:
 
 %%
 
-
 namespace yy {
 
     void mlaskal_parser::error(const location_type& l, const std::string& m)
     {
         message(DUERR_SYNTAX, l, m);
     }
-
 }

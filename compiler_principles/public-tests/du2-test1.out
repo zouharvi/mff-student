@@ -1,0 +1,64 @@
+6: program
+6: identifier [DU2TEST1]
+6: ;
+8: var
+8: identifier [I]
+8: ,
+8: identifier [J]
+8: :
+8: identifier [INTEGER]
+8: ;
+9: identifier [R]
+9: :
+9: identifier [REAL]
+9: ;
+10: identifier [S]
+10: :
+10: identifier [STRING]
+10: ;
+11: begin
+12: identifier [I]
+12: :=
+12: unsigned integer 2
+12: ;
+13: identifier [J]
+13: :=
+13: identifier [I]
+13: sign/add oper +
+13: unsigned integer 2
+13: ;
+14: identifier [R]
+14: :=
+14: real number 3.14159
+14: ;
+15: if
+15: (
+15: identifier [J]
+15: rel oper >
+15: identifier [I]
+15: )
+15: then
+16: begin
+17: identifier [C]
+17: :=
+17: string [a]
+17: ;
+18: identifier [S]
+18: :=
+18: string [bubak]
+18: ;
+19: end
+20: else
+21: begin
+22: identifier [C]
+22: :=
+22: string [']
+22: ;
+23: identifier [S]
+23: :=
+23: string [Test 'apostrofu']
+23: ;
+24: end
+25: end
+25: .
+Everything is OK

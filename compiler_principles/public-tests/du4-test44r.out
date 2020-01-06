@@ -1,0 +1,57 @@
+Warning (line 2): Label '729' declared but never used
+Warning (line 22): Label '729' declared but never used
+Everything is nearly OK, although there were 2 warnings
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+INTEGER type="T1"
+REAL type="T3"
+STRING type="T4"
+RECORD type="T2">
+	FIELD name="I" type="T1"/>
+	FIELD name="R" type="T3"/>
+	FIELD name="S" type="T4"/>
+RECORD:
+RECORD type="T5">
+	FIELD name="PRVNI" type="T2"/>
+	FIELD name="DRUHY" type="T2"/>
+RECORD:
+LABEL name="729"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_GLOBAL_VARIABLE name="CISLO" type="T1"
+SKIND_CONST name="DVA" value="2" type="T1"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_TYPE name="INTEGER" type="T1"
+SKIND_FUNCTION name="JEDNA" type="T1":
+SKIND_FUNCTION name="MULTIPLY" type="T1":
+	PMODE_BY_VALUE name="I" type="T1"
+	PMODE_BY_VALUE name="J" type="T1"
+	LABEL name="729"
+	SKIND_LOCAL_VARIABLE name="A" type="T2"
+	SKIND_LOCAL_VARIABLE name="B" type="T5"
+	SKIND_LOCAL_VARIABLE name="I" type="T1"
+	SKIND_LOCAL_VARIABLE name="J" type="T1"
+SKIND_FUNCTION name="PLUSJEDNA" type="T1":
+	PMODE_BY_VALUE name="I" type="T1"
+	SKIND_LOCAL_VARIABLE name="I" type="T1"
+SKIND_FUNCTION name="READI" type="T1":
+SKIND_FUNCTION name="READR" type="T3":
+SKIND_FUNCTION name="READS" type="T4":
+SKIND_TYPE name="REAL" type="T3"
+SKIND_TYPE name="REC" type="T2"
+SKIND_TYPE name="REC2" type="T5"
+SKIND_GLOBAL_VARIABLE name="S" type="T4"
+SKIND_TYPE name="STRING" type="T4"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="VYPISDVAKRAT":
+	PMODE_BY_VALUE name="I" type="T1"
+	SKIND_LOCAL_VARIABLE name="I" type="T1"
+	SKIND_LOCAL_VARIABLE name="R" type="T3"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T1"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T3"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T4"
+SKIND_GLOBAL_VARIABLE name="ZAZNAM" type="T2"
+****************************

@@ -1,0 +1,51 @@
+Warning (line 3): Label '1' declared but never used
+Warning (line 3): Label '2' declared but never used
+Warning (line 3): Label '3' declared but never used
+Warning (line 20): Label '10' declared but never used
+Everything is nearly OK, although there were 4 warnings
+****** CANONICAL DUMP ******
+RANGE type="T0" lower_bound="1" upper_bound="10"
+STRING type="T1"
+ARRAY type="T2" index_type="T0" element_type="T1"
+BOOLEAN type="T3"
+INTEGER type="T4"
+REAL type="T5"
+LABEL name="1"
+LABEL name="2"
+LABEL name="3"
+SKIND_TYPE name="AR" type="T2"
+SKIND_GLOBAL_VARIABLE name="B" type="T3"
+SKIND_TYPE name="BOOLEAN" type="T3"
+SKIND_CONST name="C1" value="20" type="T4"
+SKIND_CONST name="FALSE" value="0" type="T3"
+SKIND_FUNCTION name="FNC1" type="T1":
+	PMODE_BY_REFERENCE name="PARAM1" type="T4"
+	PMODE_BY_VALUE name="PARAM2" type="T5"
+	SKIND_PARAMETER_BY_REFERENCE name="PARAM1" type="T4"
+	SKIND_LOCAL_VARIABLE name="PARAM2" type="T5"
+SKIND_GLOBAL_VARIABLE name="I" type="T4"
+SKIND_TYPE name="INTEGER" type="T4"
+SKIND_GLOBAL_VARIABLE name="J" type="T4"
+SKIND_GLOBAL_VARIABLE name="POLE" type="T2"
+SKIND_PROCEDURE name="PROC1":
+	PMODE_BY_VALUE name="PARAM1" type="T4"
+	LABEL name="10"
+	SKIND_LOCAL_VARIABLE name="LOKAL" type="T4"
+	SKIND_LOCAL_VARIABLE name="PARAM1" type="T4"
+SKIND_GLOBAL_VARIABLE name="R" type="T5"
+SKIND_FUNCTION name="READI" type="T4":
+SKIND_FUNCTION name="READR" type="T5":
+SKIND_FUNCTION name="READS" type="T1":
+SKIND_TYPE name="REAL" type="T5"
+SKIND_GLOBAL_VARIABLE name="S" type="T1"
+SKIND_TYPE name="STR" type="T1"
+SKIND_TYPE name="STRING" type="T1"
+SKIND_CONST name="TRUE" value="1" type="T3"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T4"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T5"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T1"
+****************************

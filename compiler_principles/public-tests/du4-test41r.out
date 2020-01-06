@@ -1,0 +1,48 @@
+Everything is OK
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+INTEGER type="T2"
+REAL type="T3"
+RECORD type="T1">
+	FIELD name="F1" type="T2"/>
+	FIELD name="F2" type="T2"/>
+	FIELD name="F3" type="T3"/>
+RECORD:
+STRING type="T4"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_GLOBAL_VARIABLE name="GV1" type="T1"
+SKIND_GLOBAL_VARIABLE name="GV2" type="T1"
+SKIND_TYPE name="INTEGER" type="T2"
+SKIND_FUNCTION name="READI" type="T2":
+SKIND_FUNCTION name="READR" type="T3":
+SKIND_FUNCTION name="READS" type="T4":
+SKIND_TYPE name="REAL" type="T3"
+SKIND_TYPE name="REC" type="T1"
+SKIND_PROCEDURE name="RECCP":
+	PMODE_BY_VALUE name="PV" type="T1"
+	PMODE_BY_REFERENCE name="PW" type="T1"
+	SKIND_LOCAL_VARIABLE name="LV" type="T1"
+	SKIND_LOCAL_VARIABLE name="PV" type="T1"
+	SKIND_PARAMETER_BY_REFERENCE name="PW" type="T1"
+SKIND_PROCEDURE name="RECCP2":
+	PMODE_BY_VALUE name="PV" type="T1"
+	PMODE_BY_REFERENCE name="PW" type="T1"
+	SKIND_LOCAL_VARIABLE name="LV" type="T1"
+	SKIND_LOCAL_VARIABLE name="PV" type="T1"
+	SKIND_PARAMETER_BY_REFERENCE name="PW" type="T1"
+SKIND_PROCEDURE name="SCACP":
+	PMODE_BY_VALUE name="V" type="T3"
+	PMODE_BY_REFERENCE name="W" type="T3"
+	SKIND_LOCAL_VARIABLE name="V" type="T3"
+	SKIND_PARAMETER_BY_REFERENCE name="W" type="T3"
+SKIND_TYPE name="STRING" type="T4"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T3"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T4"
+****************************

@@ -1,0 +1,113 @@
+Everything is OK
+****** CANONICAL DUMP ******
+INTEGER type="T0"
+RANGE type="T1" lower_bound="1" upper_bound="10"
+ARRAY type="T2" index_type="T1" element_type="T0"
+BOOLEAN type="T3"
+REAL type="T4"
+STRING type="T5"
+SKIND_CONST name="A" value="1" type="T0"
+SKIND_PROCEDURE name="ADDVI":
+	PMODE_BY_VALUE name="PVI" type="T2"
+	PMODE_BY_REFERENCE name="PWI" type="T2"
+	SKIND_LOCAL_VARIABLE name="LVI" type="T2"
+	SKIND_LOCAL_VARIABLE name="N" type="T0"
+	SKIND_LOCAL_VARIABLE name="PVI" type="T2"
+	SKIND_PARAMETER_BY_REFERENCE name="PWI" type="T2"
+SKIND_TYPE name="ARRI" type="T2"
+SKIND_CONST name="B" value="3" type="T0"
+SKIND_TYPE name="BOOLEAN" type="T3"
+SKIND_CONST name="C" value="10" type="T0"
+SKIND_CONST name="D" value="1" type="T4"
+SKIND_PROCEDURE name="D3I":
+	PMODE_BY_VALUE name="S" type="T5"
+	PMODE_BY_VALUE name="P" type="T0"
+	PMODE_BY_VALUE name="Q" type="T0"
+	PMODE_BY_VALUE name="R" type="T0"
+	SKIND_LOCAL_VARIABLE name="P" type="T0"
+	SKIND_LOCAL_VARIABLE name="Q" type="T0"
+	SKIND_LOCAL_VARIABLE name="R" type="T0"
+	SKIND_LOCAL_VARIABLE name="S" type="T5"
+SKIND_PROCEDURE name="D3R":
+	PMODE_BY_VALUE name="S" type="T5"
+	PMODE_BY_VALUE name="P" type="T4"
+	PMODE_BY_VALUE name="Q" type="T4"
+	PMODE_BY_VALUE name="R" type="T4"
+	SKIND_LOCAL_VARIABLE name="P" type="T4"
+	SKIND_LOCAL_VARIABLE name="Q" type="T4"
+	SKIND_LOCAL_VARIABLE name="R" type="T4"
+	SKIND_LOCAL_VARIABLE name="S" type="T5"
+SKIND_CONST name="E" value="2.718" type="T4"
+SKIND_CONST name="F" value="500000" type="T4"
+SKIND_CONST name="FALSE" value="0" type="T3"
+SKIND_PROCEDURE name="GLOBALINTEGEREXPRESSIONS":
+SKIND_PROCEDURE name="GLOBALREALEXPRESSIONS":
+SKIND_GLOBAL_VARIABLE name="GVI" type="T2"
+SKIND_GLOBAL_VARIABLE name="GWI" type="T2"
+SKIND_GLOBAL_VARIABLE name="I" type="T0"
+SKIND_TYPE name="INTEGER" type="T0"
+SKIND_GLOBAL_VARIABLE name="J" type="T0"
+SKIND_GLOBAL_VARIABLE name="K" type="T0"
+SKIND_PROCEDURE name="LOCALINTEGEREXPRESSIONS":
+	SKIND_LOCAL_VARIABLE name="I" type="T0"
+	SKIND_LOCAL_VARIABLE name="JJ" type="T0"
+	SKIND_LOCAL_VARIABLE name="K" type="T0"
+SKIND_PROCEDURE name="LOCALREALEXPRESSIONS":
+	SKIND_LOCAL_VARIABLE name="X" type="T4"
+	SKIND_LOCAL_VARIABLE name="YY" type="T4"
+	SKIND_LOCAL_VARIABLE name="Z" type="T4"
+SKIND_PROCEDURE name="PARAMTESTINTEGER":
+	PMODE_BY_VALUE name="P" type="T0"
+	PMODE_BY_VALUE name="Q" type="T0"
+	PMODE_BY_VALUE name="R" type="T0"
+	SKIND_LOCAL_VARIABLE name="P" type="T0"
+	SKIND_LOCAL_VARIABLE name="Q" type="T0"
+	SKIND_LOCAL_VARIABLE name="R" type="T0"
+SKIND_PROCEDURE name="PARAMTESTREAL":
+	PMODE_BY_VALUE name="P" type="T4"
+	PMODE_BY_VALUE name="Q" type="T4"
+	PMODE_BY_VALUE name="R" type="T4"
+	SKIND_LOCAL_VARIABLE name="P" type="T4"
+	SKIND_LOCAL_VARIABLE name="Q" type="T4"
+	SKIND_LOCAL_VARIABLE name="R" type="T4"
+SKIND_FUNCTION name="READI" type="T0":
+SKIND_FUNCTION name="READR" type="T4":
+SKIND_FUNCTION name="READS" type="T5":
+SKIND_TYPE name="REAL" type="T4"
+SKIND_TYPE name="STRING" type="T5"
+SKIND_CONST name="TRUE" value="1" type="T3"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T0"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T4"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T5"
+SKIND_GLOBAL_VARIABLE name="X" type="T4"
+SKIND_GLOBAL_VARIABLE name="Y" type="T4"
+SKIND_GLOBAL_VARIABLE name="Z" type="T4"
+****************************
+****** PROGRAM OUTPUT ******
+addvi: 1 3 6
+addvi: 2 3 6
+addvi: 3 3 6
+addvi: 4 3 6
+addvi: 5 3 6
+addvi: 6 3 6
+addvi: 7 3 6
+addvi: 8 3 6
+addvi: 9 3 6
+addvi: 10 3 6
+mainintegerassignment: 1 3 10
+mainintegerexpressions: 8 31 4
+globalintegerexpressions: 8 31 4
+localintegerassignment: 1 3 10
+localintegerexpressions: 8 31 4
+paramtestinteger: 1 3 10
+mainrealassignment: 1 2.718 500000
+mainrealexpressions: 499998 1.359e+06 1.00001
+globalrealexpressions: 499998 1.359e+06 1.00001
+localrealassignment: 1 2.718 500000
+localrealexpressions: 499998 1.359e+06 1.00001
+paramtestreal: 1 2.718 500000
+****************************

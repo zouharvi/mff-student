@@ -37,22 +37,6 @@ int divideBignum(std::vector<int> &bignum, bool &overflow)
 
     return remainder;
 }
-int totalArrayDimension(mlc::type_pointer arrType)
-{
-    int dim = 1;
-    while (arrType->cat() == TCAT_ARRAY)
-    {
-        auto rangeType = arrType->access_array()->index_type()->access_range();
-        auto lowerBound = rangeType->lowerBound();
-        auto upperBound = rangeType->upperBound();
-
-        dim *= (*upperBound - *lowerBound + 1);
-
-        arrType = arrType->access_array()->element_type();
-    }
-
-    return dim;
-}
 
 static void store_temp_variable(mlc::icblock_pointer block, mlc::type_category type, mlc::stack_address addr)
 {
@@ -134,9 +118,6 @@ void load_variable(mlc::icblock_pointer block, mlc::typed_symbol_pointer tsp)
         case TCAT_STR:
             block->append<ai::LLDS>(addr);
             break;
-        case TCAT_ARRAY:
-            block->append<ai::LREF>(addr);
-            break;
         }
         break;
     }
@@ -156,9 +137,6 @@ void load_variable(mlc::icblock_pointer block, mlc::typed_symbol_pointer tsp)
             break;
         case TCAT_STR:
             block->append<ai::GLDS>(addr);
-            break;
-        case TCAT_ARRAY:
-            block->append<ai::GREF>(addr);
             break;
         }
         break;
@@ -211,89 +189,6 @@ static void append_many(mlc::MlaskalCtx *ctx, mlc::icblock_pointer out, mlc::icb
     out->append<ai::LDLITI>(ctx->tab->ls_int().add(count));
     out->append<ai::EQI>();
     out->append_with_target<ai::JF>(label_loop);
-}
-
-void load_array(mlc::MlaskalCtx *ctx, mlc::icblock_pointer block, mlc::icblock_pointer src, mlc::type_pointer arrType)
-{
-    auto elemType = arrType;
-    while (elemType->cat() == TCAT_ARRAY)
-    {
-        elemType = elemType->access_array()->element_type();
-    }
-
-    int elemCount = totalArrayDimension(arrType);
-    for (int i = 0; i < elemCount; ++i)
-    {
-        auto loop_block = mlc::icblock_create();
-        loop_block = mlc::icblock_merge_and_kill(loop_block, src);
-        auto type = elemType->cat();
-        switch (type)
-        {
-        case TCAT_BOOL:
-            block->append<ai::XLDB>();
-            break;
-        case TCAT_INT:
-            block->append<ai::XLDI>();
-            break;
-        case TCAT_REAL:
-            block->append<ai::XLDR>();
-            break;
-        case TCAT_STR:
-            block->append<ai::XLDS>();
-            break;
-        }
-        block = mlc::icblock_merge_and_kill(loop_block, block);
-    }
-}
-
-void store_array(mlc::MlaskalCtx *ctx, mlc::icblock_pointer block, int arrLine, mlc::type_pointer arrType, mlc::exprConst &arr, mlc::exprConst &expr)
-{
-
-    auto elemType = arrType;
-    while (elemType->cat() == TCAT_ARRAY)
-    {
-        elemType = elemType->access_array()->element_type();
-    }
-
-    int elemCount = totalArrayDimension(arrType);
-    auto loop_block = mlc::icblock_create();
-    loop_block = mlc::icblock_merge_and_kill(loop_block, expr.code);
-    for (int i = 0; i < elemCount; ++i)
-    {
-        auto type = elemType->cat();
-        switch (type)
-        {
-        case TCAT_BOOL:
-            block->append<ai::XLDB>();
-            break;
-        case TCAT_INT:
-            block->append<ai::XLDI>();
-            break;
-        case TCAT_REAL:
-            block->append<ai::XLDR>();
-            break;
-        case TCAT_STR:
-            block->append<ai::XLDS>();
-            break;
-        }
-
-        switch (type)
-        {
-        case TCAT_BOOL:
-            block->append<ai::XSTB>();
-            break;
-        case TCAT_INT:
-            block->append<ai::XSTI>();
-            break;
-        case TCAT_REAL:
-            block->append<ai::XSTR>();
-            break;
-        case TCAT_STR:
-            block->append<ai::XSTS>();
-            break;
-        }
-        block = mlc::icblock_merge_and_kill(loop_block, block);
-    }
 }
 
 };

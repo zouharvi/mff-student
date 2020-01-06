@@ -1,0 +1,70 @@
+Warning (line 3): Label '1' declared but never used
+Warning (line 3): Label '2' declared but never used
+Warning (line 3): Label '3' declared but never used
+Warning (line 23): Label '10' declared but never used
+Everything is nearly OK, although there were 4 warnings
+****** CANONICAL DUMP ******
+RANGE type="T0" lower_bound="1" upper_bound="2"
+RANGE type="T1" lower_bound="3" upper_bound="4"
+RANGE type="T2" lower_bound="5" upper_bound="6"
+STRING type="T3"
+ARRAY type="T4" index_type="T2" element_type="T3"
+ARRAY type="T5" index_type="T1" element_type="T4"
+ARRAY type="T6" index_type="T0" element_type="T5"
+RANGE type="T7" lower_bound="1" upper_bound="10"
+RANGE type="T8" lower_bound="11" upper_bound="20"
+ARRAY type="T9" index_type="T8" element_type="T3"
+ARRAY type="T10" index_type="T7" element_type="T9"
+BOOLEAN type="T11"
+INTEGER type="T12"
+REAL type="T13"
+RANGE type="T14" lower_bound="20" upper_bound="30"
+ARRAY type="T15" index_type="T14" element_type="T12"
+LABEL name="1"
+LABEL name="2"
+LABEL name="3"
+SKIND_TYPE name="AR1" type="T6"
+SKIND_TYPE name="AR2" type="T10"
+SKIND_GLOBAL_VARIABLE name="B" type="T11"
+SKIND_TYPE name="BOOLEAN" type="T11"
+SKIND_CONST name="C1" value="20" type="T12"
+SKIND_CONST name="FALSE" value="0" type="T11"
+SKIND_FUNCTION name="FNC1" type="T3":
+	PMODE_BY_REFERENCE name="PARAM1" type="T12"
+	PMODE_BY_REFERENCE name="PARAM2" type="T12"
+	PMODE_BY_VALUE name="PARAM3" type="T13"
+	SKIND_PARAMETER_BY_REFERENCE name="PARAM1" type="T12"
+	SKIND_PARAMETER_BY_REFERENCE name="PARAM2" type="T12"
+	SKIND_LOCAL_VARIABLE name="PARAM3" type="T13"
+SKIND_FUNCTION name="FNC2" type="T12":
+SKIND_GLOBAL_VARIABLE name="I" type="T12"
+SKIND_TYPE name="INT" type="T12"
+SKIND_TYPE name="INTEGER" type="T12"
+SKIND_GLOBAL_VARIABLE name="J" type="T12"
+SKIND_GLOBAL_VARIABLE name="POLE" type="T6"
+SKIND_PROCEDURE name="PROC1":
+	PMODE_BY_VALUE name="PARAM1" type="T12"
+	LABEL name="10"
+	SKIND_CONST name="C3" value="30" type="T12"
+	SKIND_LOCAL_VARIABLE name="LOKAL" type="T15"
+	SKIND_TYPE name="LOKALNIPOLE" type="T15"
+	SKIND_LOCAL_VARIABLE name="PARAM1" type="T12"
+SKIND_PROCEDURE name="PROC2":
+SKIND_GLOBAL_VARIABLE name="R" type="T13"
+SKIND_FUNCTION name="READI" type="T12":
+SKIND_FUNCTION name="READR" type="T13":
+SKIND_FUNCTION name="READS" type="T3":
+SKIND_TYPE name="REAL" type="T13"
+SKIND_TYPE name="RNG" type="T7"
+SKIND_GLOBAL_VARIABLE name="S" type="T3"
+SKIND_TYPE name="STR" type="T3"
+SKIND_TYPE name="STRING" type="T3"
+SKIND_CONST name="TRUE" value="1" type="T11"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T12"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T13"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T3"
+****************************

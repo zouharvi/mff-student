@@ -1,0 +1,46 @@
+Warning (line 3): Label '1' declared but never used
+Warning (line 3): Label '2' declared but never used
+Warning (line 3): Label '3' declared but never used
+Warning (line 12): Label '10' declared but never used
+Everything is nearly OK, although there were 4 warnings
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+STRING type="T1"
+INTEGER type="T2"
+REAL type="T3"
+LABEL name="1"
+LABEL name="2"
+LABEL name="3"
+SKIND_GLOBAL_VARIABLE name="B" type="T0"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_FUNCTION name="FNC1" type="T1":
+	PMODE_BY_REFERENCE name="PARAM1" type="T2"
+	PMODE_BY_VALUE name="PARAM2" type="T3"
+	SKIND_PARAMETER_BY_REFERENCE name="PARAM1" type="T2"
+	SKIND_LOCAL_VARIABLE name="PARAM2" type="T3"
+SKIND_FUNCTION name="FNC2" type="T2":
+SKIND_GLOBAL_VARIABLE name="I" type="T2"
+SKIND_TYPE name="INTEGER" type="T2"
+SKIND_GLOBAL_VARIABLE name="J" type="T2"
+SKIND_PROCEDURE name="PROC1":
+	PMODE_BY_VALUE name="PARAM1" type="T2"
+	LABEL name="10"
+	SKIND_LOCAL_VARIABLE name="LOKAL" type="T2"
+	SKIND_LOCAL_VARIABLE name="PARAM1" type="T2"
+SKIND_GLOBAL_VARIABLE name="R" type="T3"
+SKIND_FUNCTION name="READI" type="T2":
+SKIND_FUNCTION name="READR" type="T3":
+SKIND_FUNCTION name="READS" type="T1":
+SKIND_TYPE name="REAL" type="T3"
+SKIND_GLOBAL_VARIABLE name="S" type="T1"
+SKIND_TYPE name="STRING" type="T1"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T3"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T1"
+****************************

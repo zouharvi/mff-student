@@ -1,0 +1,86 @@
+1: program
+1: identifier
+1: ;
+1: label
+1: unsigned integer 0
+1: ;
+1: type
+1: identifier
+1: =
+Error (line 1): Unknown character '^'(0x5e) on the input
+1: identifier
+1: ;
+1: identifier
+1: =
+1: (
+1: identifier
+1: ,
+1: identifier
+1: ,
+1: identifier
+1: )
+1: ;
+1: var
+1: identifier
+1: ,
+1: identifier
+1: ,
+1: identifier
+1: :
+1: identifier
+1: ;
+1: identifier
+1: :
+1: identifier
+1: ;
+1: begin
+1: for
+1: identifier
+1: :=
+1: unsigned integer 0
+1: for direction to
+1: unsigned integer 0
+1: do
+1: begin
+1: identifier
+1: :=
+1: identifier
+1: mul oper *
+1: unsigned integer 0
+1: ;
+1: identifier
+1: :=
+1: identifier
+1: mul oper mod
+1: (
+1: unsigned integer 0
+1: sign/add oper +
+1: identifier
+1: )
+1: ;
+1: if
+1: identifier
+1: rel oper >=
+1: unsigned integer 0
+1: then
+1: goto
+1: unsigned integer 0
+1: ;
+1: end
+1: unsigned integer 0
+1: :
+1: identifier
+1: :=
+1: identifier
+1: mul oper *
+1: real number 0
+1: ;
+1: identifier
+1: :=
+1: identifier
+1: mul oper /
+1: real number 0
+1: ;
+1: end
+1: .
+There were some errors 1 and warnings 0

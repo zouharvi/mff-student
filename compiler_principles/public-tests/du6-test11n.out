@@ -1,0 +1,28 @@
+Error (line 12): Expression may not be passed by reference
+There were some errors 1 and warnings 0
+****** CANONICAL DUMP ******
+INTEGER type="T0"
+BOOLEAN type="T1"
+REAL type="T2"
+STRING type="T3"
+SKIND_PROCEDURE name="ADDONE":
+	PMODE_BY_REFERENCE name="I" type="T0"
+	SKIND_PARAMETER_BY_REFERENCE name="I" type="T0"
+SKIND_TYPE name="BOOLEAN" type="T1"
+SKIND_CONST name="FALSE" value="0" type="T1"
+SKIND_GLOBAL_VARIABLE name="I" type="T0"
+SKIND_TYPE name="INTEGER" type="T0"
+SKIND_FUNCTION name="READI" type="T0":
+SKIND_FUNCTION name="READR" type="T2":
+SKIND_FUNCTION name="READS" type="T3":
+SKIND_TYPE name="REAL" type="T2"
+SKIND_TYPE name="STRING" type="T3"
+SKIND_CONST name="TRUE" value="1" type="T1"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T0"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T3"
+****************************

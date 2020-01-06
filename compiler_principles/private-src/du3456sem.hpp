@@ -28,13 +28,9 @@ struct argsCode
 	std::vector<mlc::type_category> argTypes;
 };
 
-int totalArrayDimension(mlc::type_pointer arrType);
-
 void store_variable(mlc::icblock_pointer block, mlc::typed_symbol_pointer tsp);
 void load_variable(mlc::icblock_pointer block, mlc::typed_symbol_pointer tsp);
 void ref_variable(mlc::icblock_pointer block, mlc::typed_symbol_pointer tsp);
-void load_array(mlc::MlaskalCtx *ctx, mlc::icblock_pointer block, mlc::icblock_pointer src, mlc::type_pointer arrType);
-void store_array(mlc::MlaskalCtx *ctx, mlc::icblock_pointer block, int arrLine, mlc::type_pointer arrType, mlc::exprConst &arr, mlc::exprConst &expr);
 } // namespace mlc
 
 #endif

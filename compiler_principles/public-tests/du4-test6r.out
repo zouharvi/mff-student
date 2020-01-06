@@ -1,0 +1,75 @@
+Warning (line 3): Label '1' declared but never used
+Warning (line 3): Label '2' declared but never used
+Warning (line 3): Label '3' declared but never used
+Warning (line 29): Label '10' declared but never used
+Everything is nearly OK, although there were 4 warnings
+****** CANONICAL DUMP ******
+BOOLEAN type="T0"
+INTEGER type="T2"
+REAL type="T3"
+RECORD type="T1">
+	FIELD name="X" type="T2"/>
+	FIELD name="Y" type="T2"/>
+	FIELD name="D" type="T3"/>
+RECORD:
+STRING type="T4"
+RECORD type="T5">
+	FIELD name="B1" type="T1"/>
+	FIELD name="B2" type="T1"/>
+	FIELD name="DELKA" type="T3"/>
+	FIELD name="JMENO" type="T4"/>
+RECORD:
+LABEL name="1"
+LABEL name="2"
+LABEL name="3"
+SKIND_GLOBAL_VARIABLE name="B" type="T0"
+SKIND_TYPE name="BOD" type="T1"
+SKIND_TYPE name="BOOLEAN" type="T0"
+SKIND_CONST name="C1" value="20" type="T2"
+SKIND_CONST name="FALSE" value="0" type="T0"
+SKIND_FUNCTION name="FNC1" type="T4":
+	PMODE_BY_REFERENCE name="PARAM1" type="T2"
+	PMODE_BY_REFERENCE name="PARAM2" type="T2"
+	PMODE_BY_VALUE name="PARAM3" type="T3"
+	SKIND_PARAMETER_BY_REFERENCE name="PARAM1" type="T2"
+	SKIND_PARAMETER_BY_REFERENCE name="PARAM2" type="T2"
+	SKIND_LOCAL_VARIABLE name="PARAM3" type="T3"
+SKIND_FUNCTION name="FNC2" type="T2":
+SKIND_FUNCTION name="FNC3" type="T2":
+	PMODE_BY_REFERENCE name="U1" type="T5"
+	PMODE_BY_VALUE name="U2" type="T5"
+	PMODE_BY_VALUE name="U3" type="T5"
+	SKIND_PARAMETER_BY_REFERENCE name="U1" type="T5"
+	SKIND_LOCAL_VARIABLE name="U2" type="T5"
+	SKIND_LOCAL_VARIABLE name="U3" type="T5"
+SKIND_GLOBAL_VARIABLE name="I" type="T2"
+SKIND_TYPE name="INT" type="T2"
+SKIND_TYPE name="INTEGER" type="T2"
+SKIND_GLOBAL_VARIABLE name="J" type="T2"
+SKIND_PROCEDURE name="PROC1":
+	PMODE_BY_VALUE name="PARAM1" type="T2"
+	LABEL name="10"
+	SKIND_CONST name="C3" value="30" type="T2"
+	SKIND_LOCAL_VARIABLE name="LOKAL" type="T5"
+	SKIND_TYPE name="LOKALNIUSECKA" type="T5"
+	SKIND_LOCAL_VARIABLE name="PARAM1" type="T2"
+SKIND_PROCEDURE name="PROC2":
+SKIND_GLOBAL_VARIABLE name="R" type="T3"
+SKIND_FUNCTION name="READI" type="T2":
+SKIND_FUNCTION name="READR" type="T3":
+SKIND_FUNCTION name="READS" type="T4":
+SKIND_TYPE name="REAL" type="T3"
+SKIND_GLOBAL_VARIABLE name="S" type="T4"
+SKIND_TYPE name="STR" type="T4"
+SKIND_TYPE name="STRING" type="T4"
+SKIND_CONST name="TRUE" value="1" type="T0"
+SKIND_GLOBAL_VARIABLE name="U" type="T5"
+SKIND_TYPE name="USECKA" type="T5"
+SKIND_PROCEDURE name="WRITEI":
+	PMODE_BY_VALUE name="P" type="T2"
+SKIND_PROCEDURE name="WRITELN":
+SKIND_PROCEDURE name="WRITER":
+	PMODE_BY_VALUE name="P" type="T3"
+SKIND_PROCEDURE name="WRITES":
+	PMODE_BY_VALUE name="P" type="T4"
+****************************
