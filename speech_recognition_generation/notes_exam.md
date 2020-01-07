@@ -1,4 +1,5 @@
-### Overview and summary of important topics taught at NPFL038, Fundamentals of Speech Recognition and Generation
+### Overview and summary of important topics taught
+### NPFL038, Fundamentals of Speech Recognition and Generation
 ### Vilém Zouhar, January 2020
 
 $\vspace{1cm}$
@@ -23,7 +24,7 @@ _Source: Huang - Chapter 2.1_
 
 ### Intensity perception
 
-Sound amplitude is measured on an adjusted logarithmic scale: $10 \cdot log_{10} \big( P/P_0 \big)$, where $P_0$ is the lowest audible power level (amplitude for 1kHz). The graph of minimal power needed for a given frequency (from $10^1$ to $10^4$) is a skewed U curve with minimum between $10^3$ and $10^4$ (human speech).
+Sound amplitude is measured on an adjusted logarithmic scale: $10 \cdot \log_{10} \big( P/P_0 \big)$, where $P_0$ is the lowest audible power level (amplitude for 1kHz). The graph of minimal power needed for a given frequency (from $10^1$ to $10^4$) is a skewed U curve with minimum between $10^3$ and $10^4$ (human speech).
 
 ### Speech production
 
@@ -114,8 +115,8 @@ Without further augmentations, it can produce codebooks with $2^n$ vectors.
 
 This algorithm aims to be faster than the previous ones. It does not recompute the whole partition at once, but incrementally adds single vectors and recomputes only the affected partition.
 
-1. Randomly select $N$ vectors from the sample space
-2. Take a yet unprocessed sample vector $x$
+1. Randomly select $N$ vectors from the sample space, which will be the initial codebook
+2. Take a yet unprocessed sample vector $x$ (sequentially)
 3. Find the corresponding partition: $y'_i = \text{argmin}\ d(x, y'_i)$
 4. $R_i = R_i \cup \{x\}$, $y_i = cent(R_i)$ 
 5. Stop when all sample vectors processed
@@ -128,7 +129,7 @@ Instead of describing only a discrete number of points, we can make use of norma
 
 This algorithm defines a general way by which to create a probability model (as a sum of Gaussians) from a set of sample vectors. It tries to maximize the probability of seen data given the parametric boundaries (limited number of parameters). The probability of a single vector given the means $\mu_i$, the covariances $C_i$ and prior probabilities $c_i$: $p(x|\theta) = \sum c_i \mathcal{N}(x|\mu_i, C_i)$ ($\mu$ and $C$ are part of $\theta$).
 
-The probability of the training data can be written as $p(x_1, x_2, \ldots, x_T|\theta) = L(\theta|\{x_1, x_2, \ldots\})$. This way we can represent that we pick the best possible model. Since the likelihood function is monotonic, maximizing $L(\theta|\{x_1, \ldots\})$ is the same as maximizing $\sum \ln p(x_i|\theta)$. 
+The probability of the training data can be written as $\sum \ln p(x_i|\theta) = L(\theta|\{x_1, x_2, \ldots\})$. This way we can represent that we pick the best possible model. Since the likelihood function is monotonic, maximizing $L(\theta|\{x_1, \ldots\})$ is the same as maximizing $\sum \ln p(x_i|\theta)$. 
 
 Input: $\omega = \{x_1, x_2, \ldots, x_T\}$, output: codebook of size $N$
 
@@ -143,7 +144,7 @@ Input: $\omega = \{x_1, x_2, \ldots, x_T\}$, output: codebook of size $N$
 
 ## Usage
 
-Vector quantization is used in Speech Recognition (with HMMs) to model the probability of a (speech) vector in a specific state, which stores some probability model (that we train).
+Vector quantization (especially mixture density models) is used in Speech Recognition (with HMMs) to model the probability of a (speech) vector in a specific state, which stores some probability model (that we train).
 
 \pagebreak
 
@@ -186,7 +187,7 @@ The second task with HMM deals with parameter estimation. As in vector quantizat
 
 ## Forward-Backward algorithm
 
-To compute the probability of automata being at state $s_i$ in time $t$ ($P(S_t = i|O, \lambda$) we will need the symmetrical complement to forward variables. Given an HMM and an output string $O$ we can compute the forward variables $\alpha$, but starting from the end (of the HMM and also of $O$) we can get backward variables $\beta$ in the very same way. We can then get the posterior probability: $$\gamma_t(i) = P(S_t = i|O,\lambda) = \frac{\alpha_t(i) \beta_t(i)}{P(O|\lambda)}$$
+To compute the probability of automata being at state $s_i$ in time $t$ ($P(S_t = i|O, \lambda$) we will need something symmetrical to forward variables, but which can also model the path from the end. Given an HMM and an output string $O$ we can compute the forward variables $\alpha$, but starting from the end (of the HMM and also of $O$) we can get backward variables $\beta$ in the very same way. We can then get the posterior probability: $$\gamma_t(i) = P(S_t = i|O,\lambda) = \frac{\alpha_t(i) \beta_t(i)}{P(O|\lambda)}$$
 
 ## Baum-Welch
 
@@ -243,7 +244,7 @@ The difference between Baum-Welch and Viterbi training is very similar to the di
 - Symbol output probability: $$\hat{b}_{j}(o_k) = \frac{\sum_{t: O_t = o_k} \chi_t(j)}{\sum_t \chi_t(j)}$$
 4. Recompute the training data probability $P(O|\lambda)$. Repeat if it improved significantly.
 
-Viterbi training is much faster and intuitive, but we are unable (it is much more complicated) to use mixture models.
+Viterbi training is much faster and intuitive, but we are unable (it is much more complicated) to use mixture models and no direct analytical formulas exist.
 
 \pagebreak
 
@@ -265,7 +266,7 @@ During initialization, we can use phoneme-level aligned data, so that we know th
 
 ## Dynamic features
 
-Derivatives are part of the observation vector and so have their own set of gaussian parameters. They have to be taken into consideration when smoothing the curve (the derivatives define the smoothing).
+Derivatives are part of the observation vector and so have their own set of gaussian parameters. They have to be taken into consideration when smoothing the curve (the derivatives define the smoothing). We need this, because given a state sequence, the probability would be maximized by using an average vector from each state. This does not happen in reality, as there are transitions.
 
 ## Context dependency
 
@@ -280,9 +281,7 @@ Encoding for each feature must be thoroughly considered, as some are probabiliti
 
 ## Speaker characteristics
 
-We can start with an _average voice model_ and then on low data estimate the transform for every phoneme using for example decision tree. This way we can mimic another voice. 
-
-We can also combine two or more models to create a new voice.
+We can start with an _average voice model_ and then on low data estimate the transform for every phoneme using for example decision tree. This way we can mimic another voice. We can also combine two or more models to create a new voice.
 
 \pagebreak
 
@@ -322,21 +321,21 @@ HResult uses word accuracy, which is computed as $\frac{C-I}{N}$ and correctness
 ## Grammars
 
 ### Single-word recognition
-A simple grammar, which connects the start state with all words (uniform prob) and all word with the end state (100% transition probability).
+A simple grammar, which connects the start state with all words (uniform or unigram probability) and all word with the end state (100% transition probability).
 
 ### Speech recognition
-Either a full grammar description (in the Chomsky hierarchy) or some stochastic graph, based on zerogram, unigram, bigram or trigram models.
+Either a full grammar description (finite state automata in the Chomsky hierarchy) or some stochastic graph, based on zerogram, unigram, bigram or trigram models.
 
 ## Mel-frequency cepstrum
 _Source: https://en.wikipedia.org/wiki/Mel-frequency_cepstrum_
 
 After we take the Fourier transform, we put it through the mel scale, so that it is relativized as to what are people sensitive to. Discrete cosine transform is almost like the Fourier transform inverse.
 
-1. Take the Fourier transform of (a windowed excerpt of) a signal.
-2. Map the powers of the spectrum obtained above onto the mel scale, using triangular overlapping windows.
-3. Take the logs of the powers at each of the mel frequencies.
-4. Take the discrete cosine transform of the list of mel log powers, as if it were a signal.
-5. The MFCCs are the amplitudes of the resulting spectrum.
+1. Take the Fourier transform of (a windowed excerpt of) a signal
+2. Map the powers of the spectrum obtained above onto the mel scale, using triangular overlapping windows
+3. Take the logs of the powers at each of the mel frequencies
+4. Take the discrete cosine transform of the list of mel log powers, as if it were a signal
+5. The MFCCs are the amplitudes of the resulting spectrum
 
 \vspace{1cm}
 
