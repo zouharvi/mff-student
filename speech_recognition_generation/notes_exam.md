@@ -312,9 +312,9 @@ To evaluate ASR we can make use of the Levenshtein Distance. Usually, we conside
 - $C$ - number of correct words
 - $I$ - number of inserted words
 - $D$ - number of deleted words
-- $C$ - number of changed words
+- $S$ - number of changed words
 
-Word error rate (WER) can be thus defined as $\frac{I+D+C}{C+S+I} = \frac{I+D+C}{\#\text{words in reference}}$.
+Word error rate (WER) can be thus defined as $\frac{I+D+C}{C+S+D} = \frac{I+D+C}{\#\text{words in reference}}$.
 
 HResult uses word accuracy, which is computed as $\frac{C-I}{N}$ and correctness, which we get as $\frac{C}{N}$. It also computes the number of sentences with all words recognized correctly.
 
