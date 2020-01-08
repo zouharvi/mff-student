@@ -13,18 +13,16 @@
 
 %code requires
 {
-#include "dutables.hpp"
-#include "du3456sem.hpp"
-#pragma warning (disable:4065)
-#define YYLLOC_DEFAULT(res,rhs,N)    (res = (N)?YYRHSLOC(rhs, 1):YYRHSLOC(rhs, 0))
-#define YY_NULL    0
-#define YY_NULLPTR 0
+    #include "dutables.hpp"
+    #include "du3456sem.hpp"
+    #pragma warning (disable:4065)
+    #define YYLLOC_DEFAULT(res,rhs,N)    (res = (N)?YYRHSLOC(rhs, 1):YYRHSLOC(rhs, 0))
+    #define YY_NULL    0
+    #define YY_NULLPTR 0
 }
 
 %param{ mlc::yyscan_t2 yyscanner }
 %param{ mlc::MlaskalCtx* ctx }
-
-%start mlaskal
 
 %code
 {
@@ -112,36 +110,36 @@
 
 /* expressions */
 %type<mlc::expression::pointer> factor
-%type<mlc::expression::pointer> mul_expression
-%type<mlc::expression::pointer> add_expression
-%type<mlc::expression::pointer> simple_expression
+%type<mlc::expression::pointer> mulExpression
+%type<mlc::expression::pointer> addExpression
+%type<mlc::expression::pointer> simpleExpression
 %type<mlc::expression::pointer> expression
 
-%type<mlc::real_par_list::pointer> real_par_list
+%type<mlc::realParList::pointer> realParList
 
 /* variables */
-%type<mlc::id_list::pointer> variable_noidentifier
-%type<mlc::id_list::pointer> variable
+%type<mlc::idList::pointer> variable_noidentifier
+%type<mlc::idList::pointer> variable
 
 /* profun-definition */
 %type<std::tuple<mlc::ls_id_index, mlc::parameter_list_ptr>> profun_header
 %type<std::tuple<mlc::ls_id_index, mlc::parameter_list_ptr>> procedure_header
 %type<std::tuple<mlc::ls_id_index, mlc::parameter_list_ptr>> function_header
-%type<mlc::parameter_list_ptr> formal_par_list
+%type<mlc::parameter_list_ptr> formalParList
 %type<mlc::parameter_list_ptr> formal_par
 
 /* types */
-%type<mlc::type_specifier::pointer> type
+%type<mlc::typeSpecifier::pointer> type
 %type<mlc::type_pointer> structured_type
 %type<mlc::field_list_ptr> record_body
 %type<mlc::field_list_ptr> field_list
-%type<mlc::var_def::pointer> var_def
-%type<mlc::id_list::pointer> identifier_list
+%type<mlc::varDef::pointer> varDef
+%type<mlc::idList::pointer> identifier_list
 
 /* constants */
-%type<mlc::constant_value::pointer> constant
-%type<mlc::constant_value::pointer> unsigned_constant
-%type<mlc::constant_value::pointer> unsigned_constant_noidentifier
+%type<mlc::valueConstant::pointer> constant
+%type<mlc::valueConstant::pointer> unsigned_constant
+%type<mlc::valueConstant::pointer> unsigned_constant_noidentifier
 
 %start program
 
@@ -167,23 +165,23 @@ block_header:
     ;
 
 block_header_label:
-    /* empty */
+    /* Can be empty; don't remove */
     | LABEL label_list SEMICOLON
     ;
 
 block_header_const:
-    /* empty */
+    /* Can be empty; don't remove */
     | CONST const_def_list
     ;
 
 block_header_type:
-    /* empty */
+    /* Can be empty; don't remove */
     | TYPE type_def_list
     ;
 
 block_header_var:
-    /* empty */
-    | VAR var_def_list
+    /* Can be empty; don't remove */
+    | VAR varDef_list
     ;
 
 block:
@@ -201,16 +199,10 @@ statement_list:
 
 label_list:
     UINT {
-        ctx->tab->add_label_entry(
-            @UINT,
-            $UINT,
-            ctx->tab->new_label());
+        ctx->tab->add_label_entry(@UINT, $UINT, ctx->tab->new_label());
     }
     | label_list[list] COMMA UINT {
-        ctx->tab->add_label_entry(
-            @UINT,
-            $UINT,
-            ctx->tab->new_label());
+        ctx->tab->add_label_entry(@UINT, $UINT, ctx->tab->new_label());
     }
     ;
 
@@ -221,42 +213,28 @@ const_def_list:
 
 const_def:
     IDENTIFIER EQ constant {
-        switch ($constant->get_type()) {
-            case constant_value::type::ID_CONSTANT: {
-                auto value = ((id_constant*)&*$constant)->_val;
+        switch ($constant->getType()) {
+            case valueConstant::type::ID_CONSTANT: {
+                auto value = ((idConstant*)&*$constant)->_val;
                 mlc::symbol_pointer sp = ctx->tab->find_symbol(value);
-                if (sp->kind() != SKIND_CONST) {
+                if (sp->kind() != SKIND_CONST)
                     message(DUERR_NOTCONST, @constant, *value);
-                }
 
                 switch (sp->access_const()->type()->cat()) {
                     case TCAT_REAL:
-                        ctx->tab->add_const_real(
-                            @IDENTIFIER,
-                            $IDENTIFIER,
-                            sp->access_const()->access_real_const()->real_value());
-
+                        ctx->tab->add_const_real(@IDENTIFIER, $IDENTIFIER, sp->access_const()->access_real_const()->real_value());
                     break;
 
                     case TCAT_INT:
-                        ctx->tab->add_const_int(
-                            @IDENTIFIER,
-                            $IDENTIFIER,
-                            sp->access_const()->access_int_const()->int_value());
+                        ctx->tab->add_const_int(@IDENTIFIER, $IDENTIFIER, sp->access_const()->access_int_const()->int_value());
                     break;
 
                     case TCAT_STR:
-                        ctx->tab->add_const_str(
-                            @IDENTIFIER,
-                            $IDENTIFIER,
-                            sp->access_const()->access_str_const()->str_value());
+                        ctx->tab->add_const_str(@IDENTIFIER, $IDENTIFIER, sp->access_const()->access_str_const()->str_value());
                     break;
 
                     case TCAT_BOOL:
-                        ctx->tab->add_const_bool(
-                            @IDENTIFIER,
-                            $IDENTIFIER,
-                            sp->access_const()->access_bool_const()->bool_value());
+                        ctx->tab->add_const_bool(@IDENTIFIER, $IDENTIFIER, sp->access_const()->access_bool_const()->bool_value());
                     break;
 
                     case TCAT_UNDEF:
@@ -267,51 +245,35 @@ const_def:
                 }
             } break;
 
-            case constant_value::type::UINT_CONSTANT:
-                ctx->tab->add_const_int(@IDENTIFIER, $IDENTIFIER, ((uint_constant*)&*$constant)->_val);
+            case valueConstant::type::UINT_CONSTANT:
+                ctx->tab->add_const_int(@IDENTIFIER, $IDENTIFIER, ((uintConstant*)&*$constant)->_val);
             break;
 
-            case constant_value::type::STR_CONSTANT:
-                ctx->tab->add_const_str(@IDENTIFIER, $IDENTIFIER, ((str_constant*)&*$constant)->_val);
+            case valueConstant::type::STR_CONSTANT:
+                ctx->tab->add_const_str(@IDENTIFIER, $IDENTIFIER, ((strConstant*)&*$constant)->_val);
             break;
 
-            case constant_value::type::REAL_CONSTANT:
-                ctx->tab->add_const_real(@IDENTIFIER, $IDENTIFIER, ((real_constant*)&*$constant)->_val);
+            case valueConstant::type::REAL_CONSTANT:
+                ctx->tab->add_const_real(@IDENTIFIER, $IDENTIFIER, ((realConstant*)&*$constant)->_val);
             break;
 
-            case constant_value::type::SIGNED_UINT_CONSTANT:
-                if (
-                    ((signed_uint_constant*)&*$constant)->_oper ==
-                        DUTOKGE_OPER_SIGNADD::DUTOKGE_PLUS
-                ) {
-                    ctx->tab->add_const_int(
-                        @IDENTIFIER,
-                        $IDENTIFIER,
-                        ((signed_uint_constant*)&*$constant)->_val);
+            case valueConstant::type::SIGNED_UINT_CONSTANT:
+                if (((signedUintConstant*)&*$constant)->_oper == DUTOKGE_OPER_SIGNADD::DUTOKGE_PLUS) {
+                    ctx->tab->add_const_int(@IDENTIFIER, $IDENTIFIER,
+                        ((signedUintConstant*)&*$constant)->_val);
                 } else {
-                    ctx->tab->add_const_int(
-                        @IDENTIFIER,
-                        $IDENTIFIER,
-                        ctx->tab->ls_int().add(
-                            -*((signed_uint_constant*)&*$constant)->_val));
+                    ctx->tab->add_const_int(@IDENTIFIER, $IDENTIFIER,
+                        ctx->tab->ls_int().add(-*((signedUintConstant*)&*$constant)->_val));
                 }
             break;
 
-            case constant_value::type::SIGNED_REAL_CONSTANT:
-                if (
-                    ((signed_real_constant*)&*$constant)->_oper ==
-                        DUTOKGE_OPER_SIGNADD::DUTOKGE_PLUS
-                ) {
-                    ctx->tab->add_const_real(
-                        @IDENTIFIER,
-                        $IDENTIFIER,
-                        ((signed_real_constant*)&*$constant)->_val);
+            case valueConstant::type::SIGNED_REAL_CONSTANT:
+                if (((signedRealConstant*)&*$constant)->_oper == DUTOKGE_OPER_SIGNADD::DUTOKGE_PLUS) {
+                    ctx->tab->add_const_real(@IDENTIFIER, $IDENTIFIER,
+                        ((signedRealConstant*)&*$constant)->_val);
                 } else {
-                    ctx->tab->add_const_real(
-                        @IDENTIFIER,
-                        $IDENTIFIER,
-                        ctx->tab->ls_real().add(
-                            -*((signed_real_constant*)&*$constant)->_val));
+                    ctx->tab->add_const_real(@IDENTIFIER, $IDENTIFIER,
+                        ctx->tab->ls_real().add(-*((signedRealConstant*)&*$constant)->_val));
                 }
             break;
         }
@@ -325,27 +287,21 @@ type_def_list:
 
 type_def:
     IDENTIFIER EQ type {
-        switch ($type->get_type()) {
-            case type_specifier::type::ID_TYPE: {
-                auto value = ((id_specifier*)&*$type)->_val;
+        switch ($type->getType()) {
+            case typeSpecifier::type::ID_TYPE: {
+                auto value = ((idSpecifier*)&*$type)->_val;
                 mlc::symbol_pointer sp =
                     ctx->tab->find_symbol(value);
 
                 if (!sp || (sp->kind() != SKIND_TYPE)) {
                     message(DUERR_NOTTYPE, @type, *value);
                 } else {
-                    ctx->tab->add_type(
-                        @IDENTIFIER,
-                        $IDENTIFIER,
-                        sp->access_type()->type());
+                    ctx->tab->add_type(@IDENTIFIER, $IDENTIFIER, sp->access_type()->type());
                 }
             } break;
 
-            case type_specifier::type::RECORD_TYPE:
-                ctx->tab->add_type(
-                    @IDENTIFIER,
-                    $IDENTIFIER,
-                    ((record_specifier*)&*$type)->_val);
+            case typeSpecifier::type::RECORD_TYPE:
+                ctx->tab->add_type(@IDENTIFIER, $IDENTIFIER, ((recordSpecifier*)&*$type)->_val);
             break;
             default:
             break;
@@ -353,52 +309,49 @@ type_def:
     }
     ;
 
-var_def_list:
-    var_def_do SEMICOLON
-    | var_def_list var_def_do SEMICOLON
+varDef_list:
+    varDef_do SEMICOLON
+    | varDef_list varDef_do SEMICOLON
     ;
 
-var_def_do:
-    var_def {
-        for (auto&& id : $var_def->_list->_ids) {
-            ctx->tab->add_var(@var_def, id, $var_def->_type);
-        }
+varDef_do:
+    varDef {
+        for (auto&& id : $varDef->_list->_ids)
+            ctx->tab->add_var(@varDef, id, $varDef->_type);
     }
     ;
 
-var_def:
+varDef:
     identifier_list COLON type {
         type_pointer type;
 
-        switch ($type->get_type()) {
-            case type_specifier::type::ID_TYPE: {
-                auto value = ((id_specifier*)&*$type)->_val;
+        switch ($type->getType()) {
+            case typeSpecifier::type::ID_TYPE: {
+                auto value = ((idSpecifier*)&*$type)->_val;
                 mlc::symbol_pointer sp =
                     ctx->tab->find_symbol(value);
 
-                if (!sp || (sp->kind() != SKIND_TYPE)) {
+                if (!sp || (sp->kind() != SKIND_TYPE))
                     message(DUERR_NOTTYPE, @type, *value);
-                } else {
+                else
                     type = sp->access_type()->type();
-                }
-            } break;
-
-            case type_specifier::type::RECORD_TYPE:
-                type = ((record_specifier*)&*$type)->_val;
+            }
             break;
+
+            case typeSpecifier::type::RECORD_TYPE:
+                type = ((recordSpecifier*)&*$type)->_val;
+            break;
+
             default:
             break;
         }
 
-        $$ = std::make_shared<var_def>(
-            std::move($identifier_list),
-            type
-        );
+        $$ = std::make_shared<varDef>(std::move($identifier_list), type);
     }
     ;
 
 identifier_list:
-    IDENTIFIER { $$ = std::make_shared<id_list>($IDENTIFIER); }
+    IDENTIFIER { $$ = std::make_shared<idList>($IDENTIFIER); }
     | identifier_list[list] COMMA IDENTIFIER {
         $list->append($IDENTIFIER);
         $$ = std::move($list);
@@ -406,68 +359,42 @@ identifier_list:
     ;
 
 profun_def_list:
-    /* empty */
+    /* Can be empty; don't remove */
     | profun_def_list procedure_header SEMICOLON block SEMICOLON[end] {
         ctx->tab->leave(@end);
-
-        ctx->tab->set_subprogram_code(
-            std::get<
-                0
-                >($procedure_header),
-            $block);
+        ctx->tab->set_subprogram_code(std::get<0>($procedure_header), $block);
     }
     | profun_def_list function_header SEMICOLON block SEMICOLON[end] {
         ctx->tab->leave(@end);
-
-        ctx->tab->set_subprogram_code(
-            std::get<
-                0
-                >($function_header),
-            $block);
+        ctx->tab->set_subprogram_code(std::get<0>($function_header), $block);
     }
     ;
 
 procedure_header: PROCEDURE profun_header {
         ctx->tab->add_proc(
             @profun_header,
-            std::get<
-                0
-                >($profun_header),
-            std::get<
-                1
-                >($profun_header));
-
+            std::get<0>($profun_header),
+            std::get<1>($profun_header));
         ctx->tab->enter(
             @profun_header,
-            std::get<
-                0
-                >($profun_header));
-
+            std::get<0>($profun_header));
         $$ = std::move($profun_header);
     }
     ;
 
 function_header: FUNCTION profun_header COLON IDENTIFIER {
         mlc::symbol_pointer sp = ctx->tab->find_symbol($IDENTIFIER);
-
-        if (!sp || (sp->kind() != SKIND_TYPE)) {
+        if (!sp || (sp->kind() != SKIND_TYPE))
             message(DUERR_NOTTYPE, @IDENTIFIER, *$IDENTIFIER);
-        }
 
         ctx->tab->add_fnc(
             @profun_header,
-            std::get<0
-            >($profun_header),
+            std::get<0>($profun_header),
             sp->access_type()->type(),
-            std::get<
-                1
-                >($profun_header));
-
+            std::get<1>($profun_header));
         ctx->tab->enter(
             @profun_header,
-            std::get<
-                0
-                >($profun_header));
+            std::get<0>($profun_header));
 
         $$ = std::move($profun_header);
     }
@@ -477,15 +404,15 @@ profun_header:
     IDENTIFIER {
         $$ = std::make_tuple($IDENTIFIER, std::make_shared<parameter_list_body>());
     }
-    | IDENTIFIER LPAR formal_par_list RPAR {
+    | IDENTIFIER LPAR formalParList RPAR {
         ctx->tab->enter(@IDENTIFIER, $IDENTIFIER);
-        $$ = std::make_tuple($IDENTIFIER, $formal_par_list);
+        $$ = std::make_tuple($IDENTIFIER, $formalParList);
     }
     ;
 
-formal_par_list:
+formalParList:
     formal_par { $$ = $formal_par; }
-    | formal_par_list[list] SEMICOLON formal_par {
+    | formalParList[list] SEMICOLON formal_par {
         $list->append_and_kill($formal_par);
         $$ = $list;
     }
@@ -497,44 +424,33 @@ formal_par:
 
         mlc::symbol_pointer sp = ctx->tab->find_symbol($IDENTIFIER);
 
-        if (!sp || (sp->kind() != SKIND_TYPE)) {
+        if (!sp || (sp->kind() != SKIND_TYPE))
             message(DUERR_NOTTYPE, @IDENTIFIER, *$IDENTIFIER);
-        }
-
-        for (auto&& id : $identifier_list->_ids) {
+        for (auto&& id : $identifier_list->_ids)
             $$->append_parameter_by_value(id, sp->access_type()->type());
-        }
     }
     | VAR identifier_list COLON IDENTIFIER  {
         $$ = std::make_shared<parameter_list_body>();
-
         mlc::symbol_pointer sp = ctx->tab->find_symbol($IDENTIFIER);
 
-        if (!sp || (sp->kind() != SKIND_TYPE)) {
+        if (!sp || (sp->kind() != SKIND_TYPE))
             message(DUERR_NOTTYPE, @IDENTIFIER, *$IDENTIFIER);
-        }
-
-        for (auto&& id : $identifier_list->_ids) {
+        for (auto&& id : $identifier_list->_ids)
             $$->append_parameter_by_reference(id, sp->access_type()->type());
-        }
     }
     ;
 
 type:
-    IDENTIFIER  { $$ = std::make_shared<id_specifier>($IDENTIFIER); }
-    | structured_type { $$ = std::make_shared<record_specifier>($structured_type); }
+    IDENTIFIER  { $$ = std::make_shared<idSpecifier>($IDENTIFIER); }
+    | structured_type { $$ = std::make_shared<recordSpecifier>($structured_type); }
     ;
 
 structured_type:
     RECORD END {
-        $$ = ctx->tab->create_record_type(
-            std::make_shared<field_list_body>(),
-            @RECORD);
+        $$ = ctx->tab->create_record_type(std::make_shared<field_list_body>(), @RECORD);
     }
     | RECORD record_body END {
-        $$ = ctx->tab->create_record_type(
-            $record_body,
-            @RECORD);
+        $$ = ctx->tab->create_record_type($record_body, @RECORD);
     }
     ;
 
@@ -544,19 +460,17 @@ record_body:
     ;
 
 field_list:
-    var_def {
+    varDef {
         auto fields = std::make_shared<field_list_body>();
 
-        for (auto&& id : $var_def->_list->_ids) {
-            fields->append_field(id, $var_def->_type);
-        }
+        for (auto&& id : $varDef->_list->_ids)
+            fields->append_field(id, $varDef->_type);
 
         $$ = fields;
     }
-    | field_list[fields] SEMICOLON var_def {
-        for (auto&& id : $var_def->_list->_ids) {
-            $fields->append_field(id, $var_def->_type);
-        }
+    | field_list[fields] SEMICOLON varDef {
+        for (auto&& id : $varDef->_list->_ids)
+            $fields->append_field(id, $varDef->_type);
 
         $$ = $fields;
     }
@@ -568,9 +482,9 @@ statement:
     ;
 
 whilefor_header:
-    WHILE expression DO  { $$ = icblock_create(); } // expression: bool
-    | FOR IDENTIFIER ASSIGN  // IDENTIFIER: ordinal type variable
-    expression FOR_DIRECTION expression  // expression: ordinal
+    WHILE expression DO  { $$ = icblock_create(); }
+    | FOR IDENTIFIER ASSIGN
+    expression FOR_DIRECTION expression
     DO { $$ = icblock_create(); }
     ;
 
@@ -579,7 +493,7 @@ headered_safe_statement:
     ;
 
 safe_statement:
-    /* empty */  { $$ = icblock_create(); }
+    /* Can be empty; don't remove */  { $$ = icblock_create(); }
     | IF expression THEN headered_safe_statement ELSE headered_safe_statement { $$ = icblock_create(); }
     | REPEAT statement_list UNTIL expression { $$ = icblock_create(); }
     | whilefor_header headered_safe_statement { $$ = icblock_create(); }
@@ -597,14 +511,12 @@ if_statement:
     ;
 
 label_header:
-    /* empty */
+    /* Can be empty; don't remove */
     | UINT COLON
     ;
 
 simple_statement:
     IDENTIFIER ASSIGN expression {
-        // IDENTIFIER: variable || function identifier (return value)
-
         auto r_expr = expression::rexpressionize(ctx, $expression);
         auto symbol = ctx->tab->find_symbol($IDENTIFIER);
         auto kind = symbol->kind();
@@ -623,9 +535,9 @@ simple_statement:
                     break;
 
                     case TCAT_REAL:
-                        if (r_expr->_type->cat() == TCAT_INT) {
+                        if (r_expr->_type->cat() == TCAT_INT)
                             r_expr->_constr->append<ai::CVRTIR>();
-                        } else if (r_expr->_type->cat() != TCAT_REAL) {
+                        else if (r_expr->_type->cat() != TCAT_REAL) {
                             // TODO: cannot be converted to real
                         }
 
@@ -637,7 +549,6 @@ simple_statement:
                     break;
 
                     case TCAT_RECORD:
-                        // TODO
                     break;
                 }
             break;
@@ -654,9 +565,9 @@ simple_statement:
                     break;
 
                     case TCAT_REAL:
-                        if (r_expr->_type->cat() == TCAT_INT) {
+                        if (r_expr->_type->cat() == TCAT_INT)
                             r_expr->_constr->append<ai::CVRTIR>();
-                        } else if (r_expr->_type->cat() != TCAT_REAL) {
+                        else if (r_expr->_type->cat() != TCAT_REAL) {
                             // TODO: cannot be converted to real
                         }
 
@@ -668,7 +579,6 @@ simple_statement:
                     break;
 
                     case TCAT_RECORD:
-                        // TODO
                     break;
                 }
             break;
@@ -687,9 +597,9 @@ simple_statement:
                         break;
 
                         case TCAT_REAL:
-                            if (r_expr->_type->cat() == TCAT_INT) {
+                            if (r_expr->_type->cat() == TCAT_INT)
                                 r_expr->_constr->append<ai::CVRTIR>();
-                            } else if (r_expr->_type->cat() != TCAT_REAL) {
+                            else if (r_expr->_type->cat() != TCAT_REAL) {
                                 // TODO: cannot be converted to real
                             }
 
@@ -701,11 +611,8 @@ simple_statement:
                         break;
 
                         case TCAT_RECORD:
-                            // TODO
                         break;
                     }
-                } else {
-                    // TODO: wrong return
                 }
             break;
         }
@@ -713,8 +620,6 @@ simple_statement:
         $$ = std::move(r_expr->_constr);
     }
     | variable_noidentifier ASSIGN expression {
-        // IDENTIFIER: variable || function identifier (return value)
-
         auto r_expr = expression::rexpressionize(ctx, $expression);
         auto symbol = ctx->tab->find_symbol($variable_noidentifier->_ids[
             0
@@ -741,9 +646,9 @@ simple_statement:
                                 break;
 
                                 case TCAT_REAL:
-                                    if (r_expr->_type->cat() == TCAT_INT) {
+                                    if (r_expr->_type->cat() == TCAT_INT)
                                         r_expr->_constr->append<ai::CVRTIR>();
-                                    } else if (r_expr->_type->cat() != TCAT_REAL) {
+                                    else if (r_expr->_type->cat() != TCAT_REAL) {
                                         // TODO: cannot be converted to real
                                     }
 
@@ -758,8 +663,6 @@ simple_statement:
                                     // TODO: ERROR
                                 break;
                             }
-                        } else {
-                            // TODO: ERROR
                         }
                     } break;
 
@@ -813,25 +716,19 @@ simple_statement:
             default:
             break;
         }
-
         $$ = std::move(r_expr->_constr);
     }
     | IDENTIFIER {
-        // IDENTIFIER: procedure
-
         auto symbol = ctx->tab->find_symbol($IDENTIFIER);
         auto kind = symbol->kind();
         icblock_pointer constr = icblock_create();
 
         if (kind == SKIND_PROCEDURE) {
             constr->append<ai::CALL>(symbol->access_procedure()->code());
-
             $$ = std::move(constr);
         }
     }
-    | IDENTIFIER LPAR real_par_list RPAR {
-        // IDENTIFIER: procedure
-
+    | IDENTIFIER LPAR realParList RPAR {
         auto symbol = ctx->tab->find_symbol($IDENTIFIER);
         auto kind = symbol->kind();
         icblock_pointer constr = icblock_create();
@@ -841,11 +738,11 @@ simple_statement:
             for (
                 auto [par, real_par] = std::tuple{
                     symbol->access_procedure()->parameters()->begin(),
-                    $real_par_list->_pars.begin()
+                    $realParList->_pars.begin()
                 };
 
                 (par != symbol->access_procedure()->parameters()->end()) &&
-                (real_par != $real_par_list->_pars.end());
+                (real_par != $realParList->_pars.end());
 
                 ++par,
                 ++real_par
@@ -863,7 +760,6 @@ simple_statement:
                             }
                         } else if (tcat1 == TCAT_INT) {
                             if (tcat2 == TCAT_REAL) {
-                                // TODO: warning
                                 expr->_constr->append<ai::CVRTRI>();
                             }
                         }
@@ -887,7 +783,7 @@ simple_statement:
 
 variable:
     IDENTIFIER {
-        $$ = std::make_shared<id_list>($IDENTIFIER);
+        $$ = std::make_shared<idList>($IDENTIFIER);
     }
     | variable_noidentifier { $$ = std::move($variable_noidentifier); }
     ;
@@ -899,19 +795,19 @@ variable_noidentifier:
     }
     ;
 
-real_par_list:
-    expression { $$ = std::make_shared<real_par_list>($expression); }
-    | real_par_list[lft_list] COMMA expression {
+realParList:
+    expression { $$ = std::make_shared<realParList>($expression); }
+    | realParList[lft_list] COMMA expression {
         $lft_list->append($expression);
         $$ = std::move($lft_list);
     }
     ;
 
 expression:
-    simple_expression { $$ = std::move($simple_expression); }
-    | simple_expression[lft_expression] OPER_REL simple_expression[rgt_expression] {
-        r_expression::pointer r_expr1 = expression::rexpressionize(ctx, $lft_expression);
-        r_expression::pointer r_expr2 = expression::rexpressionize(ctx, $rgt_expression);
+    simpleExpression { $$ = std::move($simpleExpression); }
+    | simpleExpression[lftExpression] OPER_REL simpleExpression[rgtExpression] {
+        rExpression::pointer r_expr1 = expression::rexpressionize(ctx, $lftExpression);
+        rExpression::pointer r_expr2 = expression::rexpressionize(ctx, $rgtExpression);
 
         type_category tcat1 = r_expr1->_type->cat();
         type_category tcat2 = r_expr2->_type->cat();
@@ -1001,10 +897,10 @@ expression:
     }
     ;
 
-simple_expression:
-    add_expression { $$ = std::move($add_expression); }
-    | OPER_SIGNADD add_expression {
-        r_expression::pointer r_expr = expression::rexpressionize(ctx, $add_expression);
+simpleExpression:
+    addExpression { $$ = std::move($addExpression); }
+    | OPER_SIGNADD addExpression {
+        rExpression::pointer r_expr = expression::rexpressionize(ctx, $addExpression);
 
         if ($OPER_SIGNADD == DUTOKGE_OPER_SIGNADD::DUTOKGE_MINUS) {
             switch (r_expr->_type->cat()) {
@@ -1025,11 +921,11 @@ simple_expression:
     }
     ;
 
-add_expression:
-    mul_expression { $$ = std::move($mul_expression); }
-    | add_expression[lft_expression] OPER_SIGNADD mul_expression {
-        r_expression::pointer r_expr1 = expression::rexpressionize(ctx, $lft_expression);
-        r_expression::pointer r_expr2 = expression::rexpressionize(ctx, $mul_expression);
+addExpression:
+    mulExpression { $$ = std::move($mulExpression); }
+    | addExpression[lftExpression] OPER_SIGNADD mulExpression {
+        rExpression::pointer r_expr1 = expression::rexpressionize(ctx, $lftExpression);
+        rExpression::pointer r_expr2 = expression::rexpressionize(ctx, $mulExpression);
 
         type_category tcat1 = r_expr1->_type->cat();
         type_category tcat2 = r_expr2->_type->cat();
@@ -1073,12 +969,11 @@ add_expression:
                     r_expr1->_constr->append<ai::ADDS>();
                 }
         }
-
         $$ = std::move(r_expr1);
     }
-    | add_expression[lft_expression] OR mul_expression {
-        r_expression::pointer r_expr1 = expression::rexpressionize(ctx, $lft_expression);
-        r_expression::pointer r_expr2 = expression::rexpressionize(ctx, $mul_expression);
+    | addExpression[lftExpression] OR mulExpression {
+        rExpression::pointer r_expr1 = expression::rexpressionize(ctx, $lftExpression);
+        rExpression::pointer r_expr2 = expression::rexpressionize(ctx, $mulExpression);
 
         type_category tcat1 = r_expr1->_type->cat();
         type_category tcat2 = r_expr2->_type->cat();
@@ -1089,16 +984,15 @@ add_expression:
                 r_expr1->_constr->append<ai::OR>();
             }
         }
-
         $$ = std::move(r_expr1);
     }
     ;
 
-mul_expression:
+mulExpression:
     factor { $$ = std::move($factor); }
-    | mul_expression[lft_expr] OPER_MUL factor {
-        r_expression::pointer r_expr1 = expression::rexpressionize(ctx, $lft_expr);
-        r_expression::pointer r_expr2 = expression::rexpressionize(ctx, $factor);
+    | mulExpression[lft_expr] OPER_MUL factor {
+        rExpression::pointer r_expr1 = expression::rexpressionize(ctx, $lft_expr);
+        rExpression::pointer r_expr2 = expression::rexpressionize(ctx, $factor);
 
         type_category tcat1 = r_expr1->_type->cat();
         type_category tcat2 = r_expr2->_type->cat();
@@ -1205,7 +1099,6 @@ mul_expression:
                 }
             break;
         }
-
         $$ = std::move(r_expr1);
     }
     ;
@@ -1215,47 +1108,43 @@ factor:
         type_pointer type;
         icblock_pointer constr = icblock_create();
 
-        switch($constant->get_type()) {
-            case constant_value::type::UINT_CONSTANT:
+        switch($constant->getType()) {
+            case valueConstant::type::UINT_CONSTANT:
                 type = ctx->tab->logical_integer();
-                constr->append<ai::LDLITI>(((uint_constant*)&*$constant)->_val);
+                constr->append<ai::LDLITI>(((uintConstant*)&*$constant)->_val);
             break;
 
-            case constant_value::type::STR_CONSTANT:
+            case valueConstant::type::STR_CONSTANT:
                 type = ctx->tab->logical_string();
-                constr->append<ai::LDLITS>(((str_constant*)&*$constant)->_val);
+                constr->append<ai::LDLITS>(((strConstant*)&*$constant)->_val);
             break;
 
-            case constant_value::type::REAL_CONSTANT:
+            case valueConstant::type::REAL_CONSTANT:
                 type = ctx->tab->logical_real();
-                constr->append<ai::LDLITR>(((real_constant*)&*$constant)->_val);
+                constr->append<ai::LDLITR>(((realConstant*)&*$constant)->_val);
             break;
 
             default:
             break;
         }
 
-        $$ = std::make_shared<r_expression>(
+        $$ = std::make_shared<rExpression>(
             type,
             constr);
     }
     | variable_noidentifier {
-        $$ = std::make_shared<l_expression>(
+        $$ = std::make_shared<lExpression>(
             ctx->tab->find_symbol($variable_noidentifier->_ids[
                 0
                 ])->access_typed()->type(),
             $variable_noidentifier);
     }
     | IDENTIFIER {
-        // IDENTIFIER: function || variable || unsigned_constant
-
-        $$ = std::make_shared<l_expression>(
+        $$ = std::make_shared<lExpression>(
             ctx->tab->find_symbol($IDENTIFIER)->access_typed()->type(),
-            std::make_shared<id_list>($IDENTIFIER));
+            std::make_shared<idList>($IDENTIFIER));
     }
-    | IDENTIFIER LPAR real_par_list RPAR {
-        // IDENTIFIER: function
-
+    | IDENTIFIER LPAR realParList RPAR {
         auto symbol = ctx->tab->find_symbol($IDENTIFIER);
         auto kind = symbol->kind();
         icblock_pointer constr = icblock_create();
@@ -1288,11 +1177,11 @@ factor:
             for (
                 auto [par, real_par] = std::tuple{
                     symbol->access_function()->parameters()->begin(),
-                    $real_par_list->_pars.begin()
+                    $realParList->_pars.begin()
                 };
 
                 (par != symbol->access_function()->parameters()->end()) &&
-                (real_par != $real_par_list->_pars.end());
+                (real_par != $realParList->_pars.end());
 
                 ++par,
                 ++real_par
@@ -1322,12 +1211,12 @@ factor:
 
             constr->append<ai::CALL>(symbol->access_function()->code());
 
-            $$ = std::make_shared<r_expression>(type, icblock_merge_and_kill(constr, destr));
+            $$ = std::make_shared<rExpression>(type, icblock_merge_and_kill(constr, destr));
         }
     }
     | LPAR expression RPAR { $$ = std::move($expression); }
     | NOT factor[inner_factor] {
-        r_expression::pointer r_expr = expression::rexpressionize(ctx, $inner_factor);
+        rExpression::pointer r_expr = expression::rexpressionize(ctx, $inner_factor);
 
         switch (r_expr->_type->cat()) {
             case TCAT_BOOL:
@@ -1344,25 +1233,24 @@ factor:
 
 constant:
     unsigned_constant { $$ = std::move($unsigned_constant); }
-    | OPER_SIGNADD UINT { $$ = std::make_shared<signed_uint_constant>($OPER_SIGNADD, $UINT); }
-    | OPER_SIGNADD REAL { $$ = std::make_shared<signed_real_constant>($OPER_SIGNADD, $REAL); }
+    | OPER_SIGNADD UINT { $$ = std::make_shared<signedUintConstant>($OPER_SIGNADD, $UINT); }
+    | OPER_SIGNADD REAL { $$ = std::make_shared<signedRealConstant>($OPER_SIGNADD, $REAL); }
     ;
 
 unsigned_constant:
-    IDENTIFIER  { $$ = std::make_shared<id_constant>($IDENTIFIER); }
+    IDENTIFIER  { $$ = std::make_shared<idConstant>($IDENTIFIER); }
     | unsigned_constant_noidentifier { $$ = std::move($unsigned_constant_noidentifier); }
     ;
 
 unsigned_constant_noidentifier:
-    UINT { $$ = std::make_shared<uint_constant>($UINT); }
-    | REAL { $$ = std::make_shared<real_constant>($REAL); }
-    | STRING { $$ = std::make_shared<str_constant>($STRING); }
+    UINT { $$ = std::make_shared<uintConstant>($UINT); }
+    | REAL { $$ = std::make_shared<realConstant>($REAL); }
+    | STRING { $$ = std::make_shared<strConstant>($STRING); }
     ;
 
 %%
 
 namespace yy {
-
     void mlaskal_parser::error(const location_type& l, const std::string& m)
     {
         message(DUERR_SYNTAX, l, m);

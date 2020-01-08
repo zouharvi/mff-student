@@ -11,7 +11,7 @@
 	#include "bisonflex.hpp"
 
 	// allow access to context 
-	// CHANGE THIS LINE TO #include "du3456g.hpp" WHEN THIS FILE IS COPIED TO du3456l.lex
+	// CHANGED THIS LINE TO #include "du3456g.hpp" WHEN THIS FILE IS COPIED TO du3456l.lex
 	#include "du3456g.hpp"
 	#include "du3456sem.hpp"
 
@@ -61,35 +61,35 @@ EXPONENT[eE][+-]?{UNSIGNED}
 (?i:"not")          {   return parser::make_NOT(ctx->curline);    }
 (?i:"record")       {   return parser::make_RECORD(ctx->curline);    }
 
-";"         {   return parser::make_SEMICOLON(ctx->curline);    }
-".."        {   return parser::make_DOTDOT(ctx->curline);    }
-"."         {   return parser::make_DOT(ctx->curline);    }
-","         {   return parser::make_COMMA(ctx->curline);    }
-":="        {   return parser::make_ASSIGN(ctx->curline);    }
-":"         {   return parser::make_COLON(ctx->curline);    }
-"="         {   return parser::make_EQ(ctx->curline);    }
-"("         {   return parser::make_LPAR(ctx->curline);    }
-")"         {   return parser::make_RPAR(ctx->curline);    }
-"["         {   return parser::make_LSBRA(ctx->curline);    }
-"]"         {   return parser::make_RSBRA(ctx->curline);    }
+";"         		{   return parser::make_SEMICOLON(ctx->curline);    }
+".."        		{   return parser::make_DOTDOT(ctx->curline);    }
+"."         		{   return parser::make_DOT(ctx->curline);    }
+","         		{   return parser::make_COMMA(ctx->curline);    }
+":="        		{   return parser::make_ASSIGN(ctx->curline);    }
+":"         		{   return parser::make_COLON(ctx->curline);    }
+"="         		{   return parser::make_EQ(ctx->curline);    }
+"("         		{   return parser::make_LPAR(ctx->curline);    }
+")"         		{   return parser::make_RPAR(ctx->curline);    }
+"["         		{   return parser::make_LSBRA(ctx->curline);    }
+"]"         		{   return parser::make_RSBRA(ctx->curline);    }
 
-"<"         {   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_LT, ctx->curline);    }
-"<="        {   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_LE, ctx->curline);    }
-"<>"        {   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_NE, ctx->curline);    }
-">="        {   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_GE, ctx->curline);    }
-">"         {   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_GT, ctx->curline);    }
+"<"         		{   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_LT, ctx->curline);    }
+"<="        		{   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_LE, ctx->curline);    }
+"<>"        		{   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_NE, ctx->curline);    }
+">="        		{   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_GE, ctx->curline);    }
+">"         		{   return parser::make_OPER_REL(mlc::DUTOKGE_OPER_REL::DUTOKGE_GT, ctx->curline);    }
 
-"+"         {   return parser::make_OPER_SIGNADD(mlc::DUTOKGE_OPER_SIGNADD::DUTOKGE_PLUS, ctx->curline);    }
-"-"         {   return parser::make_OPER_SIGNADD(mlc::DUTOKGE_OPER_SIGNADD::DUTOKGE_MINUS, ctx->curline);    }
+"+"         		{   return parser::make_OPER_SIGNADD(mlc::DUTOKGE_OPER_SIGNADD::DUTOKGE_PLUS, ctx->curline);    }
+"-"         		{   return parser::make_OPER_SIGNADD(mlc::DUTOKGE_OPER_SIGNADD::DUTOKGE_MINUS, ctx->curline);    }
 
-"*"         {   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_ASTERISK, ctx->curline);    }
-"/"         {   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_SOLIDUS, ctx->curline);    }
-(?i:"div")      {   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_DIV, ctx->curline);    }
-(?i:"mod")      {   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_MOD, ctx->curline);    }
-(?i:"and")      {   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_AND, ctx->curline);    }
+"*"         		{   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_ASTERISK, ctx->curline);    }
+"/"         		{   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_SOLIDUS, ctx->curline);    }
+(?i:"div")      	{   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_DIV, ctx->curline);    }
+(?i:"mod")      	{   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_MOD, ctx->curline);    }
+(?i:"and")      	{   return parser::make_OPER_MUL(mlc::DUTOKGE_OPER_MUL::DUTOKGE_AND, ctx->curline);    }
 
-(?i:"to")       {   return parser::make_FOR_DIRECTION(mlc::DUTOKGE_FOR_DIRECTION::DUTOKGE_TO, ctx->curline);    }
-(?i:"downto")   {   return parser::make_FOR_DIRECTION(mlc::DUTOKGE_FOR_DIRECTION::DUTOKGE_DOWNTO, ctx->curline);    }
+(?i:"to")       	{   return parser::make_FOR_DIRECTION(mlc::DUTOKGE_FOR_DIRECTION::DUTOKGE_TO, ctx->curline);    }
+(?i:"downto")   	{   return parser::make_FOR_DIRECTION(mlc::DUTOKGE_FOR_DIRECTION::DUTOKGE_DOWNTO, ctx->curline);    }
 
 "'"		{  
 	buffer = "";
@@ -105,13 +105,13 @@ EXPONENT[eE][+-]?{UNSIGNED}
 
 
 {UNSIGNED}  {
-			int result;
-			if (!mlc::checkNumber(yytext, result)) {
-				// it is out of range...
-				message(mlc::DUERR_INTOUTRANGE, ctx->curline, yytext);
-			}
-			return parser::make_UINT(ctx->tab->ls_int().add(result), ctx->curline);
-            }
+		int result;
+		if (!mlc::checkNumber(yytext, result)) {
+			// it is out of range...
+			message(mlc::DUERR_INTOUTRANGE, ctx->curline, yytext);
+		}
+		return parser::make_UINT(ctx->tab->ls_int().add(result), ctx->curline);
+}
 
 {UNSIGNED}({EXPONENT}|"."{UNSIGNED}{EXPONENT}?) {
 		double value = std::stod(yytext);
@@ -121,57 +121,52 @@ EXPONENT[eE][+-]?{UNSIGNED}
 		}
 
             	return parser::make_REAL(ctx->tab->ls_real().add(value), ctx->curline);
-                                                }
+}
 
 {UNSIGNED}({EXPONENT}|"."{UNSIGNED}{EXPONENT}?)({LETTER}|{DIGIT})* {
 		double value = std::stod(yytext);
-
-		if (std::isinf(value) || std::isnan(value)) {
+		if (std::isinf(value) || std::isnan(value))
 			message(mlc::DUERR_REALOUTRANGE, ctx->curline, yytext);
-		}
-
 		message(mlc::DUERR_BADREAL, ctx->curline, yytext);
+		return parser::make_REAL(ctx->tab->ls_real().add(value), ctx->curline);
+}
 
-            	return parser::make_REAL(ctx->tab->ls_real().add(value), ctx->curline);
-                                                }
 {DIGIT}+({LETTER}|{DIGIT})* {
-			std::string parsed = yytext;
-			std::string text = "";
-			// this could be probably rewritten using <algorithm>
-			for (auto&& c : parsed) {
-				if (isdigit(c)) {
-					text += c;
-				} else {
-					break;
-				}
-			}
+	std::string parsed = yytext;
+	std::string text = "";
+	// this could be probably rewritten using <algorithm>
+	for (auto&& c : parsed) {
+		if (isdigit(c)) {
+			text += c;
+		} else {
+			break;
+		}
+	}
 
-			int result;
-			if (!mlc::checkNumber(text, result)) {
-				// it is out of range...
-				message(mlc::DUERR_INTOUTRANGE, ctx->curline, yytext);
-			}
+	int result;
+	if (!mlc::checkNumber(text, result)) {
+		// it is out of range...
+		message(mlc::DUERR_INTOUTRANGE, ctx->curline, yytext);
+	}
 
-			message(mlc::DUERR_BADINT, ctx->curline, yytext);
-			return parser::make_UINT(ctx->tab->ls_int().add(result), ctx->curline);
-			    }
+	message(mlc::DUERR_BADINT, ctx->curline, yytext);
+	return parser::make_UINT(ctx->tab->ls_int().add(result), ctx->curline);
+}
 
 
 {LETTER}({LETTER}|{DIGIT})* {
-	    std::string ident = yytext;
-	    for (char& c : ident) {
-	    	c = std::toupper(c);
-	    }
-
-            return parser::make_IDENTIFIER(ctx->tab->ls_id().add(ident), ctx->curline);
-                            }
+	std::string ident = yytext;
+	for (char& c : ident)
+		c = std::toupper(c);
+	return parser::make_IDENTIFIER(ctx->tab->ls_id().add(ident), ctx->curline);
+}
 
 <STRING>[^\n^']*	{ buffer += yytext; }
 
 <STRING>'		{
 	BEGIN(INITIAL);
 	return parser::make_STRING(ctx->tab->ls_str().add(buffer), ctx->curline);
-			}
+}
 
 <STRING>"''"	{ /* quotation */ buffer += "'"; }
 
@@ -180,17 +175,17 @@ EXPONENT[eE][+-]?{UNSIGNED}
 	ctx->curline++;
 	BEGIN(INITIAL);
 	return parser::make_STRING(ctx->tab->ls_str().add(buffer), ctx->curline - 1);
-			}
+}
 
 <STRING><<EOF>>	{
 	BEGIN(INITIAL);
 	message(mlc::DUERR_EOFINSTRCHR, ctx->curline);
 	return parser::make_EOF(ctx->curline);
-			}
+}
 
 <COMMENT>[^\n^{^}] { /* comment */ }
 
-<COMMENT>\n	{ ctx->curline++; }
+<COMMENT>\n		{ ctx->curline++; }
 <COMMENT>"{"	{ brackets++; }
 <COMMENT>"}"	{ brackets--; if (brackets < 1) { BEGIN(INITIAL); } }
 
@@ -198,7 +193,7 @@ EXPONENT[eE][+-]?{UNSIGNED}
 	BEGIN(INITIAL);
 	message(mlc::DUERR_EOFINCMT, ctx->curline);
 	return parser::make_EOF(ctx->curline);
-			}
+}
 
 <<EOF>>		return parser::make_EOF(ctx->curline);
 
@@ -212,7 +207,6 @@ EXPONENT[eE][+-]?{UNSIGNED}
 %%
 
 namespace mlc {
-
 	yyscan_t2 lexer_init(FILE * iff)
 	{
 		yyscan_t2 scanner;
@@ -226,5 +220,4 @@ namespace mlc {
 		yyset_in(nullptr, scanner);
 		yylex_destroy(scanner);
 	}
-
 }

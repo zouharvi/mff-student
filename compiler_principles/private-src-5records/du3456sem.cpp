@@ -1,41 +1,10 @@
-// Co-op w/ JK, JP
+// Co-op w/ JK, MH
 
 #include "du3456sem.hpp"
 #include "duerr.hpp"
 
 namespace mlc
 {
-
-std::string &upper_case(std::string &from)
-{
-    for (auto &&c : from)
-    {
-        if (c >= 'a' && c <= 'z')
-        {
-            c ^= (1UL << 5);
-        }
-    }
-
-    return from;
-}
-
-std::string &un_apostrophe(std::string &from)
-{
-    std::string to;
-    to.reserve(from.size());
-
-    for (const char *c = from.c_str(); *c != '\0'; ++c)
-    {
-        if (*c == '\'')
-        {
-            ++c;
-        }
-
-        to.push_back(*c);
-    }
-
-    return from = std::move(to);
-}
 
 ls_int_type::value_type convert_int(
     const char *from,
@@ -68,7 +37,7 @@ ls_int_type::value_type convert_int(
             message(DUERR_INTOUTRANGE, line, from);
 
             number += digit;
-            ++where;
+            where++;
             break;
         }
 
@@ -86,17 +55,45 @@ ls_int_type::value_type convert_int(
     return static_cast<ls_int_type::value_type>(number & mask);
 }
 
-ls_real_type::value_type convert_real(const std::string &from) try
-{
-    return std::stod(from);
-}
-catch (std::out_of_range &)
-{
-    std::istringstream from_stream{from};
-    ls_real_type::value_type number;
 
-    from_stream >> number;
-    return number;
+std::string &upper(std::string &from)
+{
+    for (auto &&c : from)
+        if (c >= 'a' && c <= 'z')
+            c ^= (1UL << 5);
+    return from;
+}
+
+std::string &dropApostrophe(std::string &from)
+{
+    std::string to;
+    to.reserve(from.size());
+
+    for (const char *c = from.c_str(); *c != '\0'; ++c)
+    {
+        if (*c == '\'')
+            c++;
+        to.push_back(*c);
+    }
+
+    return from = std::move(to);
+}
+
+
+ls_real_type::value_type convert_real(const std::string &from)
+{
+    try
+    {
+        return std::stod(from);
+    }
+    catch (std::out_of_range &)
+    {
+        std::istringstream from_stream{from};
+        ls_real_type::value_type number;
+
+        from_stream >> number;
+        return number;
+    }
 }
 
 icblock_pointer create_destr(type_category t_cat)
@@ -135,10 +132,7 @@ bool count_field_recur(
     type_pointer &type,
     stack_address &address)
 {
-    for (
-        auto i = ids.cbegin() + 1;
-        i != ids.cend();
-        ++i)
+    for (auto i = ids.cbegin() + 1; i != ids.cend(); i++)
     {
         auto field = type->access_record()->find(*i);
         if (!field)
@@ -155,13 +149,13 @@ bool count_field_recur(
 
 auto expression::rexpressionize(MlaskalCtx *ctx, pointer expr) -> r_pointer
 {
-    if (expr->get_type() == type::REXPRESSION)
+    if (expr->getType() == type::REXPRESSION)
     {
-        return std::static_pointer_cast<r_expression>(expr);
+        return std::static_pointer_cast<rExpression>(expr);
     }
     else
     {
-        l_expression *l_expr = (l_expression *)&*expr;
+        lExpression *l_expr = (lExpression *)&*expr;
         type_pointer type;
         icblock_pointer constr;
         icblock_pointer destr;
@@ -341,7 +335,7 @@ auto expression::rexpressionize(MlaskalCtx *ctx, pointer expr) -> r_pointer
                 break;
             }
 
-            return std::make_shared<r_expression>(type, constr);
+            return std::make_shared<rExpression>(type, constr);
         }
         else
         {
@@ -349,4 +343,4 @@ auto expression::rexpressionize(MlaskalCtx *ctx, pointer expr) -> r_pointer
         }
     }
 }
-}
+} // namespace mlc

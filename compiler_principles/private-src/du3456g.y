@@ -214,7 +214,7 @@ constantInt:
     | OPER_SIGNADD UINT {
         auto val = $2;
         if ($1 == mlc::DUTOKGE_OPER_SIGNADD::DUTOKGE_MINUS) {
-        val = ctx->tab->ls_int().add(- *val);
+            val = ctx->tab->ls_int().add(- *val);
         }
         $$ = val;
     }
@@ -225,9 +225,8 @@ constantReal:
     | OPER_SIGNADD REAL {
         auto val = $2;
         if ($1 == mlc::DUTOKGE_OPER_SIGNADD::DUTOKGE_MINUS) {
-        val = ctx->tab->ls_real().add(- *val);
+            val = ctx->tab->ls_real().add(- *val);
         }
-
         $$ = val;
     }
     ;
@@ -349,8 +348,8 @@ params:
     ;
 
 varMaybe: %empty 	{ $$ = false; }
-        | VAR 	 	{ $$ = true; }
-        ;
+    | VAR 	 	{ $$ = true; }
+    ;
 
 identifierType:
     IDENTIFIER {
@@ -362,7 +361,8 @@ identifierType:
             auto t = symbolptr->access_type();
             $$ = t->type();
         }
-    };
+    }
+    ;
 
 type: identifierType	{ $$ = $1; }
     | ordType           { $$ = $1; }
@@ -397,7 +397,6 @@ stmtA:
         auto label_then = ctx->tab->new_label();
         auto label_else = ctx->tab->new_label();
 
-        // condition
         auto icblock = $2.code;
 
         icblock->append_with_target<ai::JF>(label_then);
@@ -574,18 +573,18 @@ stmtA:
                     auto par = params->begin() + i;
                     if (par->partype == parameter_mode::PMODE_BY_VALUE) {
                         switch (argType) {
-                                case TCAT_BOOL:
-                                        icblock->append<ai::DTORB>();
-                                        break;
-                                case TCAT_INT:
-                                        icblock->append<ai::DTORI>();
-                                        break;
-                                case TCAT_REAL:
-                                        icblock->append<ai::DTORR>();
-                                        break;
-                                case TCAT_STR:
-                                        icblock->append<ai::DTORS>();
-                                        break;
+                            case TCAT_BOOL:
+                                    icblock->append<ai::DTORB>();
+                                    break;
+                            case TCAT_INT:
+                                    icblock->append<ai::DTORI>();
+                                    break;
+                            case TCAT_REAL:
+                                    icblock->append<ai::DTORR>();
+                                    break;
+                            case TCAT_STR:
+                                    icblock->append<ai::DTORS>();
+                                    break;
                         }
                     } else if (par->partype == parameter_mode::PMODE_BY_REFERENCE) {
                         icblock->append<ai::DTORP>();
@@ -597,7 +596,6 @@ stmtA:
     }
     | UINT COLON stmtA     {  // GOTO
         auto icblock = mlc::icblock_create();
-
         auto label = ctx->tab->find_label($1);
         if (!!label) {
             icblock->add_label(label->label());
@@ -703,7 +701,6 @@ stmtB:
     }
     | WHILE expr DO stmtB      {
         auto icblock = mlc::icblock_create();
-
         auto label_loop = ctx->tab->new_label();
         auto label_cond = ctx->tab->new_label();
         
@@ -726,8 +723,6 @@ stmtB:
     | IF expr THEN stmtA ELSE stmtB    {
         auto label_then = ctx->tab->new_label();
         auto label_else = ctx->tab->new_label();
-
-        // condition
         auto icblock = $2.code;
 
         icblock->append_with_target<ai::JF>(label_then);
@@ -1135,18 +1130,18 @@ factor: constantLiteral		{ $$ = $1; }
                 auto subprog = sp->access_subprogram();
                 auto fnType = sp->access_function()->type()->cat();
                 switch (fnType) {
-                        case TCAT_BOOL:
-                                icblock->append<ai::INITB>();
-                                break;
-                        case TCAT_INT:
-                                icblock->append<ai::INITI>();
-                                break;
-                        case TCAT_REAL:
-                                icblock->append<ai::INITR>();
-                                break;
-                        case TCAT_STR:
-                                icblock->append<ai::INITS>();
-                                break;
+                    case TCAT_BOOL:
+                            icblock->append<ai::INITB>();
+                            break;
+                    case TCAT_INT:
+                            icblock->append<ai::INITI>();
+                            break;
+                    case TCAT_REAL:
+                            icblock->append<ai::INITR>();
+                            break;
+                    case TCAT_STR:
+                            icblock->append<ai::INITS>();
+                            break;
                 }
                 auto params = subprog->parameters();
                 for (int i = 0; i < $2.argTypes.size(); i++) {
@@ -1191,18 +1186,18 @@ factor: constantLiteral		{ $$ = $1; }
                         auto par = params->begin() + i;
                         if (par->partype == parameter_mode::PMODE_BY_VALUE) {
                                 switch (argType) {
-                                        case TCAT_BOOL:
-                                                icblock->append<ai::DTORB>();
-                                                break;
-                                        case TCAT_INT:
-                                                icblock->append<ai::DTORI>();
-                                                break;
-                                        case TCAT_REAL:
-                                                icblock->append<ai::DTORR>();
-                                                break;
-                                        case TCAT_STR:
-                                                icblock->append<ai::DTORS>();
-                                                break;
+                                    case TCAT_BOOL:
+                                            icblock->append<ai::DTORB>();
+                                            break;
+                                    case TCAT_INT:
+                                            icblock->append<ai::DTORI>();
+                                            break;
+                                    case TCAT_REAL:
+                                            icblock->append<ai::DTORR>();
+                                            break;
+                                    case TCAT_STR:
+                                            icblock->append<ai::DTORS>();
+                                            break;
                                 }
                         } else if (par->partype == parameter_mode::PMODE_BY_REFERENCE) {
                             icblock->append<ai::DTORP>();
