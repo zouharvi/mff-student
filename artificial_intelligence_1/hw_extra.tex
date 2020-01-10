@@ -1,0 +1,77 @@
+% !TeX spellcheck = cs_CZ
+
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{wasysym} % smileys
+\usepackage{fancyhdr}
+\setlength\parindent{0pt} % indent
+
+% my commands:
+\newcommand{\n}{\newline}
+\newcommand{\tab}{\hspace{1cm}}
+
+\begin{document}
+
+\thispagestyle{fancy} 
+\lhead{HW extra, 05-01-2020}
+\rhead{Vilém Zouhar}
+
+\section{Vlastnosti heuristik}
+\subsection{Max z heuristik}
+$p$ je libovolný následník vrcholu $n$. Předpokládáme $\forall i: H_i$ je konzistentní.
+\begin{align*}
+H'(n) = \max(H_1(n), H_2(n), \ldots, H_N(n)) &\le (H_1(p) + c(n,p), H_2(p) + c(n,p), \ldots, H_N(p) + c(n,p)) \\
+&= max(H_1(p), H_2(p), \ldots, H_N(p)) + c(n,p) = H'(p) + c(n,p) \\
+\Rightarrow H'(n) \le H'(p) + c(n,p)
+\end{align*}
+
+\subsection{Přípustná heuristika}
+Tvrzení není pravdivé. Uvažme lineární cestu délky 3 (4 vrcholy $a, b, c, d$, $d$ je cílový). Každá hrana má cenu $1$.
+
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+    Vrcholy:& a& b & c & d \\
+    Opravdová vzdálenost:& 3 & 2 & 1 & 0 \\
+    Heuristika:& 3 & 1 & 1 & 0 \\
+\hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+Heuristika je jistě přípustná, neboť dává vždy nejvýše takový odhad, jako je opravdová vzdálenost. Není však konzistentní, neboť $h(a) \nleq h(b) + c(a,b) = 1 + 1 = 2$
+
+\subsection{Součet heuristik}
+Tvrzení není pravdivé. Uvažme podobný případ cesty, ovšem se skoro konstantní (přípustnou i konzistentní) heuristikou $H_K$.
+
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+    Vrcholy:& a& b & c & d \\
+    Opravdová vzdálenost:& 3 & 2 & 1 & 0 \\
+    $H_K$:& 1 & 1 & 1 & 0 \\
+    $H' = H_K + H_K$:& 2 & 2 & 2 & 0 \\
+\hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+Pak evidentně $H'$ není přípustná, neboť $2 = H'(c) > f(c) = 1$.
+
+\subsection{Dvojnásobná heuristika}
+
+Tvrzení je pravdivé. Předpokládejme, že A* najde horší řešení. V libovolném bodě výpočtu se ve fringe vyskytoval konec prefixu cesty nejvýše dvakrát horší, než optimální. Těsně předtím, než A* došel až do cíle, tak měl na výběr mezi tímto cílem, nebo vrcholem v cestě, která je nejvýše dvakrát horší. Potom si ale nemohl vybrat ten cíl, neboť se vybírá minimum z fringe.
+
+\section{Žáby}
+
+\section{Hraní her}
+
+\section{Logika}
+
+\end{document}
