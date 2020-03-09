@@ -1,0 +1,2 @@
+hmmlearn>=0.2.3
+numpy>=1.16.0
