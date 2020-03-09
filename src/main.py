@@ -13,18 +13,18 @@ if __name__ == '__main__':
     data = Data(corpus='brown')
 
     model = Model()
-    model.fit(data.all)
-    predicted = model.predict(data.all)
+    model.fit(data)
+    # predicted = model.predict(data.all)
 
-    print('Train:')
-    evaluate(predicted, data.gold)
+    # print('Train:')
+    # evaluate(predicted, data.gold)
     
-    print('Dev:')
-    data = Data(corpus='genesis')
-    evaluate(predicted, data.gold)
+    # print('Dev:')
+    # data = Data(corpus='genesis')
+    # evaluate(predicted, data.gold)
 
-    if args.inference:
-        dataArg = Data(value=args.inference)
+    # if args.inference:
+    #     dataArg = Data(value=args.inference)
 
-        out = model.predict(dataArg.all)
-        print('|'.join(out))
+    #     out = model.predict(dataArg.all)
+    #     print('|'.join(out))

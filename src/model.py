@@ -11,51 +11,61 @@ class Model:
         ]
 
         # CLASS * CASE * LEN * STOP * BLANK * ABBR * (BOW * BOS)
-        EMISSIONS = 14 * 3 * 3 * 2 * 2 * 2 * (3)
+        EMISSIONS = 15 * 3 * 4 * 2 * 2 * 2 * 2 * 2
+        EMISSIONS = 2 * 2
         
         np.random.seed(0)
-        model = hmm.MultinomialHMM(n_components=len(STATES))
-        model.startprob_ = np.np.empty(len(STATES))
-        model.startprob_.fill(1.0/len(STATES))
-        model.transmat_ = np.empty((len(STATES), len(STATES)))
-        model.transmat_.fill(1.0/len(STATES))
+        
+        self.model = hmm.MultinomialHMM(
+            n_components=len(STATES),
+            params='st', # don't touch the emission probs
+            init_params='st',
+            verbose=True)
+        self.model.startprob_ = np.empty(len(STATES))
+        self.model.startprob_.fill(1.0/len(STATES))
+        self.model.transmat_ = np.empty((len(STATES), len(STATES)))
+        self.model.transmat_.fill(1.0/len(STATES))
 
-        model.emissionprob_ = np.array([
-            [0.0, 0.9, 0.1],
-            [0.3, 0.6, 0.1],
-            [0.5, 0.4, 0.1]])
+        sFF = np.zeros(EMISSIONS)
+        sFF.fill(1.0)
+        sTF = np.zeros(EMISSIONS)
+        sTF.fill(1.0)
+        sTT = np.zeros(EMISSIONS)
+        sTT.fill(1.0)
+        
+        sFF[0] = 0
+        sFF[1] = 0
+        sFF = self.normalize(sFF)
+        
+        sTF[1] = 0
+        sTF = self.normalize(sTF)
+        
+        sTT = self.normalize(sTT)
+
+        self.model.emissionprob_ = np.array([sFF, sTF, sTT])
+
+    def normalize(self, v):
+        norm = np.linalg.norm(v)
+        if norm == 0: 
+            return v
+        return v / norm
 
     def feature_to_vec(self, feature):
-        vClass = np.zeros(15)
-        vCase  = np.zeros(3)
-        vLen   = np.zeros(3)
-        vStop  = np.zeros(2)
-        vBlank = np.zeros(2)
-        vAbbr  = np.zeros(2)
-        vClass[feature[0]] = 1
-        vCase[feature[1]] = 1
-        vLen[feature[2]] = 1
-        vStop[feature[3]] = 1
-        vBlank[feature[4]] = 1
-        vAbbr[feature[5]] = 1
-        return np.concatenate([vClass, vCase, vLen, vStop, vBlank, vAbbr])
-
-    def vec_to_feature(self, _vec):
-        vec = list(_vec)
-        vClass = vec[:15]
-        vec = vec[15:]
-        vCase = vec[:3]
-        vec = vec[3:]
-        vLen = vec[:3]
-        vec = vec[3:]
-        vStop = vec[:2]
-        vec = vec[2:]
-        vBlank = vec[:2]
-        vec = vec[2:]
-        vAbbr = vec[:2]
-        return (vClass.index(1), vCase.index(1), vLen.index(1), vStop.index(1), vBlank.index(1), vAbbr.index(1))
+        out = 0
+        return 2*feature[0]+feature[1]
+        POWERS = [2, 2, 2, 2, 2, 4, 3, 15]
+        for i, f in enumerate(feature):
+            out = out*POWERS[i] + f
+        return out
 
     def fit(self, data):
+        print('Fitting the model')
+        self.vData = list(map(self.feature_to_vec, data.featured))
+        self.vData = np.array(self.vData, dtype=np.int32)
+        self.vData = self.vData.reshape(len(data.featured), 1)
+        self.model.fit(self.vData)
+
+    def decode(self, data):
         pass
 
     def predict(self, data):

@@ -2,6 +2,7 @@ from nltk.corpus import brown, genesis
 from nltk.corpus import stopwords
 import re
 import nltk
+import random
 
 class Data:
     def __init__(self, file=None, corpus=None, value=None, gold=True, language='english'):
@@ -31,7 +32,7 @@ class Data:
                 assert(len(corpusNLTK.raw()) > 0)
 
             if gold:
-                self.prolix = list(corpusNLTK.words())
+                self.prolix = list(corpusNLTK.words()[:1000])
                 self.add_features()
             else:
                 self.all = str(corpusNLTK.raw())
@@ -51,19 +52,20 @@ class Data:
 
     def add_features(self):
         print('Adding features')
-        self.featured = map(self.word_features, zip([None] + self.prolix[:-1], self.prolix))
+        self.featured = list(map(self.word_features, zip([None] + self.prolix[:-1], self.prolix)))+[[1, 1, 1, 1, 1, 3, 2, 14]]
 
     def word_features(self, x):
         prev = x[0]
         word = x[1]
-        # here we skip stopword text
         return [
-            self.word_feature_class(word),
-            self.word_feature_case(word),
-            self.word_feature_len(word),
-            self.word_feature_stop(word),
+            random.randint(0,1), # BOS
+            random.randint(0,1), # BOW
+            self.word_feature_abbr(word),
             self.word_feature_blank(prev, word),
-            self.word_feature_abbr(word)
+            self.word_feature_stop(word),
+            self.word_feature_len(word),
+            self.word_feature_case(word),
+            self.word_feature_class(word),
         ]
 
     def word_feature_case(self, word):
