@@ -92,16 +92,14 @@ class Data:
         return int(bool(word) and (word in stopwords.words(self.language)))
 
     def word_feature_class(self, word):
-        if word in stopwords.words(self.language):
-            return 0
         SPECIAL = [
             r'[IVXCDM]+', r'[a-zA-Z]+', r'[0-9]+', r'\.', r',', r'\:', r'\;',
-            r'[\?\!]', r'[\(\[\{]', r'[\)\]\}]', r'\-', r'\+', r'\/', r'\"', r'\'', r'~'
+            r'[\?\!]', r'[\(\[\{\)\]\}]', r'[\-\+]', r'\/', r'[\"\']', r'~'
         ]
         
         for x, expr in enumerate(SPECIAL):
             if bool(re.match(expr, word)):
-                return 1+x
+                return x
 
-        return 1+len(SPECIAL)+1
+        return len(SPECIAL)
         
