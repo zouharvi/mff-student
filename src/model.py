@@ -14,50 +14,14 @@ class Model:
         
         self.model = hmm.GaussianHMM(
             n_components=len(STATES),
-            covariance_type='spherical',
+            covariance_type='diag',
             verbose=True)
-        self.model.startprob_ = np.empty(len(STATES))
-        self.model.startprob_.fill(1.0/len(STATES))
         
-        # self.model.transmat_ = np.empty((len(STATES), len(STATES)))
-        # self.model.transmat_.fill(1.0/len(STATES))
-        self.model.transmat_ = np.array([
-            [1.0/3, 1.0/3, 1.0/3],
-            [1.0/3, 1.0/3, 1.0/3],
-            [1.0/3, 1.0/3, 1.0/3],
-        ])
-
-        # sFF = np.zeros(EMISSIONS)
-        # sFF.fill(1.0)
-        # sTF = np.zeros(EMISSIONS)
-        # sTF.fill(1.0)
-        # sTT = np.zeros(EMISSIONS)
-        # sTT.fill(1.0)
-        
-        # sFF[0] = 0
-        # sFF[1] = 0
-        # sFF = self.normalize(sFF)
-        
-        # sTF[1] = 0
-        # sTF = self.normalize(sTF)
-        
-        # sTT = self.normalize(sTT)
-
-        # self.model.emissionprob_ = np.array([sFF, sTF, sTT])
-
-        self.model.means_ = np.array([
-            [1],
-            [0],
-            [1],
-        ])
-
-        self.model.covars_ = np.array([0.5, 0.5, 0.5])
-
     def normalize(self, v):
-        norm = np.linalg.norm(v)
-        if norm == 0: 
+        total = np.sum(v)
+        if total == 0: 
             return v
-        return v / norm
+        return v / total
 
     def feature_to_vec(self, feature):
         vClass = np.zeros(14)
@@ -67,8 +31,8 @@ class Model:
         vBlank = np.zeros(2)
         vAbbr  = np.zeros(2)
         vClass[feature[0]] = 1
-        vCase[feature[1]] = 1
-        vLen[feature[2]] = 1
+        vLen[feature[1]] = 1
+        vCase[feature[2]] = 1
         vStop[feature[3]] = 1
         vBlank[feature[4]] = 1
         vAbbr[feature[5]] = 1
@@ -77,16 +41,38 @@ class Model:
 
     def fit(self, data):
         print('Fitting the model')
-        self.fTT = list(map(self.feature_to_vec, data.fTT))
-        self.fTF = list(map(self.feature_to_vec, data.fTF))
-        self.fFF = list(map(self.feature_to_vec, data.fFF))
+        self.fFF = np.array(list(map(self.feature_to_vec, data.fFF)))
+        self.fTF = np.array(list(map(self.feature_to_vec, data.fTF)))
+        self.fTT = np.array(list(map(self.feature_to_vec, data.fTT)))
+            
+        trans_p = lambda seq: data.transitions.count(seq)/(len(data.transitions)-1)
+        start_p = lambda seq: data.transitions.count(seq)/len(data.transitions)
+
+        self.model.transmat_ = np.array([
+            self.normalize([trans_p('00'), trans_p('01'), trans_p('02')]),
+            self.normalize([trans_p('10'), trans_p('11'), trans_p('12')]),
+            self.normalize([trans_p('20'), trans_p('21'), trans_p('22')]),
+        ])
+
+        self.model.startprob_ = np.array(
+            [start_p('0'), start_p('1'), start_p('2')]
+        )
+
+        self.model.means_ = np.array([
+            self.fFF.mean(axis=0),
+            self.fTF.mean(axis=0),
+            self.fTT.mean(axis=0),
+        ])
+
+        # pylint: disable=locally-disabled, unsubscriptable-object
+        epsilons = np.full(shape=(self.fFF.shape[1],), fill_value=np.finfo(float).eps)
+        self.model.covars_ = np.array([
+            self.fFF.var(axis=0)+epsilons,
+            self.fTF.var(axis=0)+epsilons,
+            self.fTT.var(axis=0)+epsilons,
+        ])
         
-        # self.vData = np.array(self.vData, dtype=np.int32)
-        # self.vData = self.vData.reshape(len(data.featured), 1)
-        # self.model.fit(self.vData)
-
-    def decode(self, data):
-        pass
-
     def predict(self, data):
-        return data.split('\n')
+        print('Data prediction')
+        observables = np.array(list(map(self.feature_to_vec, data.featured)))
+        return self.model.predict(observables)

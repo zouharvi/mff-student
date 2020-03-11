@@ -3,28 +3,24 @@
 from data import Data
 from evaluator import evaluate
 from model import Model
+import numpy as np
 import argparse
 
-if False and __name__ == '__main__':
+# model.predict(dataH)
+
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HMM based tokenizer')
-    parser.add_argument('-i', '--inference', help='Data used for inference.', default=None)
+    parser.add_argument('-i', '--interactive', help='Run with interactive input loop.', default=None)
     args, _args_rest = parser.parse_known_args()
 
-    data = Data(corpus='genesis')
+    dataT = Data(corpus='genesis', startSent=0, endSent=500)
+    model = Model()
+    model.fit(dataT)
 
     model = Model()
-    model.fit(data)
-    # predicted = model.predict(data.all)
+    model.fit(dataT)
 
-    # print('Train:')
-    # evaluate(predicted, data.gold)
+    dataH = Data(corpus='genesis', startSent=0, endSent=50)
     
-    # print('Dev:')
-    # data = Data(corpus='genesis')
-    # evaluate(predicted, data.gold)
-
-    # if args.inference:
-    #     dataArg = Data(value=args.inference)
-
-    #     out = model.predict(dataArg.all)
-    #     print('|'.join(out))
+    predictedStates = model.predict(dataH)
+    evaluate(dataH, predictedStates)
