@@ -5,12 +5,12 @@ from evaluator import evaluate
 from model import Model
 import argparse
 
-if __name__ == '__main__':
+if False and __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HMM based tokenizer')
     parser.add_argument('-i', '--inference', help='Data used for inference.', default=None)
     args, _args_rest = parser.parse_known_args()
 
-    data = Data(corpus='brown')
+    data = Data(corpus='genesis')
 
     model = Model()
     model.fit(data)

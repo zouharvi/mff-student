@@ -1,7 +1,9 @@
-from nltk.corpus import brown, genesis
+from nltk.corpus import brown, genesis, webtext
 from nltk.corpus import stopwords
-import re
 import nltk
+
+import re
+import numpy as np
 import random
 
 class Data:
@@ -14,12 +16,13 @@ class Data:
             stopwords.words(language)
         except LookupError as _le:
             nltk.download('stopwords')
+            nltk.download('punkt')
 
         if file:
             with open(file, 'r') as f:
                 self.all = f.read()
-            self.scan()
-            self.add_features()
+            self.prolix = self.scan(self.all)
+            self.add_observables(self.prolix)
 
         if corpus:
             print('Loading corpus from NLTK')
@@ -32,40 +35,68 @@ class Data:
                 assert(len(corpusNLTK.raw()) > 0)
 
             if gold:
-                self.prolix = list(corpusNLTK.words()[:1000])
-                self.add_features()
+                self.all = str(corpusNLTK.raw())
+                print('Creating prolix')
+                prolix = self.scan(self.all)
+                self.fFF = []
+                self.fTF = []
+                self.fTT = []
+                allSent = list(corpusNLTK.sents())
+                prevSeg = None
+                
+                print('Adding features')
+                print('Adding BOW')
+                BOWwords = set()
+                for sent in allSent:
+                    proposed = sent.pop(0)
+                    self.fTT.append(self.word_features(prevSeg, proposed))
+                    prevSeg = proposed
+                    BOWwords.add(self.scan(proposed)[0])
+
+                    for proposed in sent:
+                        self.fTF.append(self.word_features(prevSeg, proposed))
+                        prevSeg = proposed
+                        BOWwords.add(self.scan(proposed)[0])
+
+                print('Adding not BOW')
+                prevSeg = None
+                for proposed in prolix:
+                    if not (proposed in BOWwords):
+                        self.fFF.append(self.word_features(prevSeg, proposed))
+                    prevSeg = proposed
+                self.BOWwords = BOWwords
+                self.prolix = prolix
+
             else:
                 self.all = str(corpusNLTK.raw())
-                self.scan()
-                self.add_features()
+                self.prolix = self.scan(self.all)
+                self.add_observables(self.prolix)
 
         if value:
             self.all = value
-            self.scan()
-            self.add_features()
+            self.prolix = self.scan(self.all)
+            self.add_observables(prolix)
         
 
-    def scan(self):
-        print('Creating prolix')
-        self.prolix = re.split(r'([\w]+)', self.all)
-        # TODO: filter segments of size 0
+    def scan(self, all):
+        prolix = re.split(r'([\w]+)', all)
+        prolix = list(filter(lambda x: len(x) != 0, prolix))
+        return prolix
 
-    def add_features(self):
+    def add_observables(self, prolix):
         print('Adding features')
-        self.featured = list(map(self.word_features, zip([None] + self.prolix[:-1], self.prolix)))+[[1, 1, 1, 1, 1, 3, 2, 14]]
+        self.featured = list(map(self.word_features, zip([None] + prolix[:-1], prolix)))
 
-    def word_features(self, x):
-        prev = x[0]
-        word = x[1]
+    def word_features(self, prev, word):
+        # CLASS * LEN * CASE * STOP * BLANK * ABBR
+        # EMISSIONS = 14 * 4 * 3 * 2 * 2 * 2
         return [
-            random.randint(0,1), # BOS
-            random.randint(0,1), # BOW
-            self.word_feature_abbr(word),
-            self.word_feature_blank(prev, word),
-            self.word_feature_stop(word),
+            self.word_feature_class(word),
             self.word_feature_len(word),
             self.word_feature_case(word),
-            self.word_feature_class(word),
+            self.word_feature_stop(word),
+            self.word_feature_blank(prev, word),
+            self.word_feature_abbr(word),
         ]
 
     def word_feature_case(self, word):
