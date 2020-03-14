@@ -1,49 +1,58 @@
 from features import scan
 
-def evaluate(data, states):
-    prolixState = list(zip(data.prolix, states))
-    def extractProlixPrefix(wordProlix):
-        out = []
-        for word in wordProlix:
-            prolix = prolixState.pop(0)
-            if word != prolix[0]:
-                raise Exception(f'Prolix "{prolix[0]}" not matching')
-            out.append(prolix)
-        return out
+
+def evaluate(data, prediction):
+    """
+    Evaluate data object on provided prediction prolix tag sequence.
+    """
+
+    if len(data.trueTokenization) != len(prediction):
+        raise Exception(
+            f'True data length ({len(data.trueTokenization)}) does not match prediction length ({len(prediction)})'
+        )
 
     wTP = 0
     wFP = 0
     wTN = 0
     wFN = 0
-    total = 0
 
-    for word, BOS in data.wordsBOS:
-        wordProlix = scan(word)
-        prolixPrefix = extractProlixPrefix(wordProlix)
-        print(prolixPrefix, '|||||', wordProlix)
-        assert(len(prolixPrefix) == len(wordProlix))
-
-        # prolixPrefix[0] should be a word beginning
-        if prolixPrefix[0] != 0:
+    POSITIVE = {'W', 'B'}
+    NEGATIVE = {'N', 'S'}
+    for trueTag, predTag in zip(data.trueTokenization, prediction):
+        if trueTag in NEGATIVE and predTag in NEGATIVE:
+            wTN += 1
+        elif trueTag in POSITIVE and predTag in POSITIVE:
             wTP += 1
-        else:
+        elif trueTag in POSITIVE and predTag in NEGATIVE:
             wFN += 1
-        
-        for _prolix, state in prolixPrefix[1:]:
-            print(state)
-            if state != 0:
-                wFP += 1
-            else:
-                wTN += 1
+        elif trueTag in NEGATIVE and predTag in POSITIVE:
+            wFP += 1
 
-        total += len(prolixPrefix)
-    
-    # wTP /= total
-    # wFP /= total
-    # wTN /= total
-    # wFN /= total
-    print('Word-level: ')
-    print(f'TP: {wTP}%, FP: {wFP}%')
-    print(f'FN: {wFN}%, TN: {wTN}%')
+    def safeDiv(x, y):
+        return x/y if y != 0 else float('nan')
 
-# evaluate(dataH, predictedStates)
+    total = wTP + wFP + wTN + wFN
+    wTP = safeDiv(wTP, total)
+    wFP = safeDiv(wFP, total)
+    wTN = safeDiv(wTN, total)
+    wFN = safeDiv(wFN, total)
+
+    print('Any-level: ')
+    print(f'TP: {wTP*100:6.2f}%, FP: {wFP*100:6.2f}%')
+    print(f'FN: {wFN*100:6.2f}%, TN: {wTN*100:6.2f}%')
+    print(f'Precision: {wTP/(wTP+wFP)*100:6.2f}%')
+    print(f'Recall: {wTP/(wTP+wFN)*100:6.2f}%')
+
+def decode(data, prediction):
+    """
+    Decode input string against predicted sequence
+    """
+    out = []
+    buffer = ''
+    for tag, char in zip(prediction, data.all):
+        buffer += char
+        if tag in {'W', 'B'}:
+            out.append(buffer)
+            buffer = ''
+    out += buffer
+    return '|' + '|'.join(out) + '|'

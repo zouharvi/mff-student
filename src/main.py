@@ -1,26 +1,45 @@
 #!/usr/bin/env python3
 
 from data import Data
-from evaluator import evaluate
+from evaluator import evaluate, decode
 from model import Model
 import numpy as np
 import argparse
 
-# model.predict(dataH)
+"""
+Entry point for HMM tokenizer
+"""
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HMM based tokenizer')
-    parser.add_argument('-i', '--interactive', help='Run with interactive input loop.', default=None)
+    parser.add_argument('-i', '--interactive', help='Run with interactive input loop.', action='store_true', default=None)
+    parser.add_argument('-d', '--heldout', help='Evaluate on heldout data.', action='store_true', default=None)
+    parser.add_argument('-v', '--verbose', help='Verbose output.', action='store_true', default=None)
     args, _args_rest = parser.parse_known_args()
 
-    dataT = Data(corpus='genesis', startSent=0, endSent=500)
+    bar = lambda: print('='*30)
+
+    # Training data
+    bar()
+    dataT = Data(corpus='genesis', train=True, endChar=1000000)
+    bar()
     model = Model()
     model.fit(dataT)
+    bar(), print('Train data evaluation:'), bar()
+    predicted = model.predict(dataT)
+    evaluate(dataT, predicted)
+    bar()
 
-    model = Model()
-    model.fit(dataT)
-
-    dataH = Data(corpus='genesis', startSent=0, endSent=50)
-    
-    predictedStates = model.predict(dataH)
-    evaluate(dataH, predictedStates)
+    if args.heldout:
+        dataH = Data(gutenbergF='austen-sense.txt', endChar=400000)
+        bar(), print('Heldout data evaluation:'), bar()
+        predicted = model.predict(dataH)
+        evaluate(dataH, predicted)
+    if args.interactive:
+        while True:
+            input_text = input('> ')
+            if not input_text:
+                break
+            dataH = Data(value=input_text)
+            predicted = model.predict(dataH)
+            print(decode(dataH, predicted)) 

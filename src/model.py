@@ -1,7 +1,12 @@
 import numpy as np
 from hmmlearn import hmm
 
+
 class Model:
+    """
+    Wrapper around hmmlearn HMM
+    """
+
     def __init__(self):
         # BOW, BOS
         STATES = [
@@ -9,27 +14,35 @@ class Model:
             (True, False),
             (True, True)
         ]
-        
+
         np.random.seed(0)
-        
+
         self.model = hmm.GaussianHMM(
             n_components=len(STATES),
             covariance_type='diag',
             verbose=True)
-        
+
     def normalize(self, v):
+        """
+        Normalize Python or Numpy list
+        """
+
         total = np.sum(v)
-        if total == 0: 
+        if total == 0:
             return v
         return v / total
 
     def feature_to_vec(self, feature):
+        """
+        Create one hot representation of feature vectors from Data::word_features
+        """
+
         vClass = np.zeros(14)
-        vLen   = np.zeros(4)
-        vCase  = np.zeros(3)
-        vStop  = np.zeros(2)
+        vLen = np.zeros(4)
+        vCase = np.zeros(3)
+        vStop = np.zeros(2)
         vBlank = np.zeros(2)
-        vAbbr  = np.zeros(2)
+        vAbbr = np.zeros(2)
         vClass[feature[0]] = 1
         vLen[feature[1]] = 1
         vCase[feature[2]] = 1
@@ -40,22 +53,31 @@ class Model:
         return np.array(out, dtype=np.int8)
 
     def fit(self, data):
+        """
+        Manually compute optimal HMM values from training data. Provided data object must have 
+        corresponding traing attributes.
+        """
+
         print('Fitting the model')
+
+        # one-hot encode
         self.fFF = np.array(list(map(self.feature_to_vec, data.fFF)))
         self.fTF = np.array(list(map(self.feature_to_vec, data.fTF)))
         self.fTT = np.array(list(map(self.feature_to_vec, data.fTT)))
-            
-        trans_p = lambda seq: data.transitions.count(seq)/(len(data.transitions)-1)
-        start_p = lambda seq: data.transitions.count(seq)/len(data.transitions)
+
+        def trans_p(seq): return data.transitions.count(
+            seq)/(len(data.transitions)-1)
+        def start_p(seq): return data.transitions.count(
+            seq)/len(data.transitions)
 
         self.model.transmat_ = np.array([
-            self.normalize([trans_p('00'), trans_p('01'), trans_p('02')]),
-            self.normalize([trans_p('10'), trans_p('11'), trans_p('12')]),
-            self.normalize([trans_p('20'), trans_p('21'), trans_p('22')]),
+            self.normalize([trans_p('NN'), trans_p('NW'), trans_p('NB')]),
+            self.normalize([trans_p('WN'), trans_p('WW'), trans_p('WB')]),
+            self.normalize([trans_p('BN'), trans_p('BW'), trans_p('BB')]),
         ])
 
         self.model.startprob_ = np.array(
-            [start_p('0'), start_p('1'), start_p('2')]
+            [start_p('N'), start_p('W'), start_p('B')]
         )
 
         self.model.means_ = np.array([
@@ -65,14 +87,47 @@ class Model:
         ])
 
         # pylint: disable=locally-disabled, unsubscriptable-object
-        epsilons = np.full(shape=(self.fFF.shape[1],), fill_value=np.finfo(float).eps)
+        epsilons = np.full(
+            shape=(self.fFF.shape[1],),
+            fill_value=np.finfo(float).eps
+        )
+
+        # Gaussian mixture requires all covars to be strictly positive
         self.model.covars_ = np.array([
             self.fFF.var(axis=0)+epsilons,
             self.fTF.var(axis=0)+epsilons,
             self.fTT.var(axis=0)+epsilons,
         ])
-        
+
     def predict(self, data):
+        """
+        Compute most probable state explanation of the provided sequence.
+        """
+
         print('Data prediction')
         observables = np.array(list(map(self.feature_to_vec, data.featured)))
-        return self.model.predict(observables)
+        prediction = list(self.model.predict(observables))
+
+        out = ''
+        # iterate prolix tag encoding
+        for prolixTag in data.prolixTokenization:
+            if prolixTag in ['N', 'S']:
+                out += prolixTag
+            elif prolixTag == 'W':
+                if not prediction:
+                    raise Exception(
+                        'Fewer predictions outputs than proposed prolixes')
+                pred = prediction.pop(0)
+                if pred == 0:
+                    out += 'N'
+                elif pred == 1:
+                    out += 'W'
+                elif pred == 2:
+                    out += 'B'
+                else:
+                    raise Exception('Undefined output symbol encountered')
+
+        if prediction:
+            raise Exception('More predictions outputs than proposed prolixes')
+
+        return out
