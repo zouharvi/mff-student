@@ -1,0 +1,86 @@
+% LTGF
+% Grammar 1
+% Theory
+
+:- tree_extensions.
+:- multifile if/2.
+
+% Lexicon
+% Pepa is Joe (nom.), a goatherd, and he is grazing a goat (acc.)
+
+pase ~~> (word,
+          cat:(verb,
+               num:sg)).
+pasou ~~> (word,
+          cat:(verb,
+               num:pl)).
+pepa ~~> (word,
+          cat:(noun,
+               num:sg,
+               case:nom)).
+kluci ~~> (word,
+          cat:(noun,
+               num:pl,
+               case:nom)).
+kozu ~~> (word,
+          cat:(noun,
+               num:sg,
+               case:acc)).
+kozy ~~> (word,
+          cat:(noun,
+               num:pl,
+               case:acc)).
+
+               
+% Phrase Structure Rules
+
+s ##
+    (phrase,
+     cat:(sentence,
+          num:Num),
+     head_dtr:Head,
+     nonh_dtr:Subj)
+===>
+    cat> (Subj,
+          cat:(noun,
+               num:Num,
+               case:nom)),
+    cat> (Head,
+          cat:((verb_phrase;verb_intrans),
+               num:Num)).
+
+vp ##
+    (phrase,
+     cat:(verb_phrase,
+          num:Num),
+     head_dtr:Head,
+     nonh_dtr:Obj)
+===>
+    cat> (Head,
+          cat:(verb_trans,
+               num:Num)),
+    cat> (Obj,
+          cat:(noun,
+               case:acc)).
+
+% Test sentences
+
+t(1, "pepa pase", phrase, 1, 'Grammar 1: intransitive verb').
+t(2, "pepa pase kozu", phrase, 1, 'Grammar 1: transitive verb').
+t(3, "pase kozu", phrase, 1, 'Grammar 1: transitive verb').
+t(4, "pase pepa", phrase, 0, 'Grammar 1: cannot do free word order').
+t(5, "kozu pase pepa", phrase, 0, 'Grammar 1: cannot do free word order').
+t(6, "kozu pepa pase", phrase, 0, 'Grammar 1: cannot do free word order').
+t(7, "pase kozu pepa", phrase, 0, 'Grammar 1: cannot do free word order').
+t(8, "pase pepa kozu", phrase, 0, 'Grammar 1: cannot do free word order').
+t(9, "pepa kozu pase", phrase, 0, 'Grammar 1: cannot do free word order').
+t(10, "kozu pase", bot, 0, 'Grammar 1: cannot do free word order').
+
+t(20, "kluci pasou kozu", phrase, 1, 'Grammar 1: pl pl sg').
+t(21, "kluci pasou", phrase, 1, 'Grammar 1: pl pl').
+t(22, "pepa pasou", phrase, 0, 'Grammar 1: wrong number agreement').
+t(23, "pepa pase kluci", phrase, 0, 'Grammar 1: wrong object case').
+t(24, "pepa pase kozy", phrase, 1, 'Grammar 1: sg sg pl').
+t(25, "kluci pasou kozy", phrase, 1, 'Grammar 1: pl pl pl').
+t(26, "kluci pase kozy", phrase, 0, 'Grammar 1: pl sg pl').
+t(27, "pasou kozy", phrase, 1, 'Grammar 1: pl pl').

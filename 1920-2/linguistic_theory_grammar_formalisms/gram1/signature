@@ -1,0 +1,27 @@
+% LTGF
+% Grammar 1
+% Signature
+
+type_hierarchy
+bot
+   sign phon:list cat:cat
+      word
+      phrase head_dtr:sign nonh_dtr:sign dtrs:list
+   cat num:num
+      sentence
+      verb_phrase
+      verb
+      noun case:case
+   verb
+      verb_trans
+      verb_intrans
+   case
+      nom
+      acc
+   num
+      sg
+      pl
+   list
+     ne_list hd:bot tl:list
+     e_list
+.
