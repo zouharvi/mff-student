@@ -43,6 +43,7 @@ def evaluate(data, prediction):
     print(f'Precision: {wTP/(wTP+wFP)*100:6.2f}%')
     print(f'Recall: {wTP/(wTP+wFN)*100:6.2f}%')
 
+
 def decode(data, prediction):
     """
     Decode input string against predicted sequence
@@ -55,4 +56,5 @@ def decode(data, prediction):
             out.append(buffer)
             buffer = ''
     out += buffer
+    out = [x.strip() for x in out]
     return '|' + '|'.join(out) + '|'

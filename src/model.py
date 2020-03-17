@@ -3,7 +3,7 @@ from hmmlearn import hmm
 
 
 class Model:
-    """
+    """;
     Wrapper around hmmlearn HMM
     """
 

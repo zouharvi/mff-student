@@ -12,16 +12,19 @@ Entry point for HMM tokenizer
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HMM based tokenizer')
-    parser.add_argument('-i', '--interactive', help='Run with interactive input loop.', action='store_true', default=None)
-    parser.add_argument('-d', '--heldout', help='Evaluate on heldout data.', action='store_true', default=None)
-    parser.add_argument('-v', '--verbose', help='Verbose output.', action='store_true', default=None)
+    parser.add_argument('-i', '--interactive',
+                        help='Run with interactive input loop.', action='store_true', default=None)
+    parser.add_argument(
+        '-d', '--heldout', help='Evaluate on heldout data.', action='store_true', default=None)
+    parser.add_argument(
+        '-v', '--value', help='Value to tokenize.', default=None)
     args, _args_rest = parser.parse_known_args()
 
-    bar = lambda: print('='*30)
+    def bar(): return print('='*30)
 
     # Training data
     bar()
-    dataT = Data(corpus='genesis', train=True, endChar=1000000)
+    dataT = Data(corpus='genesis', train=True, endChar=200000)
     bar()
     model = Model()
     model.fit(dataT)
@@ -31,10 +34,14 @@ if __name__ == '__main__':
     bar()
 
     if args.heldout:
-        dataH = Data(gutenbergF='austen-sense.txt', endChar=400000)
+        dataH = Data(gutenbergF='austen-sense.txt', endChar=50000)
         bar(), print('Heldout data evaluation:'), bar()
         predicted = model.predict(dataH)
         evaluate(dataH, predicted)
+    if args.value:
+        dataH = Data(value=args.value)
+        predicted = model.predict(dataH)
+        print(decode(dataH, predicted))
     if args.interactive:
         while True:
             input_text = input('> ')
@@ -42,4 +49,4 @@ if __name__ == '__main__':
                 break
             dataH = Data(value=input_text)
             predicted = model.predict(dataH)
-            print(decode(dataH, predicted)) 
+            print(decode(dataH, predicted))

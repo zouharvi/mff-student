@@ -6,9 +6,14 @@ def scan(all):
     """
     Create prolix proposal
     """
+    print('Computing prolix')
+    print('0%\r', end='')
     prolix = re.split(r'([\w]+)', all)
+    print('33%\r', end='')
     prolix = [x.strip() for x in prolix]
+    print('66%\r', end='')
     prolix = list(filter(lambda x: len(x) != 0, prolix))
+    print('100%\r', end='')
     return prolix
 
 
@@ -16,6 +21,7 @@ def add_observables(prolix, language):
     """
     Compute observable feature vector for all proposed prolix objects
     """
+    print('Adding observable features')
     return list(map(lambda x: word_features(*x, language), zip([None] + prolix[:-1], prolix)))
 
 
