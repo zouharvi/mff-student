@@ -3,6 +3,7 @@
 from data import Data
 from evaluator import evaluate, decode
 from model import Model
+from utils import draw_bar
 import numpy as np
 import argparse
 
@@ -31,24 +32,21 @@ if __name__ == '__main__':
     )
     args, _args_rest = parser.parse_known_args()
 
-    def bar(): return print('='*30)
-
     # Training data
-    bar()
-    dataT = Data(corpus='webtext', train=True, endChar=200000)
-    bar()
+    draw_bar()
+    dataT = Data(corpus='webtext', train=True, endChar=20000)
+    draw_bar()
     model = Model()
     model.fit(dataT)
-    bar(), print('Train data evaluation:'), bar()
+    draw_bar(), print('Train data evaluation:'), draw_bar()
     predicted = model.predict(dataT)
-    evaluate(dataT, predicted)
-    bar()
+    evaluate(dataT, predicted, example=True)
 
     if args.heldout:
-        dataH = Data(gutenbergF='austen-sense.txt', endChar=50000)
-        bar(), print('Heldout data evaluation:'), bar()
+        dataH = Data(corpus='inaugural', endChar=50000)
+        draw_bar(), print('Heldout data evaluation:'), draw_bar()
         predicted = model.predict(dataH)
-        evaluate(dataH, predicted)
+        evaluate(dataH, predicted, True)
     if args.value:
         dataH = Data(value=args.value)
         predicted = model.predict(dataH)

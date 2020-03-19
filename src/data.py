@@ -1,7 +1,7 @@
 import nltk
-# pylint: disable=locally-disabled, no-name-in-module
+# pylint: disable=locally-disabled, no-name-in-module, unused-wildcard-import
 from nltk import punkt
-from nltk.corpus import brown, genesis, webtext, abc
+from nltk.corpus import *
 from nltk.corpus import stopwords, gutenberg
 
 import re
@@ -184,7 +184,11 @@ class Data:
         if corpus:
             corpusNLTK = self._nltk_prep_corpus(corpus)
             print('Loading all relevant data')
-            allSent = list(corpusNLTK.sents())
+            if hasattr(corpusNLTK, 'sents'):
+                allSent = list(corpusNLTK.sents())
+            else:
+                # fake one-sentence corpus
+                allSent = [list(corpusNLTK.words())]
             self.all = self._collapse(corpusNLTK.raw())[:endChar]
         elif gutenbergF:
             gutenberg = self._nltk_prep_gutenberg(gutenbergF)
