@@ -12,19 +12,30 @@ Entry point for HMM tokenizer
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HMM based tokenizer')
-    parser.add_argument('-i', '--interactive',
-                        help='Run with interactive input loop.', action='store_true', default=None)
     parser.add_argument(
-        '-d', '--heldout', help='Evaluate on heldout data.', action='store_true', default=None)
+        '-i', '--interactive',
+        help='Run with interactive input loop.',
+        action='store_true',
+        default=None
+    )
     parser.add_argument(
-        '-v', '--value', help='Value to tokenize.', default=None)
+        '-d', '--heldout',
+        help='Evaluate on heldout data.',
+        action='store_true',
+        default=None
+    )
+    parser.add_argument(
+        '-v', '--value',
+        help='Value to tokenize.',
+        default=None
+    )
     args, _args_rest = parser.parse_known_args()
 
     def bar(): return print('='*30)
 
     # Training data
     bar()
-    dataT = Data(corpus='genesis', train=True, endChar=200000)
+    dataT = Data(corpus='webtext', train=True, endChar=200000)
     bar()
     model = Model()
     model.fit(dataT)

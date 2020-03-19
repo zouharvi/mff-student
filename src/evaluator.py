@@ -1,7 +1,7 @@
 from features import scan
 
 
-def evaluate(data, prediction):
+def evaluate(data, prediction: str) -> None:
     """
     Evaluate data object on provided prediction prolix tag sequence.
     """
@@ -28,7 +28,7 @@ def evaluate(data, prediction):
         elif trueTag in NEGATIVE and predTag in POSITIVE:
             wFP += 1
 
-    def safeDiv(x, y):
+    def safeDiv(x: float, y: float):
         return x/y if y != 0 else float('nan')
 
     total = wTP + wFP + wTN + wFN
@@ -44,7 +44,7 @@ def evaluate(data, prediction):
     print(f'Recall: {wTP/(wTP+wFN)*100:6.2f}%')
 
 
-def decode(data, prediction):
+def decode(data, prediction: str) -> None:
     """
     Decode input string against predicted sequence
     """

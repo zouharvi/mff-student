@@ -7,6 +7,9 @@ from nltk.corpus import stopwords, gutenberg
 import re
 import numpy as np
 import random
+from typing import List
+
+from nltk.corpus import CorpusReader
 
 from features import word_features, add_observables, scan
 
@@ -16,13 +19,13 @@ class Data:
     Holds training/test data
     """
 
-    def _collapse(self, text):
+    def _collapse(self, text: str) -> List[str]:
         """
         Collapse longer sequences of regex whitespace to a single space
         """
         return re.sub(r'\s+', ' ', text)
 
-    def _prolix_pass(self, all, prolix):
+    def _prolix_pass(self, all: str, prolix: List[str]) -> str:
         """
         Tag sequence pass through input data against prolix
         """
@@ -43,7 +46,7 @@ class Data:
 
         return prolixTokenization
 
-    def _true_pass(self, all, sentences):
+    def _true_pass(self, all: str, sentences: List[str]) -> str:
         """
         Tag sequence pass through input data against gold data
         """
@@ -79,7 +82,7 @@ class Data:
                 break
         return trueTokenization
 
-    def _check_nltk_base(self, language):
+    def _check_nltk_base(self, language: str) -> None:
         try:
             stopwords.words(language)
             punkt.demo
@@ -87,7 +90,7 @@ class Data:
             nltk.download('stopwords')
             nltk.download('punkt')
 
-    def _nltk_prep_corpus(self, corpus):
+    def _nltk_prep_corpus(self, corpus: str) -> CorpusReader:
         try:
             corpusNLTK = globals()[corpus]
             assert(len(corpusNLTK.raw()) > 0)
@@ -97,14 +100,14 @@ class Data:
             assert(len(corpusNLTK.raw()) > 0)
         return corpusNLTK
 
-    def _nltk_prep_gutenberg(self, gutenbergF):
+    def _nltk_prep_gutenberg(self, gutenbergF: str):
         try:
             gutenberg.sents()
         except LookupError as _le:
             nltk.download('gutenberg')
         return gutenberg
 
-    def _compute_true_prolix(self):
+    def _compute_true_prolix(self) -> None:
         print('Comparing prolix and true tokenization')
         self.fFF = []
         self.fTF = []
@@ -128,7 +131,7 @@ class Data:
                     self.transitions += 'N'
                     buffer = ''
 
-    def _compute_train_features(self):
+    def _compute_train_features(self) -> None:
         print('Computing features')
         self.fFF = list(map(
             lambda x: word_features(*x, self.language),
@@ -143,7 +146,7 @@ class Data:
             zip([None] + self.fTT[:-1], self.fTT))
         )
 
-    def _recover_prolix_trimmed(self):
+    def _recover_prolix_trimmed(self) -> None:
         print('Recovering prolix from trimmed data')
         self.prolix = []
         buffer = ''
@@ -154,7 +157,7 @@ class Data:
                 self.prolix.append(buffer.strip())
                 buffer = ''
 
-    def _init_file(self, fileF):
+    def _init_file(self, fileF: str) -> None:
         """
         Load inference data from file
         """
@@ -164,7 +167,7 @@ class Data:
         self.featured = add_observables(self.prolix, self.language)
         self.prolixTokenization = self._prolix_pass(self.all, self.prolix)
 
-    def _init_value(self, value):
+    def _init_value(self, value: str) -> None:
         """
         Load inference data from a string
         """
@@ -173,7 +176,7 @@ class Data:
         self.featured = add_observables(self.prolix, self.language)
         self.prolixTokenization = self._prolix_pass(self.all, self.prolix)
 
-    def _init_corpus(self, corpus, gutenbergF, train, endChar):
+    def _init_corpus(self, corpus: str, gutenbergF: str, train: bool, endChar: int) -> None:
         """
         Load train or inference data from an NLTK (or gutenberg) corpus
         """
@@ -188,10 +191,6 @@ class Data:
             print('Loading all relevant data')
             allSent = list(gutenberg.sents(gutenbergF))
             self.all = self._collapse(gutenberg.raw(gutenbergF))[:endChar]
-
-        # @TODO: trap for bad prolix
-        allSent[0] = ['Fake.Word.FF'] + allSent[0]
-        self.all = 'Fake.Word.FF ' + self.all
 
         self.prolix = scan(self.all)
         self.prolixTokenization = self._prolix_pass(self.all, self.prolix)
@@ -227,7 +226,7 @@ class Data:
 
         self._compute_train_features()
 
-    def __init__(self, fileF=None, corpus=None, gutenbergF=None, value=None, endChar=None, train=False, language='english'):
+    def __init__(self, fileF: str = None, corpus: str = None, gutenbergF: str = None, value: str = None, endChar: int = None, train: bool = False, language: str = 'english'):
         assert(corpus or value or fileF or gutenbergF)
         assert(not (corpus and value and fileF and gutenbergF))
 
