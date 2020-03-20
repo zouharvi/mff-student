@@ -65,10 +65,10 @@ class Model:
         self.fTF = np.array(list(map(self.feature_to_vec, data.fTF)))
         self.fTT = np.array(list(map(self.feature_to_vec, data.fTT)))
 
-        def trans_p(seq): return data.transitions.count(
-            seq)/(len(data.transitions)-1)
-        def start_p(seq): return data.transitions.count(
-            seq)/len(data.transitions)
+        def trans_p(seq):
+            return data.transitions.count(seq)/data.transitions.count(seq[0])
+        def start_p(seq):
+            return data.transitions.count(seq)/len(data.transitions)
 
         self.model.transmat_ = np.array([
             self.normalize([trans_p('NN'), trans_p('NW'), trans_p('NB')]),
