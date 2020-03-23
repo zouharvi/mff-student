@@ -30,6 +30,10 @@ kozy ~~> (word,
           cat:(noun,
                num:pl,
                case:acc)).
+kozy ~~> (word,
+          cat:(noun,
+               num:pl,
+               case:nom)).
 
                
 % Phrase Structure Rules
@@ -84,3 +88,6 @@ t(24, "pepa pase kozy", phrase, 1, 'Grammar 1: sg sg pl').
 t(25, "kluci pasou kozy", phrase, 1, 'Grammar 1: pl pl pl').
 t(26, "kluci pase kozy", phrase, 0, 'Grammar 1: pl sg pl').
 t(27, "pasou kozy", phrase, 1, 'Grammar 1: pl pl').
+t(28, "kozy pasou kozy", phrase, 1, 'Grammar 1: pl pl pl').
+t(29, "kozy pasou", phrase, 1, 'Grammar 1: pl pl').
+t(30, "kozy pasou kozu", phrase, 1, 'Grammar 1: pl pl sg').
