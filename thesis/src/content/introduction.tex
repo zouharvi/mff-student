@@ -1,0 +1,30 @@
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+It is common for especially Internet users to have to produce text in a foreign language where they are unable to verify the quality of the proposed machine translation. The issue at hand is referred to as ``outbound translation,'' which is a complement to gisting, also known as inbound translation.
+
+Both in gisting and outbound translation, a message is transferred between an author and a recipient. The user has sufficient knowledge of only one of the languages. In outbound translation, the user is responsible for creating correct messages, while in gisting, their responsibility is to interpret them correctly. An example of outbound translation may be filling out forms in a foreign language, describing an issue to technical support, or ordering food in a foreign restaurant. An example of gisting is to understand Internet articles, presentations correctly, or to read restaurant menus, all in a foreign language.
+
+When translating to foreign languages, users cooperate with machine translation tools to produce the best result. Many users also use machine translation to verify their own translation, or at least to affirm, that the machine translation is valid via backward translation. Machine translation systems advanced considerably in the last decade due to breakthroughs in statistical and later neural machine translation models but they still make often mistakes. Thankfully, they are of a vastly different kind than the mistakes people make when translating texts and so are detectable.
+
+Outbound translation is a use case, which requires some confirmation of the translation quality. Users translating to languages which they do not master enough to validate the translation could use some additional system to verify that the machine translation output is valid and assure them. This system may be the missing connection necessary for establishing trust of the user to the machine translator. We hope that MT systems will achieve perfection, but we do not expect this to happen in the foreseeable future and especially for all possible language pairs.
+
+The issue of outbound translation has not yet been fully explored, yet there exists much research on related problems, such as quality estimation and bitext alignment, which has been productized by translation companies for minimizing post-editing costs and by other NLP companies for robust information retrieval.
+
+The proposed tool, \ptakopet{}, aims to showcase how such a product intended to help with outbound translation may function. It provides the coveted user experience by several quality estimation pipelines and backward translation, which we hope is served in an unobtrusive, yet informative way.
+
+We follow up with an experiment whose objective is to examine different phenomena and strategies users use with the help of \ptakopet{} when they are faced with a task involving outbound translation. Such strategies are then further examined based on their performance (relevance and quality of produced foreign texts). This experiment also gives us valuable feedback from both the user's and experiment designer's perspective. This is very beneficial to us, as we can improve the system for future experiments with \ptakopet{}.
+
+\section*{Thesis overview}
+\addcontentsline{toc}{section}{Thesis overview}
+This thesis is divided into five chapters. The first one introduces terminology and issues related to machine translation, quality estimation, bitext alignment and source complexity, as well as relevant areas of research.
+
+The second chapter covers the development and deployment of two previous versions of \ptakopet{} (old-1 and old-2) as well as what we aimed to improve and what we learned from them. We then mention different approaches to outbound translation and what we think are their positives and negatives. We also briefly discuss the industry adoption of quality estimation systems.
+
+The next chapter shows the behaviour of \ptakopet{} from the user perspective, together with screenshots and use case descriptions.
+
+Data preparation, experiment setup, frontend, and backend implementation, quality estimation, and bitext alignment model and deployment and usage of the current version of \ptakopet{} is the focus of the fourth chapter.
+
+In the fifth chapter, we propose, prepare, realize, and evaluate an experiment on the strategies users take when faced with outbound translation with the help provided by \ptakopet{}. 
+
+At the end of this thesis, we conclude and summarize both the \ptakopet{} implementation and the experiment interpretation with notes on future work in the area of outbound translation.

@@ -1,0 +1,396 @@
+\chapter{Development documentation}
+\label{chp:development_doc}
+
+In this appendix we aim to describe all technical details regarding the deploymend and implementation of \ptakopet{}. It is a complement to \cref{chp:implementation} which deals with the implementation.
+
+\section{Frontend}
+
+The \texttt{zouharvi/ptakopet} repository contains the following directory structure:
+
+\begin{itemize}
+    \item \texttt{dist/} - output directory, which contains all of the build files.
+    \item \texttt{docs/} - source code for the \ptakopet{} documentation; the content is located in \texttt{docs/src/} and is written in simple markdown\footnote{Documentation is generated dynamically from the markdown by \href{https://docsify.js.org/}{docsify.js.org}.}
+    \item \texttt{meta/}
+        - files related to the whole project and not just the frontend
+        \begin{itemize}
+            \item \texttt{meta/logo} - the \ptakopet{} bird logo and relevant files
+            \item \texttt{meta/object\_design} - diagrams, which describe the project workings. They are used also in the documentation
+            \item \texttt{meta/study\_pilot} - all of the files connected with the pilot experiment. The contents are further described in \cref{sec:dev_doc:log_eval}
+        \item \texttt{meta/synth\_qe\_test} - data and evaluation script for the experiment, which tested the quality of transferred QE data (described in \cref{subsec:cs_de_wmt})
+        \end{itemize}
+    \item \texttt{node\_modules/} - dependencies downloaded automatically by npm\footnotehref{https://www.npmjs.com/}{www.npmjs.com}
+    \item \texttt{package.json} - the build commands and list of dependencies
+    \item \texttt{package-lock.json} - list of all dependencies together with their versions in the project.
+    \item \texttt{README.md} - introductory text about \ptakopet{}
+    \item \texttt{src/} - source files; their structure is described in detail in \cref{sec:implementation:frontend_structure}
+    \item \texttt{tsconfig.json} - TypeScript compiler settings.
+    \item \texttt{webpack.config.js} - Webpack settings
+\end{itemize}
+
+\subsection{Build and compilation}
+
+The code in \cref{lst:frontend_build_scripts} clones and builds the whole frontend in production mode:
+
+\begin{lstlisting}[language=none, caption={Shell code for building the whole frontend},label={lst:frontend_build_scripts}]
+git clone https://github.com/zouharvi/ptakopet
+cd ptakopet
+git submodule update --init
+npm install
+npm run build
+\end{lstlisting}
+
+All of the files necessary for running the frontend should then be present in the \texttt{dist/} directory. The web page does not need to be served from the Internet and can be run locally.\footnote{It still needs a server to respond to various MT related requests.} To do so, it is sufficient to load \texttt{dist/index.html} in any modern browser.
+
+Moreover, if one wishes to rebuild the code upon every change in the source files, they may run \lstinline{npm run dev}. This starts a small HTTP server and makes the application accessible from localhost. Upon code changes, the code gets recompiled in development mode.
+
+\subsection{Architecture}
+
+The source files directory has the following structure:
+
+\begin{itemize}
+    \item \texttt{src/messages/} - code for anything related to backend requests (machine translation, quality estimation, alignment and paraphrasing)
+    \item \texttt{src/misc/} - miscellaneous files (code utilities, current page config and profiles)
+    \item \texttt{src/page/} - files relevant to DOM manipulation
+    \item \texttt{src/study/} - code for displaying and collecting experiment data
+    \item \texttt{src/main.ts} - entry point for the frontend application
+\end{itemize}
+
+
+\subsubsection*{Backends} \label{subsubsec:dev_doc:backend}
+
+As mentioned in \cref{subsubsec:impl:backend}, a backend in this context is just an object, which contains a list of supported language pairs, a name and a function, which for some input returns a promise of the relevant output. For example in case of \texttt{Estimator} one may define a \backendname{Random} backend as in \cref{lst:random_qe}.
+
+\begin{lstlisting}[language=none, caption={Random quality estimation backend definition},label={lst:random_qe}]
+{
+composeRequest(
+    [lang1, lang2]: [LanguageCode, LanguageCode],
+    [text1, text2]: [string, string],
+    extra: ExtraTranslationInfo
+): Promise<Estimation> {
+    return new Promise<Estimation>(async (resolve, reject)
+    => {
+        let tokens = await tokenizer.tokenize(
+            targetText, Settings.language2 as LanguageCode)
+        let estimation: Estimation = []
+        for (let i in tokens)
+            estimation.push(Math.random())
+        resolve(estimation)
+    })
+},
+
+languages:
+    Utils.generatePairsSet<LanguageCode>(Utils.Languages),
+
+name:
+    'Random'
+}
+\end{lstlisting}
+
+\subsubsection{Highlighting} \label{subsubsec:dev_doc:highlighting}
+
+As part of the quality estimation and source complexity presentation, we wanted to highlight suspicious parts of the target and source texts, respectively. Even though this seems like a trivial and prevalent task in web development, we found a lack of robust and functional solutions. Our goal was to extend the functionality of the \texttt{textarea} element so that we could display the highlighting, but keeping the user experience unaffected.
+
+The first option we explored was based on editable \texttt{div} elements. A \texttt{div} can be made editable using the attribute \texttt{contenteditable="true"}. The \texttt{div} would then be filled by tokens, each in its \texttt{span}. The tokens could then be styled, for example with an attribute like \texttt{style='background-color: red'}. Even though this would potentially offer extensive functionality, we found it very difficult to work with. One of the biggest issues was that element focus and cursor position was lost on rerender.
+
+The other approach, which we eventually chose, was also used in \ptakopet{}-old-2. It is based on a plugin\footnotehref{https://github.com/lonekorean/highlight-within-textarea}{github.com/lonekorean/highlight-within-textarea} by Will Boyd named highlight-within-textarea. It is a simple jQuery plugin, which uses a placeholder div (overlapping with the textarea), which is redrawn according to the current highlight values. This way, the active textarea element does not lose focus nor cursor position because it is not being manipulated. It is also beneficial that it works on mobile browsers as well.
+
+Unfortunately, we could not use this plugin out of the box, as it was created to highlight keywords in the text. We thus forked\footnotehref{https://github.com/zouharvi/highlight-within-textarea}{github.com/zouharvi/highlight-within-textarea} this project and added the desired functionality. This project is incorporated in the main \ptakopet{} repository as a git submodule.
+
+During the pilot experiment, we found out that there is a serious memory leak in this plugin. This did not manifest in the original plugin, as the set of keywords to highlight needed to be defined only once. For our use case, we needed to display different highlight values roughly every second. After bisecting the bug, we committed the fix into the forked repository.
+
+\pagebreak
+\section{Experiment definition} \label{sec:dev_doc:experiment_def}
+
+In this section we describe the experiment definition on the frontend side. The tools used for generating queues and stimuli and log evaluation are discussed in \cref{sec:dev_doc:prepare_stimuli} and \cref{sec:dev_doc:log_eval}.
+
+An experiment can be defined in a single JSON file. It is included compile-time in the \texttt{src/study/baked\_study.ts} file. The \texttt{src/study/data/} directory contains two files:
+\begin{itemize}
+    \item \texttt{study\_pilot.json} - definition for the experiment described in this thesis
+    \item \texttt{study\_edin.json} - definition for an upcoming experiment which is part of this thesis
+\end{itemize}
+
+The JSON file has to contain a top-level object containing the keys \texttt{users}, \texttt{stimuliID} and \texttt{stimuliRules}. We explain every item type in a separate paragraph and provide a TypeScript type definition for the whole document in \cref{lst:experiment_def_type}.
+
+\begin{lstlisting}[caption={Experiment definition type}, label={lst:experiment_def_type}, escapeinside={\%*}{*)}, stringstyle=\ttfamily, showstringspaces=false]
+interface BakedStudyType {
+    users: {
+        [id: string]: Array<Array<string>>
+    },
+    stimuli: {
+        [id: string]: string
+    },
+    stimuliRules: Array<{
+        rule: string,
+        message?: string,
+        profile?: SettingsProfile,
+    }>,
+}
+
+interface SettingsProfile {
+    settings?: SettingsObject,
+    qe?: boolean, // quality estimation
+    mt?: boolean, // machine translation (translate 1)
+    bt?: boolean, // backward translation (translate 2)
+    pp?: boolean, // paraphrasing
+    manual?: boolean, // allow further manual settings
+}
+\end{lstlisting}
+
+\subsubsection*{\texttt{users}}
+
+\texttt{users} is an object with \texttt{userID} keys. These keys map to an array of arrays of \texttt{stimuliIDExtended}s. This defines the experiment blocks (every innermost array is a separate block) and corresponding stimuli references. The \texttt{users} object can look like in \cref{lst:experiment_def_users}.
+
+\begin{lstlisting}[caption={\texttt{users} experiment definition example}, label={lst:experiment_def_users}, escapeinside={\%*}{*)}, stringstyle=\ttfamily, showstringspaces=false]
+"users": {
+    "alice": [
+        [ "003#bt.n", "007#bt.n", "012#bt.y", ... ],
+        [ "020#bt.y", "011#bt.y", "050#bt.y", ... ]
+    ],
+    "bob": [
+        [ "101#bt.n", "003#bt.y", "084#bt.n", ... ],
+        [ "054#bt.n", "059#bt.y", "102#bt.n", ... ]
+    ],
+},
+\end{lstlisting}
+
+\subsubsection*{\texttt{stimuli}}
+
+\texttt{stimuli} is an object with \texttt{stimuliID} keys mapping to a HTML string, which gets pasted into the page when the given stimuli is to be shown. It is important to note, that it can by any HTML, like images, not just text. The example in \cref{lst:experiment_def_stimuli} contains excerpts from stimuli of the experiment. The strings are paragraphs with \texttt{<mark>} tags which highlight parts of the shown text.
+
+\begin{lstlisting}[caption={\texttt{stimuli} experiment definition example}, label={lst:experiment_def_stimuli}, escapeinside={\%*}{*)}, stringstyle=\ttfamily, showstringspaces=false]
+"stimuli": {
+    "001": "<p>A new style of wafers composed of gallium-
+        nitride-on-silicon (GaN-on-Si) is being used to
+        produce white LEDs using <mark>200-mm</mark>
+        silicon wafers. ... </p>",
+    "002": "<p>Average annual precipitation is <mark>15
+        inches</mark> (380 mm), but great variations
+        are seen. ... </p>",
+    ...
+}
+\end{lstlisting}
+
+\subsubsection*{\texttt{stimuliRules}}
+
+\texttt{stimuliRules} is an array of \texttt{stimuliRule} objects, which contain the regex and a \texttt{settings} object. If the regex matches the current \texttt{stimulIDExtended}, the settings are applied. Multiple settings objects can be applied and can even override each other. The last rule in the array gets applied last. This allows the \texttt{stimuliIDExtended} (in the \texttt{users} section) to contain different information about e.g., whether the paraphraser should be shown to a given user, while still sharing the same \texttt{stimuliID}.
+
+An example of a \texttt{stimuliRules} array is shown in \cref{lst:experiment_def_rules}.
+
+\subsubsection*{\texttt{stimuliIDExtended}}
+
+\texttt{stimuliIDExtended} is composed of two parts separated by \texttt{\#}. The first part is the actual \texttt{stimuliID} by which a lookup to this object is done, while the rest is used for any symbols, that can be later recognized by \texttt{stimuliRules}.
+
+The string can then look like: \texttt{"003\#bt.y"} and \texttt{"003\#bt.n"}. In both of these examples, the same stimulus would be shown according to the lookup in \texttt{stimuli}, but \texttt{stimuliRules} could have two rules: \texttt{"\textbackslash d+\textbackslash \#bt\textbackslash.y"} and \texttt{"\textbackslash d+\textbackslash\#bt\textbackslash.n"} which would turn the backtranslation on and off respectively.
+
+This example is also demonstrated in \cref{lst:experiment_def_rules}. In this example a \texttt{stimuliRule} with the regex \texttt{".*"} is used. This will match anything, so other rules will only partially override this rule in case they also match. When combined with the \texttt{users} definition in \cref{lst:experiment_def_users}, the user \texttt{alice} would be shown the stimuli \texttt{003} without backward translation and \texttt{bob} would see the same stimuli but with backward translation enabled.
+
+\subsubsection*{\texttt{stimuliRule}}
+
+Every \texttt{stimuliRule} object has to contain a \texttt{rule} key with the relevant regex and optionally a \texttt{settings} object or a \texttt{message} string. The later is shown above the stimuli that matches the rule. It can also contain HTML markup.
+
+\subsubsection*{\texttt{settingsProfile} object}
+
+\texttt{settings} objects have a type defined in \cref{lst:experiment_def_type}. It contains variables, which define whether a given module should be active or not and also the backends. The manual variable defines, whether users are allowed to change the backends themselves. It defaults to \texttt{false}.
+
+\pagebreak
+\begin{lstlisting}[caption={\texttt{stimuliRules} experiment definition example}, label={lst:experiment_def_rules}, escapeinside={\%*}{*)}, stringstyle=\ttfamily, showstringspaces=false]
+"stimuliRules": [
+    {
+        "rule": ".*",
+        "profile": {
+            "settings": {
+                "backendTranslator": "ufalTransformer",
+                "backendEstimator": "random",
+                "backendAligner": "fast_align_ubuntu",
+                "language1": "en",
+                "language2": "cs"
+            },
+            "qe": true,
+            "mt": true,
+            "bt": true,
+            "pp": false,
+            "manual": false
+        },
+        "message": "Translate the highlighted text in
+            the provided text."
+    },
+    {
+        "rule": ".*#.*bt\\.n.*",
+        "profile": {
+            "bt": false
+        }
+    },
+    {
+        "rule": ".*#.*bt\\.y.*",
+        "profile": {
+            "bt": true
+        }
+    },
+    ...
+]
+\end{lstlisting}
+
+\pagebreak
+
+\section{Server backend}
+
+The \texttt{zouharvi/ptakopet-server} repository contains several folders and files:
+
+\begin{itemize}
+    \item \texttt{align/} - models and config files for bitext alignment
+    \item \texttt{data/} - data which the models make use of
+    \item \texttt{install.sh} - the root install script
+    \item \texttt{qe/} - models and config files for quality estimation
+    \item \texttt{README.md} - an introductory text about the server
+    \item \texttt{server/src/} - the server source files
+    \item \texttt{server/run.sh} and \texttt{server/run\_nohup.sh} - used for launching
+\end{itemize}
+
+\subsection{Installation}
+
+The server needs to be run on a modern UNIX machine. It was tested on Ubuntu 19.10 and Fedora 31. The installation is done via a shell script \texttt{install.sh}. It first checks whether all requirements are met. The requirements are on packages installed via pip2 and pip3 (Theano, mosestokenizer, etc.), but also on system tools (CMake, g++, tar, nohup). If all requirements are satisfied, it proceeds to launch the installation scripts for alignment, quality estimation and the server itself. According to modern development standards, the server should be dockerized. On the other hand, since only usually one instance would be running at a time, dockerizing it would be overengineering.
+
+To run the server (on \texttt{0.0.0.0:80}), launch the \texttt{server/run.sh} script. A common practice is to connect to a remote machine via SSH and launch the server. For that, there is a script \texttt{server/run\_nohup.sh}, which disregards kill signals on user logout.
+
+\pagebreak
+\section{Experiment} \label{sec:dev_doc:experiment}
+
+All experiment data (both preparation and collected data) are stored in \texttt{ptakopet/meta/study\_pilot}. The directory is structured as:
+
+\begin{itemize}
+    \item \texttt{logs/}
+    \begin{itemize}
+        \item \texttt{logs/raw} anonymized collected raw log files
+        \item \texttt{logs/qe\_annotation} quality annotation of the collected data
+        \item \texttt{logs/stable} contains the finished product of all processing scripts
+    \end{itemize}
+    \item \texttt{prepare\_questions/} scripts used to genereate stimuli and also the finished baked queues
+    \item \texttt{processing\_scripts/} contains all log processing scripts
+    \item \texttt{README.md} introductory text about the experiment
+\end{itemize}
+
+\subsection{Stimuli preparation} \label{sec:dev_doc:prepare_stimuli}
+
+\subsubsection{Baked queue} \label{subsubsec:dev_doc:baked_queue}
+
+The Python program \texttt{prepare\_questions/bake.py} contains exactly this logic. Given a number of monolingual (\texttt{--cusers}) and bilingual (\texttt{--busers}) users, it will try to distribute the stimuli from the available pool as uniformly as possible. By default the output is stored in a json file \texttt{baked.json}, but this can be changed using the \texttt{--file} argument. The seed and maximum number of stimuli per user can be specified using \texttt{--seed} and \texttt{--per\_user} respectively.
+
+The program also prints the domain sizes for every user (important only for bilingual users), the intersection between users' baked queues and a histogram. All three sections are displayed in an example output in \cref{lst:bake_example}. Users are named from \texttt{u1}, with first being all the monolingual ones and then all the bilingual ones.
+
+These preparatory scripts assume that the current working directory contains two dataset files. The first is \texttt{squad-train-v2.0.json}, which is available from the SQuAD 2.0 website\footnotehref{https://rajpurkar.github.io/SQuAD-explorer/}{rajpurkar.github.io/SQuAD-explorer}. The second one is the Czech translation of the same file with structure preserved. It is hosted by Matúš Žilinec\footnotehref{https://zilinec.me/dl/datasets/squad/train-cs-v2.1.json}{zilinec.me/dl/datasets/squad/train-cs-v2.1.json} and should be stored with the name of \texttt{zilinec-train-v2.1.json}.
+
+\pagebreak
+\begin{lstlisting}[language=none,caption={Example output of baked queue generator}, label={lst:bake_example}]
+> ./prepare_questions/bake.py --cusers 2 --busers 2
+
+s: SQuAD, z: SQuAD Czech, t: Tech issues, p: Praha 6
+     s  z  t  p
+u0: 00 60 35 30
+u1: 00 60 35 30
+u2: 33 27 35 30
+u3: 20 40 35 30
+
+Intersections (in %)
+     u0  u1  u2  u3
+u0  100 100  73  84
+u1  100 100  73  84
+u2   73  73 100  75
+u3   84  84  75 100
+
+Histogram: X stimuli used by Y users
+31: 1, 22: 2, 31: 3, 83: 4
+\end{lstlisting}
+
+\subsubsection{Data extraction}
+
+Stimuli for the technical and administrative domains were chosen manually. For SQuAD and SQuAD Czech, we extracted the stimuli at random using \texttt{prepare\_questions/data\_prep.py}. We used this program to explore the SQuAD structure and also to pick stimuli of interest. As described by \cref{tab:squad_distribution}, we wanted to focus on how many questions SQuAD had per given stimuli and sample within a specific distribution. When using this data extraction program with the \texttt{extract\_distribution} command, it prints the SQuAD distribution of questions per span. It also samples the spans according to the hardcoded distribution. This is shown in \cref{lst:data_prep_extraction}.
+
+\begin{figure}[h]
+\begin{lstlisting}[language=none,caption={Output of SQuAD data extraction tool}, label={lst:data_prep_extraction}, stringstyle=\ttfamily, showstringspaces=false]
+> ./prepare_questions/data_prep.py \ 
+    extract_distribution \ 
+    output_raw.json
+    
+SQuAD 2.0 per span question distribution:
+    {1: 81619, 2: 2303, 3: 166, 5: 8, 4: 13, 6: 1}
+Total selected spans: 60
+Total SQuAD 2.0 spans: 84110
+\end{lstlisting}
+\end{figure}
+
+The output of this command is a JSON array, which contains tuples of the original SQuAD 2.0 and SQuAD 2.0 Czech paragraphs. For the purposes of our experiment, we also need to assign stimuli keys which we call \texttt{SID}. They are in the form of \texttt{<domain letter><number>}. The domain letters are shown in \cref{lst:bake_example}. For example the first stimuli of the SQuAD domain has \texttt{SID} of \texttt{s00}. To achieve this, we create a new JSON with the keys: \texttt{tech\_issues}, \texttt{praha\_6} and \texttt{squad}. The values for the first two are just arrays of strings and for \texttt{squad} it is the previous output. This file can then be used as an argument for the last data preparation command which adds these keys. Assuming the new edited file is stored in \texttt{all\_questions\_raw.json}, the keys can be added using as in \cref{lst:data_prep_add_keys}.
+
+\begin{figure}[h]
+\begin{lstlisting}[language=none,caption={Usage of data preparation tool command which adds \texttt{SID}s to stimuli}, label={lst:data_prep_add_keys}]
+> ./prepare_questions/data_prep.py \ 
+    add_keys \
+    all_questions\_raw.json \
+    all_questions.json
+\end{lstlisting}
+\end{figure}
+
+The file \texttt{all\_questions.json} from \cref{lst:data_prep_add_keys} should now contain the JSON object which can be added to the main experiment definition file described in \cref{sec:experiment_def}.
+
+\subsection{Logs} \label{sec:dev_doc:log_eval}
+
+\subsubsection{Files}
+
+The raw logs are stored in an interleaved CSV file (grepping it by the first token results in a regular CSV file). The collected files are stored with anonymized userIDs at \texttt{meta/study\_pilot/logs/raw/}. The file \texttt{meta/study\_pilot/logs/a0\_fixed.csv} contains the quality annotation of produced outputs.
+
+\subsubsection*{Processing scripts}
+
+For the purpose of this thesis we use files with the \texttt{.blog} extension. They simply contain pickled Python data. The logs are split into segments (each corresponding to one stimulus) and the timestamps are normalized concerning the segment's beginning. Furthermore, the lines also contain the annotator's ID.
+
+To create the \texttt{.blog} file, use the \texttt{meta.py} command. The file can then be used by other scripts that analyze the logs. Quality estimation annotation has to be added to these files as well using the \texttt{extract\_qe\_annotation}. This process is shown in \cref{lst:data_process_blog}. We list the processing files along with their brief description:
+
+\begin{itemize}
+    \item \texttt{meta.py} aggregates all of the raw logs into a single pickled file.
+    \item \texttt{domains.py} explores phenomena in segments across domains, such as the number of linearly written stimuli. 
+    \item \texttt{prep\_qe\_annotation.py} creates a markdown (\texttt{qe\_annotation/a0.md}) and a CSV file which can be used by a proficient annotator to assess the quality of the produced output. We turned the markdown file into a HTML page (\texttt{qe\_annotation/a0.html}) using Pandoc.\footnotehref{https://pandoc.org/}{pandoc.org} These files were then used by this annotator and afterward, their work was merged using \texttt{extract\_qe\_annotation}. 
+    \item \texttt{process\_qe\_annotation.py} processes quality annotations on collected data with graphics output which is used in this thesis and \cite{zouhar:ptakopet}. The matplotlib module is required.
+    \item \texttt{segments.py} aggregates the log to some human-readable form that can be later analyzed. Examples are only written inputs (SR1) and the last translation request before confirmation (SR5). This was useful for us to examine the data.
+    \item \texttt{load.py}, \texttt{create\_blog.py} and \texttt{utils.py} are used only as modules from other scripts.
+\end{itemize}
+
+\begin{lstlisting}[language=none,caption={Example of binary log file creation and manipulation}, label={lst:data_process_blog}]
+> ./processing_scripts/meta.py ./logs/raw/* -b main.blog
+
+>  ./processing_scripts/prep_qe_annotation.py ./main.blog \ 
+    ./prepare_questions/questions_flat.json \ 
+    --a0md a0.md --a0csv a0.csv
+
+> ./processing_scripts/extract_qe_annotation.py \ 
+    main.blog main.blog \
+    ./logs/qe_annotation/a0_fixed.csv
+
+> ./processing_scripts/domains.py ./main.blog 
+
+SQuAD 141 (100s)
+- skipped: 11
+- finished: 130
+- - linear: 50
+- - with edits: 78
+- - - avg similarity: 68.86%
+- - - equal: 68.31%
+- - - replace: 26.39%
+- - - insert: 0.00%
+- - - delete: 5.31%
+SQuAD-cs 346 (94s)
+- skipped: 26
+- finished: 320
+
+...
+
+> ./processing_scripts/segments.py ./main.blog \ 
+    -sr1 out.sr1 -sr2 out.sr2 -sr3 out.sr3 \
+    -sr4 out.sr4 -sr5 out.sr5
+\end{lstlisting}
+
+\pagebreak
+\subsubsection*{Errors} \label{subsubsec:experiment_leak}
+
+During the experiment, we committed three mistakes. The first concerns a memory leak which made the user interface less responsive over time. This was fixed after the experiment.
+
+The rest regards the annotation of produced translations. The second error is connected to the IDs in the CSV and HTML file given to the proficient annotator. Luckily this could be solved later by running the script \texttt{./processing\_scripts/fix\_qecsv\_usid.py ./main.blog ./logs/qe\_annotation/a0\_bad.csv ./logs/qe\_annotation/a0\_fixed.csv}. The file \texttt{a0\_bad.csv} is the one returned by the annotator and \texttt{a0\_fixed.csv} is the file with the correct mappings that can be used with other scripts.
+
+The other error is a methodological one. The markdown/HTML file used by the annotator by which they rated the translation quality contained visible distinctions in IDs between first viable and final outputs. Since the first viable were thought to be of lesser quality, the annotator could get biased in their ratings.

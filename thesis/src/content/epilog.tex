@@ -1,0 +1,17 @@
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+
+In this thesis we described the issue of outbound translation as a complement to gisting. We briefly described technologies related to machine translation quality estimation and presented a new system \ptakopet{} for both real usage and for experiments in this area.
+
+We also conducted an experiment on human annotators, which proved that cues such as backward translation or quality estimation can increase the user's confidence in the produced translation, but also improve the final translation itself. 
+
+We found that enhancing MT with QE improves the user experience. We expect some form of quality estimation to start appearing more in publicly available MT solutions.
+
+\section*{Future work}
+\addcontentsline{toc}{section}{Future work}
+
+In future experiments we would like to quantitatively measure which cues are most relevant for outbound translation and how they project on user confidence in the translation. This can be done by providing different cues to different users on the same task and seeing how it affects their performance and trust in the MT system.
+
+From the described experiment we already know that not all errors get recovered in the backward translation. This is a proof that backward translation is useful for the task of outbound translation, at least to some extent. We wish to explore this issue of backtranslation errors in general and see for example how many errors and of what kind get recovered.
+
+Lastly we would like to explore how to gather more QE data, because at this time only a very small dataset of manually annotated QE data for several language pairs is publicly available by WMT. This QE data synthesis is a work in progress.\footnotehref{https://github.com/zouharvi/MosQEto}{github.com/zouharvi/MosQEto}

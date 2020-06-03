@@ -1,0 +1,134 @@
+%%% This file contains definitions of various useful macros and environments %%%
+%%% Please add more macros here instead of cluttering other files with them. %%%
+
+%%% Minor tweaks of style
+
+% These macros employ a little dirty trick to convince LaTeX to typeset
+% chapter headings sanely, without lots of empty space above them.
+% Feel free to ignore.
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries \thechapter. #1
+   \par\nobreak
+   \vskip 20\p@
+}}
+\def\@makeschapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries #1
+   \par\nobreak
+   \vskip 20\p@
+}}
+\makeatother
+
+% This macro defines a chapter, which is not numbered, but is included
+% in the table of contents.
+\def\chapwithtoc#1{
+\chapter*{#1}
+\addcontentsline{toc}{chapter}{#1}
+}
+
+% Draw black "slugs" whenever a line overflows, so that we can spot it easily.
+\overfullrule=1mm
+
+%%% An environment for typesetting of program code and input/output
+%%% of programs. (Requires the fancyvrb package -- fancy verbatim.)
+
+\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small, frame=single}
+
+
+
+%%%
+%%% Custom commands and notes
+%%%
+
+\definecolor{rubine}{rgb}{0.7, 0.1, 0.1}
+\newcommand{\VVV}[1]{%
+    \noindent%
+    \textcolor{rubine}{VVV #1}%
+}
+
+\newcommand{\XXX}[1]{%
+    \noindent%
+    \textcolor{red}{XXX #1}%
+}
+
+
+\newcommand{\backendname}[1]{\textbf{#1}}
+
+\newcommand{\footnotehref}[2]{%
+\footnote{\href{#1}{#2}}%
+}
+
+% Hack for overfull paragraphs
+\tolerance=10000
+\hbadness=10000
+
+% Figure from the img/ folder with a caption
+\newcommand{\figcap}[3][1]{%
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=#1\textwidth]{img/#2}
+        \caption{#3}
+        \label{fig:#2}
+    \end{figure}
+}
+
+% Multiple images per one figure
+\usepackage{subcaption}
+
+% Force figure position
+\usepackage{float}
+
+% Force footnote to stick to the bottom
+\usepackage[bottom]{footmisc}
+
+% Used for less spacing in enumerate and itemize
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+
+% multirow
+\usepackage{multirow}
+
+% Code listing environment
+\usepackage{listings}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{TypeScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, let, string, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  sensitive=true
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  captionpos=b,
+  language=TypeScript,
+}
+\lstdefinelanguage{none}{
+  identifierstyle=
+}
+% This renames the lstlistings title
+\renewcommand*{\lstlistlistingname}{List of Listings}
+\renewcommand*{\lstlistingname}{List of Listings}
+
+
+% 1cm hspace gap by default
+\newcommand{\ttab}[1][1]{%
+    \text{} \hspace{#1 cm}%
+}
+% cref
+\usepackage[noabbrev,capitalize]{cleveref}
+
+% Ptakopět 
+\def\ptakopet{Ptakopět}
