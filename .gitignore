@@ -1,3 +1,4 @@
-main
+debug/*
 tmp*
 /target
+.rustc_info.json
