@@ -5,7 +5,7 @@ use std::fs;
 use std::iter::FromIterator;
 
 const F_STOPWORDS: &str = "./data/en/stopwords.txt";
-const F_DOCUMENT: &str = "./data/en/kufre.txt";
+const HULTH_ID: u32 = 1139;
 const LENGTH_POWER: f32 = 1.2;
 const DUPLICITY_SCORE: f32 = 0.1;
 
@@ -52,7 +52,11 @@ fn crf_key<'a>(w1: &str, w2: &str) -> String {
 
 fn compute_crf_frq_deg<'a>(
     candidates: &[Vec<String>],
-) -> (HashMap<String, u32>, HashMap<String, u32>, HashMap<String, u32>) {
+) -> (
+    HashMap<String, u32>,
+    HashMap<String, u32>,
+    HashMap<String, u32>,
+) {
     let mut cfs: HashMap<String, u32> = HashMap::new();
     let mut frq: HashMap<String, u32> = HashMap::new();
     let mut deg: HashMap<String, u32> = HashMap::new();
@@ -86,12 +90,21 @@ fn compute_crf_frq_deg<'a>(
 }
 
 fn main() {
+    let F_DOCUMENT: String = format!("./data/hulth2003/{}.abstr", HULTH_ID);
+    let F_UNCONTR: String = format!("./data/hulth2003/{}.uncontr", HULTH_ID);
+
     println!("Opening stopwords from '{}'", F_STOPWORDS);
     let sws_raw: String = fs::read_to_string(F_STOPWORDS).expect("The file could not be opened.");
     let sws: HashSet<&str> = HashSet::from_iter(sws_raw.lines());
 
     println!("Opening document from '{}'", F_DOCUMENT);
     let doc_raw: String = fs::read_to_string(F_DOCUMENT).expect("The file could not be opened.");
+
+    let mut uncontr_raw: String = fs::read_to_string(F_UNCONTR).expect("The file could not be opened.");
+    uncontr_raw = uncontr_raw.replace("\n", "");
+    uncontr_raw = uncontr_raw.replace("\t", "");
+    uncontr_raw = uncontr_raw.replace("\r", "");
+    let uncontr :HashSet<&str> = HashSet::from_iter(uncontr_raw.split("; ").collect::<Vec<&str>>());
 
     println!("");
 
@@ -121,12 +134,19 @@ fn main() {
         keywords.insert(key, score);
     }
 
-    let mut keyword_vec: Vec<(&str, &f32)> = keywords.iter().map(|(k,v)| (k.as_str(), v)).collect();
+    let mut keyword_vec: Vec<(&str, &f32)> =
+        keywords.iter().map(|(k, v)| (k.as_str(), v)).collect();
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
     println!("Score  Keyword");
     for n in 1..20 {
         let (key, val) = keyword_vec.get(n).unwrap();
-        println!("{:.3}: {}", val, key);
+        if uncontr.contains(key) {
+            println!("* {:.3}: {}", val, key);
+        } else {
+            println!("  {:.3}: {}", val, key);
+        }
     }
+
+    // println!("{:?}", uncontr);
 }
