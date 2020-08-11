@@ -6,28 +6,38 @@ use std::iter::FromIterator;
 
 const F_STOPWORDS: &str = "./data/en/stopwords.txt";
 const F_DOCUMENT: &str = "./data/en/kufre.txt";
+const LENGTH_POWER: f32 = 1.2;
+const DUPLICITY_SCORE: f32 = 0.1;
 
 fn create_candidates<'a>(words: &Vec<String>, sws: HashSet<String>) -> Vec<Vec<String>> {
     let mut buffer: Vec<String> = Vec::new();
     let mut candidates: Vec<Vec<String>> = Vec::new();
 
-    let uppercase_regex = Regex::new(r"[A-Z].+").unwrap();
-    let word_regex = Regex::new(r"[a-zA-Z]+").unwrap();
+    let uppercase_regex = Regex::new(r"\p{Lu}.+").unwrap();
+    let word_regex = Regex::new(r"\pL+").unwrap();
 
     for word in words {
         if !word_regex.is_match(word) {
             continue;
         }
 
-        if sws.contains(word) || uppercase_regex.is_match(word) {
+        if sws.contains(&word.to_lowercase()) {
             if buffer.len() != 0 {
                 candidates.push(buffer);
                 buffer = Vec::new();
             }
+        } else if uppercase_regex.is_match(word) {
+            if buffer.len() != 0 {
+                candidates.push(buffer);
+                buffer = Vec::new();
+            }
+            buffer.push(word.to_lowercase().to_string());
         } else {
-            buffer.push(word.to_string())
+            buffer.push(word.to_lowercase().to_string());
         }
     }
+
+
     return candidates;
 }
 
@@ -115,9 +125,9 @@ fn main() {
         for word in &candidate {
             sum += rat.get(word).unwrap();
         }
-        let mut score = sum/f32::powf(length as f32, 1.8);
+        let mut score = sum/f32::powf(length as f32, LENGTH_POWER);
         if keywords.contains_key(&key) {
-            score += 1.0;
+            score += DUPLICITY_SCORE;
         }
         keywords.insert(key, score);
     }
@@ -125,8 +135,9 @@ fn main() {
     let mut keyword_vec:Vec<(&String, &f32)> = keywords.iter().collect();
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
+    println!("Score  Keyword");
     for n in 1..20 {
         let (key, val) = keyword_vec.get(n).unwrap();
-        println!("{}: {}", key, val);
+        println!("{:.3}: {}", val, key);
     }
 }
