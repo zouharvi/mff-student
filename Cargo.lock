@@ -50,6 +50,7 @@ name = "smake"
 version = "0.1.0"
 dependencies = [
  "glob",
+ "lazy_static",
  "regex",
 ]
 
