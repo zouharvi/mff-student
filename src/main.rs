@@ -13,7 +13,7 @@ mod doc_reader;
 use doc_reader::DocAll;
 
 const F_STOPWORDS: &str = "./data/stopwords.txt";
-const G_ABSTR: &str = "./data/hulth2003/*.abstr";
+const G_ABSTR: &str = "./data/hulth2003_all/*.abstr";
 const LENGTH_POWER: f32 = 0.16;
 const DUPLICITY_SCORE: f32 = -0.8;
 
