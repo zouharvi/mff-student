@@ -2,8 +2,8 @@ use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::{HashMap, HashSet};
 
-pub fn compute_frq_deg<'a>(
-    candidates: &Vec<Vec<String>>,
+pub fn compute_frq_deg(
+    candidates: &[Vec<String>],
 ) -> (HashMap<&str, u32>, HashMap<&str, u32>) {
     let mut frq_map: HashMap<&str, u32> = HashMap::new();
     let mut deg_map: HashMap<&str, HashSet<&str>> = HashMap::new();
@@ -12,7 +12,7 @@ pub fn compute_frq_deg<'a>(
         for w1 in set {
             *frq_map.entry(w1).or_insert(0) += 1;
 
-            let deg_map_set = deg_map.entry(w1).or_insert(HashSet::new());
+            let deg_map_set = deg_map.entry(w1).or_insert_with(HashSet::new);
             for w2 in set {
                 deg_map_set.insert(w2);
             }
@@ -24,14 +24,14 @@ pub fn compute_frq_deg<'a>(
         .map(|x| (*x.0, x.1.len() as u32))
         .collect::<HashMap<&str, u32>>();
 
-    return (frq_map, deg);
+    (frq_map, deg)
 }
 
-fn word_heuristics(candidate: &Vec<String>) -> bool {
+fn word_heuristics(candidate: &[String]) -> bool {
     lazy_static! {
         static ref R_VERB: Regex = Regex::new(r".*ed").unwrap();
     }
-    return R_VERB.is_match(&candidate.last().unwrap()) || candidate.first().unwrap().len() <= 3;
+    R_VERB.is_match(&candidate.last().unwrap()) || candidate.first().unwrap().len() <= 3
 }
 
 pub fn create_candidates<'a>(words: Vec<&'a str>, sws: &HashSet<&str>) -> Vec<Vec<String>> {
@@ -44,14 +44,14 @@ pub fn create_candidates<'a>(words: Vec<&'a str>, sws: &HashSet<&str>) -> Vec<Ve
 
     for word in words {
         if sws.contains(&word.to_lowercase().as_str()) {
-            if buffer.len() != 0 {
+            if !buffer.is_empty() {
                 if !word_heuristics(&buffer) {
                     candidates.push(buffer);
                 }
                 buffer = Vec::new();
             }
         } else if R_UPPERCASE.is_match(word) {
-            if buffer.len() != 0 {
+            if !buffer.is_empty() {
                 if !word_heuristics(&buffer) {
                     candidates.push(buffer);
                 }
@@ -63,5 +63,5 @@ pub fn create_candidates<'a>(words: Vec<&'a str>, sws: &HashSet<&str>) -> Vec<Ve
         }
     }
 
-    return candidates;
+    candidates
 }

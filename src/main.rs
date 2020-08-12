@@ -100,5 +100,5 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
             }
         }
     }
-    return hits;
+    hits
 }

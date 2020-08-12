@@ -31,14 +31,14 @@ impl DocAll {
             }
         }
 
-        return DocAll {
+        DocAll {
             data: map_data,
-            no_documents: no_documents,
-        };
+            no_documents,
+        }
     }
 
     pub fn term_idf(&self, term: &str) -> f32 {
         let sum = *self.data.get(term).unwrap_or(&0) as f32;
-        return (self.no_documents as f32).log(10.0) / (sum as f32);
+        (self.no_documents as f32).log(10.0) / (sum as f32)
     }
 }

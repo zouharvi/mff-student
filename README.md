@@ -28,4 +28,4 @@ Measured on all huth2003 documents on a hot run.
 |description|user|
 |-|-|
 |base (keywords cleanup)|83s|
-|document word->occurence mapping|5.2s|
+|document word->occurence mapping|3.6s|
