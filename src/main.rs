@@ -14,22 +14,25 @@ use doc_reader::DocAll;
 
 const F_STOPWORDS: &str = "./data/stopwords.txt";
 const G_ABSTR: &str = "./data/hulth2003/*.abstr";
-const LENGTH_POWER: f32 = 1.2;
-const DUPLICITY_SCORE: f32 = 0.5;
+const LENGTH_POWER: f32 = 0.16;
+const DUPLICITY_SCORE: f32 = -0.8;
 
 fn main() {
     println!("Opening stopwords from '{}'", F_STOPWORDS);
-    let sws_raw: String = fs::read_to_string(F_STOPWORDS).expect("The file could not be opened.");
+    let sws_raw: String = fs::read_to_string(F_STOPWORDS).unwrap();
     let sws: HashSet<&str> = HashSet::from_iter(sws_raw.lines());
     println!("Reading all from '{}'", G_ABSTR);
     let data = DocAll::read_all(&sws, G_ABSTR);
 
-    for entry in glob(G_ABSTR).expect("Failed to read glob pattern") {
+    let mut hits = 0;
+    let mut doc_count = 0;
+    for entry in glob(G_ABSTR).unwrap() {
         match entry {
             Ok(path) => {
+                doc_count += 1;
                 let mut uncontr_path = PathBuf::from(&path);
                 uncontr_path.set_extension("uncontr");
-                process_abstr(
+                hits += process_abstr(
                     &data,
                     &sws,
                     path.as_os_str().to_str().unwrap(),
@@ -39,9 +42,10 @@ fn main() {
             Err(e) => println!("{:?}", e),
         }
     }
+    println!("Hit ratio: {}", (hits as f32)/(doc_count as f32));
 }
 
-fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &str) {
+fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &str) -> u32 {
     lazy_static! {
         static ref R_NOT_WORD: Regex = Regex::new(r"[^\pL]+").unwrap();
     }
@@ -80,6 +84,7 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
         keywords.iter().map(|(k, v)| (k.as_str(), v)).collect();
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
+    let mut hits = 0;
     if true {
         println!("Score  Keyword {}", f_abstr);
         for n in 1..15 {
@@ -89,9 +94,11 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
             let (key, val) = keyword_vec.get(n).unwrap();
             if uncontr.contains(*key) {
                 println!("* {:.3}: {}", val, key);
+                hits += 1;
             } else {
                 println!("  {:.3}: {}", val, key);
             }
         }
     }
+    return hits;
 }

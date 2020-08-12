@@ -27,6 +27,13 @@ pub fn compute_frq_deg<'a>(
     return (frq_map, deg);
 }
 
+fn word_heuristics(candidate: &Vec<String>) -> bool {
+    lazy_static! {
+        static ref R_VERB: Regex = Regex::new(r".*ed").unwrap();
+    }
+    return R_VERB.is_match(&candidate.last().unwrap()) || candidate.first().unwrap().len() <= 3;
+}
+
 pub fn create_candidates<'a>(words: Vec<&'a str>, sws: &HashSet<&str>) -> Vec<Vec<String>> {
     let mut buffer: Vec<String> = Vec::new();
     let mut candidates: Vec<Vec<String>> = Vec::new();
@@ -38,12 +45,16 @@ pub fn create_candidates<'a>(words: Vec<&'a str>, sws: &HashSet<&str>) -> Vec<Ve
     for word in words {
         if sws.contains(&word.to_lowercase().as_str()) {
             if buffer.len() != 0 {
-                candidates.push(buffer);
+                if !word_heuristics(&buffer) {
+                    candidates.push(buffer);
+                }
                 buffer = Vec::new();
             }
         } else if R_UPPERCASE.is_match(word) {
             if buffer.len() != 0 {
-                candidates.push(buffer);
+                if !word_heuristics(&buffer) {
+                    candidates.push(buffer);
+                }
                 buffer = Vec::new();
             }
             buffer.push(word.to_lowercase());

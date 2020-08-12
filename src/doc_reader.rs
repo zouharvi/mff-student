@@ -43,6 +43,6 @@ impl DocAll {
     
     pub fn term_idf(&self, term: &str) -> f32 {
         let sum = self.term_doc_frequency(term);
-        return (self.data.len() as f32).log(2.0)/(sum as f32);
+        return (self.data.len() as f32).log(10.0)/(sum as f32);
     }
 }
