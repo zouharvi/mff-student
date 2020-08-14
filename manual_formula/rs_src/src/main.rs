@@ -17,8 +17,8 @@ pub mod options {
     pub const G_ABSTR: &str = "./data/hulth2003_all/*.abstr";
     pub const PRINT_RESULTS: bool = false;
     pub const CONSIDERED_RESULTS: usize = 15;
-    pub const LENGTH_POWER: f32 = 0.16;
-    pub const DUPLICITY_SCORE: f32 = -0.8;
+    pub const LENGTH_POWER: f32 = -1.5;
+    pub const DUPLICITY_SCORE: f32 = 0.9;
 }
 
 fn main() {
@@ -79,11 +79,11 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
             .map(|word| rat.get(word.as_str()).unwrap() * data.term_idf(word))
             .sum();
         let score = match keywords.contains_key(key.as_str()) {
-            true => sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER),
-            false => {
+            true => {
                 sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER)
                     + options::DUPLICITY_SCORE
             }
+            false => sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER),
         };
         keywords.insert(key, score);
     }
