@@ -14,8 +14,8 @@ use doc_reader::DocAll;
 
 pub mod options {
     pub const F_STOPWORDS: &str = "./data/stopwords.txt";
-    pub const G_ABSTR: &str = "./data/hulth2003_all/*.abstr";
-    pub const PRINT_RESULTS: bool = false;
+    pub const G_ABSTR: &str = "./data/hulth2003_all/100-1.abstr";
+    pub const PRINT_RESULTS: bool = true;
     pub const CONSIDERED_RESULTS: usize = 15;
     pub const LENGTH_POWER: f32 = 0.16;
     pub const DUPLICITY_SCORE: f32 = -0.8;
@@ -57,12 +57,15 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     let doc_raw: String = fs::read_to_string(f_abstr).unwrap();
     let doc_words: Vec<&str> = R_NOT_WORD.split(&doc_raw).collect();
 
+
     let uncontr_raw: String = fs::read_to_string(f_uncontr)
         .unwrap()
         .replace(&['\n', '\t', '\r'][..], "");
     let uncontr: HashSet<&str> = HashSet::from_iter(uncontr_raw.split("; "));
 
     let candidates = data_utils::create_candidates(doc_words, &sws);
+    println!("{:?}", candidates);
+
     let (frqs, degs) = data_utils::compute_frq_deg(&candidates);
 
     let mut rat: HashMap<&str, f32> = HashMap::new();
@@ -84,11 +87,11 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
         };
         keywords.insert(key, score);
     }
-
+    
     let mut keyword_vec: Vec<(&str, &f32)> =
-        keywords.iter().map(|(k, v)| (k.as_str(), v)).collect();
+    keywords.iter().map(|(k, v)| (k.as_str(), v)).collect();
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
-
+    
     let mut hits = 0;
     if options::PRINT_RESULTS {
         println!("Score  Keyword {}", f_abstr);

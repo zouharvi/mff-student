@@ -66,7 +66,7 @@ namespace smake
             }
 
             var keywordsVec = keywords.ToArray();
-            Array.Sort(keywordsVec, (a, b) => a.Value.CompareTo(b.Value));
+            Array.Sort(keywordsVec, (a, b) => b.Value.CompareTo(a.Value));
 
             var hits = 0;
             if (Options.PRINT_RESULTS)
