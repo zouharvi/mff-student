@@ -28,7 +28,6 @@ fn main() {
     println!("Reading all from '{}'", options::G_ABSTR);
     let data = DocAll::read_all(&sws, options::G_ABSTR);
 
-    let doc_count: u32 = glob(options::G_ABSTR).unwrap().map(|_| 1).sum();
     let hits: u32 = glob(options::G_ABSTR)
         .unwrap()
         .map(|entry| match entry {
@@ -45,24 +44,25 @@ fn main() {
             Err(_) => 0,
         })
         .sum();
-    println!("Hit ratio: {}", (hits as f32) / (doc_count as f32));
+    println!("Hit ratio: {}", (hits as f32) / (data.no_documents as f32));
 }
 
 fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &str) -> u32 {
     lazy_static! {
         static ref R_NOT_WORD: Regex = Regex::new(r"[^\pL]+").unwrap();
+        static ref R_GARBAGE: Regex = Regex::new(r"[\n\t\r;]").unwrap();
+        static ref R_SPACE: Regex = Regex::new(r"^\s*$").unwrap();
     }
     let doc_raw: String = fs::read_to_string(f_abstr).unwrap();
     let doc_words: Vec<&str> = R_NOT_WORD.split(&doc_raw).collect();
 
-    let uncontr_raw: String = fs::read_to_string(f_uncontr)
-        .unwrap()
-        .to_lowercase()
-        .replace(&['\n', '\t', '\r'][..], "");
-    let uncontr: HashSet<&str> = HashSet::from_iter(uncontr_raw.split("; "));
+    let uncontr: HashSet<String> = R_GARBAGE
+        .split(fs::read_to_string(f_uncontr).unwrap().as_str())
+        .filter(|x| !R_SPACE.is_match(x))
+        .map(|x| x.to_lowercase().trim_matches(' ').to_string())
+        .collect::<HashSet<String>>();
 
     let candidates = data_utils::create_candidates(doc_words, &sws);
-
     let (frqs, degs) = data_utils::compute_frq_deg(&candidates);
 
     let mut rat: HashMap<&str, f32> = HashMap::new();

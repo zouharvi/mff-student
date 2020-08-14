@@ -5,7 +5,7 @@ use std::fs;
 
 pub struct DocAll {
     data: HashMap<String, u32>,
-    no_documents: u32,
+    pub no_documents: u32,
 }
 
 impl DocAll {
@@ -20,8 +20,8 @@ impl DocAll {
                     let text = fs::read_to_string(path).unwrap().to_lowercase();
                     let set = r_not_word
                         .split(text.as_str())
+                        .filter(|x| !sws.contains(x))
                         .map(|x| x.to_string())
-                        .filter(|x| !sws.contains(x.as_str()))
                         .collect::<HashSet<String>>();
                     for word in set {
                         *map_data.entry(word).or_insert(0) += 1;
@@ -39,6 +39,6 @@ impl DocAll {
 
     pub fn term_idf(&self, term: &str) -> f32 {
         let sum = *self.data.get(term).unwrap_or(&0) as f32;
-        (self.no_documents as f32).log(10.0) / (sum as f32)
+        (self.no_documents as f32).log(10.0) / sum
     }
 }
