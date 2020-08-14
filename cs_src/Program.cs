@@ -21,17 +21,15 @@ namespace smake
 
             int hits = 0;
             int docCount = 0;
-            foreach (var entry in Directory.GetFiles(Options.G_ABSTR_DIR, Options.G_ABSTR_PATTERN))
-            {
-                docCount += 1;
-                var uncontrPath = $"{entry.RemoveFromEnd("abstr")}uncontr";
-                hits += ProcessAbstr(data, sws, entry, uncontrPath);
-            }
-            Console.WriteLine($"Hit ratio: {hits / (float)docCount}");
+            var filesToProcess = Directory.GetFiles(Options.G_ABSTR_DIR, Options.G_ABSTR_PATTERN);
+            filesToProcess.AsParallel().Select(f => ProcessAbstr(data, sws, f)).Sum();
+            Console.WriteLine($"Hit ratio: {hits / (float)filesToProcess.Length}");
         }
 
-        private static int ProcessAbstr(DocAll data, HashSet<string> sws, string fAbstr, string fUncontr)
+        private static int ProcessAbstr(DocAll data, HashSet<string> sws, string fAbstr)
         {
+            string fUncontr = $"{fAbstr.RemoveFromEnd("abstr")}uncontr";
+
             var docRaw = File.ReadAllText(fAbstr).ToLower();
             var docWords = Regex.Split(docRaw, @"[^\p{L}]+");
 
