@@ -22,7 +22,7 @@ def process_abstr(data, sws, f_abstr, f_uncontr):
     doc_words = re.split(r4, doc_raw)
 
     with open(f_uncontr, 'r') as f:
-        uncontr_raw = f.read().replace('\n', '').replace('\t', '').replace('\r', '')
+        uncontr_raw = f.read().lower().replace('\n', '').replace('\t', '').replace('\r', '')
     uncontr = set(uncontr_raw.split("; "))
 
     candidates = data_utils.create_candidates(doc_words, sws)

@@ -14,8 +14,8 @@ use doc_reader::DocAll;
 
 pub mod options {
     pub const F_STOPWORDS: &str = "./data/stopwords.txt";
-    pub const G_ABSTR: &str = "./data/hulth2003_all/100-1.abstr";
-    pub const PRINT_RESULTS: bool = true;
+    pub const G_ABSTR: &str = "./data/hulth2003_all/*.abstr";
+    pub const PRINT_RESULTS: bool = false;
     pub const CONSIDERED_RESULTS: usize = 15;
     pub const LENGTH_POWER: f32 = 0.16;
     pub const DUPLICITY_SCORE: f32 = -0.8;
@@ -60,11 +60,11 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
 
     let uncontr_raw: String = fs::read_to_string(f_uncontr)
         .unwrap()
+        .to_lowercase()
         .replace(&['\n', '\t', '\r'][..], "");
     let uncontr: HashSet<&str> = HashSet::from_iter(uncontr_raw.split("; "));
 
     let candidates = data_utils::create_candidates(doc_words, &sws);
-    println!("{:?}", candidates);
 
     let (frqs, degs) = data_utils::compute_frq_deg(&candidates);
 

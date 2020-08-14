@@ -36,7 +36,7 @@ namespace smake
             var docRaw = File.ReadAllText(fAbstr).ToLower();
             var docWords = Regex.Split(docRaw, @"[^\p{L}]+");
 
-            var uncontrRaw = File.ReadAllText(fUncontr).Replace("\n", "").Replace("\t", "n").Replace("\r", "n");
+            var uncontrRaw = File.ReadAllText(fUncontr).ToLower().Replace("\n", "").Replace("\t", "").Replace("\r", "");
             var uncontr = new HashSet<string>(uncontrRaw.Split("; "));
 
             var candidates = CreateCandidates(docWords, sws);

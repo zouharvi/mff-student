@@ -10,10 +10,11 @@ Out of curiosity the program (at f9fdd9d4) was rewritten to an almost™ equival
 
 |program|user|hit ratio|
 |-|-|-|
-|Python 3.8.2|5.20s|1.498|
-|Rust debug|13.21s|1.539|
-|Rust release|0.76s|1.539|
-|CS .net core release|4.8|1.15|
+|Python 3.8.2|4.76s|1.682|
+|Rust debug|14.859s|1.741|
+|Rust release|0.77s|1.742|
+|CS .net core debug|5.01s|1.436|
+|CS .net core release|4.69s|1.436|
 
 ### Optimization
 
