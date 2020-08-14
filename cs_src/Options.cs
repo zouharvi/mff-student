@@ -14,5 +14,7 @@
         public const int CONSIDERED_RESULTS = 15;
         public const float LENGTH_POWER = 0.16f;
         public const float DUPLICITY_SCORE = -0.8f;
+
+        public const bool MAKE_PARALLEL = true;
     }
 }
