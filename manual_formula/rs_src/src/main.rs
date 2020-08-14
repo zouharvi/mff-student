@@ -50,15 +50,17 @@ fn main() {
 fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &str) -> u32 {
     lazy_static! {
         static ref R_NOT_WORD: Regex = Regex::new(r"[^\pL]+").unwrap();
+        static ref R_GARBAGE: Regex = Regex::new(r"[\n\t\r;]").unwrap();
+        static ref R_SPACE: Regex = Regex::new(r"^\s*$").unwrap();
     }
     let doc_raw: String = fs::read_to_string(f_abstr).unwrap();
     let doc_words: Vec<&str> = R_NOT_WORD.split(&doc_raw).collect();
 
-    let uncontr_raw: String = fs::read_to_string(f_uncontr)
-        .unwrap()
-        .replace(&['\n', '\t', '\r'][..], "")
-        .to_lowercase();
-    let uncontr: HashSet<&str> = HashSet::from_iter(uncontr_raw.split("; "));
+    let uncontr: HashSet<String> = R_GARBAGE
+        .split(fs::read_to_string(f_uncontr).unwrap().as_str())
+        .filter(|x| !R_SPACE.is_match(x))
+        .map(|x| x.to_lowercase().trim_matches(' ').to_string())
+        .collect::<HashSet<String>>();
 
     let candidates = data_utils::create_candidates(doc_words, &sws);
     let (frqs, degs) = data_utils::compute_frq_deg(&candidates);
@@ -92,7 +94,6 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     if options::PRINT_RESULTS {
         println!("Score  Keyword {}", f_abstr);
     }
-    
     for n in 0..options::CONSIDERED_RESULTS {
         if n >= keyword_vec.len() {
             break;
