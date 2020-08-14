@@ -17,14 +17,15 @@ namespace smake
             using var swReader = new StreamReader(Options.F_STOPWORDS);
 
             HashSet<string> sws = new HashSet<string>(swReader.ReadLines());
+
+            // parallelizing DocAll doesn't seem to help -> I/O bottleneck? (profiler suggests so)
             var data = new DocAll(sws);
 
             int hits = 0;
-            int docCount = 0;
             var filesToProcess = Directory.GetFiles(Options.G_ABSTR_DIR, Options.G_ABSTR_PATTERN);
 
-            if (Options.MAKE_PARALLEL) { filesToProcess.AsParallel().Select(f => ProcessAbstr(data, sws, f)).Sum(); }
-            else { filesToProcess.Select(f => ProcessAbstr(data, sws, f)).Sum(); }
+            if (Options.MAKE_PARALLEL) { hits = filesToProcess.AsParallel().Select(f => ProcessAbstr(data, sws, f)).Sum(); }
+            else { hits = filesToProcess.Select(f => ProcessAbstr(data, sws, f)).Sum(); }
 
             Console.WriteLine($"Hit ratio: {hits / (float)filesToProcess.Length}");
         }
@@ -33,7 +34,7 @@ namespace smake
         {
             string fUncontr = $"{fAbstr.RemoveFromEnd("abstr")}uncontr";
 
-            var docRaw = File.ReadAllText(fAbstr).ToLower();
+            var docRaw = File.ReadAllText(fAbstr);
             var docWords = Regex.Split(docRaw, @"[^\p{L}]+");
 
             var uncontrRaw = File.ReadAllText(fUncontr).ToLower().Replace("\n", "").Replace("\t", "").Replace("\r", "");
@@ -82,10 +83,14 @@ namespace smake
                 }
 
                 var (key, val) = keywordsVec[n];
-                if (Options.PRINT_RESULTS) { Console.WriteLine($"{val}: {key}"); }
                 if (uncontr.Contains(key))
                 {
+                    if (Options.PRINT_RESULTS) { Console.WriteLine($" * {val:F3}: {key}"); }
                     hits++;
+                }
+                else
+                {
+                    if (Options.PRINT_RESULTS) { Console.WriteLine($"   {val:F3}: {key}"); }
                 }
             }
 
