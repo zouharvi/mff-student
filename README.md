@@ -1,20 +1,20 @@
 # SMAKE Simple Markable And Keyword Extractor
 
-First version based on RAKE (Automatic Keyword Extraction from Individual Documents), but the formula changed later significantly. The plan is to create a manual feature extractor and feed these vectors to two dense layers with TensorFlow binding.
+First version based on RAKE (Automatic Keyword Extraction from Individual Documents), but the formula changed later significantly  (code in `manual_formula`). The plan is to create a manual feature extractor and feed these vectors to two dense layers with TensorFlow binding.
 
 ## Speed
 
 ### Language comparison comparison
 
-Out of curiosity the program (at f9fdd9d4) was rewritten to an almost™ equivalent code in Python. It was then tested on 5x supersampled Hulth 2003 dataset (5000 docs).
+Out of curiosity the first version of the program (at `manual_formula` f9fdd9d4) was rewritten to an almost™ equivalent code in Python. It was then tested on 5x supersampled Hulth 2003 dataset (5000 docs).
 
 |program|user|hit ratio|
 |-|-|-|
 |Python 3.8.2|4.76s|1.682|
 |Rust debug|14.859s|1.741|
 |Rust release|0.77s|1.742|
-|CS .net core debug|5.01s|1.436|
-|CS .net core release|4.69s|1.436|
+|CS .net core debug|2.19s|1.436|
+|CS .net core release|2.18s|1.436|
 
 ### Optimization
 
