@@ -56,8 +56,8 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
 
     let uncontr_raw: String = fs::read_to_string(f_uncontr)
         .unwrap()
-        .to_lowercase()
-        .replace(&['\n', '\t', '\r'][..], "");
+        .replace(&['\n', '\t', '\r'][..], "")
+        .to_lowercase();
     let uncontr: HashSet<&str> = HashSet::from_iter(uncontr_raw.split("; "));
 
     let candidates = data_utils::create_candidates(doc_words, &sws);
