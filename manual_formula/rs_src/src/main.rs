@@ -28,7 +28,6 @@ fn main() {
     println!("Reading all from '{}'", options::G_ABSTR);
     let data = DocAll::read_all(&sws, options::G_ABSTR);
 
-    let doc_count: u32 = glob(options::G_ABSTR).unwrap().map(|_| 1).sum();
     let hits: u32 = glob(options::G_ABSTR)
         .unwrap()
         .map(|entry| match entry {
@@ -45,7 +44,7 @@ fn main() {
             Err(_) => 0,
         })
         .sum();
-    println!("Hit ratio: {}", (hits as f32) / (doc_count as f32));
+    println!("Hit ratio: {}", (hits as f32) / (data.no_documents as f32));
 }
 
 fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &str) -> u32 {
@@ -62,7 +61,6 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     let uncontr: HashSet<&str> = HashSet::from_iter(uncontr_raw.split("; "));
 
     let candidates = data_utils::create_candidates(doc_words, &sws);
-
     let (frqs, degs) = data_utils::compute_frq_deg(&candidates);
 
     let mut rat: HashMap<&str, f32> = HashMap::new();
@@ -94,6 +92,7 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     if options::PRINT_RESULTS {
         println!("Score  Keyword {}", f_abstr);
     }
+    
     for n in 0..options::CONSIDERED_RESULTS {
         if n >= keyword_vec.len() {
             break;
