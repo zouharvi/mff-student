@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace smake
@@ -19,16 +16,16 @@ namespace smake
                 {
                     if (buffer.Count > 0)
                     {
-                        if (!WordHeuristics(buffer)) 
+                        if (!WordHeuristics(buffer))
                         { candidates.Add(buffer); }
-                        buffer = new List<string>(); 
+                        buffer = new List<string>();
                     }
                 }
                 else if (Regex.Match(word, @"\p{Lu}.+").Success)
                 {
                     if (buffer.Count > 0)
                     {
-                        if (!WordHeuristics(buffer)) 
+                        if (!WordHeuristics(buffer))
                         { candidates.Add(buffer); }
                         buffer = new List<string>();
                     }

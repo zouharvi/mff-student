@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 using static smake.DataUtils;
 
@@ -51,7 +50,7 @@ namespace smake
 
             var keywords = new Dictionary<string, float>();
 
-            foreach(var candidate in candidates)
+            foreach (var candidate in candidates)
             {
                 var key = string.Join(" ", candidate);
                 var csum = candidate.Select(word => rat.GetValueOrDefault(word, 0) * data.TermIdf(word)).Sum();
