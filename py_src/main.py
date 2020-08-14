@@ -45,7 +45,7 @@ def process_abstr(data, sws, f_abstr, f_uncontr):
     keyword_vec.sort(key=lambda a: a[1])
 
     hits = 0
-    if True:
+    if False:
         print(f"Score  Keyword {f_abstr}")
         for n in range(15):
             if n >= len(keyword_vec):

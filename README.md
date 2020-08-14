@@ -29,3 +29,13 @@ Measured on all huth2003 documents on a hot run.
 |-|-|
 |base (keywords cleanup)|83s|
 |document word->occurence mapping|3.6s|
+
+### Python comparison
+
+I wrote an equivalent code (slightly different results) in Python
+
+|program|user|
+|-|-|
+|Python|1.05s|
+|Rust debug|2.68s|
+|Rust release|0.18s|
