@@ -12,23 +12,26 @@ mod doc_reader;
 
 use doc_reader::DocAll;
 
-const F_STOPWORDS: &str = "./data/stopwords.txt";
-const G_ABSTR: &str = "./data/hulth2003_all/*.abstr";
-const PRINT_RESULTS: bool = false;
-const CONSIDERED_RESULTS: usize = 15;
-const LENGTH_POWER: f32 = 0.16;
-const DUPLICITY_SCORE: f32 = -0.8;
+pub mod options {
+    pub const F_STOPWORDS: &str = "./data/stopwords.txt";
+    pub const G_ABSTR: &str = "./data/hulth2003_all/*.abstr";
+    pub const PRINT_RESULTS: bool = false;
+    pub const CONSIDERED_RESULTS: usize = 15;
+    pub const LENGTH_POWER: f32 = 0.16;
+    pub const DUPLICITY_SCORE: f32 = -0.8;
+}
 
 fn main() {
-    println!("Opening stopwords from '{}'", F_STOPWORDS);
-    let sws_raw: String = fs::read_to_string(F_STOPWORDS).unwrap();
+    println!("Opening stopwords from '{}'", options::F_STOPWORDS);
+    
+    let sws_raw: String = fs::read_to_string(options::F_STOPWORDS).unwrap();
     let sws: HashSet<&str> = HashSet::from_iter(sws_raw.lines());
-    println!("Reading all from '{}'", G_ABSTR);
-    let data = DocAll::read_all(&sws, G_ABSTR);
+    println!("Reading all from '{}'", options::G_ABSTR);
+    let data = DocAll::read_all(&sws, options::G_ABSTR);
 
     let mut hits = 0;
     let mut doc_count = 0;
-    for entry in glob(G_ABSTR).unwrap() {
+    for entry in glob(options::G_ABSTR).unwrap() {
         match entry {
             Ok(path) => {
                 doc_count += 1;
@@ -76,8 +79,8 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
             .map(|word| rat.get(word.as_str()).unwrap() * data.term_idf(word))
             .sum();
         let score = match keywords.contains_key(key.as_str()) {
-            true => sum / f32::powf(candidate.len() as f32, LENGTH_POWER),
-            false => sum / f32::powf(candidate.len() as f32, LENGTH_POWER) + DUPLICITY_SCORE,
+            true => sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER),
+            false => sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER) + options::DUPLICITY_SCORE,
         };
         keywords.insert(key, score);
     }
@@ -87,21 +90,21 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
     let mut hits = 0;
-    if PRINT_RESULTS {
+    if options::PRINT_RESULTS {
         println!("Score  Keyword {}", f_abstr);
     }
-    for n in 0..CONSIDERED_RESULTS {
+    for n in 0..options::CONSIDERED_RESULTS {
         if n >= keyword_vec.len() {
             break;
         }
         let (key, val) = keyword_vec.get(n).unwrap();
         if uncontr.contains(*key) {
-            if PRINT_RESULTS {
+            if options::PRINT_RESULTS {
                 println!("* {:.3}: {}", val, key);
             }
             hits += 1;
         } else {
-            if PRINT_RESULTS {
+            if options::PRINT_RESULTS {
                 println!("  {:.3}: {}", val, key);
             }
         }
