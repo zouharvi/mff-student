@@ -13,8 +13,8 @@ Out of curiosity the program (at f9fdd9d4) was rewritten to an almost™ equival
 |Python 3.8.2|4.76s|1.682|
 |Rust debug|14.859s|1.741|
 |Rust release|0.77s|1.742|
-|CS .net core debug|5.01s|1.436|
-|CS .net core release|4.69s|1.436|
+|CS .net core debug|2.19s|1.436|
+|CS .net core release|2.18s|1.436|
 
 ### Optimization
 

@@ -23,30 +23,29 @@ pub mod options {
 
 fn main() {
     println!("Opening stopwords from '{}'", options::F_STOPWORDS);
-    
     let sws_raw: String = fs::read_to_string(options::F_STOPWORDS).unwrap();
     let sws: HashSet<&str> = HashSet::from_iter(sws_raw.lines());
     println!("Reading all from '{}'", options::G_ABSTR);
     let data = DocAll::read_all(&sws, options::G_ABSTR);
 
-    let mut hits = 0;
     let mut doc_count = 0;
-    for entry in glob(options::G_ABSTR).unwrap() {
-        match entry {
+    let hits: u32 = glob(options::G_ABSTR)
+        .unwrap()
+        .map(|entry| match entry {
             Ok(path) => {
                 doc_count += 1;
                 let mut uncontr_path = PathBuf::from(&path);
                 uncontr_path.set_extension("uncontr");
-                hits += process_abstr(
+                process_abstr(
                     &data,
                     &sws,
                     path.as_os_str().to_str().unwrap(),
                     uncontr_path.as_os_str().to_str().unwrap(),
-                );
+                )
             }
-            Err(e) => println!("{:?}", e),
-        }
-    }
+            Err(_) => 0,
+        })
+        .sum();
     println!("Hit ratio: {}", (hits as f32) / (doc_count as f32));
 }
 
@@ -56,7 +55,6 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     }
     let doc_raw: String = fs::read_to_string(f_abstr).unwrap();
     let doc_words: Vec<&str> = R_NOT_WORD.split(&doc_raw).collect();
-
 
     let uncontr_raw: String = fs::read_to_string(f_uncontr)
         .unwrap()
@@ -83,15 +81,16 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
             .sum();
         let score = match keywords.contains_key(key.as_str()) {
             true => sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER),
-            false => sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER) + options::DUPLICITY_SCORE,
+            false => {
+                sum / f32::powf(candidate.len() as f32, options::LENGTH_POWER)
+                    + options::DUPLICITY_SCORE
+            }
         };
         keywords.insert(key, score);
     }
-    
     let mut keyword_vec: Vec<(&str, &f32)> =
-    keywords.iter().map(|(k, v)| (k.as_str(), v)).collect();
+        keywords.iter().map(|(k, v)| (k.as_str(), v)).collect();
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
-    
     let mut hits = 0;
     if options::PRINT_RESULTS {
         println!("Score  Keyword {}", f_abstr);
