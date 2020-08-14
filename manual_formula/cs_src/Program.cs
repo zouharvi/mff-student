@@ -18,7 +18,7 @@ namespace smake
 
             HashSet<string> sws = new HashSet<string>(swReader.ReadLines());
 
-            // parallelizing DocAll doesn't seem to help -> I/O bottleneck?
+            // parallelizing DocAll doesn't seem to help -> I/O bottleneck? (profiler suggests so)
             var data = new DocAll(sws);
 
             int hits = 0;
@@ -83,10 +83,14 @@ namespace smake
                 }
 
                 var (key, val) = keywordsVec[n];
-                if (Options.PRINT_RESULTS) { Console.WriteLine($"{val}: {key}"); }
                 if (uncontr.Contains(key))
                 {
+                    if (Options.PRINT_RESULTS) { Console.WriteLine($" * {val:F3}: {key}"); }
                     hits++;
+                }
+                else
+                {
+                    if (Options.PRINT_RESULTS) { Console.WriteLine($"   {val:F3}: {key}"); }
                 }
             }
 
