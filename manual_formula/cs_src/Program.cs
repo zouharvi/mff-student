@@ -59,8 +59,8 @@ namespace smake
 
                 var score = keywords.ContainsKey(key) switch
                 {
-                    true => csum / Math.Pow(candidate.Count(), Options.LENGTH_POWER) + Options.DUPLICITY_SCORE,
-                    false => csum / Math.Pow(candidate.Count(), Options.LENGTH_POWER),
+                    true => csum / Math.Pow(candidate.Count(), Options.LENGTH_POWER),
+                    false => csum / Math.Pow(candidate.Count(), Options.LENGTH_POWER) + Options.DUPLICITY_SCORE,
                 };
 
                 keywords[key] = (float)score;
