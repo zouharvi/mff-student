@@ -85,9 +85,9 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
     let mut hits = 0;
-    if false {
+    if true {
         println!("Score  Keyword {}", f_abstr);
-        for n in 1..15 {
+        for n in 0..15 {
             if n >= keyword_vec.len() {
                 break;
             }

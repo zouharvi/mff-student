@@ -12,7 +12,7 @@ class DocAll:
         for entry in glob.glob(g_abstr):
             self.no_documents += 1
             with open(entry, 'r') as f:
-                text = f.read()
+                text = f.read().lower()
             cset = set([x for x in re.split(r1, text) if not x in sws])
 
             for word in cset:

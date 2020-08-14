@@ -36,16 +36,16 @@ def process_abstr(data, sws, f_abstr, f_uncontr):
     for candidate in candidates:
         key = " ".join(candidate)
         csum = sum([rat.get(word, 0) * data.term_idf(word) for word in candidate])
-        score = csum / len(candidate) ** LENGTH_POWER
+        score = csum / (len(candidate) ** LENGTH_POWER)
         if key in keywords:
             csum += DUPLICITY_SCORE
         keywords[key] = score
 
     keyword_vec = list(keywords.items())
-    keyword_vec.sort(key=lambda a: a[1])
+    keyword_vec.sort(key=lambda a: a[1], reverse=True)
 
     hits = 0
-    if False:
+    if True:
         print(f"Score  Keyword {f_abstr}")
         for n in range(15):
             if n >= len(keyword_vec):
@@ -64,7 +64,6 @@ if __name__ == '__main__':
     with open(F_STOPWORDS, 'r') as f:
         sws_raw = f.read()
     sws = set([x for x in sws_raw.split('\n')])
-    print(f"Reading all from '{G_ABSTR}'")
     data = doc_reader.DocAll(sws, G_ABSTR)
 
     hits = 0
