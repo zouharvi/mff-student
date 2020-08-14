@@ -34,7 +34,7 @@ namespace smake
         {
             string fUncontr = $"{fAbstr.RemoveFromEnd("abstr")}uncontr";
 
-            var docRaw = File.ReadAllText(fAbstr).ToLower();
+            var docRaw = File.ReadAllText(fAbstr);
             var docWords = Regex.Split(docRaw, @"[^\p{L}]+");
 
             var uncontrRaw = File.ReadAllText(fUncontr).ToLower().Replace("\n", "").Replace("\t", "").Replace("\r", "");
