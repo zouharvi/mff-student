@@ -14,6 +14,8 @@ use doc_reader::DocAll;
 
 const F_STOPWORDS: &str = "./data/stopwords.txt";
 const G_ABSTR: &str = "./data/hulth2003_all/*.abstr";
+const PRINT_RESULTS: bool = false;
+const CONSIDERED_RESULTS: usize = 15;
 const LENGTH_POWER: f32 = 0.16;
 const DUPLICITY_SCORE: f32 = -0.8;
 
@@ -85,17 +87,21 @@ fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &
     keyword_vec.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
 
     let mut hits = 0;
-    if true {
+    if PRINT_RESULTS {
         println!("Score  Keyword {}", f_abstr);
-        for n in 0..15 {
-            if n >= keyword_vec.len() {
-                break;
-            }
-            let (key, val) = keyword_vec.get(n).unwrap();
-            if uncontr.contains(*key) {
+    }
+    for n in 0..CONSIDERED_RESULTS {
+        if n >= keyword_vec.len() {
+            break;
+        }
+        let (key, val) = keyword_vec.get(n).unwrap();
+        if uncontr.contains(*key) {
+            if PRINT_RESULTS {
                 println!("* {:.3}: {}", val, key);
-                hits += 1;
-            } else {
+            }
+            hits += 1;
+        } else {
+            if PRINT_RESULTS {
                 println!("  {:.3}: {}", val, key);
             }
         }

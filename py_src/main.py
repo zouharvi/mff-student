@@ -7,6 +7,8 @@ import data_utils
 
 F_STOPWORDS = "./data/stopwords.txt"
 G_ABSTR = "./data/hulth2003_all/*.abstr"
+PRINT_RESULTS = False
+CONSIDERED_RESULTS = 15
 LENGTH_POWER = 0.16
 DUPLICITY_SCORE = -0.8
 r4 = re.compile(r"[^\p{L}]+")
@@ -45,16 +47,18 @@ def process_abstr(data, sws, f_abstr, f_uncontr):
     keyword_vec.sort(key=lambda a: a[1], reverse=True)
 
     hits = 0
-    if True:
+    if PRINT_RESULTS:
         print(f"Score  Keyword {f_abstr}")
-        for n in range(15):
-            if n >= len(keyword_vec):
-                break
-            (key, val) = keyword_vec[n]
-            if key in uncontr:
+    for n in range(CONSIDERED_RESULTS):
+        if n >= len(keyword_vec):
+            break
+        (key, val) = keyword_vec[n]
+        if key in uncontr:
+            if PRINT_RESULTS:
                 print(f"* {val:.3f}: {key}")
-                hits += 1
-            else:
+            hits += 1
+        else:
+            if PRINT_RESULTS:
                 print(f"  {val:.3f}: {key}")
     return hits
 

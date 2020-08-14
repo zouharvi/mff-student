@@ -32,10 +32,25 @@ Measured on all huth2003 documents on a hot run.
 
 ### Python comparison
 
-I wrote an equivalent code (slightly different results) in Python
+Comparison to an almost™ equivalent code in Python on 5x inflated Hulth 2003 dataset (5000 docs).
 
-|program|user|
-|-|-|
-|Python|1.05s|
-|Rust debug|2.68s|
-|Rust release|0.18s|
+|program|user|hit ratio|
+|-|-|-|
+|Python 3.8.2|5.20s|1.498|
+|Rust debug|13.21s|1.539|
+|Rust release|0.76s|1.539|
+
+## Dataset
+
+Hulth 2003 used:
+
+```
+@inproceedings{hulth-2003-improved,
+    title = "Improved Automatic Keyword Extraction Given More Linguistic Knowledge",
+    author = "Hulth, Anette",
+    booktitle = "Proceedings of the 2003 Conference on Empirical Methods in Natural Language Processing",
+    year = "2003",
+    url = "https://www.aclweb.org/anthology/W03-1028",
+    pages = "216--223",
+}
+```

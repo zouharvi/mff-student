@@ -2,5 +2,7 @@ debug/*
 tmp*
 /target
 .rustc_info.json
-data/*
+data/**/*.abstr
+data/**/*.contr
+data/**/*.uncontr
 **/__pycache__/*
