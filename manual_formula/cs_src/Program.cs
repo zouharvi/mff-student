@@ -17,6 +17,8 @@ namespace smake
             using var swReader = new StreamReader(Options.F_STOPWORDS);
 
             HashSet<string> sws = new HashSet<string>(swReader.ReadLines());
+
+            // parallelizing DocAll doesn't seem to help -> I/O bottleneck?
             var data = new DocAll(sws);
 
             int hits = 0;
