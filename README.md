@@ -4,7 +4,7 @@ First version based on RAKE (Automatic Keyword Extraction from Individual Docume
 
 ## Speed
 
-### Language comparison comparison
+### Language comparison
 
 Out of curiosity the first version of the program (at `manual_formula` f9fdd9d4) was rewritten to an almost™ equivalent code in Python. It was then tested on 5x supersampled Hulth 2003 dataset (5000 docs).
 

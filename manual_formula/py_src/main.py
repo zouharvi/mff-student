@@ -10,7 +10,7 @@ G_ABSTR = "./data/hulth2003_all/*.abstr"
 PRINT_RESULTS = False
 CONSIDERED_RESULTS = 15
 LENGTH_POWER = 0.16
-DUPLICITY_SCORE = -0.8
+DUPLICITY_SCORE = 0.8
 r4 = re.compile(r"[^\p{L}]+")
 
 def rchop(s, sub):
