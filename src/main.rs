@@ -44,7 +44,7 @@ fn main() {
             Err(e) => println!("{:?}", e),
         }
     }
-    println!("Hit ratio: {}", (hits as f32)/(doc_count as f32));
+    println!("Hit ratio: {}", (hits as f32) / (doc_count as f32));
 }
 
 fn process_abstr(data: &DocAll, sws: &HashSet<&str>, f_abstr: &str, f_uncontr: &str) -> u32 {

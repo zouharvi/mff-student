@@ -2,9 +2,7 @@ use lazy_static::lazy_static;
 use regex::Regex;
 use std::collections::{HashMap, HashSet};
 
-pub fn compute_frq_deg(
-    candidates: &[Vec<String>],
-) -> (HashMap<&str, u32>, HashMap<&str, u32>) {
+pub fn compute_frq_deg(candidates: &[Vec<String>]) -> (HashMap<&str, u32>, HashMap<&str, u32>) {
     let mut frq_map: HashMap<&str, u32> = HashMap::new();
     let mut deg_map: HashMap<&str, HashSet<&str>> = HashMap::new();
 
