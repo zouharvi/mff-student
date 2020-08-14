@@ -15,6 +15,6 @@
         public const float LENGTH_POWER = 0.16f;
         public const float DUPLICITY_SCORE = -0.8f;
 
-        public const bool MAKE_PARALLEL = true;
+        public const bool MAKE_PARALLEL = false;
     }
 }

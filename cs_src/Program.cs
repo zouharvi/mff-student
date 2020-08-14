@@ -23,8 +23,8 @@ namespace smake
             int docCount = 0;
             var filesToProcess = Directory.GetFiles(Options.G_ABSTR_DIR, Options.G_ABSTR_PATTERN);
 
-            if (Options.MAKE_PARALLEL) { filesToProcess.AsParallel().Select(f => ProcessAbstr(data, sws, f)).Sum(); }
-            else { filesToProcess.Select(f => ProcessAbstr(data, sws, f)).Sum(); }
+            if (Options.MAKE_PARALLEL) { hits = filesToProcess.AsParallel().Select(f => ProcessAbstr(data, sws, f)).Sum(); }
+            else { hits = filesToProcess.Select(f => ProcessAbstr(data, sws, f)).Sum(); }
 
             Console.WriteLine($"Hit ratio: {hits / (float)filesToProcess.Length}");
         }
