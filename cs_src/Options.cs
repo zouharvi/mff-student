@@ -13,7 +13,7 @@ namespace smake
         public const string G_ABSTR_DIR = "./data/hulth2003_all/";
         public const string G_ABSTR_PATTERN = "*.abstr";
 
-        public const bool PRINT_RESULTS = true;
+        public const bool PRINT_RESULTS = false;
 
         public const int CONSIDERED_RESULTS = 15;
         public const float LENGTH_POWER = 0.16f;
