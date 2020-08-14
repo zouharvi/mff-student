@@ -28,12 +28,11 @@ fn main() {
     println!("Reading all from '{}'", options::G_ABSTR);
     let data = DocAll::read_all(&sws, options::G_ABSTR);
 
-    let mut doc_count = 0;
+    let doc_count: u32 = glob(options::G_ABSTR).unwrap().map(|_| 1).sum();
     let hits: u32 = glob(options::G_ABSTR)
         .unwrap()
         .map(|entry| match entry {
             Ok(path) => {
-                doc_count += 1;
                 let mut uncontr_path = PathBuf::from(&path);
                 uncontr_path.set_extension("uncontr");
                 process_abstr(
