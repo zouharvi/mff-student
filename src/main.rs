@@ -72,7 +72,10 @@ fn process_abstr(
     let candidates = candidate::Candidate::create_candidates(&doc_words, doc_name, &sws, data);
     let gold_keywords = candidate::Candidate::gold_keywords(&uncontr, doc_name, data);
 
-    let candidates = candidates.iter().filter(|x| !uncontr_set.contains(x.raw.as_str())).collect::<Vec<&Candidate>>();
+    let candidates = candidates
+        .iter()
+        .filter(|x| !uncontr_set.contains(x.raw.as_str()))
+        .collect::<Vec<&Candidate>>();
 
     // for candidate in &candidates {
     //     println!("{}", candidate);

@@ -18,7 +18,7 @@ pub struct Candidate {
     // total words
     word_count_all: u32,
     // Probability of being a good keyword
-    prob: f32
+    prob: f32,
 }
 
 impl Candidate {
