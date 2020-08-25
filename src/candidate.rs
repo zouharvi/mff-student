@@ -18,7 +18,7 @@ pub struct Candidate {
     // total words
     word_count_all: u32,
     // Probability of being a good keyword
-    prob: f32,
+    _prob: f32,
 }
 
 impl Candidate {
@@ -38,13 +38,13 @@ impl Candidate {
             .count();
 
         Candidate {
-            raw: raw,
+            raw,
             sub_count: word_count as u8,
             count_doc: count_doc as u16,
             count_all: count_pw_all as u16,
             word_count_doc: *doc_all.map_doc_size.get(doc_name).unwrap(),
             word_count_all: doc_all.count_words as u32,
-            prob: 0.0,
+            _prob: 0.0,
         }
     }
 
@@ -89,7 +89,7 @@ impl Candidate {
         candidates
     }
 
-    pub fn gold_keywords<'a>(
+    pub fn gold_keywords(
         keywords: &[String],
         doc_name: &str,
         doc_all: &DocAll,
@@ -121,7 +121,7 @@ impl Candidate {
                 count_all: count_pw_all as u16,
                 word_count_doc: *doc_all.map_doc_size.get(doc_name).unwrap(),
                 word_count_all: doc_all.count_words as u32,
-                prob: 1.0,
+                _prob: 1.0,
             });
         }
 

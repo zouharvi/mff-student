@@ -42,9 +42,9 @@ impl DocAll {
         }
 
         DocAll {
-            map_word_count: map_word_count,
-            map_doc_raw: map_doc_raw,
-            map_doc_size: map_doc_size,
+            map_word_count,
+            map_doc_raw,
+            map_doc_size,
             count_words: count_words as u32,
             count_docs: count_docs as u32,
         }

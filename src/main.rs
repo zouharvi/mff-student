@@ -29,19 +29,16 @@ fn main() {
     let data = DocAll::read_all(&sws, options::G_ABSTR);
 
     for entry in glob(options::G_ABSTR).unwrap() {
-        match entry {
-            Ok(path) => {
-                let mut uncontr_path = PathBuf::from(&path);
-                uncontr_path.set_extension("uncontr");
-                process_abstr(
-                    &data,
-                    &sws,
-                    uncontr_path.file_stem().unwrap().to_str().unwrap(),
-                    path.to_str().unwrap(),
-                    uncontr_path.to_str().unwrap(),
-                )
-            }
-            Err(_) => (),
+        if let Ok(path) = entry  {
+            let mut uncontr_path = PathBuf::from(&path);
+            uncontr_path.set_extension("uncontr");
+            process_abstr(
+                &data,
+                &sws,
+                uncontr_path.file_stem().unwrap().to_str().unwrap(),
+                path.to_str().unwrap(),
+                uncontr_path.to_str().unwrap(),
+            )
         }
     }
 }
@@ -72,7 +69,7 @@ fn process_abstr(
     let candidates = candidate::Candidate::create_candidates(&doc_words, doc_name, &sws, data);
     let gold_keywords = candidate::Candidate::gold_keywords(&uncontr, doc_name, data);
 
-    let candidates = candidates
+    let _candidates = candidates
         .iter()
         .filter(|x| !uncontr_set.contains(x.raw.as_str()))
         .collect::<Vec<&Candidate>>();
