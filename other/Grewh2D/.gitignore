@@ -1,0 +1,6 @@
+/web/Build/*
+*.synctex.gz
+*.tmp
+*.log
+*.aux
+*.out
