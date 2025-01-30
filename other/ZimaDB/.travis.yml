@@ -1,0 +1,16 @@
+language: cpp
+os: linux
+dist: trusty
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-8
+      - libgtest-dev
+install:
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 90
+script:
+  - make travis

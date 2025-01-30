@@ -1,0 +1,184 @@
+\documentclass[a4paper]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=cyan,
+}
+\setlength\parindent{0pt}
+\usepackage{color}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}  
+\definecolor{gbcolor}{rgb}{0.9,0.9,0.97}  
+
+\title{\textbf{ZimaDB} - User Documentation}
+\author{Vilém Zouhar, Petr Chmel}
+\date{January 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{General}
+ZimaDB supports a subset of the SQLite functionality. The program can be launched as an executable. It expects the input to be on the stdin. If a command line argument is passed to the executable, then it is treated as a filename to be opened. Otherwise the user is expected (according to the SQLite syntax) to open the database file using the \textit{.open} command.
+
+\subsection{Data types}
+The following data types are supported by ZimaDB.
+\begin{itemize}
+    \item BOOLEAN
+    \item (UNSIGNED) INT, TINYINT
+    \item VARCHAR(n) (if no size specified, 32 is used)
+    \item DOUBLE
+\end{itemize}
+
+\subsection{Allowed operations}
+The following operations are supported by ZimaDB.
+\begin{itemize}
+    \item SELECT
+    \item INSERT
+    \item UPDATE
+    \item DELETE
+    \item CREATE TABLE
+    \item DROP TABLE
+    \item TRUNCATE TABLE
+\end{itemize}
+Aggregation functions are not permitted as well as nested SELECT statements. This is because the implementation is beyond the size of this project and requires advanced knowledge of databases. The JOIN ON operation can be simulated using selects on multiple tables. We don't support the table dot notation, so any multiple select must be done on distinct tables. 
+
+\subsection{Other modifiers}
+Several other modifiers are supported as well:
+\begin{itemize}
+    \item PRIMARY KEY attribute
+    \item ASC, DESC attribtute
+    \item wildcard asterisk (SELECT)
+\end{itemize}
+
+\subsection{Meta commands}
+Similarly to the SQLite system, ZimaDB provides a set of meta commands.
+\subsubsection{.about}
+Display info about this project.
+\subsubsection{.debug [on|off]}
+Turn debug on/off. Omit arguments for info.
+\subsubsection{.dump TABLE*}
+Not implemented. Would output SQL code to dump a whole table (use regex for table name).
+\subsubsection{.exit}
+Exits ZimaDB (Ctrl-D can be also used)
+\subsubsection{.help}
+Shows help for ZimaDB meta commands.
+\subsubsection{.open DATABASE}
+Open a database file (ends with .zima).
+\subsubsection{.schema TABLE*}
+Not implemented. Would output SQL code to replicate a table schema (use regex for table name).
+
+\section{Examples}
+\subsection{Employees database}
+We will create a simple employee database, which will keep track on the person's \textit{id, name, age} and \textit{monthly\_salary}. To do so we launch \textbf{ZimaDB} and open a new database file called \textit{emp.zima}. Even though it is generally considered a bad practice (\href{https://softwareengineering.stackexchange.com/questions/85764/why-is-prefixing-column-names-considered-bad-practice}{softwareengineering.stackexchange.com/questions/85764/}), we will use a three character prefix \textit{emp\_} for each of our column name.
+
+\vspace{0.5cm}
+\begin{lstlisting}[language=SQL]
+.open employees.zima
+CREATE TABLE emp (emp_id INT, emp_name VARCHAR(255), emp_age INT);
+\end{lstlisting}
+\vspace{0.5cm}
+
+\textbf{ZimaDB} will respond with an information that the file was opened and table created. Running an empty \textit{SELECT} query will tell us that the table contains no data.
+
+
+\vspace{0.5cm}
+\begin{lstlisting}[language=SQL]
+SELECT * FROM emp;
+\end{lstlisting}
+\vspace{0.5cm}
+
+We can insert the actual data using the \textbf{INSERT} query. The column order can be changed. Ommiting a column will make it set to 0 for numbers and an empty string for text fields. Mathematical expressions can also be used.
+
+\vspace{0.5cm}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{lbcolor}]
+INSERT INTO emp (emp_id, emp_name, emp_age) VALUES (0, "Jarda", 20);
+INSERT INTO emp (emp_age, emp_name) VALUES (25, "Milan");
+INSERT INTO emp (emp_age, emp_name) VALUES (20+15, "Lenka");
+INSERT INTO emp (emp_age, emp_name) VALUES ("50"-13, "Jarmila");
+\end{lstlisting}
+\vspace{0.5cm}
+
+A wildcard \textbf{SELECT} would now return the whole content of the table. We can alter the \textbf{SELECT} query to compute eg. the age in months or to multiply person's id and their age. 
+
+\vspace{0.5cm}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{lbcolor}]
+SELECT *, emp_age*12, emp_age*emp_id FROM emp;
+\end{lstlisting}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{gbcolor}]
+emp_age|emp_id|emp_name|emp_age*12|emp_age*emp_id
+-------|------|--------|----------|--------------
+20     |0     |Jarda   |240.000000|0.000000      
+25     |1     |Milan   |300.000000|25.000000     
+35     |2     |Lenka   |420.000000|70.000000     
+37     |3     |Jarmila |444.000000|111.000000    
+\end{lstlisting}
+\vspace{0.5cm}
+
+Now we create a different table with employee security level.
+
+\vspace{0.5cm}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{lbcolor}]
+CREATE TABLE sec (sec_id INT, sec_level TINYINT);
+INSERT INTO sec (sec_id, sec_level) VALUES (0, 10);
+INSERT INTO sec (sec_id, sec_level) VALUES (1, 5);
+INSERT INTO sec (sec_id, sec_level) VALUES (2, 5);
+INSERT INTO sec (sec_id, sec_level) VALUES (3, 50);
+\end{lstlisting}
+\vspace{0.5cm}
+
+Running a combined \textbf{SELECT} will return a cross product of these tables. We can add a binding condition (just as a regular \textbf{JOIN ON} would work) and display security level for each user. 
+
+\vspace{0.5cm}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{lbcolor}]
+SELECT * FROM emp, sec;
+SELECT * FROM emp, sec WHERE emp_id = sec_id;
+\end{lstlisting}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{gbcolor}]
+emp_age|emp_id|emp_name|sec_id|sec_level
+-------|------|--------|------|---------
+20     |0     |Jarda   |0     |10       
+25     |1     |Milan   |0     |10       
+35     |2     |Lenka   |0     |10       
+37     |3     |Jarmila |0     |10       
+20     |0     |Jarda   |1     |5        
+25     |1     |Milan   |1     |5        
+35     |2     |Lenka   |1     |5        
+37     |3     |Jarmila |1     |5        
+20     |0     |Jarda   |2     |5        
+25     |1     |Milan   |2     |5        
+35     |2     |Lenka   |2     |5        
+37     |3     |Jarmila |2     |5        
+20     |0     |Jarda   |3     |50       
+25     |1     |Milan   |3     |50       
+35     |2     |Lenka   |3     |50       
+37     |3     |Jarmila |3     |50       
+Rows: 16
+
+emp_age|emp_id|emp_name|sec_id|sec_level
+-------|------|--------|------|---------
+20     |0     |Jarda   |0     |10       
+25     |1     |Milan   |1     |5        
+35     |2     |Lenka   |2     |5        
+37     |3     |Jarmila |3     |50       
+Rows: 4
+\end{lstlisting}
+\vspace{0.5cm}
+
+Finally we can extract the ages of employees with their security level higher or equal to 7.
+
+\vspace{0.5cm}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{lbcolor}]
+SELECT emp_name, emp_age FROM emp, sec WHERE (emp_id=sec_id) AND (sec_level>=7);
+\end{lstlisting}
+\begin{lstlisting}[language=SQL, backgroundcolor=\color{gbcolor}]
+emp_name|emp_age
+--------|-------
+Jarda   |20     
+Jarmila |37     
+\end{lstlisting}
+
+
+\end{document}

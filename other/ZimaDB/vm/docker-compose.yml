@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+    zima:
+        build:
+            context: .
+            args:
+                env: dev
+        image: zima_build:dev-latest
+        container_name: zima_build
+        volumes:
+            - ..:/var/zima
+        tty: true
