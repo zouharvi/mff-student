@@ -1,0 +1,1 @@
+Non-optimized, not really idiomatic, pretty much pure translation of Rust version as of commit #ca347952405944d65203a5d2e9173a0a68656a60.

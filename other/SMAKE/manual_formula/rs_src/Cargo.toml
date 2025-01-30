@@ -1,0 +1,17 @@
+[package]
+name = "smake"
+version = "0.1.0"
+authors = ["Vilém Zouhar <vilem.zouhar@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+regex = "1"
+glob = "0.3.0"
+lazy_static = "1.4.0"
+
+[[bin]]
+name = "smake"
+path = "src/main.rs"
+

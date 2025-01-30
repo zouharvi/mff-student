@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "smake": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\houskape\\source\\repos\\SMAKE"
+    }
+  }
+}
